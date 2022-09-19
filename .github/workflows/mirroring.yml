@@ -18,4 +18,4 @@ jobs:
           target_repo_url:
             ${{ secrets.EPI_RTYPE_REPO_URL }}
           ssh_private_key:
-            ${{ secrets.EPI_MIRRORING_KEY }}
+            ${{ secrets.EPI_RTYPE_MIRRORING_KEY }}
