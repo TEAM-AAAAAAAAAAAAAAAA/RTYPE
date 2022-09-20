@@ -33,3 +33,6 @@
 
 # Jetbrain tools
 .idea
+
+# build Folder
+build
