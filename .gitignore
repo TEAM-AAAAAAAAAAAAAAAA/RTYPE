@@ -36,3 +36,4 @@
 
 # build Folder
 build
+cmake-build-debug
