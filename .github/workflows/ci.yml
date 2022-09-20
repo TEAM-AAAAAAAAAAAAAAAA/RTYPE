@@ -41,7 +41,7 @@ jobs:
         if: env.FAIL_TASK == 'true'
         run: exit 1
 
-  check_build:
+  build_linux:
     name: Check if the program build correctly
     runs-on: ubuntu-latest
     needs: [clean_repo]
@@ -99,10 +99,27 @@ jobs:
 #        if: env.FAIL_TASK == 'true'
 #        run: exit 1
 
+  build_windows:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Configure CMake
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_TEST_SUITE=TRUE
+
+    - name: Build
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} -j
+
+    - name: Run Unit Tests
+      run: cd ${{github.workspace}}/build && ctest -C ${{env.BUILD_TYPE}} --output-on-failure
+
+
   to_github:
     name: Push content of the current repo on mirror
     runs-on: ubuntu-latest
-    needs: [check_build]
+    needs: [build_linux, build_windows]
     steps:
       - uses: actions/checkout@v2
         with:
