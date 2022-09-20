@@ -16,8 +16,8 @@ endif()
 # Add ./cmake to the module path
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
+add_subdirectory(dependencies)
 include(DetectCompiler)
 
-add_subdirectory(dependencies)
 add_subdirectory(src)
 # find_package(SFML 2.5 COMPONENTS system window graphics REQUIRED)

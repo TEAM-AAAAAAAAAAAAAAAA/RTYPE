@@ -28,7 +28,7 @@ include(CompilerFlags)
 # target_include_directories(${LIB_NAME} PRIVATE ${INCDIRS})
 # target_include_directories(${LIB_NAME} PUBLIC ${INCROOT})
 
-find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
+# find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
 
 add_executable(${TARGET_NAME} ${SRCROOT}/main.cpp)
 # target_link_libraries(${TARGET_NAME} PRIVATE ${LIB_NAME} sfml-graphics sfml-audio)
