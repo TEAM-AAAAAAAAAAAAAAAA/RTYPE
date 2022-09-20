@@ -33,6 +33,7 @@
 
 # Jetbrain tools
 .idea
+.vscode
 
 # build Folder
 build

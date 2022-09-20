@@ -1,9 +1,9 @@
 include(FetchContent)
 
-set (SFML_VERSION "2.5.1")
+set (SFML_VERSION "2.5.0")
 
 if (NOT (SFML_OS_IOS OR SFML_OS_WINDOWS))
-    set(BUILD_SHARED_LIBS TRUE "Building SFML in static mode")
+    set(BUILD_SHARED_LIBS TRUE "Building SFML shared libraries")
 endif()
 
 FetchContent_Declare(
