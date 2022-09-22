@@ -9,7 +9,7 @@ endif()
 FetchContent_Declare(
     sfml
     GIT_REPOSITORY "https://github.com/SFML/SFML.git"
-    GIT_TAG "${SFML_VERSION}"
+    GIT_TAG "863fef024619da7f59b6404087b454337a172ac1"
 )
 
 FetchContent_GetProperties(sfml)
