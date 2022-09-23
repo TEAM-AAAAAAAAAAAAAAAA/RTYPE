@@ -52,6 +52,16 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install Conan
+        id: conan
+        uses: turtlebrowser/get-conan@main
+
+      - name: Conan version
+        run: echo "${{ steps.conan. outputs.version }}"
+
+      - name: Install dependencies with Conan
+        run: conan install . --build=missing
+
       - name: Configure CMake
         # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
         # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
@@ -104,17 +114,26 @@ jobs:
     needs: [clean_repo]
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Install Conan
+        id: conan
+        uses: turtlebrowser/get-conan@main
 
-    - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_TEST_SUITE=TRUE
+      - name: Conan version
+        run: echo "${{ steps.conan. outputs.version }}"
 
-    - name: Build
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} -j
+      - name: Install dependencies with Conan
+        run: conan install . --build=missing
 
-    # - name: Run Unit Tests
-    #   run: cd ${{github.workspace}}/build && ctest -C ${{env.BUILD_TYPE}} --output-on-failure
+      - name: Configure CMake
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_TEST_SUITE=TRUE
+
+      - name: Build
+        run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} -j
+
+      # - name: Run Unit Tests
+      #   run: cd ${{github.workspace}}/build && ctest -C ${{env.BUILD_TYPE}} --output-on-failure
 
 
   to_github:
