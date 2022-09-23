@@ -1,15 +1,4 @@
 [requires]
-    brotli/1.0.9@_/_
-    bzip2/1.0.8@_/_
-    flac/1.3.3@_/_
-    freetype/2.11.1@_/_
-    libalsa/1.2.7.2@_/_
-    libpng/1.6.37@_/_
-    ogg/1.3.5@_/_
-    openal/1.21.1@_/_
-    sfml/2.5.1@_/_
-    vorbis/1.3.7@_/_
-    zlib/1.2.12@_/_
     sfml/2.5.1@_/_
 
 [options]
