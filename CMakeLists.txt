@@ -16,7 +16,7 @@ endif()
 # Add ./cmake to the module path
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
-add_subdirectory(dependencies)
+# add_subdirectory(dependencies)
 include(DetectCompiler)
 
 add_subdirectory(src)
