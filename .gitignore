@@ -33,7 +33,9 @@
 
 # Jetbrain tools
 .idea
+.vscode
 
 # build Folder
 build
 cmake-build-debug
+rtype
