@@ -62,6 +62,9 @@ jobs:
 
       - name: Run Cmake with CMakePreset.json and vcpkg.json
         uses: lukka/run-cmake@v10
+        with:
+          configurePreset: 'ninja-multi-vcpkg'
+          buildPreset: 'ninja-multi-vcpkg'
 
 
   to_github:
