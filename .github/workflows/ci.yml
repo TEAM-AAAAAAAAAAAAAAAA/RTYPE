@@ -11,8 +11,9 @@ on:
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
-  SERV_BIN: "r-type_server"
-  CLIENT_BIN: "r-type_client"
+  SERV_BIN: r-type_server
+  CLIENT_BIN: r-type_client
+  VCPKG_COMMIT_ID: 57d3194e702a2959e86a6748999ad71fc24f7922
 
 jobs:
   clean_repo:
@@ -60,7 +61,7 @@ jobs:
       - name: Restore artifacts, or setup  vcpkg (do not install any package)
         uses: lukka/run-vcpkg@v10
         with:
-          vcpkgDirectory: '${{ github.workspace }}/vcpkg'
+          vcpkgGitCommitId: '${{ env.VCPKG_GIT_COMMIT_ID }}'
 
       - name: Run Cmake with CMakePreset.json and vcpkg.json
         uses: lukka/run-cmake@v10
