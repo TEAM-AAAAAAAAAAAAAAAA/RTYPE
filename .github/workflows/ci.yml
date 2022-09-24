@@ -1,4 +1,4 @@
-name: ci/cd
+name: Build
 
 on:
   push:
@@ -41,105 +41,35 @@ jobs:
         if: env.FAIL_TASK == 'true'
         run: exit 1
 
-  build_linux:
-    name: Check if the program build correctly
-    runs-on: ubuntu-latest
-    needs: [clean_repo]
-    container: epitechcontent/epitest-docker:latest
+  build:
+    name: Build on windows-latest, ubuntu-latest and macos-latests runners
+    strategy:
+      fail-fast: true
+      matrix: # Make one workflow run on the multiple platforms
+        platform: [windows-latest, ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.platform }}
+
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
         with:
-          fetch-depth: 0
+          submodules: 'recursive' # Checkout the repo and fetch the submodules
 
-      - name: Install Conan
-        id: conan
-        uses: turtlebrowser/get-conan@main
+      - name: Get Cmake latest
+        uses: lukka/get-cmake@latest
 
-      - name: Conan version
-        run: echo "${{ steps.conan. outputs.version }}"
+      - name: Restore artifacts, or setup  vcpkg (do not install any package)
+        uses: lukka/run-vcpkg@v10
+        with:
+          vcpkgDirectory: '${{ github.workspace }}/vcpkg'
 
-      - name: Install dependencies with Conan
-        run: conan install . --build=missing
-
-      - name: Configure CMake
-        # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
-        # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-        run: cmake -B ${{github.workspace}}/build -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
-
-      - name: Build
-        # Build your program with the given configuration
-        run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
-
-#      - name: Test
-#        working-directory: ${{github.workspace}}/build
-#        # Execute tests defined by the CMake configuration.
-#        # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-#        run: ctest -C ${{env.BUILD_TYPE}}
-
-#      - name: Check executables
-#        run: |
-#          echo "FAIL_TASK=false" >> "$GITHUB_ENV"
-#          SERV_BINARIES="${{ env.SERV_BIN }}"
-#          IFS=$','
-#          for BIN in $SERV_BINARIES; do
-#            if [ ! -f "${BIN}" ]; then
-#              echo "::error file=${BIN},title=Binary not found::${BIN}"
-#              echo "FAIL_TASK=true" >> "$GITHUB_ENV"
-#            fi
-#            if [ ! -x "${BIN}" ]; then
-#              echo "::error file=${BIN},title=Binary is not executable::${BIN}"
-#              echo "FAIL_TASK=true" >> "$GITHUB_ENV"
-#            fi
-#          done
-#          CLI_BINARIES="${{ env.CLIENT_BIN }}"
-#          IFS=$','
-#          for BIN in $CLI_BINARIES; do
-#            if [ ! -f "${BIN}" ]; then
-#              echo "::error file=${BIN},title=Binary not found::${BIN}"
-#              echo "FAIL_TASK=true" >> "$GITHUB_ENV"
-#            fi
-#            if [ ! -x "${BIN}" ]; then
-#              echo "::error file=${BIN},title=Binary is not executable::${BIN}"
-#              echo "FAIL_TASK=true" >> "$GITHUB_ENV"
-#            fi
-#          done
-#
-#      - name: Check if task failed
-#        if: env.FAIL_TASK == 'true'
-#        run: exit 1
-
-  build_windows:
-    runs-on: windows-latest
-    needs: [clean_repo]
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Install Conan
-        id: conan
-        uses: turtlebrowser/get-conan@main
-
-      - name: Conan version
-        run: echo "${{ steps.conan. outputs.version }}"
-
-      - name: Install dependencies with Conan
-        run: conan install . --build=missing
-
-      - name: Configure CMake
-        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_TEST_SUITE=TRUE
-
-      - name: Build
-        run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} -j
-
-      # - name: Run Unit Tests
-      #   run: cd ${{github.workspace}}/build && ctest -C ${{env.BUILD_TYPE}} --output-on-failure
+      - name: Run Cmake with CMakePreset.json and vcpkg.json
+        uses: lukka/run-cmake@v10
 
 
   to_github:
     name: Push content of the current repo on mirror
     runs-on: ubuntu-latest
-    needs: [build_linux, build_windows]
+    needs: [build]
     steps:
       - uses: actions/checkout@v2
         with:
