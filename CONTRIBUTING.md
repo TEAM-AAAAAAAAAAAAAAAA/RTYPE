@@ -145,7 +145,7 @@ The `footer` is optional. The [Commit Message Footer](#commit-message-footer) 
   │
   │
   │
-  └─⫸ Commit Type: build|ci|docs|feat|fix|perf|refactor|test
+  └─⫸ Commit Type: build|ci|docs|feat|fix|perf|refactor|test|misc
 ```
 The `<type>` and `<summary>` fields are mandatory, the (`<scope>`) field is optional.
 
@@ -161,6 +161,7 @@ Must be one of the following:
 - perf: A code change that improves performance
 - refactor: A code change that neither fixes a bug nor adds a feature
 - test: Adding missing tests or correcting existing tests
+- misc: A commit which does not correspond with the other types
 
 
 #### Scope
@@ -207,6 +208,44 @@ Closes #<pr number>
 Breaking Change section should start with the phrase "BREAKING CHANGE: " followed by a summary of the breaking change, a blank line, and a detailed description of the breaking change that also includes migration instructions.
 
 Similarly, a Deprecation section should start with "DEPRECATED: " followed by a short description of what is deprecated, a blank line, and a detailed description of the deprecation that also mentions the recommended update path.
+
+#### Issues Format
+
+We stay in compliance with the architecture of the main project. The projects is divided in 4 big parts :
+
+- **ECS** : Entity Component System is a architectural model mainly used in video game development.
+- **GUI** :  Graphical User Interface represents the graphical part of the project in SFML.
+- **SERVER** : Server is the part that manages communication between the Users and itself as well as calculating and managing most of the game logic.
+- **CLIENT** : Client is the interface that allows the communication between the User and the Server.
+
+Each of these parts can have subcategories, you just have to mention them after the name of the big part.
+If you want to make an issue, please follow the format like these templates :
+
+```
+ECS-SparseArrayClass
+```
+
+or
+
+```
+GUI-Display-MainMenu
+```
+
+or even
+
+```
+SERVER-Socket-HandleNewClient
+```
+
+or, at last
+
+```
+CLIENT-Controls-SendClientInput
+```
+
+##### Regarding Branches
+
+To create branches, we remain consistent with the issues format (We will use the available github issue create branch feature in the development section to create branches from issues).
 
 
 ## Attribution
