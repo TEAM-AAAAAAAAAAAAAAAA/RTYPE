@@ -40,3 +40,4 @@
 build
 cmake-build-debug
 rtype
+vcpkg_installed
