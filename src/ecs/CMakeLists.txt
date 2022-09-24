@@ -1,9 +1,11 @@
-set(INCROOT ${INCROOT}/ecs)
-set(SRCROOT ${SRCROOT}/ecs)
+set(INCROOT ${PROJECT_SOURCE_DIR}/src/ecs)
+set(SRCROOT ${PROJECT_SOURCE_DIR}/src/ecs)
 
 set(SRC
     ${SRC}
-    ${INCROOT}/ecs.cpp
+    ${SRCROOT}/ecs.cpp
+    ${SRCROOT}/SparseArray.cpp
+    ${SRCROOT}/SparseArray.hpp
     PARENT_SCOPE
 )
 
