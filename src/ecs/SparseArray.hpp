@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2022
 ** RTYPE
 ** File description:
-** sparseArray
+** SparseArray
 */
 
 #ifndef SPARSEARRAY_HPP_
@@ -11,24 +11,24 @@
 #include <optional>
 #include <vector>
 
-template <typename Component> // You can also mirror the definition of std :: vector , that takes an additional allocator.
-class sparse_array
+template <typename Component>
+class SparseArray
 {
 public:
-    using value_type = std::optional<Component>; // optional component type
+    using value_type = std::optional<Component>;
     using reference_type = value_type &;
     using const_reference_type = value_type const &;
-    using container_t = std::vector<value_type>; // optionally add your allocator template here.
+    using container_t = std::vector<value_type>;
     using size_type = typename container_t::size_type;
     using iterator = typename container_t::iterator;
     using const_iterator = typename container_t ::const_iterator;
 
 public:
-    sparse_array() { _data.clear(); }                                 // You can add more constructors.
-    sparse_array(sparse_array const &other) : _data(other._data) {}     // copy constructor
-    sparse_array(sparse_array &&other) noexcept : _data(other._data) {} // move constructor
-    ~sparse_array() = default;
-    sparse_array &operator=(sparse_array const &other)
+    SparseArray() { _data.clear(); }
+    SparseArray(SparseArray const &other) : _data(other._data) {}
+    SparseArray(SparseArray &&other) noexcept : _data(other._data) {}
+    ~SparseArray() = default;
+    SparseArray &operator=(SparseArray const &other)
     {
         for (auto &&i : other)
         {
@@ -36,7 +36,7 @@ public:
         }
         return *this;
     }
-    sparse_array &operator=(sparse_array &&other) noexcept
+    SparseArray &operator=(SparseArray &&other) noexcept
     {
         _data = std::move(other._data);
         return *this;

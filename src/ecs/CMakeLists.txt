@@ -5,7 +5,7 @@ set(SRC
     ${SRC}
     ${SRCROOT}/ecs.cpp
     ${SRCROOT}/ecs.hpp
-    ${SRCROOT}/sparseArray.hpp
+    ${SRCROOT}/SparseArray.hpp
     PARENT_SCOPE
 )
 
