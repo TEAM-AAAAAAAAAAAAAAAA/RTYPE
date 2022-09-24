@@ -112,7 +112,7 @@ jobs:
   to_github:
     name: Push content of the current repo on mirror
     runs-on: ubuntu-latest
-    needs: [build]
+    needs: [build_linux, build_windows]
     steps:
       - uses: actions/checkout@v2
         with:
