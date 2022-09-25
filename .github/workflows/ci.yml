@@ -54,9 +54,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install vcpkg
-        uses: friendlyanon/setup-vcpkg@v1
-        with: { committish: "${{ env.VCPKG_COMMIT }}" }
+      - name: Configure vcpkg and install dependencies
+        run: |
+          sh ./vcpkg\boostrap-vcpkg.sh
+          vcpkg install sfml
 
       - name: Configure CMake
         # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
@@ -108,13 +109,12 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          submodules: recursive
 
-      - name: Install vcpkg
-        uses: friendlyanon/setup-vcpkg@v1
-        with: { committish: "${{ env.VCPKG_COMMIT }}" }
-
-      - name: Install sfml
-        run: D:\a\RTYPE\RTYPE\vcpkg\vcpkg.exe install --triplet x64-windows --debug
+      - name: Configure vcpkg and install dependencies
+        run: |
+          .\vcpkg\boostrap-vcpkg.bat
+          vcpkg install --triplet x64-windows --debug sfml:x64-windows
 
       - name: Configure CMake
         run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_TEST_SUITE=TRUE -DCMAKE_TOOLCHAIN_FILE='${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake'
