@@ -56,7 +56,7 @@ jobs:
 
       - name: Configure vcpkg and install dependencies
         run: |
-          sh ${{github.workspace}}/vcpkg/boostrap-vcpkg.sh
+          sh ${{github.workspace}}/vcpkg/bootstrap-vcpkg.sh
           vcpkg install sfml
 
       - name: Configure CMake
@@ -113,7 +113,7 @@ jobs:
 
       - name: Configure vcpkg and install dependencies
         run: |
-          ${{github.workspace}}\vcpkg\boostrap-vcpkg.bat
+          ${{github.workspace}}\vcpkg\bootstrap-vcpkg.bat
           vcpkg install --triplet x64-windows --debug sfml:x64-windows
 
       - name: Configure CMake
