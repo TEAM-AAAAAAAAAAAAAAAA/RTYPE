@@ -113,6 +113,9 @@ jobs:
         uses: friendlyanon/setup-vcpkg@v1
         with: { committish: "${{ env.VCPKG_COMMIT }}" }
 
+      - name: Install sfml
+        run: D:\a\RTYPE\RTYPE\vcpkg\vcpkg.exe install . --debug
+
       - name: Configure CMake
         run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_TEST_SUITE=TRUE -DCMAKE_TOOLCHAIN_FILE='${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake'
 
