@@ -57,7 +57,8 @@ jobs:
 
       - name: Configure vcpkg and install dependencies
         run: |
-          sh ${{github.workspace}}/vcpkg/bootstrap-vcpkg.sh
+          chmod +x ${{github.workspace}}/vcpkg/bootstrap-vcpkg.sh
+          ${{github.workspace}}/vcpkg/bootstrap-vcpkg.sh
           vcpkg install sfml
 
       - name: Configure CMake
