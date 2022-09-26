@@ -3,8 +3,7 @@ set(SRCROOT ${PROJECT_SOURCE_DIR}/src/ecs)
 
 set(SRC
     ${SRC}
-    ${SRCROOT}/ecs.cpp
-    ${SRCROOT}/ecs.hpp
+    ${SRCROOT}/Registry.hpp
     ${SRCROOT}/SparseArray.hpp
     PARENT_SCOPE
 )

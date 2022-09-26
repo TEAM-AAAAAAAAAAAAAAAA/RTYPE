@@ -10,6 +10,7 @@
 
 #include <optional>
 #include <vector>
+#include <exception>
 
 template <typename Component>
 class SparseArray
@@ -107,13 +108,21 @@ public:
     }
     template <class... Params>
     reference_type emplace_at(size_type pos, Params &&...)
-    {}
+    {
+    }
     void erase(size_type pos)
     {
         _data[pos] = std::nullopt;
     }
-    size_type get_index(value_type const &) const
-    {}
+    size_type get_index(value_type const &c) const
+    {
+        (void)c;
+        throw std::runtime_error("Not implemented");
+        // auto i = std::find(_data.begin(), _data.end(), c);
+        // if (i == _data.end())
+        //     throw std::runtime_error("Value not in SparseArray");
+        // return i - _data.begin();
+    }
 
 private:
     container_t _data;

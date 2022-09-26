@@ -1,4 +1,4 @@
-#include "ecs/ecs.hpp"
+void demo(void);
 
 int main(void)
 {
