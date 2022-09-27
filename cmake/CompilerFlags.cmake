@@ -34,7 +34,6 @@ elseif(COMPILER_TYPE MATCHES "clang")
     )
 endif()
 
-# enable BM_RELEASE define in release mode
 if(CMAKE_BUILD_TYPE MATCHES Release)
-    add_compile_definitions(BM_RELEASE=1)
+    add_compile_definitions(RELEASE=1)
 endif()
