@@ -5,24 +5,19 @@
 
 void demo(void)
 {
-    int c = 4;
-    size_t i = 5;
-
-    SparseArray<int> a;
-
-    a.insert_at(i, c);
-
-    std::cout << a[i].has_value() << std::endl;
-
-    SparseArray<int> b(a);
-
-    std::cout << b[i].has_value() << std::endl;
-
-    // std::cout << b.get_index(c) << std::endl;
-
     Registry r;
 
     r.register_component<Position>();
+
+    Entity e = r.spawn_entity();
+    Entity f = r.spawn_entity();
+    auto test = r.add_component<Position>(e, {1, 2});
+    auto test2 = r.add_component<Position>(f, {1, 2});
+    (void)test;
+    (void)test2;
+    r.remove_component<Position>(e);
+    // r.kill_entity(e);
+    // r.add_component<Position>(e, {1, 2});
 
     auto positions = r.get_components<Position>();
     (void)positions;

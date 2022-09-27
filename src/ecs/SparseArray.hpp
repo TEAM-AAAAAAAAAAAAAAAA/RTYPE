@@ -27,7 +27,7 @@ public:
 public:
     SparseArray() { _data.clear(); }
     SparseArray(SparseArray const &other) : _data(other._data) {}
-    SparseArray(SparseArray &&other) noexcept : _data(other._data) {}
+    SparseArray(SparseArray &&other) noexcept : _data(std::move(other._data)) {}
     ~SparseArray() = default;
     SparseArray &operator=(SparseArray const &other)
     {
@@ -44,6 +44,9 @@ public:
     }
     reference_type operator[](size_t idx)
     {
+        std::cout << _data.size() << std::endl;
+        std::cout << _data.capacity() << std::endl;
+        std::cout << idx << std::endl;
         return _data[idx];
     }
     const_reference_type operator[](size_t idx) const
@@ -80,6 +83,8 @@ public:
     }
     reference_type insert_at(size_type pos, Component const &c)
     {
+        std::cout << _data.capacity() << std::endl;
+        std::cout << pos << std::endl;
         try
         {
             if (pos >= _data.capacity())
@@ -90,7 +95,9 @@ public:
         {
             std::cout << e.what() << std::endl;
         }
-        return _data.at(pos);
+        std::cout << _data.capacity() << std::endl;
+        std::cout << _data.size() << std::endl;
+        return _data[pos];
     }
     reference_type insert_at(size_type pos, Component &&c)
     {
@@ -104,7 +111,7 @@ public:
         {
             std::cout << e.what() << std::endl;
         }
-        return _data.at(pos);
+        return _data[pos];
     }
     template <class... Params>
     reference_type emplace_at(size_type pos, Params &&...)
