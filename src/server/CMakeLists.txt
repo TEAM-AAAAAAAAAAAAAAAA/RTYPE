@@ -1,0 +1,1 @@
+set (SRC_ROOT ${PROJECT_SOURCE_DIR}/src/server)

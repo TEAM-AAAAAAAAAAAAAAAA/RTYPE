@@ -1,13 +1,12 @@
-set(INCROOT ${INCROOT}/ecs)
-set(SRCROOT ${SRCROOT}/ecs)
+set(INCROOT ${PROJECT_SOURCE_DIR}/ecs)
+set(SRCROOT ${PROJECT_SOURCE_DIR}/ecs)
 
-set(SRC
-    ${SRC}
+set(ECS_SRC
     ${INCROOT}/ecs.cpp
     PARENT_SCOPE
 )
 
-set(INCDIRS
+set(ECS_INCDIRS
     ${INCDIRS}
     ${INCROOT}
     PARENT_SCOPE)
