@@ -17,11 +17,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platforms: [ windows-latest, ubuntu-latest, macos-latest ]
-    runs-on: ${{ matrix.platforms }}
+        platform: [ windows-latest, ubuntu-latest, macos-latest ]
+    runs-on: ${{ matrix.platform }}
     steps:
       - name: Install system deps for Linux
-        if: ${{ matrix.platforms }} == 'ubuntu-latest'
+        if: matrix.platform == 'ubuntu-latest'
         run: |
           sudo apt update -y && sudo apt upgrade -y
           sudo apt install -y libudev libx11 libxrandr opengl
