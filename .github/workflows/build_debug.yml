@@ -24,7 +24,7 @@ jobs:
         if: matrix.platform == 'ubuntu-latest'
         run: |
           sudo apt update -y && sudo apt upgrade -y
-          sudo apt install -y libudev-dev libx11-dev libxrandr-dev opengl-dev
+          sudo apt install -y libudev-dev libx11-dev libxrandr-dev libopengl-dev
 
       - uses: actions/checkout@v3
         with:
