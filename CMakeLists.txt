@@ -19,8 +19,6 @@ endif()
 include(CompilerFlags)
 include(DetectCompiler)
 
-
-
 # add_subdirectory(dependencies)
 
 add_subdirectory(src)
