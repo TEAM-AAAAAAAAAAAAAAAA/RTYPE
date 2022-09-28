@@ -1,0 +1,30 @@
+name: Build Debug
+
+on:
+  push:
+    branches: [ install_deps ]
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+  SERV_BIN: r-type_server
+  CLIENT_BIN: r-type_client
+  VCPKG_COMMIT: 57d3194e702a2959e86a6748999ad71fc24f7922
+  VCPKG_DISABLE_METRICS: true
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        platforms: [ windows-latest, ubuntu-latest, macos-latest ]
+    runs-on: ${{ matrix.platforms }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+      - name: Run vcpkg
+        uses: lukka/run-vcpkg@v4
+        with:
+          vcpkgArguments: 'sfml'
+          vcpkgDirectory: '${{ github.workspace}}/vcpkg'
