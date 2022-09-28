@@ -20,6 +20,12 @@ jobs:
         platforms: [ windows-latest, ubuntu-latest, macos-latest ]
     runs-on: ${{ matrix.platforms }}
     steps:
+      - name: Install system deps for Linux
+        if: ${{ matrix.platforms }} == 'ubuntu-latest'
+        run: |
+          sudo apt update -y && sudo apt upgrade -y
+          sudo apt install -y libudev libx11 libxrandr opengl
+
       - uses: actions/checkout@v3
         with:
           submodules: 'recursive'
