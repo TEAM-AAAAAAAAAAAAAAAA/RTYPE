@@ -8,16 +8,20 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 option(BUILD_TEST_SUITE OFF)
 option(ENABLE_CODE_COVERAGE OFF)
 
+# Add ./cmake to the module path
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+
+
 if(NOT DEFINED CMAKE_SUPPRESS_DEVELOPER_WARNINGS)
      set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1 CACHE INTERNAL "No dev warnings")
 endif()
 
-
-# Add ./cmake to the module path
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
-
-# add_subdirectory(dependencies)
+include(CompilerFlags)
 include(DetectCompiler)
 
+
+
+# add_subdirectory(dependencies)
+
 add_subdirectory(src)
-# find_package(SFML 2.5 COMPONENTS system window graphics REQUIRED)
+add_subdirectory(tests)
