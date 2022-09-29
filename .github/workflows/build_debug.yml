@@ -32,5 +32,5 @@ jobs:
       - name: Run vcpkg
         uses: lukka/run-vcpkg@v4
         with:
-          vcpkgArguments: 'sfml'
+          vcpkgArguments: 'sfml boost-asio'
           vcpkgDirectory: '${{ github.workspace}}/vcpkg'
