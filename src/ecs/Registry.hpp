@@ -7,6 +7,7 @@
 #include "Entity.hpp"
 #include <stack>
 #include <exception>
+#include <iostream>
 
 class Registry
 {
@@ -57,11 +58,7 @@ public:
     template <typename Component>
     typename SparseArray<Component>::reference_type add_component(Entity const &to, Component &&c)
     {
-        // if (!_components_arrays.at(std::type_index(typeid(c))))
-        // {
-        //     register_component<Component>();
-        // }
-        return std::any_cast<SparseArray<Component>>(_components_arrays.at(std::type_index(typeid(Component)))).insert_at(to, c);
+        return std::any_cast<SparseArray<Component>&>(_components_arrays[std::type_index(typeid(Component))]).insert_at(to, c);
     }
 
     template <typename Component, typename... Params>
@@ -72,12 +69,7 @@ public:
     {
         try
         {
-            // auto &component = _components_arrays.at(std::type_index(typeid(Component)));
-            // SparseArray<Component> c = std::any_cast<SparseArray<Component>>(component);
-            // std::optional<Component> &a = c[from];
-            // std::cout << a.has_value() << std::endl;
-            // a = std::nullopt;
-            std::any_cast<SparseArray<Component>>(_components_arrays.at(std::type_index(typeid(Component))))[from] = std::nullopt;
+            std::any_cast<SparseArray<Component>&>(_components_arrays.at(std::type_index(typeid(Component))))[from] = std::nullopt;
         }
         catch (std::exception &e)
         {
