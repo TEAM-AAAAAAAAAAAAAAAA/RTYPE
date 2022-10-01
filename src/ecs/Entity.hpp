@@ -18,14 +18,16 @@ public:
     explicit operator size_t &() { return _id; }
     explicit operator size_t() const { return _id; }
 
+    static const std::size_t npos = -1;
+
 private:
     explicit Entity(size_t id) : _id(id) {}
-    size_t &operator=(const size_t &id)
+    size_t &operator=(const std::size_t &id)
     {
         _id = id;
         return _id;
     }
-    size_t _id;
+    std::size_t _id;
 };
 
 #endif // ECS_ENTITY_

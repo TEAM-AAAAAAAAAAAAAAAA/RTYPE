@@ -123,8 +123,13 @@ namespace ecs {
                 return _data[pos];
             }
 
-            template<class... Params>
-            reference_type emplace_at(size_type pos, Params &&...) {
+            template <class... Params>
+            reference_type emplace_at(size_type pos, Params &&...args)
+            {
+                if (pos >= _data.capacity())
+                    _data.resize(pos + 1);
+                _data.emplace(_data.begin() + pos, Component(args...));
+                return _data[pos];
             }
 
             void erase(size_type pos) {

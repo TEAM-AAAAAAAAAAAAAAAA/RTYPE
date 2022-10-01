@@ -6,7 +6,6 @@
 #include <functional>
 #include "SparseArray.hpp"
 #include "Entity.hpp"
-#include <stack>
 #include <exception>
 #include <iostream>
 
@@ -75,8 +74,8 @@ namespace ecs {
                     _last_entity++;
                     return Entity(_last_entity - 1);
                 }
-                size_t id = _entity_recycle_bin.top();
-                _entity_recycle_bin.pop();
+                size_t id = _entity_recycle_bin.front();
+                _entity_recycle_bin.erase(_entity_recycle_bin.begin());
                 return Entity(id);
             }
 
@@ -85,19 +84,23 @@ namespace ecs {
              * @param idx The index of the entity whose id is desired
              * @return The id of the Entity if it exists, std::npos otherwise
              */
-            Entity entity_from_index(std::size_t idx) {
-                // if (idx < _last_entity &&
+            Entity entity_from_index(std::size_t idx)
+            {
+                if (idx >= _last_entity || std::find(_entity_recycle_bin.begin(), _entity_recycle_bin.end(), idx) != _entity_recycle_bin.end())
+                    return Entity::npos;
+                return Entity(idx);
             } // ?
 
             /**
              * This is used to delete the given Entity (id)
-             * For optimisation purposes, Registry class push it in the _entity_recycle_bin 
+             * For optimisation purposes, Registry class push it in the _entity_recycle_bin
              * @param e The Entity you want to kill
              */
-            void kill_entity(Entity const &e) {
-                for (const auto &erase_func: _erase_functions)
+            void kill_entity(Entity const &e)
+            {
+                for (const auto& erase_func: _erase_functions)
                     erase_func(*this, e);
-                _entity_recycle_bin.push(e);
+                _entity_recycle_bin.push_back(e);
             }
 
             /**
@@ -123,23 +126,20 @@ namespace ecs {
              * @param p Parameters of the component you want to emplace
              * @return the SparseArray<Component> reference of the component
              */
-            template<typename Component, typename... Params>
-            typename SparseArray<Component>::reference_type emplace_component(Entity const &to, Params &&...p);
-
+            template <typename Component, typename... Params>
+            typename SparseArray<Component>::reference_type emplace_component(Entity const &to, Params &&...p)
+            {
+                return std::any_cast<SparseArray<Component>&>(_components_arrays[std::type_index(typeid(Component))]).insert_at(to, Component(p...));
+            }
             /**
              * This function is used to remove a component into an Entity given as parameter
              * @tparam Component The type of the component you want to remove
              * @param from The Entity in which you want to remove component
              */
-            template<typename Component>
-            void remove_component(Entity const &from) {
-                try {
-                    std::any_cast<SparseArray<Component> &>(
-                            _components_arrays.at(std::type_index(typeid(Component))))[from] = std::nullopt;
-                }
-                catch (std::exception &e) {
-                    std::cout << e.what() << std::endl;
-                }
+            template <typename Component>
+            void remove_component(Entity const &from)
+            {
+                std::any_cast<SparseArray<Component>&>(_components_arrays.at(std::type_index(typeid(Component))))[from] = std::nullopt;
             }
 
         private:
@@ -156,11 +156,11 @@ namespace ecs {
             /**
              * Private member _entity_recycle_bin represents the bin of every deleted component, used to recover entity instead of creating another one
              */
-            std::stack<size_t> _entity_recycle_bin;
+            std::vector<size_t> _entity_recycle_bin;
 
             /**
              * The total number of entity present in the Registry class
              */
-            size_t _last_entity;
+            std::size_t _last_entity;
     };
 }
