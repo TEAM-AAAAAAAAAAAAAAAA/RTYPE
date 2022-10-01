@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <typeindex>
 #include <any>
+#include <functional>
 #include "SparseArray.hpp"
 #include "Entity.hpp"
 #include <stack>
@@ -18,6 +19,12 @@ public:
     SparseArray<Component> &register_component()
     {
         _components_arrays[std::type_index(typeid(Component))] = SparseArray<Component>();
+
+        std::function<void(Registry&, Entity const&)> erase_func = [] (Registry &r, Entity const& e) {
+            SparseArray<Component>& array = r.template get_components<Component>();
+            array.erase(e);
+        };
+        _erase_functions.push_back(erase_func);
         return get_components<Component>();
     }
     template <class Component>
@@ -51,10 +58,8 @@ public:
 
     void kill_entity(Entity const &e)
     {
-        for (auto &&i : _components_arrays)
-        {
-            std::any_cast<SparseArray<std::any>>(i.second)[e] = std::nullopt;
-        }
+        for (const auto& erase_func: _erase_functions)
+            erase_func(*this, e);
         _entity_recycle_bin.push(e);
     }
 
@@ -82,6 +87,7 @@ public:
 
 private:
     std::unordered_map<std::type_index, std::any> _components_arrays;
+    std::vector<std::function<void(Registry &, Entity const &)>> _erase_functions;
     std::stack<size_t> _entity_recycle_bin;
     size_t _last_entity;
 };
