@@ -70,7 +70,10 @@ public:
     }
 
     template <typename Component, typename... Params>
-    typename SparseArray<Component>::reference_type emplace_component(Entity const &to, Params &&...p);
+    typename SparseArray<Component>::reference_type emplace_component(Entity const &to, Params &&...p)
+    {
+        return std::any_cast<SparseArray<Component>&>(_components_arrays[std::type_index(typeid(Component))]).insert_at(to, Component(p...));
+    }
 
     template <typename Component>
     void remove_component(Entity const &from)
