@@ -80,14 +80,7 @@ public:
     template <typename Component>
     void remove_component(Entity const &from)
     {
-        try
-        {
-            std::any_cast<SparseArray<Component>&>(_components_arrays.at(std::type_index(typeid(Component))))[from] = std::nullopt;
-        }
-        catch (std::exception &e)
-        {
-            std::cout << e.what() << std::endl;
-        }
+        std::any_cast<SparseArray<Component>&>(_components_arrays.at(std::type_index(typeid(Component))))[from] = std::nullopt;
     }
 
 private:
