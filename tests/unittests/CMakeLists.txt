@@ -20,3 +20,5 @@ function (create_test)
     target_link_libraries(${TEST_NAME} ${TEST_DEPS} criterion)
     add_test(${TEST_NAME} ${TEST_NAME})
 endfunction()
+
+# add_subdirectory(system_julien)

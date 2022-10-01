@@ -11,6 +11,8 @@ option(ENABLE_CODE_COVERAGE OFF)
 # Add ./cmake to the module path
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
+find_package(SFML COMPONENTS system window graphics CONFIG REQUIRED)
+find_package(Boost REQUIRED)
 
 if(NOT DEFINED CMAKE_SUPPRESS_DEVELOPER_WARNINGS)
      set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1 CACHE INTERNAL "No dev warnings")
@@ -18,8 +20,6 @@ endif()
 
 include(CompilerFlags)
 include(DetectCompiler)
-
-
 
 # add_subdirectory(dependencies)
 
