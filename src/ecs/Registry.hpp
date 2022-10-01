@@ -46,21 +46,23 @@ public:
             _last_entity++;
             return Entity(_last_entity - 1);
         }
-        size_t id = _entity_recycle_bin.top();
-        _entity_recycle_bin.pop();
+        size_t id = _entity_recycle_bin.front();
+        _entity_recycle_bin.erase(_entity_recycle_bin.begin());
         return Entity(id);
     }
 
-    Entity entity_from_index(std ::size_t idx)
+    Entity entity_from_index(std::size_t idx)
     {
-        // if (idx < _last_entity && 
+        if (idx >= _last_entity || std::find(_entity_recycle_bin.begin(), _entity_recycle_bin.end(), idx) != _entity_recycle_bin.end())
+            throw std::runtime_error("Registry: EntityFromIndex: Cannot find entity with given id");
+        return Entity(idx);
     } // ?
 
     void kill_entity(Entity const &e)
     {
         for (const auto& erase_func: _erase_functions)
             erase_func(*this, e);
-        _entity_recycle_bin.push(e);
+        _entity_recycle_bin.push_back(e);
     }
 
     template <typename Component>
@@ -91,6 +93,6 @@ public:
 private:
     std::unordered_map<std::type_index, std::any> _components_arrays;
     std::vector<std::function<void(Registry &, Entity const &)>> _erase_functions;
-    std::stack<size_t> _entity_recycle_bin;
+    std::vector<size_t> _entity_recycle_bin;
     size_t _last_entity;
 };
