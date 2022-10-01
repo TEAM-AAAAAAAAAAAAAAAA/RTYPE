@@ -11,6 +11,7 @@
 #include <optional>
 #include <vector>
 #include <exception>
+#include <iostream>
 
 template <typename Component>
 class SparseArray
@@ -44,9 +45,6 @@ public:
     }
     reference_type operator[](size_t idx)
     {
-        std::cout << _data.size() << std::endl;
-        std::cout << _data.capacity() << std::endl;
-        std::cout << idx << std::endl;
         return _data[idx];
     }
     const_reference_type operator[](size_t idx) const
@@ -83,20 +81,16 @@ public:
     }
     reference_type insert_at(size_type pos, Component const &c)
     {
-        std::cout << _data.capacity() << std::endl;
-        std::cout << pos << std::endl;
         try
         {
             if (pos >= _data.capacity())
-                _data.resize(pos + 1);
+                _data.resize(pos);
             _data.emplace(_data.begin() + pos, c);
         }
         catch (std::exception &e)
         {
             std::cout << e.what() << std::endl;
         }
-        std::cout << _data.capacity() << std::endl;
-        std::cout << _data.size() << std::endl;
         return _data[pos];
     }
     reference_type insert_at(size_type pos, Component &&c)
