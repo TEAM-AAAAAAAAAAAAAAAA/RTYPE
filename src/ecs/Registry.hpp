@@ -34,7 +34,7 @@ public:
 
     Entity spawn_entity()
     {
-        if (_entity_recycle_bin.size() == 0)
+        if (_entity_recycle_bin.empty())
         {
             _last_entity++;
             return Entity(_last_entity - 1);
@@ -44,7 +44,10 @@ public:
         return Entity(id);
     }
 
-    Entity entity_from_index(std ::size_t idx); // ?
+    Entity entity_from_index(std ::size_t idx)
+    {
+        // if (idx < _last_entity && 
+    } // ?
 
     void kill_entity(Entity const &e)
     {
