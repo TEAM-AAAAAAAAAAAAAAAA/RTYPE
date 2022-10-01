@@ -41,3 +41,10 @@ build
 cmake-build-debug
 rtype
 vcpkg_installed
+Testing/
+
+vcpkg/
+
+rtype_client
+
+rtype_server
