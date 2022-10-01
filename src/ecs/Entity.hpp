@@ -3,16 +3,23 @@
 
 #include <cstddef>
 
+/**
+ * Entity class is represented by a simple entity_t according to the global functioning of the ECS
+ */
 class Entity
 {
 public:
     friend class Registry;
 
-    operator size_t &() { return _id; }
-    operator size_t() const { return _id; }
+    /**
+     * Operators for the Entity class used to get the Id of the entity
+     * @return Private member _id of the Entity
+     */
+    explicit operator size_t &() { return _id; }
+    explicit operator size_t() const { return _id; }
 
 private:
-    Entity(size_t id) : _id(id) {}
+    explicit Entity(size_t id) : _id(id) {}
     size_t &operator=(const size_t &id)
     {
         _id = id;
