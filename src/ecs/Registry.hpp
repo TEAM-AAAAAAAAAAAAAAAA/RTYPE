@@ -54,7 +54,7 @@ public:
     Entity entity_from_index(std::size_t idx)
     {
         if (idx >= _last_entity || std::find(_entity_recycle_bin.begin(), _entity_recycle_bin.end(), idx) != _entity_recycle_bin.end())
-            throw std::runtime_error("Registry: EntityFromIndex: Cannot find entity with given id");
+            return Entity::npos;
         return Entity(idx);
     } // ?
 
