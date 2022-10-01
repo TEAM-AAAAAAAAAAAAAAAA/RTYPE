@@ -1,7 +1,7 @@
-void demo(void);
+#include <iostream>
 
-int main(void)
+int main()
 {
-    demo();
+    std::cout << "Hello World!" << std::endl;
     return 0;
 }

@@ -8,6 +8,7 @@ set(SRC
     ${SRCROOT}/Entity.hpp
     ${SRCROOT}/Registry.hpp
     ${SRCROOT}/SparseArray.hpp
+    )
 set(ECS_SRC
     ${INCROOT}/ecs.cpp
     PARENT_SCOPE
