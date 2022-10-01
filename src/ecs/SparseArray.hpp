@@ -95,21 +95,18 @@ public:
     }
     reference_type insert_at(size_type pos, Component &&c)
     {
-        try
-        {
-            if (pos >= _data.capacity())
-                _data.resize(pos + 1);
-            _data.emplace(_data.begin() + pos, std::move(c));
-        }
-        catch (std::exception &e)
-        {
-            std::cout << e.what() << std::endl;
-        }
+        if (pos >= _data.capacity())
+            _data.resize(pos + 1);
+        _data.emplace(_data.begin() + pos, std::move(c));
         return _data[pos];
     }
     template <class... Params>
-    reference_type emplace_at(size_type pos, Params &&...)
+    reference_type emplace_at(size_type pos, Params &&...args)
     {
+        if (pos >= _data.capacity())
+            _data.resize(pos + 1);
+        _data.emplace(_data.begin() + pos, Component(args...));
+        return _data[pos];
     }
     void erase(size_type pos)
     {
