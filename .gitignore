@@ -41,7 +41,10 @@ build
 cmake-build-debug
 rtype
 vcpkg_installed
-rtype_server
+Testing/
+
+vcpkg/
+
 rtype_client
-Testing/Temporary/CTestCostData.txt
-Testing/Temporary/LastTest.log
+
+rtype_server
