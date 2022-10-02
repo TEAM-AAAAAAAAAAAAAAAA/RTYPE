@@ -1,4 +1,4 @@
-# R-Type
+# R-Type [![Build](https://github.com/TEAM-AAAAAAAAAAAAAAAA/RTYPE/actions/workflows/ci.yml/badge.svg)](https://github.com/TEAM-AAAAAAAAAAAAAAAA/RTYPE/actions/workflows/ci.yml) [![Build Debug](https://github.com/TEAM-AAAAAAAAAAAAAAAA/RTYPE/actions/workflows/build_debug.yml/badge.svg)](https://github.com/TEAM-AAAAAAAAAAAAAAAA/RTYPE/actions/workflows/build_debug.yml)
 
 This project aims to recreate the R-Type game and add a multiplayer mode to it. we had to implement a multi-threaded server and a graphical client in SFML.
 
