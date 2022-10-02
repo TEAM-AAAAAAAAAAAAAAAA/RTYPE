@@ -11,6 +11,7 @@
 #include <vector>
 #include <exception>
 #include <iostream>
+#include "Constant.hpp"
 
 namespace ecs {
 
@@ -141,13 +142,14 @@ namespace ecs {
              * @return The sizeType of the valueType's index you are looking for
              */
             sizeType getIndex(valueType const &c) const {
+                std::size_t cpt = 0;
                 if (!c.has_value())
-                    return std::nullopt;
-                for (auto iterator =  _data.begin(); iterator != _data.end(); iterator++)
+                    return ecs::npos;
+                for (valueType iterator =  _data.begin(); iterator != _data.end(); iterator++, cpt++)
                     if (iterator.has_value() && iterator.value() == c.value()) {
-                        return iterator.value();
+                        return cpt;
                     }
-                return std::nullopt;
+                return ecs::npos;
             }
 
         private:

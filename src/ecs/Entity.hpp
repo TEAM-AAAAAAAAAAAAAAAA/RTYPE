@@ -15,10 +15,7 @@ namespace ecs {
              * @return Private member _id of the Entity
              */
             explicit operator size_t &() { return _id; }
-
             explicit operator size_t() const { return _id; }
-
-            static const std::size_t npos = -1;
 
         private:
             explicit Entity(size_t id) : _id(id) {}

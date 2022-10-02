@@ -8,6 +8,7 @@
 #include "Entity.hpp"
 #include <exception>
 #include <iostream>
+#include "Constant.hpp"
 
 namespace ecs {
 
@@ -70,12 +71,15 @@ namespace ecs {
              * @return The entity just created (id)
              */
             Entity spawn_entity() {
+                size_t front;
+
                 if (_entitiesBin.empty()) {
                     _lastEntity++;
                     return Entity(_lastEntity - 1);
                 }
+                front = _entitiesBin.front();
                 _entitiesBin.erase(_entitiesBin.begin());
-                return _entitiesBin.front();
+                return Entity(front);
             }
 
             /**
@@ -83,16 +87,12 @@ namespace ecs {
              * @param idx The index of the entity whose id is desired
              * @return The id of the Entity if it exists, std::npos otherwise
              */
-//            TODO: Need to implement properly
-//            Entity entityFromIndex(std::size_t idx)
-//            {
-//                std::size_t first = _entitiesBin.begin()->_id;
-//                std::size_t last = _entitiesBin.end()->_id;
-//
-//                if (idx >= _lastEntity || std::find(first, last, idx). != last)
-//                    return Entity::npos;
-//                return Entity(idx);
-//            }
+            Entity entityFromIndex(std::size_t idx)
+            {
+                if (idx >= _lastEntity || std::find(_entitiesBin.begin(), _entitiesBin.end(), idx) != _entitiesBin.end())
+                    return Entity(ecs::npos);
+                return Entity(idx);
+            }
 
             /**
              * This is used to delete the given Entity (id)
@@ -103,7 +103,7 @@ namespace ecs {
             {
                 for (const auto& erase_func: _eraseFunctions)
                     erase_func(*this, e);
-                _entitiesBin.push_back(e);
+                _entitiesBin.push_back(e._id);
             }
 
             /**
@@ -160,7 +160,7 @@ namespace ecs {
             /**
              * Private member _entitiesBin represents the bin of every deleted component, used to recover entity instead of creating another one
              */
-            std::vector<Entity> _entitiesBin;
+            std::vector<std::size_t> _entitiesBin;
 
             /**
              * The total number of entity present in the Registry class
