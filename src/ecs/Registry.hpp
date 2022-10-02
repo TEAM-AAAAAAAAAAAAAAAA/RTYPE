@@ -85,7 +85,7 @@ namespace ecs {
             /**
              * This function is used to get the id of the Entity following the give index
              * @param idx The index of the entity whose id is desired
-             * @return The id of the Entity if it exists, std::npos otherwise
+             * @return The id of the Entity if it exists, ecs::npos otherwise
              */
             Entity entityFromIndex(std::size_t idx)
             {
