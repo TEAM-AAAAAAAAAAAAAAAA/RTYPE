@@ -74,9 +74,8 @@ namespace ecs {
                     _last_entity++;
                     return Entity(_last_entity - 1);
                 }
-                size_t id = _entity_recycle_bin.front();
                 _entity_recycle_bin.erase(_entity_recycle_bin.begin());
-                return Entity(id);
+                return _entity_recycle_bin.front();
             }
 
             /**
@@ -84,12 +83,16 @@ namespace ecs {
              * @param idx The index of the entity whose id is desired
              * @return The id of the Entity if it exists, std::npos otherwise
              */
-            Entity entity_from_index(std::size_t idx)
-            {
-                if (idx >= _last_entity || std::find(_entity_recycle_bin.begin(), _entity_recycle_bin.end(), idx) != _entity_recycle_bin.end())
-                    return Entity::npos;
-                return Entity(idx);
-            } // ?
+//            TODO: Need to implement properly
+//            Entity entity_from_index(std::size_t idx)
+//            {
+//                std::size_t first = _entity_recycle_bin.begin()->_id;
+//                std::size_t last = _entity_recycle_bin.end()->_id;
+//
+//                if (idx >= _last_entity || std::find(first, last, idx). != last)
+//                    return Entity::npos;
+//                return Entity(idx);
+//            }
 
             /**
              * This is used to delete the given Entity (id)
@@ -156,7 +159,7 @@ namespace ecs {
             /**
              * Private member _entity_recycle_bin represents the bin of every deleted component, used to recover entity instead of creating another one
              */
-            std::vector<size_t> _entity_recycle_bin;
+            std::vector<Entity> _entity_recycle_bin;
 
             /**
              * The total number of entity present in the Registry class
