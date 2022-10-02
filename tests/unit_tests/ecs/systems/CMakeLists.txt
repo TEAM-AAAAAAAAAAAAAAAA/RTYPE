@@ -1,11 +1,13 @@
-set (INCLUDE_ROOT ${PROJECT_SOURCE_DIR}/tests/unit_tests/ecs/systems)
-set (SRC_ROOT ${PROJECT_SOURCE_DIR}/tests/unit_tests/ecs/systems)
+set (INCLUDE_TEST_ROOT ${PROJECT_SOURCE_DIR}/tests/unit_tests/ecs/systems)
+set (SRC_TEST_ROOT ${PROJECT_SOURCE_DIR}/tests/unit_tests/ecs/systems)
+#set (SRC_ROOT ${PROJECT_SOURCE_DIR}/src/ecs/systems)
+#set (INC_ROOT ${PROJECT_SOURCE_DIR}/src/ecs/systems)
 
-set(TEST_SRC_ROOT
-        ${SRC_ROOT}/systems_tests.cpp
+set(SOURCES
+        ${SRC_TEST_ROOT}/systemsTests.cpp
         )
 
 create_test(
         TEST_NAME systems_test
-        TEST_SRC ${TEST_SRC_ROOT}
+        TEST_SRC ${SOURCES}
 )

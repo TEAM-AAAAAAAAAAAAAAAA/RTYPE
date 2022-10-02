@@ -1,11 +1,14 @@
-set (INCLUDE_ROOT ${PROJECT_SOURCE_DIR}/tests/unit_tests/ecs/registry)
-set (SRC_ROOT ${PROJECT_SOURCE_DIR}/tests/unit_tests/ecs/registry)
+set (INCLUDE_TEST_ROOT ${PROJECT_SOURCE_DIR}/tests/unit_tests/ecs/registry)
+set (SRC_TEST_ROOT ${PROJECT_SOURCE_DIR}/tests/unit_tests/ecs/registry)
+set (SRC_ROOT ${PROJECT_SOURCE_DIR}/src/ecs)
+set (INC_ROOT ${PROJECT_SOURCE_DIR}/src/ecs)
 
-set(TEST_SRC_ROOT
-        ${SRC_ROOT}/registry_tests.cpp
+set(SOURCES
+        ${SRC_TEST_ROOT}/registryTests.cpp
+        ${SRC_ROOT}/Registry.hpp
         )
 
 create_test(
         TEST_NAME registry_test
-        TEST_SRC ${TEST_SRC_ROOT}
+        TEST_SRC ${SOURCES}
 )

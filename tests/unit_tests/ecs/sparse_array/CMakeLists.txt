@@ -1,11 +1,14 @@
-set (INCLUDE_ROOT ${PROJECT_SOURCE_DIR}/tests/unit_tests/ecs/sparse_array)
-set (SRC_ROOT ${PROJECT_SOURCE_DIR}/tests/unit_tests/ecs/sparse_array)
+set (INCLUDE_TEST_ROOT ${PROJECT_SOURCE_DIR}/tests/unit_tests/ecs/sparse_array)
+set (SRC_TEST_ROOT ${PROJECT_SOURCE_DIR}/tests/unit_tests/ecs/sparse_array)
+set (INC_ROOT ${PROJECT_SOURCE_DIR}/src/ecs)
+set (SRC_ROOT ${PROJECT_SOURCE_DIR}/src/ecs)
 
-set(TEST_SRC_ROOT
-        ${SRC_ROOT}/sparse_array_tests.cpp
+set (SOURCES
+        ${SRC_TEST_ROOT}/sparseArrayTests.cpp
+        ${SRC_ROOT}/SparseArray.hpp
         )
 
 create_test(
         TEST_NAME sparse_array_test
-        TEST_SRC ${TEST_SRC_ROOT}
+        TEST_SRC ${SOURCES}
 )
