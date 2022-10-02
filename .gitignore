@@ -44,5 +44,5 @@ rtype_server
 vcpkg_installed
 
 # Useless execs
-src/ecs/main.cpp
+src/main.cpp
 
