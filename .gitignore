@@ -43,3 +43,6 @@ rtype_client
 rtype_server
 vcpkg_installed
 
+# Useless execs
+src/ecs/main.cpp
+
