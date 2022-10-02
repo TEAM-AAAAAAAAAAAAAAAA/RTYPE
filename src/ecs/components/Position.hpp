@@ -1,7 +1,8 @@
 #pragma once
 
-struct Position
-{
-    int x;
-    int y;
-};
+namespace ecs {
+    struct Position {
+        int x;
+        int y;
+    };
+}
