@@ -22,7 +22,7 @@ namespace ecs {
      */
     class Registry {
         public:
-            Registry() : _last_entity(0) {}
+            Registry() : _lastEntity(0) {}
 
             /**
              * This function is used to register a new component in the private member _unordered_map
@@ -30,15 +30,15 @@ namespace ecs {
              * @return The SparseArray of components you just registered
              */
             template<class Component>
-            SparseArray<Component> &register_component() {
-                _components_arrays[std::type_index(typeid(Component))] = SparseArray<Component>();
+            SparseArray<Component> &registerComponent() {
+                _componentsArrays[std::type_index(typeid(Component))] = SparseArray<Component>();
 
                 std::function<void(Registry &, Entity const &)> erase_func = [](Registry &r, Entity const &e) {
-                    SparseArray<Component> &array = r.template get_components<Component>();
+                    SparseArray<Component> &array = r.template getComponents<Component>();
                     array.erase(e);
                 };
-                _erase_functions.push_back(erase_func);
-                return get_components<Component>();
+                _eraseFunctions.push_back(erase_func);
+                return getComponents<Component>();
             }
 
             /**
@@ -48,9 +48,9 @@ namespace ecs {
              * @return The SparseArray of components you asked
              */
             template<class Component>
-            SparseArray<Component> &get_components() {
+            SparseArray<Component> &getComponents() {
                 return std::any_cast<SparseArray<Component> &>(
-                        _components_arrays.at(std::type_index(typeid(Component))));
+                        _componentsArrays.at(std::type_index(typeid(Component))));
             }
 
             /**
@@ -60,22 +60,22 @@ namespace ecs {
              * @return The const SparseArray of components you asked
              */
             template<class Component>
-            SparseArray<Component> const &get_components() const {
-                return std::any_cast<SparseArray<Component>>(_components_arrays.at(std::type_index(typeid(Component))));
+            SparseArray<Component> const &getComponents() const {
+                return std::any_cast<SparseArray<Component>>(_componentsArrays.at(std::type_index(typeid(Component))));
             }
 
             /**
-             * This function is used to create a new entity if it doesn't exists in the _entity_recycle_bin,
+             * This function is used to create a new entity if it doesn't exists in the _entitiesBin,
              * otherwise it recover it from the bin
              * @return The entity just created (id)
              */
             Entity spawn_entity() {
-                if (_entity_recycle_bin.empty()) {
-                    _last_entity++;
-                    return Entity(_last_entity - 1);
+                if (_entitiesBin.empty()) {
+                    _lastEntity++;
+                    return Entity(_lastEntity - 1);
                 }
-                _entity_recycle_bin.erase(_entity_recycle_bin.begin());
-                return _entity_recycle_bin.front();
+                _entitiesBin.erase(_entitiesBin.begin());
+                return _entitiesBin.front();
             }
 
             /**
@@ -84,31 +84,31 @@ namespace ecs {
              * @return The id of the Entity if it exists, std::npos otherwise
              */
 //            TODO: Need to implement properly
-//            Entity entity_from_index(std::size_t idx)
+//            Entity entityFromIndex(std::size_t idx)
 //            {
-//                std::size_t first = _entity_recycle_bin.begin()->_id;
-//                std::size_t last = _entity_recycle_bin.end()->_id;
+//                std::size_t first = _entitiesBin.begin()->_id;
+//                std::size_t last = _entitiesBin.end()->_id;
 //
-//                if (idx >= _last_entity || std::find(first, last, idx). != last)
+//                if (idx >= _lastEntity || std::find(first, last, idx). != last)
 //                    return Entity::npos;
 //                return Entity(idx);
 //            }
 
             /**
              * This is used to delete the given Entity (id)
-             * For optimisation purposes, Registry class push it in the _entity_recycle_bin
+             * For optimisation purposes, Registry class push it in the _entitiesBin
              * @param e The Entity you want to kill
              */
-            void kill_entity(Entity const &e)
+            void killEntity(Entity const &e)
             {
-                for (const auto& erase_func: _erase_functions)
+                for (const auto& erase_func: _eraseFunctions)
                     erase_func(*this, e);
-                _entity_recycle_bin.push_back(e);
+                _entitiesBin.push_back(e);
             }
 
             /**
              * This function is used to add a component into the Entity given as parameter.
-             * In the same time, the erase function of this component is pushed into the _erase_functions vector,
+             * In the same time, the erase function of this component is pushed into the _eraseFunctions vector,
              * in this case we can simply delete a component without needing type of it
              * @tparam Component The type of component want to be added
              * @param to The Entity in which you want to add component
@@ -116,9 +116,9 @@ namespace ecs {
              * @return the SparseArray<Component> reference of the component
              */
             template<typename Component>
-            typename SparseArray<Component>::reference_type add_component(Entity const &to, Component &&c) {
+            typename SparseArray<Component>::referenceType addComponent(Entity const &to, Component &&c) {
                 return std::any_cast<SparseArray<Component> &>(
-                        _components_arrays[std::type_index(typeid(Component))]).insert_at(to, c);
+                        _componentsArrays[std::type_index(typeid(Component))]).insertAt(to, c);
             }
 
             /**
@@ -130,9 +130,10 @@ namespace ecs {
              * @return the SparseArray<Component> reference of the component
              */
             template <typename Component, typename... Params>
-            typename SparseArray<Component>::reference_type emplace_component(Entity const &to, Params &&...p)
+            typename SparseArray<Component>::referenceType emplaceComponent(Entity const &to, Params &&...p)
             {
-                return std::any_cast<SparseArray<Component>&>(_components_arrays[std::type_index(typeid(Component))]).insert_at(to, Component(p...));
+                return std::any_cast<SparseArray<Component> &>(
+                        _componentsArrays[std::type_index(typeid(Component))]).insertAt(to, Component(p...));
             }
             /**
              * This function is used to remove a component into an Entity given as parameter
@@ -140,30 +141,30 @@ namespace ecs {
              * @param from The Entity in which you want to remove component
              */
             template <typename Component>
-            void remove_component(Entity const &from)
+            void removeComponent(Entity const &from)
             {
-                std::any_cast<SparseArray<Component>&>(_components_arrays.at(std::type_index(typeid(Component))))[from] = std::nullopt;
+                std::any_cast<SparseArray<Component>&>(_componentsArrays.at(std::type_index(typeid(Component))))[from] = std::nullopt;
             }
 
         private:
             /**
              * Private member _components_array represents the group of component already registered in the Registry class
              */
-            std::unordered_map<std::type_index, std::any> _components_arrays;
+            std::unordered_map<std::type_index, std::any> _componentsArrays;
 
             /**
-             * Private member _erase_functions represents self erase function of each component
+             * Private member _eraseFunctions represents self erase function of each component
              */
-            std::vector<std::function<void(Registry &, Entity const &)>> _erase_functions;
+            std::vector<std::function<void(Registry &, Entity const &)>> _eraseFunctions;
 
             /**
-             * Private member _entity_recycle_bin represents the bin of every deleted component, used to recover entity instead of creating another one
+             * Private member _entitiesBin represents the bin of every deleted component, used to recover entity instead of creating another one
              */
-            std::vector<Entity> _entity_recycle_bin;
+            std::vector<Entity> _entitiesBin;
 
             /**
              * The total number of entity present in the Registry class
              */
-            std::size_t _last_entity;
+            std::size_t _lastEntity;
     };
 }

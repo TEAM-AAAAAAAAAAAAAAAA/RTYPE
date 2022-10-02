@@ -23,13 +23,13 @@ namespace ecs {
     template<typename Component>
     class SparseArray {
         public:
-            using value_type = std::optional<Component>;
-            using reference_type = value_type &;
-            using const_reference_type = value_type const &;
-            using container_t = std::vector<value_type>;
-            using size_type = typename container_t::size_type;
-            using iterator = typename container_t::iterator;
-            using const_iterator = typename container_t::const_iterator;
+            using valueType = std::optional<Component>;
+            using referenceType = valueType &;
+            using constReferenceType = valueType const &;
+            using container = std::vector<valueType>;
+            using sizeType = typename container::size_type;
+            using iterator = typename container::iterator;
+            using constIterator = typename container::const_iterator;
 
         public:
             /**
@@ -62,11 +62,11 @@ namespace ecs {
                 return *this;
             }
 
-            reference_type operator[](size_t idx) {
+            referenceType operator[](size_t idx) {
                 return _data[idx];
             }
 
-            const_reference_type operator[](size_t idx) const {
+            constReferenceType operator[](size_t idx) const {
                 return _data[idx];
             }
 
@@ -74,11 +74,11 @@ namespace ecs {
                 return _data.begin();
             }
 
-            const_iterator begin() const {
+            constIterator begin() const {
                 return _data.begin();
             }
 
-            const_iterator cbegin() const {
+            constIterator cBegin() const {
                 return _data.cbegin();
             }
 
@@ -86,19 +86,19 @@ namespace ecs {
                 return _data.end();
             }
 
-            const_iterator end() const {
+            constIterator end() const {
                 return _data.end();
             }
 
-            const_iterator cend() const {
+            constIterator cEnd() const {
                 return _data.cend();
             }
 
-            size_type size() const {
+            sizeType size() const {
                 return _data.size();
             }
 
-            reference_type insert_at(size_type pos, Component const &c) {
+            referenceType insertAt(sizeType pos, Component const &c) {
                 try {
                     if (pos >= _data.capacity())
                         _data.resize(pos);
@@ -110,7 +110,7 @@ namespace ecs {
                 return _data[pos];
             }
 
-            reference_type insert_at(size_type pos, Component &&c) {
+            referenceType insertAt(sizeType pos, Component &&c) {
                 try {
                     if (pos >= _data.capacity())
                         _data.resize(pos + 1);
@@ -123,7 +123,7 @@ namespace ecs {
             }
 
             template <class... Params>
-            reference_type emplace_at(size_type pos, Params &&...args)
+            referenceType emplaceAt(sizeType pos, Params &&...args)
             {
                 if (pos >= _data.capacity())
                     _data.resize(pos + 1);
@@ -131,16 +131,16 @@ namespace ecs {
                 return _data[pos];
             }
 
-            void erase(size_type pos) {
+            void erase(sizeType pos) {
                 _data[pos] = std::nullopt;
             }
 
             /**
-             * This function is used to get the index of the std::optional<Component> of the std::vector<std::optional<Component>> _data according to the given value_type (std::optional<Component>)
+             * This function is used to get the index of the std::optional<Component> of the std::vector<std::optional<Component>> _data according to the given valueType (std::optional<Component>)
              * @param c The std::optional<Component>, type of the component you want the index
-             * @return The size_type of the value_type's index you are looking for
+             * @return The sizeType of the valueType's index you are looking for
              */
-            size_type get_index(value_type const &c) const {
+            sizeType getIndex(valueType const &c) const {
                 if (!c.has_value())
                     return std::nullopt;
                 for (auto iterator =  _data.begin(); iterator != _data.end(); iterator++)
@@ -154,6 +154,6 @@ namespace ecs {
             /**
              * Private member _data represented by a std::vector<std::optional<Component>> the data of the component
              */
-            container_t _data;
+            container _data;
     };
 }
