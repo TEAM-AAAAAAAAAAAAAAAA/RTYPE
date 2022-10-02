@@ -1,5 +1,4 @@
-#ifndef ECS_ENTITY_
-#define ECS_ENTITY_
+#pragma once
 
 #include <cstddef>
 
@@ -32,5 +31,3 @@ namespace ecs {
             std::size_t _id;
     };
 }
-
-#endif // ECS_ENTITY_

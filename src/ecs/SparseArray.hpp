@@ -5,8 +5,7 @@
 ** SparseArray
 */
 
-#ifndef SPARSEARRAY_HPP_
-#define SPARSEARRAY_HPP_
+#pragma once
 
 #include <optional>
 #include <vector>
@@ -158,5 +157,3 @@ namespace ecs {
             container_t _data;
     };
 }
-
-#endif /* !SPARSEARRAY_HPP_ */
