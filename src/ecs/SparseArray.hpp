@@ -142,12 +142,13 @@ namespace ecs {
              * @return The size_type of the value_type's index you are looking for
              */
             size_type get_index(value_type const &c) const {
-                //TODO: Need to implement this function
-//                for (auto iterator =  _data.begin(); iterator != _data.end(); iterator++)
-//                    if (iterator.has_value() && c.has_value() && iterator.value() == c.value()) {
-//                        return iterator.value();
-//                    }
-//                return std::nullopt;
+                if (!c.has_value())
+                    return std::nullopt;
+                for (auto iterator =  _data.begin(); iterator != _data.end(); iterator++)
+                    if (iterator.has_value() && iterator.value() == c.value()) {
+                        return iterator.value();
+                    }
+                return std::nullopt;
             }
 
         private:
