@@ -47,3 +47,11 @@ vcpkg_installed
 src/main.cpp
 test_main
 
+
+Testing/
+
+vcpkg/
+
+rtype_client
+
+rtype_server
