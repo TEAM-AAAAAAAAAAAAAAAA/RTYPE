@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ecs {
+namespace ecs::component {
     struct Position {
         int x;
         int y;
