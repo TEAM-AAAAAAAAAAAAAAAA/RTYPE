@@ -1,1 +1,1 @@
-add_subdirectory(unittests)
+add_subdirectory(unit_tests)
