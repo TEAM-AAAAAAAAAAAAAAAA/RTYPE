@@ -6,3 +6,4 @@ set(ECS_INCDIRS
     PARENT_SCOPE)
 
 add_subdirectory(components)
+add_subdirectory(systems)
