@@ -18,6 +18,11 @@ if(NOT DEFINED CMAKE_SUPPRESS_DEVELOPER_WARNINGS)
      set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1 CACHE INTERNAL "No dev warnings")
 endif()
 
+option(BUILD_TEST_SUITE ON)
+if (BUILD_TEST_SUITE)
+     enable_testing()
+endif()
+
 include(CompilerFlags)
 include(DetectCompiler)
 

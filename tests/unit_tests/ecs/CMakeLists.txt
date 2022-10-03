@@ -1,0 +1,3 @@
+add_subdirectory(sparse_array)
+add_subdirectory(registry)
+add_subdirectory(systems)

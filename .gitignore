@@ -39,8 +39,15 @@
 # build Folder
 build
 cmake-build-debug
-rtype
+rtype_client
+rtype_server
 vcpkg_installed
+
+# Useless execs
+src/main.cpp
+test_main
+
+
 Testing/
 
 vcpkg/
