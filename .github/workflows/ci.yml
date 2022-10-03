@@ -16,6 +16,17 @@ env:
   VCPKG_COMMIT: 57d3194e702a2959e86a6748999ad71fc24f7922
   VCPKG_DISABLE_METRICS: true
 
+jobs:
+  clang-format:
+    name: Clang Format Checker
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+    - uses: DoozyX/clang-format-lint-action@v0.13
+      with:
+        source: 'src'
+        clangFormatVersion: 12
+
   clean_repo:
     name: Delete useless files
     runs-on: ubuntu-latest
