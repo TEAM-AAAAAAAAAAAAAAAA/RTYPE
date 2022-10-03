@@ -2,11 +2,9 @@ set(INCROOT ${PROJECT_SOURCE_DIR}/src/ecs/components)
 set(SRCROOT ${PROJECT_SOURCE_DIR}/src/ecs/components)
 
 set(SRC
+    ${SRCROOT}/Controllable.hpp
+    ${SRCROOT}/Drawable.hpp
     ${SRCROOT}/Position.hpp
-    ${SRCROOT}/InputMoveDown.hpp
-    ${SRCROOT}/InputMoveLeft.hpp
-    ${SRCROOT}/InputMoveRight.hpp
-    ${SRCROOT}/InputMoveUp.hpp
     ${SRCROOT}/Size.hpp
     PARENT_SCOPE
 )
