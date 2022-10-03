@@ -33,7 +33,7 @@ namespace ecs
             ecs::Entity enemy = initWorld.registry.spawn_entity();
             initWorld.registry.addComponent<ecs::component::Position>(enemy, {50, 50});
             initWorld.registry.addComponent<ecs::component::Size>(enemy, {10, 10});
-            initWorld.registry.addComponent<ecs::component::Drawable>(enemy, {"/home/aurele/2022-09-28-09:36:39-screenshot_000.png"});
+            initWorld.registry.addComponent<ecs::component::Drawable>(enemy, {""});
 
             initWorld.addSystem(ecs::systems::positionLogger);
             initWorld.addSystem(ecs::systems::draw);
