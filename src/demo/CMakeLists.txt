@@ -1,16 +1,19 @@
-set(INCROOT ${PROJECT_SOURCE_DIR}/src/demo)
-set(SRCROOT ${PROJECT_SOURCE_DIR}/src/demo)
+set(INC_ROOT ${PROJECT_SOURCE_DIR}/src/demo)
+set(SRC_ROOT ${PROJECT_SOURCE_DIR}/src/demo)
+set(ECS_SRC ${PROJECT_SOURCE_DIR}/src/ecs)
 
 set(TARGET rtype_demo)
 
 set(SRC
-    ${SRCROOT}/Demo.cpp
-)
+        ${SRC_ROOT}/Demo.cpp
+        )
 
 add_executable(${TARGET} ${SRC})
 
 set(INCDIRS
-    ${INCROOT}
-    PARENT_SCOPE)
+        ${ECS_ROOT}
+        ${INCROOT}
+        PARENT_SCOPE
+        )
 
 set_target_properties(${TARGET} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})

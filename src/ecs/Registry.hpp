@@ -36,7 +36,7 @@ namespace ecs
 
             std::function<void(Registry &, Entity const &)> erase_func = [](Registry &r, Entity const &e) {
                 SparseArray<Component> &array = r.template getComponents<Component>();
-                array.erase(e);
+                array.erase(e._id);
             };
             _eraseFunctions.push_back(erase_func);
             return getComponents<Component>();
@@ -119,7 +119,7 @@ namespace ecs
         typename SparseArray<Component>::referenceType addComponent(Entity const &to, Component &&c)
         {
             return std::any_cast<SparseArray<Component> &>(_componentsArrays[std::type_index(typeid(Component))])
-                .insertAt(to, c);
+                .insertAt(to._id, c);
         }
 
         /**
@@ -134,7 +134,7 @@ namespace ecs
         typename SparseArray<Component>::referenceType emplaceComponent(Entity const &to, Params &&...p)
         {
             return std::any_cast<SparseArray<Component> &>(_componentsArrays[std::type_index(typeid(Component))])
-                .insertAt(to, Component(p...));
+                .insertAt(to._id, Component(p...));
         }
         /**
          * This function is used to remove a component into an Entity given as parameter
