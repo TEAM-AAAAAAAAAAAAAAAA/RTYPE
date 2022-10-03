@@ -4,8 +4,8 @@
 
 namespace ecs::component
 {
-    struct InputMoveUp {
-        InputMoveUp(sf::Keyboard::Key input) : Key(input) {}
+    struct InputMoveDown {
+        InputMoveDown(sf::Keyboard::Key input) : Key(input) {}
 
         sf::Keyboard::Key Key;
     };
