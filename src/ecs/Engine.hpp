@@ -9,9 +9,9 @@
 #include "../ecs/components/Position.hpp"
 #include "../ecs/components/Size.hpp"
 #include "../ecs/components/Velocity.hpp"
+#include "../ecs/systems/Draw.hpp"
 #include "../ecs/systems/Movement.hpp"
 #include "../ecs/systems/PositionLogger.hpp"
-#include "../ecs/systems/Draw.hpp"
 #include "SFML/Graphics.hpp"
 
 namespace ecs
@@ -56,7 +56,12 @@ namespace ecs
                 _currentWorld.swap(_waitingWorld);
         }
 
-        void run() { _currentWorld.get()->runSystems(); }
+        void run()
+        {
+            while (true) {
+                _currentWorld.get()->runSystems();
+            }
+        }
 
         // Entity createEntity() { return _currentWorld.get()->registry.spawn_entity(); }
 
