@@ -2,7 +2,7 @@
 
 namespace ecs::component
 {
-    struct Position {
+    struct Size {
         int x;
         int y;
     };

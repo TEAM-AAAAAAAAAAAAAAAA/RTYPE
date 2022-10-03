@@ -7,6 +7,7 @@ set(SRC
     ${SRCROOT}/InputMoveLeft.hpp
     ${SRCROOT}/InputMoveRight.hpp
     ${SRCROOT}/InputMoveUp.hpp
+    ${SRCROOT}/Size.hpp
     PARENT_SCOPE
 )
 
