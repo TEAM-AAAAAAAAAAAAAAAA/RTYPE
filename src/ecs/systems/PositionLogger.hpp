@@ -2,9 +2,9 @@
 
 #include <functional>
 #include <iostream>
-#include "../../ecs/World.hpp"
-#include "../../ecs/components/Position.hpp"
-#include "../../ecs/components/Velocity.hpp"
+#include "World.hpp"
+#include "components/Position.hpp"
+#include "components/Velocity.hpp"
 
 namespace ecs::systems
 {
