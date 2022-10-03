@@ -3,6 +3,7 @@ set(SRCROOT ${PROJECT_SOURCE_DIR}/src/ecs/systems)
 
 set(SRC
     ${SRCROOT}/Movement.hpp
+    ${SRCROOT}/PositionLogger.hpp
     PARENT_SCOPE
 )
 
