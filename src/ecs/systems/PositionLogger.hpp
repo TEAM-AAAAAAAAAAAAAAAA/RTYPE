@@ -2,15 +2,15 @@
 
 #include <functional>
 #include <iostream>
-#include "../../ecs/Registry.hpp"
+#include "../../ecs/World.hpp"
 #include "../../ecs/components/Position.hpp"
 #include "../../ecs/components/Velocity.hpp"
 
 namespace ecs::systems
 {
-    std::function<void(Registry &)> positionLogger = [](Registry &r) {
-        auto const &positions = r.getComponents<component::Position>();
-        auto const &velocities = r.getComponents<component::Velocity>();
+    std::function<void(World &)> positionLogger = [](World &world) {
+        auto const &positions = world.registry.getComponents<component::Position>();
+        auto const &velocities = world.registry.getComponents<component::Velocity>();
 
         for (size_t i = 0; i < positions.size() && i < velocities.size(); ++i) {
             auto const &pos = positions[i];
