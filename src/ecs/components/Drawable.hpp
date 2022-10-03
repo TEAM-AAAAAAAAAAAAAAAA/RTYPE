@@ -9,4 +9,4 @@ namespace ecs::component
 
         sf::Texture Texture;
     };
-} // namespace ecs::componenté&&é
+} // namespace ecs::component
