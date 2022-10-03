@@ -9,6 +9,7 @@
 
 #include <cstddef>
 
-namespace ecs {
+namespace ecs
+{
     static const std::size_t npos = -1;
 }
