@@ -3,7 +3,7 @@
 namespace ecs::component
 {
     struct Size {
-        int x;
-        int y;
+        int height;
+        int width;
     };
 } // namespace ecs::component
