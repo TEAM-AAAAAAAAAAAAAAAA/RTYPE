@@ -3,9 +3,9 @@
 #include <functional>
 #include <iostream>
 #include "../../ecs/World.hpp"
+#include "../../ecs/components/Drawable.hpp"
 #include "../../ecs/components/Position.hpp"
 #include "../../ecs/components/Size.hpp"
-#include "../../ecs/components/Drawable.hpp"
 
 namespace ecs::systems
 {
@@ -25,8 +25,8 @@ namespace ecs::systems
                 sf::Sprite sprite;
                 sprite.setTexture(texture);
                 world.getWindow().draw(sprite);
-                // draw.value().Texture
             }
         };
+        world.getWindow().display();
     };
 }
