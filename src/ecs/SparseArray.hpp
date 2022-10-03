@@ -15,7 +15,6 @@
 
 namespace ecs
 {
-
     /**
      * SparseArray class is the component container of the ecs. \n
      * This can be quite useful to store components that are defined for most entities,

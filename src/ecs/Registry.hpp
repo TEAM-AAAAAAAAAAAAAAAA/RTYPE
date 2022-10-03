@@ -12,7 +12,6 @@
 
 namespace ecs
 {
-
     /**
      * [This is the core of the ECS] \n
      * This class contains many feature as follows : \n
