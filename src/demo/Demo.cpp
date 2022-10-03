@@ -11,13 +11,15 @@
 #include "../ecs/systems/Movement.hpp"
 #include "../ecs/systems/PositionLogger.hpp"
 #include <iostream>
+#include "../ecs/Registry.hpp"
+#include "../ecs/components/Position.hpp"
 
 int main()
 {
     ecs::Registry r;
     ecs::Entity e = r.spawn_entity();
     r.emplaceComponent<ecs::component::Position>(e, 1, 2);
-    r.emplaceComponent<ecs::component::Velocity>(e, 1, 2);
+    r.emplaceComponent<ecs::component::Velocity>(e, 1, 1);
     while (true)
     {
         ecs::systems::movement(r);
