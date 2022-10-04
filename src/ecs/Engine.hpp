@@ -4,7 +4,7 @@
  * File Created: Tuesday, 4th October 2022 6:33:43 pm
  * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
  * -----
- * Last Modified: Tuesday, 4th October 2022 7:26:51 pm
+ * Last Modified: Tuesday, 4th October 2022 10:14:01 pm
  * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
  * -----
  * Copyright 2022 - 2022 Your Company, Your Company
@@ -23,6 +23,8 @@
 #include "components/Size.hpp"
 #include "components/EnemyAI.hpp"
 #include "components/Velocity.hpp"
+#include "systems/HandleSFMLEvents.hpp"
+#include "systems/HandleSFMLMovements.hpp"
 #include "systems/Draw.hpp"
 #include "systems/Movement.hpp"
 #include "systems/PositionLogger.hpp"
@@ -51,6 +53,8 @@ namespace ecs
                 enemy, {"src/demo/assets/textures/players.gif", {1, 18, 32, 16}});
             initWorld.registry.addComponent<ecs::component::EnemyAI>(enemy, {});
 
+            initWorld.addSystem(ecs::systems::handleSFMLEvents);
+            initWorld.addSystem(ecs::systems::handleSFMLMovements);
             // initWorld.addSystem(ecs::systems::positionLogger);
             initWorld.addSystem(ecs::systems::draw);
             initWorld.addSystem(ecs::systems::movement);
@@ -75,7 +79,7 @@ namespace ecs
 
         void run()
         {
-            while (true) {
+            while (_window.get()->isOpen()) {
                 _currentWorld.get()->runSystems();
             }
         }
