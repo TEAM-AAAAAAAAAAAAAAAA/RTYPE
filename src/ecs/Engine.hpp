@@ -1,18 +1,31 @@
+/*
+ * File: Engine.hpp
+ * Project: ecs
+ * File Created: Tuesday, 4th October 2022 6:33:43 pm
+ * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
+ * -----
+ * Last Modified: Tuesday, 4th October 2022 7:26:51 pm
+ * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
+ * -----
+ * Copyright 2022 - 2022 Your Company, Your Company
+ */
+
 #pragma once
 
 #include <memory>
 #include "Engine.hpp"
 #include "Registry.hpp"
+#include "SFML/Graphics.hpp"
 #include "World.hpp"
 #include "components/Controllable.hpp"
 #include "components/Drawable.hpp"
 #include "components/Position.hpp"
 #include "components/Size.hpp"
+#include "components/EnemyAI.hpp"
 #include "components/Velocity.hpp"
 #include "systems/Draw.hpp"
 #include "systems/Movement.hpp"
 #include "systems/PositionLogger.hpp"
-#include "SFML/Graphics.hpp"
 
 namespace ecs
 {
@@ -25,18 +38,22 @@ namespace ecs
             ecs::Entity player = initWorld.registry.spawn_entity();
             initWorld.registry.addComponent<ecs::component::Position>(player, {10, 10});
             initWorld.registry.addComponent<ecs::component::Velocity>(player, {1, 1});
-            initWorld.registry.addComponent<ecs::component::Size>(player, {10, 10});
-            initWorld.registry.addComponent<ecs::component::Drawable>(player, {""});
+            initWorld.registry.addComponent<ecs::component::Size>(player, {5, 5});
+            initWorld.registry.addComponent<ecs::component::Drawable>(
+                player, {"src/demo/assets/textures/players.gif", {1, 1, 32, 16}});
             initWorld.registry.addComponent<ecs::component::Controllable>(
                 player, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D});
 
             ecs::Entity enemy = initWorld.registry.spawn_entity();
-            initWorld.registry.addComponent<ecs::component::Position>(enemy, {50, 50});
-            initWorld.registry.addComponent<ecs::component::Size>(enemy, {10, 10});
-            initWorld.registry.addComponent<ecs::component::Drawable>(enemy, {""});
+            initWorld.registry.addComponent<ecs::component::Position>(enemy, {500, 500});
+            initWorld.registry.addComponent<ecs::component::Size>(enemy, {5, 5});
+            initWorld.registry.addComponent<ecs::component::Drawable>(
+                enemy, {"src/demo/assets/textures/players.gif", {1, 18, 32, 16}});
+            initWorld.registry.addComponent<ecs::component::EnemyAI>(enemy, {});
 
-            initWorld.addSystem(ecs::systems::positionLogger);
+            // initWorld.addSystem(ecs::systems::positionLogger);
             initWorld.addSystem(ecs::systems::draw);
+            initWorld.addSystem(ecs::systems::movement);
 
             _currentWorld = std::make_unique<ecs::World>(initWorld);
         }
