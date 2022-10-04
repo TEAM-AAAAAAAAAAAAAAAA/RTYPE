@@ -4,7 +4,7 @@
  * File Created: Tuesday, 4th October 2022 6:33:43 pm
  * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
  * -----
- * Last Modified: Tuesday, 4th October 2022 10:43:00 pm
+ * Last Modified: Tuesday, 4th October 2022 11:37:11 pm
  * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
  * -----
  * Copyright 2022 - 2022 Your Company, Your Company
@@ -19,13 +19,14 @@
 #include "World.hpp"
 #include "components/Controllable.hpp"
 #include "components/Drawable.hpp"
+#include "components/EnemyAI.hpp"
 #include "components/Position.hpp"
 #include "components/Size.hpp"
-#include "components/EnemyAI.hpp"
 #include "components/Velocity.hpp"
+#include "systems/Draw.hpp"
 #include "systems/HandleSFMLEvents.hpp"
 #include "systems/HandleSFMLMovements.hpp"
-#include "systems/Draw.hpp"
+#include "systems/ManageClientEvents.hpp"
 #include "systems/Movement.hpp"
 #include "systems/PositionLogger.hpp"
 
@@ -36,11 +37,13 @@ namespace ecs
         Engine(int wSizeX = 800, int wSizeY = 600, std::string wTitle = "r-type") : _worldSwitchReady(false)
         {
             _window = std::make_unique<sf::RenderWindow>(sf::VideoMode(wSizeX, wSizeY), wTitle);
+            _window.get()->setFramerateLimit(60);
             ecs::World initWorld(_window);
             ecs::Entity player = initWorld.registry.spawn_entity();
             initWorld.registry.addComponent<ecs::component::Position>(player, {10, 10});
-            initWorld.registry.addComponent<ecs::component::Velocity>(player, {1, 1});
-            initWorld.registry.addComponent<ecs::component::Size>(player, {5, 5});
+            initWorld.registry.addComponent<ecs::component::Velocity>(player, {5, 5});
+            initWorld.registry.addComponent<ecs::component::Size>(player, {2, 2});
+            initWorld.registry.addComponent<ecs::component::Direction>(player, {0, 0});
             initWorld.registry.addComponent<ecs::component::Drawable>(
                 player, {"src/demo/assets/textures/players.gif", {1, 1, 32, 16}});
             initWorld.registry.addComponent<ecs::component::Controllable>(
@@ -55,6 +58,7 @@ namespace ecs
 
             initWorld.addSystem(ecs::systems::handleSFMLEvents);
             initWorld.addSystem(ecs::systems::handleSFMLMovements);
+            initWorld.addSystem(ecs::systems::manageClientEvents);
             // initWorld.addSystem(ecs::systems::positionLogger);
             initWorld.addSystem(ecs::systems::draw);
             initWorld.addSystem(ecs::systems::movement);
@@ -71,10 +75,7 @@ namespace ecs
             _waitingWorld = std::make_unique<ecs::World>(world);
         }
 
-        void setWorldSwitchReady()
-        {
-            _worldSwitchReady = true;
-        }
+        void setWorldSwitchReady() { _worldSwitchReady = true; }
 
         void run()
         {
@@ -93,10 +94,7 @@ namespace ecs
         std::unique_ptr<ecs::World> _waitingWorld;
         bool _worldSwitchReady;
 
-        bool isWorldSwitchReady()
-        {
-            return _worldSwitchReady;
-        }
+        bool isWorldSwitchReady() { return _worldSwitchReady; }
 
         void switchWorlds()
         {
