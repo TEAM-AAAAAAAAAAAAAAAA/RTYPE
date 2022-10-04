@@ -1,3 +1,15 @@
+/*
+ * File: Draw.hpp
+ * Project: systems
+ * File Created: Tuesday, 4th October 2022 6:33:43 pm
+ * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
+ * -----
+ * Last Modified: Tuesday, 4th October 2022 7:27:06 pm
+ * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
+ * -----
+ * Copyright 2022 - 2022 Your Company, Your Company
+ */
+
 #pragma once
 
 #include <functional>
@@ -21,6 +33,8 @@ namespace ecs::systems
             auto const &draw = drawables[i];
             if (pos && size && draw) {
                 sf::Sprite sprite;
+                sprite.setScale({float(size.value().width), float(size.value().height)});
+                sprite.setPosition({float(pos.value().x), float(pos.value().y)});
                 sprite.setTexture(draw.value().Texture);
                 world.getWindow().draw(sprite);
             }
