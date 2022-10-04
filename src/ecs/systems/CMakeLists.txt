@@ -2,6 +2,9 @@ set(INCROOT ${PROJECT_SOURCE_DIR}/src/ecs/systems)
 set(SRCROOT ${PROJECT_SOURCE_DIR}/src/ecs/systems)
 
 set(SYSTEMS_SRC
+    ${SRCROOT}/Draw.hpp
+    ${SRCROOT}/HandleSFMLEvents.hpp
+    ${SRCROOT}/HandleSFMLMovements.hpp
     ${SRCROOT}/Movement.hpp
     ${SRCROOT}/PositionLogger.hpp
     PARENT_SCOPE
