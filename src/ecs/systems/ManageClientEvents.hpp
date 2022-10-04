@@ -4,7 +4,7 @@
  * File Created: Tuesday, 4th October 2022 10:17:07 pm
  * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
  * -----
- * Last Modified: Wednesday, 5th October 2022 12:38:11 am
+ * Last Modified: Wednesday, 5th October 2022 12:44:25 am
  * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
  * -----
  * Copyright 2022 - 2022 Your Company, Your Company
@@ -66,7 +66,8 @@ namespace ecs::systems
                     if (pos && con) {
                         ecs::Entity bullet = world.registry.spawn_entity();
                         world.registry.addComponent<ecs::component::Direction>(bullet, {1, 0});
-                        world.registry.addComponent<ecs::component::Drawable>(bullet, { "src/demo/assets/textures/players.gif", {5, 5, 1, 1}});
+                        world.registry.addComponent<ecs::component::Drawable>(
+                            bullet, {"src/demo/assets/textures/players.gif", {5, 5, 1, 1}});
                         world.registry.addComponent<ecs::component::Position>(bullet, {pos.value().x, pos.value().y});
                         world.registry.addComponent<ecs::component::Size>(bullet, {10, 10});
                         world.registry.addComponent<ecs::component::Velocity>(bullet, {10, 0});
