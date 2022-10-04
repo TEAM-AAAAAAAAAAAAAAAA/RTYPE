@@ -4,7 +4,7 @@
  * File Created: Tuesday, 4th October 2022 7:31:30 pm
  * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
  * -----
- * Last Modified: Tuesday, 4th October 2022 7:34:03 pm
+ * Last Modified: Tuesday, 4th October 2022 10:06:51 pm
  * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
  * -----
  * Copyright 2022 - 2022 Your Company, Your Company
@@ -29,7 +29,14 @@ namespace ecs
             UIRight,
             UIEnter,
         };
-        Event(EventType e);
+        Event(EventType e) : _e(e) {}
+
+        bool operator==(Event &other)
+        {
+            if (_e == other._e)
+                return true;
+            return false;
+        }
 
       private:
         EventType _e;
