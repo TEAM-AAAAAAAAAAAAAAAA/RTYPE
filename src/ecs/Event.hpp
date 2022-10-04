@@ -4,7 +4,7 @@
  * File Created: Tuesday, 4th October 2022 7:31:30 pm
  * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
  * -----
- * Last Modified: Tuesday, 4th October 2022 10:06:51 pm
+ * Last Modified: Tuesday, 4th October 2022 11:01:46 pm
  * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
  * -----
  * Copyright 2022 - 2022 Your Company, Your Company
@@ -17,6 +17,7 @@ namespace ecs
     class Event {
       public:
         enum EventType {
+            Unknown,
             Quit,
             MoveUp,
             MoveLeft,
@@ -34,6 +35,13 @@ namespace ecs
         bool operator==(Event &other)
         {
             if (_e == other._e)
+                return true;
+            return false;
+        }
+
+        bool operator==(Event::EventType type)
+        {
+            if (_e == type)
                 return true;
             return false;
         }
