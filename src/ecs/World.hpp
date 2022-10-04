@@ -1,5 +1,19 @@
+/*
+ * File: World.hpp
+ * Project: ecs
+ * File Created: Tuesday, 4th October 2022 6:33:43 pm
+ * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
+ * -----
+ * Last Modified: Tuesday, 4th October 2022 9:57:28 pm
+ * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
+ * -----
+ * Copyright 2022 - 2022 Your Company, Your Company
+ */
+
 #pragma once
 
+#include <stack>
+#include "Event.hpp"
 #include "Registry.hpp"
 #include "SFML/Graphics.hpp"
 
@@ -20,6 +34,17 @@ namespace ecs
 
         sf::RenderWindow &getWindow() { return *_window; }
 
+        void pushEvent(ecs::Event event) { _events.push(event); }
+
+        ecs::Event &getEvent() { return _events.top(); }
+
+        ecs::Event popEvent()
+        {
+            ecs::Event event = _events.top();
+            _events.pop();
+            return event;
+        }
+
         // class Entity {
         //   public:
         //     Entity(ecs::Registry &r, ecs::Entity &e) : _e(e) { _registry = std::make_unique<ecs::Registry>(r); }
@@ -34,5 +59,6 @@ namespace ecs
       private:
         std::unique_ptr<sf::RenderWindow> &_window;
         std::vector<std::function<void(World &)>> _systems;
+        std::stack<ecs::Event> _events;
     };
 } // namespace ecs
