@@ -13,4 +13,4 @@ namespace ecs::component
         int x;
         int y;
     };
-}
+} // namespace ecs::component

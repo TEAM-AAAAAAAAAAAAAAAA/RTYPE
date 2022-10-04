@@ -18,7 +18,6 @@ namespace ecs::systems
             if (pos && vel) {
                 pos.value().x += vel.value().x;
                 pos.value().y += vel.value().y;
-
             }
         };
     };
