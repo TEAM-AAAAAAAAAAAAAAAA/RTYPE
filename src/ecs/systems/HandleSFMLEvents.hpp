@@ -4,7 +4,7 @@
  * File Created: Tuesday, 4th October 2022 7:34:35 pm
  * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
  * -----
- * Last Modified: Tuesday, 4th October 2022 10:24:43 pm
+ * Last Modified: Wednesday, 5th October 2022 12:42:29 am
  * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
  * -----
  * Copyright 2022 - 2022 Your Company, Your Company
@@ -14,7 +14,6 @@
 
 #include <functional>
 #include "World.hpp"
-#include "components/Controllable.hpp"
 
 namespace ecs::systems
 {
@@ -24,7 +23,17 @@ namespace ecs::systems
         while (world.getWindow().pollEvent(event)) {
             switch (event.type) {
                 case sf::Event::Closed: world.getWindow().close(); break;
-                case sf::Event::KeyPressed: break;
+                case sf::Event::KeyPressed: {
+                    auto const &shootables = world.registry.getComponents<component::Shootable>();
+
+                    for (size_t i = 0; i < shootables.size(); ++i) {
+                        auto const &shoot = shootables[i];
+                        if (shoot) {
+                            if (event.key.code == shoot.value().Shoot || event.key.code == shoot.value().ShootSecondary)
+                                world.pushEvent(ecs::Event(ecs::Event::EventType::Shoot));
+                        }
+                    }
+                } break;
                 default: break;
             }
         }
