@@ -4,8 +4,10 @@ set(SRCROOT ${PROJECT_SOURCE_DIR}/src/ecs/components)
 set(COMPONENTS_SRC
     ${SRCROOT}/Controllable.hpp
     ${SRCROOT}/Drawable.hpp
+    ${SRCROOT}/EnemyAI.hpp
     ${SRCROOT}/Position.hpp
     ${SRCROOT}/Size.hpp
+    ${SRCROOT}/Velocity.hpp
     PARENT_SCOPE
 )
 
