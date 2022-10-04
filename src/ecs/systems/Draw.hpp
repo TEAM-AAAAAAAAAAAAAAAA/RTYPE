@@ -20,10 +20,8 @@ namespace ecs::systems
             auto const &size = sizes[i];
             auto const &draw = drawables[i];
             if (pos && size && draw) {
-                sf::Texture texture;
-                texture.loadFromFile(draw.value().Texture, sf::IntRect(0, 0, 16, 16));
                 sf::Sprite sprite;
-                sprite.setTexture(texture);
+                sprite.setTexture(draw.value().Texture);
                 world.getWindow().draw(sprite);
             }
         };

@@ -5,8 +5,9 @@
 namespace ecs::component
 {
     struct Drawable {
-        Drawable(std::string texture) : Texture(texture) {}
+        Drawable(sf::Texture texture) : Texture(texture) {}
+        Drawable(std::string texture) { Texture.loadFromFile(texture); }
 
-        std::string Texture;
+        sf::Texture Texture;
     };
 } // namespace ecs::component
