@@ -6,7 +6,7 @@
 */
 
 #include <iostream>
-#include "../ecs/Engine.hpp"
+#include "Engine.hpp"
 
 int main()
 {

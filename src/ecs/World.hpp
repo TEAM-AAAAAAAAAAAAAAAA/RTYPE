@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../ecs/Registry.hpp"
+#include "Registry.hpp"
 #include "SFML/Graphics.hpp"
 
 namespace ecs

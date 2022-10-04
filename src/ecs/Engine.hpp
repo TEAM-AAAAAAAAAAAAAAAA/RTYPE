@@ -1,17 +1,17 @@
 #pragma once
 
 #include <memory>
-#include "../ecs/Engine.hpp"
-#include "../ecs/Registry.hpp"
-#include "../ecs/World.hpp"
-#include "../ecs/components/Controllable.hpp"
-#include "../ecs/components/Drawable.hpp"
-#include "../ecs/components/Position.hpp"
-#include "../ecs/components/Size.hpp"
-#include "../ecs/components/Velocity.hpp"
-#include "../ecs/systems/Draw.hpp"
-#include "../ecs/systems/Movement.hpp"
-#include "../ecs/systems/PositionLogger.hpp"
+#include "Engine.hpp"
+#include "Registry.hpp"
+#include "World.hpp"
+#include "components/Controllable.hpp"
+#include "components/Drawable.hpp"
+#include "components/Position.hpp"
+#include "components/Size.hpp"
+#include "components/Velocity.hpp"
+#include "systems/Draw.hpp"
+#include "systems/Movement.hpp"
+#include "systems/PositionLogger.hpp"
 #include "SFML/Graphics.hpp"
 
 namespace ecs
