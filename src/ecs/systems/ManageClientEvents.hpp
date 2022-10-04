@@ -1,10 +1,10 @@
 /*
- * File: ManageEvents.hpp
+ * File: ManageClientEvents.hpp
  * Project: systems
  * File Created: Tuesday, 4th October 2022 10:17:07 pm
  * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
  * -----
- * Last Modified: Tuesday, 4th October 2022 10:23:43 pm
+ * Last Modified: Tuesday, 4th October 2022 10:28:29 pm
  * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
  * -----
  * Copyright 2022 - 2022 Your Company, Your Company
@@ -17,6 +17,6 @@
 
 namespace ecs::systems
 {
-    std::function<void(World &)> handleSFMLEvents = [](World &world) {
-    }
+    std::function<void(World &)> manageClientEvents = [](World &world) {
+    };
 }
