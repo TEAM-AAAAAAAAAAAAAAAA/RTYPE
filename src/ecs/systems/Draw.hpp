@@ -2,10 +2,10 @@
 
 #include <functional>
 #include <iostream>
-#include "../../ecs/World.hpp"
-#include "../../ecs/components/Drawable.hpp"
-#include "../../ecs/components/Position.hpp"
-#include "../../ecs/components/Size.hpp"
+#include "World.hpp"
+#include "components/Drawable.hpp"
+#include "components/Position.hpp"
+#include "components/Size.hpp"
 
 namespace ecs::systems
 {

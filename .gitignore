@@ -56,3 +56,4 @@ vcpkg/
 rtype_client
 
 rtype_server
+!/graph/
