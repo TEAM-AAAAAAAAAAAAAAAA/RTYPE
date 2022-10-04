@@ -4,7 +4,7 @@
  * File Created: Tuesday, 4th October 2022 10:11:08 pm
  * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
  * -----
- * Last Modified: Tuesday, 4th October 2022 10:24:56 pm
+ * Last Modified: Tuesday, 4th October 2022 11:37:07 pm
  * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
  * -----
  * Copyright 2022 - 2022 Your Company, Your Company
@@ -25,13 +25,16 @@ namespace ecs::systems
             auto &contr = controllables[i];
 
             if (contr) {
-                if (sf::Keyboard::isKeyPressed(contr.value().MoveUp) || sf::Keyboard::isKeyPressed(contr.value().MoveUpSecondary))
+                if (sf::Keyboard::isKeyPressed(contr.value().MoveUp)
+                    || sf::Keyboard::isKeyPressed(contr.value().MoveUpSecondary))
                     world.pushEvent(ecs::Event(ecs::Event::EventType::MoveUp));
-                else if (sf::Keyboard::isKeyPressed(contr.value().MoveLeft) || sf::Keyboard::isKeyPressed(contr.value().MoveLeftSecondary))
+                if (sf::Keyboard::isKeyPressed(contr.value().MoveLeft)
+                    || sf::Keyboard::isKeyPressed(contr.value().MoveLeftSecondary))
                     world.pushEvent(ecs::Event(ecs::Event::EventType::MoveLeft));
-                else if (sf::Keyboard::isKeyPressed(contr.value().MoveDown) || sf::Keyboard::isKeyPressed(contr.value().MoveDownSecondary))
+                if (sf::Keyboard::isKeyPressed(contr.value().MoveDown)
+                    || sf::Keyboard::isKeyPressed(contr.value().MoveDownSecondary))
                     world.pushEvent(ecs::Event(ecs::Event::EventType::MoveDown));
-                else if (sf::Keyboard::isKeyPressed(contr.value().MoveRight)
+                if (sf::Keyboard::isKeyPressed(contr.value().MoveRight)
                     || sf::Keyboard::isKeyPressed(contr.value().MoveRightSecondary))
                     world.pushEvent(ecs::Event(ecs::Event::EventType::MoveRight));
             }
