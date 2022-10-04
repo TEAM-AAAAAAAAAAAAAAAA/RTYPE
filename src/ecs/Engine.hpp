@@ -4,7 +4,7 @@
  * File Created: Tuesday, 4th October 2022 6:33:43 pm
  * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
  * -----
- * Last Modified: Tuesday, 4th October 2022 10:14:01 pm
+ * Last Modified: Tuesday, 4th October 2022 10:43:00 pm
  * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
  * -----
  * Copyright 2022 - 2022 Your Company, Your Company
@@ -33,7 +33,7 @@ namespace ecs
 {
     class Engine {
       public:
-        Engine(int wSizeX = 800, int wSizeY = 600, std::string wTitle = "r-type")
+        Engine(int wSizeX = 800, int wSizeY = 600, std::string wTitle = "r-type") : _worldSwitchReady(false)
         {
             _window = std::make_unique<sf::RenderWindow>(sf::VideoMode(wSizeX, wSizeY), wTitle);
             ecs::World initWorld(_window);
@@ -71,16 +71,17 @@ namespace ecs
             _waitingWorld = std::make_unique<ecs::World>(world);
         }
 
-        void switchWorlds()
+        void setWorldSwitchReady()
         {
-            if (_waitingWorld)
-                _currentWorld.swap(_waitingWorld);
+            _worldSwitchReady = true;
         }
 
         void run()
         {
             while (_window.get()->isOpen()) {
                 _currentWorld.get()->runSystems();
+                if (isWorldSwitchReady())
+                    switchWorlds();
             }
         }
 
@@ -90,5 +91,17 @@ namespace ecs
         std::unique_ptr<sf::RenderWindow> _window;
         std::unique_ptr<ecs::World> _currentWorld;
         std::unique_ptr<ecs::World> _waitingWorld;
+        bool _worldSwitchReady;
+
+        bool isWorldSwitchReady()
+        {
+            return _worldSwitchReady;
+        }
+
+        void switchWorlds()
+        {
+            if (_waitingWorld)
+                _currentWorld.swap(_waitingWorld);
+        }
     };
 } // namespace ecs
