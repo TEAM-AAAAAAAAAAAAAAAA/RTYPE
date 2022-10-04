@@ -4,7 +4,7 @@
  * File Created: Tuesday, 4th October 2022 6:33:43 pm
  * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
  * -----
- * Last Modified: Tuesday, 4th October 2022 11:02:57 pm
+ * Last Modified: Tuesday, 4th October 2022 11:04:40 pm
  * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
  * -----
  * Copyright 2022 - 2022 Your Company, Your Company
@@ -39,14 +39,14 @@ namespace ecs
         const ecs::Event getEvent()
         {
             if (_events.size() == 0)
-                return ecs::Event(ecs::Event::EventType::Unknown);
+                return ecs::Event(ecs::Event::EventType::Null);
             return _events.top();
         }
 
         const ecs::Event popEvent()
         {
             if (_events.size() == 0)
-                return ecs::Event(ecs::Event::EventType::Unknown);
+                return ecs::Event(ecs::Event::EventType::Null);
             ecs::Event event = _events.top();
             _events.pop();
             return event;
