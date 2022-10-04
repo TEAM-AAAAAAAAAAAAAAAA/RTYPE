@@ -1,7 +1,7 @@
 set (INCLUDE_TEST_ROOT ${PROJECT_SOURCE_DIR}/tests/unit_tests/ecs/registry)
 set (SRC_TEST_ROOT ${PROJECT_SOURCE_DIR}/tests/unit_tests/ecs/registry)
-set (SRC_ROOT ../../../../src/ecs)
-set (INC_ROOT ../../../../src/ecs)
+set (SRC_ROOT ${PROJECT_SOURCE_DIR}/src/ecs)
+set (INC_ROOT ${PROJECT_SOURCE_DIR}/src/ecs)
 
 set(SOURCES
         ${SRC_TEST_ROOT}/registryTests.cpp
