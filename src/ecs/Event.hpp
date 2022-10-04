@@ -4,7 +4,7 @@
  * File Created: Tuesday, 4th October 2022 7:31:30 pm
  * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
  * -----
- * Last Modified: Tuesday, 4th October 2022 11:04:22 pm
+ * Last Modified: Tuesday, 4th October 2022 11:08:42 pm
  * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
  * -----
  * Copyright 2022 - 2022 Your Company, Your Company
@@ -33,14 +33,14 @@ namespace ecs
         };
         Event(EventType e) : _e(e) {}
 
-        bool operator==(Event &other)
+        bool operator==(const Event other) const
         {
             if (_e == other._e)
                 return true;
             return false;
         }
 
-        bool operator==(Event::EventType type)
+        bool operator==(const Event::EventType type) const
         {
             if (_e == type)
                 return true;
@@ -48,6 +48,6 @@ namespace ecs
         }
 
       private:
-        EventType _e;
+        const EventType _e;
     };
 } // namespace ecs

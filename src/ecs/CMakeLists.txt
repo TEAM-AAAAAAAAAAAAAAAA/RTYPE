@@ -13,6 +13,7 @@ set(ECS_SRC
     ${SRCROOT}/Constant.hpp
     ${SRCROOT}/Engine.hpp
     ${SRCROOT}/Entity.hpp
+    ${SRCROOT}/Event.hpp
     ${SRCROOT}/Registry.hpp
     ${SRCROOT}/SparseArray.hpp
     ${SRCROOT}/World.hpp
