@@ -28,9 +28,9 @@ namespace Network
       public:
         /**
          * Constructor which runs a thread for handling server inputs
-         *@param local_port the port on which the server runs
+         *@param localPort the port on which the server runs
          */
-        explicit Server(unsigned short local_port);
+        explicit Server(unsigned short localPort);
 
         /**
          * Destroy the Server object and join all thread pools
@@ -41,94 +41,94 @@ namespace Network
          * This function allows us to check if the server has received messages
          *@return true if there are messages
          */
-        bool HasMessages() override;
+        bool hasMessages() override;
 
         /**
          * This function sends a message to a client determined by his ID
          *@param message the message to send
          *@param clientID the ID of the client
          */
-        void SendToClient(const std::string &message, uint32_t clientID) override;
+        void sendToClient(const std::string &message, uint32_t clientID) override;
 
         /**
          * Send a message to all clients that have connected to the server
          *@param message the message to send
          */
-        void SendToAll(const std::string &message);
+        void sendToAll(const std::string &message);
 
         /**
          * Get the amount of clients that are connected
          *@return Amount of connected clients
          */
-        size_t GetClientCount() override;
+        size_t getClientCount() override;
 
         /**
          * Get the ID of client from the clients array
          *@param n the index for the array
          *@return client ID of client n
          */
-        uint32_t GetClientIdByIndex(size_t index) override;
+        uint32_t getClientIdByIndex(size_t index) override;
 
       private:
         /**
          * All network related variables
          */
-        boost::asio::io_service io_service;
+        boost::asio::io_service _ioService;
         udp::socket socket;
-        udp::endpoint server_endpoint;
-        udp::endpoint remote_endpoint;
-        std::array<char, 8> recv_buffer;
+        udp::endpoint _serverEndpoint;
+        udp::endpoint _remoteEndpoint;
+        std::array<char, 8> _recvBuffer;
 
         /**
          * Thread pools used by the server class
          */
-        std::thread service_thread;
+        std::thread _serviceThread;
         boost::asio::thread_pool _interpretPool;
 
         /**
          * Locked queue of all unprocessed incoming messages
          */
-        LockedQueue<ClientMessage> incomingMessages;
+        LockedQueue<ClientMessage> _incomingMessages;
 
         /**
          * Starts the reception of messages for the server
          */
-        void start_receive();
+        void startReceive();
 
         /**
          * Handling of error from sending/receiving
-         *@param error_code the code of the error being handled
-         *@param remote_endpoint the endpoint where the error occured
+         *@param errorCode the code of the error being handled
+         *@param remoteEndpoint the endpoint where the error occured
          */
-        void handle_remote_error(const std::error_code error_code, const udp::endpoint remote_endpoint);
+        void handleRemoteError(const std::error_code errorCode, const udp::endpoint endpoint);
 
         /**
          * Handles the incoming messages by placing them into the incoming
          * messages locked queue
          *@param error error of reception
-         *@param bytes_transferred the size of the incoming packet
+         *@param bytesTransferred the size of the incoming packet
          */
-        void handle_receive(const std::error_code &error, std::size_t bytes_transferred);
+        void handleReceive(const std::error_code &error, std::size_t bytesTransferred);
 
         /**
          * Handles the sending of packets
          *@param message the packet as a string
          *@param error error code of sending
-         *@param bytes_transferred the size of the outgoing packet
+         *@param bytesTransferred the size of the outgoing packet
          */
-        void handle_send(std::string message, const std::error_code &error, std::size_t bytes_transferred) {}
+        void handleSend(std::string message, const std::error_code &error, std::size_t bytesTransferred) {}
 
         /**
          * Run the server's service
          */
-        void run_service();
+        void runService();
 
         /**
          *Get the or create client id object
          *@param endpoint endpoint of the client
          *@return int32_t the ID of the client
          */
-        int32_t get_or_create_client_id(udp::endpoint endpoint);
+        int32_t getOrCreateClientID(udp::endpoint endpoint);
 
         /**
          * Send message to the endpoint

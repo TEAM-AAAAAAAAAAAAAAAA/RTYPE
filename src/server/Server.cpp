@@ -1,34 +1,34 @@
 #include "Server.hpp"
 
 namespace Network {
-	Server::Server(unsigned short local_port) :
-		socket(io_service, udp::endpoint(udp::v4(), local_port)),
-		service_thread(&Server::run_service, this),
+	Server::Server(unsigned short localPort) :
+		socket(_ioService, udp::endpoint(udp::v4(), localPort)),
+		_serviceThread(&Server::runService, this),
 		nextClientID(0L),
 		_interpretPool(6)
 	{
     	boost::asio::post(_interpretPool, boost::bind(&Server::interpretIncoming, this));
-		std::cerr << "Starting server on port " <<  local_port << std::endl;
+		std::cerr << "Starting server on port " <<  localPort << std::endl;
 	};
 
 	Server::~Server()
 	{
-		io_service.stop();
-		service_thread.join();
+		_ioService.stop();
+		_serviceThread.join();
 	}
 
-	void Server::start_receive()
+	void Server::startReceive()
 	{
-		socket.async_receive_from(boost::asio::buffer(recv_buffer), remote_endpoint,
-			[this](std::error_code ec, std::size_t bytes_recvd){ this->handle_receive(ec, bytes_recvd); });
+		socket.async_receive_from(boost::asio::buffer(_recvBuffer), _remoteEndpoint,
+			[this](std::error_code ec, std::size_t bytesRecvd){ this->handleReceive(ec, bytesRecvd); });
 	}
 
-	void Server::handle_remote_error(const std::error_code error_code, const udp::endpoint remote_endpoint)
+	void Server::handleRemoteError(const std::error_code errorCode, const udp::endpoint endpoint)
 	{
 		bool found = false;
 		int32_t id;
 		for (const auto& client : clients)
-			if (client.second == remote_endpoint) {
+			if (client.second == endpoint) {
 				found = true;
 				id = client.first;
 				break;
@@ -36,45 +36,44 @@ namespace Network {
 		if (found == false)
 			return;
 		clients.erase(id);
-		on_client_disconnected(id);
 	}
 
-	void Server::handle_receive(const std::error_code& error, std::size_t bytes_transferred)
+	void Server::handleReceive(const std::error_code& error, std::size_t bytesTransferred)
 	{
 		if (!error)
 		{
 			try {
-				auto message = ClientMessage(std::string(recv_buffer.data(), recv_buffer.data() + bytes_transferred), get_or_create_client_id(remote_endpoint));
+				auto message = ClientMessage(std::string(_recvBuffer.data(), _recvBuffer.data() + bytesTransferred), getOrCreateClientID(_remoteEndpoint));
 				if (!message.first.empty())
-					incomingMessages.push(message);
+					_incomingMessages.push(message);
 			}
 			catch (std::exception ex) {
-				std::cerr << "handle_receive: Error parsing incoming message:" << ex.what() << std::endl;
+				std::cerr << "handleReceive: Error parsing incoming message:" << ex.what() << std::endl;
 			}
 			catch (...) {
-				std::cerr << "handle_receive: Unknown error while parsing incoming message" << std::endl;;
+				std::cerr << "handleReceive: Unknown error while parsing incoming message" << std::endl;;
 			}
 		}
 		else
 		{
-			std::cerr << "handle_receive: error: " << error.message() << " while receiving from address " << remote_endpoint << std::endl;
-			handle_remote_error(error, remote_endpoint);
+			std::cerr << "handleReceive: error: " << error.message() << " while receiving from address " << _remoteEndpoint << std::endl;
+			handleRemoteError(error, _remoteEndpoint);
 		}
 
-		start_receive();
+		startReceive();
 	}
 
-	void Server::send(const std::string& message, udp::endpoint target_endpoint)
+	void Server::send(const std::string& message, udp::endpoint endpoint)
 	{
-		socket.send_to(boost::asio::buffer(message), target_endpoint);
+		socket.send_to(boost::asio::buffer(message), endpoint);
 	}
 
-	void Server::run_service()
+	void Server::runService()
 	{
-		start_receive();
-		while (!io_service.stopped()){
+		startReceive();
+		while (!_ioService.stopped()){
 			try {
-				io_service.run();
+				_ioService.run();
 			}
 			catch (const std::exception& e) {
 				std::cerr << "Server: Network exception: " << e.what() << std::endl;
@@ -86,7 +85,7 @@ namespace Network {
 		std::cerr << "Server network thread stopped" << std::endl;
 	};
 
-	int32_t Server::get_or_create_client_id(udp::endpoint endpoint)
+	int32_t Server::getOrCreateClientID(udp::endpoint endpoint)
 	{
 		for (const auto& client : clients)
 			if (client.second == endpoint)
@@ -97,17 +96,17 @@ namespace Network {
 		return id;
 	};
 
-	void Server::SendToClient(const std::string& message, uint32_t clientID)
+	void Server::sendToClient(const std::string& message, uint32_t clientID)
 	{
 		try {
 			send(message, clients.at(clientID));
 		}
 		catch (std::out_of_range) {
-			std::cerr << "SendToClient : Unknown client ID " << clientID << std::endl;
+			std::cerr << "sendToClient : Unknown client ID " << clientID << std::endl;
 		}
 	};
 
-	void Server::SendToAll(const std::string& message)
+	void Server::sendToAll(const std::string& message)
 	{
 		for (auto client : clients)
 			send(message, client.second);
@@ -117,19 +116,19 @@ namespace Network {
 	{
 		Network::ClientMessage message;
 		while (1) {
-			if (!incomingMessages.empty())
-				message = incomingMessages.pop();
+			if (!_incomingMessages.empty())
+				message = _incomingMessages.pop();
 		    	boost::asio::post(_interpretPool, boost::bind(&Server::interpretIncoming, this));
 				// Deserialize and add as task
 		}
 	}
 
-	size_t Server::GetClientCount()
+	size_t Server::getClientCount()
 	{
 		return clients.size();
 	}
 
-	uint32_t Server::GetClientIdByIndex(size_t index)
+	uint32_t Server::getClientIdByIndex(size_t index)
 	{
 		auto it = clients.begin();
 		for (int i = 0; i < index; i++)
@@ -137,8 +136,8 @@ namespace Network {
 		return it->first;
 	};
 
-	bool Server::HasMessages()
+	bool Server::hasMessages()
 	{
-		return !incomingMessages.empty();
+		return !_incomingMessages.empty();
 	};
 }
