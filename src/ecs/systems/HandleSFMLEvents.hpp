@@ -18,6 +18,11 @@
 
 namespace ecs::systems
 {
+    /**
+     * Used to manage Sfml events
+     * Currently able to manage the following actions:
+     * Close the window, KeyPressed
+     */
     std::function<void(World &)> handleSFMLEvents = [](World &world) {
         sf::Event event;
 

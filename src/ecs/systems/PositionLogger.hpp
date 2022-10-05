@@ -8,6 +8,9 @@
 
 namespace ecs::systems
 {
+    /**
+     * Used to display, as a logger, all the value of the Position & Velocity component
+     */
     std::function<void(World &)> positionLogger = [](World &world) {
         auto const &positions = world.registry.getComponents<component::Position>();
         auto const &velocities = world.registry.getComponents<component::Velocity>();

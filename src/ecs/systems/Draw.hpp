@@ -21,6 +21,9 @@
 
 namespace ecs::systems
 {
+    /**
+     * Used to set the scale, the position and the texture of the entity before display it
+     */
     std::function<void(World &)> draw = [](World &world) {
         auto const &positions = world.registry.getComponents<component::Position>();
         auto const &sizes = world.registry.getComponents<component::Size>();

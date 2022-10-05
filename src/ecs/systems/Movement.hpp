@@ -21,6 +21,9 @@
 
 namespace ecs::systems
 {
+    /**
+     * Used to apply the values of the velocity component to the position component according to the internal clock of the system
+     */
     std::function<void(World &)> movement = [](World &world) {
         auto &positions = world.registry.getComponents<component::Position>();
         auto const &velocities = world.registry.getComponents<component::Velocity>();
