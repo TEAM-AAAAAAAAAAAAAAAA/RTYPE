@@ -4,7 +4,7 @@
  * File Created: Tuesday, 4th October 2022 6:33:43 pm
  * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
  * -----
- * Last Modified: Tuesday, 4th October 2022 11:04:40 pm
+ * Last Modified: Wednesday, 5th October 2022 1:57:07 pm
  * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
  * -----
  * Copyright 2022 - 2022 Your Company, Your Company
@@ -56,13 +56,13 @@ namespace ecs
              * Used to add a new event into the world
              * @param event The event you want to push in the world
              */
-            void pushEvent(ecs::Event event) { _events.push(event); }
+            void pushEvent(const ecs::Event event) { _events.push(event); }
 
             /**
              * Used to get the first event of the private stack _events
              * @return The first event of the private stack if it exists, ecs::Event::EventType::Null otherwise
              */
-            ecs::Event getEvent()
+            const ecs::Event getEvent() const
             {
                 if (_events.empty())
                     return {ecs::Event::EventType::Null};
@@ -73,7 +73,7 @@ namespace ecs
              * Used to pop the first event of the private stack _events
              * @return The event you just popped out of the stack if it exists, ecs::Event::EventType::Null otherwise
              */
-            ecs::Event popEvent()
+            const ecs::Event popEvent()
             {
                 if (_events.empty())
                     return {ecs::Event::EventType::Null};
