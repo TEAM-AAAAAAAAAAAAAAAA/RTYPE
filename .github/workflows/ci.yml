@@ -67,8 +67,9 @@ jobs:
           vcpkgArguments: 'sfml boost-asio'
           vcpkgDirectory: '${{ github.workspace}}/vcpkg'
 
+      - uses: seanmiddleditch/gha-setup-ninja@master
+
       - name: Configure
-        uses: seanmiddleditch/gha-setup-ninja@master
         shell: cmake -P {0}
         run: |
           execute_process(
