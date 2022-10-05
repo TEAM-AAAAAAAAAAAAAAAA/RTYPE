@@ -45,8 +45,8 @@ namespace ecs
              * Constructor of Engine class, it takes care of register every component in the world's registry.
              * It also create a player and an enemy.
              * And finally it takes care of adding every systems related to the components in the initWorld.
-             * @param wSizeWidth width size of the window in pixel
-             * @param wSizeHeight height size of the window in pixel
+             * @param wSizeWidth width size of the window in pixel, 800px as default
+             * @param wSizeHeight height size of the window in pixel, 600 as default
              * @param wTitle window's title, "r-type" as default
              */
             explicit Engine(int wSizeWidth = 800, int wSizeHeight = 600, std::string wTitle = "r-type") : _worldSwitchReady(false)
@@ -80,11 +80,6 @@ namespace ecs
 
                 _currentWorld = std::make_unique<ecs::World>(initWorld);
             }
-
-            /**
-             * Default constructor deleted because you need to register width and height of the window you want to create
-             */
-            Engine() = delete;
 
             /**
              * Used to get the currentWorld currently used by the ecs
