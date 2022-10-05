@@ -16,10 +16,14 @@
 
 namespace ecs::component
 {
+    /**
+     * Drawable component is used to know if the Entity is able to be draw and in which manner
+     * It differs by constructor parameters
+     */
     struct Drawable {
-        Drawable(std::string texture) { Texture.loadFromFile(texture); }
-        Drawable(std::string texture, sf::IntRect rect) { Texture.loadFromFile(texture, rect); }
-        Drawable(sf::Texture texture) : Texture(texture) {}
+        explicit Drawable(const std::string& texture) { Texture.loadFromFile(texture); }
+        Drawable(const std::string& texture, sf::IntRect rect) { Texture.loadFromFile(texture, rect); }
+        explicit Drawable(const sf::Texture& texture) : Texture(texture) {}
 
         sf::Texture Texture;
     };
