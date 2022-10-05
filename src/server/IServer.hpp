@@ -27,16 +27,16 @@ namespace Network
          *@param clientID the ID of the client
          */
         virtual void sendToClient(const std::string &message, uint32_t clientID) = 0;
-		/**
-		* Get the amount of clients that are connected
-		*@return Amount of connected clients
-		*/
+        /**
+         * Get the amount of clients that are connected
+         *@return Amount of connected clients
+         */
         virtual size_t getClientCount() = 0;
-		/**
-		* Get the ID of client from the clients array
-		*@param n the index for the array
-		*@return client ID of client n
-		*/
+        /**
+         * Get the ID of client from the clients array
+         *@param n the index for the array
+         *@return client ID of client n
+         */
         virtual uint32_t getClientIdByIndex(size_t n) = 0;
     };
 } // namespace Network
