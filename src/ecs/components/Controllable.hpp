@@ -16,6 +16,12 @@
 
 namespace ecs::component
 {
+    /**
+     * Controllable component represents all the authorized input for the user
+     * In brief, it currently manage the following inputs :
+     * Up, Down, Right, Left
+     * Secondary Up, Secondary Down, Secondary Left, Secondary Right,
+     */
     struct Controllable {
         Controllable(sf::Keyboard::Key moveUp, sf::Keyboard::Key moveLeft, sf::Keyboard::Key moveDown,
             sf::Keyboard::Key moveRight, sf::Keyboard::Key moveUpSecondary = sf::Keyboard::Unknown,

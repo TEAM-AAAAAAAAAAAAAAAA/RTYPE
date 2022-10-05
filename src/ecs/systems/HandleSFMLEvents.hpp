@@ -4,7 +4,7 @@
  * File Created: Tuesday, 4th October 2022 7:34:35 pm
  * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
  * -----
- * Last Modified: Wednesday, 5th October 2022 12:42:29 am
+ * Last Modified: Wednesday, 5th October 2022 2:10:39 pm
  * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
  * -----
  * Copyright 2022 - 2022 Your Company, Your Company
@@ -17,6 +17,11 @@
 
 namespace ecs::systems
 {
+    /**
+     * Used to manage Sfml events
+     * Currently able to manage the following actions:
+     * Close the window, KeyPressed
+     */
     std::function<void(World &)> handleSFMLEvents = [](World &world) {
         sf::Event event;
 
@@ -38,4 +43,4 @@ namespace ecs::systems
             }
         }
     };
-}
+} // namespace ecs::systems

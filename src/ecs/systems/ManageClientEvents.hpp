@@ -20,6 +20,10 @@
 
 namespace ecs::systems
 {
+    /**
+     * Used to manage every client' events
+     * Refer to SFMLEvents.hpp documentation to learn more about managed events
+     */
     std::function<void(World &)> manageClientEvents = [](World &world) {
         while (world.getEvent() != ecs::Event::EventType::Null) {
 

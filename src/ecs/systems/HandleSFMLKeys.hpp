@@ -4,7 +4,7 @@
  * File Created: Tuesday, 4th October 2022 10:11:08 pm
  * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
  * -----
- * Last Modified: Wednesday, 5th October 2022 12:42:26 am
+ * Last Modified: Wednesday, 5th October 2022 2:11:18 pm
  * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
  * -----
  * Copyright 2022 - 2022 Your Company, Your Company
@@ -19,7 +19,11 @@
 
 namespace ecs::systems
 {
-    std::function<void(World &)> handleSFMLKeys = [](World &world) {
+    /**
+     * Used to manage every movement ordered by Sfml input by the user
+     * Refer to the Controllable.hpp documentation to learn more about managed input
+     */
+    std::function<void(World &)> handleSFMLMovements = [](World &world) {
         auto const &controllables = world.registry.getComponents<component::Controllable>();
         // auto const &shootables = world.registry.getComponents<component::Shootable>();
 
@@ -49,4 +53,4 @@ namespace ecs::systems
             }
         }
     };
-}
+} // namespace ecs::systems

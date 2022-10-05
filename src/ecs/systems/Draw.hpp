@@ -4,7 +4,7 @@
  * File Created: Tuesday, 4th October 2022 6:33:43 pm
  * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
  * -----
- * Last Modified: Tuesday, 4th October 2022 7:27:06 pm
+ * Last Modified: Wednesday, 5th October 2022 2:07:38 pm
  * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
  * -----
  * Copyright 2022 - 2022 Your Company, Your Company
@@ -21,6 +21,9 @@
 
 namespace ecs::systems
 {
+    /**
+     * Used to set the scale, the position and the texture of the entity before display it
+     */
     std::function<void(World &)> draw = [](World &world) {
         auto const &positions = world.registry.getComponents<component::Position>();
         auto const &sizes = world.registry.getComponents<component::Size>();
@@ -41,4 +44,4 @@ namespace ecs::systems
         };
         world.getWindow().display();
     };
-}
+} // namespace ecs::systems

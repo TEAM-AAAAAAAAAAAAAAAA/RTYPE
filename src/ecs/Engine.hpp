@@ -4,7 +4,7 @@
  * File Created: Tuesday, 4th October 2022 6:33:43 pm
  * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
  * -----
- * Last Modified: Wednesday, 5th October 2022 12:40:43 am
+ * Last Modified: Wednesday, 5th October 2022 2:10:46 pm
  * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
  * -----
  * Copyright 2022 - 2022 Your Company, Your Company
@@ -33,11 +33,27 @@
 
 namespace ecs
 {
+    /**
+     * The Engine class manages the whole part of systems in ecs in a given world.
+     * Systems are, most of the time, short function using components to realise some actions.
+     * For example, to make an Entity move, we need a component Position and a component Velocity,
+     * the system is the thing who update the position of the Entity according to the Velocity component
+     * by adding velocity value to the x & y member of the component position of the Entity.
+     */
     class Engine {
       public:
-        Engine(int wSizeX = 800, int wSizeY = 600, std::string wTitle = "r-type") : _worldSwitchReady(false)
+        /**
+         * Constructor of Engine class, it takes care of register every component in the world's registry.
+         * It also create a player and an enemy.
+         * And finally it takes care of adding every systems related to the components in the initWorld.
+         * @param wSizeWidth width size of the window in pixel, 800px as default
+         * @param wSizeHeight height size of the window in pixel, 600 as default
+         * @param wTitle window's title, "r-type" as default
+         */
+        explicit Engine(int wSizeWidth = 800, int wSizeHeight = 600, std::string wTitle = "r-type")
+            : _worldSwitchReady(false)
         {
-            _window = std::make_unique<sf::RenderWindow>(sf::VideoMode(wSizeX, wSizeY), wTitle);
+            _window = std::make_unique<sf::RenderWindow>(sf::VideoMode(wSizeWidth, wSizeHeight), wTitle);
             _window.get()->setFramerateLimit(60);
             ecs::World initWorld(_window);
             ecs::Entity player = initWorld.registry.spawn_entity();
@@ -68,8 +84,16 @@ namespace ecs
             _currentWorld = std::make_unique<ecs::World>(initWorld);
         }
 
+        /**
+         * Used to get the currentWorld currently used by the ecs
+         * @return The currently used world by the ecs
+         */
         ecs::World &getWorld() { return *_currentWorld; }
 
+        /**
+         * Set the world given as parameter to release mode
+         * @param world The world you want to set to release mode
+         */
         void setWaitingWorld(ecs::World &world)
         {
             if (_waitingWorld)
@@ -77,26 +101,34 @@ namespace ecs
             _waitingWorld = std::make_unique<ecs::World>(world);
         }
 
+        /**
+         * Set the world given as parameter ready to switch for another one
+         */
         void setWorldSwitchReady() { _worldSwitchReady = true; }
 
+        /**
+         * Main loop of the current world
+         * Actually run while the window is open
+         */
         void run()
         {
-            while (_window.get()->isOpen()) {
-                _currentWorld.get()->runSystems();
+            while (_window->isOpen()) {
+                _currentWorld->runSystems();
                 if (isWorldSwitchReady())
                     switchWorlds();
             }
         }
 
-        // Entity createEntity() { return _currentWorld.get()->registry.spawn_entity(); }
-
       private:
+        /**
+         * The window used to display every drawable component
+         */
         std::unique_ptr<sf::RenderWindow> _window;
         std::unique_ptr<ecs::World> _currentWorld;
         std::unique_ptr<ecs::World> _waitingWorld;
         bool _worldSwitchReady;
 
-        bool isWorldSwitchReady() { return _worldSwitchReady; }
+        [[nodiscard]] bool isWorldSwitchReady() const { return _worldSwitchReady; }
 
         void switchWorlds()
         {
