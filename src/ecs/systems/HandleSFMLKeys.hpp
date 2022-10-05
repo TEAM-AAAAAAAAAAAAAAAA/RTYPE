@@ -18,7 +18,7 @@ namespace ecs::systems
      * Used to manage every movement ordered by Sfml input by the user
      * Refer to the Controllable.hpp documentation to learn more about managed input
      */
-    std::function<void(World &)> handleSFMLMovements = [](World &world) {
+    std::function<void(World &)> handleSFMLKeys = [](World &world) {
         auto const &controllables = world.registry.getComponents<component::Controllable>();
         // auto const &shootables = world.registry.getComponents<component::Shootable>();
 
