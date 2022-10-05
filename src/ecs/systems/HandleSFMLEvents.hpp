@@ -4,7 +4,7 @@
  * File Created: Tuesday, 4th October 2022 7:34:35 pm
  * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
  * -----
- * Last Modified: Tuesday, 4th October 2022 10:24:43 pm
+ * Last Modified: Wednesday, 5th October 2022 2:07:14 pm
  * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
  * -----
  * Copyright 2022 - 2022 Your Company, Your Company
@@ -34,4 +34,4 @@ namespace ecs::systems
             }
         }
     };
-}
+} // namespace ecs::systems

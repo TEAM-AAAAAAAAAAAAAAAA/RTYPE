@@ -24,4 +24,4 @@ namespace ecs::systems
             }
         };
     };
-}
+} // namespace ecs::systems

@@ -4,7 +4,7 @@
  * File Created: Tuesday, 4th October 2022 6:33:43 pm
  * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
  * -----
- * Last Modified: Tuesday, 4th October 2022 11:37:20 pm
+ * Last Modified: Wednesday, 5th October 2022 2:08:02 pm
  * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
  * -----
  * Copyright 2022 - 2022 Your Company, Your Company
@@ -22,7 +22,8 @@
 namespace ecs::systems
 {
     /**
-     * Used to apply the values of the velocity component to the position component according to the internal clock of the system
+     * Used to apply the values of the velocity component to the position component according to the internal clock of
+     * the system
      */
     std::function<void(World &)> movement = [](World &world) {
         auto &positions = world.registry.getComponents<component::Position>();
@@ -45,4 +46,4 @@ namespace ecs::systems
             }
         };
     };
-}
+} // namespace ecs::systems
