@@ -68,6 +68,7 @@ jobs:
           vcpkgDirectory: '${{ github.workspace}}/vcpkg'
 
       - name: Configure
+        uses: seanmiddleditch/gha-setup-ninja@master
         shell: cmake -P {0}
         run: |
           execute_process(
