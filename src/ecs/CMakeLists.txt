@@ -10,6 +10,7 @@ add_subdirectory(systems)
 set(ECS_SRC
     ${COMPONENTS_SRC}
     ${SYSTEMS_SRC}
+    ${SRCROOT}/AssetManager.hpp
     ${SRCROOT}/Constant.hpp
     ${SRCROOT}/Engine.hpp
     ${SRCROOT}/Entity.hpp

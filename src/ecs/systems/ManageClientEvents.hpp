@@ -63,10 +63,11 @@ namespace ecs::systems
                     auto const &pos = positions[i];
                     auto const &con = controllables[i];
                     if (pos && con) {
+                        std::filesystem::path playerPath =
+                            ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif");
                         ecs::Entity bullet = world.registry.spawn_entity();
                         world.registry.addComponent<ecs::component::Direction>(bullet, {1, 0});
-                        world.registry.addComponent<ecs::component::Drawable>(
-                            bullet, {"src/demo/assets/textures/players.gif", {5, 5, 1, 1}});
+                        world.registry.addComponent<ecs::component::Drawable>(bullet, {playerPath, {5, 5, 1, 1}});
                         world.registry.addComponent<ecs::component::Position>(bullet, {pos.value().x, pos.value().y});
                         world.registry.addComponent<ecs::component::Size>(bullet, {10, 10});
                         world.registry.addComponent<ecs::component::Velocity>(bullet, {10, 0});

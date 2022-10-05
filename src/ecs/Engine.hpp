@@ -7,7 +7,9 @@
 
 #pragma once
 
+#include <filesystem>
 #include <memory>
+#include "AssetManager.hpp"
 #include "Engine.hpp"
 #include "Registry.hpp"
 #include "SFML/Graphics.hpp"
@@ -48,6 +50,7 @@ namespace ecs
         explicit Engine(int wSizeWidth = 800, int wSizeHeight = 600, std::string wTitle = "r-type")
             : _worldSwitchReady(false)
         {
+            std::filesystem::path playerPath = ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif");
             _window = std::make_unique<sf::RenderWindow>(sf::VideoMode(wSizeWidth, wSizeHeight), wTitle);
             _window.get()->setFramerateLimit(60);
             ecs::World initWorld(_window);
@@ -58,7 +61,7 @@ namespace ecs
             initWorld.registry.addComponent<ecs::component::Direction>(player, {0, 0});
             initWorld.registry.addComponent<ecs::component::Shootable>(player, {sf::Keyboard::Space});
             initWorld.registry.addComponent<ecs::component::Drawable>(
-                player, {"src/demo/assets/textures/players.gif", {1, 1, 32, 16}});
+                player, {playerPath, {1, 1, 32, 16}});
             initWorld.registry.addComponent<ecs::component::Controllable>(
                 player, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D});
 
@@ -66,7 +69,7 @@ namespace ecs
             initWorld.registry.addComponent<ecs::component::Position>(enemy, {500, 500});
             initWorld.registry.addComponent<ecs::component::Size>(enemy, {5, 5});
             initWorld.registry.addComponent<ecs::component::Drawable>(
-                enemy, {"src/demo/assets/textures/players.gif", {1, 18, 32, 16}});
+                enemy, {playerPath, {1, 18, 32, 16}});
             initWorld.registry.addComponent<ecs::component::EnemyAI>(enemy, {});
 
             initWorld.addSystem(ecs::systems::handleSFMLEvents);
