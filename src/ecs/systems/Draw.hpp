@@ -1,14 +1,9 @@
 /*
- * File: Draw.hpp
- * Project: systems
- * File Created: Tuesday, 4th October 2022 6:33:43 pm
- * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
- * -----
- * Last Modified: Wednesday, 5th October 2022 2:07:38 pm
- * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
- * -----
- * Copyright 2022 - 2022 Your Company, Your Company
- */
+** EPITECH PROJECT, 2022
+** RTYPE
+** File description:
+** Draw
+*/
 
 #pragma once
 

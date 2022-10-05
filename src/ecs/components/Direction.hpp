@@ -1,14 +1,9 @@
 /*
- * File: Direction.hpp
- * Project: components
- * File Created: Tuesday, 4th October 2022 7:10:05 pm
- * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
- * -----
- * Last Modified: Tuesday, 4th October 2022 7:22:19 pm
- * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
- * -----
- * Copyright 2022 - 2022 Your Company, Your Company
- */
+** EPITECH PROJECT, 2022
+** RTYPE
+** File description:
+** Direction
+*/
 
 #pragma once
 

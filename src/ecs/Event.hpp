@@ -1,14 +1,9 @@
 /*
- * File: Event.hpp
- * Project: ecs
- * File Created: Tuesday, 4th October 2022 7:31:30 pm
- * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
- * -----
- * Last Modified: Wednesday, 5th October 2022 2:01:45 pm
- * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
- * -----
- * Copyright 2022 - 2022 Your Company, Your Company
- */
+** EPITECH PROJECT, 2022
+** RTYPE
+** File description:
+** Event
+*/
 
 #pragma once
 
