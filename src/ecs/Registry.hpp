@@ -32,11 +32,13 @@ namespace ecs
          */
         template <class Component> SparseArray<Component> &registerComponent()
         {
+            if (_componentsArrays.find(std::type_index(typeid(Component))) != _componentsArrays.end())
+                return getComponents<Component>();
             _componentsArrays[std::type_index(typeid(Component))] = SparseArray<Component>();
 
             std::function<void(Registry &, Entity const &)> erase_func = [](Registry &r, Entity const &e) {
                 SparseArray<Component> &array = r.template getComponents<Component>();
-                array.erase(e);
+                array.erase(e._id);
             };
             _eraseFunctions.push_back(erase_func);
             return getComponents<Component>();
@@ -118,8 +120,9 @@ namespace ecs
         template <typename Component>
         typename SparseArray<Component>::referenceType addComponent(Entity const &to, Component &&c)
         {
+            registerComponent<Component>();
             return std::any_cast<SparseArray<Component> &>(_componentsArrays[std::type_index(typeid(Component))])
-                .insertAt(to, c);
+                .insertAt(to._id, c);
         }
 
         /**
@@ -133,8 +136,9 @@ namespace ecs
         template <typename Component, typename... Params>
         typename SparseArray<Component>::referenceType emplaceComponent(Entity const &to, Params &&...p)
         {
+            registerComponent<Component>();
             return std::any_cast<SparseArray<Component> &>(_componentsArrays[std::type_index(typeid(Component))])
-                .insertAt(to, Component(p...));
+                .insertAt(to._id, Component(p...));
         }
         /**
          * This function is used to remove a component into an Entity given as parameter
@@ -143,6 +147,7 @@ namespace ecs
          */
         template <typename Component> void removeComponent(Entity const &from)
         {
+            registerComponent<Component>();
             std::any_cast<SparseArray<Component> &>(_componentsArrays.at(std::type_index(typeid(Component))))[from] =
                 std::nullopt;
         }
