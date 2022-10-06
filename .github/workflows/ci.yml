@@ -96,6 +96,7 @@ jobs:
           )
           if (NOT result EQUAL 0)
             message(FATAL_ERROR "Bad exit status. Failed to build RTYPE project.")
+          endif()
 
       - name: "Check rtype executables existence"
         uses: andstor/file-existence-action@v1
