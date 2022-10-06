@@ -67,6 +67,35 @@ jobs:
           vcpkgArguments: 'sfml boost-asio'
           vcpkgDirectory: '${{ github.workspace}}/vcpkg'
 
+      - uses: seanmiddleditch/gha-setup-ninja@master
+
+      - name: Configure
+        shell: cmake -P {0}
+        run: |
+          execute_process(
+            COMMAND cmake
+              -S .
+              -B build
+              -D CMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+              -G Ninja
+            RESULT_VARIABLE result
+          )
+          if (NOT result EQUAL 0)
+            message(FATAL_ERROR "Bad exit status. Failed to configure RTYPE project.")
+          endif()
+
+      - name: Build
+        shell: cmake -P { 0 }
+        run: |
+          messsage(STATUS "Using host CMake version: ${CMAKE_VERSION}")
+
+          execute_process(
+            COMMAND cmake --build build
+            RESULT_VARIABLE result
+          )
+          if (NOT result EQUAL 0)
+            message(FATAL_ERROR "Bad exit status. Failed to build RTYPE project.")
+
       - name: "Check rtype executables existence"
         uses: andstor/file-existence-action@v1
         with:

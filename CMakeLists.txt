@@ -8,8 +8,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 option(BUILD_TEST_SUITE OFF)
 option(ENABLE_CODE_COVERAGE OFF)
 
+set(SFML_DIR ${PROJECT_SOURCE_DIR}/cmake)
+
 # Add ./cmake to the module path
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 find_package(SFML COMPONENTS system window graphics CONFIG REQUIRED)
 find_package(Boost REQUIRED)
