@@ -79,6 +79,7 @@ jobs:
               -D CMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
               -G Ninja
               -D CMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
+              -D
             RESULT_VARIABLE result
           )
           if (NOT result EQUAL 0)
