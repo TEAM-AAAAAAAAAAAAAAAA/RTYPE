@@ -72,7 +72,10 @@ jobs:
       - name: Configure
         shell: cmake -P {0}
         run: |
-          cmake_path(SET VCPKG_TOOLCHAIN_PATH "${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake") 
+          if (${{ matrix.platform }} STREQUAL windows-latest)
+            set(VCPKG_TOOLCHAIN_PATH ${{ github.workspace }}\vcpkg\scripts\buildsystems\vcpkg.cmake)
+          else()
+            set(VCPKG_TOOLCHAIN_PATH ${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake)
           execute_process(
             COMMAND cmake
               -S .
