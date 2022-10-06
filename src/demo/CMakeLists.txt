@@ -14,5 +14,4 @@ target_link_libraries(${TARGET} PRIVATE
     sfml-system sfml-network sfml-graphics sfml-window ${PROJECT_NAME}_ecs
 )
 
-
 set_target_properties(${TARGET} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
