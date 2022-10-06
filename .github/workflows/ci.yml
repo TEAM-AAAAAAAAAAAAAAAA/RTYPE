@@ -86,7 +86,7 @@ jobs:
           endif()
 
       - name: Build
-        shell: cmake -P { 0 }
+        shell: cmake -P {0}
         run: |
           messsage(STATUS "Using host CMake version: ${CMAKE_VERSION}")
 
