@@ -72,10 +72,9 @@ jobs:
       - name: Configure
         shell: cmake -P {0}
         run: |
-          if (${{ matrix.platform }} STREQUAL windows-latest)
-            set(VCPKG_TOOLCHAIN_PATH ${{ github.workspace }}\vcpkg\scripts\buildsystems\vcpkg.cmake)
-          else()
             set(VCPKG_TOOLCHAIN_PATH ${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake)
+          if (${{ matrix.platform }} STREQUAL windows-latest)
+            string(REPLACE "\\" "/" VCPKG_TOOLCHAIN_PATH ${VCPKG_TOOLCHAIN_PATH})
           endif()
           execute_process(
             COMMAND cmake
