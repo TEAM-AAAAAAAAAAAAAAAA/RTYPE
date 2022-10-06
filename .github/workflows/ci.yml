@@ -75,7 +75,7 @@ jobs:
           set(VCPKG_TOOLCHAIN_PATH ${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake)
           if (${{ matrix.platform }} STREQUAL windows-latest)
             message(STATUS "Replacing slashes in VCPKG_TOOLCHAIN_PATH")
-            string(REPLACE "\" "/" VCPKG_TOOLCHAIN_PATH ${VCPKG_TOOLCHAIN_PATH})
+            cmake_path(SET VCPKG_TOOLCHAIN_PATH ${VCPKG_TOOLCHAIN_PATH})
           endif()
           message(STATUS "Searching for vcpkg.cmake in ${VCPKG_TOOLCHAIN_PATH}")
           execute_process(
