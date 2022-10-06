@@ -72,12 +72,11 @@ jobs:
       - name: Configure
         shell: cmake -P {0}
         run: |
-          set(VCPKG_TOOLCHAIN_PATH ${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake)
           if (${{ matrix.platform }} STREQUAL windows-latest)
             message(STATUS "Replacing slashes in VCPKG_TOOLCHAIN_PATH")
-            cmake_path(SET VCPKG_TOOLCHAIN_PATH ${VCPKG_TOOLCHAIN_PATH})
+            cmake_path(SET VCPKG_TOOLCHAIN_PATH ${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake)
           endif()
-          message(STATUS "Searching for vcpkg.cmake in ${VCPKG_TOOLCHAIN_PATH}")
+          message(STATUS "Using vcpkg.cmake in: ${VCPKG_TOOLCHAIN_PATH}")
           execute_process(
             COMMAND cmake
               -S .
@@ -103,11 +102,6 @@ jobs:
           if (NOT result EQUAL 0)
             message(FATAL_ERROR "Bad exit status. Failed to build RTYPE project.")
           endif()
-
-      - name: "Check rtype executables existence"
-        uses: andstor/file-existence-action@v1
-        with:
-          files: "${{ env.SERV_BIN }}, ${{ env.CLIENT_BIN }}"
 
       # - name: Check executables
       #   run: |
