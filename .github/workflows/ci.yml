@@ -69,6 +69,10 @@ jobs:
 
       - uses: seanmiddleditch/gha-setup-ninja@master
 
+      - name: List directory
+        run: |
+          ls -lRa
+
       - name: Configure
         shell: cmake -P {0}
         run: |
