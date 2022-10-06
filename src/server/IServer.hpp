@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <utility>
+#include <vector>
 
 /**
  * IServer interface is to facilitate the creation of the server class
@@ -12,6 +13,7 @@ namespace Network
      * sent it
      */
     typedef std::pair<std::string, unsigned int> ClientMessage;
+    typedef std::pair<std::string, std::vector<unsigned int>> ServerMessage;
 
     class IServer {
       public:

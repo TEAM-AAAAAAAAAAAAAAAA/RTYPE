@@ -69,6 +69,11 @@ namespace Network
          */
         uint32_t getClientIdByIndex(size_t index) override;
 
+        /**
+         * Locked queue of all unprocessed incoming messages
+         */
+        LockedQueue<ServerMessage> outgoingMessages;
+
       private:
         /**
          * All network related variables

@@ -8,6 +8,7 @@ set(SYSTEMS_SRC
     ${SRCROOT}/ManageClientEvents.hpp
     ${SRCROOT}/Movement.hpp
     ${SRCROOT}/PositionLogger.hpp
+    ${SRCROOT}/ServerPush.hpp
     PARENT_SCOPE
 )
 

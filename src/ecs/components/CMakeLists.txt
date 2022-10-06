@@ -8,6 +8,7 @@ set(COMPONENTS_SRC
     ${SRCROOT}/Position.hpp
     ${SRCROOT}/Size.hpp
     ${SRCROOT}/Velocity.hpp
+    ${SRCROOT}/Network.hpp
     PARENT_SCOPE
 )
 
