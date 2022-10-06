@@ -76,10 +76,9 @@ jobs:
             COMMAND cmake
               -S .
               -B build
-              -D CMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+              -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
               -G Ninja
-              -D CMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
-              -D
+              -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
             RESULT_VARIABLE result
           )
           if (NOT result EQUAL 0)
