@@ -64,8 +64,12 @@ jobs:
       - name: Run vcpkg
         uses: lukka/run-vcpkg@v4
         with:
-          vcpkgArguments: 'sfml boost-asio'
+          vcpkgArguments: 'sfml boost-asio boost-thread'
           vcpkgDirectory: '${{ github.workspace}}/vcpkg'
+
+      - name: List directory
+        run: |
+          ls -lR  .
 
       - uses: seanmiddleditch/gha-setup-ninja@master
 
