@@ -73,9 +73,8 @@ jobs:
         shell: cmake -P {0}
         run: |
           set(VCPKG_TOOLCHAIN_PATH ${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake)
-          if (${{ matrix.platform }} STREQUAL windows-latest)
-            string(REPLACE "/" "\\" VCPKG_TOOLCHAIN_PATH ${VCPKG_TOOLCHAIN_PATH})
-          endif()
+          file(TO_CMAKE_PATH ${VCPKG_TOOLCHAIN_PATH} ${VCPKG_TOOLCHAIN_PATH})
+          message(STATUS "Searching for vcpkg.cmake in ${VCPKG_TOOLCHAIN_PATH}")
           execute_process(
             COMMAND cmake
               -S .
