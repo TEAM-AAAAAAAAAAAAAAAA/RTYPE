@@ -49,11 +49,10 @@ namespace ecs
          * @param wSizeHeight height size of the window in pixel, 600 as default
          * @param wTitle window's title, "r-type" as default
          */
-        explicit Engine(int wSizeWidth = 800, int wSizeHeight = 600, std::string wTitle = "r-type")
+        explicit Engine()
             : _worldSwitchReady(false)
         {
-            _window = std::make_unique<sf::RenderWindow>(sf::VideoMode(wSizeWidth, wSizeHeight), wTitle);
-            _window.get()->setFramerateLimit(60);
+            _window = std::make_unique<utils::Window>();
             ecs::World initWorld(_window);
             ecs::Entity player = initWorld.registry.spawn_entity();
             initWorld.registry.addComponent<ecs::component::Position>(player, {10, 10});
@@ -121,7 +120,7 @@ namespace ecs
         /**
          * The window used to display every drawable component
          */
-        std::unique_ptr<sf::RenderWindow> _window;
+        std::unique_ptr<utils::Window> _window;
         std::unique_ptr<ecs::World> _currentWorld;
         std::unique_ptr<ecs::World> _waitingWorld;
         bool _worldSwitchReady;

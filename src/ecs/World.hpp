@@ -16,6 +16,7 @@
 #include "Event.hpp"
 #include "Registry.hpp"
 #include "SFML/Graphics.hpp"
+#include "utils/Window.hpp"
 
 namespace ecs
 {
@@ -32,7 +33,7 @@ namespace ecs
          * Default constructor of World class
          * @param window The window in which the world have to proceed
          */
-        explicit World(std::unique_ptr<sf::RenderWindow> &window) : _window(window) {}
+        explicit World(std::unique_ptr<utils::Window> &window) : _window(window) {}
 
         /**
          * Used to operate all the systems in the world
@@ -50,7 +51,7 @@ namespace ecs
          */
         void addSystem(const std::function<void(World &)> &system) { _systems.push_back(system); }
 
-        sf::RenderWindow &getWindow() { return *_window; }
+        utils::Window &getWindow() { return *_window; }
 
         /**
          * Used to add a new event into the world
@@ -91,7 +92,7 @@ namespace ecs
         /**
          * The window used to display any information by the World class
          */
-        std::unique_ptr<sf::RenderWindow> &_window;
+        std::unique_ptr<utils::Window> &_window;
 
         /**
          * Private system's vector of the World class

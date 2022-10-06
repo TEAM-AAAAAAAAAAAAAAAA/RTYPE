@@ -16,3 +16,7 @@ target_link_libraries(${TARGET} PRIVATE
 
 
 set_target_properties(${TARGET} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
+
+# if (CLIENT_COMPILATION_MODE)
+     add_compile_definitions(CLIENT_COMPILATION_MODE)
+# endif()
