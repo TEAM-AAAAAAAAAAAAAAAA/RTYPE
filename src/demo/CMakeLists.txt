@@ -11,7 +11,7 @@ set(SRC
 add_executable(${TARGET} ${SRC})
 
 target_link_libraries(${TARGET} PRIVATE
-    ${PROJECT_NAME}_ecs
+    ${PROJECT_NAME}_ecs Boost::thread pthread
 )
 
 if (CLIENT_COMPILATION_MODE)

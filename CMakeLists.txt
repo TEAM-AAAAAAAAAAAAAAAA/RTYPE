@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16.0)
+cmake_minimum_required(VERSION 3.20.0)
 
 project(rtype LANGUAGES CXX)
 
@@ -8,13 +8,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 option(BUILD_TEST_SUITE OFF)
 option(ENABLE_CODE_COVERAGE OFF)
 
-#set(SFML_DIR ${PROJECT_SOURCE_DIR}/cmake)
+if (COMPILER_TYPE MATCHES "msvc")
+     message(STATUS "Using static SFML libraries")
+     set(SFML_STATIC_LIBRARIES TRUE)
+endif()
 
 # Add ./cmake to the module path
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 find_package(SFML COMPONENTS system window graphics CONFIG REQUIRED)
-find_package(Boost REQUIRED)
+find_package(Boost REQUIRED COMPONENTS thread)
 
 if(NOT DEFINED CMAKE_SUPPRESS_DEVELOPER_WARNINGS)
      set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1 CACHE INTERNAL "No dev warnings")
