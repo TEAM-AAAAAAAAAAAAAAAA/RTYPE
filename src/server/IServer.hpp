@@ -6,7 +6,7 @@
 /**
  * IServer interface is to facilitate the creation of the server class
  */
-namespace Network
+namespace network
 {
     /**
      * Standard pair class that contains a string and the ID of the client that
@@ -41,4 +41,4 @@ namespace Network
          */
         virtual uint32_t getClientIdByIndex(size_t n) = 0;
     };
-} // namespace Network
+} // namespace network

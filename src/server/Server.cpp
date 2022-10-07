@@ -1,6 +1,6 @@
 #include "Server.hpp"
 
-namespace Network
+namespace network
 {
     Server::Server(unsigned short localPort)
         : socket(_ioService, udp::endpoint(udp::v4(), localPort)), _serviceThread(&Server::runService, this),
@@ -108,7 +108,7 @@ namespace Network
 
     void Server::interpretIncoming(void)
     {
-        Network::ClientMessage message;
+        network::ClientMessage message;
         while (1) {
             if (!_incomingMessages.empty())
                 message = _incomingMessages.pop();
@@ -128,4 +128,4 @@ namespace Network
     };
 
     bool Server::hasMessages() { return !_incomingMessages.empty(); };
-} // namespace Network
+} // namespace network

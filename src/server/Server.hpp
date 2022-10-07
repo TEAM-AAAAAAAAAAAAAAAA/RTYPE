@@ -22,7 +22,7 @@ typedef ClientList::value_type Client;
 /**
  * Server class which is used by the game server to communicate with the client
  */
-namespace Network
+namespace network
 {
     class Server : public IServer {
       public:
@@ -153,4 +153,4 @@ namespace Network
         ClientList clients;
         int nextClientID;
     };
-} // namespace Network
+} // namespace network

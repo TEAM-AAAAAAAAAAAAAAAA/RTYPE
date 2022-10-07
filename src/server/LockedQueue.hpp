@@ -6,7 +6,7 @@
 /**
  * Simple mutex-guarded queue
  */
-namespace Network
+namespace network
 {
     template <typename _T> class LockedQueue {
       private:
