@@ -9,6 +9,7 @@ set(COMPONENTS_SRC
     ${SRCROOT}/Size.hpp
     ${SRCROOT}/Velocity.hpp
     ${SRCROOT}/Network.hpp
+    ${SRCROOT}/NetworkId.hpp
     PARENT_SCOPE
 )
 

@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2022
+** RTYPE
+** File description:
+** ServerPush
+*/
+
 #pragma once
 
 #include <functional>

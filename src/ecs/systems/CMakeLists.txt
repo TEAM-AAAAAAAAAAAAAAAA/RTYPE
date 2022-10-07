@@ -9,6 +9,7 @@ set(SYSTEMS_SRC
     ${SRCROOT}/Movement.hpp
     ${SRCROOT}/PositionLogger.hpp
     ${SRCROOT}/ServerPush.hpp
+    ${SRCROOT}/PositionUpdate.hpp
     PARENT_SCOPE
 )
 

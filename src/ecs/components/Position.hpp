@@ -11,15 +11,17 @@
  */
 
 #pragma once
+#include <cstddef>
+#include <array>
 
 namespace ecs::component
 {
     struct Position {
         int x;
         int y;
-        std::string serialize()
+        std::array<char, 4> serialize()
         {
-            std::string pos("temp");
+            std::array<char, 4> pos;
             size_t tmp = 0;
 
             tmp = x >> 8;
