@@ -18,6 +18,7 @@
 #include "components/Direction.hpp"
 #include "components/Position.hpp"
 #include "components/Velocity.hpp"
+#include <chrono>
 
 namespace ecs::systems
 {
@@ -29,19 +30,20 @@ namespace ecs::systems
         auto &positions = world.registry.getComponents<component::Position>();
         auto const &velocities = world.registry.getComponents<component::Velocity>();
         auto &directions = world.registry.getComponents<component::Direction>();
+        using chrono = std::chrono::high_resolution_clock;
 
-        static sf::Clock clock;
+        static auto clock = chrono::now();
         for (size_t i = 0; i < positions.size() && i < velocities.size(); ++i) {
             auto &pos = positions[i];
             auto const &vel = velocities[i];
             auto &dir = directions[i];
             if (pos && vel) {
-                if (clock.getElapsedTime().asMilliseconds() > 10) {
+                if (std::chrono::duration<double, std::milli>(chrono::now()-clock).count() > 10) {
                     pos.value().x += vel.value().x * (dir.value().x);
                     pos.value().y += vel.value().y * dir.value().y;
-                    clock.restart();
                     dir.value().x = 0;
                     dir.value().y = 0;
+                    clock = chrono::now();
                 }
             }
         };

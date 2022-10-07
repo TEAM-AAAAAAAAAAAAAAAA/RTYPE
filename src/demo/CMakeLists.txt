@@ -11,12 +11,18 @@ set(SRC
 add_executable(${TARGET} ${SRC})
 
 target_link_libraries(${TARGET} PRIVATE
-    sfml-system sfml-network sfml-graphics sfml-window ${PROJECT_NAME}_ecs
+    ${PROJECT_NAME}_ecs
 )
+
+if (CLIENT_COMPILATION_MODE)
+    target_link_libraries(${TARGET} PRIVATE
+        sfml-system sfml-network sfml-graphics sfml-window
+    )
+endif()
 
 
 set_target_properties(${TARGET} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
 
-# if (CLIENT_COMPILATION_MODE)
-     add_compile_definitions(CLIENT_COMPILATION_MODE)
-# endif()
+if (CLIENT_COMPILATION_MODE)
+    add_compile_definitions(CLIENT_COMPILATION_MODE)
+endif()
