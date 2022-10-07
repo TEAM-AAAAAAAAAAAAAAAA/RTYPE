@@ -8,7 +8,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 option(BUILD_TEST_SUITE OFF)
 option(ENABLE_CODE_COVERAGE OFF)
 
-#set(SFML_DIR ${PROJECT_SOURCE_DIR}/cmake)
+if (COMPILER_TYPE MATCHES "msvc")
+     message(STATUS "Using static SFML libraries")
+     set(SFML_STATIC_LIBRARIES TRUE)
+endif()
 
 # Add ./cmake to the module path
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
