@@ -25,7 +25,7 @@ set(ECS_INCDIRS
     ${SYSTEMS_INCDIRS}
 )
 
-add_library(${TARGET} SHARED ${ECS_SRC})
+add_library(${TARGET} STATIC ${ECS_SRC})
 
 target_include_directories(${TARGET}
                       PUBLIC ${INCROOT}
