@@ -90,7 +90,6 @@ jobs:
               -S .
               -B build
               -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
-              -G Ninja
               -DCMAKE_TOOLCHAIN_FILE=${VCPKG_TOOLCHAIN_PATH}
             RESULT_VARIABLE result
           )
