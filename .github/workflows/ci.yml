@@ -49,14 +49,23 @@ jobs:
       fail-fast: false
       matrix:
         platform: [ windows-latest, ubuntu-latest, macos-latest ]
+        include:
+          - platform: windows-latest
+            triplet: x64-windows
+          - platform: ubuntu-latest
+            triplet: x64-linux
+          - platform: macos-latest
+            triplet: x64-osx
     needs: [clean_repo]
     runs-on: ${{ matrix.platform }}
+    env:
+        VCPKG_DEFAULT_TRIPLET: ${{ matrix.triplet }}
     steps:
       - name: Install system deps for Linux
         if: matrix.platform == 'ubuntu-latest'
         run: |
           sudo apt update -y && sudo apt upgrade -y
-          sudo apt install -y libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev
+          sudo apt install -y libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev autoconf libtool
 
       - uses: actions/checkout@v3
         with:
@@ -64,13 +73,43 @@ jobs:
       - name: Run vcpkg
         uses: lukka/run-vcpkg@v4
         with:
-          vcpkgArguments: 'sfml boost-asio'
+          vcpkgArguments: 'sfml boost-asio boost-thread'
           vcpkgDirectory: '${{ github.workspace}}/vcpkg'
 
-      - name: "Check rtype executables existence"
-        uses: andstor/file-existence-action@v1
-        with:
-          files: "${{ env.SERV_BIN }}, ${{ env.CLIENT_BIN }}"
+      - uses: seanmiddleditch/gha-setup-ninja@master
+
+      - name: Configure
+        shell: cmake -P {0}
+        run: |
+          cmake_path(SET VCPKG_TOOLCHAIN_PATH ${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake)
+          message(STATUS "Using vcpkg.cmake in: ${VCPKG_TOOLCHAIN_PATH}")
+          cmake_path(SET SFML_DIR ${{ github.workspace }}/vcpkg/installed/${{ matrix.triplet }}/share/sfml)
+          message(STATUS "Using SFML_DIR: ${SFML_DIR}")
+          execute_process(
+            COMMAND cmake
+              -S .
+              -B build
+              -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+              -G Ninja
+              -DCMAKE_TOOLCHAIN_FILE=${VCPKG_TOOLCHAIN_PATH}
+            RESULT_VARIABLE result
+          )
+          if (NOT result EQUAL 0)
+            message(FATAL_ERROR "Bad exit status. Failed to configure RTYPE project.")
+          endif()
+
+      - name: Build
+        shell: cmake -P {0}
+        run: |
+          message(STATUS "Using host CMake version: ${CMAKE_VERSION}")
+
+          execute_process(
+            COMMAND cmake --build build
+            RESULT_VARIABLE result
+          )
+          if (NOT result EQUAL 0)
+            message(FATAL_ERROR "Bad exit status. Failed to build RTYPE project.")
+          endif()
 
       # - name: Check executables
       #   run: |

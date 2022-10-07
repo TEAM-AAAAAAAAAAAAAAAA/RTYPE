@@ -5,7 +5,7 @@ set(TARGET ${PROJECT_NAME}_ecs)
 
 add_subdirectory(components)
 add_subdirectory(systems)
-
+add_subdirectory(utils)
 
 set(ECS_SRC
     ${COMPONENTS_SRC}
@@ -26,7 +26,7 @@ set(ECS_INCDIRS
     ${SYSTEMS_INCDIRS}
 )
 
-add_library(${TARGET} ${ECS_SRC})
+add_library(${TARGET} SHARED ${ECS_SRC})
 
 target_include_directories(${TARGET}
                       PUBLIC ${INCROOT}

@@ -4,6 +4,10 @@ set (INC_ROOT ${PROJECT_SOURCE_DIR}/src/server)
 set(TARGET rtype_server)
 
 set(SRC
+    ${SRC_ROOT}/Server.cpp
+    ${SRC_ROOT}/Server.hpp
+    ${SRC_ROOT}/IServer.hpp
+    ${SRC_ROOT}/LockedQueue.hpp
     ${SRC_ROOT}/entrypoint.cpp
 )
 

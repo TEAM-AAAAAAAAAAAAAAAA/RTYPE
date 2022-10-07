@@ -18,6 +18,7 @@ namespace ecs::systems
      * Close the window, KeyPressed
      */
     std::function<void(World &)> handleSFMLEvents = [](World &world) {
+#ifdef CLIENT_COMPILATION_MODE
         sf::Event event;
 
         while (world.getWindow().pollEvent(event)) {
@@ -37,5 +38,6 @@ namespace ecs::systems
                 default: break;
             }
         }
+#endif
     };
 } // namespace ecs::systems

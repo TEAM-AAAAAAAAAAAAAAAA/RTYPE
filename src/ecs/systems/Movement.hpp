@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <chrono>
 #include <functional>
 #include <iostream>
 #include "World.hpp"
@@ -25,9 +26,10 @@ namespace ecs::systems
         auto const &velocities = world.registry.getComponents<component::Velocity>();
         auto &directions = world.registry.getComponents<component::Direction>();
         auto const &controllable = world.registry.getComponents<component::Controllable>();
+        using chrono = std::chrono::high_resolution_clock;
 
-        static sf::Clock clock;
-        if (clock.getElapsedTime().asMilliseconds() > 10) {
+        static auto clock = chrono::now();
+        if (std::chrono::duration<double, std::milli>(chrono::now() - clock).count() > 10) {
             for (size_t i = 0; i < positions.size() && i < velocities.size(); ++i) {
                 auto &pos = positions[i];
                 auto const &vel = velocities[i];
@@ -42,7 +44,7 @@ namespace ecs::systems
                     }
                 }
             };
-            clock.restart();
+            clock = chrono::now();
         }
     };
 } // namespace ecs::systems

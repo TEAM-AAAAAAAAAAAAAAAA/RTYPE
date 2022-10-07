@@ -12,7 +12,6 @@
 #include "AssetManager.hpp"
 #include "Engine.hpp"
 #include "Registry.hpp"
-#include "SFML/Graphics.hpp"
 #include "World.hpp"
 #include "components/Controllable.hpp"
 #include "components/Drawable.hpp"
@@ -47,38 +46,10 @@ namespace ecs
          * @param wSizeHeight height size of the window in pixel, 600 as default
          * @param wTitle window's title, "r-type" as default
          */
-        explicit Engine(int wSizeWidth = 800, int wSizeHeight = 600, std::string wTitle = "r-type")
-            : _worldSwitchReady(false)
+        explicit Engine() : _worldSwitchReady(false)
         {
-            std::filesystem::path playerPath = ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif");
-            _window = std::make_unique<sf::RenderWindow>(sf::VideoMode(wSizeWidth, wSizeHeight), wTitle);
-            _window.get()->setFramerateLimit(60);
+            _window = std::make_unique<utils::Window>();
             ecs::World initWorld(_window);
-            ecs::Entity player = initWorld.registry.spawn_entity();
-            initWorld.registry.addComponent<ecs::component::Position>(player, {10, 10});
-            initWorld.registry.addComponent<ecs::component::Velocity>(player, {5, 5});
-            initWorld.registry.addComponent<ecs::component::Size>(player, {2, 2});
-            initWorld.registry.addComponent<ecs::component::Direction>(player, {0, 0});
-            initWorld.registry.addComponent<ecs::component::Shootable>(player, {sf::Keyboard::Space});
-            initWorld.registry.addComponent<ecs::component::Drawable>(
-                player, {playerPath, {1, 1, 32, 16}});
-            initWorld.registry.addComponent<ecs::component::Controllable>(
-                player, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D});
-
-            ecs::Entity enemy = initWorld.registry.spawn_entity();
-            initWorld.registry.addComponent<ecs::component::Position>(enemy, {500, 500});
-            initWorld.registry.addComponent<ecs::component::Size>(enemy, {5, 5});
-            initWorld.registry.addComponent<ecs::component::Drawable>(
-                enemy, {playerPath, {1, 18, 32, 16}});
-            initWorld.registry.addComponent<ecs::component::EnemyAI>(enemy, {});
-
-            initWorld.addSystem(ecs::systems::handleSFMLEvents);
-            initWorld.addSystem(ecs::systems::handleSFMLKeys);
-            initWorld.addSystem(ecs::systems::manageClientEvents);
-            // initWorld.addSystem(ecs::systems::positionLogger);
-            initWorld.addSystem(ecs::systems::draw);
-            initWorld.addSystem(ecs::systems::movement);
-
             _currentWorld = std::make_unique<ecs::World>(initWorld);
         }
 
@@ -92,11 +63,12 @@ namespace ecs
          * Set the world given as parameter to release mode
          * @param world The world you want to set to release mode
          */
-        void setWaitingWorld(ecs::World &world)
+        void setWaitingWorld(ecs::World world, bool worldSwitchReady = true)
         {
             if (_waitingWorld)
                 _waitingWorld.release();
             _waitingWorld = std::make_unique<ecs::World>(world);
+            _worldSwitchReady = worldSwitchReady;
         }
 
         /**
@@ -117,11 +89,13 @@ namespace ecs
             }
         }
 
+        inline std::unique_ptr<utils::Window> &getWindow() { return _window; }
+
       private:
         /**
          * The window used to display every drawable component
          */
-        std::unique_ptr<sf::RenderWindow> _window;
+        std::unique_ptr<utils::Window> _window;
         std::unique_ptr<ecs::World> _currentWorld;
         std::unique_ptr<ecs::World> _waitingWorld;
         bool _worldSwitchReady;
