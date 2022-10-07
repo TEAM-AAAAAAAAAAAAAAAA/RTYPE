@@ -40,11 +40,6 @@ namespace ecs
                 SparseArray<Component> &array = r.template getComponents<Component>();
                 array.erase(e._id);
             };
-            std::function<std::string(Registry &, Entity const &)> serialize_func = [](Registry &r, Entity const &e) {
-                SparseArray<Component> &array = r.template getComponents<Component>();
-                return array[e._id].serialize();
-            };
-            _serializeFunctions.push_back(serialize_func);
             _eraseFunctions.push_back(erase_func);
             return getComponents<Component>();
         }
@@ -167,11 +162,6 @@ namespace ecs
          * Private member _eraseFunctions represents self erase function of each component
          */
         std::vector<std::function<void(Registry &, Entity const &)>> _eraseFunctions;
-
-        /**
-         * Private member _serializeFunctions represents self serializing functions for each component
-         */
-        std::vector<std::function<std::string(Registry &, Entity const &)>> _serializeFunctions;
 
         /**
          * Private member _entitiesBin represents the bin of every deleted component, used to recover entity instead of
