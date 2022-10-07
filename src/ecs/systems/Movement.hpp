@@ -12,13 +12,13 @@
 
 #pragma once
 
+#include <chrono>
 #include <functional>
 #include <iostream>
 #include "World.hpp"
 #include "components/Direction.hpp"
 #include "components/Position.hpp"
 #include "components/Velocity.hpp"
-#include <chrono>
 
 namespace ecs::systems
 {
@@ -38,7 +38,7 @@ namespace ecs::systems
             auto const &vel = velocities[i];
             auto &dir = directions[i];
             if (pos && vel) {
-                if (std::chrono::duration<double, std::milli>(chrono::now()-clock).count() > 10) {
+                if (std::chrono::duration<double, std::milli>(chrono::now() - clock).count() > 10) {
                     pos.value().x += vel.value().x * (dir.value().x);
                     pos.value().y += vel.value().y * dir.value().y;
                     dir.value().x = 0;
