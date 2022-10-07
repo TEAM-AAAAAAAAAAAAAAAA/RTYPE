@@ -49,8 +49,17 @@ jobs:
       fail-fast: false
       matrix:
         platform: [ windows-latest, ubuntu-latest, macos-latest ]
+        include:
+          - os: windows-latest
+            triplet: x64-windows
+          - os: ubuntu-latest
+            triplet: x64-linux
+          - os: macos-latest
+            triplet: x64-osx
     needs: [clean_repo]
     runs-on: ${{ matrix.platform }}
+    env:
+        VCPKG_DEFAULT_TRIPLET: ${{ matrix.triplet }}
     steps:
       - name: Install system deps for Linux
         if: matrix.platform == 'ubuntu-latest'
@@ -81,6 +90,7 @@ jobs:
             cmake_path(SET VCPKG_TOOLCHAIN_PATH ${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake)
           endif()
           message(STATUS "Using vcpkg.cmake in: ${VCPKG_TOOLCHAIN_PATH}")
+          cmake_path(SET SFML_DIR ${{ github.workspace }}/vcpkg/installed/${{ matrix.triplet }}/share/sfml) 
           execute_process(
             COMMAND cmake
               -S .
