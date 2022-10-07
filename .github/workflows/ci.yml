@@ -50,11 +50,11 @@ jobs:
       matrix:
         platform: [ windows-latest, ubuntu-latest, macos-latest ]
         include:
-          - os: windows-latest
+          - platform: windows-latest
             triplet: x64-windows
-          - os: ubuntu-latest
+          - platform: ubuntu-latest
             triplet: x64-linux
-          - os: macos-latest
+          - platform: macos-latest
             triplet: x64-osx
     needs: [clean_repo]
     runs-on: ${{ matrix.platform }}
@@ -85,12 +85,10 @@ jobs:
       - name: Configure
         shell: cmake -P {0}
         run: |
-          if (${{ matrix.platform }} STREQUAL windows-latest)
-            message(STATUS "Replacing slashes in VCPKG_TOOLCHAIN_PATH")
-            cmake_path(SET VCPKG_TOOLCHAIN_PATH ${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake)
-          endif()
+          cmake_path(SET VCPKG_TOOLCHAIN_PATH ${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake)
           message(STATUS "Using vcpkg.cmake in: ${VCPKG_TOOLCHAIN_PATH}")
-          cmake_path(SET SFML_DIR ${{ github.workspace }}/vcpkg/installed/${{ matrix.triplet }}/share/sfml) 
+          cmake_path(SET SFML_DIR ${{ github.workspace }}/vcpkg/installed/${{ matrix.triplet }}/share/sfml)
+          message(STATUS "Using SFML_DIR: ${{ SFML_DIR }}")
           execute_process(
             COMMAND cmake
               -S .
