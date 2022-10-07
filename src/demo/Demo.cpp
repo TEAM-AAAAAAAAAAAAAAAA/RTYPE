@@ -20,7 +20,7 @@
     #include "components/EnemyAI.hpp"
     #include "systems/Draw.hpp"
     #include "systems/HandleSFMLEvents.hpp"
-    #include "systems/HandleSFMLMovements.hpp"
+    #include "systems/HandleSFMLKeys.hpp"
     #include "systems/ManageClientEvents.hpp"
 #endif
 
@@ -37,19 +37,19 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.addSystem(ecs::systems::movement);
 
 #ifdef CLIENT_COMPILATION_MODE
+    std::filesystem::path playerPath = ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif");
     world.registry.addComponent<ecs::component::Controllable>(
         player, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D});
-    world.registry.addComponent<ecs::component::Drawable>(
-        player, {"src/demo/assets/textures/players.gif", {1, 1, 32, 16}});
+    world.registry.addComponent<ecs::component::Drawable>(player, {playerPath, {1, 1, 32, 16}});
+    world.registry.addComponent<ecs::component::Shootable>(player, {sf::Keyboard::Space});
 
     ecs::Entity enemy = world.registry.spawn_entity();
     world.registry.addComponent<ecs::component::Position>(enemy, {500, 500});
     world.registry.addComponent<ecs::component::Size>(enemy, {5, 5});
     world.registry.addComponent<ecs::component::EnemyAI>(enemy, {});
-    world.registry.addComponent<ecs::component::Drawable>(
-        enemy, {"src/demo/assets/textures/players.gif", {1, 18, 32, 16}});
+    world.registry.addComponent<ecs::component::Drawable>(enemy, {playerPath, {1, 18, 32, 16}});
     world.addSystem(ecs::systems::handleSFMLEvents);
-    world.addSystem(ecs::systems::handleSFMLMovements);
+    world.addSystem(ecs::systems::handleSFMLKeys);
 
     world.addSystem(ecs::systems::manageClientEvents);
     world.addSystem(ecs::systems::draw);
