@@ -65,7 +65,7 @@ jobs:
         if: matrix.platform == 'ubuntu-latest'
         run: |
           sudo apt update -y && sudo apt upgrade -y
-          sudo apt install -y libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev
+          sudo apt install -y libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev autoconf libtool
 
       - uses: actions/checkout@v3
         with:
@@ -75,10 +75,6 @@ jobs:
         with:
           vcpkgArguments: 'sfml boost-asio boost-thread'
           vcpkgDirectory: '${{ github.workspace}}/vcpkg'
-
-      - name: List directory
-        run: |
-          ls -lR  .
 
       - uses: seanmiddleditch/gha-setup-ninja@master
 
