@@ -74,7 +74,11 @@ namespace ecs
 
         constIterator cBegin() const { return _data.cbegin(); }
 
-        iterator end() { return _data.end(); }
+        iterator end() {
+            if (_data.size() == 1)
+                return _data.begin();
+            return _data.end();
+        }
 
         constIterator end() const { return _data.end(); }
 
@@ -85,7 +89,7 @@ namespace ecs
         referenceType insertAt(sizeType pos, Component const &c)
         {
             try {
-                if (pos >= _data.capacity())
+                if (pos >= _data.capacity() && pos != 0)
                     _data.resize(pos);
                 _data.emplace(_data.begin() + pos, c);
             } catch (std::exception &e) {
@@ -97,7 +101,7 @@ namespace ecs
         referenceType insertAt(sizeType pos, Component &&c)
         {
             try {
-                if (pos >= _data.capacity())
+                if (pos >= _data.capacity() && pos != 0)
                     _data.resize(pos + 1);
                 _data.emplace(_data.begin() + pos, std::move(c));
             } catch (std::exception &e) {
@@ -108,7 +112,7 @@ namespace ecs
 
         template <class... Params> referenceType emplaceAt(sizeType pos, Params &&...args)
         {
-            if (pos >= _data.capacity())
+            if (pos >= _data.capacity() && pos != 0)
                 _data.resize(pos + 1);
             _data.emplace(_data.begin() + pos, Component(args...));
             return _data[pos];
