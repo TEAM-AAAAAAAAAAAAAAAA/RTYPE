@@ -15,16 +15,14 @@
 namespace ecs::systems
 {
     /**
-     * Used to manage every movement ordered by Sfml input by the user
+     * Used to manage every action ordered by Sfml input by the user
      * Refer to the Controllable.hpp documentation to learn more about managed input
      */
     std::function<void(World &)> handleSFMLKeys = [](World &world) {
         auto const &controllables = world.registry.getComponents<component::Controllable>();
         // auto const &shootables = world.registry.getComponents<component::Shootable>();
 
-        for (size_t i = 0; i < controllables.size(); ++i) {
-            auto const &contr = controllables[i];
-
+        for (const auto & contr : controllables) {
             if (contr) {
                 if (sf::Keyboard::isKeyPressed(contr.value().MoveUp)
                     || sf::Keyboard::isKeyPressed(contr.value().MoveUpSecondary))
