@@ -1,5 +1,7 @@
-set (INCLUDE_ROOT ${PROJECT_SOURCE_DIR}/tests/unit_tests)
-set (SRC_ROOT ${PROJECT_SOURCE_DIR}/tests/unit_tests)
+set (INCLUDE_TEST_ROOT ${PROJECT_SOURCE_DIR}/tests/unit_tests)
+set (SRC_TEST_ROOT ${PROJECT_SOURCE_DIR}/tests/unit_tests)
+set (INC_ROOT ${PROJECT_SOURCE_DIR}/src/ecs)
+set (SRC_ROOT ${PROJECT_SOURCE_DIR}/src/ecs)
 
 function (create_test)
     set (test_name TEST_NAME)
@@ -18,6 +20,9 @@ function (create_test)
     set (TEST_DEPS "${create_test_TEST_DEPS}")
     add_executable(${TEST_NAME} ${SRC})
     target_link_libraries(${TEST_NAME} ${TEST_DEPS} criterion)
+    target_include_directories(${TEST_NAME} PRIVATE
+            ${SRC_ROOT}
+            )
     add_test(${TEST_NAME} ${TEST_NAME})
 endfunction()
 add_subdirectory(ecs)
