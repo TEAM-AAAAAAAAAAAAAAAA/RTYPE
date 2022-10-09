@@ -46,6 +46,7 @@ vcpkg_installed
 
 # Useless execs
 src/main.cpp
+src/demo/test_main.cpp
 test_main
 
 
