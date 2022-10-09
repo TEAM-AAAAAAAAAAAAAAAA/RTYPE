@@ -11,8 +11,16 @@
 
 namespace ecs::component
 {
+    /**
+     * Shootable component define if the entity is able to shoot on other entities. In brief if it can damage another one
+     */
     struct Shootable {
-        Shootable(sf::Keyboard::Key shoot, sf::Keyboard::Key shootSecondary = sf::Keyboard::Key::Unknown)
+        /**
+         * Default constructor of the component,
+         * @param shoot Primary shoot sfml key
+         * @param shootSecondary Secondary shoot sfml key, unknown as default
+         */
+        explicit Shootable(sf::Keyboard::Key shoot, sf::Keyboard::Key shootSecondary = sf::Keyboard::Key::Unknown)
             : Shoot(shoot), ShootSecondary(shootSecondary)
         {
         }
