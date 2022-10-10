@@ -87,7 +87,7 @@ jobs:
           message(STATUS "Using SFML_DIR: ${SFML_DIR}")
             set(CMAKE_CXX_COMPILER ${MSVC_COMPILER_PATH})
           endif()
-          if (${{ matrix.platform }} STREQUAL "windows-latest)
+          if (${{ matrix.platform }} STREQUAL "windows-latest")
             execute_process(
               COMMAND cmake
                 -S .
