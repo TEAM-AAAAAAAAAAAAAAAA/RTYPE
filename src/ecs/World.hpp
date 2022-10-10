@@ -51,7 +51,7 @@ namespace ecs
          */
         void addSystem(const std::function<void(World &)> &system) { _systems.push_back(system); }
 
-        utils::Window &getWindow() { return *_window; }
+        inline utils::Window &getWindow() { return *_window; }
 
         /**
          * Used to add a new event into the world
