@@ -62,8 +62,9 @@ namespace ecs
         /**
          * Set the world given as parameter to release mode
          * @param world The world you want to set to release mode
+         * @param worldSwitchReady Used to prevents of automatic world's switch
          */
-        void setWaitingWorld(ecs::World world, bool worldSwitchReady = true)
+        void setWaitingWorld(const ecs::World& world, bool worldSwitchReady = true)
         {
             if (_waitingWorld)
                 _waitingWorld.release();

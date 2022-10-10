@@ -27,14 +27,16 @@ namespace ecs::systems
         auto &directions = world.registry.getComponents<component::Direction>();
         auto const &controllable = world.registry.getComponents<component::Controllable>();
         using chrono = std::chrono::high_resolution_clock;
+        using chronoDuration = std::chrono::duration<double, std::milli>;
 
         static auto clock = chrono::now();
-        if (std::chrono::duration<double, std::milli>(chrono::now() - clock).count() > 10) {
+        if (chronoDuration(chrono::now() - clock).count() > 10) {
             for (size_t i = 0; i < positions.size() && i < velocities.size(); ++i) {
                 auto &pos = positions[i];
                 auto const &vel = velocities[i];
                 auto &dir = directions[i];
                 auto const &contr = controllable[i];
+
                 if (pos && vel) {
                     pos.value().x += vel.value().x * dir.value().x;
                     pos.value().y += vel.value().y * dir.value().y;

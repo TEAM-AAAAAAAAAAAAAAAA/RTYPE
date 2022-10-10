@@ -15,7 +15,9 @@ namespace ecs::systems
     /**
      * Used to manage Sfml events
      * Currently able to manage the following actions:
-     * Close the window, KeyPressed
+     * Close the window
+     * KeyPressed, in this case, we check if the bind is known from sfml:
+     * if yes, we had it on world's events' stack, nothing otherwise
      */
     std::function<void(World &)> handleSFMLEvents = [](World &world) {
 #ifdef CLIENT_COMPILATION_MODE
