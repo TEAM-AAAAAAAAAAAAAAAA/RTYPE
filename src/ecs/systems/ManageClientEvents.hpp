@@ -68,12 +68,12 @@ namespace ecs::systems
                     auto const &con = controllables[i];
                     auto &weapon = weapons[i];
                     if (pos && con && weapon) {
-                        auto elapsed = chrono::now().time_since_epoch().count() - weapon.value().LastShoot;
+                        auto elapsed = constant::chrono::now().time_since_epoch().count() - weapon.value().LastShoot;
                         if (weapon.value().HasSuper && elapsed > weapon.value().SuperLoadingTime) {
-                            weapon.value().LastShoot = chrono::now().time_since_epoch().count();
+                            weapon.value().LastShoot = constant::chrono::now().time_since_epoch().count();
                             // spawn super bullet
                         } else if (elapsed > weapon.value().ShootDelay) {
-                            weapon.value().LastShoot = chrono::now().time_since_epoch().count();
+                            weapon.value().LastShoot = constant::chrono::now().time_since_epoch().count();
                             ecs::Entity bullet = world.registry.spawn_entity();
                             world.registry.addComponent<ecs::component::Direction>(bullet, {1, 0});
                             world.registry.addComponent<ecs::component::Position>(

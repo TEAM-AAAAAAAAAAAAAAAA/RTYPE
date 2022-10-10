@@ -92,7 +92,7 @@ namespace ecs
         Entity entityFromIndex(std::size_t idx)
         {
             if (idx >= _lastEntity || std::find(_entitiesBin.begin(), _entitiesBin.end(), idx) != _entitiesBin.end())
-                return Entity(ecs::npos);
+                return Entity(ecs::constant::npos);
             return Entity(idx);
         }
 
