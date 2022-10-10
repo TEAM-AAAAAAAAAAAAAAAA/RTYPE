@@ -12,7 +12,8 @@
 namespace ecs::component
 {
     /**
-     * Shootable component define if the entity is able to shoot on other entities. In brief if it can damage another one
+     * Shootable component define if the entity is able to shoot on other entities. In brief if it can damage another
+     * one
      */
     struct Shootable {
         /**

@@ -23,7 +23,7 @@ namespace ecs::systems
         auto const &controllables = world.registry.getComponents<component::Controllable>();
         // auto const &shootables = world.registry.getComponents<component::Shootable>();
 
-        for (const auto & contr : controllables) {
+        for (const auto &contr : controllables) {
             if (contr) {
                 if (sf::Keyboard::isKeyPressed(contr.value().MoveUp)
                     || sf::Keyboard::isKeyPressed(contr.value().MoveUpSecondary))
