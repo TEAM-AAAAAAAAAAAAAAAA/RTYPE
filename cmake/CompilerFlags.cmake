@@ -19,6 +19,7 @@ if(COMPILER_TYPE MATCHES "msvc")
     )
     get_WIN32_WINNT(ver)
     add_definitions(-D_WIN32_WINNT=${ver})
+    message(STATUS "Defining _WIN32_WINNT to ${ver}")
 elseif(COMPILER_TYPE MATCHES "gcc")
     message(STATUS "Enabling GCC-specific options")
 
