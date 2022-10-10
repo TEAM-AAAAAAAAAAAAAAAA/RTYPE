@@ -16,7 +16,7 @@ target_link_libraries(${TARGET} PRIVATE
 
 if (CLIENT_COMPILATION_MODE)
     target_link_libraries(${TARGET} PRIVATE
-        sfml-system sfml-network sfml-graphics sfml-window Boost::thread pthread
+        sfml-system sfml-network sfml-graphics sfml-window
     )
 endif()
 

@@ -10,7 +10,6 @@
 #include <stack>
 #include "Event.hpp"
 #include "Registry.hpp"
-#include "SFML/Graphics.hpp"
 #include "utils/Window.hpp"
 
 namespace ecs
