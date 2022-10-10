@@ -82,11 +82,21 @@ jobs:
       - name: Configure
         shell: cmake -P {0}
         run: |
+          macro(get_WIN32_WINNT version)
+            if (WIN32 AND CMAKE_SYSTEM_VERSION)
+              set(WIN_VER ${CMAKE_SYSTEM_VERSION})
+              string(REPLACE "." "" WIN_VER ${WIN_VER})
+              string(REGEX REPLACE "([0-9])" "0\\1" WIN_VER ${WIN_VER})
+              set (${version} "Ox${WIN_VER}")
+            endif()
+          endmacro()
           cmake_path(SET VCPKG_TOOLCHAIN_PATH ${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake)
           message(STATUS "Using vcpkg.cmake in: ${VCPKG_TOOLCHAIN_PATH}")
           cmake_path(SET SFML_DIR ${{ github.workspace }}/vcpkg/installed/${{ matrix.triplet }}/share/sfml)
           message(STATUS "Using SFML_DIR: ${SFML_DIR}")
           if (${{ matrix.platform }} STREQUAL "windows-latest")
+            add_definitions(-D_WIN32_WINNT=${ver})
+            message(STATUS "Defining _WIN32_WINNT to ${ver}")
             execute_process(
               COMMAND cmake
                 -S .
