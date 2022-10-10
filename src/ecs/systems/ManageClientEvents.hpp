@@ -20,9 +20,10 @@ namespace ecs::systems
      * Refer to SFMLEvents.hpp documentation to learn more about managed events
      */
     std::function<void(World &)> manageClientEvents = [](World &world) {
+#ifdef CLIENT_COMPILATION_MODE
         while (world.getEvent() != ecs::Event::EventType::Null) {
 
-#pragma region Player Movement
+    #pragma region Player Movement
             if (world.getEvent() == ecs::Event::EventType::MoveUp || world.getEvent() == ecs::Event::EventType::MoveLeft
                 || world.getEvent() == ecs::Event::EventType::MoveDown
                 || world.getEvent() == ecs::Event::EventType::MoveRight) {
@@ -52,9 +53,9 @@ namespace ecs::systems
                     }
                 };
             }
-#pragma endregion
+    #pragma endregion
 
-#pragma region Bullet Shoot
+    #pragma region Bullet Shoot
             else if (world.getEvent() == ecs::Event::EventType::Shoot) {
                 auto const &controllables = world.registry.getComponents<component::Controllable>();
                 auto const &positions = world.registry.getComponents<component::Position>();
@@ -74,9 +75,10 @@ namespace ecs::systems
                     }
                 }
             }
-#pragma endregion
+    #pragma endregion
 
             world.popEvent();
         }
+#endif
     };
 } // namespace ecs::systems

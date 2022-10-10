@@ -16,10 +16,12 @@ namespace ecs::component
      * It differs by constructor parameters
      */
     struct Drawable {
+#ifdef CLIENT_COMPILATION_MODE
         explicit Drawable(const std::string &texture) { Texture.loadFromFile(texture); }
         Drawable(const std::string &texture, sf::IntRect rect) { Texture.loadFromFile(texture, rect); }
         explicit Drawable(const sf::Texture &texture) : Texture(texture) {}
 
         sf::Texture Texture;
+#endif
     };
 } // namespace ecs::component
