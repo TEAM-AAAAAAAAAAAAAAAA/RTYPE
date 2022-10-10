@@ -25,7 +25,9 @@ namespace ecs::systems
         auto &positions = world.registry.getComponents<component::Position>();
         auto const &velocities = world.registry.getComponents<component::Velocity>();
         auto &directions = world.registry.getComponents<component::Direction>();
+#ifdef CLIENT_COMPILATION_MODE
         auto const &controllable = world.registry.getComponents<component::Controllable>();
+#endif
         using chrono = std::chrono::high_resolution_clock;
         using chronoDuration = std::chrono::duration<double, std::milli>;
 
@@ -35,15 +37,19 @@ namespace ecs::systems
                 auto &pos = positions[i];
                 auto const &vel = velocities[i];
                 auto &dir = directions[i];
+#ifdef CLIENT_COMPILATION_MODE
                 auto const &contr = controllable[i];
+#endif
 
                 if (pos && vel) {
                     pos.value().x += vel.value().x * dir.value().x;
                     pos.value().y += vel.value().y * dir.value().y;
+#ifdef CLIENT_COMPILATION_MODE
                     if (contr) {
                         dir.value().x = 0;
                         dir.value().y = 0;
                     }
+#endif
                 }
             };
             clock = chrono::now();
