@@ -82,7 +82,7 @@ namespace network
         udp::socket socket;
         udp::endpoint _serverEndpoint;
         udp::endpoint _remoteEndpoint;
-        std::array<char, 8> _recvBuffer;
+        std::array<char, 10> _recvBuffer;
 
         /**
          * Thread pools used by the server class

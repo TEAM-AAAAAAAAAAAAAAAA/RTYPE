@@ -12,8 +12,8 @@ namespace network
      * Standard pair class that contains a string and the ID of the client that
      * sent it
      */
-    typedef std::pair<std::array<char, 8>, unsigned int> ClientMessage;
-    typedef std::pair<std::array<char, 8>, std::vector<unsigned int>> ServerMessage;
+    typedef std::pair<std::array<char, 10>, unsigned int> ClientMessage;
+    typedef std::pair<std::array<char, 10>, std::vector<unsigned int>> ServerMessage;
 
     class IServer {
       public:
