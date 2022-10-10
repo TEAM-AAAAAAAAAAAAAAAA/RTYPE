@@ -27,6 +27,10 @@ set(ECS_INCDIRS
 
 add_library(${TARGET} SHARED ${ECS_SRC})
 
+include(GenerateExportHeader)
+
+generate_export_header(${TARGET})
+
 target_include_directories(${TARGET}
                       PUBLIC ${INCROOT}
                       PRIVATE ${ECS_INCDIRS}
