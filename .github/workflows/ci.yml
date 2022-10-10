@@ -74,8 +74,15 @@ jobs:
       - name: Run vcpkg
         uses: lukka/run-vcpkg@v4
         with:
-          vcpkgArguments: 'sfml boost-asio boost-thread pthread:x64-windows'
+          vcpkgArguments: 'sfml boost-asio boost-thread'
           vcpkgDirectory: '${{ github.workspace}}/vcpkg'
+
+#      - name: Install windows pthreads
+#        if: matrix.platform == 'windows-latest'
+#        uses: lukka/run-vcpkg@v4
+#        with:
+#          vcpkgArguments: 'pthread'
+#          vcpkgDirectory: '${{ github.workspace}}/vcpkg'
 
       - uses: seanmiddleditch/gha-setup-ninja@master
 
