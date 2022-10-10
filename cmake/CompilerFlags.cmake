@@ -21,6 +21,7 @@ if (WIN32)
 
     get_WIN32_WINNT(ver)
     add_definitions(-D_WIN32_WINNT=${ver})
+    add_definitions(-DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE)
     message(STATUS "Setting _WIN32_WINNT with ${ver}"})
 endif ()
 # Enable Warnings
