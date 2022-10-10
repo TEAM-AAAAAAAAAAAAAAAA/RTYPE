@@ -2,14 +2,16 @@
 ** EPITECH PROJECT, 2022
 ** RTYPE
 ** File description:
-** Damage
+** Projectile
 */
 
 #pragma once
 
 namespace ecs::component
 {
-    struct Damage {
-        int damage;
+    struct Projectile {
+        Projectile(int damage) : Damage(damage) {}
+
+        int Damage;
     };
 } // namespace ecs::component
