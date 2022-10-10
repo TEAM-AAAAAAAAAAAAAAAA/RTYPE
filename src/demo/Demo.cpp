@@ -41,7 +41,7 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.registry.addComponent<ecs::component::Controllable>(
         player, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D});
     world.registry.addComponent<ecs::component::Drawable>(player, {playerPath, {1, 1, 32, 16}});
-    world.registry.addComponent<ecs::component::Shootable>(player, {sf::Keyboard::Space});
+    world.registry.addComponent<ecs::component::Shootable>(player, ecs::component::Shootable(sf::Keyboard::Space));
 
     ecs::Entity enemy = world.registry.spawn_entity();
     world.registry.addComponent<ecs::component::Position>(enemy, {500, 500});
