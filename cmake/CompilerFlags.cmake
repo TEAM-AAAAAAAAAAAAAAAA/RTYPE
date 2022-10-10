@@ -1,5 +1,14 @@
 # Platform-specific compilation options
 
+macro(get_WIN32_WINNT version)
+    if (WIN32 AND CMAKE_SYSTEM_VERSION)
+        set(WIN_VER ${CMAKE_SYSTEM_VERSION})
+        string(REPLACE "." "" WIN_VER ${WIN_VER})
+        string(REGEX REPLACE "([0-9])" "0\\1" WIN_VER ${WIN_VER})
+        set (${version} "Ox${WIN_VER}")
+    endif()
+endmacro()
+
 # Enable Warnings
 if(COMPILER_TYPE MATCHES "msvc")
     message(STATUS "Enabling MSVC-specific options")
@@ -8,6 +17,8 @@ if(COMPILER_TYPE MATCHES "msvc")
         "/W4"
         "/WX"
     )
+    get_WIN32_WINNT(ver)
+    add_definitions(-D_WIN32_WINNT=${ver})
 elseif(COMPILER_TYPE MATCHES "gcc")
     message(STATUS "Enabling GCC-specific options")
 
