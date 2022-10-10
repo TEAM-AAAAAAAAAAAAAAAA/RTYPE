@@ -37,7 +37,7 @@ namespace ecs::systems
             if (pos && id) {
                 std::array<char, 2> idBin = id.serialize();
                 std::array<char, 4> posBin = pos.serialize();
-                std::array<char, 7> msg;
+                std::array<char, 8> msg;
                 msg[0] = idBin[0];
                 msg[1] = idBin[1];
                 msg[2] = posBin[0];

@@ -41,8 +41,7 @@ namespace network
     {
         if (!error) {
             try {
-                auto message = ClientMessage(std::string(_recvBuffer.data(), _recvBuffer.data() + bytesTransferred),
-                    getOrCreateClientID(_remoteEndpoint));
+                auto message = ClientMessage(std::array(_recvBuffer), getOrCreateClientID(_remoteEndpoint));
                 if (!message.first.empty())
                     _incomingMessages.push(message);
             } catch (std::exception ex) {
