@@ -1,14 +1,28 @@
 # Platform-specific compilation options
 
-macro(get_WIN32_WINNT version)
-    if (WIN32 AND CMAKE_SYSTEM_VERSION)
-        set(WIN_VER ${CMAKE_SYSTEM_VERSION})
-        string(REPLACE "." "" WIN_VER ${WIN_VER})
-        string(REGEX REPLACE "([0-9])" "0\\1" WIN_VER ${WIN_VER})
-        set (${version} "Ox${WIN_VER}")
-    endif()
-endmacro()
+if (WIN32)
+    macro(get_WIN32_WINNT version)
+        if (CMAKE_SYSTEM_VERSION)
+            set(ver ${CMAKE_SYSTEM_VERSION})
+            string(REGEX MATCH "^([0-9]+).([0-9])" ver ${ver})
+            string(REGEX MATCH "^([0-9]+)" verMajor ${ver})
+            # Check for Windows 10, b/c we'll need to convert to hex 'A'.
+            if ("${verMajor}" MATCHES "10")
+                set(verMajor "A")
+                string(REGEX REPLACE "^([0-9]+)" ${verMajor} ver ${ver})
+            endif ()
+            # Remove all remaining '.' characters.
+            string(REPLACE "." "" ver ${ver})
+            # Prepend each digit with a zero.
+            string(REGEX REPLACE "([0-9A-Z])" "0\\1" ver ${ver})
+            set(${version} "0x${ver}")
+        endif ()
+    endmacro()
 
+    get_WIN32_WINNT(ver)
+    add_definitions(-D_WIN32_WINNT=${ver})
+    message(STATUS "Setting _WIN32_WINNT with ${ver}"})
+endif ()
 # Enable Warnings
 if(COMPILER_TYPE MATCHES "msvc")
     message(STATUS "Enabling MSVC-specific options")
@@ -17,9 +31,6 @@ if(COMPILER_TYPE MATCHES "msvc")
         "/W4"
         "/WX"
     )
-    get_WIN32_WINNT(ver)
-    add_definitions(-D_WIN32_WINNT=${ver})
-    message(STATUS "Defining _WIN32_WINNT to ${ver}")
 elseif(COMPILER_TYPE MATCHES "gcc")
     message(STATUS "Enabling GCC-specific options")
 
