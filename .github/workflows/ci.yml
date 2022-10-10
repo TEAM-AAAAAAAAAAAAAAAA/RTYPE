@@ -77,6 +77,13 @@ jobs:
           vcpkgArguments: 'sfml boost-asio boost-thread'
           vcpkgDirectory: '${{ github.workspace}}/vcpkg'
 
+#      - name: Install windows pthreads
+#        if: matrix.platform == 'windows-latest'
+#        uses: lukka/run-vcpkg@v4
+#        with:
+#          vcpkgArguments: 'pthread'
+#          vcpkgDirectory: '${{ github.workspace}}/vcpkg'
+
       - uses: seanmiddleditch/gha-setup-ninja@master
 
       - name: Configure
@@ -94,6 +101,8 @@ jobs:
                 -G "Visual Studio 17 2022"
                 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
                 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_TOOLCHAIN_PATH}
+                -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE
+                -DBUILD_SHARED_LIBS=TRUE
             RESULT_VARIABLE result
             )
           else()
