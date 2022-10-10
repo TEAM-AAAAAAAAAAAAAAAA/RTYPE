@@ -21,9 +21,12 @@ namespace ecs::systems
     std::function<void(World &)> handleSFMLKeys = [](World &world) {
 #ifdef CLIENT_COMPILATION_MODE
         auto const &controllables = world.registry.getComponents<component::Controllable>();
-        // auto const &shootables = world.registry.getComponents<component::Shootable>();
+        auto const &shootables = world.registry.getComponents<component::Shootable>();
 
-        for (const auto &contr : controllables) {
+        for (size_t i = 0; i < controllables.size() && i < shootables.size(); ++i) {
+            auto &contr = controllables[i];
+            auto const &shoot = shootables[i];
+
             if (contr) {
                 if (sf::Keyboard::isKeyPressed(contr.value().MoveUp)
                     || sf::Keyboard::isKeyPressed(contr.value().MoveUpSecondary))
@@ -38,11 +41,11 @@ namespace ecs::systems
                     || sf::Keyboard::isKeyPressed(contr.value().MoveRightSecondary))
                     world.pushEvent(ecs::Event(ecs::Event::EventType::MoveRight));
 
-                // if (shoot) {
-                //     if (sf::Keyboard::isKeyPressed(shoot.value().Shoot)
-                //         || sf::Keyboard::isKeyPressed(shoot.value().ShootSecondary))
-                //         world.pushEvent(ecs::Event(ecs::Event::EventType::Shoot));
-                // }
+                if (shoot) {
+                    if (sf::Keyboard::isKeyPressed(shoot.value().Shoot)
+                        || sf::Keyboard::isKeyPressed(shoot.value().ShootSecondary))
+                        world.pushEvent(ecs::Event(ecs::Event::EventType::Shoot));
+                }
             }
         }
 #endif
