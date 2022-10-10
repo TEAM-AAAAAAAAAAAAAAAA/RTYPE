@@ -12,6 +12,8 @@
 #include "World.hpp"
 #include "components/Controllable.hpp"
 #include "components/Direction.hpp"
+#include "components/Projectile.hpp"
+#include "components/Weapon.hpp"
 
 namespace ecs::systems
 {
@@ -20,15 +22,14 @@ namespace ecs::systems
      * Refer to SFMLEvents.hpp documentation to learn more about managed events
      */
     std::function<void(World &)> manageClientEvents = [](World &world) {
-#ifdef CLIENT_COMPILATION_MODE
         while (world.getEvent() != ecs::Event::EventType::Null) {
 
-    /**
-     * Region only reserved for player movement.
-     * Incrementing and decrementing the entity direction is used to manage multi input in the sametime, still caped as
-     * 1 or -1
-     */
-    #pragma region Player Movement
+/**
+ * Region only reserved for player movement.
+ * Incrementing and decrementing the entity direction is used to manage multi input in the sametime, still caped as
+ * 1 or -1
+ */
+#pragma region Player Movement
             if (world.getEvent() == ecs::Event::EventType::MoveUp || world.getEvent() == ecs::Event::EventType::MoveLeft
                 || world.getEvent() == ecs::Event::EventType::MoveDown
                 || world.getEvent() == ecs::Event::EventType::MoveRight) {
@@ -50,36 +51,49 @@ namespace ecs::systems
                     }
                 }
             }
-    #pragma endregion
+#pragma endregion
 
-    /**
-     * Region only reserved for bullet Shoot
-     * If the system is called, instantly create a new entity with bullet's component
-     */
-    #pragma region Bullet Shoot
+/**
+ * Region only reserved for bullet Shoot
+ * If the system is called, instantly create a new entity with bullet's component
+ */
+#pragma region Bullet Shoot
             else if (world.getEvent() == ecs::Event::EventType::Shoot) {
                 auto const &controllables = world.registry.getComponents<component::Controllable>();
                 auto const &positions = world.registry.getComponents<component::Position>();
+                auto &weapons = world.registry.getComponents<component::Weapon>();
 
                 for (size_t i = 0; i < positions.size() && i < controllables.size(); ++i) {
                     auto const &pos = positions[i];
                     auto const &con = controllables[i];
-                    if (pos && con) {
-                        std::filesystem::path playerPath =
-                            ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif");
-                        ecs::Entity bullet = world.registry.spawn_entity();
-                        world.registry.addComponent<ecs::component::Direction>(bullet, {1, 0});
-                        world.registry.addComponent<ecs::component::Drawable>(bullet, {playerPath, {5, 5, 1, 1}});
-                        world.registry.addComponent<ecs::component::Position>(bullet, {pos.value().x, pos.value().y});
-                        world.registry.addComponent<ecs::component::Size>(bullet, {10, 10});
-                        world.registry.addComponent<ecs::component::Velocity>(bullet, {10, 0});
+                    auto &weapon = weapons[i];
+                    if (pos && con && weapon) {
+                        auto elapsed = chrono::now().time_since_epoch().count() - weapon.value().LastShoot;
+                        if (weapon.value().HasSuper && elapsed > weapon.value().SuperLoadingTime) {
+                            weapon.value().LastShoot = chrono::now().time_since_epoch().count();
+                            // spawn super bullet
+                        } else if (elapsed > weapon.value().ShootDelay) {
+                            weapon.value().LastShoot = chrono::now().time_since_epoch().count();
+                            ecs::Entity bullet = world.registry.spawn_entity();
+                            world.registry.addComponent<ecs::component::Direction>(bullet, {1, 0});
+                            world.registry.addComponent<ecs::component::Position>(
+                                bullet, {pos.value().x, pos.value().y});
+                            world.registry.addComponent<ecs::component::Size>(bullet, {10, 10});
+                            world.registry.addComponent<ecs::component::Velocity>(bullet, {10, 0});
+                            world.registry.addComponent<ecs::component::Projectile>(bullet, {weapon.value().Damage});
+#ifdef CLIENT_COMPILATION_MODE
+                            std::filesystem::path playerPath =
+                                ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif");
+                            world.registry.addComponent<ecs::component::Drawable>(
+                                bullet, {playerPath, {5, 5, 1, 1}}); // To be removed with the server/client split
+#endif
+                        }
                     }
                 }
             }
-    #pragma endregion
+#pragma endregion
 
             world.popEvent();
         }
-#endif
     };
 } // namespace ecs::systems

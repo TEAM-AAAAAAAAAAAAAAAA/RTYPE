@@ -11,6 +11,7 @@
 #include "components/Position.hpp"
 #include "components/Size.hpp"
 #include "components/Velocity.hpp"
+#include "components/Weapon.hpp"
 #include "systems/Movement.hpp"
 #include "systems/PositionLogger.hpp"
 #ifdef CLIENT_COMPILATION_MODE
@@ -33,7 +34,8 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.registry.addComponent<ecs::component::Velocity>(player, {5, 5});
     world.registry.addComponent<ecs::component::Size>(player, {2, 2});
     world.registry.addComponent<ecs::component::Direction>(player, {1, 0});
-    world.addSystem(ecs::systems::positionLogger);
+    world.registry.addComponent<ecs::component::Weapon>(player, {100, 1});
+    // world.addSystem(ecs::systems::positionLogger);
     world.addSystem(ecs::systems::movement);
 
 #ifdef CLIENT_COMPILATION_MODE
