@@ -1,12 +1,18 @@
+/*
+** EPITECH PROJECT, 2022
+** RTYPE
+** File description:
+** Server
+*/
+
 #include "Server.hpp"
 
 namespace network
 {
     Server::Server(unsigned short localPort)
         : socket(_ioService, udp::endpoint(udp::v4(), localPort)), _serviceThread(&Server::runService, this),
-          _nextClientID(0L), _interpretPool(6), _outgoingThread(&Server::sendOutgoing, this)
+          _nextClientID(0L), _interpretThread(&Server::interpretIncoming, this), _outgoingThread(&Server::sendOutgoing, this)
     {
-        boost::asio::post(_interpretPool, boost::bind(&Server::interpretIncoming, this));
         std::cerr << "Starting server on port " << localPort << std::endl;
     };
 
@@ -118,7 +124,6 @@ namespace network
         while (1) {
             if (!_incomingMessages.empty())
                 message = _incomingMessages.pop();
-            boost::asio::post(_interpretPool, boost::bind(&Server::interpretIncoming, this));
             // Deserialize and add as task
         }
     }
