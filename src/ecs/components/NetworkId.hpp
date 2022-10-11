@@ -11,8 +11,11 @@
 
 namespace ecs::component
 {
+    /// @brief NetworkId component related to the entity sent to the client
     struct NetworkId {
         size_t id;
+        /// @brief Serialize the component
+        /// @return The serialized component
         std::array<char, 2> serialize()
         {
             std::array<char, 2> arr;

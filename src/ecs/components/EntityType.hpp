@@ -9,6 +9,7 @@
 
 namespace ecs::component
 {
+    /// @brief EntityType component
     struct EntityType {
         char type;
     };

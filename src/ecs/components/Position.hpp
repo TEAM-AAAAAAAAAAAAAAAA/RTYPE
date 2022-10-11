@@ -19,6 +19,8 @@ namespace ecs::component
     struct Position {
         int x;
         int y;
+        /// @brief serialize the component
+        /// @return the serialized component
         std::array<char, 4> serialize()
         {
             std::array<char, 4> pos;

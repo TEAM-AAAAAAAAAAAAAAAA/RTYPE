@@ -9,6 +9,7 @@
 
 namespace ecs::component
 {
+    /// @brief EntityLife component
     struct EntityLife {
         int life;
     };

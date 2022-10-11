@@ -10,6 +10,7 @@
 
 namespace ecs::component
 {
+    /// @brief Network component needed to send messages
     struct Network {
         Network::Server serv;
     };

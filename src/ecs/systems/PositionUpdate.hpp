@@ -19,7 +19,8 @@
 namespace ecs::systems
 {
     /**
-     * System used to push updated position of entity to the server outgoing queue.
+     * System used to push updated position of entity
+     * to the server outgoing queue.
      */
     std::function<void(World &)> serverPush = [](World &world) {
         auto &network = world.registry.getComponents<component::Network>();

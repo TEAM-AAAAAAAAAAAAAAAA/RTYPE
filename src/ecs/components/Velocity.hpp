@@ -9,6 +9,7 @@
 
 namespace ecs::component
 {
+    /// @brief Velocity component
     struct Velocity {
         int x;
         int y;

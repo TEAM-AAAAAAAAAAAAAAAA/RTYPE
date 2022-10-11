@@ -19,7 +19,8 @@
 namespace ecs::systems
 {
     /**
-     * System used to push death of entity to the server outgoing queue.
+     * System used to push death of entity message to the server
+     * outgoing queue when is life as gone under 0.
      */
     std::function<void(World &)> serverPush = [](World &world) {
         auto &network = world.registry.getComponents<component::Network>();
