@@ -64,7 +64,7 @@ namespace network
 
         /**
          * Get the ID of client from the clients array
-         *@param n the index for the array
+         *@param index the index for the array
          *@return client ID of client n
          */
         uint32_t getClientIdByIndex(size_t index) override;
