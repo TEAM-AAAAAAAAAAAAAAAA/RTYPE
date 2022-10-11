@@ -5,7 +5,7 @@ namespace ecs::component
     /// @brief Size component
     struct Size {
         int height;
-        int width
+        int width;
         /// @brief serialize the component
         /// @return the serialized component
         std::array<char, 2> serialize()
