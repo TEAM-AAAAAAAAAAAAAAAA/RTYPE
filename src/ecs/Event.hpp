@@ -63,9 +63,9 @@ namespace ecs
             return false;
         }
 
-		inline bool operator!=(const Event other) const { return _e != other._e;};
+        inline bool operator!=(const Event other) const { return _e != other._e; };
 
-		inline bool operator!=(const Event::EventType type) const { return _e != type;};
+        inline bool operator!=(const Event::EventType type) const { return _e != type; };
 
       private:
         const EventType _e;
