@@ -4,7 +4,7 @@ namespace network
 {
     Server::Server(unsigned short localPort)
         : socket(_ioService, udp::endpoint(udp::v4(), localPort)), _serviceThread(&Server::runService, this),
-          nextClientID(0L), _interpretPool(6)
+          _nextClientID(0L), _interpretPool(6), _outgoingThread(&Server::sendOutgoing, this)
     {
         boost::asio::post(_interpretPool, boost::bind(&Server::interpretIncoming, this));
         std::cerr << "Starting server on port " << localPort << std::endl;
@@ -26,7 +26,7 @@ namespace network
     {
         bool found = false;
         int32_t id;
-        for (const auto &client : clients)
+        for (const auto &client : _clients)
             if (client.second == endpoint) {
                 found = true;
                 id = client.first;
@@ -34,7 +34,7 @@ namespace network
             }
         if (found == false)
             return;
-        clients.erase(id);
+        _clients.erase(id);
     }
 
     void Server::handleReceive(const std::error_code &error, std::size_t bytesTransferred)
@@ -59,7 +59,15 @@ namespace network
         startReceive();
     }
 
-    void Server::send(const std::string &message, udp::endpoint endpoint)
+    void Server::sendOutgoing(void)
+    {
+        while (1) {
+            if (!outgoingMessages.empty())
+                sendToAll(outgoingMessages.pop().first);
+        }
+    }
+
+    void Server::send(const std::array<char, 10> &message, udp::endpoint endpoint)
     {
         socket.send_to(boost::asio::buffer(message), endpoint);
     }
@@ -81,27 +89,27 @@ namespace network
 
     int32_t Server::getOrCreateClientID(udp::endpoint endpoint)
     {
-        for (const auto &client : clients)
+        for (const auto &client : _clients)
             if (client.second == endpoint)
                 return client.first;
 
-        auto id = ++nextClientID;
-        clients.insert(Client(id, endpoint));
+        auto id = ++_nextClientID;
+        _clients.insert(Client(id, endpoint));
         return id;
     };
 
-    void Server::sendToClient(const std::string &message, uint32_t clientID)
+    void Server::sendToClient(const std::array<char, 10> &message, uint32_t clientID)
     {
         try {
-            send(message, clients.at(clientID));
+            send(message, _clients.at(clientID));
         } catch (std::out_of_range) {
             std::cerr << "sendToClient : Unknown client ID " << clientID << std::endl;
         }
     };
 
-    void Server::sendToAll(const std::string &message)
+    void Server::sendToAll(const std::array<char, 10> &message)
     {
-        for (auto client : clients)
+        for (auto client : _clients)
             send(message, client.second);
     }
 
@@ -116,11 +124,11 @@ namespace network
         }
     }
 
-    size_t Server::getClientCount() { return clients.size(); }
+    size_t Server::getClientCount() { return _clients.size(); }
 
     uint32_t Server::getClientIdByIndex(size_t index)
     {
-        auto it = clients.begin();
+        auto it = _clients.begin();
         for (int i = 0; i < index; i++)
             ++it;
         return it->first;

@@ -28,7 +28,7 @@ namespace network
          *@param message the message to send
          *@param clientID the ID of the client
          */
-        virtual void sendToClient(const std::string &message, uint32_t clientID) = 0;
+        virtual void sendToClient(const std::array<char, 10> &message, uint32_t clientID) = 0;
         /**
          * Get the amount of clients that are connected
          *@return Amount of connected clients

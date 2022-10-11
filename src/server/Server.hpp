@@ -48,13 +48,13 @@ namespace network
          *@param message the message to send
          *@param clientID the ID of the client
          */
-        void sendToClient(const std::string &message, uint32_t clientID) override;
+        void sendToClient(const std::array<char, 10> &message, uint32_t clientID) override;
 
         /**
          * Send a message to all clients that have connected to the server
          *@param message the message to send
          */
-        void sendToAll(const std::string &message);
+        void sendToAll(const std::array<char, 10> &message);
 
         /**
          * Get the amount of clients that are connected
@@ -88,6 +88,7 @@ namespace network
          * Thread pools used by the server class
          */
         std::thread _serviceThread;
+        std::thread _outgoingThread;
         boost::asio::thread_pool _interpretPool;
 
         /**
@@ -117,11 +118,11 @@ namespace network
 
         /**
          * Handles the sending of packets
-         *@param message the packet as a string
+         *@param message the packet as an array
          *@param error error code of sending
          *@param bytesTransferred the size of the outgoing packet
          */
-        void handleSend(std::string message, const std::error_code &error, std::size_t bytesTransferred) {}
+        void handleSend(std::array<char, 10> message, const std::error_code &error, std::size_t bytesTransferred) {}
 
         /**
          * Run the server's service
@@ -137,10 +138,10 @@ namespace network
 
         /**
          * Send message to the endpoint
-         *@param message message as a string
+         *@param message message as an array
          *@param target endpoint of the receiving client
          */
-        void send(const std::string &message, udp::endpoint target);
+        void send(const std::array<char, 10> &message, udp::endpoint target);
 
         /**
          * Interpret incoming messages
@@ -148,9 +149,14 @@ namespace network
         void interpretIncoming();
 
         /**
+         * Send messages in the outgoing message queue
+         */
+        void sendOutgoing();
+
+        /**
          *  Clients of the server
          */
-        ClientList clients;
-        int nextClientID;
+        ClientList _clients;
+        int _nextClientID;
     };
 } // namespace network
