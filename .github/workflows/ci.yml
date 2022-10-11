@@ -75,7 +75,8 @@ jobs:
         uses: lukka/run-vcpkg@v4
         with:
           vcpkgArguments: 'sfml boost-asio boost-thread'
-          vcpkgDirectory: '${{ github.workspace}}/vcpkg'
+          vcpkgDirectory: '${{ github.workspace }}/vcpkg'
+          vcpkgGitCommitId: '${{ env.VCPKG_COMMIT }}'
 
 #      - name: Install windows pthreads
 #        if: matrix.platform == 'windows-latest'
