@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2022
+** RTYPE
+** File description:
+** LockedQueue
+*/
+
 #pragma once
 #include <list>
 #include <mutex>

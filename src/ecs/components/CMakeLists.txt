@@ -10,6 +10,7 @@ set(COMPONENTS_SRC
     ${SRCROOT}/Velocity.hpp
     ${SRCROOT}/Network.hpp
     ${SRCROOT}/NetworkId.hpp
+    ${SRCROOT}/EntityType.hpp
     PARENT_SCOPE
 )
 

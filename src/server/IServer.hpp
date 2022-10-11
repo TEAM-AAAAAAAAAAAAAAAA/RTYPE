@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2022
+** RTYPE
+** File description:
+** IServer
+*/
+
 #pragma once
 #include <array>
 #include <utility>

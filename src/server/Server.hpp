@@ -85,11 +85,11 @@ namespace network
         std::array<char, 10> _recvBuffer;
 
         /**
-         * Thread pools used by the server class
+         * Threads used by the server class
          */
         std::thread _serviceThread;
         std::thread _outgoingThread;
-        boost::asio::thread_pool _interpretPool;
+        std::thread _interpretThread;
 
         /**
          * Locked queue of all unprocessed incoming messages
