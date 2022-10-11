@@ -49,19 +49,23 @@ namespace ecs
          */
         Event(EventType e) : _e(e) {}
 
-        bool operator==(const Event other) const
+        inline bool operator==(const Event other) const
         {
             if (_e == other._e)
                 return true;
             return false;
         }
 
-        bool operator==(const Event::EventType type) const
+        inline bool operator==(const Event::EventType type) const
         {
             if (_e == type)
                 return true;
             return false;
         }
+
+		inline bool operator!=(const Event other) const { return _e != other._e;};
+
+		inline bool operator!=(const Event::EventType type) const { return _e != type;};
 
       private:
         const EventType _e;

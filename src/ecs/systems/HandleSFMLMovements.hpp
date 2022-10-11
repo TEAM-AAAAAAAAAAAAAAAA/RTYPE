@@ -26,7 +26,7 @@ namespace ecs::systems
         auto const &controllables = world.registry.getComponents<component::Controllable>();
 
         for (size_t i = 0; i < controllables.size(); ++i) {
-            auto &contr = controllables[i];
+            auto const &contr = controllables[i];
 
             if (contr) {
                 if (sf::Keyboard::isKeyPressed(contr.value().MoveUp)
