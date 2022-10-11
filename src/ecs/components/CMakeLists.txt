@@ -11,6 +11,7 @@ set(COMPONENTS_SRC
     ${SRCROOT}/Network.hpp
     ${SRCROOT}/NetworkId.hpp
     ${SRCROOT}/EntityType.hpp
+    ${SRCROOT}/EntityLife.hpp
     PARENT_SCOPE
 )
 

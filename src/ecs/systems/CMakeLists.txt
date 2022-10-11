@@ -10,6 +10,7 @@ set(SYSTEMS_SRC
     ${SRCROOT}/PositionLogger.hpp
     ${SRCROOT}/ServerPush.hpp
     ${SRCROOT}/PositionUpdate.hpp
+    ${SRCROOT}/DeathUpdate.hpp
     PARENT_SCOPE
 )
 
