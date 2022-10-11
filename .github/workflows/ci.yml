@@ -175,6 +175,9 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deploy.output.page_url }}
+    permissions:
+      pages: write
+      id-token: write
     steps:
       - uses: actions/checkout@v3
         with:
