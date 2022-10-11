@@ -55,7 +55,6 @@ namespace network
                       << _remoteEndpoint << std::endl;
             handleRemoteError(error, _remoteEndpoint);
         }
-
         startReceive();
     }
 
