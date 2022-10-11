@@ -33,7 +33,7 @@ namespace ecs::systems
 
         static auto clock = chrono::now();
         if (chronoDuration(chrono::now() - clock).count() > 10) {
-            for (size_t i = 0; i < positions.size() && i < velocities.size(); ++i) {
+            for (size_t i = 0; i < positions.size() && i < velocities.size() && i < directions.size(); ++i) {
                 auto &pos = positions[i];
                 auto const &vel = velocities[i];
                 auto &dir = directions[i];
@@ -41,7 +41,7 @@ namespace ecs::systems
                 auto const &contr = controllables[i];
 #endif
 
-                if (pos && vel) {
+                if (pos && vel && dir) {
                     pos.value().x += vel.value().x * dir.value().x;
                     pos.value().y += vel.value().y * dir.value().y;
 #ifdef CLIENT_COMPILATION_MODE
