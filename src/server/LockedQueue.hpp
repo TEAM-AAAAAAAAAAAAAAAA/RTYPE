@@ -32,7 +32,7 @@ namespace network
          * Function which pushes the value into the queue while locking it
          * @param value value to push
          */
-        void push(_T value)
+        void push(T value)
         {
             std::unique_lock<std::mutex> lock(mutex);
             queue.push(value);
