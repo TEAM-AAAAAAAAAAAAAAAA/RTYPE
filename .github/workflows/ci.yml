@@ -202,7 +202,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
           github_token: ${{ inputs.github_token }}
-          folder: docs/build/html
+          folder: docs/html
           message: "Update generated documentation"
           branch: gh-pages
 
