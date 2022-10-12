@@ -19,3 +19,11 @@ jobs:
         with:
           source: 'src'
           clangFormatVersion: 12
+          inplace: true
+      - uses: EndBug/add-and-commit@v4
+        with:
+            author_name: Clang Robot
+            author_email: robot@example.com
+            message: 'rtor: Committing clang-fmt changes'
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

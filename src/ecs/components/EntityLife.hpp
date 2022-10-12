@@ -1,16 +1,16 @@
 /*
 ** EPITECH PROJECT, 2022
-** RTYPE
+** R-TYPE_FD
 ** File description:
-** EnemyAI
+** EntityLife
 */
 
 #pragma once
 
 namespace ecs::component
 {
-    /// @brief EnemyAI component
-    struct EnemyAI {
-        EnemyAI() {}
+    /// @brief EntityLife component
+    struct EntityLife {
+        int life;
     };
 } // namespace ecs::component

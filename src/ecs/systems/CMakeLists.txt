@@ -9,6 +9,9 @@ set(SYSTEMS_SRC
     ${SRCROOT}/Movement.hpp
     ${SRCROOT}/PositionLogger.hpp
     ${SRCROOT}/ProjectileCollision.hpp
+    ${SRCROOT}/ServerPush.hpp
+    ${SRCROOT}/PositionUpdate.hpp
+    ${SRCROOT}/DeathUpdate.hpp
     PARENT_SCOPE
 )
 
