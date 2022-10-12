@@ -34,4 +34,8 @@ add_subdirectory(src)
 if (BUILD_TEST_SUITE)
      enable_testing()
      add_subdirectory(tests)
+     endif()
+
+if (CLIENT_COMPILATION_MODE)
+     add_compile_definitions(CLIENT_COMPILATION_MODE)
 endif()

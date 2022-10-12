@@ -11,11 +11,22 @@ set(SRC
 add_executable(${TARGET} ${SRC})
 
 target_link_libraries(${TARGET} PRIVATE
-    sfml-system sfml-network sfml-graphics sfml-window Boost::thread
+    Boost::thread
 )
 
 target_include_directories(${TARGET}
         PRIVATE ${ECS_INCROOT}
 )
 
+if (CLIENT_COMPILATION_MODE)
+    target_link_libraries(${TARGET} PRIVATE
+        sfml-system sfml-network sfml-graphics sfml-window
+    )
+endif()
+
+
 set_target_properties(${TARGET} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
+
+if (CLIENT_COMPILATION_MODE)
+    add_compile_definitions(CLIENT_COMPILATION_MODE)
+endif()
