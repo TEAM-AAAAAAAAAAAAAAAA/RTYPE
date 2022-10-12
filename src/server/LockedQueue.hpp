@@ -15,7 +15,7 @@
  */
 namespace network
 {
-    template <typename _T> class LockedQueue {
+    template <typename T> class LockedQueue {
       private:
         /**
          * Standard mutex class which lets us lock the queue
@@ -25,12 +25,12 @@ namespace network
          * Templated standard queue class which lets us use the queue with any
          * class
          */
-        std::queue<_T> queue;
+        std::queue<T> queue;
 
       public:
         /**
          * Function which pushes the value into the queue while locking it
-         *@param value value to push
+         * @param value value to push
          */
         void push(_T value)
         {
@@ -40,12 +40,12 @@ namespace network
 
         /**
          * Get the top value of the queue
-         * @return return the front value
+         *  @return return the front value
          */
-        _T pop()
+        T pop()
         {
             std::unique_lock<std::mutex> lock(mutex);
-            _T value;
+            T value;
             std::swap(value, queue.front());
             queue.pop();
             return value;
@@ -53,7 +53,7 @@ namespace network
 
         /**
          * Check if the queue is empty
-         *@return True if queue is empty
+         * @return True if queue is empty
          */
         bool empty()
         {
