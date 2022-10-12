@@ -14,6 +14,7 @@
 
 namespace ecs::component
 {
+    /// @brief EnemyAI component
     struct EnemyAI {
         EnemyAI() {}
     };
