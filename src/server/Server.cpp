@@ -10,7 +10,7 @@
 namespace network
 {
     Server::Server(unsigned short localPort)
-        : socket(_ioService, udp::endpoint(udp::v4(), localPort)), _serviceThread(&Server::runService, this),
+        : _socket(_ioService, udp::endpoint(udp::v4(), localPort)), _serviceThread(&Server::runService, this),
           _nextClientID(0L), _interpretThread(&Server::interpretIncoming, this), _outgoingThread(&Server::sendOutgoing, this)
     {
         std::cerr << "Starting server on port " << localPort << std::endl;
@@ -24,7 +24,7 @@ namespace network
 
     void Server::startReceive()
     {
-        socket.async_receive_from(boost::asio::buffer(_recvBuffer), _remoteEndpoint,
+        _socket.async_receive_from(boost::asio::buffer(_recvBuffer), _remoteEndpoint,
             [this](std::error_code ec, std::size_t bytesRecvd) { this->handleReceive(ec, bytesRecvd); });
     }
 
@@ -74,7 +74,7 @@ namespace network
 
     void Server::send(const std::array<char, 10> &message, udp::endpoint endpoint)
     {
-        socket.send_to(boost::asio::buffer(message), endpoint);
+        _socket.send_to(boost::asio::buffer(message), endpoint);
     }
 
     void Server::runService()
