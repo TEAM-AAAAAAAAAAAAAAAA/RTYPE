@@ -3,8 +3,6 @@ name: Build
 on:
   push:
     branches: [ main ]
-    tags:
-      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
   delete:
     branches: [ main ]
   pull_request:
@@ -215,21 +213,3 @@ jobs:
             ${{ secrets.EPI_RTYPE_REPO_URL }}
           ssh_private_key:
             ${{ secrets.EPI_RTYPE_MIRRORING_KEY }}
-    name: Create Release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: | # TO COMPLETE WITH THE CONTENT OF THE RELEASE
-            New R-TYPE Release
-          draft: false
-          prerelease: false
-        
