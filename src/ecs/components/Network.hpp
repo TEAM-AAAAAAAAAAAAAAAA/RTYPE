@@ -6,12 +6,12 @@
 */
 
 #pragma once
+#include "Server.hpp"
 
 namespace ecs::component
 {
-    /// @brief Velocity component
-    struct Velocity {
-        int x;
-        int y;
+    /// @brief Network component needed to send messages
+    struct Network {
+        Network::Server serv;
     };
 } // namespace ecs::component
