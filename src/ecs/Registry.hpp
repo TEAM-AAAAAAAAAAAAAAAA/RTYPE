@@ -37,7 +37,9 @@ namespace ecs
             _componentsArrays[std::type_index(typeid(Component))] = SparseArray<Component>();
 
             std::function<void(Registry &, Entity const &)> erase_func = [](Registry &r, Entity const &e) {
-                SparseArray<Component> &array = r.template getComponents<Component>();
+                SparseArray<Component> &array = r.getComponents<Component>();
+                if (e._id > array.size())
+                    return;
                 array.erase(e._id);
             };
             _eraseFunctions.push_back(erase_func);
@@ -103,6 +105,8 @@ namespace ecs
          */
         void killEntity(Entity const &e)
         {
+            if (e._id == ecs::constant::npos)
+                return;
             for (const auto &erase_func : _eraseFunctions)
                 erase_func(*this, e);
             _entitiesBin.push_back(e._id);

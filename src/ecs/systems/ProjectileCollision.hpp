@@ -21,7 +21,7 @@ namespace ecs::systems
             if (proj && projPos) {
                 if (projPos.value().x < 0 || projPos.value().x > ecs::constant::mapWidth || projPos.value().y < 0
                     || projPos.value().y > ecs::constant::mapWidth) {
-                    // world.registry.killEntity(world.registry.entityFromIndex(i));
+                    world.registry.killEntity(world.registry.entityFromIndex(i));
                 }
             }
         };
@@ -63,8 +63,8 @@ namespace ecs::systems
             }
         };
 
-            // if (killProj)
-            //     world.registry.killEntity(world.registry.entityFromIndex(projId));
+        if (killProj)
+            world.registry.killEntity(world.registry.entityFromIndex(projId));
 #pragma endregion
     };
 } // namespace ecs::systems
