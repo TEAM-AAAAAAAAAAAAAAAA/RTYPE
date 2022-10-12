@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2022
+** RTYPE
+** File description:
+** LockedQueue
+*/
+
 #pragma once
 #include <list>
 #include <mutex>
@@ -6,9 +13,9 @@
 /**
  * Simple mutex-guarded queue
  */
-namespace Network
+namespace network
 {
-    template <typename _T> class LockedQueue {
+    template <typename T> class LockedQueue {
       private:
         /**
          * Standard mutex class which lets us lock the queue
@@ -18,14 +25,14 @@ namespace Network
          * Templated standard queue class which lets us use the queue with any
          * class
          */
-        std::queue<_T> queue;
+        std::queue<T> queue;
 
       public:
         /**
          * Function which pushes the value into the queue while locking it
-         *@param value value to push
+         * @param value value to push
          */
-        void push(_T value)
+        void push(T value)
         {
             std::unique_lock<std::mutex> lock(mutex);
             queue.push(value);
@@ -33,12 +40,12 @@ namespace Network
 
         /**
          * Get the top value of the queue
-         * @return return the front value
+         *  @return return the front value
          */
-        _T pop()
+        T pop()
         {
             std::unique_lock<std::mutex> lock(mutex);
-            _T value;
+            T value;
             std::swap(value, queue.front());
             queue.pop();
             return value;
@@ -46,7 +53,7 @@ namespace Network
 
         /**
          * Check if the queue is empty
-         *@return True if queue is empty
+         * @return True if queue is empty
          */
         bool empty()
         {

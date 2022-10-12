@@ -2,15 +2,15 @@
 ** EPITECH PROJECT, 2022
 ** RTYPE
 ** File description:
-** EnemyAI
+** EntityType
 */
 
 #pragma once
 
 namespace ecs::component
 {
-    /// @brief EnemyAI component
-    struct EnemyAI {
-        EnemyAI() {}
+    /// @brief EntityType component
+    struct EntityType {
+        char type;
     };
 } // namespace ecs::component
