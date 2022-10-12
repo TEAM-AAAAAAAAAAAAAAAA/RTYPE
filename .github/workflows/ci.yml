@@ -196,7 +196,7 @@ jobs:
 
       - name: Add .nojekyll
         run: |
-          touch ${{github.workspace}}/docs/build/html/.nojekyll
+          touch ${{github.workspace}}/docs/html/.nojekyll
 
       - name: Deploy documentation
         uses: JamesIves/github-pages-deploy-action@v4.2.5
