@@ -107,8 +107,8 @@ namespace ecs
         {
             if (e._id == ecs::constant::npos)
                 return;
-            for (const auto &erase_func : _eraseFunctions)
-                erase_func(*this, e);
+            for (const auto &eraseFunc : _eraseFunctions)
+                eraseFunc(*this, e);
             _entitiesBin.push_back(e._id);
         }
 
