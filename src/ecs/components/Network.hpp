@@ -6,12 +6,13 @@
 */
 
 #pragma once
-#include "Server.hpp"
+#include "../../server/Server.hpp"
 
 namespace ecs::component
 {
     /// @brief Network component needed to send messages
     struct Network {
-        Network::Server serv;
+        Network(unsigned short localPort = 8000) : serv(localPort) {};
+        network::Server serv;
     };
 } // namespace ecs::component
