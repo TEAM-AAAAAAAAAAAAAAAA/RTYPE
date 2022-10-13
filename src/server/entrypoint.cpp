@@ -19,7 +19,7 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.registry.addComponent<ecs::component::Velocity>(player, {5, 5});
     world.registry.addComponent<ecs::component::Size>(player, {32, 64});
     world.registry.addComponent<ecs::component::Direction>(player, {1, 0});
-    world.registry.addComponent<ecs::component::Weapon>(player, {100, 10});
+    world.registry.addComponent<ecs::component::Weapon>(player, {100, 10, 10});
     world.registry.addComponent<ecs::component::Health>(player, {100});
     // world.registry.addComponent<ecs::component::Faction>(player, {ecs::component::Faction::Factions::Players});
     // world.addSystem(ecs::systems::positionLogger);
