@@ -2,7 +2,7 @@ set (SRC_ROOT ${PROJECT_SOURCE_DIR}/src/server)
 set (INC_ROOT ${PROJECT_SOURCE_DIR}/src/server)
 set(ECS_SRC ../ecs)
 
-set(TARGET rtype_server)
+set(TARGET r-type_server)
 
 set(SRC
     ${SRC_ROOT}/Server.cpp
@@ -16,6 +16,7 @@ add_executable(${TARGET} ${SRC})
 
 target_link_libraries(${TARGET} PRIVATE
     ${Boost_LIBRARIES}
+
 )
 
 target_include_directories(${TARGET}
