@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Engine.hpp"
-#include "components/Network.hpp"
 // #include "components/Faction.hpp"
 #include "components/Faction.hpp"
 #include "components/Health.hpp"
@@ -14,7 +13,6 @@ ecs::World getGameWorld(ecs::Engine &engine)
     ecs::Entity network = world.registry.spawn_entity();
 
     world.registry.registerComponent<ecs::component::Projectile>();
-    world.registry.addComponent<ecs::component::Network>(network, {8000});
 
     world.registry.addComponent<ecs::component::Position>(player, {10, 10});
     world.registry.addComponent<ecs::component::Velocity>(player, {5, 5});
