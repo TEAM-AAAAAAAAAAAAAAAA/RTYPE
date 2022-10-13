@@ -1,21 +1,31 @@
 /*
- * File: Engine.hpp
- * Project: ecs
- * File Created: Tuesday, 4th October 2022 6:33:43 pm
- * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
- * -----
- * Last Modified: Wednesday, 5th October 2022 2:05:52 pm
- * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
- * -----
- * Copyright 2022 - 2022 Your Company, Your Company
- */
+** EPITECH PROJECT, 2022
+** RTYPE
+** File description:
+** Engine
+*/
 
 #pragma once
 
+#include <filesystem>
 #include <memory>
+#include "AssetManager.hpp"
 #include "Engine.hpp"
 #include "Registry.hpp"
 #include "World.hpp"
+#include "components/Controllable.hpp"
+#include "components/Drawable.hpp"
+#include "components/EnemyAI.hpp"
+#include "components/Position.hpp"
+#include "components/Shootable.hpp"
+#include "components/Size.hpp"
+#include "components/Velocity.hpp"
+#include "systems/Draw.hpp"
+#include "systems/HandleSFMLEvents.hpp"
+#include "systems/HandleSFMLKeys.hpp"
+#include "systems/ManageClientEvents.hpp"
+#include "systems/Movement.hpp"
+#include "systems/PositionLogger.hpp"
 
 namespace ecs
 {
@@ -52,8 +62,9 @@ namespace ecs
         /**
          * Set the world given as parameter to release mode
          * @param world The world you want to set to release mode
+         * @param worldSwitchReady Used to prevents of automatic world's switch
          */
-        void setWaitingWorld(ecs::World world, bool worldSwitchReady = true)
+        void setWaitingWorld(const ecs::World &world, bool worldSwitchReady = true)
         {
             if (_waitingWorld)
                 _waitingWorld.release();

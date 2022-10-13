@@ -1,14 +1,9 @@
 /*
- * File: Controllable.hpp
- * Project: components
- * File Created: Monday, 3rd October 2022 6:17:46 pm
- * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
- * -----
- * Last Modified: Tuesday, 4th October 2022 7:26:15 pm
- * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
- * -----
- * Copyright 2022 - 2022 Your Company, Your Company
- */
+** EPITECH PROJECT, 2022
+** RTYPE
+** File description:
+** Controllable
+*/
 
 #pragma once
 

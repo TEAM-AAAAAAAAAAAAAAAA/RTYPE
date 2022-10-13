@@ -9,12 +9,13 @@
 
 #ifdef CLIENT_COMPILATION_MODE
     #include "SFML/Graphics.hpp"
+    #include "Constant.hpp"
 
 namespace ecs::utils
 {
     class Window : public sf::RenderWindow {
       public:
-        Window() : sf::RenderWindow(sf::VideoMode(800, 400), "r-type") {}
+        Window() : sf::RenderWindow(sf::VideoMode(ecs::constant::mapWidth, ecs::constant::mapHeight), "r-type") {}
         // Window(int wSizeWidth = 800, int wSizeHeight = 600, std::string wTitle = "r-type")
         //     : _window(sf::VideoMode(800, 400), "r-type")
         // {

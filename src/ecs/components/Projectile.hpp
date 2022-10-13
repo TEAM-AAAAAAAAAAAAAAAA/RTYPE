@@ -2,15 +2,16 @@
 ** EPITECH PROJECT, 2022
 ** RTYPE
 ** File description:
-** EnemyAI
+** Projectile
 */
 
 #pragma once
 
 namespace ecs::component
 {
-    /// @brief EnemyAI component
-    struct EnemyAI {
-        EnemyAI() {}
+    struct Projectile {
+        Projectile(int damage) : Damage(damage) {}
+
+        int Damage;
     };
 } // namespace ecs::component

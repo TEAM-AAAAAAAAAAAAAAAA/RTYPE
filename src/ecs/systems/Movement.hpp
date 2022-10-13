@@ -1,14 +1,9 @@
 /*
- * File: Movement.hpp
- * Project: systems
- * File Created: Tuesday, 4th October 2022 6:33:43 pm
- * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
- * -----
- * Last Modified: Wednesday, 5th October 2022 2:08:02 pm
- * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
- * -----
- * Copyright 2022 - 2022 Your Company, Your Company
- */
+** EPITECH PROJECT, 2022
+** RTYPE
+** File description:
+** Movement
+*/
 
 #pragma once
 
@@ -30,22 +25,34 @@ namespace ecs::systems
         auto &positions = world.registry.getComponents<component::Position>();
         auto const &velocities = world.registry.getComponents<component::Velocity>();
         auto &directions = world.registry.getComponents<component::Direction>();
+#ifdef CLIENT_COMPILATION_MODE
+        auto const &controllables = world.registry.getComponents<component::Controllable>();
+#endif
         using chrono = std::chrono::high_resolution_clock;
+        using chronoDuration = std::chrono::duration<double, std::milli>;
 
         static auto clock = chrono::now();
-        for (size_t i = 0; i < positions.size() && i < velocities.size(); ++i) {
-            auto &pos = positions[i];
-            auto const &vel = velocities[i];
-            auto &dir = directions[i];
-            if (pos && vel) {
-                if (std::chrono::duration<double, std::milli>(chrono::now() - clock).count() > 10) {
-                    pos.value().x += vel.value().x * (dir.value().x);
+        if (chronoDuration(chrono::now() - clock).count() > 10) {
+            for (size_t i = 0; i < positions.size() && i < velocities.size(); ++i) {
+                auto &pos = positions[i];
+                auto const &vel = velocities[i];
+                auto &dir = directions[i];
+#ifdef CLIENT_COMPILATION_MODE
+                auto const &contr = controllables[i];
+#endif
+
+                if (pos && vel) {
+                    pos.value().x += vel.value().x * dir.value().x;
                     pos.value().y += vel.value().y * dir.value().y;
-                    dir.value().x = 0;
-                    dir.value().y = 0;
-                    clock = chrono::now();
+#ifdef CLIENT_COMPILATION_MODE
+                    if (i < controllables.size() && contr) {
+                        dir.value().x = 0;
+                        dir.value().y = 0;
+                    }
+#endif
                 }
-            }
-        };
+            };
+            clock = chrono::now();
+        }
     };
 } // namespace ecs::systems

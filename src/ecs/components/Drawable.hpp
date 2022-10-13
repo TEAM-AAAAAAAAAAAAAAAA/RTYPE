@@ -1,14 +1,9 @@
 /*
- * File: Drawable.hpp
- * Project: components
- * File Created: Monday, 3rd October 2022 6:32:42 pm
- * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
- * -----
- * Last Modified: Wednesday, 5th October 2022 2:09:12 pm
- * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
- * -----
- * Copyright 2022 - 2022 Your Company, Your Company
- */
+** EPITECH PROJECT, 2022
+** RTYPE
+** File description:
+** Drawable
+*/
 
 #pragma once
 
@@ -21,10 +16,12 @@ namespace ecs::component
      * It differs by constructor parameters
      */
     struct Drawable {
+#ifdef CLIENT_COMPILATION_MODE
         explicit Drawable(const std::string &texture) { Texture.loadFromFile(texture); }
         Drawable(const std::string &texture, sf::IntRect rect) { Texture.loadFromFile(texture, rect); }
         explicit Drawable(const sf::Texture &texture) : Texture(texture) {}
 
         sf::Texture Texture;
+#endif
     };
 } // namespace ecs::component
