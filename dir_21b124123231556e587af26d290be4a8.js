@@ -8,5 +8,6 @@ var dir_21b124123231556e587af26d290be4a8 =
     [ "Movement.hpp", "_movement_8hpp.html", "_movement_8hpp" ],
     [ "PositionLogger.hpp", "_position_logger_8hpp.html", "_position_logger_8hpp" ],
     [ "PositionUpdate.hpp", "_position_update_8hpp.html", null ],
+    [ "ProjectileCollision.hpp", "_projectile_collision_8hpp.html", "_projectile_collision_8hpp" ],
     [ "ServerPush.hpp", "_server_push_8hpp.html", null ]
 ];

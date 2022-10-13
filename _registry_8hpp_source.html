@@ -161,103 +161,108 @@ $(document).ready(function(){initNavTree('_registry_8hpp_source.html',''); initR
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            _componentsArrays[std::type_index(<span class="keyword">typeid</span>(Component))] = <a class="code" href="classecs_1_1_sparse_array.html">SparseArray&lt;Component&gt;</a>();</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            std::function&lt;void(<a class="code" href="classecs_1_1_registry.html">Registry</a> &amp;, <a class="code" href="classecs_1_1_entity.html">Entity</a> <span class="keyword">const</span> &amp;)&gt; erase_func = [](<a class="code" href="classecs_1_1_registry.html">Registry</a> &amp;r, <a class="code" href="classecs_1_1_entity.html">Entity</a> <span class="keyword">const</span> &amp;e) {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                <a class="code" href="classecs_1_1_sparse_array.html">SparseArray&lt;Component&gt;</a> &amp;array = r.template getComponents&lt;Component&gt;();</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                array.<a class="code" href="classecs_1_1_sparse_array.html#abcc31b0e8950b62375bf75b4b92339e2">erase</a>(e._id);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            };</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            _eraseFunctions.push_back(erase_func);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            <span class="keywordflow">return</span> getComponents&lt;Component&gt;();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        }</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classecs_1_1_registry.html#af1bb5ae13485a9755528c3d2f71aa4d1">   53</a></span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> Component&gt; <a class="code" href="classecs_1_1_sparse_array.html">SparseArray&lt;Component&gt;</a> &amp;<a class="code" href="classecs_1_1_registry.html#af1bb5ae13485a9755528c3d2f71aa4d1">getComponents</a>()</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keywordflow">return</span> std::any_cast&lt;SparseArray&lt;Component&gt; &amp;&gt;(_componentsArrays.at(std::type_index(<span class="keyword">typeid</span>(Component))));</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="classecs_1_1_registry.html#ae498c82a2499ce559af98eababd02e09">   64</a></span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> Component&gt; <a class="code" href="classecs_1_1_sparse_array.html">SparseArray&lt;Component&gt;</a> <span class="keyword">const</span> &amp;<a class="code" href="classecs_1_1_registry.html#ae498c82a2499ce559af98eababd02e09">getComponents</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="keywordflow">return</span> std::any_cast&lt;SparseArray&lt;Component&gt;&gt;(_componentsArrays.at(std::type_index(<span class="keyword">typeid</span>(Component))));</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        }</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="classecs_1_1_registry.html#a960bf8fcdaa237dc3a8594cf53290085">   74</a></span>&#160;        <a class="code" href="classecs_1_1_entity.html">Entity</a> <a class="code" href="classecs_1_1_registry.html#a960bf8fcdaa237dc3a8594cf53290085">spawn_entity</a>()</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        {</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <span class="keywordtype">size_t</span> front;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <span class="keywordflow">if</span> (_entitiesBin.empty()) {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                _lastEntity++;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="classecs_1_1_entity.html">Entity</a>(_lastEntity - 1);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            }</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            front = _entitiesBin.front();</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            _entitiesBin.erase(_entitiesBin.begin());</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="classecs_1_1_entity.html">Entity</a>(front);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        }</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="classecs_1_1_registry.html#a56a1512c5bd8ebbf1f59cddeea212079">   92</a></span>&#160;        <a class="code" href="classecs_1_1_entity.html">Entity</a> <a class="code" href="classecs_1_1_registry.html#a56a1512c5bd8ebbf1f59cddeea212079">entityFromIndex</a>(std::size_t idx)</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="keywordflow">if</span> (idx &gt;= _lastEntity || std::find(_entitiesBin.begin(), _entitiesBin.end(), idx) != _entitiesBin.end())</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="classecs_1_1_entity.html">Entity</a>(ecs::constant::npos);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="classecs_1_1_entity.html">Entity</a>(idx);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        }</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="classecs_1_1_registry.html#a2d965270a7935f60eb1b6fd40201c9f1">  104</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classecs_1_1_registry.html#a2d965270a7935f60eb1b6fd40201c9f1">killEntity</a>(<a class="code" href="classecs_1_1_entity.html">Entity</a> <span class="keyword">const</span> &amp;e)</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        {</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;erase_func : _eraseFunctions)</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                erase_func(*<span class="keyword">this</span>, e);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            _entitiesBin.push_back(e._id);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        }</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Component&gt;</div>
-<div class="line"><a name="l00121"></a><span class="lineno"><a class="line" href="classecs_1_1_registry.html#a84a2d80e15dc9014520feec1a134302a">  121</a></span>&#160;        <span class="keyword">typename</span> <a class="code" href="classecs_1_1_sparse_array.html#a204812c0707a2ff60c541d7a53346472">SparseArray&lt;Component&gt;::referenceType</a> <a class="code" href="classecs_1_1_registry.html#a84a2d80e15dc9014520feec1a134302a">addComponent</a>(<a class="code" href="classecs_1_1_entity.html">Entity</a> <span class="keyword">const</span> &amp;to, Component &amp;&amp;c)</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        {</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            registerComponent&lt;Component&gt;();</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            <span class="keywordflow">return</span> std::any_cast&lt;SparseArray&lt;Component&gt; &amp;&gt;(_componentsArrays[std::type_index(<span class="keyword">typeid</span>(Component))])</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                .insertAt(to._id, c);</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        }</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Component, <span class="keyword">typename</span>... Params&gt;</div>
-<div class="line"><a name="l00137"></a><span class="lineno"><a class="line" href="classecs_1_1_registry.html#a669eace40b445fce60219ef5f744b417">  137</a></span>&#160;        <span class="keyword">typename</span> <a class="code" href="classecs_1_1_sparse_array.html#a204812c0707a2ff60c541d7a53346472">SparseArray&lt;Component&gt;::referenceType</a> <a class="code" href="classecs_1_1_registry.html#a669eace40b445fce60219ef5f744b417">emplaceComponent</a>(<a class="code" href="classecs_1_1_entity.html">Entity</a> <span class="keyword">const</span> &amp;to, Params &amp;&amp;...p)</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        {</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            registerComponent&lt;Component&gt;();</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            <span class="keywordflow">return</span> std::any_cast&lt;SparseArray&lt;Component&gt; &amp;&gt;(_componentsArrays[std::type_index(<span class="keyword">typeid</span>(Component))])</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                .insertAt(to._id, Component(p...));</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        }</div>
-<div class="line"><a name="l00148"></a><span class="lineno"><a class="line" href="classecs_1_1_registry.html#a99a1b5411ada253846bff2ced94e4f95">  148</a></span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Component&gt; <span class="keywordtype">void</span> <a class="code" href="classecs_1_1_registry.html#a99a1b5411ada253846bff2ced94e4f95">removeComponent</a>(<a class="code" href="classecs_1_1_entity.html">Entity</a> <span class="keyword">const</span> &amp;from)</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        {</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;            registerComponent&lt;Component&gt;();</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            std::any_cast&lt;SparseArray&lt;Component&gt; &amp;&gt;(_componentsArrays.at(std::type_index(<span class="keyword">typeid</span>(Component))))[from] =</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                std::nullopt;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        }</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;      <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        std::unordered_map&lt;std::type_index, std::any&gt; _componentsArrays;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        std::vector&lt;std::function&lt;void(<a class="code" href="classecs_1_1_registry.html">Registry</a> &amp;, <a class="code" href="classecs_1_1_entity.html">Entity</a> <span class="keyword">const</span> &amp;)&gt;&gt; _eraseFunctions;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        std::vector&lt;std::size_t&gt; _entitiesBin;</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        std::size_t _lastEntity;</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    };</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;} <span class="comment">// namespace ecs</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                <a class="code" href="classecs_1_1_sparse_array.html">SparseArray&lt;Component&gt;</a> &amp;array = r.<a class="code" href="classecs_1_1_registry.html#af1bb5ae13485a9755528c3d2f71aa4d1">getComponents</a>&lt;Component&gt;();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                <span class="keywordflow">if</span> (e._id &gt; array.<a class="code" href="classecs_1_1_sparse_array.html#ae1d59f9a67c3ede1c870af0d1d5fe06b">size</a>())</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                array.<a class="code" href="classecs_1_1_sparse_array.html#abcc31b0e8950b62375bf75b4b92339e2">erase</a>(e._id);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            };</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            _eraseFunctions.push_back(erase_func);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <span class="keywordflow">return</span> getComponents&lt;Component&gt;();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        }</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classecs_1_1_registry.html#af1bb5ae13485a9755528c3d2f71aa4d1">   55</a></span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> Component&gt; <a class="code" href="classecs_1_1_sparse_array.html">SparseArray&lt;Component&gt;</a> &amp;<a class="code" href="classecs_1_1_registry.html#af1bb5ae13485a9755528c3d2f71aa4d1">getComponents</a>()</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keywordflow">return</span> std::any_cast&lt;SparseArray&lt;Component&gt; &amp;&gt;(_componentsArrays.at(std::type_index(<span class="keyword">typeid</span>(Component))));</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classecs_1_1_registry.html#ae498c82a2499ce559af98eababd02e09">   66</a></span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> Component&gt; <a class="code" href="classecs_1_1_sparse_array.html">SparseArray&lt;Component&gt;</a> <span class="keyword">const</span> &amp;<a class="code" href="classecs_1_1_registry.html#ae498c82a2499ce559af98eababd02e09">getComponents</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <span class="keywordflow">return</span> std::any_cast&lt;SparseArray&lt;Component&gt;&gt;(_componentsArrays.at(std::type_index(<span class="keyword">typeid</span>(Component))));</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        }</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classecs_1_1_registry.html#a960bf8fcdaa237dc3a8594cf53290085">   76</a></span>&#160;        <a class="code" href="classecs_1_1_entity.html">Entity</a> <a class="code" href="classecs_1_1_registry.html#a960bf8fcdaa237dc3a8594cf53290085">spawn_entity</a>()</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <span class="keywordtype">size_t</span> front;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keywordflow">if</span> (_entitiesBin.empty()) {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                _lastEntity++;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="classecs_1_1_entity.html">Entity</a>(_lastEntity - 1);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            }</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            front = _entitiesBin.front();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            _entitiesBin.erase(_entitiesBin.begin());</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="classecs_1_1_entity.html">Entity</a>(front);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="classecs_1_1_registry.html#a56a1512c5bd8ebbf1f59cddeea212079">   94</a></span>&#160;        <a class="code" href="classecs_1_1_entity.html">Entity</a> <a class="code" href="classecs_1_1_registry.html#a56a1512c5bd8ebbf1f59cddeea212079">entityFromIndex</a>(std::size_t idx)</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        {</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            <span class="keywordflow">if</span> (idx &gt;= _lastEntity || std::find(_entitiesBin.begin(), _entitiesBin.end(), idx) != _entitiesBin.end())</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="classecs_1_1_entity.html">Entity</a>(ecs::constant::npos);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="classecs_1_1_entity.html">Entity</a>(idx);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        }</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="classecs_1_1_registry.html#a2d965270a7935f60eb1b6fd40201c9f1">  106</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classecs_1_1_registry.html#a2d965270a7935f60eb1b6fd40201c9f1">killEntity</a>(<a class="code" href="classecs_1_1_entity.html">Entity</a> <span class="keyword">const</span> &amp;e)</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        {</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <span class="keywordflow">if</span> (e._id == ecs::constant::npos)</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;eraseFunc : _eraseFunctions)</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                eraseFunc(*<span class="keyword">this</span>, e);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            _entitiesBin.push_back(e._id);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        }</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Component&gt;</div>
+<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="classecs_1_1_registry.html#a84a2d80e15dc9014520feec1a134302a">  125</a></span>&#160;        <span class="keyword">typename</span> <a class="code" href="classecs_1_1_sparse_array.html#a204812c0707a2ff60c541d7a53346472">SparseArray&lt;Component&gt;::referenceType</a> <a class="code" href="classecs_1_1_registry.html#a84a2d80e15dc9014520feec1a134302a">addComponent</a>(<a class="code" href="classecs_1_1_entity.html">Entity</a> <span class="keyword">const</span> &amp;to, Component &amp;&amp;c)</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        {</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            registerComponent&lt;Component&gt;();</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            <span class="keywordflow">return</span> std::any_cast&lt;SparseArray&lt;Component&gt; &amp;&gt;(_componentsArrays[std::type_index(<span class="keyword">typeid</span>(Component))])</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                .insertAt(to._id, c);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        }</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Component, <span class="keyword">typename</span>... Params&gt;</div>
+<div class="line"><a name="l00141"></a><span class="lineno"><a class="line" href="classecs_1_1_registry.html#a669eace40b445fce60219ef5f744b417">  141</a></span>&#160;        <span class="keyword">typename</span> <a class="code" href="classecs_1_1_sparse_array.html#a204812c0707a2ff60c541d7a53346472">SparseArray&lt;Component&gt;::referenceType</a> <a class="code" href="classecs_1_1_registry.html#a669eace40b445fce60219ef5f744b417">emplaceComponent</a>(<a class="code" href="classecs_1_1_entity.html">Entity</a> <span class="keyword">const</span> &amp;to, Params &amp;&amp;...p)</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        {</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            registerComponent&lt;Component&gt;();</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            <span class="keywordflow">return</span> std::any_cast&lt;SparseArray&lt;Component&gt; &amp;&gt;(_componentsArrays[std::type_index(<span class="keyword">typeid</span>(Component))])</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                .insertAt(to._id, Component(p...));</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        }</div>
+<div class="line"><a name="l00152"></a><span class="lineno"><a class="line" href="classecs_1_1_registry.html#a99a1b5411ada253846bff2ced94e4f95">  152</a></span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Component&gt; <span class="keywordtype">void</span> <a class="code" href="classecs_1_1_registry.html#a99a1b5411ada253846bff2ced94e4f95">removeComponent</a>(<a class="code" href="classecs_1_1_entity.html">Entity</a> <span class="keyword">const</span> &amp;from)</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        {</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            registerComponent&lt;Component&gt;();</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            std::any_cast&lt;SparseArray&lt;Component&gt; &amp;&gt;(_componentsArrays.at(std::type_index(<span class="keyword">typeid</span>(Component))))[from] =</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                std::nullopt;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        }</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;      <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        std::unordered_map&lt;std::type_index, std::any&gt; _componentsArrays;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        std::vector&lt;std::function&lt;void(<a class="code" href="classecs_1_1_registry.html">Registry</a> &amp;, <a class="code" href="classecs_1_1_entity.html">Entity</a> <span class="keyword">const</span> &amp;)&gt;&gt; _eraseFunctions;</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        std::vector&lt;std::size_t&gt; _entitiesBin;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        std::size_t _lastEntity;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    };</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;} <span class="comment">// namespace ecs</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclassecs_1_1_registry_html_a960bf8fcdaa237dc3a8594cf53290085"><div class="ttname"><a href="classecs_1_1_registry.html#a960bf8fcdaa237dc3a8594cf53290085">ecs::Registry::spawn_entity</a></div><div class="ttdeci">Entity spawn_entity()</div><div class="ttdef"><b>Definition:</b> Registry.hpp:74</div></div>
-<div class="ttc" id="aclassecs_1_1_registry_html_a99a1b5411ada253846bff2ced94e4f95"><div class="ttname"><a href="classecs_1_1_registry.html#a99a1b5411ada253846bff2ced94e4f95">ecs::Registry::removeComponent</a></div><div class="ttdeci">void removeComponent(Entity const &amp;from)</div><div class="ttdef"><b>Definition:</b> Registry.hpp:148</div></div>
-<div class="ttc" id="aclassecs_1_1_registry_html_a669eace40b445fce60219ef5f744b417"><div class="ttname"><a href="classecs_1_1_registry.html#a669eace40b445fce60219ef5f744b417">ecs::Registry::emplaceComponent</a></div><div class="ttdeci">SparseArray&lt; Component &gt;::referenceType emplaceComponent(Entity const &amp;to, Params &amp;&amp;...p)</div><div class="ttdef"><b>Definition:</b> Registry.hpp:137</div></div>
+<div class="ttc" id="aclassecs_1_1_registry_html_a960bf8fcdaa237dc3a8594cf53290085"><div class="ttname"><a href="classecs_1_1_registry.html#a960bf8fcdaa237dc3a8594cf53290085">ecs::Registry::spawn_entity</a></div><div class="ttdeci">Entity spawn_entity()</div><div class="ttdef"><b>Definition:</b> Registry.hpp:76</div></div>
+<div class="ttc" id="aclassecs_1_1_registry_html_a99a1b5411ada253846bff2ced94e4f95"><div class="ttname"><a href="classecs_1_1_registry.html#a99a1b5411ada253846bff2ced94e4f95">ecs::Registry::removeComponent</a></div><div class="ttdeci">void removeComponent(Entity const &amp;from)</div><div class="ttdef"><b>Definition:</b> Registry.hpp:152</div></div>
+<div class="ttc" id="aclassecs_1_1_registry_html_a669eace40b445fce60219ef5f744b417"><div class="ttname"><a href="classecs_1_1_registry.html#a669eace40b445fce60219ef5f744b417">ecs::Registry::emplaceComponent</a></div><div class="ttdeci">SparseArray&lt; Component &gt;::referenceType emplaceComponent(Entity const &amp;to, Params &amp;&amp;...p)</div><div class="ttdef"><b>Definition:</b> Registry.hpp:141</div></div>
+<div class="ttc" id="aclassecs_1_1_sparse_array_html_ae1d59f9a67c3ede1c870af0d1d5fe06b"><div class="ttname"><a href="classecs_1_1_sparse_array.html#ae1d59f9a67c3ede1c870af0d1d5fe06b">ecs::SparseArray::size</a></div><div class="ttdeci">sizeType size() const</div><div class="ttdef"><b>Definition:</b> SparseArray.hpp:83</div></div>
 <div class="ttc" id="aclassecs_1_1_sparse_array_html_a204812c0707a2ff60c541d7a53346472"><div class="ttname"><a href="classecs_1_1_sparse_array.html#a204812c0707a2ff60c541d7a53346472">ecs::SparseArray::referenceType</a></div><div class="ttdeci">valueType &amp; referenceType</div><div class="ttdef"><b>Definition:</b> SparseArray.hpp:27</div></div>
 <div class="ttc" id="aclassecs_1_1_registry_html"><div class="ttname"><a href="classecs_1_1_registry.html">ecs::Registry</a></div><div class="ttdef"><b>Definition:</b> Registry.hpp:24</div></div>
-<div class="ttc" id="aclassecs_1_1_registry_html_ae498c82a2499ce559af98eababd02e09"><div class="ttname"><a href="classecs_1_1_registry.html#ae498c82a2499ce559af98eababd02e09">ecs::Registry::getComponents</a></div><div class="ttdeci">const SparseArray&lt; Component &gt; &amp; getComponents() const</div><div class="ttdef"><b>Definition:</b> Registry.hpp:64</div></div>
-<div class="ttc" id="aclassecs_1_1_registry_html_a84a2d80e15dc9014520feec1a134302a"><div class="ttname"><a href="classecs_1_1_registry.html#a84a2d80e15dc9014520feec1a134302a">ecs::Registry::addComponent</a></div><div class="ttdeci">SparseArray&lt; Component &gt;::referenceType addComponent(Entity const &amp;to, Component &amp;&amp;c)</div><div class="ttdef"><b>Definition:</b> Registry.hpp:121</div></div>
+<div class="ttc" id="aclassecs_1_1_registry_html_ae498c82a2499ce559af98eababd02e09"><div class="ttname"><a href="classecs_1_1_registry.html#ae498c82a2499ce559af98eababd02e09">ecs::Registry::getComponents</a></div><div class="ttdeci">const SparseArray&lt; Component &gt; &amp; getComponents() const</div><div class="ttdef"><b>Definition:</b> Registry.hpp:66</div></div>
+<div class="ttc" id="aclassecs_1_1_registry_html_a84a2d80e15dc9014520feec1a134302a"><div class="ttname"><a href="classecs_1_1_registry.html#a84a2d80e15dc9014520feec1a134302a">ecs::Registry::addComponent</a></div><div class="ttdeci">SparseArray&lt; Component &gt;::referenceType addComponent(Entity const &amp;to, Component &amp;&amp;c)</div><div class="ttdef"><b>Definition:</b> Registry.hpp:125</div></div>
 <div class="ttc" id="aclassecs_1_1_registry_html_a62e5024139f23f3f18859e01f70856ba"><div class="ttname"><a href="classecs_1_1_registry.html#a62e5024139f23f3f18859e01f70856ba">ecs::Registry::registerComponent</a></div><div class="ttdeci">SparseArray&lt; Component &gt; &amp; registerComponent()</div><div class="ttdef"><b>Definition:</b> Registry.hpp:33</div></div>
-<div class="ttc" id="aclassecs_1_1_sparse_array_html_abcc31b0e8950b62375bf75b4b92339e2"><div class="ttname"><a href="classecs_1_1_sparse_array.html#abcc31b0e8950b62375bf75b4b92339e2">ecs::SparseArray::erase</a></div><div class="ttdeci">void erase(sizeType pos)</div><div class="ttdef"><b>Definition:</b> SparseArray.hpp:117</div></div>
-<div class="ttc" id="aclassecs_1_1_registry_html_a2d965270a7935f60eb1b6fd40201c9f1"><div class="ttname"><a href="classecs_1_1_registry.html#a2d965270a7935f60eb1b6fd40201c9f1">ecs::Registry::killEntity</a></div><div class="ttdeci">void killEntity(Entity const &amp;e)</div><div class="ttdef"><b>Definition:</b> Registry.hpp:104</div></div>
+<div class="ttc" id="aclassecs_1_1_sparse_array_html_abcc31b0e8950b62375bf75b4b92339e2"><div class="ttname"><a href="classecs_1_1_sparse_array.html#abcc31b0e8950b62375bf75b4b92339e2">ecs::SparseArray::erase</a></div><div class="ttdeci">void erase(sizeType pos)</div><div class="ttdef"><b>Definition:</b> SparseArray.hpp:109</div></div>
+<div class="ttc" id="aclassecs_1_1_registry_html_a2d965270a7935f60eb1b6fd40201c9f1"><div class="ttname"><a href="classecs_1_1_registry.html#a2d965270a7935f60eb1b6fd40201c9f1">ecs::Registry::killEntity</a></div><div class="ttdeci">void killEntity(Entity const &amp;e)</div><div class="ttdef"><b>Definition:</b> Registry.hpp:106</div></div>
 <div class="ttc" id="a_constant_8hpp_html"><div class="ttname"><a href="_constant_8hpp.html">Constant.hpp</a></div></div>
 <div class="ttc" id="aclassecs_1_1_registry_html_af399b8524018c5adf9e4f917ca377d97"><div class="ttname"><a href="classecs_1_1_registry.html#af399b8524018c5adf9e4f917ca377d97">ecs::Registry::Registry</a></div><div class="ttdeci">Registry()</div><div class="ttdef"><b>Definition:</b> Registry.hpp:26</div></div>
 <div class="ttc" id="aclassecs_1_1_entity_html"><div class="ttname"><a href="classecs_1_1_entity.html">ecs::Entity</a></div><div class="ttdef"><b>Definition:</b> Entity.hpp:10</div></div>
-<div class="ttc" id="aclassecs_1_1_registry_html_af1bb5ae13485a9755528c3d2f71aa4d1"><div class="ttname"><a href="classecs_1_1_registry.html#af1bb5ae13485a9755528c3d2f71aa4d1">ecs::Registry::getComponents</a></div><div class="ttdeci">SparseArray&lt; Component &gt; &amp; getComponents()</div><div class="ttdef"><b>Definition:</b> Registry.hpp:53</div></div>
+<div class="ttc" id="aclassecs_1_1_registry_html_af1bb5ae13485a9755528c3d2f71aa4d1"><div class="ttname"><a href="classecs_1_1_registry.html#af1bb5ae13485a9755528c3d2f71aa4d1">ecs::Registry::getComponents</a></div><div class="ttdeci">SparseArray&lt; Component &gt; &amp; getComponents()</div><div class="ttdef"><b>Definition:</b> Registry.hpp:55</div></div>
 <div class="ttc" id="a_entity_8hpp_html"><div class="ttname"><a href="_entity_8hpp.html">Entity.hpp</a></div></div>
 <div class="ttc" id="a_sparse_array_8hpp_html"><div class="ttname"><a href="_sparse_array_8hpp.html">SparseArray.hpp</a></div></div>
 <div class="ttc" id="aclassecs_1_1_sparse_array_html"><div class="ttname"><a href="classecs_1_1_sparse_array.html">ecs::SparseArray</a></div><div class="ttdef"><b>Definition:</b> SparseArray.hpp:24</div></div>
 <div class="ttc" id="anamespaceecs_html"><div class="ttname"><a href="namespaceecs.html">ecs</a></div><div class="ttdef"><b>Definition:</b> AssetManager.hpp:12</div></div>
-<div class="ttc" id="aclassecs_1_1_registry_html_a56a1512c5bd8ebbf1f59cddeea212079"><div class="ttname"><a href="classecs_1_1_registry.html#a56a1512c5bd8ebbf1f59cddeea212079">ecs::Registry::entityFromIndex</a></div><div class="ttdeci">Entity entityFromIndex(std::size_t idx)</div><div class="ttdef"><b>Definition:</b> Registry.hpp:92</div></div>
+<div class="ttc" id="aclassecs_1_1_registry_html_a56a1512c5bd8ebbf1f59cddeea212079"><div class="ttname"><a href="classecs_1_1_registry.html#a56a1512c5bd8ebbf1f59cddeea212079">ecs::Registry::entityFromIndex</a></div><div class="ttdeci">Entity entityFromIndex(std::size_t idx)</div><div class="ttdef"><b>Definition:</b> Registry.hpp:94</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

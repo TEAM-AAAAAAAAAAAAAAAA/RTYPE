@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['pop_297',['pop',['../classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80',1,'network::LockedQueue']]],
-  ['popevent_298',['popEvent',['../classecs_1_1_world.html#a677058b2b679c8521c03320fe580057c',1,'ecs::World']]],
-  ['projectile_299',['Projectile',['../structecs_1_1component_1_1_projectile.html#aae08d1e4b50a8e05cc9861e5ba64c16a',1,'ecs::component::Projectile']]],
-  ['push_300',['push',['../classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2',1,'network::LockedQueue']]],
-  ['pushevent_301',['pushEvent',['../classecs_1_1_world.html#a74f0effbecc49f49a39627047b5d543e',1,'ecs::World']]]
+  ['operator_20size_5ft_303',['operator size_t',['../classecs_1_1_entity.html#ac07dc331932f4e04592214c81d2357f0',1,'ecs::Entity']]],
+  ['operator_20size_5ft_20_26_304',['operator size_t &amp;',['../classecs_1_1_entity.html#af7cd81970c027bcfcdf61ed199834cc3',1,'ecs::Entity']]],
+  ['operator_21_3d_305',['operator!=',['../classecs_1_1_event.html#a375737350deaac7d6abb4cb579fa2f31',1,'ecs::Event::operator!=(const Event other) const'],['../classecs_1_1_event.html#a0f17266baf4d1f3872826e945ed12acf',1,'ecs::Event::operator!=(const Event::EventType type) const']]],
+  ['operator_3d_306',['operator=',['../classecs_1_1_sparse_array.html#a0e68e561d90535a7d27024d461d52718',1,'ecs::SparseArray::operator=(SparseArray const &amp;other)'],['../classecs_1_1_sparse_array.html#a8efb9ffb701753a94a93adcb34d3e216',1,'ecs::SparseArray::operator=(SparseArray &amp;&amp;other) noexcept']]],
+  ['operator_3d_3d_307',['operator==',['../classecs_1_1_event.html#af7fb5366dd2424aeeb95f99f9d487648',1,'ecs::Event::operator==(const Event other) const'],['../classecs_1_1_event.html#a5433700d1ed3bb8d0df2d55cff27cbdf',1,'ecs::Event::operator==(const Event::EventType type) const']]],
+  ['operator_5b_5d_308',['operator[]',['../classecs_1_1_sparse_array.html#abb7cd0b83b375518c16fcb9b55830d1b',1,'ecs::SparseArray::operator[](size_t idx)'],['../classecs_1_1_sparse_array.html#a65db4db86273a54ddc12debfb8a142a5',1,'ecs::SparseArray::operator[](size_t idx) const']]]
 ];

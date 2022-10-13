@@ -150,94 +150,103 @@ $(document).ready(function(){initNavTree('_manage_client_events_8hpp_source.html
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_world_8hpp.html">World.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_controllable_8hpp.html">components/Controllable.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_direction_8hpp.html">components/Direction.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_projectile_8hpp.html">components/Projectile.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_weapon_8hpp.html">components/Weapon.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs_1_1systems.html">ecs::systems</a></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="namespaceecs_1_1systems.html#ac67f4a6799296119e6faddb95989b6ab">   24</a></span>&#160;    std::function&lt;void(<a class="code" href="classecs_1_1_world.html">World</a> &amp;)&gt; <a class="code" href="namespaceecs_1_1systems.html#ac67f4a6799296119e6faddb95989b6ab">manageClientEvents</a> = [](<a class="code" href="classecs_1_1_world.html">World</a> &amp;world) {</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordflow">while</span> (world.getEvent() != ecs::Event::EventType::Null) {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#pragma region Player Movement</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keywordflow">if</span> (world.getEvent() == ecs::Event::EventType::MoveUp || world.getEvent() == ecs::Event::EventType::MoveLeft</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                || world.getEvent() == ecs::Event::EventType::MoveDown</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                || world.getEvent() == ecs::Event::EventType::MoveRight) {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                <span class="keyword">auto</span> &amp;directions = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_direction.html">component::Direction</a>&gt;();</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                <span class="keyword">auto</span> <span class="keyword">const</span> &amp;controllables = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_controllable.html">component::Controllable</a>&gt;();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; directions.size() &amp;&amp; i &lt; controllables.size(); ++i) {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                    <span class="keyword">auto</span> &amp;dir = directions[i];</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                    <span class="keyword">auto</span> <span class="keyword">const</span> &amp;con = controllables[i];</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                    <span class="keywordflow">if</span> (dir &amp;&amp; con) {</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                        <span class="keywordflow">if</span> (world.getEvent() == ecs::Event::EventType::MoveUp)</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                            dir.value().<a class="code" href="structecs_1_1component_1_1_direction.html#a3d32a244afa7d0baf48f009970957ba6">y</a> &lt;= 0 ? dir.value().y = -1 : dir.value().y -= 1;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (world.getEvent() == ecs::Event::EventType::MoveLeft)</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                            dir.value().x &lt;= 0 ? dir.value().x = -1 : dir.value().x -= 1;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (world.getEvent() == ecs::Event::EventType::MoveDown)</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                            dir.value().y &gt;= 0 ? dir.value().y = 1 : dir.value().y += 1;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (world.getEvent() == ecs::Event::EventType::MoveRight)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                            dir.value().x &gt;= 0 ? dir.value().x = 1 : dir.value().x += 1;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                    }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                }</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            }</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#pragma endregion</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#pragma region Bullet Shoot</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (world.getEvent() == ecs::Event::EventType::Shoot) {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                <span class="keyword">auto</span> <span class="keyword">const</span> &amp;controllables = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_controllable.html">component::Controllable</a>&gt;();</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                <span class="keyword">auto</span> <span class="keyword">const</span> &amp;positions = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_position.html">component::Position</a>&gt;();</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                <span class="keyword">auto</span> &amp;weapons = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_weapon.html">component::Weapon</a>&gt;();</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; positions.size() &amp;&amp; i &lt; controllables.size(); ++i) {</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                    <span class="keyword">auto</span> <span class="keyword">const</span> &amp;pos = positions[i];</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                    <span class="keyword">auto</span> <span class="keyword">const</span> &amp;con = controllables[i];</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                    <span class="keyword">auto</span> &amp;weapon = weapons[i];</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                    <span class="keywordflow">if</span> (pos &amp;&amp; con &amp;&amp; weapon) {</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                        <span class="keyword">auto</span> elapsed = constant::chrono::now().time_since_epoch().count() - weapon.value().LastShoot;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                        <span class="keywordflow">if</span> (weapon.value().HasSuper &amp;&amp; elapsed &gt; weapon.value().SuperLoadingTime) {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                            weapon.value().LastShoot = constant::chrono::now().time_since_epoch().count();</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                            <span class="comment">// spawn super bullet</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (elapsed &gt; weapon.value().ShootDelay) {</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                            weapon.value().LastShoot = constant::chrono::now().time_since_epoch().count();</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                            <a class="code" href="classecs_1_1_entity.html">ecs::Entity</a> bullet = world.registry.spawn_entity();</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                            world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_direction.html">ecs::component::Direction</a>&gt;(bullet, {1, 0});</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                            world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_position.html">ecs::component::Position</a>&gt;(</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                                bullet, {pos.value().<a class="code" href="structecs_1_1component_1_1_direction.html#a5f84b023526f216923180dcb1ef385b1">x</a>, pos.value().y});</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                            world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_size.html">ecs::component::Size</a>&gt;(bullet, {10, 10});</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                            world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_velocity.html">ecs::component::Velocity</a>&gt;(bullet, {10, 0});</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                            world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_projectile.html">ecs::component::Projectile</a>&gt;(bullet, {weapon.value().Damage});</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#ifdef CLIENT_COMPILATION_MODE</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                            std::filesystem::path playerPath =</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                                <a class="code" href="namespaceecs.html#ac7dbc71818b670fb99ddcae563cce5a3">ecs::crossPlatformPath</a>(<span class="stringliteral">&quot;src&quot;</span>, <span class="stringliteral">&quot;demo&quot;</span>, <span class="stringliteral">&quot;assets&quot;</span>, <span class="stringliteral">&quot;textures&quot;</span>, <span class="stringliteral">&quot;players.gif&quot;</span>);</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                            world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_drawable.html">ecs::component::Drawable</a>&gt;(</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                                bullet, {playerPath, {5, 5, 1, 1}}); <span class="comment">// To be removed with the server/client split</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                        }</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                    }</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                }</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            }</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">#pragma endregion</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            world.popEvent();</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        }</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    };</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_faction_8hpp.html">components/Faction.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_projectile_8hpp.html">components/Projectile.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_weapon_8hpp.html">components/Weapon.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs_1_1systems.html">ecs::systems</a></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="namespaceecs_1_1systems.html#ac67f4a6799296119e6faddb95989b6ab">   25</a></span>&#160;    std::function&lt;void(<a class="code" href="classecs_1_1_world.html">World</a> &amp;)&gt; <a class="code" href="namespaceecs_1_1systems.html#ac67f4a6799296119e6faddb95989b6ab">manageClientEvents</a> = [](<a class="code" href="classecs_1_1_world.html">World</a> &amp;world) {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordflow">while</span> (world.getEvent() != ecs::Event::EventType::Null) {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#pragma region Player Movement</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="keywordflow">if</span> (world.getEvent() == ecs::Event::EventType::MoveUp || world.getEvent() == ecs::Event::EventType::MoveLeft</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                || world.getEvent() == ecs::Event::EventType::MoveDown</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                || world.getEvent() == ecs::Event::EventType::MoveRight) {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                <span class="keyword">auto</span> &amp;directions = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_direction.html">component::Direction</a>&gt;();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                <span class="keyword">auto</span> <span class="keyword">const</span> &amp;controllables = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_controllable.html">component::Controllable</a>&gt;();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; directions.size() &amp;&amp; i &lt; controllables.size(); ++i) {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                    <span class="keyword">auto</span> &amp;dir = directions[i];</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                    <span class="keyword">auto</span> <span class="keyword">const</span> &amp;con = controllables[i];</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                    <span class="keywordflow">if</span> (dir &amp;&amp; con) {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                        <span class="keywordflow">if</span> (world.getEvent() == ecs::Event::EventType::MoveUp)</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                            dir.value().<a class="code" href="structecs_1_1component_1_1_direction.html#a3d32a244afa7d0baf48f009970957ba6">y</a> &lt;= 0 ? dir.value().y = -1 : dir.value().y -= 1;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (world.getEvent() == ecs::Event::EventType::MoveLeft)</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                            dir.value().x &lt;= 0 ? dir.value().x = -1 : dir.value().x -= 1;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (world.getEvent() == ecs::Event::EventType::MoveDown)</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                            dir.value().y &gt;= 0 ? dir.value().y = 1 : dir.value().y += 1;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (world.getEvent() == ecs::Event::EventType::MoveRight)</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                            dir.value().x &gt;= 0 ? dir.value().x = 1 : dir.value().x += 1;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                    }</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                }</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            }</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#pragma endregion</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#pragma region Bullet Shoot</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (world.getEvent() == ecs::Event::EventType::Shoot) {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                <span class="keyword">auto</span> <span class="keyword">const</span> &amp;controllables = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_controllable.html">component::Controllable</a>&gt;();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                <span class="keyword">auto</span> <span class="keyword">const</span> &amp;positions = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_position.html">component::Position</a>&gt;();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                <span class="keyword">auto</span> &amp;weapons = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_weapon.html">component::Weapon</a>&gt;();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                <span class="keyword">auto</span> <span class="keyword">const</span> &amp;factions = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_faction.html">component::Faction</a>&gt;();</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; positions.size() &amp;&amp; i &lt; controllables.size(); ++i) {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                    <span class="keyword">auto</span> <span class="keyword">const</span> &amp;pos = positions[i];</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                    <span class="keyword">auto</span> <span class="keyword">const</span> &amp;con = controllables[i];</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                    <span class="keyword">auto</span> &amp;weapon = weapons[i];</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                    <span class="keywordflow">if</span> (pos &amp;&amp; con &amp;&amp; weapon) {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                        <span class="keyword">auto</span> elapsed = constant::chrono::now().time_since_epoch().count() - weapon.value().lastShoot;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                        <span class="keywordflow">if</span> (weapon.value().hasSuper &amp;&amp; elapsed &gt; weapon.value().superLoadingTime) {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                            weapon.value().lastShoot = constant::chrono::now().time_since_epoch().count();</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                            <span class="comment">// spawn super bullet</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (elapsed &gt; weapon.value().shootDelay) {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                            weapon.value().lastShoot = constant::chrono::now().time_since_epoch().count();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                            <a class="code" href="classecs_1_1_entity.html">ecs::Entity</a> bullet = world.registry.spawn_entity();</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                            world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_direction.html">ecs::component::Direction</a>&gt;(bullet, {1, 0});</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                            world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_position.html">ecs::component::Position</a>&gt;(</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                                bullet, {pos.value().<a class="code" href="structecs_1_1component_1_1_direction.html#a5f84b023526f216923180dcb1ef385b1">x</a>, pos.value().y});</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                            world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_size.html">ecs::component::Size</a>&gt;(bullet, {10, 10});</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                            world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_velocity.html">ecs::component::Velocity</a>&gt;(bullet, {weapon.value().projSpeed, 0});</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                            world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_projectile.html">ecs::component::Projectile</a>&gt;(bullet, {weapon.value().damage});</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                            <a class="code" href="structecs_1_1component_1_1_faction.html#af6ff333bfa9135fc5709a76af44ca55b">ecs::component::Faction::Factions</a> fac = ecs::component::Faction::Factions::None;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                            <span class="keywordflow">if</span> (i &lt; factions.size() &amp;&amp; factions[i])</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                                fac = factions[i].value().faction;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                            world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_faction.html">ecs::component::Faction</a>&gt;(bullet, {fac});</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#ifdef CLIENT_COMPILATION_MODE</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                            std::filesystem::path playerPath =</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                                <a class="code" href="namespaceecs.html#ac7dbc71818b670fb99ddcae563cce5a3">ecs::crossPlatformPath</a>(<span class="stringliteral">&quot;src&quot;</span>, <span class="stringliteral">&quot;demo&quot;</span>, <span class="stringliteral">&quot;assets&quot;</span>, <span class="stringliteral">&quot;textures&quot;</span>, <span class="stringliteral">&quot;players.gif&quot;</span>);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                            world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_drawable.html">ecs::component::Drawable</a>&gt;(</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                                bullet, {playerPath, {5, 5, 1, 1}}); <span class="comment">// To be removed with the server/client split</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                        }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                    }</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            }</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#pragma endregion</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            world.popEvent();</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        }</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    };</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="astructecs_1_1component_1_1_drawable_html"><div class="ttname"><a href="structecs_1_1component_1_1_drawable.html">ecs::component::Drawable</a></div><div class="ttdef"><b>Definition:</b> Drawable.hpp:18</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_velocity_html"><div class="ttname"><a href="structecs_1_1component_1_1_velocity.html">ecs::component::Velocity</a></div><div class="ttdoc">Velocity component.</div><div class="ttdef"><b>Definition:</b> Velocity.hpp:13</div></div>
-<div class="ttc" id="anamespaceecs_1_1systems_html_ac67f4a6799296119e6faddb95989b6ab"><div class="ttname"><a href="namespaceecs_1_1systems.html#ac67f4a6799296119e6faddb95989b6ab">ecs::systems::manageClientEvents</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; manageClientEvents</div><div class="ttdef"><b>Definition:</b> ManageClientEvents.hpp:24</div></div>
+<div class="ttc" id="a_faction_8hpp_html"><div class="ttname"><a href="_faction_8hpp.html">Faction.hpp</a></div></div>
+<div class="ttc" id="anamespaceecs_1_1systems_html_ac67f4a6799296119e6faddb95989b6ab"><div class="ttname"><a href="namespaceecs_1_1systems.html#ac67f4a6799296119e6faddb95989b6ab">ecs::systems::manageClientEvents</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; manageClientEvents</div><div class="ttdef"><b>Definition:</b> ManageClientEvents.hpp:25</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_direction_html"><div class="ttname"><a href="structecs_1_1component_1_1_direction.html">ecs::component::Direction</a></div><div class="ttdef"><b>Definition:</b> Direction.hpp:17</div></div>
 <div class="ttc" id="a_direction_8hpp_html"><div class="ttname"><a href="_direction_8hpp.html">Direction.hpp</a></div></div>
 <div class="ttc" id="a_event_8hpp_html"><div class="ttname"><a href="_event_8hpp.html">Event.hpp</a></div></div>
 <div class="ttc" id="a_world_8hpp_html"><div class="ttname"><a href="_world_8hpp.html">World.hpp</a></div></div>
 <div class="ttc" id="a_projectile_8hpp_html"><div class="ttname"><a href="_projectile_8hpp.html">Projectile.hpp</a></div></div>
+<div class="ttc" id="astructecs_1_1component_1_1_faction_html"><div class="ttname"><a href="structecs_1_1component_1_1_faction.html">ecs::component::Faction</a></div><div class="ttdef"><b>Definition:</b> Faction.hpp:12</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_projectile_html"><div class="ttname"><a href="structecs_1_1component_1_1_projectile.html">ecs::component::Projectile</a></div><div class="ttdef"><b>Definition:</b> Projectile.hpp:12</div></div>
 <div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:20</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_size_html"><div class="ttname"><a href="structecs_1_1component_1_1_size.html">ecs::component::Size</a></div><div class="ttdoc">Size component.</div><div class="ttdef"><b>Definition:</b> Size.hpp:6</div></div>
 <div class="ttc" id="anamespaceecs_1_1systems_html"><div class="ttname"><a href="namespaceecs_1_1systems.html">ecs::systems</a></div><div class="ttdef"><b>Definition:</b> DeathUpdate.hpp:19</div></div>
 <div class="ttc" id="aclassecs_1_1_entity_html"><div class="ttname"><a href="classecs_1_1_entity.html">ecs::Entity</a></div><div class="ttdef"><b>Definition:</b> Entity.hpp:10</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_controllable_html"><div class="ttname"><a href="structecs_1_1component_1_1_controllable.html">ecs::component::Controllable</a></div><div class="ttdef"><b>Definition:</b> Controllable.hpp:20</div></div>
+<div class="ttc" id="astructecs_1_1component_1_1_faction_html_af6ff333bfa9135fc5709a76af44ca55b"><div class="ttname"><a href="structecs_1_1component_1_1_faction.html#af6ff333bfa9135fc5709a76af44ca55b">ecs::component::Faction::Factions</a></div><div class="ttdeci">Factions</div><div class="ttdef"><b>Definition:</b> Faction.hpp:13</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_weapon_html"><div class="ttname"><a href="structecs_1_1component_1_1_weapon.html">ecs::component::Weapon</a></div><div class="ttdef"><b>Definition:</b> Weapon.hpp:14</div></div>
 <div class="ttc" id="a_weapon_8hpp_html"><div class="ttname"><a href="_weapon_8hpp.html">Weapon.hpp</a></div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_direction_html_a5f84b023526f216923180dcb1ef385b1"><div class="ttname"><a href="structecs_1_1component_1_1_direction.html#a5f84b023526f216923180dcb1ef385b1">ecs::component::Direction::x</a></div><div class="ttdeci">int x</div><div class="ttdef"><b>Definition:</b> Direction.hpp:18</div></div>

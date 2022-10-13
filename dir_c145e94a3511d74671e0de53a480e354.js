@@ -18,6 +18,9 @@ var dir_c145e94a3511d74671e0de53a480e354 =
     [ "EntityType.hpp", "_entity_type_8hpp.html", [
       [ "EntityType", "structecs_1_1component_1_1_entity_type.html", "structecs_1_1component_1_1_entity_type" ]
     ] ],
+    [ "Faction.hpp", "_faction_8hpp.html", [
+      [ "Faction", "structecs_1_1component_1_1_faction.html", "structecs_1_1component_1_1_faction" ]
+    ] ],
     [ "Health.hpp", "_health_8hpp.html", [
       [ "Health", "structecs_1_1component_1_1_health.html", "structecs_1_1component_1_1_health" ]
     ] ],

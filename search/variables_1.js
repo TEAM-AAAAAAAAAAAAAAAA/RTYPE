@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['handlesfmlevents_324',['handleSFMLEvents',['../namespaceecs_1_1systems.html#a4294eeb80a7b9f00e1baad04f18dad03',1,'ecs::systems']]],
-  ['handlesfmlkeys_325',['handleSFMLKeys',['../namespaceecs_1_1systems.html#a4259c57e73934aa863c710dc88386edd',1,'ecs::systems']]],
-  ['hassuper_326',['HasSuper',['../structecs_1_1component_1_1_weapon.html#ab32ce912e8b70cb93cce1ffd5481260c',1,'ecs::component::Weapon']]],
-  ['health_327',['health',['../structecs_1_1component_1_1_health.html#a690db6f5fd2224adbb8c6b61eba628f4',1,'ecs::component::Health']]],
-  ['height_328',['height',['../structecs_1_1component_1_1_size.html#a6de1fd19c7b4a0eef00d18cbb00152cb',1,'ecs::component::Size']]]
+  ['faction_336',['faction',['../structecs_1_1component_1_1_faction.html#afff7553e9fcd8b3281b5b86e9225c255',1,'ecs::component::Faction']]]
 ];

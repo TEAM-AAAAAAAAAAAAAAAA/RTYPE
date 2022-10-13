@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['_7eiserver_319',['~IServer',['../classnetwork_1_1_i_server.html#ab07a82561f507e0f23663f83f103b036',1,'network::IServer']]],
-  ['_7eserver_320',['~Server',['../classnetwork_1_1_server.html#ad45f59f763b247db82bfc77b9c87af38',1,'network::Server']]],
-  ['_7esparsearray_321',['~SparseArray',['../classecs_1_1_sparse_array.html#ae7d499079af6b8b866d8845042ec8270',1,'ecs::SparseArray']]]
+  ['weapon_329',['Weapon',['../structecs_1_1component_1_1_weapon.html#ac68b44b76016a166d8ffb447a46c74ff',1,'ecs::component::Weapon']]],
+  ['world_330',['World',['../classecs_1_1_world.html#a00726c449c9d48a80a7f60f5c98692e6',1,'ecs::World::World()=delete'],['../classecs_1_1_world.html#a140a565e397b48539e8147eb72a737a3',1,'ecs::World::World(std::unique_ptr&lt; utils::Window &gt; &amp;window)']]]
 ];

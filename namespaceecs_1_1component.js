@@ -6,6 +6,7 @@ var namespaceecs_1_1component =
     [ "EnemyAI", "structecs_1_1component_1_1_enemy_a_i.html", "structecs_1_1component_1_1_enemy_a_i" ],
     [ "EntityLife", "structecs_1_1component_1_1_entity_life.html", "structecs_1_1component_1_1_entity_life" ],
     [ "EntityType", "structecs_1_1component_1_1_entity_type.html", "structecs_1_1component_1_1_entity_type" ],
+    [ "Faction", "structecs_1_1component_1_1_faction.html", "structecs_1_1component_1_1_faction" ],
     [ "Health", "structecs_1_1component_1_1_health.html", "structecs_1_1component_1_1_health" ],
     [ "Network", "structecs_1_1component_1_1_network.html", "structecs_1_1component_1_1_network" ],
     [ "NetworkId", "structecs_1_1component_1_1_network_id.html", "structecs_1_1component_1_1_network_id" ],

@@ -9,6 +9,7 @@ var hierarchy =
     [ "ecs::component::EntityLife", "structecs_1_1component_1_1_entity_life.html", null ],
     [ "ecs::component::EntityType", "structecs_1_1component_1_1_entity_type.html", null ],
     [ "ecs::Event", "classecs_1_1_event.html", null ],
+    [ "ecs::component::Faction", "structecs_1_1component_1_1_faction.html", null ],
     [ "ecs::component::Health", "structecs_1_1component_1_1_health.html", null ],
     [ "network::IServer", "classnetwork_1_1_i_server.html", [
       [ "network::Server", "classnetwork_1_1_server.html", null ]

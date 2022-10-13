@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['width_353',['width',['../structecs_1_1component_1_1_size.html#a74a08ef18b4e55b48d8c02d5d6a70c79',1,'ecs::component::Size']]]
+  ['type_367',['type',['../structecs_1_1component_1_1_entity_type.html#a1059654495c06a65f2c7430f70477e23',1,'ecs::component::EntityType']]]
 ];
