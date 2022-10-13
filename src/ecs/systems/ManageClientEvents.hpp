@@ -12,6 +12,7 @@
 #include "World.hpp"
 #include "components/Controllable.hpp"
 #include "components/Direction.hpp"
+#include "components/Faction.hpp"
 #include "components/Projectile.hpp"
 #include "components/Weapon.hpp"
 
@@ -62,25 +63,30 @@ namespace ecs::systems
                 auto const &controllables = world.registry.getComponents<component::Controllable>();
                 auto const &positions = world.registry.getComponents<component::Position>();
                 auto &weapons = world.registry.getComponents<component::Weapon>();
+                auto const &factions = world.registry.getComponents<component::Faction>();
 
                 for (size_t i = 0; i < positions.size() && i < controllables.size(); ++i) {
                     auto const &pos = positions[i];
                     auto const &con = controllables[i];
                     auto &weapon = weapons[i];
                     if (pos && con && weapon) {
-                        auto elapsed = constant::chrono::now().time_since_epoch().count() - weapon.value().LastShoot;
-                        if (weapon.value().HasSuper && elapsed > weapon.value().SuperLoadingTime) {
-                            weapon.value().LastShoot = constant::chrono::now().time_since_epoch().count();
+                        auto elapsed = constant::chrono::now().time_since_epoch().count() - weapon.value().lastShoot;
+                        if (weapon.value().hasSuper && elapsed > weapon.value().superLoadingTime) {
+                            weapon.value().lastShoot = constant::chrono::now().time_since_epoch().count();
                             // spawn super bullet
-                        } else if (elapsed > weapon.value().ShootDelay) {
-                            weapon.value().LastShoot = constant::chrono::now().time_since_epoch().count();
+                        } else if (elapsed > weapon.value().shootDelay) {
+                            weapon.value().lastShoot = constant::chrono::now().time_since_epoch().count();
                             ecs::Entity bullet = world.registry.spawn_entity();
                             world.registry.addComponent<ecs::component::Direction>(bullet, {1, 0});
                             world.registry.addComponent<ecs::component::Position>(
                                 bullet, {pos.value().x, pos.value().y});
                             world.registry.addComponent<ecs::component::Size>(bullet, {10, 10});
-                            world.registry.addComponent<ecs::component::Velocity>(bullet, {10, 0});
-                            world.registry.addComponent<ecs::component::Projectile>(bullet, {weapon.value().Damage});
+                            world.registry.addComponent<ecs::component::Velocity>(bullet, {weapon.value().projSpeed, 0});
+                            world.registry.addComponent<ecs::component::Projectile>(bullet, {weapon.value().damage});
+                            ecs::component::Faction::Factions fac = ecs::component::Faction::Factions::None;
+                            if (i < factions.size() && factions[i])
+                                fac = factions[i].value().faction;
+                            world.registry.addComponent<ecs::component::Faction>(bullet, {fac});
 #ifdef CLIENT_COMPILATION_MODE
                             std::filesystem::path playerPath =
                                 ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif");

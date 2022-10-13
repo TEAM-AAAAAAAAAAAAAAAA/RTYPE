@@ -12,16 +12,17 @@
 namespace ecs::component
 {
     struct Weapon {
-        Weapon(int shootDelay, int damage, bool hasSuper = false, int superDamage = 0, int superLoadingTime = 0)
-            : ShootDelay(shootDelay * 1000000), Damage(damage), HasSuper(hasSuper), SuperDamage(superDamage), SuperLoadingTime(superLoadingTime), LastShoot(0)
+        Weapon(int shootDelay, int damage, int projSpeed, bool hasSuper = false, int superDamage = 0, int superLoadingTime = 0)
+            : shootDelay(shootDelay * 1000000), damage(damage), projSpeed(projSpeed), hasSuper(hasSuper), superDamage(superDamage), superLoadingTime(superLoadingTime), lastShoot(0)
         {
         }
 
-        int ShootDelay;
-        int Damage;
-        int64_t LastShoot;
-        bool HasSuper;
-        int SuperDamage;
-        int SuperLoadingTime;
+        int shootDelay;
+        int damage;
+        int projSpeed;
+        int64_t lastShoot;
+        bool hasSuper;
+        int superDamage;
+        int superLoadingTime;
     };
 } // namespace ecs::component

@@ -10,8 +10,8 @@
 namespace ecs::component
 {
     struct Projectile {
-        Projectile(int damage) : Damage(damage) {}
+        Projectile(int damage) : damage(damage) {}
 
-        int Damage;
+        int damage;
     };
 } // namespace ecs::component
