@@ -93,7 +93,7 @@ It consists of two main methods :
 template <class Component> SparseArray<Component> &registerComponent()
 ```
 
-This function is not used by the developper but it allows, in back end, to allow a new type of components in the registry.
+This function is not used by the developper but it allows, in back end, a new type of components in the registry.
 In the same way, the component store a self delete methods as a lambda in a `_earase_func` private vector.
 		
 ```c++
