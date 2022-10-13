@@ -59,7 +59,7 @@ namespace ecs::systems
                 msg[6] = posBin[3];
                 msg[7] = sizeBin[0];
                 msg[8] = sizeBin[1];
-                msg[9] = ecs::getPacketTypeKey(ecs::ENTITY_MOVE);
+                msg[9] = ecs::constant::getPacketTypeKey(ecs::constant::PacketType::ENTITY_MOVE);
                 serv.value().serv.outgoingQueue.push(network::ServerMessage(msg, std::vector<unsigned int>()));
             }
         }

@@ -49,7 +49,7 @@ namespace ecs::systems
                 msg[3] = posBin[1];
                 msg[4] = posBin[2];
                 msg[5] = posBin[3];
-                msg[6] = ecs::getPacketTypeKey(ecs::ENTITY_DEATH);
+                msg[6] = ecs::constant::getPacketTypeKey(ecs::constant::PacketType::ENTITY_DEATH);
                 serv.value().serv.outgoingQueue.push(
                     msg); // This is to be replaced when possible, it will not work nor should it
             }
