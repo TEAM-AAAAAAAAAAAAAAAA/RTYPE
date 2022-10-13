@@ -46,7 +46,7 @@ It represents the vector of each component in the current world.
 --------------------------------------------------------------------------------------------
 
 Systems are the things that directly interacts with components.
-They actually get all the associated components in oder to actualize Entities values.
+They actually get all the associated components in order to actualize Entities' values.
 They are generated in lambda format and pushed in the private vector of the current world.
 They look like this : 
 
