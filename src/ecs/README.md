@@ -86,7 +86,7 @@ std::function<void(World &)> movement = [](World &world) {
 <h3 style="text-align: center; color:orange">Registry</h3>
 --------------------------------------------------------------------------------------------
 
-This is the most interessant part if we speak about managing components because it's the **Components Manager** by definition.
+This is the most interesting part if we talk about managing components because it's the **Components Manager** by definition.
 It consists of two main methods :
 
 ``` c++
