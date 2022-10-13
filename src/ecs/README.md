@@ -101,7 +101,7 @@ typename SparseArray<Component>::referenceType addComponent(Entity const &to, Co
 ```
 
 If your objective is to add a new component to the Sparse Array, you are at the right place.
-Let's just define what a world is before giving you a good example of adding a component and make it run properly.
+Let's just define what a world is before giving you a good example of adding a component and making it run properly.
 
 Registry Class Private Member
 
