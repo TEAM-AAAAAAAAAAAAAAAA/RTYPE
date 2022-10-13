@@ -22,7 +22,7 @@ namespace ecs::systems
      * System used to push updated position of entity
      * to the server outgoing queue.
      */
-    std::function<void(World &)> serverPush = [](World &world) {
+    std::function<void(World &)> positionUpdate = [](World &world) {
         auto &network = world.registry.getComponents<component::Network>();
         auto &position = world.registry.getComponents<component::Position>();
         auto &networkId = world.registry.getComponents<component::NetworkId>();
