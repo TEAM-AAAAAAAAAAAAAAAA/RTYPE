@@ -167,7 +167,7 @@ Private events' stack of the World class
 
 Now that we have a better visualization of what composes the ecs, we can see how we can use it.
 
-Lets now decompose our main function who's actually creating a world, spawn two entities and gives the player the possibility to move  and shoot :
+Now let's decompose our main function who's actually creating a world, spawn two entities and gives the player the possibility to move  and shoot :
 ```c++
 int main()  
 {  
