@@ -174,12 +174,11 @@ jobs:
     concurrency:
       group: "pages"
       cancel-in-progress: true
+    permissions:
+      permissions: read-all | write-all
     environment:
       name: github-pages
       url: ${{ steps.deploy.output.page_url }}
-    permissions:
-      pages: write
-      id-token: write
     steps:
       - uses: actions/checkout@v3
         with:
