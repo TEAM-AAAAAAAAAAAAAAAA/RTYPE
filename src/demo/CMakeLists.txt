@@ -2,7 +2,7 @@ set(INC_ROOT ${PROJECT_SOURCE_DIR}/src/demo)
 set(SRC_ROOT ${PROJECT_SOURCE_DIR}/src/demo)
 set(ECS_SRC ../ecs)
 
-set(TARGET rtype_demo)
+set(TARGET r-type_demo)
 
 set(SRC
         ${SRC_ROOT}/Demo.cpp
