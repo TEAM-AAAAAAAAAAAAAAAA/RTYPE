@@ -1,11 +1,13 @@
 set (SRC_ROOT ${PROJECT_SOURCE_DIR}/src/client)
 set (INC_ROOT ${PROJECT_SOURCE_DIR}/src/client)
+set(ECS_SRC ../ecs)
 
-set(TARGET rtype_client)
+set(TARGET r-type_client)
 
 set(SRC
     ${SRC_ROOT}/entrypoint.cpp
 )
+
 
 add_executable(${TARGET} ${SRC})
 
@@ -14,12 +16,14 @@ target_link_libraries(${TARGET} PRIVATE
     Boost::boost
 )
 
+target_include_directories(${TARGET}
+        PRIVATE ${ECS_INCROOT}
+)
+
 target_include_directories(${TARGET} PRIVATE
     ${Boost_INCLUDE_DIRS}
 )
 
 set_target_properties(${TARGET} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
 
-if (CLIENT_COMPILATION_MODE)
-     add_compile_definitions(CLIENT_COMPILATION_MODE)
-endif()
+add_compile_definitions(CLIENT_COMPILATION_MODE)
