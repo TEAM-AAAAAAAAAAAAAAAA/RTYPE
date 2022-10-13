@@ -14,6 +14,10 @@
 #include "components/Position.hpp"
 #include "components/Size.hpp"
 
+#ifdef CLIENT_COMPILATION_MODE
+    #include "SFML/Graphics.hpp"
+#endif
+
 namespace ecs::systems
 {
     /**
@@ -32,9 +36,9 @@ namespace ecs::systems
             auto const &draw = drawables[i];
             if (pos && size && draw) {
                 sf::Sprite sprite;
-                sprite.setScale({float(size.value().width), float(size.value().height)});
-                sprite.setPosition({float(pos.value().x), float(pos.value().y)});
                 sprite.setTexture(draw.value().Texture);
+                sprite.setScale({float(size.value().width / draw.value().Texture.getSize().x), float(size.value().height / draw.value().Texture.getSize().y)});
+                sprite.setPosition({float(pos.value().x), float(pos.value().y)});
                 world.getWindow().draw(sprite);
             }
         };

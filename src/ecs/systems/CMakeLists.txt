@@ -8,6 +8,7 @@ set(SYSTEMS_SRC
     ${SRCROOT}/ManageClientEvents.hpp
     ${SRCROOT}/Movement.hpp
     ${SRCROOT}/PositionLogger.hpp
+    ${SRCROOT}/ProjectileCollision.hpp
     ${SRCROOT}/ServerPush.hpp
     ${SRCROOT}/PositionUpdate.hpp
     ${SRCROOT}/DeathUpdate.hpp
