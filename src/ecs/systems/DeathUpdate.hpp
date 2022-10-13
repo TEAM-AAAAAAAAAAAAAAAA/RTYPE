@@ -9,12 +9,12 @@
 
 #include <functional>
 #include <iostream>
-#include "World.hpp"
-#include "Network.hpp"
-#include "Position.hpp"
-#include "NetworkId.hpp"
 #include "Constant.hpp"
 #include "EntityLife.hpp"
+#include "Network.hpp"
+#include "NetworkId.hpp"
+#include "Position.hpp"
+#include "World.hpp"
 
 namespace ecs::systems
 {
@@ -35,13 +35,13 @@ namespace ecs::systems
             std::cerr << "Error: Server component not found" << std::endl;
             return;
         }
-        for (size_t i = 0; i < position.size() && i < networkId.size(); i ++) {
+        for (size_t i = 0; i < position.size() && i < networkId.size(); i++) {
             auto &pos = position[i];
             auto &id = networkId[i];
             auto &li = life[i];
-            if (li.life <= 0 && pos && id) {
-                std::array<char, 2> idBin = id.serialize();
-                std::array<char, 4> posBin = pos.serialize();
+            if (li.value().life <= 0 && pos && id) {
+                std::array<char, 2> idBin = id.value().serialize();
+                std::array<char, 4> posBin = pos.value().serialize();
                 std::array<char, 7> msg;
                 msg[0] = idBin[0];
                 msg[1] = idBin[1];
@@ -50,7 +50,8 @@ namespace ecs::systems
                 msg[4] = posBin[2];
                 msg[5] = posBin[3];
                 msg[6] = ecs::getPacketTypeKey(ecs::ENTITY_DEATH);
-                serv.push(msg); // This is to be replaced when possible, it will not work nor should it
+                serv.value().serv.outgoingQueue.push(
+                    msg); // This is to be replaced when possible, it will not work nor should it
             }
         }
     };
