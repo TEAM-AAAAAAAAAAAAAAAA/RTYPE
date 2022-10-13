@@ -23,6 +23,14 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "RTYPE", "index.html", [
+    [ "R-Type", "index.html", [
+      [ "Before continuing...", "index.html#autotoc_md1", null ],
+      [ "Prerequisites", "index.html#autotoc_md2", null ],
+      [ "Building program", "index.html#autotoc_md3", null ],
+      [ "Testing program", "index.html#autotoc_md4", null ],
+      [ "Coding Style", "index.html#autotoc_md5", null ],
+      [ "Authors", "index.html#autotoc_md6", null ]
+    ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -62,7 +70,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_asset_manager_8hpp.html",
-"pages.html"
+"namespacemembers_eval.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
