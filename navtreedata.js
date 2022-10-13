@@ -23,13 +23,13 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "RTYPE", "index.html", [
-    [ "R-Type", "index.html", [
-      [ "Before continuing...", "index.html#autotoc_md1", null ],
-      [ "Prerequisites", "index.html#autotoc_md2", null ],
-      [ "Building program", "index.html#autotoc_md3", null ],
-      [ "Testing program", "index.html#autotoc_md4", null ],
-      [ "Coding Style", "index.html#autotoc_md5", null ],
-      [ "Authors", "index.html#autotoc_md6", null ]
+    [ "<h1 style=\"text-align: center\">ECS MANUAL</h1>", "index.html", [
+      [ "<h3 style=\"text-align: center; color:orange\">Components</h3>", "index.html#autotoc_md1", null ],
+      [ "<h3 style=\"text-align: center; color:orange\">Sparse Array</h3>", "index.html#autotoc_md3", null ],
+      [ "<h3 style=\"text-align: center; color:orange\">Systems</h3>", "index.html#autotoc_md5", null ],
+      [ "<h3 style=\"text-align: center; color:orange\">Registry</h3>", "index.html#autotoc_md7", null ],
+      [ "<h3 style=\"text-align: center; color:orange\">Worlds</h3>", "index.html#autotoc_md9", null ],
+      [ "<h3 style=\"text-align: center; color:orange\">Example</h3>", "index.html#autotoc_md11", null ]
     ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],

@@ -10,7 +10,7 @@
         src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
         crossorigin="anonymous"></script>
-<title>RTYPE: R-Type</title>
+<title>RTYPE: &lt;h1 style=&quot;text-align: center&quot;&gt;ECS MANUAL&lt;/h1&gt;</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
   <!--BEGIN FULL_SIDEBAR-->
 <script type="text/javascript">var page_layout=1;</script>
@@ -133,42 +133,165 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">R-Type </div>  </div>
+<div class="title"><h1 style="text-align: center">ECS MANUAL</h1>
+</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a href="https://github.com/TEAM-AAAAAAAAAAAAAAAA/RTYPE/actions/workflows/ci.yml"><object type="image/svg+xml" data="https://github.com/TEAM-AAAAAAAAAAAAAAAA/RTYPE/actions/workflows/ci.yml/badge.svg" style="pointer-events: none;">Build</object></a></p>
-<p>This project aims to recreate the R-Type game and add a multiplayer mode to it. we had to implement a multi-threaded server and a graphical client in SFML.</p>
-<h1><a class="anchor" id="autotoc_md1"></a>
-Before continuing...</h1>
-<p>This project is an EPITECH Project. If you are an EPITECH student, move out the way! Nothing to see here... The groups don't want to be involved to your -42.<br  />
-If you're not, no worries! You're welcome here!</p>
-<h1><a class="anchor" id="autotoc_md2"></a>
-Prerequisites</h1>
-<p>To use this project, you'll need Cmake 3.17.0 Compiler, SFML-devel library and C11.</p>
-<h1><a class="anchor" id="autotoc_md3"></a>
-Building program</h1>
-<div class="fragment"><div class="line">cmake -B ./build -G &quot;Unix Makefiles&quot; -DCMAKE_BUILD_TYPE=Release</div>
-<div class="line">cmake --build ./build</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md4"></a>
-Testing program</h1>
-<div class="fragment"><div class="line">rm -rf ./build</div>
-<div class="line">cmake -B ./build -G &quot;Unix Makefiles&quot; -DCMAKE_BUILD_TYPE=Debug -DTESTING=ON</div>
-<div class="line">cmake --build ./build</div>
-<div class="line">cd ./build</div>
-<div class="line">ctest --ouput-on-failure</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md5"></a>
-Coding Style</h1>
-<p>R-Type is developed with C++. EPITECH doesn't impose any Coding Style to this but we tried to be as clean as possible.</p>
-<h1><a class="anchor" id="autotoc_md6"></a>
-Authors</h1>
+<div class="textblock"><p>Before explaining systems and components' methods, lets have a look on the architecture diagram of the ECS.</p>
+<p>&gt;Just note that there is no trash struct called Entity_t containing the whole of the data. &gt;Entity are only represented by ID/index and which component is assigned on this ID</p>
+<p>First of all, let's define the terms in an increasing architectural way</p>
+<hr  />
+ <h1><a class="anchor" id="autotoc_md1"></a>
+&lt;h3 style="text-align: center; color:orange"&gt;Components&lt;/h3&gt;</h1>
+<p>They are most of the time struct/class containing some obvious fact. As example, Component Position : </p><div class="fragment"><div class="line"><span class="keyword">struct </span>Position {  </div>
+<div class="line">    <span class="keywordtype">int</span> x;  </div>
+<div class="line">    <span class="keywordtype">int</span> y;  </div>
+<div class="line">};</div>
+</div><!-- fragment --><hr  />
+ <h1><a class="anchor" id="autotoc_md3"></a>
+&lt;h3 style="text-align: center; color:orange"&gt;Sparse Array&lt;/h3&gt;</h1>
+<p>It's a wrapper around a std::vector used to store components of Entities. It got all the utility as a normal vector (end(), begin()...). The special feature of the SparseArray class is that its size never gets smaller. Even if an Entity disapears or is deleted, we only put a <code>std::nullopt</code> at his component location, in this way it could be reused after. Sparse array Class private members :</p>
+<div class="fragment"><div class="line"> {c++}</div>
+<div class="line">std::vector&lt;std::optional&lt;Component&gt;&gt; _data</div>
+</div><!-- fragment --><p>It represents the vector of each component in the current world.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md5"></a>
+&lt;h3 style="text-align: center; color:orange"&gt;Systems&lt;/h3&gt;</h1>
+<p>Systems are the things that directly interacts with components. They actually get all the associated components in order to actualize Entities' values. They are generated in lambda format and pushed in the private vector of the current world. They look like this :</p>
+<div class="fragment"><div class="line"> {c++}</div>
+<div class="line">std::function&lt;void(World &amp;)&gt; movement = [](World &amp;world) {  </div>
+<div class="line"> </div>
+<div class="line">    // Get all the components related to the system</div>
+<div class="line">    auto &amp;positions = world.registry.getComponents&lt;component::Position&gt;();  </div>
+<div class="line">    auto const &amp;velocities = world.registry.getComponents&lt;component::Velocity&gt;();  </div>
+<div class="line">    auto &amp;directions = world.registry.getComponents&lt;component::Direction&gt;();  </div>
+<div class="line">    using chrono = std::chrono::high_resolution_clock;</div>
+<div class="line">    static auto clock = chrono::now();</div>
+<div class="line">    </div>
+<div class="line">    // Loop on every components and apply the logic of the system</div>
+<div class="line">    for (size_t i = 0; i &lt; positions.size() &amp;&amp; i &lt; velocities.size(); ++i) {  </div>
+<div class="line">        auto &amp;pos = positions[i];  </div>
+<div class="line">        auto const &amp;vel = velocities[i];  </div>
+<div class="line">        auto &amp;dir = directions[i];  </div>
+<div class="line">        if (pos &amp;&amp; vel) {</div>
+<div class="line"> </div>
+<div class="line">        // The goal of this is to update Entities values</div>
+<div class="line">            if (std::chrono::duration&lt;double, std::milli&gt;(chrono::now() - clock).count() &gt; 10) {  </div>
+<div class="line">                pos.value().x += vel.value().x * (dir.value().x);  </div>
+<div class="line">                pos.value().y += vel.value().y * dir.value().y;  </div>
+<div class="line">                dir.value().x = 0;  </div>
+<div class="line">                dir.value().y = 0;  </div>
+<div class="line">                clock = chrono::now();  </div>
+<div class="line">            }  </div>
+<div class="line">        }  </div>
+<div class="line">    };  </div>
+<div class="line">};</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md7"></a>
+&lt;h3 style="text-align: center; color:orange"&gt;Registry&lt;/h3&gt;</h1>
+<p>This is the most interesting part if we talk about managing components because it's the <b>Components Manager</b> by definition. It consists of two main methods :</p>
+<div class="fragment"><div class="line">template &lt;class Component&gt; SparseArray&lt;Component&gt; &amp;registerComponent()</div>
+</div><!-- fragment --><p>This function is not used by the developper but it allows, in back end, a new type of components in the registry. In the same way, the component stores a self delete methods as a lambda in a <code>_eraseFunc</code> private vector.</p>
+<div class="fragment"><div class="line"> {c++}</div>
+<div class="line">typename SparseArray&lt;Component&gt;::referenceType addComponent(Entity const &amp;to, Component &amp;&amp;c)</div>
+</div><!-- fragment --><p>If your objective is to add a new component to the Sparse Array, you are at the right place. Let's just define what a world is before giving you a good example of adding a component and making it run properly.</p>
+<p>Registry Class Private Member</p>
+<div class="fragment"><div class="line">std::unordered_map&lt;std::type_index, std::any&gt; _componentsArrays;</div>
+</div><!-- fragment --><p>It represents the group of components already registred by the registerComponent method</p>
+<div class="fragment"><div class="line">std::vector&lt;std::function&lt;void(Registry &amp;, Entity const &amp;)&gt;&gt; _eraseFunctions;  </div>
+</div><!-- fragment --><p>It represents the vector of self erase lambda of each component</p>
+<div class="fragment"><div class="line"> {c++}</div>
+<div class="line">std::vector&lt;std::size_t&gt; _entitiesBin;  </div>
+</div><!-- fragment --><p>It represents the bin of every deleted entities, used to recover an entity instead of creating another one</p>
+<div class="fragment"><div class="line"> {c++}</div>
+<div class="line">std::size_t _lastEntity;</div>
+</div><!-- fragment --><p>It represents the current number of entities used or able to be used in the Registry Class</p>
+<hr  />
+ <h1><a class="anchor" id="autotoc_md9"></a>
+&lt;h3 style="text-align: center; color:orange"&gt;Worlds&lt;/h3&gt;</h1>
+<p>It is at the top of the architecture because it contains all the terms seen before. In a more concrete way, we can see worlds as scene. For example, in the Game part, we can see different worlds :</p>
 <ul>
-<li><b>Guillaume Terrière</b> - <a href="https://github.com/GuyomT">GuyomT</a></li>
-<li><b>Aurèle Nicolas</b> - <a href="https://github.com/aurelenc">aurelenc</a></li>
-<li><b>Julien Hourcadette</b> - <a href="https://github.com/Bootoyka">Bootoyka</a></li>
-<li><b>Constant Vigneron</b> - <a href="https://github.com/Cavonstavant">Cavonstavant</a></li>
-<li><b>Emile Ettel</b> - <a href="https://github.com/EmileEttel">EmileEttel</a> </li>
+<li>World Menu</li>
+<li>World GameLogic</li>
 </ul>
-</div></div><!-- PageDoc -->
+<p>In this way, world contains every useful component &amp; system which is associated with it. For example, we'll not use component Position or Velocity in the server world.</p>
+<div class="fragment"><div class="line"> {c++}</div>
+<div class="line">std::unique_ptr&lt;sf::RenderWindow&gt; &amp;_window;  </div>
+</div><!-- fragment --><p>The window used to display any information by the World class</p>
+<div class="fragment"><div class="line">std::vector&lt;std::function&lt;void(World &amp;)&gt;&gt; _systems;  </div>
+</div><!-- fragment --><p>Private system's vector of the World class</p>
+<div class="fragment"><div class="line"> {c++}</div>
+<div class="line">std::stack&lt;ecs::Event&gt; _events;</div>
+</div><!-- fragment --><p>Private events' stack of the World class</p>
+<hr  />
+ <h1><a class="anchor" id="autotoc_md11"></a>
+&lt;h3 style="text-align: center; color:orange"&gt;Example&lt;/h3&gt;</h1>
+<p>Now that we have a better visualization of what composes the ecs, we can see how we can use it.</p>
+<p>Now let's decompose our main function who's actually creating a world, spawn two entities and gives the player the possibility to move and shoot : </p><div class="fragment"><div class="line"> {c++}</div>
+<div class="line">int main()  </div>
+<div class="line">{  </div>
+<div class="line">    ecs::Engine engine;</div>
+<div class="line">    </div>
+<div class="line">    // initialization of the world</div>
+<div class="line">    ecs::World ourNewWorld = getGameWorld(engine);</div>
+<div class="line">    </div>
+<div class="line">    // set the world as ready to use</div>
+<div class="line">    engine.setWaitingWorld(ourNewWorld);  </div>
+<div class="line"> </div>
+<div class="line">    // run the engine</div>
+<div class="line">    engine.run();  </div>
+<div class="line">    return 0;  </div>
+<div class="line">}</div>
+</div><!-- fragment --><h3 style="text-align: center">Initialization of the world</h3>
+<div class="fragment"><div class="line"> {c++}</div>
+<div class="line">ecs::World getGameWorld(ecs::Engine &amp;engine)  </div>
+<div class="line">{  </div>
+<div class="line">    // In this example just below, to begin we can see a creation of a new world</div>
+<div class="line">    ecs::World world(engine.getWindow());  </div>
+<div class="line"> </div>
+<div class="line">    // After that we are able to create our first entity</div>
+<div class="line">    ecs::Entity player = world.registry.spawn_entity();</div>
+<div class="line">    </div>
+<div class="line">    // it&#39;s now time to create a new entity and to add its associated components</div>
+<div class="line">    world.registry.addComponent&lt;ecs::component::Position&gt;(player, {10, 10});  </div>
+<div class="line">    world.registry.addComponent&lt;ecs::component::Velocity&gt;(player, {5, 5});  </div>
+<div class="line">    world.registry.addComponent&lt;ecs::component::Size&gt;(player, {2, 2});  </div>
+<div class="line">    world.registry.addComponent&lt;ecs::component::Direction&gt;(player, {1, 0});</div>
+<div class="line">    </div>
+<div class="line">    // To finish, we now want to add associated systems</div>
+<div class="line">    world.addSystem(ecs::systems::positionLogger);  </div>
+<div class="line">    world.addSystem(ecs::systems::movement);   </div>
+<div class="line">    return world;  </div>
+<div class="line">}</div>
+</div><!-- fragment --><h3 style="text-align: center">Set the world</h3>
+<div class="fragment"><div class="line"> {c++}</div>
+<div class="line">void setWaitingWorld(ecs::World world, bool worldSwitchReady = true)  </div>
+<div class="line">{  </div>
+<div class="line">    // Delete the previous world in waiting mode</div>
+<div class="line">    if (_waitingWorld)  </div>
+<div class="line">        _waitingWorld.release();</div>
+<div class="line">    </div>
+<div class="line">    // Set the \_waitingWorld with the world given as parameters</div>
+<div class="line">    _waitingWorld = std::make_unique&lt;ecs::World&gt;(world);</div>
+<div class="line"> </div>
+<div class="line">    // Set the \_worldSwitchReady, true by default</div>
+<div class="line">    _worldSwitchReady = worldSwitchReady;  </div>
+<div class="line">}</div>
+</div><!-- fragment --><h3 style="text-align: center">Run the Engine</h3>
+<div class="fragment"><div class="line"> {c++}</div>
+<div class="line">void run()  </div>
+<div class="line">{  </div>
+<div class="line">    while (_window-&gt;isOpen()) {</div>
+<div class="line">    </div>
+<div class="line">        // Simply loop on every systems and run them</div>
+<div class="line">        _currentWorld-&gt;runSystems();</div>
+<div class="line">        </div>
+<div class="line">        // if the current world is ready to switch, an automaticaly switch occure</div>
+<div class="line">        if (isWorldSwitchReady())  </div>
+<div class="line">            switchWorlds();  </div>
+<div class="line">    }  </div>
+<div class="line">}</div>
+</div><!-- fragment --> </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
