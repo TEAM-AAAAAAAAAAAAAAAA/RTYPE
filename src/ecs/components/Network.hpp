@@ -12,7 +12,7 @@ namespace ecs::component
 {
     /// @brief Network component needed to send messages
     struct Network {
-        Network(unsigned short localPort = 8000) : serv(localPort) {};
+        explicit Network(unsigned short localPort = 8000) : serv(localPort) {};
         network::Server serv;
     };
 } // namespace ecs::component
