@@ -159,7 +159,7 @@ Must be one of the following:
 - feat: A new feature
 - fix: A bug fix
 - perf: A code change that improves performance
-- refactor: A code change that neither fixes a bug nor adds a feature
+- rtor: A code change that neither fixes a bug nor adds a feature
 - test: Adding missing tests or correcting existing tests
 - misc: A commit which does not correspond with the other types
 
