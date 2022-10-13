@@ -94,7 +94,7 @@ template <class Component> SparseArray<Component> &registerComponent()
 ```
 
 This function is not used by the developper but it allows, in back end, a new type of components in the registry.
-In the same way, the component store a self delete methods as a lambda in a `_earase_func` private vector.
+In the same way, the component stores a self delete methods as a lambda in a `_eraseFunc` private vector.
 		
 ```c++
 typename SparseArray<Component>::referenceType addComponent(Entity const &to, Component &&c)
