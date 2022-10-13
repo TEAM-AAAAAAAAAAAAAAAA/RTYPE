@@ -45,7 +45,7 @@ It represents the vector of each component in the current world.
 <h3 style="text-align: center; color:orange">Systems</h3>
 --------------------------------------------------------------------------------------------
 
-Systems are the thing who directly interacts with components.
+Systems are the things that directly interacts with components.
 They actually get all the associated components in oder to actualize Entities values.
 They are generated in lambda forma and pushed in the private vector of the current world.
 They look like this : 
