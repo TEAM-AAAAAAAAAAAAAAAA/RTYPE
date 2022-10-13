@@ -1,21 +1,15 @@
 /*
- * File: World.hpp
- * Project: ecs
- * File Created: Tuesday, 4th October 2022 6:33:43 pm
- * Author: Aurèle Nicolas (aurele.nicolas@epitech.eu)
- * -----
- * Last Modified: Wednesday, 5th October 2022 1:57:31 pm
- * Modified By: Aurèle Nicolas (aurele.nicolas@epitech.eu>)
- * -----
- * Copyright 2022 - 2022 Your Company, Your Company
- */
+** EPITECH PROJECT, 2022
+** RTYPE
+** File description:
+** World
+*/
 
 #pragma once
 
 #include <stack>
 #include "Event.hpp"
 #include "Registry.hpp"
-#include "SFML/Graphics.hpp"
 #include "utils/Window.hpp"
 
 namespace ecs

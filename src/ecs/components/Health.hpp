@@ -2,15 +2,14 @@
 ** EPITECH PROJECT, 2022
 ** RTYPE
 ** File description:
-** EnemyAI
+** Health
 */
 
 #pragma once
 
 namespace ecs::component
 {
-    /// @brief EnemyAI component
-    struct EnemyAI {
-        EnemyAI() {}
+    struct Health {
+        int health;
     };
 } // namespace ecs::component
