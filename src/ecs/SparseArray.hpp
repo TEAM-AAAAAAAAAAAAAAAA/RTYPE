@@ -84,25 +84,17 @@ namespace ecs
 
         referenceType insertAt(sizeType pos, Component const &c)
         {
-            try {
-                if (pos > _data.capacity())
-                    _data.resize(pos, std::nullopt);
-                _data.emplace(_data.begin() + pos, c);
-            } catch (std::exception &e) {
-                std::cout << e.what() << std::endl;
-            }
+            if (pos > _data.capacity())
+                _data.resize(pos, std::nullopt);
+            _data.emplace(_data.begin() + pos, c);
             return _data[pos];
         }
 
         referenceType insertAt(sizeType pos, Component &&c)
         {
-            try {
-                if (pos > _data.capacity())
-                    _data.resize(pos, std::nullopt);
-                _data.emplace(_data.begin() + pos, std::move(c));
-            } catch (std::exception &e) {
-                std::cout << e.what() << std::endl;
-            }
+            if (pos > _data.capacity())
+                _data.resize(pos, std::nullopt);
+            _data.emplace(_data.begin() + pos, std::move(c));
             return _data[pos];
         }
 
