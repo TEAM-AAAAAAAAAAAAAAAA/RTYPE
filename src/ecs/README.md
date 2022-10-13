@@ -140,7 +140,7 @@ For example, in the Game part, we can see different worlds :
 - World Menu
 - World GameLogic
 
-In this way, world contain every usefull component & system which is associated with it.
+In this way, world contains every useful component & system which is associated with it.
 As example we'll not use component Position or Velocity in the server world.
 
 ```c++
