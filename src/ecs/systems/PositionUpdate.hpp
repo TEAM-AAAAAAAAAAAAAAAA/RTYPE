@@ -33,7 +33,16 @@ namespace ecs::systems
             std::cerr << "Error: Network component not found" << std::endl;
             return;
         }
-        auto &serv = network[0];
+        size_t netId = 0;
+        for (netId; netId < network.size(); netId++) {
+            if (network[netId])
+                break;
+        }
+        if (netId == network.size()) {
+            std::cerr << "Error: Network component not found" << std::endl;
+            return;
+        }
+        auto &serv = network[netId];
         if (!serv) {
             std::cerr << "Error: Network component not found" << std::endl;
             return;
