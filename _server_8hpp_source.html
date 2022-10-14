@@ -147,94 +147,95 @@ $(document).ready(function(){initNavTree('_server_8hpp_source.html',''); initRes
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;thread&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_i_server_8hpp.html">IServer.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_locked_queue_8hpp.html">LockedQueue.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;boost/asio/thread_pool.hpp&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;boost/shared_ptr.hpp&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">using</span> boost::asio::ip::udp;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="_server_8hpp.html#a7b4b9d3309381d76b118f09de13053ae">   19</a></span>&#160;<span class="keyword">typedef</span> std::map&lt;uint32_t, udp::endpoint&gt; <a class="code" href="_server_8hpp.html#a7b4b9d3309381d76b118f09de13053ae">ClientList</a>;</div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="_server_8hpp.html#a621a3d0b1af26fc6b724a97c867da53b">   20</a></span>&#160;<span class="keyword">typedef</span> ClientList::value_type <a class="code" href="_server_8hpp.html#a621a3d0b1af26fc6b724a97c867da53b">Client</a>;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacenetwork.html">network</a></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;{</div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classnetwork_1_1_server.html">   27</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classnetwork_1_1_server.html">Server</a> : <span class="keyword">public</span> <a class="code" href="classnetwork_1_1_i_server.html">IServer</a> {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;      <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="classnetwork_1_1_server.html#a6442dfcfb6e417d7996411874a44b542">Server</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> localPort);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="classnetwork_1_1_server.html#ad45f59f763b247db82bfc77b9c87af38">~Server</a>();</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_locked_queue_8hpp.html">LockedQueue.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;boost/asio/thread_pool.hpp&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;boost/shared_ptr.hpp&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">using</span> boost::asio::ip::udp;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="_server_8hpp.html#a7b4b9d3309381d76b118f09de13053ae">   18</a></span>&#160;<span class="keyword">typedef</span> std::map&lt;uint32_t, udp::endpoint&gt; <a class="code" href="_server_8hpp.html#a7b4b9d3309381d76b118f09de13053ae">ClientList</a>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="_server_8hpp.html#a621a3d0b1af26fc6b724a97c867da53b">   19</a></span>&#160;<span class="keyword">typedef</span> ClientList::value_type <a class="code" href="_server_8hpp.html#a621a3d0b1af26fc6b724a97c867da53b">Client</a>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacenetwork.html">network</a></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="namespacenetwork.html#ad2ace61918f2294d67045bd0c16f5cef">   30</a></span>&#160;    <span class="keyword">typedef</span> std::pair&lt;std::array&lt;char, 10&gt;, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>&gt; <a class="code" href="namespacenetwork.html#ad2ace61918f2294d67045bd0c16f5cef">ClientMessage</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="namespacenetwork.html#a880ffbc0ceda8e94f1c78da15cf474f9">   31</a></span>&#160;    <span class="keyword">typedef</span> std::pair&lt;std::array&lt;char, 10&gt;, std::vector&lt;unsigned int&gt;&gt; <a class="code" href="namespacenetwork.html#a880ffbc0ceda8e94f1c78da15cf474f9">ServerMessage</a>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classnetwork_1_1_server.html">   33</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classnetwork_1_1_server.html">Server</a> {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;      <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <a class="code" href="classnetwork_1_1_server.html#ad45f59f763b247db82bfc77b9c87af38">~Server</a>();</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classnetwork_1_1_server.html#a8ab6c206dd283858b97ec399d242f018">hasMessages</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="classnetwork_1_1_server.html#a3db2364590c0dda7b544ef9a4cee9dc8">hasMessages</a>();</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classnetwork_1_1_server.html#a294e2628e5e62f2e4ddd2328500057fe">sendToClient</a>(<span class="keyword">const</span> std::array&lt;char, 10&gt; &amp;message, uint32_t clientID) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classnetwork_1_1_server.html#ade558513c1c13cdba51177d8aed992ed">sendToClient</a>(<span class="keyword">const</span> std::array&lt;char, 10&gt; &amp;message, uint32_t clientID);</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classnetwork_1_1_server.html#aeca5b4e711ac59e1afc0af2d608dbb28">sendToAll</a>(<span class="keyword">const</span> std::array&lt;char, 10&gt; &amp;message);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classnetwork_1_1_server.html#aeca5b4e711ac59e1afc0af2d608dbb28">sendToAll</a>(<span class="keyword">const</span> std::array&lt;char, 10&gt; &amp;message);</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordtype">size_t</span> <a class="code" href="classnetwork_1_1_server.html#a5f7958a27a26fca5a04444d5567bd4d0">getClientCount</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">size_t</span> <a class="code" href="classnetwork_1_1_server.html#aaccca23811016babad4680e642334acf">getClientCount</a>();</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        uint32_t <a class="code" href="classnetwork_1_1_server.html#a86f5b4e27f280fdf54daac7860f5c00c">getClientIdByIndex</a>(<span class="keywordtype">size_t</span> index) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keyword">static</span> uint32_t <a class="code" href="classnetwork_1_1_server.html#a82867998d7480b86bc2a99c73097db28">getClientIdByIndex</a>(<span class="keywordtype">size_t</span> index);</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="classnetwork_1_1_server.html#a366e83d7b492475f37dcfbb9883aa185">   75</a></span>&#160;        <a class="code" href="classnetwork_1_1_locked_queue.html">LockedQueue&lt;ServerMessage&gt;</a> <a class="code" href="classnetwork_1_1_server.html#a366e83d7b492475f37dcfbb9883aa185">outgoingMessages</a>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        boost::asio::io_service _ioService;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        udp::endpoint _serverEndpoint;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        udp::endpoint _remoteEndpoint;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        std::array&lt;char, 10&gt; _recvBuffer;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        udp::socket _socket;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        std::thread _serviceThread;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        std::thread _outgoingThread;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        std::thread _interpretThread;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <a class="code" href="classnetwork_1_1_locked_queue.html">LockedQueue&lt;ClientMessage&gt;</a> _incomingMessages;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keywordtype">void</span> startReceive();</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keywordtype">void</span> handleRemoteError(<span class="keyword">const</span> std::error_code errorCode, <span class="keyword">const</span> udp::endpoint endpoint);</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="keywordtype">void</span> handleReceive(<span class="keyword">const</span> std::error_code &amp;error, std::size_t bytesTransferred);</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="keywordtype">void</span> handleSend(std::array&lt;char, 10&gt; message, <span class="keyword">const</span> std::error_code &amp;error, std::size_t bytesTransferred) {}</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <span class="keywordtype">void</span> runService();</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        int32_t getOrCreateClientID(udp::endpoint endpoint);</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        <span class="keywordtype">void</span> send(<span class="keyword">const</span> std::array&lt;char, 10&gt; &amp;message, udp::endpoint target);</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <span class="keywordtype">void</span> interpretIncoming();</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <span class="keywordtype">void</span> sendOutgoing();</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        <a class="code" href="_server_8hpp.html#a7b4b9d3309381d76b118f09de13053ae">ClientList</a> _clients;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        <span class="keywordtype">int</span> _nextClientID;</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    };</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;} <span class="comment">// namespace network</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keyword">static</span> <a class="code" href="classnetwork_1_1_locked_queue.html">LockedQueue&lt;ServerMessage&gt;</a> &amp;<a class="code" href="classnetwork_1_1_server.html#a61cac88b84dbf8bb0e04d79b826b31b8">getOutgoingMessages</a>();</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <a class="code" href="classnetwork_1_1_locked_queue.html">LockedQueue&lt;ServerMessage&gt;</a> _outgoingMessages;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        boost::asio::io_service _ioService;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        udp::endpoint _serverEndpoint;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        udp::endpoint _remoteEndpoint;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        std::array&lt;char, 10&gt; _recvBuffer;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        udp::socket _socket;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        std::thread _serviceThread;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        std::thread _outgoingThread;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        std::thread _interpretThread;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <a class="code" href="classnetwork_1_1_locked_queue.html">LockedQueue&lt;ClientMessage&gt;</a> _incomingMessages;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="keywordtype">void</span> startReceive();</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keywordtype">void</span> handleRemoteError(<span class="keyword">const</span> std::error_code errorCode, <span class="keyword">const</span> udp::endpoint endpoint);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <span class="keywordtype">void</span> handleReceive(<span class="keyword">const</span> std::error_code &amp;error, std::size_t bytesTransferred);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <span class="keywordtype">void</span> handleSend(std::array&lt;char, 10&gt; message, <span class="keyword">const</span> std::error_code &amp;error, std::size_t bytesTransferred) {}</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keywordtype">void</span> runService();</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        int32_t getOrCreateClientID(udp::endpoint endpoint);</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <span class="keywordtype">void</span> send(<span class="keyword">const</span> std::array&lt;char, 10&gt; &amp;message, udp::endpoint target);</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        <span class="keywordtype">void</span> interpretIncoming();</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        <span class="keywordtype">void</span> sendOutgoing();</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <a class="code" href="_server_8hpp.html#a7b4b9d3309381d76b118f09de13053ae">ClientList</a> _clients;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        <span class="keywordtype">int</span> _nextClientID;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        <a class="code" href="classnetwork_1_1_server.html">Server</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> localPort = 8000);</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        <span class="keyword">static</span> <a class="code" href="classnetwork_1_1_server.html">Server</a> _Instance;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    };</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;} <span class="comment">// namespace network</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclassnetwork_1_1_server_html"><div class="ttname"><a href="classnetwork_1_1_server.html">network::Server</a></div><div class="ttdef"><b>Definition:</b> Server.hpp:27</div></div>
-<div class="ttc" id="a_i_server_8hpp_html"><div class="ttname"><a href="_i_server_8hpp.html">IServer.hpp</a></div></div>
-<div class="ttc" id="anamespacenetwork_html_ad2ace61918f2294d67045bd0c16f5cef"><div class="ttname"><a href="namespacenetwork.html#ad2ace61918f2294d67045bd0c16f5cef">network::ClientMessage</a></div><div class="ttdeci">std::pair&lt; std::array&lt; char, 10 &gt;, unsigned int &gt; ClientMessage</div><div class="ttdef"><b>Definition:</b> IServer.hpp:22</div></div>
-<div class="ttc" id="aclassnetwork_1_1_server_html_a294e2628e5e62f2e4ddd2328500057fe"><div class="ttname"><a href="classnetwork_1_1_server.html#a294e2628e5e62f2e4ddd2328500057fe">network::Server::sendToClient</a></div><div class="ttdeci">void sendToClient(const std::array&lt; char, 10 &gt; &amp;message, uint32_t clientID) override</div><div class="ttdef"><b>Definition:</b> Server.cpp:106</div></div>
-<div class="ttc" id="aclassnetwork_1_1_server_html_a366e83d7b492475f37dcfbb9883aa185"><div class="ttname"><a href="classnetwork_1_1_server.html#a366e83d7b492475f37dcfbb9883aa185">network::Server::outgoingMessages</a></div><div class="ttdeci">LockedQueue&lt; ServerMessage &gt; outgoingMessages</div><div class="ttdef"><b>Definition:</b> Server.hpp:75</div></div>
-<div class="ttc" id="a_server_8hpp_html_a621a3d0b1af26fc6b724a97c867da53b"><div class="ttname"><a href="_server_8hpp.html#a621a3d0b1af26fc6b724a97c867da53b">Client</a></div><div class="ttdeci">ClientList::value_type Client</div><div class="ttdef"><b>Definition:</b> Server.hpp:20</div></div>
-<div class="ttc" id="anamespacenetwork_html"><div class="ttname"><a href="namespacenetwork.html">network</a></div><div class="ttdef"><b>Definition:</b> IServer.hpp:16</div></div>
-<div class="ttc" id="aclassnetwork_1_1_server_html_a5f7958a27a26fca5a04444d5567bd4d0"><div class="ttname"><a href="classnetwork_1_1_server.html#a5f7958a27a26fca5a04444d5567bd4d0">network::Server::getClientCount</a></div><div class="ttdeci">size_t getClientCount() override</div><div class="ttdef"><b>Definition:</b> Server.cpp:131</div></div>
-<div class="ttc" id="aclassnetwork_1_1_server_html_a86f5b4e27f280fdf54daac7860f5c00c"><div class="ttname"><a href="classnetwork_1_1_server.html#a86f5b4e27f280fdf54daac7860f5c00c">network::Server::getClientIdByIndex</a></div><div class="ttdeci">uint32_t getClientIdByIndex(size_t index) override</div><div class="ttdef"><b>Definition:</b> Server.cpp:133</div></div>
-<div class="ttc" id="aclassnetwork_1_1_locked_queue_html_a076e0981cce5c44eed95476e135011f2"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">network::LockedQueue::push</a></div><div class="ttdeci">void push(T value)</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:35</div></div>
-<div class="ttc" id="aclassnetwork_1_1_server_html_a8ab6c206dd283858b97ec399d242f018"><div class="ttname"><a href="classnetwork_1_1_server.html#a8ab6c206dd283858b97ec399d242f018">network::Server::hasMessages</a></div><div class="ttdeci">bool hasMessages() override</div><div class="ttdef"><b>Definition:</b> Server.cpp:141</div></div>
+<div class="ttc" id="aclassnetwork_1_1_server_html"><div class="ttname"><a href="classnetwork_1_1_server.html">network::Server</a></div><div class="ttdef"><b>Definition:</b> Server.hpp:33</div></div>
+<div class="ttc" id="aclassnetwork_1_1_server_html_a61cac88b84dbf8bb0e04d79b826b31b8"><div class="ttname"><a href="classnetwork_1_1_server.html#a61cac88b84dbf8bb0e04d79b826b31b8">network::Server::getOutgoingMessages</a></div><div class="ttdeci">static LockedQueue&lt; ServerMessage &gt; &amp; getOutgoingMessages()</div><div class="ttdef"><b>Definition:</b> Server.cpp:147</div></div>
+<div class="ttc" id="anamespacenetwork_html_ad2ace61918f2294d67045bd0c16f5cef"><div class="ttname"><a href="namespacenetwork.html#ad2ace61918f2294d67045bd0c16f5cef">network::ClientMessage</a></div><div class="ttdeci">std::pair&lt; std::array&lt; char, 10 &gt;, unsigned int &gt; ClientMessage</div><div class="ttdef"><b>Definition:</b> Server.hpp:30</div></div>
+<div class="ttc" id="aclassnetwork_1_1_server_html_a82867998d7480b86bc2a99c73097db28"><div class="ttname"><a href="classnetwork_1_1_server.html#a82867998d7480b86bc2a99c73097db28">network::Server::getClientIdByIndex</a></div><div class="ttdeci">static uint32_t getClientIdByIndex(size_t index)</div><div class="ttdef"><b>Definition:</b> Server.cpp:137</div></div>
+<div class="ttc" id="a_server_8hpp_html_a621a3d0b1af26fc6b724a97c867da53b"><div class="ttname"><a href="_server_8hpp.html#a621a3d0b1af26fc6b724a97c867da53b">Client</a></div><div class="ttdeci">ClientList::value_type Client</div><div class="ttdef"><b>Definition:</b> Server.hpp:19</div></div>
+<div class="ttc" id="anamespacenetwork_html"><div class="ttname"><a href="namespacenetwork.html">network</a></div><div class="ttdef"><b>Definition:</b> NetworkClient.hpp:14</div></div>
+<div class="ttc" id="anamespacenetwork_html_a880ffbc0ceda8e94f1c78da15cf474f9"><div class="ttname"><a href="namespacenetwork.html#a880ffbc0ceda8e94f1c78da15cf474f9">network::ServerMessage</a></div><div class="ttdeci">std::pair&lt; std::array&lt; char, 10 &gt;, std::vector&lt; unsigned int &gt; &gt; ServerMessage</div><div class="ttdef"><b>Definition:</b> Server.hpp:31</div></div>
+<div class="ttc" id="aclassnetwork_1_1_server_html_aaccca23811016babad4680e642334acf"><div class="ttname"><a href="classnetwork_1_1_server.html#aaccca23811016babad4680e642334acf">network::Server::getClientCount</a></div><div class="ttdeci">static size_t getClientCount()</div><div class="ttdef"><b>Definition:</b> Server.cpp:135</div></div>
 <div class="ttc" id="aclassnetwork_1_1_locked_queue_html"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html">network::LockedQueue&lt; ServerMessage &gt;</a></div></div>
-<div class="ttc" id="aclassnetwork_1_1_locked_queue_html_a6f83affbc6d8bc587e67a5b1003678b9"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html#a6f83affbc6d8bc587e67a5b1003678b9">network::LockedQueue::empty</a></div><div class="ttdeci">bool empty()</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:58</div></div>
-<div class="ttc" id="aclassnetwork_1_1_locked_queue_html_a2be6f1a5bcdc3fd83a53558377f51d80"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80">network::LockedQueue::pop</a></div><div class="ttdeci">T pop()</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:45</div></div>
 <div class="ttc" id="a_server_8hpp_html"><div class="ttname"><a href="_server_8hpp.html">Server.hpp</a></div></div>
-<div class="ttc" id="aclassnetwork_1_1_i_server_html"><div class="ttname"><a href="classnetwork_1_1_i_server.html">network::IServer</a></div><div class="ttdef"><b>Definition:</b> IServer.hpp:25</div></div>
-<div class="ttc" id="aclassnetwork_1_1_server_html_a6442dfcfb6e417d7996411874a44b542"><div class="ttname"><a href="classnetwork_1_1_server.html#a6442dfcfb6e417d7996411874a44b542">network::Server::Server</a></div><div class="ttdeci">Server(unsigned short localPort)</div><div class="ttdef"><b>Definition:</b> Server.cpp:12</div></div>
-<div class="ttc" id="a_server_8hpp_html_a7b4b9d3309381d76b118f09de13053ae"><div class="ttname"><a href="_server_8hpp.html#a7b4b9d3309381d76b118f09de13053ae">ClientList</a></div><div class="ttdeci">std::map&lt; uint32_t, udp::endpoint &gt; ClientList</div><div class="ttdef"><b>Definition:</b> Server.hpp:19</div></div>
-<div class="ttc" id="aclassnetwork_1_1_server_html_ad45f59f763b247db82bfc77b9c87af38"><div class="ttname"><a href="classnetwork_1_1_server.html#ad45f59f763b247db82bfc77b9c87af38">network::Server::~Server</a></div><div class="ttdeci">virtual ~Server()</div><div class="ttdef"><b>Definition:</b> Server.cpp:19</div></div>
-<div class="ttc" id="aclassnetwork_1_1_server_html_aeca5b4e711ac59e1afc0af2d608dbb28"><div class="ttname"><a href="classnetwork_1_1_server.html#aeca5b4e711ac59e1afc0af2d608dbb28">network::Server::sendToAll</a></div><div class="ttdeci">void sendToAll(const std::array&lt; char, 10 &gt; &amp;message)</div><div class="ttdef"><b>Definition:</b> Server.cpp:115</div></div>
+<div class="ttc" id="a_server_8hpp_html_a7b4b9d3309381d76b118f09de13053ae"><div class="ttname"><a href="_server_8hpp.html#a7b4b9d3309381d76b118f09de13053ae">ClientList</a></div><div class="ttdeci">std::map&lt; uint32_t, udp::endpoint &gt; ClientList</div><div class="ttdef"><b>Definition:</b> Server.hpp:18</div></div>
+<div class="ttc" id="aclassnetwork_1_1_server_html_ad45f59f763b247db82bfc77b9c87af38"><div class="ttname"><a href="classnetwork_1_1_server.html#ad45f59f763b247db82bfc77b9c87af38">network::Server::~Server</a></div><div class="ttdeci">~Server()</div><div class="ttdef"><b>Definition:</b> Server.cpp:22</div></div>
+<div class="ttc" id="aclassnetwork_1_1_server_html_aeca5b4e711ac59e1afc0af2d608dbb28"><div class="ttname"><a href="classnetwork_1_1_server.html#aeca5b4e711ac59e1afc0af2d608dbb28">network::Server::sendToAll</a></div><div class="ttdeci">static void sendToAll(const std::array&lt; char, 10 &gt; &amp;message)</div><div class="ttdef"><b>Definition:</b> Server.cpp:119</div></div>
+<div class="ttc" id="aclassnetwork_1_1_server_html_ade558513c1c13cdba51177d8aed992ed"><div class="ttname"><a href="classnetwork_1_1_server.html#ade558513c1c13cdba51177d8aed992ed">network::Server::sendToClient</a></div><div class="ttdeci">static void sendToClient(const std::array&lt; char, 10 &gt; &amp;message, uint32_t clientID)</div><div class="ttdef"><b>Definition:</b> Server.cpp:110</div></div>
 <div class="ttc" id="a_locked_queue_8hpp_html"><div class="ttname"><a href="_locked_queue_8hpp.html">LockedQueue.hpp</a></div></div>
+<div class="ttc" id="aclassnetwork_1_1_server_html_a3db2364590c0dda7b544ef9a4cee9dc8"><div class="ttname"><a href="classnetwork_1_1_server.html#a3db2364590c0dda7b544ef9a4cee9dc8">network::Server::hasMessages</a></div><div class="ttdeci">static bool hasMessages()</div><div class="ttdef"><b>Definition:</b> Server.cpp:145</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

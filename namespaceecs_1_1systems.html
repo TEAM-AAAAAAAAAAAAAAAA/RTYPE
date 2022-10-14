@@ -155,6 +155,8 @@ Variables</h2></td></tr>
 <tr class="separator:a33dcdd288d54220f937db37567c5512f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a109fac74ab82a8543e68f4f3871e11a4"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#a109fac74ab82a8543e68f4f3871e11a4">positionLogger</a></td></tr>
 <tr class="separator:a109fac74ab82a8543e68f4f3871e11a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5d3073c8b752ac3549307f9b418a4d1"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#aa5d3073c8b752ac3549307f9b418a4d1">positionUpdate</a></td></tr>
+<tr class="separator:aa5d3073c8b752ac3549307f9b418a4d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ae801d63a324b2863d0b308abaa46d9"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#a3ae801d63a324b2863d0b308abaa46d9">projectileCollision</a></td></tr>
 <tr class="separator:a3ae801d63a324b2863d0b308abaa46d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -307,6 +309,21 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="aa5d3073c8b752ac3549307f9b418a4d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5d3073c8b752ac3549307f9b418a4d1">&#9670;&nbsp;</a></span>positionUpdate</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt; ecs::systems::positionUpdate</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>System used to push updated position of entity to the server outgoing queue. </p>
+
+</div>
+</div>
 <a id="a3ae801d63a324b2863d0b308abaa46d9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3ae801d63a324b2863d0b308abaa46d9">&#9670;&nbsp;</a></span>projectileCollision</h2>
 
@@ -333,7 +350,6 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>System used to push death of entity message to the server outgoing queue when is life as gone under 0.</p>
-<p>System used to push updated position of entity to the server outgoing queue.</p>
 <p>System used to pop incoming tasks given by clients. </p>
 
 </div>

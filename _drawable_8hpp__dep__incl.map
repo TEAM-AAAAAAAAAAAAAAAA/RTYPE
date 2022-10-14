@@ -1,6 +1,8 @@
 <map id="src/ecs/components/Drawable.hpp" name="src/ecs/components/Drawable.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="6,5,157,47"/>
-<area shape="rect" id="node2" href="$_engine_8hpp.html" title=" " alt="" coords="10,169,153,196"/>
-<area shape="rect" id="node4" href="$_draw_8hpp.html" title=" " alt="" coords="53,95,243,121"/>
-<area shape="rect" id="node3" href="$_demo_8cpp.html" title=" " alt="" coords="5,244,157,271"/>
+<area shape="rect" id="node1" title=" " alt="" coords="126,5,277,47"/>
+<area shape="rect" id="node2" href="$client_2entrypoint_8cpp.html" title=" " alt="" coords="5,244,184,271"/>
+<area shape="rect" id="node3" href="$_engine_8hpp.html" title=" " alt="" coords="213,169,355,196"/>
+<area shape="rect" id="node6" href="$_draw_8hpp.html" title=" " alt="" coords="106,95,297,121"/>
+<area shape="rect" id="node4" href="$_demo_8cpp.html" title=" " alt="" coords="208,244,360,271"/>
+<area shape="rect" id="node5" href="$server_2entrypoint_8cpp.html" title=" " alt="" coords="384,244,568,271"/>
 </map>

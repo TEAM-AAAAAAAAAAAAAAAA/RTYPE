@@ -1,5 +1,8 @@
 var dir_c145e94a3511d74671e0de53a480e354 =
 [
+    [ "ClientSocket.hpp", "_client_socket_8hpp.html", [
+      [ "ClientSocket", "structecs_1_1component_1_1_client_socket.html", null ]
+    ] ],
     [ "Controllable.hpp", "_controllable_8hpp.html", [
       [ "Controllable", "structecs_1_1component_1_1_controllable.html", "structecs_1_1component_1_1_controllable" ]
     ] ],
@@ -23,9 +26,6 @@ var dir_c145e94a3511d74671e0de53a480e354 =
     ] ],
     [ "Health.hpp", "_health_8hpp.html", [
       [ "Health", "structecs_1_1component_1_1_health.html", "structecs_1_1component_1_1_health" ]
-    ] ],
-    [ "Network.hpp", "_network_8hpp.html", [
-      [ "Network", "structecs_1_1component_1_1_network.html", "structecs_1_1component_1_1_network" ]
     ] ],
     [ "NetworkId.hpp", "_network_id_8hpp.html", [
       [ "NetworkId", "structecs_1_1component_1_1_network_id.html", "structecs_1_1component_1_1_network_id" ]

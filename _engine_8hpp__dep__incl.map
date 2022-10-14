@@ -1,4 +1,6 @@
 <map id="src/ecs/Engine.hpp" name="src/ecs/Engine.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="10,6,153,33"/>
-<area shape="rect" id="node2" href="$_demo_8cpp.html" title=" " alt="" coords="5,81,157,108"/>
+<area shape="rect" id="node1" title=" " alt="" coords="213,6,355,33"/>
+<area shape="rect" id="node2" href="$client_2entrypoint_8cpp.html" title=" " alt="" coords="5,81,184,108"/>
+<area shape="rect" id="node3" href="$_demo_8cpp.html" title=" " alt="" coords="208,81,360,108"/>
+<area shape="rect" id="node4" href="$server_2entrypoint_8cpp.html" title=" " alt="" coords="384,81,568,108"/>
 </map>
