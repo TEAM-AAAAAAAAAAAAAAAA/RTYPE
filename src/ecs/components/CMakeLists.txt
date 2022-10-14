@@ -14,7 +14,6 @@ set(COMPONENTS_SRC
     ${SRCROOT}/Size.hpp
     ${SRCROOT}/Velocity.hpp
     ${SRCROOT}/Weapon.hpp
-    ${SRCROOT}/Network.hpp
     ${SRCROOT}/NetworkId.hpp
     ${SRCROOT}/EntityType.hpp
     ${SRCROOT}/EntityLife.hpp

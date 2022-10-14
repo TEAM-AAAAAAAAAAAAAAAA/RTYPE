@@ -39,9 +39,9 @@
 # build Folder
 build
 cmake-build-debug
-rtype_client
-rtype_server
-rtype_demo
+r-type_client
+r-type_server
+r-type_demo
 vcpkg_installed
 
 # Useless execs

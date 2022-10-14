@@ -9,9 +9,12 @@
 
 namespace network
 {
+    Server Server::_Instance;
+
     Server::Server(unsigned short localPort)
         : _socket(_ioService, udp::endpoint(udp::v4(), localPort)), _serviceThread(&Server::runService, this),
-          _nextClientID(0L), _interpretThread(&Server::interpretIncoming, this), _outgoingThread(&Server::sendOutgoing, this)
+          _nextClientID(0L), _interpretThread(&Server::interpretIncoming, this),
+          _outgoingThread(&Server::sendOutgoing, this)
     {
         std::cerr << "Starting server on port " << localPort << std::endl;
     };
@@ -24,6 +27,7 @@ namespace network
 
     void Server::startReceive()
     {
+        _recvBuffer.fill(0);
         _socket.async_receive_from(boost::asio::buffer(_recvBuffer), _remoteEndpoint,
             [this](std::error_code ec, std::size_t bytesRecvd) { this->handleReceive(ec, bytesRecvd); });
     }
@@ -67,8 +71,8 @@ namespace network
     void Server::sendOutgoing(void)
     {
         while (1) {
-            if (!outgoingMessages.empty())
-                sendToAll(outgoingMessages.pop().first);
+            if (!_outgoingMessages.empty())
+                sendToAll(_outgoingMessages.pop().first);
         }
     }
 
@@ -106,7 +110,7 @@ namespace network
     void Server::sendToClient(const std::array<char, 10> &message, uint32_t clientID)
     {
         try {
-            send(message, _clients.at(clientID));
+            _Instance.send(message, _Instance._clients.at(clientID));
         } catch (std::out_of_range) {
             std::cerr << "sendToClient : Unknown client ID " << clientID << std::endl;
         }
@@ -114,8 +118,8 @@ namespace network
 
     void Server::sendToAll(const std::array<char, 10> &message)
     {
-        for (auto client : _clients)
-            send(message, client.second);
+        for (auto client : _Instance._clients)
+            _Instance.send(message, client.second);
     }
 
     void Server::interpretIncoming(void)
@@ -128,15 +132,17 @@ namespace network
         }
     }
 
-    size_t Server::getClientCount() { return _clients.size(); }
+    size_t Server::getClientCount() { return _Instance._clients.size(); }
 
     uint32_t Server::getClientIdByIndex(size_t index)
     {
-        auto it = _clients.begin();
+        auto it = _Instance._clients.begin();
         for (int i = 0; i < index; i++)
             ++it;
         return it->first;
     };
 
-    bool Server::hasMessages() { return !_incomingMessages.empty(); };
+    bool Server::hasMessages() { return !_Instance._incomingMessages.empty(); };
+
+    LockedQueue<ServerMessage> &Server::getOutgoingMessages() { return _Instance._outgoingMessages; }
 } // namespace network

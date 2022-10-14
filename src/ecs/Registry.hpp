@@ -142,7 +142,7 @@ namespace ecs
         {
             registerComponent<Component>();
             return std::any_cast<SparseArray<Component> &>(_componentsArrays[std::type_index(typeid(Component))])
-                .insertAt(to._id, Component(p...));
+                .emplaceAt(to._id, p...);
         }
         /**
          * This function is used to remove a component into an Entity given as parameter
