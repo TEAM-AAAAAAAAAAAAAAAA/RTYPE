@@ -11,7 +11,8 @@ namespace network
 {
     Server::Server(unsigned short localPort)
         : _socket(_ioService, udp::endpoint(udp::v4(), localPort)), _serviceThread(&Server::runService, this),
-          _nextClientID(0L), _interpretThread(&Server::interpretIncoming, this), _outgoingThread(&Server::sendOutgoing, this)
+          _nextClientID(0L), _interpretThread(&Server::interpretIncoming, this),
+          _outgoingThread(&Server::sendOutgoing, this)
     {
         std::cerr << "Starting server on port " << localPort << std::endl;
     };
@@ -24,6 +25,7 @@ namespace network
 
     void Server::startReceive()
     {
+        _recvBuffer.fill(0);
         _socket.async_receive_from(boost::asio::buffer(_recvBuffer), _remoteEndpoint,
             [this](std::error_code ec, std::size_t bytesRecvd) { this->handleReceive(ec, bytesRecvd); });
     }
