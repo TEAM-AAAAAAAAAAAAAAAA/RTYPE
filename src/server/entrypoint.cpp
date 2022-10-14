@@ -1,9 +1,11 @@
 #include <iostream>
 #include "Engine.hpp"
-// #include "components/Faction.hpp"
+#include "Server.hpp"
 #include "components/Faction.hpp"
 #include "components/Health.hpp"
 #include "systems/ProjectileCollision.hpp"
+
+network::Server SERVER(8000);
 
 ecs::World getGameWorld(ecs::Engine &engine)
 {
@@ -21,7 +23,7 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.registry.addComponent<ecs::component::Weapon>(player, {100, 10, 10});
     world.registry.addComponent<ecs::component::Health>(player, {100});
     world.registry.addComponent<ecs::component::Faction>(player, {ecs::component::Faction::Factions::Players});
-    world.addSystem(ecs::systems::positionLogger);
+    // world.addSystem(ecs::systems::positionLogger);
     world.addSystem(ecs::systems::movement);
     world.addSystem(ecs::systems::projectileCollision);
 
