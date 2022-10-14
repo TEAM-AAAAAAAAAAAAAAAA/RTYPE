@@ -3,5 +3,4 @@ source_group("" FILES ${SRC})
 
 add_subdirectory(ecs)
 add_subdirectory(client)
-add_subdirectory(demo)
 add_subdirectory(server)
