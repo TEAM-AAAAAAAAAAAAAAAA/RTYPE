@@ -36,8 +36,7 @@ namespace network
          * Constructor which runs a thread for handling server inputs
          * @param localPort the port on which the server runs
          */
-        Server() : Server(8000) {}
-        explicit Server(unsigned short localPort);
+        explicit Server(unsigned short localPort = 8000);
 
         /**
          * Destroy the Server object and join all thread pools
