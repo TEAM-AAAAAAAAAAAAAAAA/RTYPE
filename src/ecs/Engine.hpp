@@ -26,10 +26,6 @@
 #include "systems/ManageClientEvents.hpp"
 #include "systems/Movement.hpp"
 #include "systems/PositionLogger.hpp"
-#ifndef CLIENT_COMPILATION_MODE
-    #include "../server/Server.hpp"
-extern network::Server SERVER;
-#endif
 
 namespace ecs
 {

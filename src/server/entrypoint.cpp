@@ -5,8 +5,6 @@
 #include "components/Health.hpp"
 #include "systems/ProjectileCollision.hpp"
 
-network::Server SERVER(8000);
-
 ecs::World getGameWorld(ecs::Engine &engine)
 {
     ecs::World world(engine.getWindow());

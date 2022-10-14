@@ -33,12 +33,6 @@ namespace network
     class Server {
       public:
         /**
-         * Constructor which runs a thread for handling server inputs
-         * @param localPort the port on which the server runs
-         */
-        explicit Server(unsigned short localPort = 8000);
-
-        /**
          * Destroy the Server object and join all thread pools
          */
         ~Server();
@@ -47,40 +41,42 @@ namespace network
          * This function allows us to check if the server has received messages
          *@return true if there are messages
          */
-        bool hasMessages();
+        static bool hasMessages();
 
         /**
          * This function sends a message to a client determined by his ID
          * @param message the message to send
          * @param clientID the ID of the client
          */
-        void sendToClient(const std::array<char, 10> &message, uint32_t clientID);
+        static void sendToClient(const std::array<char, 10> &message, uint32_t clientID);
 
         /**
          * Send a message to all clients that have connected to the server
          *@param message the message to send
          */
-        void sendToAll(const std::array<char, 10> &message);
+        static void sendToAll(const std::array<char, 10> &message);
 
         /**
          * Get the amount of clients that are connected
          * @return Amount of connected clients
          */
-        size_t getClientCount();
+        static size_t getClientCount();
 
         /**
          * Get the ID of client from the clients array
          * @param index the index for the array
          * @return client ID of client n
          */
-        uint32_t getClientIdByIndex(size_t index);
+        static uint32_t getClientIdByIndex(size_t index);
 
+        static LockedQueue<ServerMessage> &getOutgoingMessages();
+
+      private:
         /**
          * Locked queue of all unprocessed incoming messages
          */
-        LockedQueue<ServerMessage> outgoingMessages;
+        LockedQueue<ServerMessage> _outgoingMessages;
 
-      private:
         /**
          * All network related variables
          */
@@ -164,5 +160,13 @@ namespace network
          */
         ClientList _clients;
         int _nextClientID;
+
+        /**
+         * Constructor which runs a thread for handling server inputs
+         * @param localPort the port on which the server runs
+         */
+        Server(unsigned short localPort = 8000);
+
+        static Server _Instance;
     };
 } // namespace network
