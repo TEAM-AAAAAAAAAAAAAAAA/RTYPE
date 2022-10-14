@@ -17,8 +17,8 @@ namespace ecs::component
      */
     struct Drawable {
 #ifdef CLIENT_COMPILATION_MODE
-        explicit Drawable(const std::filesystem::path &texture) { Texture.loadFromFile(texture); }
-        Drawable(const std::filesystem::path &texture, sf::IntRect rect) { Texture.loadFromFile(texture, rect); }
+        explicit Drawable(const std::filesystem::path &texture) { Texture.loadFromFile(texture.generic_string()); }
+        Drawable(const std::filesystem::path &texture, sf::IntRect rect) { Texture.loadFromFile(texture.generic_string(), rect); }
         explicit Drawable(const sf::Texture &texture) : Texture(texture) {}
 
         sf::Texture Texture;
