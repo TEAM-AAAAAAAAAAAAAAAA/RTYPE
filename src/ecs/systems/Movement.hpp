@@ -42,6 +42,7 @@ namespace ecs::systems
 #endif
 
                 if (pos && vel && dir) {
+                    std::cout << dir.value().x << " " << dir.value().y << std::endl;
                     pos.value().x += vel.value().x * dir.value().x;
                     pos.value().y += vel.value().y * dir.value().y;
 #ifdef CLIENT_COMPILATION_MODE

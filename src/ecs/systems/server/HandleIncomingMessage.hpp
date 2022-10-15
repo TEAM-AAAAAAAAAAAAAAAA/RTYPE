@@ -9,6 +9,7 @@
 
 #include <functional>
 #include <iostream>
+#include "../server/Server.hpp"
 #include "World.hpp"
 #include "components/Direction.hpp"
 #include "components/EntityType.hpp"
@@ -19,7 +20,6 @@
 #include "components/Size.hpp"
 #include "components/Velocity.hpp"
 #include "components/Weapon.hpp"
-#include "../server/Server.hpp"
 
 namespace ecs::systems
 {
@@ -47,8 +47,19 @@ namespace ecs::systems
         network::Server::getOutgoingMessages().push(message);
     }
 
+    static void movePlayer(World &world, network::ClientMessage &msg)
+    {
+        auto &directions = world.registry.getComponents<component::Direction>();
+
+        if (msg.second < directions.size() || !directions[msg.second])
+            return;
+
+        directions[msg.second].value().x = msg.first[1];
+        directions[msg.second].value().x = msg.first[2];
+    }
+
     static std::unordered_map<char, std::function<void(World &, network::ClientMessage &msg)>> packetTypeFunction = {
-        {0, createPlayer}};
+        {0, createPlayer}, {ecs::Event::EventType::Move, movePlayer}};
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Server::getIncomingMessages().empty()) {

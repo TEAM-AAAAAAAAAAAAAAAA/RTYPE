@@ -25,6 +25,7 @@
 #include "systems/client/HandleIncomingMessages.hpp"
 #include "systems/client/HandleSFMLEvents.hpp"
 #include "systems/client/HandleSFMLKeys.hpp"
+#include "systems/client/SendDirection.hpp"
 
 ecs::World getGameWorld(ecs::Engine &engine)
 {
@@ -74,6 +75,7 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.addSystem(ecs::systems::manageClientEvents);
     world.addSystem(ecs::systems::draw);
     world.addSystem(ecs::systems::HandleIncomingMessages);
+    world.addSystem(ecs::systems::SendDirection);
     return world;
 }
 

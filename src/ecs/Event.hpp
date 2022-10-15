@@ -22,6 +22,7 @@ namespace ecs
             Null,
             Unknown,
             Quit,
+            Move,
             MoveUp,
             MoveLeft,
             MoveDown,
@@ -61,6 +62,8 @@ namespace ecs
         inline bool operator!=(const Event other) const { return _e != other._e; };
 
         inline bool operator!=(const Event::EventType type) const { return _e != type; };
+
+        inline char serialize() const { return _e; }
 
       private:
         const EventType _e;
