@@ -82,7 +82,7 @@ namespace network
                     auto message = Message(_recvBuffer);
                     if (!message.empty()) {
                         _incomingMessages.push(message);
-                        std::cerr << "Sending message :"; // Debug print
+                        std::cerr << "Receiving message :"; // Debug print
                         for (auto &c : message)           //
                             std::cerr << '\\' << (int)c;  //
                         std::cerr << std::endl;           //
