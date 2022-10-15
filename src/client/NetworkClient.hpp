@@ -108,12 +108,6 @@ namespace network
         void handleSend(std::array<char, 10> message, const std::error_code &error, std::size_t bytesTransferred) {}
 
         /**
-         * Sends a message to the server
-         *@param msg the message being sent
-         */
-        void send(const std::array<char, 10> &msg) { _socket.send_to(boost::asio::buffer(msg, msg.size()), _endpoint); }
-
-        /**
          * Run the client's service
          */
         void runService()
