@@ -15,15 +15,16 @@ using boost::asio::ip::udp;
 
 namespace network
 {
-    class Client {
-      public:
-        Client(boost::asio::io_service &ioService, const std::string &host, const std::string &port)
-            : _ioService(ioService), _serviceThread(&Client::runService, this), _outgoingThread(&Client::sendOutgoing, this), _socket(ioService, udp::endpoint(udp::v4(), 0))
+    class Client
+    {
+    public:
+        Client(const std::string &host, const std::string &port)
+            : _serviceThread(&Client::runService, this), _outgoingThread(&Client::sendOutgoing, this), _socket(_ioService)
         {
             udp::resolver resolver(_ioService);
             udp::resolver::query query(udp::v4(), host, port);
-            udp::resolver::iterator iter = resolver.resolve(query);
-            _endpoint = *iter;
+            _endpoint = *resolver.resolve(query);
+            _socket.open(udp::v4());
         }
 
         ~Client()
@@ -49,11 +50,11 @@ namespace network
          */
         LockedQueue<std::array<char, 10>> incomingMessages;
 
-      private:
+    private:
         /**
          * All network related variables
          */
-        boost::asio::io_service &_ioService;
+        boost::asio::io_service _ioService;
         udp::socket _socket;
         std::array<char, 10> _recvBuffer;
         udp::endpoint _endpoint;
@@ -66,7 +67,36 @@ namespace network
          */
         void handleReceive(const std::error_code &error, std::size_t bytesTransferred)
         {
+            if (!error)
+            {
+                try
+                {
+                    auto message = std::array<char, 10>(_recvBuffer);
+                    if (!message.empty())
+                    {
+                        incomingMessages.push(message);
+                        std::cerr << "Sending message :"; // Debug print
+                        for (auto &c : outgoingMessages.front()) //
+                            std::cerr << '\\' << (int)c; //
+                        std::cerr << std::endl; //
+                    }
+                }
+                catch (const std::exception &e)
+                {
+                    std::cerr << e.what() << '\n';
+                }
+            }
+            startReceive();
+        }
 
+        void startReceive()
+        {
+            udp::endpoint senderEndpoint;
+
+            _recvBuffer.fill(0);
+            _socket.async_receive_from(boost::asio::buffer(_recvBuffer), senderEndpoint,
+                                       [this](std::error_code ec, std::size_t bytesRecvd)
+                                       { this->handleReceive(ec, bytesRecvd); });
         }
 
         /**
@@ -78,20 +108,44 @@ namespace network
         void handleSend(std::array<char, 10> message, const std::error_code &error, std::size_t bytesTransferred) {}
 
         /**
-         * Sends a message to the server
-         *@param msg the message being sent
-         */
-        void send(const std::array<char, 10> &msg) { _socket.send_to(boost::asio::buffer(msg, msg.size()), _endpoint); }
-
-        /**
          * Run the client's service
          */
-        void runService();
+        void runService()
+        {
+            usleep(10000);
+            startReceive();
+            while (!_ioService.stopped())
+            {
+                try
+                {
+                    _ioService.run();
+                }
+                catch (const std::exception &e)
+                {
+                    std::cerr << e.what() << '\n';
+                }
+            }
+        }
 
         /**
          * Send messages in the outgoing message queue
          */
-        void sendOutgoing();
+        void sendOutgoing()
+        {
+            sleep(1);
+            while (!_ioService.stopped())
+            {
+                if (!outgoingMessages.empty())
+                {
+                    std::cerr << "Sending message :"; // Debug print
+                    for (auto &c : outgoingMessages.front()) //
+                        std::cerr << '\\' << (int)c; //
+                    std::cerr << std::endl; //
+                    auto msg = outgoingMessages.pop();
+                    _socket.send_to(boost::asio::buffer(msg), _endpoint);
+                }
+            }
+        }
 
         /**
          * Threads used by the client class
