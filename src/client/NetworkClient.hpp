@@ -20,6 +20,8 @@ namespace network
         {
             _Instance._socket.close();
             _Instance._ioService.stop();
+            _Instance._outgoingThread.join();
+            _Instance._serviceThread.join();
         }
 
         static Message receive(void)
