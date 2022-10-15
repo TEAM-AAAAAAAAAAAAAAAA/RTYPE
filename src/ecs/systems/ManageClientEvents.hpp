@@ -10,10 +10,10 @@
 #include <functional>
 #include "Event.hpp"
 #include "World.hpp"
-#include "components/Controllable.hpp"
+#include "components/client/Controllable.hpp"
 #include "components/Direction.hpp"
 #include "components/Faction.hpp"
-#include "components/Projectile.hpp"
+#include "components/server/Projectile.hpp"
 #include "components/Weapon.hpp"
 
 namespace ecs::systems

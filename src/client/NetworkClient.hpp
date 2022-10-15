@@ -79,7 +79,7 @@ namespace network
 
         /**
          * Sends a message to the server
-         *@param msg the message being sent
+         * @param msg the message being sent
          */
         void send(const std::array<char, 10> &msg) { _socket.send_to(boost::asio::buffer(msg, msg.size()), _endpoint); }
 

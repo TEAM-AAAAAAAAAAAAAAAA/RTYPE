@@ -10,13 +10,13 @@ add_subdirectory(utils)
 set(ECS_SRC
     ${COMPONENTS_SRC}
     ${SYSTEMS_SRC}
-    ${ECS_SRCROOT}/Constant.hpp
-    ${ECS_SRCROOT}/Engine.hpp
-    ${ECS_SRCROOT}/Entity.hpp
-    ${ECS_SRCROOT}/Event.hpp
-    ${ECS_SRCROOT}/Registry.hpp
-    ${ECS_SRCROOT}/SparseArray.hpp
-    ${ECS_SRCROOT}/World.hpp
+    # ${ECS_SRCROOT}/Constant.hpp
+    # ${ECS_SRCROOT}/Engine.hpp
+    # ${ECS_SRCROOT}/Entity.hpp
+    # ${ECS_SRCROOT}/Event.hpp
+    # ${ECS_SRCROOT}/Registry.hpp
+    # ${ECS_SRCROOT}/SparseArray.hpp
+    # ${ECS_SRCROOT}/World.hpp
 )
 
 set(ECS_INCDIRS
@@ -26,15 +26,15 @@ set(ECS_INCDIRS
 )
 
 
-add_library(${TARGET} SHARED ${ECS_SRC})
+# add_library(${TARGET} SHARED ${ECS_SRC})
 
-include(GenerateExportHeader)
+# include(GenerateExportHeader)
 
-generate_export_header(${TARGET})
+# generate_export_header(${TARGET})
 
-target_include_directories(${TARGET}
-                      PUBLIC ${INCROOT}
-                      PRIVATE ${ECS_INCDIRS}
-)
+# target_include_directories(${TARGET}
+#                       PUBLIC ${INCROOT}
+#                       PRIVATE ${ECS_INCDIRS}
+# )
 
-set_target_properties(${TARGET} PROPERTIES LINKER_LANGUAGE CXX)
+# set_target_properties(${TARGET} PROPERTIES LINKER_LANGUAGE CXX)

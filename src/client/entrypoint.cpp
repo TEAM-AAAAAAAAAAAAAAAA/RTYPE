@@ -8,23 +8,21 @@
 #include <iostream>
 #include "Engine.hpp"
 #include "SFML/Graphics.hpp"
-#include "components/Controllable.hpp"
+#include "components/client/Controllable.hpp"
 #include "components/Direction.hpp"
-#include "components/Drawable.hpp"
-#include "components/EnemyAI.hpp"
+#include "components/client/Drawable.hpp"
 #include "components/Faction.hpp"
 #include "components/Health.hpp"
 #include "components/Position.hpp"
 #include "components/Size.hpp"
 #include "components/Velocity.hpp"
 #include "components/Weapon.hpp"
-#include "systems/Draw.hpp"
-#include "systems/HandleSFMLEvents.hpp"
-#include "systems/HandleSFMLKeys.hpp"
+#include "systems/client/Draw.hpp"
+#include "systems/client/HandleSFMLEvents.hpp"
+#include "systems/client/HandleSFMLKeys.hpp"
 #include "systems/ManageClientEvents.hpp"
 #include "systems/Movement.hpp"
 #include "systems/PositionLogger.hpp"
-#include "systems/ProjectileCollision.hpp"
 
 ecs::World getGameWorld(ecs::Engine &engine)
 {
@@ -43,12 +41,10 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.registry.addComponent<ecs::component::Faction>(player, {ecs::component::Faction::Factions::Players});
     // world.addSystem(ecs::systems::positionLogger);
     world.addSystem(ecs::systems::movement);
-    world.addSystem(ecs::systems::projectileCollision);
 
     ecs::Entity enemy = world.registry.spawn_entity();
     world.registry.addComponent<ecs::component::Position>(enemy, {500, 500});
     world.registry.addComponent<ecs::component::Size>(enemy, {64, 128});
-    world.registry.addComponent<ecs::component::EnemyAI>(enemy, {});
     world.registry.addComponent<ecs::component::Health>(enemy, {100});
     world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Enemies});
 

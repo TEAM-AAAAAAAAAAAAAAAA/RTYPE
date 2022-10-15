@@ -3,7 +3,8 @@
 #include "Server.hpp"
 #include "components/Faction.hpp"
 #include "components/Health.hpp"
-#include "systems/ProjectileCollision.hpp"
+#include "systems/server/ProjectileCollision.hpp"
+#include "systems/Movement.hpp"
 
 ecs::World getGameWorld(ecs::Engine &engine)
 {

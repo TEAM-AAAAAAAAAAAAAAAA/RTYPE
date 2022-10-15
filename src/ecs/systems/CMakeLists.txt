@@ -2,9 +2,6 @@ set(INCROOT ${PROJECT_SOURCE_DIR}/src/ecs/systems)
 set(SRCROOT ${PROJECT_SOURCE_DIR}/src/ecs/systems)
 
 set(SYSTEMS_SRC
-    ${SRCROOT}/Draw.hpp
-    ${SRCROOT}/HandleSFMLEvents.hpp
-    ${SRCROOT}/HandleSFMLKeys.hpp
     ${SRCROOT}/ManageClientEvents.hpp
     ${SRCROOT}/Movement.hpp
     ${SRCROOT}/PositionLogger.hpp

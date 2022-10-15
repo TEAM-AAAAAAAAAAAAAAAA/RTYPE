@@ -9,8 +9,8 @@
 
 #include <functional>
 #include "World.hpp"
-#include "components/Controllable.hpp"
-#include "components/Shootable.hpp"
+#include "components/client/Controllable.hpp"
+#include "components/client/Shootable.hpp"
 
 namespace ecs::systems
 {
