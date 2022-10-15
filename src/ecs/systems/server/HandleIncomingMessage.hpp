@@ -31,11 +31,13 @@ namespace ecs::systems
         world.registry.addComponent<ecs::component::Velocity>(newPlayer, {5, 5});
         world.registry.addComponent<ecs::component::Size>(newPlayer, {32, 64});
         world.registry.addComponent<ecs::component::Direction>(newPlayer, {1, 0});
+        world.registry.addComponent<ecs::component::EntityType>(newPlayer, {ecs::component::EntityType::Types::Player});
         world.registry.addComponent<ecs::component::Weapon>(newPlayer, {100, 10, 10});
         world.registry.addComponent<ecs::component::Health>(newPlayer, {100});
         world.registry.addComponent<ecs::component::NetworkId>(newPlayer, {static_cast<size_t>(newPlayer)});
         world.registry.addComponent<ecs::component::Faction>(newPlayer, {ecs::component::Faction::Factions::Players});
 
+        std::cerr << "New connection !" << std::endl; // Debug print
         network::ServerMessage message;
         message.first.fill(0);
         message.first[1] = static_cast<size_t>(newPlayer) >> 8;
@@ -49,7 +51,8 @@ namespace ecs::systems
         {0, createPlayer}};
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
-        while (!network::Server::getOutgoingMessages().empty()) {
+        while (!network::Server::getIncomingMessages().empty()) {
+            std::cerr << "Handling messages !" << std::endl; // Debug print
             network::ClientMessage msg = network::Server::getIncomingMessages().pop();
             packetTypeFunction[msg.first[0]](world, msg);
         }

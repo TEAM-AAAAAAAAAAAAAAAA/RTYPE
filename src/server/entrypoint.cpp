@@ -7,6 +7,7 @@
 #include "systems/Movement.hpp"
 #include "systems/server/HandleIncomingMessage.hpp"
 #include "systems/server/ProjectileCollision.hpp"
+#include "systems/server/PositionUpdate.hpp"
 
 ecs::World getGameWorld(ecs::Engine &engine)
 {
@@ -21,7 +22,10 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.registry.registerComponent<ecs::component::Weapon>();
     world.registry.registerComponent<ecs::component::Velocity>();
     world.registry.registerComponent<ecs::component::NetworkId>();
-
+    world.registry.registerComponent<ecs::component::EntityType>();
+    world.registry.registerComponent<ecs::component::Size>();
+    world.registry.registerComponent<ecs::component::Faction>();
+    world.registry.registerComponent<ecs::component::Position>();
     // world.registry.addComponent<ecs::component::Position>(player, {10, 10});
     // world.registry.addComponent<ecs::component::Velocity>(player, {5, 5});
     // world.registry.addComponent<ecs::component::Size>(player, {32, 64});
@@ -33,6 +37,7 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.addSystem(ecs::systems::movement);
     world.addSystem(ecs::systems::projectileCollision);
     world.addSystem(ecs::systems::HandleIncomingMessages);
+    world.addSystem(ecs::systems::PositionUpdate);
 
     ecs::Entity enemy = world.registry.spawn_entity();
     world.registry.addComponent<ecs::component::Position>(enemy, {500, 500});

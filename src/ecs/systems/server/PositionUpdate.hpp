@@ -9,11 +9,15 @@
 
 #include <functional>
 #include <iostream>
-#include "EntityType.hpp"
-#include "Server.hpp"
-#include "NetworkId.hpp"
-#include "Position.hpp"
-#include "Size.hpp"
+#include "components/Direction.hpp"
+#include "components/EntityType.hpp"
+#include "components/Faction.hpp"
+#include "components/Health.hpp"
+#include "components/NetworkId.hpp"
+#include "components/Position.hpp"
+#include "components/Size.hpp"
+#include "components/Velocity.hpp"
+#include "components/Weapon.hpp"
 #include "World.hpp"
 
 namespace ecs::systems
@@ -22,7 +26,7 @@ namespace ecs::systems
      * System used to push updated position of entity
      * to the server outgoing queue.
      */
-    std::function<void(World &)> positionUpdate = [](World &world) {
+    std::function<void(World &)> PositionUpdate = [](World &world) {
         auto &position = world.registry.getComponents<component::Position>();
         auto &networkId = world.registry.getComponents<component::NetworkId>();
         auto &entityType = world.registry.getComponents<component::EntityType>();
@@ -38,7 +42,7 @@ namespace ecs::systems
                 std::array<char, 2> idBin = id.value().serialize();
                 std::array<char, 4> posBin = pos.value().serialize();
                 std::array<char, 2> sizeBin = size.value().serialize();
-                Message msg;
+                network::Message msg;
                 msg[1] = idBin[0];
                 msg[2] = idBin[1];
                 msg[3] = type.value().type;

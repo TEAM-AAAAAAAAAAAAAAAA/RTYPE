@@ -32,17 +32,19 @@ ecs::World getGameWorld(ecs::Engine &engine)
 
     // ecs::Entity player = world.registry.spawn_entity();
 
-    world.registry.registerComponent<ecs::component::Projectile>();
+    world.registry.registerComponent<ecs::component::EntityType>();
     world.registry.registerComponent<ecs::component::Velocity>();
     world.registry.registerComponent<ecs::component::Size>();
+    world.registry.registerComponent<ecs::component::Faction>();
+    world.registry.registerComponent<ecs::component::NetworkId>();
+    world.registry.registerComponent<ecs::component::Position>();
+    world.registry.registerComponent<ecs::component::Projectile>();
     world.registry.registerComponent<ecs::component::Direction>();
     world.registry.registerComponent<ecs::component::Weapon>();
     world.registry.registerComponent<ecs::component::Health>();
-    world.registry.registerComponent<ecs::component::Faction>();
     world.registry.registerComponent<ecs::component::Drawable>();
     world.registry.registerComponent<ecs::component::Shootable>();
     world.registry.registerComponent<ecs::component::Controllable>();
-    world.registry.registerComponent<ecs::component::Position>();
 
     // world.registry.addComponent<ecs::component::Position>(player, {10, 10});
     // world.registry.addComponent<ecs::component::Velocity>(player, {5, 5});

@@ -9,31 +9,37 @@
 
 #include <functional>
 #include <iostream>
-#include "AssetManager.hpp"
 #include "../client/NetworkClient.hpp"
+#include "AssetManager.hpp"
 #include "World.hpp"
 #include "components/EntityType.hpp"
 #include "components/NetworkId.hpp"
 #include "components/Position.hpp"
 #include "components/Size.hpp"
 #include "components/Velocity.hpp"
+#include "components/client/Controllable.hpp"
 #include "components/client/Drawable.hpp"
 #include "components/client/Shootable.hpp"
-#include "components/client/Controllable.hpp"
 
 namespace ecs::systems
 {
     static void movePacketHandle(World &world, network::Message &msg)
     {
+        std::cerr << "HandleIncomingMessages" << std::endl;
         auto &positions = world.registry.getComponents<component::Position>();
+        std::cerr << "HandleIncomingMessages" << std::endl;
         auto &networkId = world.registry.getComponents<component::NetworkId>();
+        std::cerr << "HandleIncomingMessages" << std::endl;
         auto &velocities = world.registry.getComponents<component::Velocity>();
+        std::cerr << "HandleIncomingMessages" << std::endl;
         auto &sizes = world.registry.getComponents<component::Size>();
+        std::cerr << "HandleIncomingMessages" << std::endl;
         auto &types = world.registry.getComponents<component::EntityType>();
         size_t msgId = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
         size_t posX = (unsigned char)msg[4] << 8U | (unsigned char)msg[5];
         size_t posY = (unsigned char)msg[6] << 8U | (unsigned char)msg[7];
 
+        std::cerr << "HandleIncomingMessages" << std::endl;
         for (size_t i = 0; i < networkId.size(); i++)
             if (networkId[i] && networkId[i]->id == msgId) {
                 if (i < sizes.size() && sizes[i]) {
@@ -53,6 +59,7 @@ namespace ecs::systems
                 }
                 return;
             }
+        std::cerr << "HandleIncomingMessages" << std::endl;
         Entity newEntity = world.registry.spawn_entity();
         world.registry.addComponent<component::EntityType>(newEntity, {msg[3]});
         world.registry.addComponent<component::NetworkId>(newEntity, {msgId});
@@ -86,11 +93,13 @@ namespace ecs::systems
     }
 
     static std::unordered_map<char, std::function<void(World &, network::Message &msg)>> packetTypeFunction = {
-        {8, movePacketHandle}};
+        {8, movePacketHandle}, {0, movePacketHandle}};
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Client::getIncomingMessages().empty()) {
+            std::cerr << "HandleIncomingMessages" << std::endl;
             network::Message msg = network::Client::getIncomingMessages().pop();
+            std::cerr << "HandleIncomingMessages" << std::endl;
             packetTypeFunction[msg[0]](world, msg);
         }
     };
