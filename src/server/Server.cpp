@@ -76,7 +76,7 @@ namespace network
         }
     }
 
-    void Server::send(const std::array<char, 10> &message, udp::endpoint endpoint)
+    void Server::send(const Message &message, udp::endpoint endpoint)
     {
         _socket.send_to(boost::asio::buffer(message), endpoint);
     }
@@ -107,7 +107,7 @@ namespace network
         return id;
     };
 
-    void Server::sendToClient(const std::array<char, 10> &message, uint32_t clientID)
+    void Server::sendToClient(const Message &message, uint32_t clientID)
     {
         try {
             _Instance.send(message, _Instance._clients.at(clientID));
@@ -116,7 +116,7 @@ namespace network
         }
     };
 
-    void Server::sendToAll(const std::array<char, 10> &message)
+    void Server::sendToAll(const Message &message)
     {
         for (auto client : _Instance._clients)
             _Instance.send(message, client.second);

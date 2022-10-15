@@ -23,13 +23,6 @@ typedef ClientList::value_type Client;
  */
 namespace network
 {
-    /**
-     * Standard pair class that contains a string and the ID of the client that
-     * sent it
-     */
-    typedef std::pair<std::array<char, 10>, unsigned int> ClientMessage;
-    typedef std::pair<std::array<char, 10>, std::vector<unsigned int>> ServerMessage;
-
     class Server {
       public:
         /**
@@ -48,13 +41,13 @@ namespace network
          * @param message the message to send
          * @param clientID the ID of the client
          */
-        static void sendToClient(const std::array<char, 10> &message, uint32_t clientID);
+        static void sendToClient(const Message &message, uint32_t clientID);
 
         /**
          * Send a message to all clients that have connected to the server
          *@param message the message to send
          */
-        static void sendToAll(const std::array<char, 10> &message);
+        static void sendToAll(const Message &message);
 
         /**
          * Get the amount of clients that are connected
@@ -83,7 +76,7 @@ namespace network
         boost::asio::io_service _ioService;
         udp::endpoint _serverEndpoint;
         udp::endpoint _remoteEndpoint;
-        std::array<char, 10> _recvBuffer;
+        Message _recvBuffer;
         udp::socket _socket;
 
         /**
@@ -124,7 +117,7 @@ namespace network
          * @param error error code of sending
          * @param bytesTransferred the size of the outgoing packet
          */
-        void handleSend(std::array<char, 10> message, const std::error_code &error, std::size_t bytesTransferred) {}
+        void handleSend(Message message, const std::error_code &error, std::size_t bytesTransferred) {}
 
         /**
          * Run the server's service
@@ -143,7 +136,7 @@ namespace network
          * @param message message as an array
          * @param target endpoint of the receiving client
          */
-        void send(const std::array<char, 10> &message, udp::endpoint target);
+        void send(const Message &message, udp::endpoint target);
 
         /**
          * Interpret incoming messages

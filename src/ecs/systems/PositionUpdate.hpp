@@ -23,30 +23,10 @@ namespace ecs::systems
      * to the server outgoing queue.
      */
     std::function<void(World &)> positionUpdate = [](World &world) {
-        auto &network = world.registry.getComponents<component::Network>();
         auto &position = world.registry.getComponents<component::Position>();
         auto &networkId = world.registry.getComponents<component::NetworkId>();
         auto &entityType = world.registry.getComponents<component::EntityType>();
         auto &sizes = world.registry.getComponents<component::Size>();
-
-        if (network.size() == 0) {
-            std::cerr << "Error: Network component not found" << std::endl;
-            return;
-        }
-        size_t netId = 0;
-        for (netId; netId < network.size(); netId++) {
-            if (network[netId])
-                break;
-        }
-        if (netId == network.size()) {
-            std::cerr << "Error: Network component not found" << std::endl;
-            return;
-        }
-        auto &serv = network[netId];
-        if (!serv) {
-            std::cerr << "Error: Network component not found" << std::endl;
-            return;
-        }
 
         for (size_t i = 0; i < position.size() && i < networkId.size() && i < sizes.size() && i < entityType.size();
              i++) {
@@ -58,7 +38,7 @@ namespace ecs::systems
                 std::array<char, 2> idBin = id.value().serialize();
                 std::array<char, 4> posBin = pos.value().serialize();
                 std::array<char, 2> sizeBin = size.value().serialize();
-                std::array<char, 10> msg;
+                Message msg;
                 msg[0] = idBin[0];
                 msg[1] = idBin[1];
                 msg[2] = type.value().type;
@@ -69,7 +49,7 @@ namespace ecs::systems
                 msg[7] = sizeBin[0];
                 msg[8] = sizeBin[1];
                 msg[9] = ecs::constant::getPacketTypeKey(ecs::constant::PacketType::ENTITY_MOVE);
-                serv.value().serv.outgoingQueue.push(network::ServerMessage(msg, std::vector<unsigned int>()));
+                network::Server::getOutgoingMessages().push(network::ServerMessage(msg, std::vector<unsigned int>()));
             }
         }
     };

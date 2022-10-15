@@ -23,6 +23,7 @@
 #include "systems/ManageClientEvents.hpp"
 #include "systems/Movement.hpp"
 #include "systems/PositionLogger.hpp"
+#include "NetworkClient.hpp"
 
 ecs::World getGameWorld(ecs::Engine &engine)
 {
@@ -64,7 +65,12 @@ ecs::World getGameWorld(ecs::Engine &engine)
 
 int main()
 {
+    network::Client::setHost("localhost");
+    network::Client::setPort("8000");
+    network::Client::connect();
     ecs::Engine engine;
+
+    network::Client::getOutgoingMessages().push(std::array<char, 10>{'H', 'e', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l'});
     engine.setWaitingWorld(getGameWorld(engine));
 
     engine.run();
