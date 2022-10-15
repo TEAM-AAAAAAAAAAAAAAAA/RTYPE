@@ -7,7 +7,6 @@ set(TARGET r-type_server)
 set(SRC
     ${SRC_ROOT}/Server.cpp
     ${SRC_ROOT}/Server.hpp
-    # ${SRC_ROOT}/LockedQueue.hpp
     ${SRC_ROOT}/entrypoint.cpp
 )
 
