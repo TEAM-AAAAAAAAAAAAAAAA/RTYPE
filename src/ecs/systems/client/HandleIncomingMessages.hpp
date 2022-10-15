@@ -43,8 +43,8 @@ namespace ecs::systems
         for (size_t i = 0; i < networkId.size(); i++)
             if (networkId[i] && networkId[i]->id == msgId) {
                 if (i < sizes.size() && sizes[i]) {
-                    sizes[i].value().height = msg[8];
-                    sizes[i].value().width = msg[9];
+                    sizes[i].value().width = msg[8];
+                    sizes[i].value().height = msg[9];
                 }
                 if (i < positions.size() && positions[i]) {
                     positions[i].value().x = posX;
