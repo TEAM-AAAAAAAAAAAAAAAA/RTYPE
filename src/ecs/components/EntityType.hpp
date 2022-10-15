@@ -11,6 +11,14 @@ namespace ecs::component
 {
     /// @brief EntityType component
     struct EntityType {
+        enum Types {
+            Player,
+            OtherPlayer,
+            Bullet,
+            EnemyBase,
+            EnemyBoss,
+        };
+        EntityType(char type) : type(type) {}
         char type;
     };
 } // namespace ecs::component

@@ -13,8 +13,7 @@ namespace network
 
     Server::Server(unsigned short localPort)
         : _socket(_ioService, udp::endpoint(udp::v4(), localPort)), _serviceThread(&Server::runService, this),
-          _nextClientID(0L), _interpretThread(&Server::interpretIncoming, this),
-          _outgoingThread(&Server::sendOutgoing, this)
+          _nextClientID(0L), _outgoingThread(&Server::sendOutgoing, this)
     {
         std::cerr << "Starting server on port " << localPort << std::endl;
     };
@@ -70,9 +69,16 @@ namespace network
 
     void Server::sendOutgoing(void)
     {
+
         while (1) {
-            if (!_outgoingMessages.empty())
-                sendToAll(_outgoingMessages.pop().first);
+            if (!_outgoingMessages.empty()) {
+                ServerMessage message = _outgoingMessages.pop();
+                if (message.second.size() == 0)
+                    sendToAll(message.first);
+                else
+                    for (auto &client : message.second)
+                        sendToClient(message.first, client);
+            }
         }
     }
 
@@ -122,16 +128,6 @@ namespace network
             _Instance.send(message, client.second);
     }
 
-    void Server::interpretIncoming(void)
-    {
-        network::ClientMessage message;
-        while (1) {
-            if (!_incomingMessages.empty())
-                message = _incomingMessages.pop();
-            // Deserialize and add as task
-        }
-    }
-
     size_t Server::getClientCount() { return _Instance._clients.size(); }
 
     uint32_t Server::getClientIdByIndex(size_t index)
@@ -145,4 +141,6 @@ namespace network
     bool Server::hasMessages() { return !_Instance._incomingMessages.empty(); };
 
     LockedQueue<ServerMessage> &Server::getOutgoingMessages() { return _Instance._outgoingMessages; }
+
+    LockedQueue<ClientMessage> &Server::getIncomingMessages() { return _Instance._incomingMessages; }
 } // namespace network

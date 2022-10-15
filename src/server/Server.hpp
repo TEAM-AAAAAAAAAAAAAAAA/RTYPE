@@ -64,6 +64,8 @@ namespace network
 
         static LockedQueue<ServerMessage> &getOutgoingMessages();
 
+        static LockedQueue<ClientMessage> &getIncomingMessages();
+
       private:
         /**
          * Locked queue of all unprocessed incoming messages
@@ -84,7 +86,6 @@ namespace network
          */
         std::thread _serviceThread;
         std::thread _outgoingThread;
-        std::thread _interpretThread;
 
         /**
          * Locked queue of all unprocessed incoming messages

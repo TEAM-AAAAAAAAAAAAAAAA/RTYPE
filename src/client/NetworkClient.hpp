@@ -5,6 +5,8 @@
 ** NetworkClient
 */
 
+#pragma once
+
 #include <boost/array.hpp>
 #include <boost/asio.hpp>
 #include <iostream>
@@ -83,9 +85,9 @@ namespace network
                     if (!message.empty()) {
                         _incomingMessages.push(message);
                         std::cerr << "Receiving message :"; // Debug print
-                        for (auto &c : message)           //
-                            std::cerr << '\\' << (int)c;  //
-                        std::cerr << std::endl;           //
+                        for (auto &c : message)             //
+                            std::cerr << '\\' << (int)c;    //
+                        std::cerr << std::endl;             //
                     }
                 } catch (const std::exception &e) {
                     std::cerr << e.what() << '\n';
