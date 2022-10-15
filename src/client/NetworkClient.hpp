@@ -19,7 +19,7 @@ namespace network
     {
     public:
         Client(const std::string &host, const std::string &port)
-            : _serviceThread(&Client::runService, this), _outgoingThread(&Client::sendOutgoing, this), _socket(_ioService)
+            : _socket(_ioService), _serviceThread(&Client::runService, this), _outgoingThread(&Client::sendOutgoing, this)
         {
             udp::resolver resolver(_ioService);
             udp::resolver::query query(udp::v4(), host, port);
@@ -76,7 +76,7 @@ namespace network
                     {
                         incomingMessages.push(message);
                         std::cerr << "Sending message :"; // Debug print
-                        for (auto &c : outgoingMessages.front()) //
+                        for (auto &c : message) //
                             std::cerr << '\\' << (int)c; //
                         std::cerr << std::endl; //
                     }
@@ -112,7 +112,7 @@ namespace network
          */
         void runService()
         {
-            usleep(10000);
+            while (!_socket.is_open());
             startReceive();
             while (!_ioService.stopped())
             {
@@ -137,11 +137,11 @@ namespace network
             {
                 if (!outgoingMessages.empty())
                 {
+                    auto msg = outgoingMessages.pop();
                     std::cerr << "Sending message :"; // Debug print
-                    for (auto &c : outgoingMessages.front()) //
+                    for (auto &c : msg) //
                         std::cerr << '\\' << (int)c; //
                     std::cerr << std::endl; //
-                    auto msg = outgoingMessages.pop();
                     _socket.send_to(boost::asio::buffer(msg), _endpoint);
                 }
             }
