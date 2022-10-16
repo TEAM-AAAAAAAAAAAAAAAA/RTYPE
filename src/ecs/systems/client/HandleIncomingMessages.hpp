@@ -81,16 +81,6 @@ namespace ecs::systems
             world.registry.addComponent<component::Drawable>(
                 newEntity, {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {5, 5, 1, 1}});
         }
-
-        // if (msg[3] == component::EntityType::Types::Player) {
-        //     for (int i = 0; i <)
-        // }
-
-        // for (int i = 0;; i++) {
-        //     if (i < positions.size() && positions[i]) {
-
-        //     }
-        // }
     }
 
     static std::unordered_map<char, std::function<void(World &, network::Message &msg)>> packetTypeFunction = {

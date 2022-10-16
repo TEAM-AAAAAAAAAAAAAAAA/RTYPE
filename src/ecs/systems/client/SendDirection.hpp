@@ -23,7 +23,8 @@ namespace ecs::systems
         auto const &directions = world.registry.getComponents<component::Direction>();
 
         static auto clock = ecs::constant::chrono::now();
-        if (ecs::constant::chronoDuration(ecs::constant::chrono::now() - clock).count() > 1000) {
+        if (ecs::constant::chronoDuration(ecs::constant::chrono::now() - clock).count() > 10) {
+            clock = ecs::constant::chrono::now();
             for (size_t i = 0; i < controllables.size() && i < directions.size(); i++) {
                 if (!controllables[i] || !directions[i])
                     continue;
@@ -35,7 +36,6 @@ namespace ecs::systems
                 msg[1] = directions[i].value().x;
                 msg[2] = directions[i].value().y;
                 network::Client::getOutgoingMessages().push(msg);
-                
 
                 // while (world.getEvent() != ecs::Event::EventType::Null) {
                 //     network::Message msg;
