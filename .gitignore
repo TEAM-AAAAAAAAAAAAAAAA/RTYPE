@@ -35,6 +35,7 @@
 .idea
 .vscode
 .obsidian
+.fleet
 
 # build Folder
 build
