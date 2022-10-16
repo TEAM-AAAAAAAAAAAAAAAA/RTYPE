@@ -23,7 +23,8 @@ namespace ecs::systems
         auto &directions = world.registry.getComponents<component::Direction>();
 
         static auto clock = ecs::constant::chrono::now();
-        if (ecs::constant::chronoDuration(ecs::constant::chrono::now() - clock).count() > 1000) {
+        if (ecs::constant::chronoDuration(ecs::constant::chrono::now() - clock).count() > 10) {
+            clock = ecs::constant::chrono::now();
             for (size_t i = 0; i < controllables.size() && i < directions.size(); i++) {
                 if (!controllables[i] || !directions[i])
                     continue;
