@@ -39,13 +39,6 @@ namespace ecs::systems
                     network::Client::getOutgoingMessages().push(msg);
                     directions[i].value().hasMoved = false;
                 }
-                // while (world.getEvent() != ecs::Event::EventType::Null) {
-                //     network::Message msg;
-                //     msg.fill(0);
-                //     msg[0] = world.getEvent().serialize();
-                //     network::Client::getOutgoingMessages().push(msg);
-                //     world.popEvent();
-                // }
             }
         }
     };
