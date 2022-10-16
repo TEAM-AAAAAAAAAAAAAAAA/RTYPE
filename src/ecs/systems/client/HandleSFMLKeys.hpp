@@ -19,6 +19,9 @@ namespace ecs::systems
      * Refer to the Controllable.hpp documentation to learn more about managed input
      */
     std::function<void(World &)> handleSFMLKeys = [](World &world) {
+        if (!world.getWindow().hasFocus())
+            return;
+
 #ifdef CLIENT_COMPILATION_MODE
         auto &controllables = world.registry.getComponents<component::Controllable>();
         auto const &shootables = world.registry.getComponents<component::Shootable>();
@@ -29,46 +32,43 @@ namespace ecs::systems
 
             if (contr) {
                 bool hasMoved = false;
-                static ecs::Event::EventType lastEvent;
+                static ecs::Event::EventType lastEventX;
+                static ecs::Event::EventType lastEventY;
 
                 if (sf::Keyboard::isKeyPressed(contr.value().MoveUp)
                     || sf::Keyboard::isKeyPressed(contr.value().MoveUpSecondary)) {
                     hasMoved = true;
-                    // if (lastEvent != ecs::Event(ecs::Event::EventType::MoveUp)) {
+                    if (lastEventY != ecs::Event(ecs::Event::EventType::MoveUp)) {
                         world.pushEvent(ecs::Event(ecs::Event::EventType::MoveUp));
-                        lastEvent = ecs::Event::EventType::MoveUp;
-                    // }
-                    // contr.value().lastDirectionY = ecs::Event::EventType::MoveUp;
+                        lastEventY = ecs::Event::EventType::MoveUp;
+                    }
                 } else if (sf::Keyboard::isKeyPressed(contr.value().MoveDown)
                     || sf::Keyboard::isKeyPressed(contr.value().MoveDownSecondary)) {
                     hasMoved = true;
-                    // if (lastEvent != ecs::Event(ecs::Event::EventType::MoveDown)) {
+                    if (lastEventY != ecs::Event(ecs::Event::EventType::MoveDown)) {
                         world.pushEvent(ecs::Event(ecs::Event::EventType::MoveDown));
-                        lastEvent = ecs::Event::EventType::MoveDown;
-                    // }
-                    // contr.value().lastDirectionY = ecs::Event::EventType::MoveDown;
+                        lastEventY = ecs::Event::EventType::MoveDown;
+                    }
                 }
                 if (sf::Keyboard::isKeyPressed(contr.value().MoveLeft)
                     || sf::Keyboard::isKeyPressed(contr.value().MoveLeftSecondary)) {
                     hasMoved = true;
-                    // if (lastEvent != ecs::Event(ecs::Event::EventType::MoveLeft)) {
+                    if (lastEventX != ecs::Event(ecs::Event::EventType::MoveLeft)) {
                         world.pushEvent(ecs::Event(ecs::Event::EventType::MoveLeft));
-                        lastEvent = ecs::Event::EventType::MoveLeft;
-                    // }
-                    // contr.value().lastDirectionX = ecs::Event::EventType::MoveLeft;
+                        lastEventX = ecs::Event::EventType::MoveLeft;
+                    }
                 } else if (sf::Keyboard::isKeyPressed(contr.value().MoveRight)
                     || sf::Keyboard::isKeyPressed(contr.value().MoveRightSecondary)) {
                     hasMoved = true;
-                    // if (lastEvent != ecs::Event(ecs::Event::EventType::MoveRight)) {
+                    if (lastEventX != ecs::Event(ecs::Event::EventType::MoveRight)) {
                         world.pushEvent(ecs::Event(ecs::Event::EventType::MoveRight));
-                        lastEvent = ecs::Event::EventType::MoveRight;
-                    // }
-                    // contr.value().lastDirectionX = ecs::Event::EventType::MoveRight;
+                        lastEventX = ecs::Event::EventType::MoveRight;
+                    }
                 }
-                if (!hasMoved /*&& lastEvent != ecs::Event(ecs::Event::EventType::MoveStop)*/) {
+                if (!hasMoved) {
                     world.pushEvent(ecs::Event(ecs::Event::EventType::MoveStop));
-                    // std::cout << "stop" << std::endl;
-                    lastEvent = ecs::Event::EventType::MoveStop;
+                    lastEventX = ecs::Event::EventType::MoveStop;
+                    lastEventY = ecs::Event::EventType::MoveStop;
                 }
 
                 if (shoot) {
