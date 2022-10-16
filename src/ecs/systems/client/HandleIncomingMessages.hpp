@@ -72,7 +72,7 @@ namespace ecs::systems
         if (msg[3] == component::EntityType::Types::Player) {
             world.registry.addComponent<component::Direction>(newEntity, {0, 0});
             world.registry.addComponent<component::Velocity>(newEntity, {msg[10], msg[11]});
-            if (selfId == msgId) {
+            if (selfId != msgId) {
                 world.registry.addComponent<component::Drawable>(newEntity,
                     {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {1, 1, 32, 16}});
             } else {
