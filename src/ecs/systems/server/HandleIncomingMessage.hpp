@@ -20,6 +20,7 @@
 #include "components/Size.hpp"
 #include "components/Velocity.hpp"
 #include "components/Weapon.hpp"
+#include "components/server/Projectile.hpp"
 
 namespace ecs::systems
 {
@@ -72,17 +73,46 @@ namespace ecs::systems
     static void playerShoot(World &world, network::ClientMessage &msg)
     {
         auto &networkIds = world.registry.getComponents<component::NetworkId>();
+        auto const &positions = world.registry.getComponents<component::Position>();
+        auto &weapons = world.registry.getComponents<component::Weapon>();
+        auto const &factions = world.registry.getComponents<component::Faction>();
 
-        for (size_t i = 0; i < networkIds.size(); ++i) {
+        for (size_t i = 0; i < networkIds.size() && i < positions.size() && i < weapons.size() && i < factions.size();
+             ++i) {
             auto &id = networkIds[i];
 
-            if (clientNumToId[msg.second] == id.value().id) {
+            if (id && clientNumToId[msg.second] == id.value().id) {
+                auto &pos = positions[i];
+                auto &weapon = weapons[i];
+                auto &fac = factions[i];
+
+                if (pos && weapon && fac) {
+                    auto elapsed = constant::chrono::now().time_since_epoch().count() - weapon.value().lastShoot;
+                    if (weapon.value().hasSuper && elapsed > weapon.value().superLoadingTime) {
+                        weapon.value().lastShoot = constant::chrono::now().time_since_epoch().count();
+                        // spawn super bullet
+                    } else if (elapsed > weapon.value().shootDelay) {
+                        weapon.value().lastShoot = constant::chrono::now().time_since_epoch().count();
+                        ecs::Entity bullet = world.registry.spawn_entity();
+                        world.registry.addComponent<ecs::component::EntityType>(bullet, {component::EntityType::Bullet});
+                        world.registry.addComponent<ecs::component::NetworkId>(bullet, {static_cast<size_t>(bullet)});
+                        world.registry.addComponent<ecs::component::Direction>(bullet, {1, 0});
+                        world.registry.addComponent<ecs::component::Position>(bullet, {pos.value().x, pos.value().y});
+                        world.registry.addComponent<ecs::component::Size>(bullet, {10, 10});
+                        world.registry.addComponent<ecs::component::Velocity>(bullet, {weapon.value().projSpeed, 0});
+                        world.registry.addComponent<ecs::component::Projectile>(bullet, {weapon.value().damage});
+                        ecs::component::Faction::Factions fac = ecs::component::Faction::Factions::None;
+                        if (i < factions.size() && factions[i])
+                            fac = factions[i].value().faction;
+                        world.registry.addComponent<ecs::component::Faction>(bullet, {fac});
+                    }
+                }
             }
         };
     }
 
     static std::unordered_map<char, std::function<void(World &, network::ClientMessage &msg)>> packetTypeFunction = {
-        {0, createPlayer}, {ecs::Event::EventType::Move, movePlayer}, {ecs::Event::EventType::Shoot, playerShoot}};
+        {0, createPlayer}, {ecs::constant::PLAYER_MOVE, movePlayer}, {ecs::constant::PLAYER_SHOT, playerShoot}};
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Server::getIncomingMessages().empty()) {

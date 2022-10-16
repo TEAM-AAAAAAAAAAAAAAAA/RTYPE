@@ -32,7 +32,7 @@ namespace ecs::systems
                 if (directions[i].value().hasMoved) {
                     network::Message msg;
                     msg.fill(0);
-                    msg[0] = ecs::Event::EventType::Move;
+                    msg[0] = ecs::constant::PLAYER_MOVE;
                     msg[1] = directions[i].value().x;
                     msg[2] = directions[i].value().y;
                     network::Client::getOutgoingMessages().push(msg);
