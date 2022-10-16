@@ -34,6 +34,7 @@ namespace ecs::systems
                 bool hasMoved = false;
                 static ecs::Event::EventType lastEventX;
                 static ecs::Event::EventType lastEventY;
+                static bool isStopped = false;
 
                 if (sf::Keyboard::isKeyPressed(contr.value().MoveUp)
                     || sf::Keyboard::isKeyPressed(contr.value().MoveUpSecondary)) {
@@ -41,6 +42,7 @@ namespace ecs::systems
                     if (lastEventY != ecs::Event(ecs::Event::EventType::MoveUp)) {
                         world.pushEvent(ecs::Event(ecs::Event::EventType::MoveUp));
                         lastEventY = ecs::Event::EventType::MoveUp;
+                        isStopped = false;
                     }
                 } else if (sf::Keyboard::isKeyPressed(contr.value().MoveDown)
                     || sf::Keyboard::isKeyPressed(contr.value().MoveDownSecondary)) {
@@ -48,6 +50,7 @@ namespace ecs::systems
                     if (lastEventY != ecs::Event(ecs::Event::EventType::MoveDown)) {
                         world.pushEvent(ecs::Event(ecs::Event::EventType::MoveDown));
                         lastEventY = ecs::Event::EventType::MoveDown;
+                        isStopped = false;
                     }
                 }
                 if (sf::Keyboard::isKeyPressed(contr.value().MoveLeft)
@@ -56,6 +59,7 @@ namespace ecs::systems
                     if (lastEventX != ecs::Event(ecs::Event::EventType::MoveLeft)) {
                         world.pushEvent(ecs::Event(ecs::Event::EventType::MoveLeft));
                         lastEventX = ecs::Event::EventType::MoveLeft;
+                        isStopped = false;
                     }
                 } else if (sf::Keyboard::isKeyPressed(contr.value().MoveRight)
                     || sf::Keyboard::isKeyPressed(contr.value().MoveRightSecondary)) {
@@ -63,12 +67,15 @@ namespace ecs::systems
                     if (lastEventX != ecs::Event(ecs::Event::EventType::MoveRight)) {
                         world.pushEvent(ecs::Event(ecs::Event::EventType::MoveRight));
                         lastEventX = ecs::Event::EventType::MoveRight;
+                        isStopped = false;
                     }
                 }
                 if (!hasMoved) {
-                    world.pushEvent(ecs::Event(ecs::Event::EventType::MoveStop));
+                    if (!isStopped)
+                        world.pushEvent(ecs::Event(ecs::Event::EventType::MoveStop));
                     lastEventX = ecs::Event::EventType::MoveStop;
                     lastEventY = ecs::Event::EventType::MoveStop;
+                    isStopped = true;
                 }
 
                 if (shoot) {

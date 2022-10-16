@@ -30,7 +30,6 @@ namespace ecs::systems
                     continue;
 
                 if (directions[i].value().hasMoved) {
-                    std::cout << "sent x: " << directions[i].value().x << ", y: " << directions[i].value().y << std::endl;
                     network::Message msg;
                     msg.fill(0);
                     msg[0] = ecs::Event::EventType::Move;

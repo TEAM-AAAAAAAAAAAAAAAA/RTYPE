@@ -59,8 +59,6 @@ namespace ecs::systems
                             dir.value().x = 1;
                             // dir.value().x >= 0 ? dir.value().x = 1 : dir.value().x += 1;
                         }
-                        std::cout << dir.value().x << " " << dir.value().y << std::endl;
-                        std::cout << x << " " << y << std::endl;
                         if (x != dir.value().x || y != dir.value().y)
                             dir.value().hasMoved = true;
                     }
