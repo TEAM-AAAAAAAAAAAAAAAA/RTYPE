@@ -33,7 +33,7 @@ namespace ecs::systems
 #pragma region Player Movement
             if (world.getEvent() == ecs::Event::EventType::MoveUp || world.getEvent() == ecs::Event::EventType::MoveLeft
                 || world.getEvent() == ecs::Event::EventType::MoveDown
-                || world.getEvent() == ecs::Event::EventType::MoveRight) {
+                || world.getEvent() == ecs::Event::EventType::MoveRight || world.getEvent() == ecs::Event::EventType::MoveStop) {
                 auto &directions = world.registry.getComponents<component::Direction>();
                 auto &controllables = world.registry.getComponents<component::Controllable>();
 
@@ -43,7 +43,7 @@ namespace ecs::systems
                     if (dir && con) {
                         int x = dir.value().x;
                         int y = dir.value().y;
-                        if (world.getEvent() == ecs::Event::EventType::Stop) {
+                        if (world.getEvent() == ecs::Event::EventType::MoveStop) {
                             dir.value().x = 0;
                             dir.value().y = 0;
                         } else if (world.getEvent() == ecs::Event::EventType::MoveUp) {
@@ -59,6 +59,8 @@ namespace ecs::systems
                             dir.value().x = 1;
                             // dir.value().x >= 0 ? dir.value().x = 1 : dir.value().x += 1;
                         }
+                        std::cout << dir.value().x << " " << dir.value().y << std::endl;
+                        std::cout << x << " " << y << std::endl;
                         if (x != dir.value().x || y != dir.value().y)
                             dir.value().hasMoved = true;
                     }

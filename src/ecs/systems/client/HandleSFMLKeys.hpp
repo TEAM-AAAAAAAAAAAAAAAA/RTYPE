@@ -65,10 +65,10 @@ namespace ecs::systems
                     // }
                     // contr.value().lastDirectionX = ecs::Event::EventType::MoveRight;
                 }
-                if (!hasMoved /*&& lastEvent != ecs::Event(ecs::Event::EventType::Stop)*/) {
-                    world.pushEvent(ecs::Event(ecs::Event::EventType::Stop));
-                    std::cout << "stop" << std::endl;
-                    lastEvent = ecs::Event::EventType::Stop;
+                if (!hasMoved /*&& lastEvent != ecs::Event(ecs::Event::EventType::MoveStop)*/) {
+                    world.pushEvent(ecs::Event(ecs::Event::EventType::MoveStop));
+                    // std::cout << "stop" << std::endl;
+                    lastEvent = ecs::Event::EventType::MoveStop;
                 }
 
                 if (shoot) {
