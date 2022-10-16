@@ -23,6 +23,8 @@
 
 namespace ecs::systems
 {
+    static std::map<unsigned int, size_t> clientNumToId;
+
     static void createPlayer(World &world, network::ClientMessage &msg)
     {
         ecs::Entity newPlayer = world.registry.spawn_entity();
@@ -38,6 +40,7 @@ namespace ecs::systems
         world.registry.addComponent<ecs::component::Faction>(newPlayer, {ecs::component::Faction::Factions::Players});
 
         std::cerr << "New connection !" << std::endl; // Debug print
+        clientNumToId[msg.second] = static_cast<size_t>(newPlayer);
         network::ServerMessage message;
         message.first.fill(0);
         message.first[1] = static_cast<size_t>(newPlayer) >> 8;
@@ -50,11 +53,13 @@ namespace ecs::systems
     static void movePlayer(World &world, network::ClientMessage &msg)
     {
         auto &directions = world.registry.getComponents<component::Direction>();
+        auto &networkIds = world.registry.getComponents<component::NetworkId>();
 
-        for (size_t i = 0; i < directions.size(); ++i) {
+        for (size_t i = 0; i < directions.size() && i < networkIds.size(); ++i) {
             auto &dir = directions[i];
+            auto &id = networkIds[i];
 
-            if (dir) {
+            if (dir && clientNumToId[msg.second] == id.value().id) {
                 std::cout << (int)msg.first[1] << " " << (int)msg.first[2] << std::endl;
                 std::cout << dir.value().x << " " << dir.value().y << std::endl;
                 dir.value().x = (int)msg.first[1];
@@ -68,7 +73,6 @@ namespace ecs::systems
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Server::getIncomingMessages().empty()) {
-            // std::cerr << "Handling messages !" << std::endl; // Debug print
             network::ClientMessage msg = network::Server::getIncomingMessages().pop();
             packetTypeFunction[msg.first[0]](world, msg);
         }

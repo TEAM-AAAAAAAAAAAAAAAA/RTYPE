@@ -10,11 +10,11 @@
 #include <functional>
 #include "Event.hpp"
 #include "World.hpp"
-#include "components/client/Controllable.hpp"
 #include "components/Direction.hpp"
 #include "components/Faction.hpp"
-#include "components/server/Projectile.hpp"
 #include "components/Weapon.hpp"
+#include "components/client/Controllable.hpp"
+#include "components/server/Projectile.hpp"
 #include "../client/NetworkClient.hpp"
 #include "Constant.hpp"
 
@@ -35,22 +35,36 @@ namespace ecs::systems
 #pragma region Player Movement
             if (world.getEvent() == ecs::Event::EventType::MoveUp || world.getEvent() == ecs::Event::EventType::MoveLeft
                 || world.getEvent() == ecs::Event::EventType::MoveDown
-                || world.getEvent() == ecs::Event::EventType::MoveRight) {
+                || world.getEvent() == ecs::Event::EventType::MoveRight || world.getEvent() == ecs::Event::EventType::MoveStop) {
                 auto &directions = world.registry.getComponents<component::Direction>();
-                auto const &controllables = world.registry.getComponents<component::Controllable>();
+                auto &controllables = world.registry.getComponents<component::Controllable>();
 
                 for (size_t i = 0; i < directions.size() && i < controllables.size(); ++i) {
                     auto &dir = directions[i];
-                    auto const &con = controllables[i];
+                    auto &con = controllables[i];
                     if (dir && con) {
-                        if (world.getEvent() == ecs::Event::EventType::MoveUp)
-                            dir.value().y <= 0 ? dir.value().y = -1 : dir.value().y -= 1;
-                        else if (world.getEvent() == ecs::Event::EventType::MoveLeft)
-                            dir.value().x <= 0 ? dir.value().x = -1 : dir.value().x -= 1;
-                        else if (world.getEvent() == ecs::Event::EventType::MoveDown)
-                            dir.value().y >= 0 ? dir.value().y = 1 : dir.value().y += 1;
-                        else if (world.getEvent() == ecs::Event::EventType::MoveRight)
-                            dir.value().x >= 0 ? dir.value().x = 1 : dir.value().x += 1;
+                        int x = dir.value().x;
+                        int y = dir.value().y;
+                        if (world.getEvent() == ecs::Event::EventType::MoveStop) {
+                            dir.value().x = 0;
+                            dir.value().y = 0;
+                        } else if (world.getEvent() == ecs::Event::EventType::MoveUp) {
+                            dir.value().y = -1;
+                            // dir.value().y <= 0 ? dir.value().y = -1 : dir.value().y -= 1;
+                        } else if (world.getEvent() == ecs::Event::EventType::MoveLeft) {
+                            dir.value().x = -1;
+                            // dir.value().x <= 0 ? dir.value().x = -1 : dir.value().x -= 1;
+                        } else if (world.getEvent() == ecs::Event::EventType::MoveDown) {
+                            dir.value().y = 1;
+                            // dir.value().y >= 0 ? dir.value().y = 1 : dir.value().y += 1;
+                        } else if (world.getEvent() == ecs::Event::EventType::MoveRight) {
+                            dir.value().x = 1;
+                            // dir.value().x >= 0 ? dir.value().x = 1 : dir.value().x += 1;
+                        }
+                        std::cout << dir.value().x << " " << dir.value().y << std::endl;
+                        std::cout << x << " " << y << std::endl;
+                        if (x != dir.value().x || y != dir.value().y)
+                            dir.value().hasMoved = true;
                     }
                 }
             }

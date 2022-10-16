@@ -23,6 +23,7 @@
 
 namespace ecs::systems
 {
+    static size_t selfId = 0;
     static void movePacketHandle(World &world, network::Message &msg)
     {
         // std::cerr << "HandleIncomingMessages" << std::endl;
@@ -61,19 +62,27 @@ namespace ecs::systems
             }
         // std::cerr << "HandleIncomingMessages" << std::endl;
         Entity newEntity = world.registry.spawn_entity();
-        world.registry.addComponent<component::EntityType>(newEntity, {msg[3]});
+        if (msg[3] == component::EntityType::Types::Player && msgId != selfId)
+            world.registry.addComponent<component::EntityType>(newEntity, {component::EntityType::Types::OtherPlayer});
+        else
+            world.registry.addComponent<component::EntityType>(newEntity, {msg[3]});
         world.registry.addComponent<component::NetworkId>(newEntity, {msgId});
         world.registry.addComponent<component::Position>(newEntity, {(int)posX, (int)posY});
         world.registry.addComponent<component::Size>(newEntity, {msg[8], msg[9]});
         if (msg[3] == component::EntityType::Types::Player) {
             world.registry.addComponent<component::Direction>(newEntity, {0, 0});
             world.registry.addComponent<component::Velocity>(newEntity, {msg[10], msg[11]});
-            world.registry.addComponent<component::Drawable>(newEntity,
-                {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {1, 1, 32, 16}});
-            world.registry.addComponent<ecs::component::Shootable>(
-                newEntity, ecs::component::Shootable(sf::Keyboard::Space));
-            world.registry.addComponent<ecs::component::Controllable>(
-                newEntity, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D});
+            if (selfId == msgId) {
+                world.registry.addComponent<component::Drawable>(newEntity,
+                    {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {1, 1, 32, 16}});
+            } else {
+                world.registry.addComponent<component::Drawable>(newEntity,
+                    {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {1, 1, 32, 16}});
+                world.registry.addComponent<ecs::component::Shootable>(
+                    newEntity, ecs::component::Shootable(sf::Keyboard::Space));
+                world.registry.addComponent<ecs::component::Controllable>(
+                    newEntity, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D});
+            }
         } else if (msg[3] == component::EntityType::Types::EnemyBase) {
             world.registry.addComponent<component::Drawable>(newEntity,
                 {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {1, 18, 32, 16}});
@@ -81,6 +90,11 @@ namespace ecs::systems
             world.registry.addComponent<component::Drawable>(
                 newEntity, {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {5, 5, 1, 1}});
         }
+    }
+
+    static void firstMessageHandle(World &world, network::Message &msg)
+    {
+        selfId = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
     }
 
     static std::unordered_map<char, std::function<void(World &, network::Message &msg)>> packetTypeFunction = {
