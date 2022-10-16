@@ -64,12 +64,25 @@ namespace ecs::systems
                 std::cout << dir.value().x << " " << dir.value().y << std::endl;
                 dir.value().x = (int)msg.first[1];
                 dir.value().y = (int)msg.first[2];
+                return;
+            }
+        };
+    }
+
+    static void playerShoot(World &world, network::ClientMessage &msg)
+    {
+        auto &networkIds = world.registry.getComponents<component::NetworkId>();
+
+        for (size_t i = 0; i < networkIds.size(); ++i) {
+            auto &id = networkIds[i];
+
+            if (clientNumToId[msg.second] == id.value().id) {
             }
         };
     }
 
     static std::unordered_map<char, std::function<void(World &, network::ClientMessage &msg)>> packetTypeFunction = {
-        {0, createPlayer}, {ecs::Event::EventType::Move, movePlayer}};
+        {0, createPlayer}, {ecs::Event::EventType::Move, movePlayer}, {ecs::Event::EventType::Shoot, playerShoot}};
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Server::getIncomingMessages().empty()) {
