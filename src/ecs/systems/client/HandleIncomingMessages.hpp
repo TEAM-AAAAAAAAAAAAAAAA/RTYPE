@@ -98,7 +98,7 @@ namespace ecs::systems
     }
 
     static std::unordered_map<char, std::function<void(World &, network::Message &msg)>> packetTypeFunction = {
-        {8, movePacketHandle}, {0, movePacketHandle}};
+        {8, movePacketHandle}, {0, firstMessageHandle}};
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Client::getIncomingMessages().empty()) {
