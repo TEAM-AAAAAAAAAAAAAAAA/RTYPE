@@ -8,8 +8,8 @@
 #pragma once
 
 #ifdef CLIENT_COMPILATION_MODE
-    #include "SFML/Graphics.hpp"
     #include "Constant.hpp"
+    #include "SFML/Graphics.hpp"
 
 namespace ecs::utils
 {
