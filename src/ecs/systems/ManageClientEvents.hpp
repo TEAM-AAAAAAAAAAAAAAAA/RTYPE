@@ -10,11 +10,11 @@
 #include <functional>
 #include "Event.hpp"
 #include "World.hpp"
-#include "components/client/Controllable.hpp"
 #include "components/Direction.hpp"
 #include "components/Faction.hpp"
-#include "components/server/Projectile.hpp"
 #include "components/Weapon.hpp"
+#include "components/client/Controllable.hpp"
+#include "components/server/Projectile.hpp"
 
 namespace ecs::systems
 {
@@ -35,20 +35,32 @@ namespace ecs::systems
                 || world.getEvent() == ecs::Event::EventType::MoveDown
                 || world.getEvent() == ecs::Event::EventType::MoveRight) {
                 auto &directions = world.registry.getComponents<component::Direction>();
-                auto const &controllables = world.registry.getComponents<component::Controllable>();
+                auto &controllables = world.registry.getComponents<component::Controllable>();
 
                 for (size_t i = 0; i < directions.size() && i < controllables.size(); ++i) {
                     auto &dir = directions[i];
-                    auto const &con = controllables[i];
+                    auto &con = controllables[i];
                     if (dir && con) {
-                        if (world.getEvent() == ecs::Event::EventType::MoveUp)
-                            dir.value().y <= 0 ? dir.value().y = -1 : dir.value().y -= 1;
-                        else if (world.getEvent() == ecs::Event::EventType::MoveLeft)
-                            dir.value().x <= 0 ? dir.value().x = -1 : dir.value().x -= 1;
-                        else if (world.getEvent() == ecs::Event::EventType::MoveDown)
-                            dir.value().y >= 0 ? dir.value().y = 1 : dir.value().y += 1;
-                        else if (world.getEvent() == ecs::Event::EventType::MoveRight)
-                            dir.value().x >= 0 ? dir.value().x = 1 : dir.value().x += 1;
+                        int x = dir.value().x;
+                        int y = dir.value().y;
+                        if (world.getEvent() == ecs::Event::EventType::Stop) {
+                            dir.value().x = 0;
+                            dir.value().y = 0;
+                        } else if (world.getEvent() == ecs::Event::EventType::MoveUp) {
+                            dir.value().y = -1;
+                            // dir.value().y <= 0 ? dir.value().y = -1 : dir.value().y -= 1;
+                        } else if (world.getEvent() == ecs::Event::EventType::MoveLeft) {
+                            dir.value().x = -1;
+                            // dir.value().x <= 0 ? dir.value().x = -1 : dir.value().x -= 1;
+                        } else if (world.getEvent() == ecs::Event::EventType::MoveDown) {
+                            dir.value().y = 1;
+                            // dir.value().y >= 0 ? dir.value().y = 1 : dir.value().y += 1;
+                        } else if (world.getEvent() == ecs::Event::EventType::MoveRight) {
+                            dir.value().x = 1;
+                            // dir.value().x >= 0 ? dir.value().x = 1 : dir.value().x += 1;
+                        }
+                        if (x != dir.value().x || y != dir.value().y)
+                            dir.value().hasMoved = true;
                     }
                 }
             }
@@ -81,7 +93,8 @@ namespace ecs::systems
                             world.registry.addComponent<ecs::component::Position>(
                                 bullet, {pos.value().x, pos.value().y});
                             world.registry.addComponent<ecs::component::Size>(bullet, {10, 10});
-                            world.registry.addComponent<ecs::component::Velocity>(bullet, {weapon.value().projSpeed, 0});
+                            world.registry.addComponent<ecs::component::Velocity>(
+                                bullet, {weapon.value().projSpeed, 0});
                             world.registry.addComponent<ecs::component::Projectile>(bullet, {weapon.value().damage});
                             ecs::component::Faction::Factions fac = ecs::component::Faction::Factions::None;
                             if (i < factions.size() && factions[i])

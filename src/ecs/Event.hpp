@@ -27,6 +27,7 @@ namespace ecs
             MoveLeft,
             MoveDown,
             MoveRight,
+            Stop,
             Shoot,
             UIUp,
             UILeft,

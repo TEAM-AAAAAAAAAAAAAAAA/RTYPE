@@ -30,7 +30,7 @@ namespace ecs::systems
         world.registry.addComponent<ecs::component::Position>(newPlayer, {10, 10});
         world.registry.addComponent<ecs::component::Velocity>(newPlayer, {5, 5});
         world.registry.addComponent<ecs::component::Size>(newPlayer, {32, 64});
-        world.registry.addComponent<ecs::component::Direction>(newPlayer, {1, 0});
+        world.registry.addComponent<ecs::component::Direction>(newPlayer, {0, 0});
         world.registry.addComponent<ecs::component::EntityType>(newPlayer, {ecs::component::EntityType::Types::Player});
         world.registry.addComponent<ecs::component::Weapon>(newPlayer, {100, 10, 10});
         world.registry.addComponent<ecs::component::Health>(newPlayer, {100});
