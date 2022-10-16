@@ -53,10 +53,10 @@ namespace network
                 auto message = ClientMessage(std::array(_recvBuffer), getOrCreateClientID(_remoteEndpoint));
                 if (!message.first.empty()) {
                     _incomingMessages.push(message);
-                    std::cerr << "Receiving message :"; // Debug print
-                    for (auto &c : message.first)       //
-                        std::cerr << '\\' << (int)c;    //
-                    std::cerr << std::endl;             //
+                    // std::cerr << "Receiving message :"; // Debug print
+                    // for (auto &c : message.first)       //
+                    //     std::cerr << '\\' << (int)c;    //
+                    // std::cerr << std::endl;             //
                 }
             } catch (std::exception ex) {
                 std::cerr << "handleReceive: Error parsing incoming message:" << ex.what() << std::endl;

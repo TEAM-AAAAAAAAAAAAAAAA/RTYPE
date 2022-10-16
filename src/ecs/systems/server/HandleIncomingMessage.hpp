@@ -51,11 +51,16 @@ namespace ecs::systems
     {
         auto &directions = world.registry.getComponents<component::Direction>();
 
-        if (msg.second < directions.size() || !directions[msg.second])
-            return;
+        for (size_t i = 0; i < directions.size(); ++i) {
+            auto &dir = directions[i];
 
-        directions[msg.second].value().x = msg.first[1];
-        directions[msg.second].value().x = msg.first[2];
+            if (dir) {
+                std::cout << (int)msg.first[1] << " " << (int)msg.first[2] << std::endl;
+                std::cout << dir.value().x << " " << dir.value().y << std::endl;
+                dir.value().x = (int)msg.first[1];
+                dir.value().y = (int)msg.first[2];
+            }
+        };
     }
 
     static std::unordered_map<char, std::function<void(World &, network::ClientMessage &msg)>> packetTypeFunction = {
@@ -63,7 +68,7 @@ namespace ecs::systems
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Server::getIncomingMessages().empty()) {
-            std::cerr << "Handling messages !" << std::endl; // Debug print
+            // std::cerr << "Handling messages !" << std::endl; // Debug print
             network::ClientMessage msg = network::Server::getIncomingMessages().pop();
             packetTypeFunction[msg.first[0]](world, msg);
         }
