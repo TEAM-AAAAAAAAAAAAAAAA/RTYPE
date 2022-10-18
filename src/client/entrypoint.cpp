@@ -76,6 +76,7 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.addSystem(ecs::systems::draw);
     world.addSystem(ecs::systems::HandleIncomingMessages);
     world.addSystem(ecs::systems::SendDirection);
+    world.addSystem(ecs::systems::movement);
     return world;
 }
 
