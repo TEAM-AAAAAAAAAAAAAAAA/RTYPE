@@ -44,12 +44,6 @@ namespace ecs::systems
                 if (pos && vel && dir) {
                     pos.value().x += vel.value().x * dir.value().x;
                     pos.value().y += vel.value().y * dir.value().y;
-#ifdef CLIENT_COMPILATION_MODE
-                    if (i < controllables.size() && contr) {
-                        dir.value().x = 0;
-                        dir.value().y = 0;
-                    }
-#endif
                 }
             };
             clock = chrono::now();

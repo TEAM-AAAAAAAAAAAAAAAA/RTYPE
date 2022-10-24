@@ -10,7 +10,7 @@
 #include <functional>
 #include <iostream>
 #include "World.hpp"
-#include "components/Drawable.hpp"
+#include "components/client/Drawable.hpp"
 #include "components/Position.hpp"
 #include "components/Size.hpp"
 

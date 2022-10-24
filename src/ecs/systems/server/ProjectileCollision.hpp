@@ -3,9 +3,15 @@
 #include <functional>
 #include <iostream>
 #include "World.hpp"
+#include "components/Position.hpp"
+#include "components/Size.hpp"
+#include "components/Velocity.hpp"
+#include "components/Direction.hpp"
+#include "components/Weapon.hpp"
+#include "components/server/EnemyAI.hpp"
 #include "components/Faction.hpp"
 #include "components/Health.hpp"
-#include "components/Projectile.hpp"
+#include "components/server/Projectile.hpp"
 
 namespace ecs::systems
 {
