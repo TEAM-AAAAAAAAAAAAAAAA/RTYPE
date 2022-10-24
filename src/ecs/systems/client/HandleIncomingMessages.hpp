@@ -26,21 +26,15 @@ namespace ecs::systems
     static size_t selfId = 0;
     static void movePacketHandle(World &world, network::Message &msg)
     {
-        // std::cerr << "HandleIncomingMessages" << std::endl;
         auto &positions = world.registry.getComponents<component::Position>();
-        // std::cerr << "HandleIncomingMessages" << std::endl;
         auto &networkId = world.registry.getComponents<component::NetworkId>();
-        // std::cerr << "HandleIncomingMessages" << std::endl;
         auto &velocities = world.registry.getComponents<component::Velocity>();
-        // std::cerr << "HandleIncomingMessages" << std::endl;
         auto &sizes = world.registry.getComponents<component::Size>();
-        // std::cerr << "HandleIncomingMessages" << std::endl;
         auto &types = world.registry.getComponents<component::EntityType>();
         size_t msgId = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
         size_t posX = (unsigned char)msg[4] << 8U | (unsigned char)msg[5];
         size_t posY = (unsigned char)msg[6] << 8U | (unsigned char)msg[7];
 
-        // std::cerr << "HandleIncomingMessages" << std::endl;
         for (size_t i = 0; i < networkId.size(); i++)
             if (networkId[i] && networkId[i]->id == msgId) {
                 if (i < sizes.size() && sizes[i]) {
@@ -60,7 +54,6 @@ namespace ecs::systems
                 }
                 return;
             }
-        // std::cerr << "HandleIncomingMessages" << std::endl;
         Entity newEntity = world.registry.spawn_entity();
         if (msg[3] == component::EntityType::Types::Player && msgId != selfId)
             world.registry.addComponent<component::EntityType>(newEntity, {component::EntityType::Types::OtherPlayer});
@@ -102,9 +95,7 @@ namespace ecs::systems
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Client::getIncomingMessages().empty()) {
-            // std::cerr << "HandleIncomingMessages" << std::endl;
             network::Message msg = network::Client::getIncomingMessages().pop();
-            // std::cerr << "HandleIncomingMessages" << std::endl;
             packetTypeFunction[msg[0]](world, msg);
         }
     };
