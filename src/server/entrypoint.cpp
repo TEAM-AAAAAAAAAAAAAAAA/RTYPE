@@ -26,6 +26,7 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.registry.registerComponent<ecs::component::Size>();
     world.registry.registerComponent<ecs::component::Faction>();
     world.registry.registerComponent<ecs::component::Position>();
+    world.registry.registerComponent<ecs::component::Health>();
     // world.registry.addComponent<ecs::component::Position>(player, {10, 10});
     // world.registry.addComponent<ecs::component::Velocity>(player, {5, 5});
     // world.registry.addComponent<ecs::component::Size>(player, {32, 64});
