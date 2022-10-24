@@ -43,7 +43,8 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.registry.addComponent<ecs::component::Weapon>(player, {100, 10, 10});
     world.registry.addComponent<ecs::component::Health>(player, {100});
     world.registry.addComponent<ecs::component::Faction>(player, {ecs::component::Faction::Factions::Players});
-    // world.addSystem(ecs::systems::positionLogger);
+
+    world.addSystem(ecs::systems::positionLogger);
     world.addSystem(ecs::systems::movement);
     world.addSystem(ecs::systems::projectileCollision);
 
