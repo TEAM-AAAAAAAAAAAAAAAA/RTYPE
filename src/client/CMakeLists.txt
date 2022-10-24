@@ -6,6 +6,8 @@ set(TARGET r-type_client)
 
 set(SRC
     ${SRC_ROOT}/entrypoint.cpp
+    ${SRC_ROOT}/NetworkClient.cpp
+    ${SRC_ROOT}/NetworkClient.hpp
 )
 
 
