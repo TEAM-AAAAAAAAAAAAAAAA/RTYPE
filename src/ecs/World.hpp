@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <stack>
+#include <queue>
 #include "Event.hpp"
 #include "Registry.hpp"
 #include "utils/Window.hpp"
@@ -61,7 +61,7 @@ namespace ecs
         {
             if (_events.empty())
                 return {ecs::Event::EventType::Null};
-            return _events.top();
+            return _events.front();
         }
 
         /**
@@ -72,7 +72,7 @@ namespace ecs
         {
             if (_events.empty())
                 return {ecs::Event::EventType::Null};
-            ecs::Event event = _events.top();
+            ecs::Event event = _events.front();
             _events.pop();
             return event;
         }
@@ -96,6 +96,6 @@ namespace ecs
         /**
          * Private events' stack of the World class
          */
-        std::stack<ecs::Event> _events;
+        std::queue<ecs::Event> _events;
     };
 } // namespace ecs

@@ -23,22 +23,8 @@ typedef ClientList::value_type Client;
  */
 namespace network
 {
-    /**
-     * Standard pair class that contains a string and the ID of the client that
-     * sent it
-     */
-    typedef std::pair<std::array<char, 10>, unsigned int> ClientMessage;
-    typedef std::pair<std::array<char, 10>, std::vector<unsigned int>> ServerMessage;
-
     class Server {
       public:
-        /**
-         * Constructor which runs a thread for handling server inputs
-         * @param localPort the port on which the server runs
-         */
-        Server() : Server(8000) {}
-        explicit Server(unsigned short localPort);
-
         /**
          * Destroy the Server object and join all thread pools
          */
@@ -48,47 +34,51 @@ namespace network
          * This function allows us to check if the server has received messages
          *@return true if there are messages
          */
-        bool hasMessages();
+        static bool hasMessages();
 
         /**
          * This function sends a message to a client determined by his ID
          * @param message the message to send
          * @param clientID the ID of the client
          */
-        void sendToClient(const std::array<char, 10> &message, uint32_t clientID);
+        static void sendToClient(const Message &message, uint32_t clientID);
 
         /**
          * Send a message to all clients that have connected to the server
          *@param message the message to send
          */
-        void sendToAll(const std::array<char, 10> &message);
+        static void sendToAll(const Message &message);
 
         /**
          * Get the amount of clients that are connected
          * @return Amount of connected clients
          */
-        size_t getClientCount();
+        static size_t getClientCount();
 
         /**
          * Get the ID of client from the clients array
          * @param index the index for the array
          * @return client ID of client n
          */
-        uint32_t getClientIdByIndex(size_t index);
+        static uint32_t getClientIdByIndex(size_t index);
 
+        static LockedQueue<ServerMessage> &getOutgoingMessages();
+
+        static LockedQueue<ClientMessage> &getIncomingMessages();
+
+      private:
         /**
          * Locked queue of all unprocessed incoming messages
          */
-        LockedQueue<ServerMessage> outgoingMessages;
+        LockedQueue<ServerMessage> _outgoingMessages;
 
-      private:
         /**
          * All network related variables
          */
         boost::asio::io_service _ioService;
         udp::endpoint _serverEndpoint;
         udp::endpoint _remoteEndpoint;
-        std::array<char, 10> _recvBuffer;
+        Message _recvBuffer;
         udp::socket _socket;
 
         /**
@@ -96,7 +86,6 @@ namespace network
          */
         std::thread _serviceThread;
         std::thread _outgoingThread;
-        std::thread _interpretThread;
 
         /**
          * Locked queue of all unprocessed incoming messages
@@ -113,7 +102,7 @@ namespace network
          * @param errorCode the code of the error being handled
          * @param remoteEndpoint the endpoint where the error occured
          */
-        void handleRemoteError(const std::error_code errorCode, const udp::endpoint endpoint);
+        void handleRemoteError(const std::error_code errorCode, const udp::endpoint& endpoint);
 
         /**
          * Handles the incoming messages by placing them into the incoming
@@ -129,7 +118,7 @@ namespace network
          * @param error error code of sending
          * @param bytesTransferred the size of the outgoing packet
          */
-        void handleSend(std::array<char, 10> message, const std::error_code &error, std::size_t bytesTransferred) {}
+        void handleSend(Message message, const std::error_code &error, std::size_t bytesTransferred) {}
 
         /**
          * Run the server's service
@@ -148,7 +137,7 @@ namespace network
          * @param message message as an array
          * @param target endpoint of the receiving client
          */
-        void send(const std::array<char, 10> &message, udp::endpoint target);
+        void send(const Message &message, udp::endpoint target);
 
         /**
          * Interpret incoming messages
@@ -158,12 +147,20 @@ namespace network
         /**
          * Send messages in the outgoing message queue
          */
-        void sendOutgoing();
+        [[noreturn]] void sendOutgoing();
 
         /**
          *  Clients of the server
          */
         ClientList _clients;
         int _nextClientID;
+
+        /**
+         * Constructor which runs a thread for handling server inputs
+         * @param localPort the port on which the server runs
+         */
+        Server(unsigned short localPort = 8000);
+
+        static Server _Instance;
     };
 } // namespace network
