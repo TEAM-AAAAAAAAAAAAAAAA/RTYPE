@@ -29,7 +29,6 @@ namespace ecs::systems
         auto const &sizes = world.registry.getComponents<component::Size>();
         auto const &drawables = world.registry.getComponents<component::Drawable>();
 
-        world.getWindow().clear();
         for (size_t i = 0; i < positions.size() && i < sizes.size() && i < drawables.size(); ++i) {
             auto const &pos = positions[i];
             auto const &size = sizes[i];
@@ -43,6 +42,7 @@ namespace ecs::systems
             }
         };
         world.getWindow().display();
+        world.getWindow().clear ();
 #endif
     };
 } // namespace ecs::systems
