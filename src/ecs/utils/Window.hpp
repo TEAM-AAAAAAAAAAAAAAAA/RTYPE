@@ -17,7 +17,7 @@ namespace ecs::utils
       public:
         Window() : sf::RenderWindow(sf::VideoMode(ecs::constant::mapWidth, ecs::constant::mapHeight), "r-type")
         {
-            _window.setFramerateLimit(60);
+            this->setFramerateLimit(60);
         }
     };
 } // namespace ecs::utils
