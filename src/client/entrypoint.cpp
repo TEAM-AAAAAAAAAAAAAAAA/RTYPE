@@ -31,8 +31,6 @@ ecs::World getGameWorld(ecs::Engine &engine)
 {
     ecs::World world(engine.getWindow());
 
-    // ecs::Entity player = world.registry.spawn_entity();
-
     world.registry.registerComponent<ecs::component::EntityType>();
     world.registry.registerComponent<ecs::component::Velocity>();
     world.registry.registerComponent<ecs::component::Size>();
@@ -46,29 +44,6 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.registry.registerComponent<ecs::component::Drawable>();
     world.registry.registerComponent<ecs::component::Shootable>();
     world.registry.registerComponent<ecs::component::Controllable>();
-
-    // world.registry.addComponent<ecs::component::Position>(player, {10, 10});
-    // world.registry.addComponent<ecs::component::Velocity>(player, {5, 5});
-    // world.registry.addComponent<ecs::component::Size>(player, {32, 64});
-    // world.registry.addComponent<ecs::component::Direction>(player, {1, 0});
-    // world.registry.addComponent<ecs::component::Weapon>(player, {100, 10, 10});
-    // world.registry.addComponent<ecs::component::Health>(player, {100});
-    // world.registry.addComponent<ecs::component::Faction>(player, {ecs::component::Faction::Factions::Players});
-    // // world.addSystem(ecs::systems::positionLogger);
-    // world.addSystem(ecs::systems::movement);
-
-    // ecs::Entity enemy = world.registry.spawn_entity();
-    // world.registry.addComponent<ecs::component::Position>(enemy, {500, 500});
-    // world.registry.addComponent<ecs::component::Size>(enemy, {64, 128});
-    // world.registry.addComponent<ecs::component::Health>(enemy, {100});
-    // world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Enemies});
-
-    // const std::filesystem::path &playerPath = ecs::crossPlatformPath("src", "demo", "assets", "textures",
-    // "players.gif"); world.registry.addComponent<ecs::component::Controllable>(
-    //     player, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D});
-    // world.registry.addComponent<ecs::component::Drawable>(player, {playerPath, sf::IntRect(1, 1, 32, 16)});
-    // world.registry.addComponent<ecs::component::Shootable>(player, ecs::component::Shootable(sf::Keyboard::Space));
-    // world.registry.addComponent<ecs::component::Drawable>(enemy, {playerPath, {1, 18, 32, 16}});
 
     world.addSystem(ecs::systems::handleSFMLEvents);
     world.addSystem(ecs::systems::handleSFMLKeys);
