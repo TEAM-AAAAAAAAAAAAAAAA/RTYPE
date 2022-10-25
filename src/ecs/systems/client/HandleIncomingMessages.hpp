@@ -31,6 +31,7 @@ namespace ecs::systems
         auto &velocities = world.registry.getComponents<component::Velocity>();
         auto &sizes = world.registry.getComponents<component::Size>();
         auto &types = world.registry.getComponents<component::EntityType>();
+        auto &directions = world.registry.getComponents<component::Direction>();
         size_t msgId = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
         size_t posX = (unsigned char)msg[4] << 8U | (unsigned char)msg[5];
         size_t posY = (unsigned char)msg[6] << 8U | (unsigned char)msg[7];
@@ -48,9 +49,14 @@ namespace ecs::systems
                 if (i < types.size() && types[i]) {
                     types[i].value().type = msg[3];
                 }
-                if (i < velocities.size() && velocities[i] && msg[3]) {
+                if (i < velocities.size() && velocities[i]) {
                     velocities[i].value().x = msg[10];
                     velocities[i].value().y = msg[11];
+                }
+                if (i < directions.size() && directions[i]) {
+                    component::Direction d = component::Direction::deserialize(msg[12]);
+                    directions[i].value().x = d.x;
+                    directions[i].value().y = d.y;
                 }
                 return;
             }
@@ -80,6 +86,8 @@ namespace ecs::systems
             world.registry.addComponent<component::Drawable>(newEntity,
                 {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {1, 18, 32, 16}});
         } else if (msg[3] == component::EntityType::Types::Bullet) {
+            component::Direction d = component::Direction::deserialize(msg[12]);
+            world.registry.addComponent<component::Direction>(newEntity, {d.x, d.y});
             world.registry.addComponent<component::Drawable>(
                 newEntity, {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {5, 5, 1, 1}});
         }

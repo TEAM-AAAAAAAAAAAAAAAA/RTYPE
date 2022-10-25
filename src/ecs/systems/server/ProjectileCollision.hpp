@@ -3,14 +3,14 @@
 #include <functional>
 #include <iostream>
 #include "World.hpp"
+#include "components/Direction.hpp"
+#include "components/Faction.hpp"
+#include "components/Health.hpp"
 #include "components/Position.hpp"
 #include "components/Size.hpp"
 #include "components/Velocity.hpp"
-#include "components/Direction.hpp"
 #include "components/Weapon.hpp"
 #include "components/server/EnemyAI.hpp"
-#include "components/Faction.hpp"
-#include "components/Health.hpp"
 #include "components/server/Projectile.hpp"
 
 namespace ecs::systems
@@ -18,16 +18,23 @@ namespace ecs::systems
     std::function<void(World &)> projectileCollision = [](World &world) {
         auto const &projectiles = world.registry.getComponents<component::Projectile>();
         auto const &positions = world.registry.getComponents<component::Position>();
+        // auto const &networkIds = world.registry.getComponents<component::NetworkId>();
 
 #pragma region Proj out of map
         for (size_t i = 0; i < projectiles.size() && i < positions.size(); ++i) {
             auto const &proj = projectiles[i];
             auto const &projPos = positions[i];
+            // auto const &networkId = networkIds[i];
 
-            if (proj && projPos) {
+            if (proj && projPos/* && networkId*/) {
                 if (projPos.value().x < 0 || projPos.value().x > ecs::constant::mapWidth || projPos.value().y < 0
                     || projPos.value().y > ecs::constant::mapWidth) {
                     world.registry.killEntity(world.registry.entityFromIndex(i));
+                    // std::array<char, 2> idBin = networkId.value().serialize();
+                    // network::Message msg;
+                    // msg[0] = ecs::constant::getPacketTypeKey(ecs::constant::PacketType::ENTITY_DEATH);
+                    // msg[1] = idBin[0];
+                    // msg[2] = idBin[1];
                 }
             }
         };

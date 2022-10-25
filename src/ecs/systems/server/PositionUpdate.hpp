@@ -32,9 +32,10 @@ namespace ecs::systems
         auto &entityType = world.registry.getComponents<component::EntityType>();
         auto &sizes = world.registry.getComponents<component::Size>();
         auto &velocities = world.registry.getComponents<component::Velocity>();
+        auto &directions = world.registry.getComponents<component::Direction>();
 
         static auto clock = ecs::constant::chrono::now();
-        if (ecs::constant::chronoDuration(ecs::constant::chrono::now() - clock).count() > 10) {
+        if (ecs::constant::chronoDuration(ecs::constant::chrono::now() - clock).count() > 100) {
             clock = ecs::constant::chrono::now();
             for (size_t i = 0; i < position.size() && i < networkId.size() && i < sizes.size() && i < entityType.size()
                  && i < velocities.size();
@@ -43,7 +44,8 @@ namespace ecs::systems
                 auto &size = sizes[i];
                 auto &id = networkId[i];
                 auto &type = entityType[i];
-                if (pos && id) {
+                auto &direction = directions[i];
+                if (pos && id && size && type && direction) {
                     std::array<char, 2> idBin = id.value().serialize();
                     std::array<char, 4> posBin = pos.value().serialize();
                     std::array<char, 2> sizeBin = size.value().serialize();
@@ -59,6 +61,7 @@ namespace ecs::systems
                     msg[9] = sizeBin[1];
                     msg[10] = velocities[i].value().x;
                     msg[11] = velocities[i].value().y;
+                    msg[12] = direction.value().serialize();
                     msg[0] = ecs::constant::getPacketTypeKey(ecs::constant::PacketType::ENTITY_MOVE);
                     network::Server::getOutgoingMessages().push(
                         network::ServerMessage(msg, std::vector<unsigned int>()));

@@ -19,7 +19,7 @@ namespace network
      * Standard pair class that contains a string and the ID of the client that
      * sent it
      */
-    typedef std::array<char, 12> Message;
+    typedef std::array<char, 13> Message;
     typedef std::pair<Message, unsigned int> ClientMessage;
     typedef std::pair<Message, std::vector<unsigned int>> ServerMessage;
 
