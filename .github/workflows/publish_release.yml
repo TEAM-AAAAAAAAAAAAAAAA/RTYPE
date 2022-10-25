@@ -93,3 +93,7 @@ jobs:
           if (NOT result EQUAL 0)
             message(FATAL_ERROR "Bad exit status. Failed to build RTYPE project.")
           endif()
+      - name: List directory
+        shell: bash
+        run: |
+          ls -la
