@@ -38,6 +38,9 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.registry.addComponent<ecs::component::EnemyAI>(enemy, {});
     world.registry.addComponent<ecs::component::Health>(enemy, {100});
     world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Enemies});
+    world.registry.addComponent<ecs::component::NetworkId>(enemy, {static_cast<size_t>(enemy)});
+    world.registry.addComponent<ecs::component::EntityType>(enemy, {ecs::component::EntityType::Types::EnemyBase});
+    world.registry.addComponent<ecs::component::Velocity>(enemy, {0, 0});
 
     return world;
 }

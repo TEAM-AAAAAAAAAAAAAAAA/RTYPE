@@ -43,7 +43,8 @@ namespace ecs::systems
                 auto &size = sizes[i];
                 auto &id = networkId[i];
                 auto &type = entityType[i];
-                if (pos && id) {
+                auto &vel = velocities[i];
+                if (pos && id && size && type && vel) {
                     std::array<char, 2> idBin = id.value().serialize();
                     std::array<char, 4> posBin = pos.value().serialize();
                     std::array<char, 2> sizeBin = size.value().serialize();
@@ -57,8 +58,8 @@ namespace ecs::systems
                     msg[7] = posBin[3];
                     msg[8] = sizeBin[0];
                     msg[9] = sizeBin[1];
-                    msg[10] = velocities[i].value().x;
-                    msg[11] = velocities[i].value().y;
+                    msg[10] = vel.value().x;
+                    msg[11] = vel.value().y;
                     msg[0] = ecs::constant::getPacketTypeKey(ecs::constant::PacketType::ENTITY_MOVE);
                     network::Server::getOutgoingMessages().push(
                         network::ServerMessage(msg, std::vector<unsigned int>()));
