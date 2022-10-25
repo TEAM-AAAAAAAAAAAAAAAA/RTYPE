@@ -26,9 +26,8 @@ namespace ecs::systems
         auto &controllables = world.registry.getComponents<component::Controllable>();
         auto const &shootables = world.registry.getComponents<component::Shootable>();
 
-        for (size_t i = 0; i < controllables.size() && i < shootables.size(); ++i) {
+        for (size_t i = 0; i < controllables.size(); ++i) {
             auto &contr = controllables[i];
-            auto const &shoot = shootables[i];
 
             if (contr) {
                 bool hasMoved = false;
@@ -77,11 +76,13 @@ namespace ecs::systems
                     lastEventY = ecs::Event::EventType::MoveStop;
                     isStopped = true;
                 }
-
-                if (shoot) {
-                    if (sf::Keyboard::isKeyPressed(shoot.value().Shoot)
-                        || sf::Keyboard::isKeyPressed(shoot.value().ShootSecondary))
-                        world.pushEvent(ecs::Event(ecs::Event::EventType::Shoot));
+                if (i < shootables.size()) {
+                    auto const &shoot = shootables[i];
+                    if (shoot) {
+                        if (sf::Keyboard::isKeyPressed(shoot.value().Shoot)
+                            || sf::Keyboard::isKeyPressed(shoot.value().ShootSecondary))
+                            world.pushEvent(ecs::Event(ecs::Event::EventType::Shoot));
+                    }
                 }
             }
         }
