@@ -13,21 +13,18 @@
 
 namespace ecs::utils
 {
+    /**
+     * SFML window wrapper for the R-Type Project
+     */
     class Window : public sf::RenderWindow {
       public:
-        Window() : sf::RenderWindow(sf::VideoMode(ecs::constant::mapWidth, ecs::constant::mapHeight), "r-type") {}
-        // Window(int wSizeWidth = 800, int wSizeHeight = 600, std::string wTitle = "r-type")
-        //     : _window(sf::VideoMode(800, 400), "r-type")
-        // {
-        //     _window.setFramerateLimit(60);
-        // }
-        // ~Window();
-
-        // void clear() { _window.clear(); }
-
-      protected:
-      private:
-        // sf::RenderWindow _window;
+        /**
+         * Default constructor of window class, setting by default the FrameLimit to 60 (representing 65 fps)
+         */
+        Window() : sf::RenderWindow(sf::VideoMode(ecs::constant::mapWidth, ecs::constant::mapHeight), "r-type")
+        {
+            this->setFramerateLimit(60);
+        }
     };
 } // namespace ecs::utils
 #else

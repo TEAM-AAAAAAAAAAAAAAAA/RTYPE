@@ -10,7 +10,7 @@
 #include <functional>
 #include <iostream>
 #include "World.hpp"
-#include "components/Drawable.hpp"
+#include "components/client/Drawable.hpp"
 #include "components/Position.hpp"
 #include "components/Size.hpp"
 
@@ -36,8 +36,10 @@ namespace ecs::systems
             if (pos && size && draw) {
                 sf::Sprite sprite;
                 sprite.setTexture(draw.value().Texture);
-                sprite.setScale({float(size.value().width / draw.value().Texture.getSize().x), float(size.value().height / draw.value().Texture.getSize().y)});
-                sprite.setPosition({float(pos.value().x), float(pos.value().y)});
+                float scaleX = static_cast<float>(size.value().width) / static_cast<float>(draw.value().Texture.getSize().x);
+                float scaleY = static_cast<float>(size.value().height) / static_cast<float>(draw.value().Texture.getSize().y);
+                sprite.setScale(scaleX, scaleY);
+                sprite.setPosition({static_cast<float>(pos.value().x), static_cast<float>(pos.value().y)});
                 world.getWindow().draw(sprite);
             }
         };

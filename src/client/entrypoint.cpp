@@ -5,113 +5,74 @@
 ** rtype
 */
 
-#include <iostream>
 #include "Engine.hpp"
-#include "SFML/Graphics.hpp"
-#include "components/Controllable.hpp"
+#include "NetworkClient.hpp"
 #include "components/Direction.hpp"
-#include "components/Drawable.hpp"
-#include "components/EnemyAI.hpp"
 #include "components/Faction.hpp"
 #include "components/Health.hpp"
 #include "components/Position.hpp"
 #include "components/Size.hpp"
 #include "components/Velocity.hpp"
 #include "components/Weapon.hpp"
-#include "systems/Draw.hpp"
-#include "systems/HandleSFMLEvents.hpp"
-#include "systems/HandleSFMLKeys.hpp"
+#include "components/client/Controllable.hpp"
+#include "components/client/Drawable.hpp"
 #include "systems/ManageClientEvents.hpp"
 #include "systems/Movement.hpp"
-#include "systems/PositionLogger.hpp"
-#include "systems/ProjectileCollision.hpp"
-#include "systems/ShowHitBox.hpp"
+#include "systems/client/Draw.hpp"
+#include "systems/client/HandleIncomingMessages.hpp"
+#include "systems/client/HandleSFMLEvents.hpp"
+#include "systems/client/HandleSFMLKeys.hpp"
+#include "systems/client/SendDirection.hpp"
 
+/**
+ * This function is used to get the game part of the world.
+ * Currently registering every components to the world's registry and adding every associated systems to the world
+ * @param engine The engine in which you want to operate
+ * @return The world ready to be used
+ */
 ecs::World getGameWorld(ecs::Engine &engine)
 {
     ecs::World world(engine.getWindow());
 
-    ecs::Entity player = world.registry.spawn_entity();
-    const std::filesystem::path &playerPath = ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif");
+    world.registry.registerComponent<ecs::component::EntityType>();
+    world.registry.registerComponent<ecs::component::Velocity>();
+    world.registry.registerComponent<ecs::component::Size>();
+    world.registry.registerComponent<ecs::component::Faction>();
+    world.registry.registerComponent<ecs::component::NetworkId>();
+    world.registry.registerComponent<ecs::component::Position>();
     world.registry.registerComponent<ecs::component::Projectile>();
-
-    world.registry.addComponent<ecs::component::Position>(player, {10, 10});
-    world.registry.addComponent<ecs::component::Velocity>(player, {5, 5});
-    world.registry.addComponent<ecs::component::Size>(player, {32, 64});
-    world.registry.addComponent<ecs::component::Direction>(player, {1, 0});
-    world.registry.addComponent<ecs::component::Weapon>(player, {100, 10, 10});
-    world.registry.addComponent<ecs::component::Health>(player, {2000});
-    world.registry.addComponent<ecs::component::Faction>(player, {ecs::component::Faction::Factions::Players});
-    // world.addSystem(ecs::systems::positionLogger);
-    world.addSystem(ecs::systems::movement);
-    world.addSystem(ecs::systems::projectileCollision);
-    world.addSystem(ecs::systems::ShowHitBox);
-
-    ecs::Entity enemy = world.registry.spawn_entity();
-    world.registry.addComponent<ecs::component::Position>(enemy, {500, 50});
-    world.registry.addComponent<ecs::component::Size>(enemy, {64, 128});
-    world.registry.addComponent<ecs::component::EnemyAI>(enemy, {});
-    world.registry.addComponent<ecs::component::Health>(enemy, {100});
-    world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Enemies});
-    world.registry.addComponent<ecs::component::Drawable>(enemy, {playerPath, {1, 18, 32, 16}});
-// TO DELETE ---------------------------------------------------------------------------------------------------------------------------------------
-    ecs::Entity enemy_1 = world.registry.spawn_entity();
-    world.registry.addComponent<ecs::component::Position>(enemy_1, {500, 100});
-    world.registry.addComponent<ecs::component::Size>(enemy_1, {64, 128});
-    world.registry.addComponent<ecs::component::EnemyAI>(enemy_1, {});
-    world.registry.addComponent<ecs::component::Health>(enemy_1, {100});
-    world.registry.addComponent<ecs::component::Faction>(enemy_1, {ecs::component::Faction::Factions::Enemies});
-    world.registry.addComponent<ecs::component::Drawable>(enemy_1, {playerPath, {1, 18, 32, 16}});
-
-
-    ecs::Entity enemy_2 = world.registry.spawn_entity();
-    world.registry.addComponent<ecs::component::Position>(enemy_2, {500, 200});
-    world.registry.addComponent<ecs::component::Size>(enemy_2, {64, 128});
-    world.registry.addComponent<ecs::component::EnemyAI>(enemy_2, {});
-    world.registry.addComponent<ecs::component::Health>(enemy_2, {110});
-    world.registry.addComponent<ecs::component::Faction>(enemy_2, {ecs::component::Faction::Factions::Enemies});
-    world.registry.addComponent<ecs::component::Drawable>(enemy_2, {playerPath, {1, 18, 32, 16}});
-
-    ecs::Entity enemy_3 = world.registry.spawn_entity();
-    world.registry.addComponent<ecs::component::Position>(enemy_3, {500, 300});
-    world.registry.addComponent<ecs::component::Size>(enemy_3, {64, 128});
-    world.registry.addComponent<ecs::component::EnemyAI>(enemy_3, {});
-    world.registry.addComponent<ecs::component::Health>(enemy_3, {120});
-    world.registry.addComponent<ecs::component::Faction>(enemy_3, {ecs::component::Faction::Factions::Enemies});
-    world.registry.addComponent<ecs::component::Drawable>(enemy_3, {playerPath, {1, 18, 32, 16}});
-
-    ecs::Entity enemy_4 = world.registry.spawn_entity();
-    world.registry.addComponent<ecs::component::Position>(enemy_4, {500, 400});
-    world.registry.addComponent<ecs::component::Size>(enemy_4, {64, 128});
-    world.registry.addComponent<ecs::component::EnemyAI>(enemy_4, {});
-    world.registry.addComponent<ecs::component::Health>(enemy_4, {130});
-    world.registry.addComponent<ecs::component::Faction>(enemy_4, {ecs::component::Faction::Factions::Enemies});
-    world.registry.addComponent<ecs::component::Drawable>(enemy_4, {playerPath, {1, 18, 32, 16}});
-
-    ecs::Entity enemy_5 = world.registry.spawn_entity();
-    world.registry.addComponent<ecs::component::Position>(enemy_5, {500, 500});
-    world.registry.addComponent<ecs::component::Size>(enemy_5, {64, 128});
-    world.registry.addComponent<ecs::component::EnemyAI>(enemy_5, {});
-    world.registry.addComponent<ecs::component::Health>(enemy_5, {140});
-    world.registry.addComponent<ecs::component::Faction>(enemy_5, {ecs::component::Faction::Factions::Enemies});
-    world.registry.addComponent<ecs::component::Drawable>(enemy_5, {playerPath, {1, 18, 32, 16}});
-// TO DELETE ---------------------------------------------------------------------------------------------------------------------------------------
-    world.registry.addComponent<ecs::component::Controllable>(
-        player, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D});
-    world.registry.addComponent<ecs::component::Drawable>(player, {playerPath, sf::IntRect(1, 1, 32, 16)});
-    world.registry.addComponent<ecs::component::Shootable>(player, ecs::component::Shootable(sf::Keyboard::Space));
+    world.registry.registerComponent<ecs::component::Direction>();
+    world.registry.registerComponent<ecs::component::Weapon>();
+    world.registry.registerComponent<ecs::component::Health>();
+    world.registry.registerComponent<ecs::component::Drawable>();
+    world.registry.registerComponent<ecs::component::Shootable>();
+    world.registry.registerComponent<ecs::component::Controllable>();
 
     world.addSystem(ecs::systems::handleSFMLEvents);
     world.addSystem(ecs::systems::handleSFMLKeys);
     world.addSystem(ecs::systems::manageClientEvents);
     world.addSystem(ecs::systems::draw);
+    world.addSystem(ecs::systems::HandleIncomingMessages);
+    world.addSystem(ecs::systems::SendDirection);
+    world.addSystem(ecs::systems::movement);
     return world;
 }
 
+/**
+ * Main function of the client, running everything to start the game
+ * @return 0 if no error, anything otherwise
+ */
 int main()
 {
+    network::Client::setHost("localhost");
+    network::Client::setPort("8000");
+    network::Client::connect();
     ecs::Engine engine;
+    network::Message msg;
+    msg.fill(0);
+
     engine.setWaitingWorld(getGameWorld(engine));
+    network::Client::getOutgoingMessages().push(msg);
 
     engine.run();
     return 0;

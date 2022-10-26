@@ -39,17 +39,25 @@ namespace ecs::systems
             auto &pos = position[i];
             auto &id = networkId[i];
             auto &li = life[i];
+            static const int firstByteId = 0;
+            static const int secondByteId = 1;
+            static const int firstBytePos = 2;
+            static const int secondBytePos = 3;
+            static const int thirdBytePos = 4;
+            static const int fourthBytePos = 5;
+            static const int packetType = 6;
+
             if (li.value().life <= 0 && pos && id) {
                 std::array<char, 2> idBin = id.value().serialize();
                 std::array<char, 4> posBin = pos.value().serialize();
                 std::array<char, 7> msg;
-                msg[0] = idBin[0];
-                msg[1] = idBin[1];
-                msg[2] = posBin[0];
-                msg[3] = posBin[1];
-                msg[4] = posBin[2];
-                msg[5] = posBin[3];
-                msg[6] = ecs::constant::getPacketTypeKey(ecs::constant::PacketType::ENTITY_DEATH);
+                msg[firstByteId] = idBin[0];
+                msg[secondByteId] = idBin[1];
+                msg[firstBytePos] = posBin[0];
+                msg[secondBytePos] = posBin[1];
+                msg[thirdBytePos] = posBin[2];
+                msg[fourthBytePos] = posBin[3];
+                msg[packetType] = ecs::constant::getPacketTypeKey(ecs::constant::PacketType::ENTITY_DEATH);
                 serv.value().serv.outgoingQueue.push(
                     msg); // This is to be replaced when possible, it will not work nor should it
             }
