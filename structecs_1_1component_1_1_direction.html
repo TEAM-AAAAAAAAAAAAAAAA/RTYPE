@@ -133,6 +133,7 @@ $(document).ready(function(){initNavTree('structecs_1_1component_1_1_direction.h
 
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structecs_1_1component_1_1_direction-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -142,16 +143,80 @@ $(document).ready(function(){initNavTree('structecs_1_1component_1_1_direction.h
 
 <p><code>#include &lt;<a class="el" href="_direction_8hpp_source.html">Direction.hpp</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ab77c910bb1f74e11f33f784be5df1d9c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecs_1_1component_1_1_direction.html#ab77c910bb1f74e11f33f784be5df1d9c">Direction</a> (int <a class="el" href="structecs_1_1component_1_1_direction.html#a5f84b023526f216923180dcb1ef385b1">x</a>, int <a class="el" href="structecs_1_1component_1_1_direction.html#a3d32a244afa7d0baf48f009970957ba6">y</a>, bool <a class="el" href="structecs_1_1component_1_1_direction.html#ad9975c7c1208041bd936b7fc5d3d69cb">hasMoved</a>=false)</td></tr>
+<tr class="separator:ab77c910bb1f74e11f33f784be5df1d9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a5f84b023526f216923180dcb1ef385b1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecs_1_1component_1_1_direction.html#a5f84b023526f216923180dcb1ef385b1">x</a></td></tr>
 <tr class="separator:a5f84b023526f216923180dcb1ef385b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d32a244afa7d0baf48f009970957ba6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecs_1_1component_1_1_direction.html#a3d32a244afa7d0baf48f009970957ba6">y</a></td></tr>
 <tr class="separator:a3d32a244afa7d0baf48f009970957ba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9975c7c1208041bd936b7fc5d3d69cb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecs_1_1component_1_1_direction.html#ad9975c7c1208041bd936b7fc5d3d69cb">hasMoved</a></td></tr>
+<tr class="separator:ad9975c7c1208041bd936b7fc5d3d69cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="structecs_1_1component_1_1_direction.html">Direction</a> component is used to know where the entity is moving x represents the x-axis (horizontally) y represents the y-axis (vertically) </p>
-</div><h2 class="groupheader">Member Data Documentation</h2>
+<div class="textblock"><p><a class="el" href="structecs_1_1component_1_1_direction.html">Direction</a> component is used to know where the entity is moving x represents the x-axis (horizontally) y represents the y-axis (vertically) hasMoved is used to know if the entity changed its direction since the last synchronisation with the server </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ab77c910bb1f74e11f33f784be5df1d9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab77c910bb1f74e11f33f784be5df1d9c">&#9670;&nbsp;</a></span>Direction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ecs::component::Direction::Direction </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>hasMoved</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ad9975c7c1208041bd936b7fc5d3d69cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9975c7c1208041bd936b7fc5d3d69cb">&#9670;&nbsp;</a></span>hasMoved</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ecs::component::Direction::hasMoved</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a5f84b023526f216923180dcb1ef385b1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5f84b023526f216923180dcb1ef385b1">&#9670;&nbsp;</a></span>x</h2>
 

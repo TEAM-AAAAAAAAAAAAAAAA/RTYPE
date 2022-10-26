@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['valuetype_389',['valueType',['../classecs_1_1_sparse_array.html#ac466ffe36e9cff21415b812b665b7c22',1,'ecs::SparseArray']]]
+  ['servermessage_425',['ServerMessage',['../namespacenetwork.html#a1290ee51c4c8d07f57076ac8f7505129',1,'network']]],
+  ['sizetype_426',['sizeType',['../classecs_1_1_sparse_array.html#a35e207ad4e22f52a8a04e4c4752733d3',1,'ecs::SparseArray']]]
 ];

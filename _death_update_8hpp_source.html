@@ -10,7 +10,7 @@
         src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
         crossorigin="anonymous"></script>
-<title>RTYPE: src/ecs/systems/DeathUpdate.hpp Source File</title>
+<title>RTYPE: src/ecs/systems/server/DeathUpdate.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
   <!--BEGIN FULL_SIDEBAR-->
 <script type="text/javascript">var page_layout=1;</script>
@@ -154,7 +154,7 @@ $(document).ready(function(){initNavTree('_death_update_8hpp_source.html',''); i
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_position_8hpp.html">Position.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_world_8hpp.html">World.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="namespaceecs_1_1systems.html">   19</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs_1_1systems.html">ecs::systems</a></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs_1_1systems.html">ecs::systems</a></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
 <div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="namespaceecs_1_1systems.html#a689ab1ddea34f047a379e06ff14f5489">   25</a></span>&#160;    std::function&lt;void(<a class="code" href="classecs_1_1_world.html">World</a> &amp;)&gt; <a class="code" href="namespaceecs_1_1systems.html#a689ab1ddea34f047a379e06ff14f5489">serverPush</a> = [](<a class="code" href="classecs_1_1_world.html">World</a> &amp;world) {</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">auto</span> &amp;<a class="code" href="namespacenetwork.html">network</a> = world.registry.getComponents&lt;component::Network&gt;();</div>
@@ -173,43 +173,51 @@ $(document).ready(function(){initNavTree('_death_update_8hpp_source.html',''); i
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keyword">auto</span> &amp;pos = position[i];</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <span class="keyword">auto</span> &amp;<span class="keywordtype">id</span> = networkId[i];</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="keyword">auto</span> &amp;li = life[i];</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            <span class="keywordflow">if</span> (li.value().life &lt;= 0 &amp;&amp; pos &amp;&amp; id) {</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                std::array&lt;char, 2&gt; idBin = <span class="keywordtype">id</span>.value().<a class="code" href="structecs_1_1component_1_1_position.html#aa6eb9519f8bd02b4c8290ef48749169c">serialize</a>();</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                std::array&lt;char, 4&gt; posBin = pos.value().serialize();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                std::array&lt;char, 7&gt; msg;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                msg[0] = idBin[0];</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                msg[1] = idBin[1];</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                msg[2] = posBin[0];</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                msg[3] = posBin[1];</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                msg[4] = posBin[2];</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                msg[5] = posBin[3];</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                msg[6] = ecs::constant::getPacketTypeKey(<a class="code" href="namespaceecs_1_1constant.html#a01d4874a258e2747078bd137000e9e74a25b36518fbb9d7026e393d2f36082251">ecs::constant::PacketType::ENTITY_DEATH</a>);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                serv.value().serv.outgoingQueue.push(</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                    msg); <span class="comment">// This is to be replaced when possible, it will not work nor should it</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            }</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    };</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> firstByteId = 0;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> secondByteId = 1;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> firstBytePos = 2;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> secondBytePos = 3;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> thirdBytePos = 4;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> fourthBytePos = 5;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> packetType = 6;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keywordflow">if</span> (li.value().life &lt;= 0 &amp;&amp; pos &amp;&amp; id) {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                std::array&lt;char, 2&gt; idBin = <span class="keywordtype">id</span>.value().<a class="code" href="structecs_1_1component_1_1_position.html#aa6eb9519f8bd02b4c8290ef48749169c">serialize</a>();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                std::array&lt;char, 4&gt; posBin = pos.value().serialize();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                std::array&lt;char, 7&gt; msg;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                msg[firstByteId] = idBin[0];</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                msg[secondByteId] = idBin[1];</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                msg[firstBytePos] = posBin[0];</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                msg[secondBytePos] = posBin[1];</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                msg[thirdBytePos] = posBin[2];</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                msg[fourthBytePos] = posBin[3];</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                msg[packetType] = ecs::constant::getPacketTypeKey(<a class="code" href="namespaceecs_1_1constant.html#a01d4874a258e2747078bd137000e9e74a25b36518fbb9d7026e393d2f36082251">ecs::constant::PacketType::ENTITY_DEATH</a>);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                serv.value().serv.outgoingQueue.push(</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                    msg); <span class="comment">// This is to be replaced when possible, it will not work nor should it</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        }</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    };</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="a_entity_life_8hpp_html"><div class="ttname"><a href="_entity_life_8hpp.html">EntityLife.hpp</a></div></div>
 <div class="ttc" id="a_network_id_8hpp_html"><div class="ttname"><a href="_network_id_8hpp.html">NetworkId.hpp</a></div></div>
-<div class="ttc" id="anamespacenetwork_html"><div class="ttname"><a href="namespacenetwork.html">network</a></div><div class="ttdef"><b>Definition:</b> NetworkClient.hpp:14</div></div>
+<div class="ttc" id="anamespacenetwork_html"><div class="ttname"><a href="namespacenetwork.html">network</a></div><div class="ttdef"><b>Definition:</b> NetworkClient.cpp:10</div></div>
 <div class="ttc" id="a_position_8hpp_html"><div class="ttname"><a href="_position_8hpp.html">Position.hpp</a></div></div>
 <div class="ttc" id="anamespaceecs_1_1constant_html_a01d4874a258e2747078bd137000e9e74a25b36518fbb9d7026e393d2f36082251"><div class="ttname"><a href="namespaceecs_1_1constant.html#a01d4874a258e2747078bd137000e9e74a25b36518fbb9d7026e393d2f36082251">ecs::constant::ENTITY_DEATH</a></div><div class="ttdeci">@ ENTITY_DEATH</div><div class="ttdef"><b>Definition:</b> Constant.hpp:31</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_network_id_html"><div class="ttname"><a href="structecs_1_1component_1_1_network_id.html">ecs::component::NetworkId</a></div><div class="ttdoc">NetworkId component related to the entity sent to the client.</div><div class="ttdef"><b>Definition:</b> NetworkId.hpp:15</div></div>
-<div class="ttc" id="astructecs_1_1component_1_1_position_html_aa6eb9519f8bd02b4c8290ef48749169c"><div class="ttname"><a href="structecs_1_1component_1_1_position.html#aa6eb9519f8bd02b4c8290ef48749169c">ecs::component::Position::serialize</a></div><div class="ttdeci">std::array&lt; char, 4 &gt; serialize()</div><div class="ttdoc">serialize the component</div><div class="ttdef"><b>Definition:</b> Position.hpp:19</div></div>
+<div class="ttc" id="astructecs_1_1component_1_1_position_html_aa6eb9519f8bd02b4c8290ef48749169c"><div class="ttname"><a href="structecs_1_1component_1_1_position.html#aa6eb9519f8bd02b4c8290ef48749169c">ecs::component::Position::serialize</a></div><div class="ttdeci">std::array&lt; char, 4 &gt; serialize()</div><div class="ttdoc">serialize the component</div><div class="ttdef"><b>Definition:</b> Position.hpp:20</div></div>
 <div class="ttc" id="a_world_8hpp_html"><div class="ttname"><a href="_world_8hpp.html">World.hpp</a></div></div>
 <div class="ttc" id="a_constant_8hpp_html"><div class="ttname"><a href="_constant_8hpp.html">Constant.hpp</a></div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_entity_life_html"><div class="ttname"><a href="structecs_1_1component_1_1_entity_life.html">ecs::component::EntityLife</a></div><div class="ttdoc">EntityLife component.</div><div class="ttdef"><b>Definition:</b> EntityLife.hpp:13</div></div>
 <div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:20</div></div>
-<div class="ttc" id="anamespaceecs_1_1systems_html"><div class="ttname"><a href="namespaceecs_1_1systems.html">ecs::systems</a></div><div class="ttdef"><b>Definition:</b> DeathUpdate.hpp:19</div></div>
+<div class="ttc" id="anamespaceecs_1_1systems_html"><div class="ttname"><a href="namespaceecs_1_1systems.html">ecs::systems</a></div><div class="ttdef"><b>Definition:</b> Draw.hpp:21</div></div>
 <div class="ttc" id="anamespaceecs_1_1systems_html_a689ab1ddea34f047a379e06ff14f5489"><div class="ttname"><a href="namespaceecs_1_1systems.html#a689ab1ddea34f047a379e06ff14f5489">ecs::systems::serverPush</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; serverPush</div><div class="ttdef"><b>Definition:</b> DeathUpdate.hpp:25</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_position_html"><div class="ttname"><a href="structecs_1_1component_1_1_position.html">ecs::component::Position</a></div><div class="ttdef"><b>Definition:</b> Position.hpp:14</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_ddca5f149c4ce13074f28b270e950ba9.html">ecs</a></li><li class="navelem"><a class="el" href="dir_21b124123231556e587af26d290be4a8.html">systems</a></li><li class="navelem"><a class="el" href="_death_update_8hpp.html">DeathUpdate.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_ddca5f149c4ce13074f28b270e950ba9.html">ecs</a></li><li class="navelem"><a class="el" href="dir_21b124123231556e587af26d290be4a8.html">systems</a></li><li class="navelem"><a class="el" href="dir_1f26314eb5ccb716885c93d7ca7776e3.html">server</a></li><li class="navelem"><a class="el" href="_death_update_8hpp.html">DeathUpdate.hpp</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

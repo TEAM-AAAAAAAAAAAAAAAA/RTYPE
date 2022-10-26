@@ -1,4 +1,4 @@
-<map id="src/ecs/components/Controllable.hpp" name="src/ecs/components/Controllable.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="33,5,184,47"/>
+<map id="src/ecs/components/client/Controllable.hpp" name="src/ecs/components/client/Controllable.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="22,5,195,47"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,95,212,121"/>
 </map>

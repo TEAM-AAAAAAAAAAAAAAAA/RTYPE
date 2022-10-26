@@ -10,7 +10,7 @@
         src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
         crossorigin="anonymous"></script>
-<title>RTYPE: src/ecs/systems/HandleSFMLEvents.hpp Source File</title>
+<title>RTYPE: src/ecs/systems/client/HandleSFMLEvents.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
   <!--BEGIN FULL_SIDEBAR-->
 <script type="text/javascript">var page_layout=1;</script>
@@ -158,32 +158,23 @@ $(document).ready(function(){initNavTree('_handle_s_f_m_l_events_8hpp_source.htm
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            <span class="keywordflow">switch</span> (event.type) {</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                <span class="keywordflow">case</span> sf::Event::Closed: world.getWindow().close(); <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                <span class="keywordflow">case</span> sf::Event::KeyPressed: {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                    <span class="comment">// auto const &amp;shootables = world.registry.getComponents&lt;component::Shootable&gt;();</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                    <span class="comment">// for (size_t i = 0; i &lt; shootables.size(); ++i) {</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                        <span class="comment">// auto const &amp;shoot = shootables[i];</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                        <span class="comment">// if (shoot) {</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                        <span class="comment">//     if (event.key.code == shoot.value().Shoot || event.key.code == shoot.value().ShootSecondary)</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                        <span class="comment">//         world.pushEvent(ecs::Event(ecs::Event::EventType::Shoot));</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                        <span class="comment">// }</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                    <span class="comment">// }</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                } <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                <span class="keywordflow">default</span>: <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            }</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        }</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    };</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                } <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                <span class="keywordflow">default</span>: <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            }</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        }</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    };</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="anamespaceecs_1_1systems_html_a4294eeb80a7b9f00e1baad04f18dad03"><div class="ttname"><a href="namespaceecs_1_1systems.html#a4294eeb80a7b9f00e1baad04f18dad03">ecs::systems::handleSFMLEvents</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; handleSFMLEvents</div><div class="ttdef"><b>Definition:</b> HandleSFMLEvents.hpp:22</div></div>
 <div class="ttc" id="a_world_8hpp_html"><div class="ttname"><a href="_world_8hpp.html">World.hpp</a></div></div>
 <div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:20</div></div>
-<div class="ttc" id="anamespaceecs_1_1systems_html"><div class="ttname"><a href="namespaceecs_1_1systems.html">ecs::systems</a></div><div class="ttdef"><b>Definition:</b> DeathUpdate.hpp:19</div></div>
+<div class="ttc" id="anamespaceecs_1_1systems_html"><div class="ttname"><a href="namespaceecs_1_1systems.html">ecs::systems</a></div><div class="ttdef"><b>Definition:</b> Draw.hpp:21</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_ddca5f149c4ce13074f28b270e950ba9.html">ecs</a></li><li class="navelem"><a class="el" href="dir_21b124123231556e587af26d290be4a8.html">systems</a></li><li class="navelem"><a class="el" href="_handle_s_f_m_l_events_8hpp.html">HandleSFMLEvents.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_ddca5f149c4ce13074f28b270e950ba9.html">ecs</a></li><li class="navelem"><a class="el" href="dir_21b124123231556e587af26d290be4a8.html">systems</a></li><li class="navelem"><a class="el" href="dir_8312ed431159819e982d669a999a9d29.html">client</a></li><li class="navelem"><a class="el" href="_handle_s_f_m_l_events_8hpp.html">HandleSFMLEvents.hpp</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

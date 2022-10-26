@@ -10,7 +10,7 @@
         src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
         crossorigin="anonymous"></script>
-<title>RTYPE: src/ecs/systems/Draw.hpp File Reference</title>
+<title>RTYPE: src/ecs/systems/client/Draw.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
   <!--BEGIN FULL_SIDEBAR-->
 <script type="text/javascript">var page_layout=1;</script>
@@ -142,50 +142,47 @@ $(document).ready(function(){initNavTree('_draw_8hpp.html',''); initResizable();
 <div class="textblock"><code>#include &lt;functional&gt;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
 <code>#include &quot;<a class="el" href="_world_8hpp_source.html">World.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_drawable_8hpp_source.html">components/Drawable.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_drawable_8hpp_source.html">components/client/Drawable.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_position_8hpp_source.html">components/Position.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_size_8hpp_source.html">components/Size.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Draw.hpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="_draw_8hpp__incl.png" border="0" usemap="#src_2ecs_2systems_2_draw_8hpp" alt=""/></div>
-<map name="src_2ecs_2systems_2_draw_8hpp" id="src_2ecs_2systems_2_draw_8hpp">
-<area shape="rect" title=" " alt="" coords="341,5,531,32"/>
-<area shape="rect" title=" " alt="" coords="21,229,107,256"/>
-<area shape="rect" title=" " alt="" coords="15,304,95,331"/>
-<area shape="rect" href="_world_8hpp.html" title=" " alt="" coords="310,80,397,107"/>
-<area shape="rect" href="_drawable_8hpp.html" title=" " alt="" coords="451,80,647,107"/>
-<area shape="rect" href="_position_8hpp.html" title=" " alt="" coords="688,80,875,107"/>
-<area shape="rect" href="_size_8hpp.html" title=" " alt="" coords="899,80,1061,107"/>
-<area shape="rect" title=" " alt="" coords="229,155,286,181"/>
-<area shape="rect" href="_event_8hpp.html" title=" " alt="" coords="310,155,397,181"/>
-<area shape="rect" href="_registry_8hpp.html" title=" " alt="" coords="421,155,523,181"/>
-<area shape="rect" href="_window_8hpp.html" title=" " alt="" coords="71,155,204,181"/>
-<area shape="rect" title=" " alt="" coords="697,229,743,256"/>
-<area shape="rect" title=" " alt="" coords="305,304,391,331"/>
-<area shape="rect" title=" " alt="" coords="386,229,473,256"/>
-<area shape="rect" href="_constant_8hpp.html" title=" " alt="" coords="457,304,565,331"/>
-<area shape="rect" href="_entity_8hpp.html" title=" " alt="" coords="738,304,825,331"/>
-<area shape="rect" href="_sparse_array_8hpp.html" title=" " alt="" coords="183,229,310,256"/>
-<area shape="rect" title=" " alt="" coords="549,229,673,256"/>
-<area shape="rect" title=" " alt="" coords="746,379,817,405"/>
-<area shape="rect" title=" " alt="" coords="485,379,536,405"/>
-<area shape="rect" title=" " alt="" coords="119,304,193,331"/>
-<area shape="rect" title=" " alt="" coords="218,304,281,331"/>
-<area shape="rect" title=" " alt="" coords="547,155,746,181"/>
-<area shape="rect" title=" " alt="" coords="769,155,825,181"/>
+<div class="center"><img src="_draw_8hpp__incl.png" border="0" usemap="#src_2ecs_2systems_2client_2_draw_8hpp" alt=""/></div>
+<map name="src_2ecs_2systems_2client_2_draw_8hpp" id="src_2ecs_2systems_2client_2_draw_8hpp">
+<area shape="rect" title=" " alt="" coords="366,5,533,47"/>
+<area shape="rect" title=" " alt="" coords="21,244,107,271"/>
+<area shape="rect" title=" " alt="" coords="19,319,99,345"/>
+<area shape="rect" href="_world_8hpp.html" title=" " alt="" coords="314,95,401,121"/>
+<area shape="rect" href="_drawable_8hpp.html" title=" " alt="" coords="435,95,671,121"/>
+<area shape="rect" href="_position_8hpp.html" title=" " alt="" coords="701,95,888,121"/>
+<area shape="rect" href="_size_8hpp.html" title=" " alt="" coords="913,95,1074,121"/>
+<area shape="rect" title=" " alt="" coords="227,169,290,196"/>
+<area shape="rect" href="_event_8hpp.html" title=" " alt="" coords="314,169,401,196"/>
+<area shape="rect" href="_registry_8hpp.html" title=" " alt="" coords="425,169,527,196"/>
+<area shape="rect" href="_window_8hpp.html" title=" " alt="" coords="69,169,203,196"/>
+<area shape="rect" title=" " alt="" coords="701,244,747,271"/>
+<area shape="rect" title=" " alt="" coords="309,319,395,345"/>
+<area shape="rect" title=" " alt="" coords="390,244,477,271"/>
+<area shape="rect" href="_constant_8hpp.html" title=" " alt="" coords="461,319,569,345"/>
+<area shape="rect" href="_entity_8hpp.html" title=" " alt="" coords="742,319,829,345"/>
+<area shape="rect" href="_sparse_array_8hpp.html" title=" " alt="" coords="187,244,314,271"/>
+<area shape="rect" title=" " alt="" coords="553,244,677,271"/>
+<area shape="rect" title=" " alt="" coords="750,393,821,420"/>
+<area shape="rect" title=" " alt="" coords="489,393,540,420"/>
+<area shape="rect" title=" " alt="" coords="123,319,197,345"/>
+<area shape="rect" title=" " alt="" coords="222,319,285,345"/>
+<area shape="rect" title=" " alt="" coords="551,169,750,196"/>
+<area shape="rect" title=" " alt="" coords="773,169,829,196"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="_draw_8hpp__dep__incl.png" border="0" usemap="#src_2ecs_2systems_2_draw_8hppdep" alt=""/></div>
-<map name="src_2ecs_2systems_2_draw_8hppdep" id="src_2ecs_2systems_2_draw_8hppdep">
-<area shape="rect" title=" " alt="" coords="94,5,285,32"/>
-<area shape="rect" href="client_2entrypoint_8cpp.html" title=" " alt="" coords="5,155,184,181"/>
-<area shape="rect" href="_engine_8hpp.html" title=" " alt="" coords="193,80,335,107"/>
-<area shape="rect" href="_demo_8cpp.html" title=" " alt="" coords="208,155,360,181"/>
-<area shape="rect" href="server_2entrypoint_8cpp.html" title=" " alt="" coords="384,155,568,181"/>
+<div class="center"><img src="_draw_8hpp__dep__incl.png" border="0" usemap="#src_2ecs_2systems_2client_2_draw_8hppdep" alt=""/></div>
+<map name="src_2ecs_2systems_2client_2_draw_8hppdep" id="src_2ecs_2systems_2client_2_draw_8hppdep">
+<area shape="rect" title=" " alt="" coords="11,5,178,47"/>
+<area shape="rect" href="client_2entrypoint_8cpp.html" title=" " alt="" coords="5,95,184,121"/>
 </map>
 </div>
 </div>
@@ -208,7 +205,7 @@ Variables</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_ddca5f149c4ce13074f28b270e950ba9.html">ecs</a></li><li class="navelem"><a class="el" href="dir_21b124123231556e587af26d290be4a8.html">systems</a></li><li class="navelem"><a class="el" href="_draw_8hpp.html">Draw.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_ddca5f149c4ce13074f28b270e950ba9.html">ecs</a></li><li class="navelem"><a class="el" href="dir_21b124123231556e587af26d290be4a8.html">systems</a></li><li class="navelem"><a class="el" href="dir_8312ed431159819e982d669a999a9d29.html">client</a></li><li class="navelem"><a class="el" href="_draw_8hpp.html">Draw.hpp</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

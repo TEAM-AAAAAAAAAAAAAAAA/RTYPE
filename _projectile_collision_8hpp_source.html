@@ -10,7 +10,7 @@
         src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
         crossorigin="anonymous"></script>
-<title>RTYPE: src/ecs/systems/ProjectileCollision.hpp Source File</title>
+<title>RTYPE: src/ecs/systems/server/ProjectileCollision.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
   <!--BEGIN FULL_SIDEBAR-->
 <script type="text/javascript">var page_layout=1;</script>
@@ -141,89 +141,101 @@ $(document).ready(function(){initNavTree('_projectile_collision_8hpp_source.html
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_world_8hpp.html">World.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_faction_8hpp.html">components/Faction.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_health_8hpp.html">components/Health.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_projectile_8hpp.html">components/Projectile.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs_1_1systems.html">ecs::systems</a></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="namespaceecs_1_1systems.html#a3ae801d63a324b2863d0b308abaa46d9">   12</a></span>&#160;    std::function&lt;void(<a class="code" href="classecs_1_1_world.html">World</a> &amp;)&gt; <a class="code" href="namespaceecs_1_1systems.html#a3ae801d63a324b2863d0b308abaa46d9">projectileCollision</a> = [](<a class="code" href="classecs_1_1_world.html">World</a> &amp;world) {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;projectiles = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_projectile.html">component::Projectile</a>&gt;();</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;positions = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_position.html">component::Position</a>&gt;();</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_direction_8hpp.html">components/Direction.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_faction_8hpp.html">components/Faction.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_health_8hpp.html">components/Health.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_position_8hpp.html">components/Position.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_size_8hpp.html">components/Size.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_velocity_8hpp.html">components/Velocity.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_weapon_8hpp.html">components/Weapon.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_enemy_a_i_8hpp.html">components/server/EnemyAI.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_projectile_8hpp.html">components/server/Projectile.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#pragma region Proj out of map</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; projectiles.size() &amp;&amp; i &lt; positions.size(); ++i) {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span> &amp;proj = projectiles[i];</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span> &amp;projPos = positions[i];</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            <span class="keywordflow">if</span> (proj &amp;&amp; projPos) {</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                <span class="keywordflow">if</span> (projPos.value().x &lt; 0 || projPos.value().x &gt; ecs::constant::mapWidth || projPos.value().y &lt; 0</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;                    || projPos.value().y &gt; ecs::constant::mapWidth) {</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                    world.registry.killEntity(world.registry.entityFromIndex(i));</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                }</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            }</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        };</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#pragma endregion</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#pragma region Hitreg</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keyword">auto</span> &amp;healths = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_health.html">component::Health</a>&gt;();</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;factions = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_faction.html">component::Faction</a>&gt;();</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;sizes = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_size.html">component::Size</a>&gt;();</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordtype">bool</span> killProj = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordtype">size_t</span> projId = 0;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; projectiles.size() &amp;&amp; i &lt; positions.size(); ++i) {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span> &amp;proj = projectiles[i];</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span> &amp;projPos = positions[i];</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="keywordflow">if</span> (proj &amp;&amp; projPos) {</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt; healths.size() &amp;&amp; j &lt; positions.size(); ++j) {</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                    <span class="keyword">auto</span> &amp;victimHealth = healths[j];</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                    <span class="keyword">auto</span> <span class="keyword">const</span> &amp;victimPos = positions[j];</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                    <span class="keyword">auto</span> <span class="keyword">const</span> &amp;victimSize = sizes[j];</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs_1_1systems.html">ecs::systems</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="namespaceecs_1_1systems.html#a3ae801d63a324b2863d0b308abaa46d9">   18</a></span>&#160;    std::function&lt;void(<a class="code" href="classecs_1_1_world.html">World</a> &amp;)&gt; <a class="code" href="namespaceecs_1_1systems.html#a3ae801d63a324b2863d0b308abaa46d9">projectileCollision</a> = [](<a class="code" href="classecs_1_1_world.html">World</a> &amp;world) {</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;projectiles = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_projectile.html">component::Projectile</a>&gt;();</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;positions = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_position.html">component::Position</a>&gt;();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#pragma region Proj out of map</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; projectiles.size() &amp;&amp; i &lt; positions.size(); ++i) {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span> &amp;proj = projectiles[i];</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span> &amp;projPos = positions[i];</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            <span class="keywordflow">if</span> (proj &amp;&amp; projPos) {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                <span class="keywordflow">if</span> (projPos.value().x &lt; 0 || projPos.value().x &gt; ecs::constant::mapWidth || projPos.value().y &lt; 0</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                    || projPos.value().y &gt; ecs::constant::mapHeight) {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                    world.registry.killEntity(world.registry.entityFromIndex(i));</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                }</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            }</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        };</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#pragma endregion</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#pragma region Hitreg</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keyword">auto</span> &amp;healths = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_health.html">component::Health</a>&gt;();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;factions = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_faction.html">component::Faction</a>&gt;();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;sizes = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_size.html">component::Size</a>&gt;();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordtype">bool</span> killProj = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordtype">size_t</span> projId = 0;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; projectiles.size() &amp;&amp; i &lt; positions.size(); ++i) {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span> &amp;proj = projectiles[i];</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span> &amp;projPos = positions[i];</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                    <span class="keywordflow">if</span> (victimHealth &amp;&amp; victimPos &amp;&amp; victimSize) {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                        <span class="keywordflow">if</span> (i &lt; factions.size() &amp;&amp; j &lt; factions.size())</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                            <span class="keywordflow">if</span> (factions[i] &amp;&amp; factions[j])</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                                <span class="keywordflow">if</span> (factions[i].value().faction == factions[j].value().faction)</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                                    <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                        <span class="keywordflow">if</span> (projPos.value().x &gt; victimPos.value().x</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                            &amp;&amp; projPos.value().x &lt; victimPos.value().x + victimSize.value().height</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                            &amp;&amp; projPos.value().y &gt; victimPos.value().y</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                            &amp;&amp; projPos.value().x &lt; victimPos.value().y + victimSize.value().height) {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                            victimHealth.value().health -= proj.value().damage;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                            victimHealth.value().health &lt;= 0 ? victimHealth.value().health = 0 : 0;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                            projId = i;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                            killProj = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                        }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                    }</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                }</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            }</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        };</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">if</span> (killProj)</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            world.registry.killEntity(world.registry.entityFromIndex(projId));</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#pragma endregion</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    };</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keywordflow">if</span> (proj &amp;&amp; projPos) {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt; healths.size() &amp;&amp; j &lt; positions.size(); ++j) {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                    <span class="keyword">auto</span> &amp;victimHealth = healths[j];</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                    <span class="keyword">auto</span> <span class="keyword">const</span> &amp;victimPos = positions[j];</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                    <span class="keyword">auto</span> <span class="keyword">const</span> &amp;victimSize = sizes[j];</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                    <span class="keywordflow">if</span> (victimHealth &amp;&amp; victimPos &amp;&amp; victimSize) {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                        <span class="keywordflow">if</span> (i &lt; factions.size() &amp;&amp; j &lt; factions.size())</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                            <span class="keywordflow">if</span> (factions[i] &amp;&amp; factions[j])</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                                <span class="keywordflow">if</span> (factions[i].value().faction == factions[j].value().faction)</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                                    <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                        <span class="keywordflow">if</span> (projPos.value().x &gt; victimPos.value().x</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                            &amp;&amp; projPos.value().x &lt; victimPos.value().x + victimSize.value().width</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                            &amp;&amp; projPos.value().y &gt; victimPos.value().y</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                            &amp;&amp; projPos.value().y &lt; victimPos.value().y + victimSize.value().height) {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                            victimHealth.value().health -= proj.value().damage;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                            victimHealth.value().health &lt;= 0 ? victimHealth.value().health = 0 : 0;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                            projId = i;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                            killProj = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                        }</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                    }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                }</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            }</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        };</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordflow">if</span> (killProj)</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            world.registry.killEntity(world.registry.entityFromIndex(projId));</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#pragma endregion</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    };</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="a_velocity_8hpp_html"><div class="ttname"><a href="_velocity_8hpp.html">Velocity.hpp</a></div></div>
 <div class="ttc" id="a_faction_8hpp_html"><div class="ttname"><a href="_faction_8hpp.html">Faction.hpp</a></div></div>
+<div class="ttc" id="a_position_8hpp_html"><div class="ttname"><a href="_position_8hpp.html">Position.hpp</a></div></div>
+<div class="ttc" id="a_enemy_a_i_8hpp_html"><div class="ttname"><a href="_enemy_a_i_8hpp.html">EnemyAI.hpp</a></div></div>
 <div class="ttc" id="a_health_8hpp_html"><div class="ttname"><a href="_health_8hpp.html">Health.hpp</a></div></div>
+<div class="ttc" id="a_direction_8hpp_html"><div class="ttname"><a href="_direction_8hpp.html">Direction.hpp</a></div></div>
 <div class="ttc" id="a_world_8hpp_html"><div class="ttname"><a href="_world_8hpp.html">World.hpp</a></div></div>
+<div class="ttc" id="a_size_8hpp_html"><div class="ttname"><a href="_size_8hpp.html">Size.hpp</a></div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_health_html"><div class="ttname"><a href="structecs_1_1component_1_1_health.html">ecs::component::Health</a></div><div class="ttdef"><b>Definition:</b> Health.hpp:12</div></div>
 <div class="ttc" id="a_projectile_8hpp_html"><div class="ttname"><a href="_projectile_8hpp.html">Projectile.hpp</a></div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_faction_html"><div class="ttname"><a href="structecs_1_1component_1_1_faction.html">ecs::component::Faction</a></div><div class="ttdef"><b>Definition:</b> Faction.hpp:12</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_projectile_html"><div class="ttname"><a href="structecs_1_1component_1_1_projectile.html">ecs::component::Projectile</a></div><div class="ttdef"><b>Definition:</b> Projectile.hpp:12</div></div>
 <div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:20</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_size_html"><div class="ttname"><a href="structecs_1_1component_1_1_size.html">ecs::component::Size</a></div><div class="ttdoc">Size component.</div><div class="ttdef"><b>Definition:</b> Size.hpp:6</div></div>
-<div class="ttc" id="anamespaceecs_1_1systems_html"><div class="ttname"><a href="namespaceecs_1_1systems.html">ecs::systems</a></div><div class="ttdef"><b>Definition:</b> DeathUpdate.hpp:19</div></div>
-<div class="ttc" id="anamespaceecs_1_1systems_html_a3ae801d63a324b2863d0b308abaa46d9"><div class="ttname"><a href="namespaceecs_1_1systems.html#a3ae801d63a324b2863d0b308abaa46d9">ecs::systems::projectileCollision</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; projectileCollision</div><div class="ttdef"><b>Definition:</b> ProjectileCollision.hpp:12</div></div>
+<div class="ttc" id="anamespaceecs_1_1systems_html"><div class="ttname"><a href="namespaceecs_1_1systems.html">ecs::systems</a></div><div class="ttdef"><b>Definition:</b> Draw.hpp:21</div></div>
+<div class="ttc" id="anamespaceecs_1_1systems_html_a3ae801d63a324b2863d0b308abaa46d9"><div class="ttname"><a href="namespaceecs_1_1systems.html#a3ae801d63a324b2863d0b308abaa46d9">ecs::systems::projectileCollision</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; projectileCollision</div><div class="ttdef"><b>Definition:</b> ProjectileCollision.hpp:18</div></div>
+<div class="ttc" id="a_weapon_8hpp_html"><div class="ttname"><a href="_weapon_8hpp.html">Weapon.hpp</a></div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_position_html"><div class="ttname"><a href="structecs_1_1component_1_1_position.html">ecs::component::Position</a></div><div class="ttdef"><b>Definition:</b> Position.hpp:14</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_ddca5f149c4ce13074f28b270e950ba9.html">ecs</a></li><li class="navelem"><a class="el" href="dir_21b124123231556e587af26d290be4a8.html">systems</a></li><li class="navelem"><a class="el" href="_projectile_collision_8hpp.html">ProjectileCollision.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_ddca5f149c4ce13074f28b270e950ba9.html">ecs</a></li><li class="navelem"><a class="el" href="dir_21b124123231556e587af26d290be4a8.html">systems</a></li><li class="navelem"><a class="el" href="dir_1f26314eb5ccb716885c93d7ca7776e3.html">server</a></li><li class="navelem"><a class="el" href="_projectile_collision_8hpp.html">ProjectileCollision.hpp</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

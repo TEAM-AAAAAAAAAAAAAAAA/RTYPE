@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['weapon_336',['Weapon',['../structecs_1_1component_1_1_weapon.html#ac68b44b76016a166d8ffb447a46c74ff',1,'ecs::component::Weapon']]],
-  ['world_337',['World',['../classecs_1_1_world.html#a00726c449c9d48a80a7f60f5c98692e6',1,'ecs::World::World()=delete'],['../classecs_1_1_world.html#a140a565e397b48539e8147eb72a737a3',1,'ecs::World::World(std::unique_ptr&lt; utils::Window &gt; &amp;window)']]]
+  ['receive_350',['receive',['../classnetwork_1_1_client.html#a8e112442a2ce634cc04ae797ab0fc5ba',1,'network::Client']]],
+  ['registercomponent_351',['registerComponent',['../classecs_1_1_registry.html#a62e5024139f23f3f18859e01f70856ba',1,'ecs::Registry']]],
+  ['registry_352',['Registry',['../classecs_1_1_registry.html#af399b8524018c5adf9e4f917ca377d97',1,'ecs::Registry']]],
+  ['removecomponent_353',['removeComponent',['../classecs_1_1_registry.html#a99a1b5411ada253846bff2ced94e4f95',1,'ecs::Registry']]],
+  ['run_354',['run',['../classecs_1_1_engine.html#aa7ecda3685c27b8f859fdf0e764f0a94',1,'ecs::Engine']]],
+  ['runsystems_355',['runSystems',['../classecs_1_1_world.html#a0015fa0624f4eeaa5178d189bf5e233b',1,'ecs::World']]]
 ];

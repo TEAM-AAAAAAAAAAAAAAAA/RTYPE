@@ -144,31 +144,40 @@ $(document).ready(function(){initNavTree('_network_id_8hpp_source.html',''); ini
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;cstddef&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;array&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;array&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;cstddef&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs_1_1component.html">ecs::component</a></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
 <div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="structecs_1_1component_1_1_network_id.html">   15</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structecs_1_1component_1_1_network_id.html">NetworkId</a> {</div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="structecs_1_1component_1_1_network_id.html#a84cffedb2f99477a3ad2022d10d38062">   16</a></span>&#160;        <span class="keywordtype">size_t</span> <a class="code" href="structecs_1_1component_1_1_network_id.html#a84cffedb2f99477a3ad2022d10d38062">id</a>;</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="structecs_1_1component_1_1_network_id.html#af97cbf26359666293fbe10e06020c345">   19</a></span>&#160;        std::array&lt;char, 2&gt; <a class="code" href="structecs_1_1component_1_1_network_id.html#af97cbf26359666293fbe10e06020c345">serialize</a>()</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        {</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            std::array&lt;char, 2&gt; arr;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            <span class="keywordtype">size_t</span> tmp = 0;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            tmp = <span class="keywordtype">id</span> &gt;&gt; 8;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            arr[0] = tmp;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            arr[1] = <span class="keywordtype">id</span> &amp; 0xff;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            <span class="keywordflow">return</span> arr;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        }</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    };</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;} <span class="comment">// namespace ecs::component</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="structecs_1_1component_1_1_network_id.html#ae4bb32b2376153e6bb80588dbf445a27">   16</a></span>&#160;        <a class="code" href="structecs_1_1component_1_1_network_id.html#ae4bb32b2376153e6bb80588dbf445a27">NetworkId</a>() : <a class="code" href="structecs_1_1component_1_1_network_id.html#a84cffedb2f99477a3ad2022d10d38062">id</a>(_last_id + 1) { _last_id++; }</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="structecs_1_1component_1_1_network_id.html#add0b63152468df7596376431aaa0e7e2">   18</a></span>&#160;        <a class="code" href="structecs_1_1component_1_1_network_id.html#add0b63152468df7596376431aaa0e7e2">NetworkId</a>(<span class="keywordtype">size_t</span> <span class="keywordtype">id</span>) : <a class="code" href="structecs_1_1component_1_1_network_id.html#a84cffedb2f99477a3ad2022d10d38062">id</a>(<a class="code" href="structecs_1_1component_1_1_network_id.html#a84cffedb2f99477a3ad2022d10d38062">id</a>) {}</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="structecs_1_1component_1_1_network_id.html#a84cffedb2f99477a3ad2022d10d38062">   20</a></span>&#160;        <span class="keywordtype">size_t</span> <a class="code" href="structecs_1_1component_1_1_network_id.html#a84cffedb2f99477a3ad2022d10d38062">id</a>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="structecs_1_1component_1_1_network_id.html#af97cbf26359666293fbe10e06020c345">   23</a></span>&#160;        std::array&lt;char, 2&gt; <a class="code" href="structecs_1_1component_1_1_network_id.html#af97cbf26359666293fbe10e06020c345">serialize</a>()</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            std::array&lt;char, 2&gt; arr;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <span class="keywordtype">size_t</span> tmp = 0;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            tmp = <span class="keywordtype">id</span> &gt;&gt; 8;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            arr[0] = tmp;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            arr[1] = <span class="keywordtype">id</span> &amp; 0xff;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keywordflow">return</span> arr;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        }</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;      <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">size_t</span> _last_id;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    };</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;} <span class="comment">// namespace ecs::component</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="anamespaceecs_1_1component_html"><div class="ttname"><a href="namespaceecs_1_1component.html">ecs::component</a></div><div class="ttdef"><b>Definition:</b> ClientSocket.hpp:16</div></div>
+<div class="ttc" id="anamespaceecs_1_1component_html"><div class="ttname"><a href="namespaceecs_1_1component.html">ecs::component</a></div><div class="ttdef"><b>Definition:</b> Controllable.hpp:12</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_network_id_html"><div class="ttname"><a href="structecs_1_1component_1_1_network_id.html">ecs::component::NetworkId</a></div><div class="ttdoc">NetworkId component related to the entity sent to the client.</div><div class="ttdef"><b>Definition:</b> NetworkId.hpp:15</div></div>
-<div class="ttc" id="astructecs_1_1component_1_1_network_id_html_af97cbf26359666293fbe10e06020c345"><div class="ttname"><a href="structecs_1_1component_1_1_network_id.html#af97cbf26359666293fbe10e06020c345">ecs::component::NetworkId::serialize</a></div><div class="ttdeci">std::array&lt; char, 2 &gt; serialize()</div><div class="ttdoc">Serialize the component.</div><div class="ttdef"><b>Definition:</b> NetworkId.hpp:19</div></div>
-<div class="ttc" id="astructecs_1_1component_1_1_network_id_html_a84cffedb2f99477a3ad2022d10d38062"><div class="ttname"><a href="structecs_1_1component_1_1_network_id.html#a84cffedb2f99477a3ad2022d10d38062">ecs::component::NetworkId::id</a></div><div class="ttdeci">size_t id</div><div class="ttdef"><b>Definition:</b> NetworkId.hpp:16</div></div>
+<div class="ttc" id="astructecs_1_1component_1_1_network_id_html_af97cbf26359666293fbe10e06020c345"><div class="ttname"><a href="structecs_1_1component_1_1_network_id.html#af97cbf26359666293fbe10e06020c345">ecs::component::NetworkId::serialize</a></div><div class="ttdeci">std::array&lt; char, 2 &gt; serialize()</div><div class="ttdoc">Serialize the component.</div><div class="ttdef"><b>Definition:</b> NetworkId.hpp:23</div></div>
+<div class="ttc" id="astructecs_1_1component_1_1_network_id_html_ae4bb32b2376153e6bb80588dbf445a27"><div class="ttname"><a href="structecs_1_1component_1_1_network_id.html#ae4bb32b2376153e6bb80588dbf445a27">ecs::component::NetworkId::NetworkId</a></div><div class="ttdeci">NetworkId()</div><div class="ttdef"><b>Definition:</b> NetworkId.hpp:16</div></div>
+<div class="ttc" id="astructecs_1_1component_1_1_network_id_html_add0b63152468df7596376431aaa0e7e2"><div class="ttname"><a href="structecs_1_1component_1_1_network_id.html#add0b63152468df7596376431aaa0e7e2">ecs::component::NetworkId::NetworkId</a></div><div class="ttdeci">NetworkId(size_t id)</div><div class="ttdef"><b>Definition:</b> NetworkId.hpp:18</div></div>
+<div class="ttc" id="astructecs_1_1component_1_1_network_id_html_a84cffedb2f99477a3ad2022d10d38062"><div class="ttname"><a href="structecs_1_1component_1_1_network_id.html#a84cffedb2f99477a3ad2022d10d38062">ecs::component::NetworkId::id</a></div><div class="ttdeci">size_t id</div><div class="ttdef"><b>Definition:</b> NetworkId.hpp:20</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

@@ -1,13 +1,9 @@
 var searchData=
 [
-  ['send_326',['send',['../classnetwork_1_1_client.html#a4b2ccd4d2ab3508d91b1b073eabf8c59',1,'network::Client']]],
-  ['sendtoall_327',['sendToAll',['../classnetwork_1_1_server.html#aeca5b4e711ac59e1afc0af2d608dbb28',1,'network::Server']]],
-  ['sendtoclient_328',['sendToClient',['../classnetwork_1_1_server.html#ade558513c1c13cdba51177d8aed992ed',1,'network::Server']]],
-  ['serialize_329',['serialize',['../structecs_1_1component_1_1_network_id.html#af97cbf26359666293fbe10e06020c345',1,'ecs::component::NetworkId::serialize()'],['../structecs_1_1component_1_1_position.html#aa6eb9519f8bd02b4c8290ef48749169c',1,'ecs::component::Position::serialize()'],['../structecs_1_1component_1_1_size.html#afe5d3d31fe7ed4d0136c6faaf9b7a308',1,'ecs::component::Size::serialize()']]],
-  ['setwaitingworld_330',['setWaitingWorld',['../classecs_1_1_engine.html#a6a43413bc2bc0077438efa0cb7a64c69',1,'ecs::Engine']]],
-  ['setworldswitchready_331',['setWorldSwitchReady',['../classecs_1_1_engine.html#a77884f11cc05c77364c4712b731cb671',1,'ecs::Engine']]],
-  ['shootable_332',['Shootable',['../structecs_1_1component_1_1_shootable.html#aca13a0ab0b5182fd1223791469b1b15c',1,'ecs::component::Shootable']]],
-  ['size_333',['size',['../classecs_1_1_sparse_array.html#ae1d59f9a67c3ede1c870af0d1d5fe06b',1,'ecs::SparseArray']]],
-  ['sparsearray_334',['SparseArray',['../classecs_1_1_sparse_array.html#a61ccc34c05864d9b536dc3f7de33b9f5',1,'ecs::SparseArray::SparseArray()'],['../classecs_1_1_sparse_array.html#abd3c8f8be422ad1af9fe244ac59ffeb7',1,'ecs::SparseArray::SparseArray(SparseArray const &amp;other)'],['../classecs_1_1_sparse_array.html#a81a21b769be543413084985c956d48a3',1,'ecs::SparseArray::SparseArray(SparseArray &amp;&amp;other) noexcept']]],
-  ['spawn_5fentity_335',['spawn_entity',['../classecs_1_1_registry.html#a960bf8fcdaa237dc3a8594cf53290085',1,'ecs::Registry']]]
+  ['pop_344',['pop',['../classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80',1,'network::LockedQueue']]],
+  ['popevent_345',['popEvent',['../classecs_1_1_world.html#a677058b2b679c8521c03320fe580057c',1,'ecs::World']]],
+  ['position_346',['Position',['../structecs_1_1component_1_1_position.html#a8121f923cc8be7dbc77a9518e1ad482d',1,'ecs::component::Position']]],
+  ['projectile_347',['Projectile',['../structecs_1_1component_1_1_projectile.html#aae08d1e4b50a8e05cc9861e5ba64c16a',1,'ecs::component::Projectile']]],
+  ['push_348',['push',['../classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2',1,'network::LockedQueue']]],
+  ['pushevent_349',['pushEvent',['../classecs_1_1_world.html#a74f0effbecc49f49a39627047b5d543e',1,'ecs::World']]]
 ];

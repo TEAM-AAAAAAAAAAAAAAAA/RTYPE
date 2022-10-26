@@ -1,12 +1,5 @@
 var searchData=
 [
-  ['emplaceat_285',['emplaceAt',['../classecs_1_1_sparse_array.html#a8c024916668c6a7ddd5265861e3e2bc5',1,'ecs::SparseArray']]],
-  ['emplacecomponent_286',['emplaceComponent',['../classecs_1_1_registry.html#a669eace40b445fce60219ef5f744b417',1,'ecs::Registry']]],
-  ['empty_287',['empty',['../classnetwork_1_1_locked_queue.html#a6f83affbc6d8bc587e67a5b1003678b9',1,'network::LockedQueue']]],
-  ['end_288',['end',['../classecs_1_1_sparse_array.html#acb0dda3580f64435b62bc2097519e8ad',1,'ecs::SparseArray::end()'],['../classecs_1_1_sparse_array.html#a47d254e67297d68b59e0be4625703c15',1,'ecs::SparseArray::end() const']]],
-  ['enemyai_289',['EnemyAI',['../structecs_1_1component_1_1_enemy_a_i.html#a91c0a29679bf50a37a7f48e51f586543',1,'ecs::component::EnemyAI']]],
-  ['engine_290',['Engine',['../classecs_1_1_engine.html#af2fcd7f1d97c2e968bedf081c8303793',1,'ecs::Engine']]],
-  ['entityfromindex_291',['entityFromIndex',['../classecs_1_1_registry.html#a56a1512c5bd8ebbf1f59cddeea212079',1,'ecs::Registry']]],
-  ['erase_292',['erase',['../classecs_1_1_sparse_array.html#abcc31b0e8950b62375bf75b4b92339e2',1,'ecs::SparseArray']]],
-  ['event_293',['Event',['../classecs_1_1_event.html#a2164a9f1154b465d76109d3339aef13c',1,'ecs::Event::Event()=delete'],['../classecs_1_1_event.html#a17fd3921036d70cc1d76aa69bcfd68ac',1,'ecs::Event::Event(EventType e)']]]
+  ['direction_309',['Direction',['../structecs_1_1component_1_1_direction.html#ab77c910bb1f74e11f33f784be5df1d9c',1,'ecs::component::Direction']]],
+  ['drawable_310',['Drawable',['../structecs_1_1component_1_1_drawable.html#a5976f9503db00650b06c94fafdabc72f',1,'ecs::component::Drawable::Drawable(const std::filesystem::path &amp;texture)'],['../structecs_1_1component_1_1_drawable.html#aa7d7f141f7b2ec0ddf3f3d1998a16c65',1,'ecs::component::Drawable::Drawable(const std::filesystem::path &amp;texture, sf::IntRect rect)'],['../structecs_1_1component_1_1_drawable.html#a0b05d467df327e3a008fb129ccc7bc93',1,'ecs::component::Drawable::Drawable(const sf::Texture &amp;texture)']]]
 ];

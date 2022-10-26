@@ -145,7 +145,7 @@ $(document).ready(function(){initNavTree('_world_8hpp_source.html',''); initResi
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;stack&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;queue&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_event_8hpp.html">Event.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_registry_8hpp.html">Registry.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_window_8hpp.html">utils/Window.hpp</a>&quot;</span></div>
@@ -174,14 +174,14 @@ $(document).ready(function(){initNavTree('_world_8hpp_source.html',''); initResi
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">        </span>{</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <span class="keywordflow">if</span> (_events.empty())</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                <span class="keywordflow">return</span> {ecs::Event::EventType::Null};</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keywordflow">return</span> _events.top();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keywordflow">return</span> _events.front();</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        }</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
 <div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classecs_1_1_world.html#a677058b2b679c8521c03320fe580057c">   71</a></span>&#160;        <span class="keyword">const</span> <a class="code" href="classecs_1_1_event.html">ecs::Event</a> <a class="code" href="classecs_1_1_world.html#a677058b2b679c8521c03320fe580057c">popEvent</a>()</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        {</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordflow">if</span> (_events.empty())</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                <span class="keywordflow">return</span> {ecs::Event::EventType::Null};</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <a class="code" href="classecs_1_1_event.html">ecs::Event</a> <span class="keyword">event</span> = _events.top();</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <a class="code" href="classecs_1_1_event.html">ecs::Event</a> <span class="keyword">event</span> = _events.front();</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            _events.pop();</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keywordflow">return</span> event;</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        }</div>
@@ -193,7 +193,7 @@ $(document).ready(function(){initNavTree('_world_8hpp_source.html',''); initResi
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        std::vector&lt;std::function&lt;void(<a class="code" href="classecs_1_1_world.html">World</a> &amp;)&gt;&gt; _systems;</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        std::stack&lt;ecs::Event&gt; _events;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        std::queue&lt;ecs::Event&gt; _events;</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    };</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;} <span class="comment">// namespace ecs</span></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -208,7 +208,7 @@ $(document).ready(function(){initNavTree('_world_8hpp_source.html',''); initResi
 <div class="ttc" id="aclassecs_1_1_world_html_a0015fa0624f4eeaa5178d189bf5e233b"><div class="ttname"><a href="classecs_1_1_world.html#a0015fa0624f4eeaa5178d189bf5e233b">ecs::World::runSystems</a></div><div class="ttdeci">void runSystems()</div><div class="ttdef"><b>Definition:</b> World.hpp:35</div></div>
 <div class="ttc" id="a_window_8hpp_html"><div class="ttname"><a href="_window_8hpp.html">Window.hpp</a></div></div>
 <div class="ttc" id="a_event_8hpp_html"><div class="ttname"><a href="_event_8hpp.html">Event.hpp</a></div></div>
-<div class="ttc" id="aclassecs_1_1utils_1_1_window_html"><div class="ttname"><a href="classecs_1_1utils_1_1_window.html">ecs::utils::Window</a></div><div class="ttdef"><b>Definition:</b> Window.hpp:36</div></div>
+<div class="ttc" id="aclassecs_1_1utils_1_1_window_html"><div class="ttname"><a href="classecs_1_1utils_1_1_window.html">ecs::utils::Window</a></div><div class="ttdef"><b>Definition:</b> Window.hpp:33</div></div>
 <div class="ttc" id="aclassecs_1_1_world_html_a71b5c2fb034c78a6270c44e42a0e2360"><div class="ttname"><a href="classecs_1_1_world.html#a71b5c2fb034c78a6270c44e42a0e2360">ecs::World::registry</a></div><div class="ttdeci">Registry registry</div><div class="ttdef"><b>Definition:</b> World.hpp:83</div></div>
 <div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:20</div></div>
 <div class="ttc" id="aclassecs_1_1_world_html_a0016f19219c7de8ff675b391cd082e9e"><div class="ttname"><a href="classecs_1_1_world.html#a0016f19219c7de8ff675b391cd082e9e">ecs::World::getWindow</a></div><div class="ttdeci">utils::Window &amp; getWindow()</div><div class="ttdef"><b>Definition:</b> World.hpp:48</div></div>

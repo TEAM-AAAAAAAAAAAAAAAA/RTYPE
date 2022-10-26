@@ -10,7 +10,7 @@
         src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
         crossorigin="anonymous"></script>
-<title>RTYPE: src/server/LockedQueue.hpp Source File</title>
+<title>RTYPE: src/ecs/LockedQueue.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
   <!--BEGIN FULL_SIDEBAR-->
 <script type="text/javascript">var page_layout=1;</script>
@@ -150,45 +150,52 @@ $(document).ready(function(){initNavTree('_locked_queue_8hpp_source.html',''); i
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacenetwork.html">network</a></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classnetwork_1_1_locked_queue.html">   18</a></span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">class </span><a class="code" href="classnetwork_1_1_locked_queue.html">LockedQueue</a> {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;      <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        std::mutex mutex;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        std::queue&lt;T&gt; queue;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;      <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">   35</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">push</a>(T value)</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            std::unique_lock&lt;std::mutex&gt; lock(mutex);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            queue.push(value);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        };</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80">   45</a></span>&#160;        T <a class="code" href="classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80">pop</a>()</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            std::unique_lock&lt;std::mutex&gt; lock(mutex);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            T value;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            std::swap(value, queue.front());</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            queue.pop();</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="keywordflow">return</span> value;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        };</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="classnetwork_1_1_locked_queue.html#a6f83affbc6d8bc587e67a5b1003678b9">   58</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classnetwork_1_1_locked_queue.html#a6f83affbc6d8bc587e67a5b1003678b9">empty</a>()</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        {</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            std::unique_lock&lt;std::mutex&gt; lock(mutex);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <span class="keywordflow">return</span> queue.empty();</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        }</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    };</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="namespacenetwork.html#a0629cd044af39caf977e11dc2e2e0fb8">   22</a></span>&#160;    <span class="keyword">typedef</span> std::array&lt;char, 12&gt; <a class="code" href="namespacenetwork.html#a0629cd044af39caf977e11dc2e2e0fb8">Message</a>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="namespacenetwork.html#a49bd28dc5f018d107ea4a942fe6d7ae5">   23</a></span>&#160;    <span class="keyword">typedef</span> std::pair&lt;Message, unsigned int&gt; <a class="code" href="namespacenetwork.html#a49bd28dc5f018d107ea4a942fe6d7ae5">ClientMessage</a>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="namespacenetwork.html#a1290ee51c4c8d07f57076ac8f7505129">   24</a></span>&#160;    <span class="keyword">typedef</span> std::pair&lt;Message, std::vector&lt;unsigned int&gt;&gt; <a class="code" href="namespacenetwork.html#a1290ee51c4c8d07f57076ac8f7505129">ServerMessage</a>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classnetwork_1_1_locked_queue.html">   26</a></span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">class </span><a class="code" href="classnetwork_1_1_locked_queue.html">LockedQueue</a> {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;      <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        std::mutex mutex;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        std::queue&lt;T&gt; queue;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;      <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">   43</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">push</a>(T value)</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            std::unique_lock&lt;std::mutex&gt; lock(mutex);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            queue.push(value);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        };</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80">   53</a></span>&#160;        T <a class="code" href="classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80">pop</a>()</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            std::unique_lock&lt;std::mutex&gt; lock(mutex);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            T value;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            std::swap(value, queue.front());</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            queue.pop();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keywordflow">return</span> value;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        };</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classnetwork_1_1_locked_queue.html#a6f83affbc6d8bc587e67a5b1003678b9">   66</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classnetwork_1_1_locked_queue.html#a6f83affbc6d8bc587e67a5b1003678b9">empty</a>()</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        {</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            std::unique_lock&lt;std::mutex&gt; lock(mutex);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="keywordflow">return</span> queue.empty();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    };</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="anamespacenetwork_html"><div class="ttname"><a href="namespacenetwork.html">network</a></div><div class="ttdef"><b>Definition:</b> NetworkClient.hpp:14</div></div>
-<div class="ttc" id="aclassnetwork_1_1_locked_queue_html_a076e0981cce5c44eed95476e135011f2"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">network::LockedQueue::push</a></div><div class="ttdeci">void push(T value)</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:35</div></div>
-<div class="ttc" id="aclassnetwork_1_1_locked_queue_html"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html">network::LockedQueue</a></div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:18</div></div>
-<div class="ttc" id="aclassnetwork_1_1_locked_queue_html_a6f83affbc6d8bc587e67a5b1003678b9"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html#a6f83affbc6d8bc587e67a5b1003678b9">network::LockedQueue::empty</a></div><div class="ttdeci">bool empty()</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:58</div></div>
-<div class="ttc" id="aclassnetwork_1_1_locked_queue_html_a2be6f1a5bcdc3fd83a53558377f51d80"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80">network::LockedQueue::pop</a></div><div class="ttdeci">T pop()</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:45</div></div>
+<div class="ttc" id="anamespacenetwork_html_a49bd28dc5f018d107ea4a942fe6d7ae5"><div class="ttname"><a href="namespacenetwork.html#a49bd28dc5f018d107ea4a942fe6d7ae5">network::ClientMessage</a></div><div class="ttdeci">std::pair&lt; Message, unsigned int &gt; ClientMessage</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:23</div></div>
+<div class="ttc" id="anamespacenetwork_html"><div class="ttname"><a href="namespacenetwork.html">network</a></div><div class="ttdef"><b>Definition:</b> NetworkClient.cpp:10</div></div>
+<div class="ttc" id="anamespacenetwork_html_a1290ee51c4c8d07f57076ac8f7505129"><div class="ttname"><a href="namespacenetwork.html#a1290ee51c4c8d07f57076ac8f7505129">network::ServerMessage</a></div><div class="ttdeci">std::pair&lt; Message, std::vector&lt; unsigned int &gt; &gt; ServerMessage</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:24</div></div>
+<div class="ttc" id="aclassnetwork_1_1_locked_queue_html_a076e0981cce5c44eed95476e135011f2"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">network::LockedQueue::push</a></div><div class="ttdeci">void push(T value)</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:43</div></div>
+<div class="ttc" id="aclassnetwork_1_1_locked_queue_html"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html">network::LockedQueue</a></div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:26</div></div>
+<div class="ttc" id="aclassnetwork_1_1_locked_queue_html_a6f83affbc6d8bc587e67a5b1003678b9"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html#a6f83affbc6d8bc587e67a5b1003678b9">network::LockedQueue::empty</a></div><div class="ttdeci">bool empty()</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:66</div></div>
+<div class="ttc" id="aclassnetwork_1_1_locked_queue_html_a2be6f1a5bcdc3fd83a53558377f51d80"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80">network::LockedQueue::pop</a></div><div class="ttdeci">T pop()</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:53</div></div>
+<div class="ttc" id="anamespacenetwork_html_a0629cd044af39caf977e11dc2e2e0fb8"><div class="ttname"><a href="namespacenetwork.html#a0629cd044af39caf977e11dc2e2e0fb8">network::Message</a></div><div class="ttdeci">std::array&lt; char, 12 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_075bb3ff235063c77951cd176d15a741.html">server</a></li><li class="navelem"><a class="el" href="_locked_queue_8hpp.html">LockedQueue.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_ddca5f149c4ce13074f28b270e950ba9.html">ecs</a></li><li class="navelem"><a class="el" href="_locked_queue_8hpp.html">LockedQueue.hpp</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

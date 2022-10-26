@@ -1,4 +1,4 @@
-<map id="src/ecs/components/Drawable.hpp" name="src/ecs/components/Drawable.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="29,5,180,47"/>
+<map id="src/ecs/components/client/Drawable.hpp" name="src/ecs/components/client/Drawable.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="27,5,183,47"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,95,204,121"/>
 </map>

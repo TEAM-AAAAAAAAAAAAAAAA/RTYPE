@@ -10,7 +10,7 @@
         src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
         crossorigin="anonymous"></script>
-<title>RTYPE: src/ecs/components/Drawable.hpp Source File</title>
+<title>RTYPE: src/ecs/components/client/Drawable.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
   <!--BEGIN FULL_SIDEBAR-->
 <script type="text/javascript">var page_layout=1;</script>
@@ -150,23 +150,25 @@ $(document).ready(function(){initNavTree('_drawable_8hpp_source.html',''); initR
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs_1_1component.html">ecs::component</a></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
 <div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="structecs_1_1component_1_1_drawable.html">   18</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structecs_1_1component_1_1_drawable.html">Drawable</a> {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#ifdef CLIENT_COMPILATION_MODE</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="structecs_1_1component_1_1_drawable.html">Drawable</a>(<span class="keyword">const</span> std::filesystem::path &amp;texture) { Texture.loadFromFile(texture.generic_string()); }</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <a class="code" href="structecs_1_1component_1_1_drawable.html">Drawable</a>(<span class="keyword">const</span> std::filesystem::path &amp;texture, sf::IntRect rect) { Texture.loadFromFile(texture.generic_string(), rect); }</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="structecs_1_1component_1_1_drawable.html">Drawable</a>(<span class="keyword">const</span> sf::Texture &amp;texture) : Texture(texture) {}</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        sf::Texture Texture;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    };</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;} <span class="comment">// namespace ecs::component</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="structecs_1_1component_1_1_drawable.html#a5976f9503db00650b06c94fafdabc72f">   19</a></span>&#160;        <span class="keyword">explicit</span> <a class="code" href="structecs_1_1component_1_1_drawable.html#a5976f9503db00650b06c94fafdabc72f">Drawable</a>(<span class="keyword">const</span> std::filesystem::path &amp;texture) { <a class="code" href="structecs_1_1component_1_1_drawable.html#a423e3801e688d4344361848be9f7bc01">Texture</a>.loadFromFile(texture.generic_string()); }</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="structecs_1_1component_1_1_drawable.html#aa7d7f141f7b2ec0ddf3f3d1998a16c65">   20</a></span>&#160;        <a class="code" href="structecs_1_1component_1_1_drawable.html#aa7d7f141f7b2ec0ddf3f3d1998a16c65">Drawable</a>(<span class="keyword">const</span> std::filesystem::path &amp;texture, sf::IntRect rect) { <a class="code" href="structecs_1_1component_1_1_drawable.html#a423e3801e688d4344361848be9f7bc01">Texture</a>.loadFromFile(texture.generic_string(), rect); }</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="structecs_1_1component_1_1_drawable.html#a0b05d467df327e3a008fb129ccc7bc93">   21</a></span>&#160;        <span class="keyword">explicit</span> <a class="code" href="structecs_1_1component_1_1_drawable.html#a0b05d467df327e3a008fb129ccc7bc93">Drawable</a>(<span class="keyword">const</span> sf::Texture &amp;texture) : <a class="code" href="structecs_1_1component_1_1_drawable.html#a423e3801e688d4344361848be9f7bc01">Texture</a>(texture) {}</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="structecs_1_1component_1_1_drawable.html#a423e3801e688d4344361848be9f7bc01">   23</a></span>&#160;        sf::Texture <a class="code" href="structecs_1_1component_1_1_drawable.html#a423e3801e688d4344361848be9f7bc01">Texture</a>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    };</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;} <span class="comment">// namespace ecs::component</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="astructecs_1_1component_1_1_drawable_html"><div class="ttname"><a href="structecs_1_1component_1_1_drawable.html">ecs::component::Drawable</a></div><div class="ttdef"><b>Definition:</b> Drawable.hpp:18</div></div>
-<div class="ttc" id="anamespaceecs_1_1component_html"><div class="ttname"><a href="namespaceecs_1_1component.html">ecs::component</a></div><div class="ttdef"><b>Definition:</b> ClientSocket.hpp:16</div></div>
+<div class="ttc" id="astructecs_1_1component_1_1_drawable_html_aa7d7f141f7b2ec0ddf3f3d1998a16c65"><div class="ttname"><a href="structecs_1_1component_1_1_drawable.html#aa7d7f141f7b2ec0ddf3f3d1998a16c65">ecs::component::Drawable::Drawable</a></div><div class="ttdeci">Drawable(const std::filesystem::path &amp;texture, sf::IntRect rect)</div><div class="ttdef"><b>Definition:</b> Drawable.hpp:20</div></div>
+<div class="ttc" id="anamespaceecs_1_1component_html"><div class="ttname"><a href="namespaceecs_1_1component.html">ecs::component</a></div><div class="ttdef"><b>Definition:</b> Controllable.hpp:12</div></div>
+<div class="ttc" id="astructecs_1_1component_1_1_drawable_html_a5976f9503db00650b06c94fafdabc72f"><div class="ttname"><a href="structecs_1_1component_1_1_drawable.html#a5976f9503db00650b06c94fafdabc72f">ecs::component::Drawable::Drawable</a></div><div class="ttdeci">Drawable(const std::filesystem::path &amp;texture)</div><div class="ttdef"><b>Definition:</b> Drawable.hpp:19</div></div>
+<div class="ttc" id="astructecs_1_1component_1_1_drawable_html_a423e3801e688d4344361848be9f7bc01"><div class="ttname"><a href="structecs_1_1component_1_1_drawable.html#a423e3801e688d4344361848be9f7bc01">ecs::component::Drawable::Texture</a></div><div class="ttdeci">sf::Texture Texture</div><div class="ttdef"><b>Definition:</b> Drawable.hpp:23</div></div>
+<div class="ttc" id="astructecs_1_1component_1_1_drawable_html_a0b05d467df327e3a008fb129ccc7bc93"><div class="ttname"><a href="structecs_1_1component_1_1_drawable.html#a0b05d467df327e3a008fb129ccc7bc93">ecs::component::Drawable::Drawable</a></div><div class="ttdeci">Drawable(const sf::Texture &amp;texture)</div><div class="ttdef"><b>Definition:</b> Drawable.hpp:21</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_ddca5f149c4ce13074f28b270e950ba9.html">ecs</a></li><li class="navelem"><a class="el" href="dir_c145e94a3511d74671e0de53a480e354.html">components</a></li><li class="navelem"><a class="el" href="_drawable_8hpp.html">Drawable.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_ddca5f149c4ce13074f28b270e950ba9.html">ecs</a></li><li class="navelem"><a class="el" href="dir_c145e94a3511d74671e0de53a480e354.html">components</a></li><li class="navelem"><a class="el" href="dir_ab0a5ce78cc1345b2f292773c1232112.html">client</a></li><li class="navelem"><a class="el" href="_drawable_8hpp.html">Drawable.hpp</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

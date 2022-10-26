@@ -1,9 +1,8 @@
 var namespaceecs_1_1component =
 [
-    [ "ClientSocket", "structecs_1_1component_1_1_client_socket.html", null ],
     [ "Controllable", "structecs_1_1component_1_1_controllable.html", "structecs_1_1component_1_1_controllable" ],
     [ "Direction", "structecs_1_1component_1_1_direction.html", "structecs_1_1component_1_1_direction" ],
-    [ "Drawable", "structecs_1_1component_1_1_drawable.html", null ],
+    [ "Drawable", "structecs_1_1component_1_1_drawable.html", "structecs_1_1component_1_1_drawable" ],
     [ "EnemyAI", "structecs_1_1component_1_1_enemy_a_i.html", "structecs_1_1component_1_1_enemy_a_i" ],
     [ "EntityLife", "structecs_1_1component_1_1_entity_life.html", "structecs_1_1component_1_1_entity_life" ],
     [ "EntityType", "structecs_1_1component_1_1_entity_type.html", "structecs_1_1component_1_1_entity_type" ],

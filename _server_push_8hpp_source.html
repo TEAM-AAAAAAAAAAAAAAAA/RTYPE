@@ -158,17 +158,17 @@ $(document).ready(function(){initNavTree('_server_push_8hpp_source.html',''); in
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; <a class="code" href="namespacenetwork.html">network</a>.size(); i++) {</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <span class="keyword">auto</span> &amp;serv = <a class="code" href="namespacenetwork.html">network</a>[i];</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <span class="keywordflow">if</span> (serv) {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                serv.serv.outgoingQueue.push(<a class="code" href="namespacenetwork.html#a880ffbc0ceda8e94f1c78da15cf474f9">Network::ServerMessage</a>(<span class="stringliteral">&quot;Hey there&quot;</span>, std::vector&lt;unsigned int&gt;()));</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                serv.serv.outgoingQueue.push(<a class="code" href="namespacenetwork.html#a1290ee51c4c8d07f57076ac8f7505129">Network::ServerMessage</a>(<span class="stringliteral">&quot;Hey there&quot;</span>, std::vector&lt;unsigned int&gt;()));</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            }</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        }</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    };</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="anamespacenetwork_html"><div class="ttname"><a href="namespacenetwork.html">network</a></div><div class="ttdef"><b>Definition:</b> NetworkClient.hpp:14</div></div>
-<div class="ttc" id="anamespacenetwork_html_a880ffbc0ceda8e94f1c78da15cf474f9"><div class="ttname"><a href="namespacenetwork.html#a880ffbc0ceda8e94f1c78da15cf474f9">network::ServerMessage</a></div><div class="ttdeci">std::pair&lt; std::array&lt; char, 10 &gt;, std::vector&lt; unsigned int &gt; &gt; ServerMessage</div><div class="ttdef"><b>Definition:</b> Server.hpp:31</div></div>
+<div class="ttc" id="anamespacenetwork_html"><div class="ttname"><a href="namespacenetwork.html">network</a></div><div class="ttdef"><b>Definition:</b> NetworkClient.cpp:10</div></div>
+<div class="ttc" id="anamespacenetwork_html_a1290ee51c4c8d07f57076ac8f7505129"><div class="ttname"><a href="namespacenetwork.html#a1290ee51c4c8d07f57076ac8f7505129">network::ServerMessage</a></div><div class="ttdeci">std::pair&lt; Message, std::vector&lt; unsigned int &gt; &gt; ServerMessage</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:24</div></div>
 <div class="ttc" id="a_world_8hpp_html"><div class="ttname"><a href="_world_8hpp.html">World.hpp</a></div></div>
-<div class="ttc" id="anamespaceecs_1_1systems_html"><div class="ttname"><a href="namespaceecs_1_1systems.html">ecs::systems</a></div><div class="ttdef"><b>Definition:</b> DeathUpdate.hpp:19</div></div>
+<div class="ttc" id="anamespaceecs_1_1systems_html"><div class="ttname"><a href="namespaceecs_1_1systems.html">ecs::systems</a></div><div class="ttdef"><b>Definition:</b> Draw.hpp:21</div></div>
 <div class="ttc" id="anamespaceecs_1_1systems_html_a689ab1ddea34f047a379e06ff14f5489"><div class="ttname"><a href="namespaceecs_1_1systems.html#a689ab1ddea34f047a379e06ff14f5489">ecs::systems::serverPush</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; serverPush</div><div class="ttdef"><b>Definition:</b> DeathUpdate.hpp:25</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

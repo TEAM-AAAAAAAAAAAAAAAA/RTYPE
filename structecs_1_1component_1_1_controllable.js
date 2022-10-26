@@ -1,6 +1,8 @@
 var structecs_1_1component_1_1_controllable =
 [
     [ "Controllable", "structecs_1_1component_1_1_controllable.html#a610a98456ca0ca990bd1f8e72903f23c", null ],
+    [ "lastDirectionX", "structecs_1_1component_1_1_controllable.html#a37fef2d5291ea3d5aa79c551fef7cb82", null ],
+    [ "lastDirectionY", "structecs_1_1component_1_1_controllable.html#a9aa9c98c6de2e856a70871f059646b4c", null ],
     [ "MoveDown", "structecs_1_1component_1_1_controllable.html#a15007d2044004baf7ca2c5d47c35a3fa", null ],
     [ "MoveDownSecondary", "structecs_1_1component_1_1_controllable.html#a6ce6960cc4b86adb9161a15113ca8726", null ],
     [ "MoveLeft", "structecs_1_1component_1_1_controllable.html#aa088718191c645089a105b7106a7ab50", null ],

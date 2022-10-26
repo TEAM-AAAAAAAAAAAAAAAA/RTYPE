@@ -14,6 +14,7 @@ var dir_ddca5f149c4ce13074f28b270e950ba9 =
     [ "Event.hpp", "_event_8hpp.html", [
       [ "Event", "classecs_1_1_event.html", "classecs_1_1_event" ]
     ] ],
+    [ "LockedQueue.hpp", "_locked_queue_8hpp.html", "_locked_queue_8hpp" ],
     [ "Registry.hpp", "_registry_8hpp.html", [
       [ "Registry", "classecs_1_1_registry.html", "classecs_1_1_registry" ]
     ] ],
