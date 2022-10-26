@@ -21,12 +21,14 @@ namespace asset
 
         /**
          * @brief end of smart path (you probably don't need to use this function)
+         * @param key the key to load the asset
          * @param path of the asset
          */
         static inline void LoadTexture(const std::string &key, const std::filesystem::path &path);
 
         /**
          * @brief load an SFML asset and add it to the map
+         * @param key the key to load the asset
          * @param path first segment of the path of the asset
          * @param next next segment of the path of the asset
          * @param args other segments of the path
@@ -47,8 +49,8 @@ namespace asset
         /**
          * @brief Get an Asset object from the map
          *
-         * @param path of the asset to get
-         * @return sf::Sprite& the asset
+         * @param key of the asset to get
+         * @return sf::Texture& the texture
          */
         static sf::Texture &GetTexture(const std::string &key);
 
