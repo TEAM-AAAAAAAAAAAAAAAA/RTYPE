@@ -18,7 +18,7 @@ namespace asset
     {
         sf::Texture texture;
 
-        if (!texture.loadFromFile(path))
+        if (!texture.loadFromFile(path.generic_string()))
             return;
         _Instance._assetsMap[path] = texture;
     }
