@@ -22,8 +22,8 @@ namespace ecs
         static short mapHeight = 1080;
 
         enum PacketType {
-            PLAYER_MOVE,
-            PLAYER_SHOT,
+            PLAYER_MOVE = 8,
+            PLAYER_SHOT = 2,
             PLAYER_CHARGED_SHOT,
             PLAYER_POWERUP,
             ENTITY_MOVE,
