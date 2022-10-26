@@ -93,14 +93,6 @@ namespace ecs::systems
 
                 break;
         }
-        // } else if (msg[3] == component::EntityType::Types::EnemyBase) {
-        //     world.registry.addComponent<component::Drawable>(newEntity,
-        //         {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {1, 18, 32, 16}});
-        // } else if (msg[3] == component::EntityType::Types::Bullet) {
-        //     world.registry.addComponent<component::Drawable>(
-        //         newEntity, {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {5, 5, 1,
-        //         1}});
-        // }
     }
 
     static void firstMessageHandle(World &world, network::Message &msg)

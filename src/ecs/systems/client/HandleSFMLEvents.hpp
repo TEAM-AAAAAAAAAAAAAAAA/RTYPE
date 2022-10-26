@@ -23,14 +23,9 @@ namespace ecs::systems
 #ifdef CLIENT_COMPILATION_MODE
         sf::Event event;
 
-        while (world.getWindow().pollEvent(event)) {
-            switch (event.type) {
-                case sf::Event::Closed: world.getWindow().close(); break;
-                case sf::Event::KeyPressed: {
-                } break;
-                default: break;
-            }
-        }
+        while (world.getWindow().pollEvent(event))
+            if (event.type == sf::Event::Closed)
+                world.getWindow().close();
 #endif
     };
 } // namespace ecs::systems
