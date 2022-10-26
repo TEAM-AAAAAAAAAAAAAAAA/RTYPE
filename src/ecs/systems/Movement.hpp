@@ -37,9 +37,6 @@ namespace ecs::systems
                 auto &pos = positions[i];
                 auto const &vel = velocities[i];
                 auto &dir = directions[i];
-#ifdef CLIENT_COMPILATION_MODE
-                auto const &contr = controllables[i];
-#endif
 
                 if (pos && vel && dir) {
                     pos.value().x += vel.value().x * dir.value().x;

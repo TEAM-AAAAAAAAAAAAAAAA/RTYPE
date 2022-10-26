@@ -55,7 +55,8 @@ namespace ecs::systems
                 auto &size = sizes[i];
                 auto &id = networkId[i];
                 auto &type = entityType[i];
-                if (pos && id) {
+                auto &vel = velocities[i];
+                if (pos && id && size && type && vel) {
                     std::array<char, 2> idBin = id.value().serialize();
                     std::array<char, 4> posBin = pos.value().serialize();
                     std::array<char, 2> sizeBin = size.value().serialize();

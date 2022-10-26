@@ -3,14 +3,14 @@
 #include <functional>
 #include <iostream>
 #include "World.hpp"
+#include "components/Direction.hpp"
+#include "components/Faction.hpp"
+#include "components/Health.hpp"
 #include "components/Position.hpp"
 #include "components/Size.hpp"
 #include "components/Velocity.hpp"
-#include "components/Direction.hpp"
 #include "components/Weapon.hpp"
 #include "components/server/EnemyAI.hpp"
-#include "components/Faction.hpp"
-#include "components/Health.hpp"
 #include "components/server/Projectile.hpp"
 
 namespace ecs::systems
@@ -26,7 +26,7 @@ namespace ecs::systems
 
             if (proj && projPos) {
                 if (projPos.value().x < 0 || projPos.value().x > ecs::constant::mapWidth || projPos.value().y < 0
-                    || projPos.value().y > ecs::constant::mapWidth) {
+                    || projPos.value().y > ecs::constant::mapHeight) {
                     world.registry.killEntity(world.registry.entityFromIndex(i));
                 }
             }
@@ -56,9 +56,9 @@ namespace ecs::systems
                                 if (factions[i].value().faction == factions[j].value().faction)
                                     continue;
                         if (projPos.value().x > victimPos.value().x
-                            && projPos.value().x < victimPos.value().x + victimSize.value().height
+                            && projPos.value().x < victimPos.value().x + victimSize.value().width
                             && projPos.value().y > victimPos.value().y
-                            && projPos.value().x < victimPos.value().y + victimSize.value().height) {
+                            && projPos.value().y < victimPos.value().y + victimSize.value().height) {
                             victimHealth.value().health -= proj.value().damage;
                             victimHealth.value().health <= 0 ? victimHealth.value().health = 0 : 0;
                             projId = i;
