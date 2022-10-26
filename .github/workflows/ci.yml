@@ -11,7 +11,7 @@ on:
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
-  BUILD_TYPE: Release
+  BUILD_TYPE: Debug
   SERV_BIN: rtype_server
   CLIENT_BIN: rtype_client
   VCPKG_COMMIT: 57d3194e702a2959e86a6748999ad71fc24f7922
