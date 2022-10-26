@@ -5,6 +5,7 @@ set(COMPONENTS_SRC
     ${SRCROOT}/Controllable.hpp
     ${SRCROOT}/Drawable.hpp
     ${SRCROOT}/Shootable.hpp
+    ${SRCROOT}/Parallax.hpp
     PARENT_SCOPE
 )
 

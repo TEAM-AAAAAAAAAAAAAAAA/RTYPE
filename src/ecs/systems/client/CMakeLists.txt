@@ -7,6 +7,7 @@ set(SYSTEMS_SRC
     ${SRCROOT}/HandleSFMLEvents.hpp
     ${SRCROOT}/HandleSFMLKeys.hpp
     ${SRCROOT}/SendDirection.hpp
+    ${SRCROOT}/HandleParallaxBounds.hpp
     PARENT_SCOPE
 )
 
