@@ -130,6 +130,11 @@ jobs:
             COMMAND cmake --build build
             RESULT_VARIABLE result
           )
+          if (${{ matrix.platform }} STREQUAL "windows-latest")
+            cmake_path(SET WORKSPACE_DIR ${{ github.workspace }}/RTYPE/RTYPE)
+            configure_file(${PROJECT_SOURCE_DIR}/r-type_client.exe ${WORKSPACE_DIR} COPYONLY)
+            configure_file(${PROJECT_SOURCE_DIR}/r-type_server.exe ${WORKSPACE_DIR} COPYONLY)
+          endif()
           if (NOT result EQUAL 0)
             message(FATAL_ERROR "Bad exit status. Failed to build RTYPE project.")
           endif()

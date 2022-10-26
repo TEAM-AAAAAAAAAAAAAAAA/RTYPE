@@ -13,19 +13,6 @@
 #include "Engine.hpp"
 #include "Registry.hpp"
 #include "World.hpp"
-#include "components/Controllable.hpp"
-#include "components/Drawable.hpp"
-#include "components/EnemyAI.hpp"
-#include "components/Position.hpp"
-#include "components/Shootable.hpp"
-#include "components/Size.hpp"
-#include "components/Velocity.hpp"
-#include "systems/Draw.hpp"
-#include "systems/HandleSFMLEvents.hpp"
-#include "systems/HandleSFMLKeys.hpp"
-#include "systems/ManageClientEvents.hpp"
-#include "systems/Movement.hpp"
-#include "systems/PositionLogger.hpp"
 
 namespace ecs
 {

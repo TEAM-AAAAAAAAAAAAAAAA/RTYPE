@@ -38,5 +38,8 @@ namespace ecs::component
         sf::Keyboard::Key MoveLeftSecondary;
         sf::Keyboard::Key MoveDownSecondary;
         sf::Keyboard::Key MoveRightSecondary;
+
+        ecs::Event::EventType lastDirectionX;
+        ecs::Event::EventType lastDirectionY;
     };
 } // namespace ecs::component
