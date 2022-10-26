@@ -8,6 +8,7 @@
 #include "systems/server/HandleIncomingMessage.hpp"
 #include "systems/server/ProjectileCollision.hpp"
 #include "systems/server/PositionUpdate.hpp"
+#include "systems/server/DeathUpdate.hpp"
 
 ecs::World getGameWorld(ecs::Engine &engine)
 {
@@ -31,6 +32,7 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.addSystem(ecs::systems::projectileCollision);
     world.addSystem(ecs::systems::HandleIncomingMessages);
     world.addSystem(ecs::systems::PositionUpdate);
+    world.addSystem(ecs::systems::deathUpdate);
 
     ecs::Entity enemy = world.registry.spawn_entity();
     world.registry.addComponent<ecs::component::Position>(enemy, {500, 500});

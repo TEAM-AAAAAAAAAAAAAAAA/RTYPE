@@ -113,6 +113,7 @@ namespace ecs::systems
                         world.registry.addComponent<ecs::component::Size>(bullet, {10, 10});
                         world.registry.addComponent<ecs::component::Velocity>(bullet, {weapon.value().projSpeed, 0});
                         world.registry.addComponent<ecs::component::Projectile>(bullet, {weapon.value().damage});
+                        world.registry.addComponent<ecs::component::Health>(bullet, {1});
                         ecs::component::Faction::Factions fac = ecs::component::Faction::Factions::None;
                         if (i < factions.size() && factions[i])
                             fac = factions[i].value().faction;
