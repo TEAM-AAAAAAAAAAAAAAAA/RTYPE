@@ -124,7 +124,6 @@ namespace ecs
         template <typename Component>
         typename SparseArray<Component>::referenceType addComponent(Entity const &to, Component &&c)
         {
-            registerComponent<Component>();
             return std::any_cast<SparseArray<Component> &>(_componentsArrays[std::type_index(typeid(Component))])
                 .insertAt(to._id, c);
         }
@@ -140,7 +139,6 @@ namespace ecs
         template <typename Component, typename... Params>
         typename SparseArray<Component>::referenceType emplaceComponent(Entity const &to, Params &&...p)
         {
-            registerComponent<Component>();
             return std::any_cast<SparseArray<Component> &>(_componentsArrays[std::type_index(typeid(Component))])
                 .emplaceAt(to._id, p...);
         }
@@ -151,7 +149,6 @@ namespace ecs
          */
         template <typename Component> void removeComponent(Entity const &from)
         {
-            registerComponent<Component>();
             std::any_cast<SparseArray<Component> &>(_componentsArrays.at(std::type_index(typeid(Component))))[from] =
                 std::nullopt;
         }

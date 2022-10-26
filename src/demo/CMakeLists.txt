@@ -6,23 +6,24 @@ set(TARGET r-type_demo)
 
 set(SRC
         ${SRC_ROOT}/Demo.cpp
-)
+        )
 
 add_executable(${TARGET} ${SRC})
 
 target_link_libraries(${TARGET} PRIVATE
-    Boost::thread
-)
+        Boost::thread
+        )
 
 target_include_directories(${TARGET}
         PRIVATE ${ECS_INCROOT}
-)
+        )
 
-if (CLIENT_COMPILATION_MODE)
+add_compile_definitions(${TARGET} PUBLIC CLIENT_COMPILATION_MODE)
+#if (CLIENT_COMPILATION_MODE)
     target_link_libraries(${TARGET} PRIVATE
-        sfml-system sfml-network sfml-graphics sfml-window
-    )
-endif()
+            sfml-system sfml-network sfml-graphics sfml-window
+            )
+#endif()
 
 
 set_target_properties(${TARGET} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})

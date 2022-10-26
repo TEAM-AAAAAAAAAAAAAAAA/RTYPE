@@ -27,15 +27,6 @@ namespace ecs::systems
             switch (event.type) {
                 case sf::Event::Closed: world.getWindow().close(); break;
                 case sf::Event::KeyPressed: {
-                    // auto const &shootables = world.registry.getComponents<component::Shootable>();
-
-                    // for (size_t i = 0; i < shootables.size(); ++i) {
-                        // auto const &shoot = shootables[i];
-                        // if (shoot) {
-                        //     if (event.key.code == shoot.value().Shoot || event.key.code == shoot.value().ShootSecondary)
-                        //         world.pushEvent(ecs::Event(ecs::Event::EventType::Shoot));
-                        // }
-                    // }
                 } break;
                 default: break;
             }
