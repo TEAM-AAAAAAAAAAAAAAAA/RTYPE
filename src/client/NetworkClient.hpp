@@ -155,10 +155,6 @@ namespace network
             while (!_ioService.stopped()) {
                 if (!_outgoingMessages.empty()) {
                     auto msg = _outgoingMessages.pop();
-                    std::cerr << "Sending message :"; // Debug print
-                    for (auto &c : msg)               //
-                        std::cerr << '\\' << (int)c;  //
-                    std::cerr << std::endl;           //
                     _socket.send_to(boost::asio::buffer(msg), _endpoint);
                 }
             }
