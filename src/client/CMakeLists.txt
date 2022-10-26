@@ -6,6 +6,8 @@ set(TARGET r-type_client)
 
 set(SRC
     ${SRC_ROOT}/entrypoint.cpp
+    ${SRC_ROOT}/Animation.cpp
+    ${SRC_ROOT}/AssetLoader.cpp
 )
 
 
