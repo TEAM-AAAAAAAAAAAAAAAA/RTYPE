@@ -40,10 +40,10 @@ namespace ecs::systems
         static const int secondBytePos = 5;
         static const int thirdBytePos = 6;
         static const int fourthBytePos = 7;
-        static const int firstByteSize = 7;
-        static const int secondByteSize = 7;
-        static const int firstByteVelocity = 7;
-        static const int secondByteVelocity = 7;
+        static const int firstByteSize = 8;
+        static const int secondByteSize = 9;
+        static const int firstByteVelocity = 10;
+        static const int secondByteVelocity = 11;
 
         static auto clock = ecs::constant::chrono::now();
         if (ecs::constant::chronoDuration(ecs::constant::chrono::now() - clock).count() > 10) {
