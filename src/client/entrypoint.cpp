@@ -48,6 +48,8 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.registry.registerComponent<ecs::component::Shootable>();
     world.registry.registerComponent<ecs::component::Controllable>();
 
+    asset::AssetLoader::LoadTexture("players", "src", "demo", "assets", "textures", "players.gif");
+
     world.addSystem(ecs::systems::handleSFMLEvents);
     world.addSystem(ecs::systems::handleSFMLKeys);
     world.addSystem(ecs::systems::manageClientEvents);

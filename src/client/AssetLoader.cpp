@@ -14,18 +14,15 @@ namespace asset
 
     AssetLoader::~AssetLoader() {}
 
-    void AssetLoader::LoadAsset(const std::filesystem::path &path)
+    void AssetLoader::LoadTexture(const std::string &key, const std::filesystem::path &path)
     {
         sf::Texture texture;
 
         if (!texture.loadFromFile(path.generic_string()))
             return;
-        _Instance._assetsMap[path.generic_string()] = texture;
+        _Instance._textureMap[key] = texture;
     }
 
-    sf::Texture &AssetLoader::GetAsset(const std::filesystem::path &path)
-    {
-        return _Instance._assetsMap[path];
-    }
+    sf::Texture &AssetLoader::GetTexture(const std::string &key) { return _Instance._textureMap[key]; }
 
 } // namespace asset
