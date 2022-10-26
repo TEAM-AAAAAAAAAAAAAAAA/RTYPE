@@ -131,7 +131,7 @@ jobs:
             RESULT_VARIABLE result
           )
           if (${{ matrix.platform }} STREQUAL "windows-latest")
-            cmake_path(SET WORKSPACE_DIR ${{ github.workspace }}/RTYPE/RTYPE)
+            cmake_path(SET WORKSPACE_DIR ${{ github.workspace }})
             message(STATUS "Using WORKSPACE_DIR: ${WORKSPACE_DIR}")
             configure_file(${WORKSPACE_DIR}/Debug/r-type_client.exe ${WORKSPACE_DIR} COPYONLY)
             configure_file(${WORKSPACE_DIR}/Debug/r-type_server.exe ${WORKSPACE_DIR} COPYONLY)
