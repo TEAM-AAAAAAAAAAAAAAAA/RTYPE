@@ -20,7 +20,7 @@ namespace asset
 
         if (!texture.loadFromFile(path.generic_string()))
             return;
-        _Instance._assetsMap[path] = texture;
+        _Instance._assetsMap[path.generic_string()] = texture;
     }
 
     sf::Texture &AssetLoader::GetAsset(const std::filesystem::path &path)

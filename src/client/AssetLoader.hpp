@@ -41,7 +41,7 @@ namespace asset
         /**
          * Map of all the assets
          */
-        std::map<std::string, sf::Texture> _assetsMap;
+        std::map<std::filesystem::path, sf::Texture> _assetsMap;
 
 
     };
