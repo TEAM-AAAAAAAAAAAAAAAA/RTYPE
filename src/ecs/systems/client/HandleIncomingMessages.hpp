@@ -108,8 +108,16 @@ namespace ecs::systems
         selfId = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
     }
 
+    static void deathMessageHandle(World &world, network::Message &msg)
+    {
+        size_t msgId = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
+
+        world.registry.killEntity(world.registry.entityFromIndex(msgId));
+    }
+
     static std::unordered_map<char, std::function<void(World &, network::Message &msg)>> packetTypeFunction = {
-        {8, movePacketHandle}, {0, firstMessageHandle}};
+        {constant::getPacketTypeKey(constant::PacketType::ENTITY_MOVE), movePacketHandle}, {0, firstMessageHandle},
+        {constant::getPacketTypeKey(constant::PacketType::ENTITY_DEATH), deathMessageHandle}};
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Client::getIncomingMessages().empty()) {
