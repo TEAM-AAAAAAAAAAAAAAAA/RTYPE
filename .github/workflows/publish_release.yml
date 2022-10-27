@@ -100,10 +100,10 @@ jobs:
             COMMAND cmake --build build
             RESULT_VARIABLE result
           )
-          if (${{ matrix.platform }} STREQUAL "windows-latest")
-            configure_file(${PROJECT_SOURCE_DIR}/r-type_client.exe ${{ github.workspace }}/RTYPE COPYONLY)
-            configure_file(${PROJECT_SOURCE_DIR}/r-type_server.exe ${{ github.workspace }}/RTYPE COPYONLY)
-          endif()
+          # if (${{ matrix.platform }} STREQUAL "windows-latest")
+          #   configure_file(${{ github.workspace }}/Debug/r-type_client.exe ${{ github.workspace }} COPYONLY)
+          #   configure_file(${PROJECT_SOURCE_DIR}/r-type_server.exe ${{ github.workspace }} COPYONLY)
+          # endif()
           if (NOT result EQUAL 0)
             message(FATAL_ERROR "Bad exit status. Failed to build RTYPE project.")
           endif()
@@ -113,8 +113,8 @@ jobs:
         with:
           name: Binaries
           path: |
-            ${{ github.workspace }}/RTYPE
-            !${{ github.workspace }}/RTYPE/vcpkg
+            ${{ github.workspace }}
+            !${{ github.workspace }}/vcpkg
 
     # - name: Create Release
     #   id: create_release
