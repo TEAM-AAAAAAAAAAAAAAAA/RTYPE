@@ -97,6 +97,7 @@ jobs:
           execute_process(
             COMMAND cmake --build build
             RESULT_VARIABLE result
+          )
           if (${{ matrix.platform }} STREQUAL "windows-latest")
             configure_file(${PROJECT_SOURCE_DIR}/r-type_client.exe ${{ github.workspace }}/RTYPE COPYONLY)
             configure_file(${PROJECT_SOURCE_DIR}/r-type_server.exe ${{ github.workspace }}/RTYPE COPYONLY)
