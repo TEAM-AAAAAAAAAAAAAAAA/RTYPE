@@ -123,11 +123,11 @@ jobs:
       - name: Upload Release Assets
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
-        permission:
+        permissions:
           contents: write
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
             asset_path: ${{ github.workspace }}/RTYPE
-            assets_name: RTYPE
+            assets_name: RTYPE  
             upload_url: ${{ steps.create_release.outputs.upload_url }}
