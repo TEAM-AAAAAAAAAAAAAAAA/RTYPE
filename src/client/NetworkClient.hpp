@@ -71,8 +71,16 @@ namespace network
         /**
          * Private default constructor of the Client Class
          */
-        Client() : _socket(_ioService), _serviceThread(&Client::runService, this),
-              _outgoingThread(&Client::sendOutgoing, this) {}
+        Client() :  _socket(_ioService), _serviceThread(&Client::runService, this),
+              _outgoingThread(&Client::sendOutgoing, this) {
+			while (!_ioService.stopped()) {
+				try {
+					_ioService.run();
+				} catch (const std::exception &e) {
+					std::cerr << e.what() << '\n';
+				}
+			}
+		}
         boost::asio::io_service _ioService;
         udp::socket _socket;
         Message _recvBuffer{};
@@ -136,13 +144,6 @@ namespace network
             while (!_socket.is_open())
                 ;
             startReceive();
-            while (!_ioService.stopped()) {
-                try {
-                    _ioService.run();
-                } catch (const std::exception &e) {
-                    std::cerr << e.what() << '\n';
-                }
-            }
         }
 
         /**
