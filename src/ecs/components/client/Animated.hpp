@@ -14,7 +14,6 @@ namespace ecs::component
      */
     struct Animated {
         int width;
-        int max;
         int origin_x;
         int origin_y;
         int current;

@@ -46,7 +46,7 @@ namespace ecs::systems
                     if (anim.value().cur_freq >= anim.value().freq) {
                         anim.value().cur_freq = 0;
                         anim.value().current++;
-                        if (anim.value().current * anim.value().width + anim.value().origin_x >= anim.value().max)
+                        if (anim.value().current * anim.value().width + anim.value().origin_x >= draw.value().Texture.getSize().x)
                             anim.value().current = 0;
                     }
                     sprite.setScale({float(size.value().width / anim.value().width), float(size.value().height / draw.value().Texture.getSize().y)});
