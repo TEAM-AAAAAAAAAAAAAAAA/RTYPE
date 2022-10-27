@@ -81,15 +81,15 @@ namespace ecs::systems
                         newEntity, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D});
                 }
                 world.registry.addComponent<component::Drawable>(newEntity,
-                    {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {1, 1, 32, 16}});
+                    {ecs::crossPlatformPath("assets", "textures", "players.gif"), {1, 1, 32, 16}});
                 break;
             case component::EntityType::Types::EnemyBase:
                 world.registry.addComponent<component::Drawable>(newEntity,
-                    {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {1, 18, 32, 16}});
+                    {ecs::crossPlatformPath("assets", "textures", "players.gif"), {1, 18, 32, 16}});
                 break;
             case component::EntityType::Types::Bullet:
                 world.registry.addComponent<component::Drawable>(newEntity,
-                    {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {5, 5, 1, 1}});
+                    {ecs::crossPlatformPath("assets", "textures", "players.gif"), {5, 5, 1, 1}});
 
                 break;
         }
