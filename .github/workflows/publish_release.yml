@@ -168,4 +168,4 @@ jobs:
         with:
             asset_path: ${{ github.workspace }}/${{ matrix.artifacts }}
             asset_name: ${{ matrix.artifacts }}
-            upload_url: ${{ needs.create_release.output.upload_url }}
+            upload_url: ${{ needs.create_release.outputs.upload_url }}
