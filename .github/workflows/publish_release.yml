@@ -119,19 +119,23 @@ jobs:
             ${{ github.workspace }}/r-type_server*
 
   create_release:
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      permissions:
-        contents: write
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.event.inputs.version }}
-        release_name: Release ${{ github.event.inputs.version }}
-        body: ${{ github.event.inputs.body }}
-        draft: false
-        prerelease: false
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        permissions:
+          contents: write
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.event.inputs.version }}
+          release_name: Release ${{ github.event.inputs.version }}
+          body: ${{ github.event.inputs.body }}
+          draft: false
+          prerelease: false
 
   upload_artifacts:
     strategy:
