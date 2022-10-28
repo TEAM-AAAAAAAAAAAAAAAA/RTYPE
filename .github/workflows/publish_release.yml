@@ -101,8 +101,8 @@ jobs:
             RESULT_VARIABLE result
           )
           # if (${{ matrix.platform }} STREQUAL "windows-latest")
-          #   configure_file(${{ github.workspace }}/Debug/r-type_client.exe ${{ github.workspace }} COPYONLY)
-          #   configure_file(${PROJECT_SOURCE_DIR}/r-type_server.exe ${{ github.workspace }} COPYONLY)
+            configure_file(${{ github.workspace }}/Debug/r-type_client.exe ${{ github.workspace }} COPYONLY)
+            configure_file(${{ github.workspace }}/Debug/r-type_server.exe ${{ github.workspace }} COPYONLY)
           # endif()
           if (NOT result EQUAL 0)
             message(FATAL_ERROR "Bad exit status. Failed to build RTYPE project.")
@@ -113,8 +113,8 @@ jobs:
         with:
           name: ${{ matrix.platform }}
           path: |
-            ${{ github.workspace }}
-            !${{ github.workspace }}/vcpkg
+            ${{ github.workspace }}/assets
+            ${{ github.workspace }}/vcpkg
 
     # - name: Create Release
     #   id: create_release
