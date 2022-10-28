@@ -118,28 +118,46 @@ jobs:
             ${{ github.workspace }}/r-type_client*
             ${{ github.workspace }}/r-type_server*
 
-    # - name: Create Release
-    #   id: create_release
-    #   uses: actions/create-release@v1
-    #   permissions:
-    #     contents: write
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #   with:
-    #     tag_name: ${{ github.event.inputs.version }}
-    #     release_name: Release ${{ github.event.inputs.version }}
-    #     body: ${{ github.event.inputs.body }}
-    #     draft: false
-    #     prerelease: false
+  create_release:
+    - name: Create Release
+       id: create_release
+       uses: actions/create-release@v1
+       permissions:
+         contents: write
+       env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       with:
+         tag_name: ${{ github.event.inputs.version }}
+         release_name: Release ${{ github.event.inputs.version }}
+         body: ${{ github.event.inputs.body }}
+         draft: false
+         prerelease: false
 
-    # - name: Upload Release Assets
-    #   id: upload-release-asset
-    #   uses: actions/upload-release-asset@v1
-    #   permissions:
-    #     contents: write
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #   with:
-    #       asset_path: ${{ github.workspace }}/RTYPE
-    #       assets_name: RTYPE  
-    #       upload_url: ${{ steps.create_release.outputs.upload_url }}
+  upload_artifacts:
+    strategy:
+      fail-fast: true
+      matrix:
+        artifacts: [ windows-latest, ubuntu-latest, macos-latest ]
+      runs-on: ubuntu-latest
+      permissions:
+        contents: read
+
+      steps:
+        - name: Download release assets
+          id: download-release-assets
+          uses: actions/download-artifact@v3
+          with:
+            name: ${{ matrix.artifacts }}
+            path: ${{ github.workspace }}/${{ matrix.artifacts }}
+
+        - name: Update release assets
+          id: upload-release-asset
+          uses: actions/upload-release-asset@v1
+          permissions:
+            contents: write
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+              asset_path: ${{ github.workspace }}/${{ matrix.artifacts }}
+              assets_name: RTYPE Binaries 
+              upload_url: ${{ steps.create_release.outputs.upload_url }}
