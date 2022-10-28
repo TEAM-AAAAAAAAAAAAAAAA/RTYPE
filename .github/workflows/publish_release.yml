@@ -115,6 +115,8 @@ jobs:
           path: |
             ${{ github.workspace }}/assets
             ${{ github.workspace }}/vcpkg
+            ${{ github.workspace }}/r-type_client*
+            ${{ github.workspace }}/r-type_server*
 
     # - name: Create Release
     #   id: create_release
