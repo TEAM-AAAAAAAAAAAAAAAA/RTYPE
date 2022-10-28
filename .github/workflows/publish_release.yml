@@ -114,7 +114,8 @@ jobs:
           name: ${{ matrix.platform }}
           path: |
             ${{ github.workspace }}/assets
-            ${{ github.workspace }}/vcpkg
+            ${{ github.workspace }}/vcpkg/installed
+            ${{ github.workspace }}/vcpkg/scripts/
             ${{ github.workspace }}/r-type_client*
             ${{ github.workspace }}/r-type_server*
 
