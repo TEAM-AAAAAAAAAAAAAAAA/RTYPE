@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['damage_372',['damage',['../structecs_1_1component_1_1_projectile.html#ae01c28d0813e0f7a134c44ae6bd6311b',1,'ecs::component::Projectile::damage()'],['../structecs_1_1component_1_1_weapon.html#ae480a3aa7ab9ad323965eb7e8f53806e',1,'ecs::component::Weapon::damage()']]],
-  ['draw_373',['draw',['../namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3',1,'ecs::systems']]]
+  ['cur_5ffreq_390',['cur_freq',['../structecs_1_1component_1_1_animated.html#ae1ad7aea00d3bfeaecf7453f651c0a5f',1,'ecs::component::Animated']]],
+  ['current_391',['current',['../structecs_1_1component_1_1_animated.html#ab81c88de53a07f9df5ba8686bb690949',1,'ecs::component::Animated']]]
 ];

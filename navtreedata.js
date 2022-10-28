@@ -68,8 +68,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_asset_manager_8hpp.html",
-"index.html#autotoc_md7"
+"_animated_8hpp.html",
+"globals_type.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

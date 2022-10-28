@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['y_413',['y',['../structecs_1_1component_1_1_direction.html#a3d32a244afa7d0baf48f009970957ba6',1,'ecs::component::Direction::y()'],['../structecs_1_1component_1_1_position.html#a0f0ae3af03793475baf53d4da2ffedba',1,'ecs::component::Position::y()'],['../structecs_1_1component_1_1_velocity.html#a9d81d0483e462287b986182b881eb7ff',1,'ecs::component::Velocity::y()']]]
+  ['width_438',['width',['../structecs_1_1component_1_1_animated.html#afe02410d67da1af64b0afe0b433f0a1b',1,'ecs::component::Animated::width()'],['../structecs_1_1component_1_1_size.html#a74a08ef18b4e55b48d8c02d5d6a70c79',1,'ecs::component::Size::width()']]]
 ];

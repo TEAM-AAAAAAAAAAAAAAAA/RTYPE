@@ -1,0 +1,24 @@
+<map id="src/ecs/systems/client/HandleParallaxBounds.hpp" name="src/ecs/systems/client/HandleParallaxBounds.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="192,5,392,47"/>
+<area shape="rect" id="node2" title=" " alt="" coords="22,244,108,271"/>
+<area shape="rect" id="node3" title=" " alt="" coords="16,319,96,345"/>
+<area shape="rect" id="node4" href="$_world_8hpp.html" title=" " alt="" coords="248,95,335,121"/>
+<area shape="rect" id="node20" href="$_parallax_8hpp.html" title=" " alt="" coords="360,95,586,121"/>
+<area shape="rect" id="node21" href="$_position_8hpp.html" title=" " alt="" coords="740,95,926,121"/>
+<area shape="rect" id="node5" title=" " alt="" coords="162,169,224,196"/>
+<area shape="rect" id="node6" href="$_event_8hpp.html" title=" " alt="" coords="248,169,335,196"/>
+<area shape="rect" id="node7" href="$_registry_8hpp.html" title=" " alt="" coords="359,169,462,196"/>
+<area shape="rect" id="node19" href="$_window_8hpp.html" title=" " alt="" coords="486,169,620,196"/>
+<area shape="rect" id="node8" title=" " alt="" coords="698,244,744,271"/>
+<area shape="rect" id="node9" title=" " alt="" coords="306,319,392,345"/>
+<area shape="rect" id="node10" title=" " alt="" coords="387,244,474,271"/>
+<area shape="rect" id="node11" href="$_constant_8hpp.html" title=" " alt="" coords="458,319,566,345"/>
+<area shape="rect" id="node14" href="$_entity_8hpp.html" title=" " alt="" coords="708,319,795,345"/>
+<area shape="rect" id="node15" href="$_sparse_array_8hpp.html" title=" " alt="" coords="184,244,311,271"/>
+<area shape="rect" id="node18" title=" " alt="" coords="550,244,674,271"/>
+<area shape="rect" id="node12" title=" " alt="" coords="716,393,787,420"/>
+<area shape="rect" id="node13" title=" " alt="" coords="486,393,537,420"/>
+<area shape="rect" id="node16" title=" " alt="" coords="120,319,194,345"/>
+<area shape="rect" id="node17" title=" " alt="" coords="219,319,282,345"/>
+<area shape="rect" id="node22" title=" " alt="" coords="870,169,926,196"/>
+</map>

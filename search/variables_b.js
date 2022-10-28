@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['x_412',['x',['../structecs_1_1component_1_1_direction.html#a5f84b023526f216923180dcb1ef385b1',1,'ecs::component::Direction::x()'],['../structecs_1_1component_1_1_position.html#a3d72213f7aed875ca0f04c64b5a4a2cf',1,'ecs::component::Position::x()'],['../structecs_1_1component_1_1_velocity.html#ae49476305ddc3758feaa8f6facdd03a6',1,'ecs::component::Velocity::x()']]]
+  ['texture_435',['Texture',['../structecs_1_1component_1_1_drawable.html#a423e3801e688d4344361848be9f7bc01',1,'ecs::component::Drawable']]],
+  ['threshold_436',['threshold',['../structecs_1_1component_1_1_parallax.html#a1a6ce9aadda80b2ab96cf0f67018cc71',1,'ecs::component::Parallax']]],
+  ['type_437',['type',['../structecs_1_1component_1_1_entity_type.html#a1059654495c06a65f2c7430f70477e23',1,'ecs::component::EntityType']]]
 ];

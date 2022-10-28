@@ -145,6 +145,8 @@ Variables</h2></td></tr>
 <tr class="separator:ab7690be6352e10d6bf8b0c79bcd2bcd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ef17d23a38a80a3e15a78a0cdb5c005"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#a3ef17d23a38a80a3e15a78a0cdb5c005">HandleIncomingMessages</a></td></tr>
 <tr class="separator:a3ef17d23a38a80a3e15a78a0cdb5c005"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9559eb78ab62e2fcdcebc80dc0d26673"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#a9559eb78ab62e2fcdcebc80dc0d26673">HandleParallaxBounds</a></td></tr>
+<tr class="separator:a9559eb78ab62e2fcdcebc80dc0d26673"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4294eeb80a7b9f00e1baad04f18dad03"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#a4294eeb80a7b9f00e1baad04f18dad03">handleSFMLEvents</a></td></tr>
 <tr class="separator:a4294eeb80a7b9f00e1baad04f18dad03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4259c57e73934aa863c710dc88386edd"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#a4259c57e73934aa863c710dc88386edd">handleSFMLKeys</a></td></tr>
@@ -176,31 +178,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= [](World &amp;world) {</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line">    }</div>
-</div><!-- fragment --><p>Used to set the scale, the position and the texture of the entity before display it </p>
+<p>Used to set the scale, the position and the texture of the entity before display it </p>
 
 </div>
 </div>
@@ -219,6 +197,32 @@ Variables</h2></td></tr>
 <div class="line">        <span class="keywordflow">while</span> (!<a class="code" href="classnetwork_1_1_client.html#a21ab5dabccf30131909a19d54ff5194e">network::Client::getIncomingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a6f83affbc6d8bc587e67a5b1003678b9">empty</a>()) {</div>
 <div class="line">            <a class="code" href="namespacenetwork.html#a0629cd044af39caf977e11dc2e2e0fb8">network::Message</a> msg = <a class="code" href="classnetwork_1_1_client.html#a21ab5dabccf30131909a19d54ff5194e">network::Client::getIncomingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80">pop</a>();</div>
 <div class="line">            packetTypeFunction[msg[0]](world, msg);</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9559eb78ab62e2fcdcebc80dc0d26673"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9559eb78ab62e2fcdcebc80dc0d26673">&#9670;&nbsp;</a></span>HandleParallaxBounds</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt; ecs::systems::HandleParallaxBounds</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= [](World &amp;world) {</div>
+<div class="line">        <span class="keyword">auto</span> &amp;parallaxes = world.registry.getComponents&lt;component::Parallax&gt;();</div>
+<div class="line">        <span class="keyword">auto</span> &amp;positions = world.registry.getComponents&lt;component::Position&gt;();</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; parallaxes.size() &amp;&amp; i &lt; positions.size(); i++) {</div>
+<div class="line">            <span class="keywordflow">if</span> (!parallaxes[i] || !positions[i])</div>
+<div class="line">                <span class="keywordflow">continue</span>;</div>
+<div class="line">            <span class="keywordflow">if</span> (positions[i].value().x &lt; parallaxes[i].value().threshold) {</div>
+<div class="line">                positions[i].value().x += parallaxes[i].value().position;</div>
+<div class="line">            }</div>
 <div class="line">        }</div>
 <div class="line">    }</div>
 </div><!-- fragment -->

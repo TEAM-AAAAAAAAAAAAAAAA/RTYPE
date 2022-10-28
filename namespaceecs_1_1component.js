@@ -1,5 +1,6 @@
 var namespaceecs_1_1component =
 [
+    [ "Animated", "structecs_1_1component_1_1_animated.html", "structecs_1_1component_1_1_animated" ],
     [ "Controllable", "structecs_1_1component_1_1_controllable.html", "structecs_1_1component_1_1_controllable" ],
     [ "Direction", "structecs_1_1component_1_1_direction.html", "structecs_1_1component_1_1_direction" ],
     [ "Drawable", "structecs_1_1component_1_1_drawable.html", "structecs_1_1component_1_1_drawable" ],
@@ -9,6 +10,7 @@ var namespaceecs_1_1component =
     [ "Faction", "structecs_1_1component_1_1_faction.html", "structecs_1_1component_1_1_faction" ],
     [ "Health", "structecs_1_1component_1_1_health.html", "structecs_1_1component_1_1_health" ],
     [ "NetworkId", "structecs_1_1component_1_1_network_id.html", "structecs_1_1component_1_1_network_id" ],
+    [ "Parallax", "structecs_1_1component_1_1_parallax.html", "structecs_1_1component_1_1_parallax" ],
     [ "Position", "structecs_1_1component_1_1_position.html", "structecs_1_1component_1_1_position" ],
     [ "Projectile", "structecs_1_1component_1_1_projectile.html", "structecs_1_1component_1_1_projectile" ],
     [ "Shootable", "structecs_1_1component_1_1_shootable.html", "structecs_1_1component_1_1_shootable" ],
