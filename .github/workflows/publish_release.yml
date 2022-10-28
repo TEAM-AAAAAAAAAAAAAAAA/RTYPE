@@ -122,6 +122,11 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: build
+    strategy:
+      fail-fast: true
+      matrix:
+        artifacts: [ windows-latest, ubuntu-latest, macos-latest ]
     steps:
       - name: Create Release
         id: create_release
@@ -135,22 +140,16 @@ jobs:
           draft: false
           prerelease: false
 
-  upload_artifacts:
-    strategy:
-      fail-fast: true
-      matrix:
-        artifacts: [ windows-latest, ubuntu-latest, macos-latest ]
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-
-    steps:
-      - uses: actions/download-artifact@v3
+      - name: Download Artifacts
+        id: download_artifacts
+        uses: actions/download-artifact@v3
         with:
           name: ${{ matrix.artifacts }}
           path: ${{ github.workspace }}/${{ matrix.artifacts }}
 
-      - uses: actions/upload-release-asset@v1
+      - name: Upload Release Assets
+        id: upload_release_assets
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
