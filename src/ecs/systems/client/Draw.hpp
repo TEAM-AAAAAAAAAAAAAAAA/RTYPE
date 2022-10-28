@@ -36,13 +36,14 @@ namespace ecs::systems
             auto const &pos = positions[i];
             auto const &size = sizes[i];
             auto const &draw = drawables[i];
-            auto &anim = animateds[i];
+
             if (pos && size && draw) {
                 sf::Sprite sprite;
                 float scaleX;
                 float scaleY;
                 sprite.setTexture(draw.value().Texture);
-                if (anim) {
+                if (i < animateds.size() && animateds[i]) {
+                    auto &anim = animateds[i];
                     sprite.setTextureRect(sf::IntRect(anim.value().width * anim.value().current + anim.value().origin_x, anim.value().origin_y, anim.value().width, draw.value().Texture.getSize().y));
                     anim.value().cur_freq++;
                     if (anim.value().cur_freq >= anim.value().freq) {
