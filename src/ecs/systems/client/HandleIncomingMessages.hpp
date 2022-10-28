@@ -32,8 +32,13 @@ namespace ecs::systems
         auto &sizes = world.registry.getComponents<component::Size>();
         auto &types = world.registry.getComponents<component::EntityType>();
         size_t msgId = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
-        size_t posX = (unsigned char)msg[4] << 8U | (unsigned char)msg[5];
-        size_t posY = (unsigned char)msg[6] << 8U | (unsigned char)msg[7];
+        int posX = (unsigned char)msg[4] << 8U | (unsigned char)msg[5];
+        int posY = (unsigned char)msg[6] << 8U | (unsigned char)msg[7];
+        int velX = msg[10];
+        int velY = msg[11];
+        component::EntityType type = msg[3];
+        int sizeX = msg[8];
+        int sizeY = msg[9];
 
         for (size_t i = 0; i < networkId.size(); i++)
             if (networkId[i] && networkId[i]->id == msgId) {
@@ -55,34 +60,47 @@ namespace ecs::systems
                 return;
             }
         Entity newEntity = world.registry.spawn_entity();
-        if (msg[3] == component::EntityType::Types::Player && msgId != selfId)
-            world.registry.addComponent<component::EntityType>(newEntity, {component::EntityType::Types::OtherPlayer});
-        else
-            world.registry.addComponent<component::EntityType>(newEntity, {msg[3]});
+        world.registry.addComponent<component::Direction>(newEntity, {0, 0});
         world.registry.addComponent<component::NetworkId>(newEntity, {msgId});
-        world.registry.addComponent<component::Position>(newEntity, {(int)posX, (int)posY});
-        world.registry.addComponent<component::Size>(newEntity, {msg[8], msg[9]});
-        if (msg[3] == component::EntityType::Types::Player) {
-            world.registry.addComponent<component::Direction>(newEntity, {0, 0});
-            world.registry.addComponent<component::Velocity>(newEntity, {msg[10], msg[11]});
-            if (selfId != msgId) {
+        world.registry.addComponent<component::Position>(newEntity, {posX, posY});
+        world.registry.addComponent<component::Velocity>(newEntity, {velX, velY});
+        world.registry.addComponent<component::Position>(newEntity, {posX, posY});
+        world.registry.addComponent<component::EntityType>(newEntity, {type.type});
+        world.registry.addComponent<component::Size>(newEntity, {sizeX, sizeY});
+        switch (type.type) {
+            case component::EntityType::Types::Player:
+                if (msgId != selfId)
+                    world.registry.addComponent<component::EntityType>(
+                        newEntity, {component::EntityType::Types::OtherPlayer});
+                else {
+                    world.registry.addComponent<component::EntityType>(
+                        newEntity, {component::EntityType::Types::Player});
+                    world.registry.addComponent<ecs::component::Shootable>(
+                        newEntity, ecs::component::Shootable(sf::Keyboard::Space));
+                    world.registry.addComponent<ecs::component::Controllable>(
+                        newEntity, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D});
+                }
                 world.registry.addComponent<component::Drawable>(newEntity,
                     {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {1, 1, 32, 16}});
-            } else {
+                break;
+            case component::EntityType::Types::EnemyBase:
                 world.registry.addComponent<component::Drawable>(newEntity,
-                    {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {1, 1, 32, 16}});
-                world.registry.addComponent<ecs::component::Shootable>(
-                    newEntity, ecs::component::Shootable(sf::Keyboard::Space));
-                world.registry.addComponent<ecs::component::Controllable>(
-                    newEntity, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D});
-            }
-        } else if (msg[3] == component::EntityType::Types::EnemyBase) {
-            world.registry.addComponent<component::Drawable>(newEntity,
-                {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {1, 18, 32, 16}});
-        } else if (msg[3] == component::EntityType::Types::Bullet) {
-            world.registry.addComponent<component::Drawable>(
-                newEntity, {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {5, 5, 1, 1}});
+                    {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {1, 18, 32, 16}});
+                break;
+            case component::EntityType::Types::Bullet:
+                world.registry.addComponent<component::Drawable>(newEntity,
+                    {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {5, 5, 1, 1}});
+
+                break;
         }
+        // } else if (msg[3] == component::EntityType::Types::EnemyBase) {
+        //     world.registry.addComponent<component::Drawable>(newEntity,
+        //         {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {1, 18, 32, 16}});
+        // } else if (msg[3] == component::EntityType::Types::Bullet) {
+        //     world.registry.addComponent<component::Drawable>(
+        //         newEntity, {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {5, 5, 1,
+        //         1}});
+        // }
     }
 
     static void firstMessageHandle(World &world, network::Message &msg)
