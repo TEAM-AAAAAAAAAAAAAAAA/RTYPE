@@ -124,6 +124,8 @@ jobs:
     needs: build
     permissions:
       contents: write
+    environment:
+      name: production
     steps:
       - name: Create Release
         id: create_release
@@ -142,6 +144,8 @@ jobs:
     needs: create_release
     permissions:
       contents: write
+    environment:
+      name: production
     strategy:
       fail-fast: true
       matrix:
@@ -161,5 +165,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
             asset_path: ${{ github.workspace }}/${{ matrix.artifacts }}
-            assets_name: RTYPE Binaries 
+            asset_name: RTYPE Binaries 
             upload_url: ${{ steps.create_release.outputs.upload_url }}
