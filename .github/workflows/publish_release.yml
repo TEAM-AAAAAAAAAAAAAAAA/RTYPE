@@ -165,5 +165,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
             asset_path: ${{ github.workspace }}/${{ matrix.artifacts }}
-            asset_name: RTYPE Binaries 
+            asset_name: ${{ matrix.artifacts }}
             upload_url: ${{ steps.create_release.outputs.upload_url }}
