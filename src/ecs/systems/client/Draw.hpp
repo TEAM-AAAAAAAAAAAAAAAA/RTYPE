@@ -51,7 +51,7 @@ namespace ecs::systems
                         if (anim.value().current * anim.value().width + anim.value().origin_x >= draw.value().Texture.getSize().x)
                             anim.value().current = 0;
                     }
-                    scaleX = static_cast<float>(anim.value().width) / static_cast<float>(draw.value().Texture.getSize().x);
+                    scaleX = static_cast<float>(size.value().width) / static_cast<float>(anim.value().width);
                     scaleY = static_cast<float>(size.value().height) / static_cast<float>(draw.value().Texture.getSize().y);
                 } else {
                     scaleX = static_cast<float>(size.value().width) / static_cast<float>(draw.value().Texture.getSize().x);
