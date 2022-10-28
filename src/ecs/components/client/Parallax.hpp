@@ -11,6 +11,8 @@ namespace ecs::component
 {
     /**
      * Parallax component allows us to more easily manipulate the parallaxed background
+     * @param threshold the position at which the background will be reset
+     * @param position the original position of the background
      */
     struct Parallax {
         int threshold;
