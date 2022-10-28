@@ -126,8 +126,6 @@ jobs:
       contents: write
     environment:
       name: production
-    outputs:
-      release_url: ${{ steps.create_release.outputs.upload_url }}
     steps:
       - name: Create Release
         id: create_release
@@ -168,4 +166,4 @@ jobs:
         with:
             asset_path: ${{ github.workspace }}/${{ matrix.artifacts }}
             asset_name: ${{ matrix.artifacts }}
-            upload_url: ${{ needs.create_release.outputs.upload_url }}
+            upload_url: ${{ jobs.create_release.outputs.upload_url }}
