@@ -10,10 +10,10 @@
 #include <functional>
 #include <iostream>
 #include "World.hpp"
-#include "components/client/Drawable.hpp"
 #include "components/Position.hpp"
 #include "components/Size.hpp"
 #include "components/client/Animated.hpp"
+#include "components/client/Drawable.hpp"
 
 #ifdef CLIENT_COMPILATION_MODE
     #include "SFML/Graphics.hpp"
@@ -49,14 +49,27 @@ namespace ecs::systems
                     if (anim.value().cur_freq >= anim.value().freq) {
                         anim.value().cur_freq = 0;
                         anim.value().current++;
-                        if (anim.value().current * anim.value().width + anim.value().origin_x >= draw.value().Texture.getSize().x)
+                        if (anim.value().current * anim.value().width + anim.value().origin_x >= anim.value().max)
                             anim.value().current = 0;
                     }
-                    scaleX = static_cast<float>(size.value().width) / static_cast<float>(anim.value().width);
+                    if (static_cast<float>(draw.value().Texture.getSize().x != 0))
+                        scaleX = static_cast<float>(size.value().width) / static_cast<float>(anim.value().width);
+                    else
+                        scaleX = 0;
+                    if (static_cast<float>(draw.value().Texture.getSize().y != 0))
+                        scaleY = static_cast<float>(size.value().height) / static_cast<float>(draw.value().Texture.getSize().y);
+                    else
+                        scaleY = 0;
                     scaleY = static_cast<float>(size.value().height) / static_cast<float>(draw.value().Texture.getSize().y);
                 } else {
-                    scaleX = static_cast<float>(size.value().width) / static_cast<float>(draw.value().Texture.getSize().x);
-                    scaleY = static_cast<float>(size.value().height) / static_cast<float>(draw.value().Texture.getSize().y);
+                    if (static_cast<float>(draw.value().Texture.getSize().x != 0))
+                        scaleX = static_cast<float>(size.value().width) / static_cast<float>(draw.value().Texture.getSize().x);
+                    else
+                        scaleX = 0;
+                    if (static_cast<float>(draw.value().Texture.getSize().y != 0))
+                        scaleY = static_cast<float>(size.value().height) / static_cast<float>(draw.value().Texture.getSize().y);
+                    else
+                        scaleY = 0;
                 }
                 sprite.setScale(scaleX, scaleY);
                 sprite.setPosition({static_cast<float>(pos.value().x), static_cast<float>(pos.value().y)});
