@@ -9,6 +9,7 @@ set(SYSTEMS_SRC
     ${SRCROOT}/ServerPush.hpp
     ${SRCROOT}/PositionUpdate.hpp
     ${SRCROOT}/DeathUpdate.hpp
+    ${SRCROOT}/ShowHitBox.hpp
     PARENT_SCOPE
 )
 
