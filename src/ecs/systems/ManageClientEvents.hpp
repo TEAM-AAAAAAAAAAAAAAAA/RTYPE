@@ -17,6 +17,8 @@
 #include "components/Weapon.hpp"
 #include "components/client/Controllable.hpp"
 #include "components/server/Projectile.hpp"
+#include "components/client/Shootable.hpp"
+#include "components/client/HitBox.hpp"
 
 namespace ecs::systems
 {
@@ -77,7 +79,14 @@ namespace ecs::systems
                 network::Client::getOutgoingMessages().push(msg);
             }
 #pragma endregion
+            else if (world.getEvent() == ecs::Event::EventType::HitBox) {
+                auto &hitBoxes = world.registry.getComponents<component::Hitbox>();
 
+                for (auto & hitBox : hitBoxes)
+                    if (hitBox != std::nullopt) {
+                        hitBox->switchHitBox();
+                    }
+            }
             world.popEvent();
         }
     };
