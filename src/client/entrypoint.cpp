@@ -47,6 +47,7 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.registry.registerComponent<ecs::component::Drawable>();
     world.registry.registerComponent<ecs::component::Shootable>();
     world.registry.registerComponent<ecs::component::Controllable>();
+    world.registry.registerComponent<ecs::component::Hitbox>();
 
     world.addSystem(ecs::systems::handleSFMLEvents);
     world.addSystem(ecs::systems::handleSFMLKeys);
@@ -55,6 +56,7 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.addSystem(ecs::systems::HandleIncomingMessages);
     world.addSystem(ecs::systems::SendDirection);
     world.addSystem(ecs::systems::movement);
+//    world.addSystem(ecs::systems::showHitBox);
     return world;
 }
 
