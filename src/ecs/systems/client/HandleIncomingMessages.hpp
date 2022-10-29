@@ -79,6 +79,8 @@ namespace ecs::systems
                         newEntity, ecs::component::Shootable(sf::Keyboard::Space));
                     world.registry.addComponent<ecs::component::Controllable>(
                         newEntity, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D});
+                    world.registry.addComponent<ecs::component::Hitbox>(
+                        newEntity, {ecs::component::Hitbox(sf::Keyboard::H)});
                 }
                 world.registry.addComponent<component::Drawable>(newEntity,
                     {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {1, 1, 32, 16}});
