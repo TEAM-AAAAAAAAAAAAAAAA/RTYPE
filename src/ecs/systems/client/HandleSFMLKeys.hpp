@@ -11,6 +11,7 @@
 #include "World.hpp"
 #include "components/client/Controllable.hpp"
 #include "components/client/Shootable.hpp"
+#include "components/client/HitBox.hpp"
 
 namespace ecs::systems
 {
@@ -25,10 +26,16 @@ namespace ecs::systems
 #ifdef CLIENT_COMPILATION_MODE
         auto &controllables = world.registry.getComponents<component::Controllable>();
         auto const &shootables = world.registry.getComponents<component::Shootable>();
+        auto &hitBoxes = world.registry.getComponents<component::Hitbox>();
 
         for (size_t i = 0; i < controllables.size(); ++i) {
             auto &contr = controllables[i];
+            auto &shootRef = shootables[i];
+            auto &hitBox = hitBoxes[i];
 
+            if (hitBox)
+                if (sf::Keyboard::isKeyPressed(hitBox.value().HitBoxKey))
+                    world.pushEvent(ecs::Event(ecs::Event::EventType::HitBox));
             if (contr) {
                 bool hasMoved = false;
                 static ecs::Event::EventType lastEventX;
