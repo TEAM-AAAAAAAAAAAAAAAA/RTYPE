@@ -54,11 +54,6 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.registry.registerComponent<ecs::component::Controllable>();
     world.registry.registerComponent<ecs::component::Animated>();
 
-    asset::AssetLoader::LoadTexture("players", "assets", "textures", "players.gif");
-    asset::AssetLoader::LoadTexture("bg1", "assets", "textures", "bg1.png");
-    asset::AssetLoader::LoadTexture("bg2", "assets", "textures", "bg2.png");
-    asset::AssetLoader::LoadTexture("bg3", "assets", "textures", "bg3.png");
-
     world.addSystem(ecs::systems::handleSFMLEvents);
     world.addSystem(ecs::systems::handleSFMLKeys);
     world.addSystem(ecs::systems::manageClientEvents);
@@ -126,6 +121,7 @@ ecs::World getGameWorld(ecs::Engine &engine)
  */
 int main()
 {
+    asset::AssetLoader::LoadIniFile("./config.ini");
     network::Client::setHost("localhost");
     network::Client::setPort("8000");
     network::Client::connect();
