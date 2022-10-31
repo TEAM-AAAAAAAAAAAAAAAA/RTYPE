@@ -79,6 +79,7 @@ namespace ecs::systems
                 network::Client::getOutgoingMessages().push(msg);
             }
 #pragma endregion
+#pragma region HitBox
             else if (world.getEvent() == ecs::Event::EventType::HitBox) {
                 auto &hitBoxes = world.registry.getComponents<component::Hitbox>();
 
@@ -87,6 +88,7 @@ namespace ecs::systems
                         hitBox->switchHitBox();
                     }
             }
+#pragma endregion
             world.popEvent();
         }
     };
