@@ -1,6 +1,6 @@
 set (SRC_ROOT ${PROJECT_SOURCE_DIR}/src/client)
 set (INC_ROOT ${PROJECT_SOURCE_DIR}/src/client)
-set(ECS_SRC ../ecs)
+#set(ECS_SRC ../ecs)
 
 set(TARGET r-type_client)
 
@@ -29,3 +29,6 @@ target_include_directories(${TARGET} PRIVATE
 set_target_properties(${TARGET} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
 
 add_compile_definitions(CLIENT_COMPILATION_MODE)
+
+install(TARGETS ${TARGET} DESTINATION ${PROJECT_SOURCE_DIR}/out/bin)
+install(FILES ${ECS_SRC} DESTINATION ${PROJECT_SOURCE_DIR}/out/include/ecs)
