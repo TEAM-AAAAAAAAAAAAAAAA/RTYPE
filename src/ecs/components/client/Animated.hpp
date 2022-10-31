@@ -12,16 +12,20 @@
 namespace ecs::component
 {
     struct Animated {
-        /**
-         * @brief AnimFrame struct
-         *
-         * @param x pos of the top left corner of the frame
-         * @param y pos of the top left corner of the frame
-         * @param width of the frame
-         * @param height of the frame
-         * @param delay before the next frame
-         */
         struct AnimFrame {
+            /**
+             * @brief AnimFrame struct
+             *
+             * @param x pos of the top left corner of the frame
+             * @param y pos of the top left corner of the frame
+             * @param width of the frame
+             * @param height of the frame
+             * @param delay before the next frame
+             */
+            AnimFrame(int x, int y, int width, int height, int delay)
+                : x(x), y(y), width(width), height(height), delay(delay)
+            {
+            }
             int x;
             int y;
             int width;
