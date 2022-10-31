@@ -2,6 +2,7 @@ set(INCROOT ${PROJECT_SOURCE_DIR}/src/ecs/components)
 set(SRCROOT ${PROJECT_SOURCE_DIR}/src/ecs/components)
 
 set(COMPONENTS_SRC
+    ${SRCROOT}/Dead.hpp
     ${SRCROOT}/Direction.hpp
     ${SRCROOT}/Faction.hpp
     ${SRCROOT}/Health.hpp

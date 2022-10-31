@@ -12,6 +12,7 @@
 #include "World.hpp"
 #include "components/Health.hpp"
 #include "components/NetworkId.hpp"
+#include "components/Dead.hpp"
 
 namespace ecs::systems
 {
@@ -39,7 +40,8 @@ namespace ecs::systems
                         }
                     }
 
-                    world.registry.killEntity(world.registry.entityFromIndex(i));
+                    // world.registry.killEntity(world.registry.entityFromIndex(i));
+                    world.registry.addComponent<component::Dead>(world.registry.entityFromIndex(i), {});
                 }
             }
         }
