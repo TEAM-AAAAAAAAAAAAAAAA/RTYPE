@@ -17,7 +17,7 @@ namespace ecs::component
      * It differs by constructor parameters
      */
     struct Drawable {
-        Drawable(const std::filesystem::path &texture, sf::IntRect rect) : rect(rect), textureKey(texture) {}
+        Drawable(const std::string &key, sf::IntRect rect) : rect(rect), textureKey(key) {}
         inline sf::Texture &getTexture() { return asset::AssetLoader::GetTexture(textureKey); }
 
         inline const sf::Texture &getTexture() const { return asset::AssetLoader::GetTexture(textureKey); }
