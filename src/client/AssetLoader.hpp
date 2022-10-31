@@ -107,15 +107,18 @@ namespace asset
             boost::property_tree::ptree pt;
             boost::property_tree::ini_parser::read_ini(path, pt);
 
+            // loop through the sections
             for (auto &section : pt) {
-                std::cout << section.first.data() << std::endl;
-                std::cout << section.second.data() << std::endl;
-                std::vector<std::string> paths;
-                while (section.second.data().find("/") != std::string::npos) {
-                    paths.push_back(section.second.data().substr(0, section.second.data().find("/")));
-                    section.second.data().erase(0, section.second.data().find("/") + 1);
+                for (auto &value : section.second) {
+                    std::vector<std::string> paths;
+                    // parse the section.second with slash and put it in the vector
+                    while (value.second.data().find("/") != std::string::npos) {
+                        paths.push_back(value.second.data().substr(0, value.second.data().find("/")));
+                        value.second.data().erase(0, value.second.data().find("/") + 1);
+                    }
+                    paths.push_back(value.second.data());
+                    LoadTexture(value.first.data(), paths);
                 }
-                LoadTexture(section.first.data(), paths);
             }
         }
 
