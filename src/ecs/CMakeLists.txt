@@ -10,6 +10,7 @@ add_subdirectory(utils)
 set(ECS_SRC
     ${COMPONENTS_SRC}
     ${SYSTEMS_SRC}
+    PARENT_SCOPE
 )
 
 set(ECS_INCDIRS
@@ -17,3 +18,5 @@ set(ECS_INCDIRS
     ${COMPONENTS_INCDIRS}
     ${SYSTEMS_INCDIRS}
 )
+
+install(DIRECTORY ${ECS_INCROOT} DESTINATION include)
