@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['origin_5fx_420',['origin_x',['../structecs_1_1component_1_1_animated.html#a0ab684ad6150c1d344e412c1c9237a36',1,'ecs::component::Animated']]],
-  ['origin_5fy_421',['origin_y',['../structecs_1_1component_1_1_animated.html#a7efb050a6f2a0235b19e17d8a1658e64',1,'ecs::component::Animated']]]
+  ['lastdirectionx_465',['lastDirectionX',['../structecs_1_1component_1_1_controllable.html#a37fef2d5291ea3d5aa79c551fef7cb82',1,'ecs::component::Controllable']]],
+  ['lastdirectiony_466',['lastDirectionY',['../structecs_1_1component_1_1_controllable.html#a9aa9c98c6de2e856a70871f059646b4c',1,'ecs::component::Controllable']]],
+  ['lastshoot_467',['lastShoot',['../structecs_1_1component_1_1_weapon.html#a835991f9ee0ba2ab1d514b9dcc537e89',1,'ecs::component::Weapon']]],
+  ['life_468',['life',['../structecs_1_1component_1_1_entity_life.html#af7ca521e701b4086bdd221b61fef58f7',1,'ecs::component::EntityLife']]]
 ];

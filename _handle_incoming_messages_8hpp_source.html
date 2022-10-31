@@ -148,114 +148,110 @@ $(document).ready(function(){initNavTree('_handle_incoming_messages_8hpp_source.
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;../client/NetworkClient.hpp&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_asset_manager_8hpp.html">AssetManager.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_world_8hpp.html">World.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_entity_type_8hpp.html">components/EntityType.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_network_id_8hpp.html">components/NetworkId.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_position_8hpp.html">components/Position.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_size_8hpp.html">components/Size.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_velocity_8hpp.html">components/Velocity.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_controllable_8hpp.html">components/client/Controllable.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_drawable_8hpp.html">components/client/Drawable.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_shootable_8hpp.html">components/client/Shootable.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs_1_1systems.html">ecs::systems</a></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">size_t</span> selfId = 0;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> movePacketHandle(World &amp;world, <a class="code" href="namespacenetwork.html#a0629cd044af39caf977e11dc2e2e0fb8">network::Message</a> &amp;msg)</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">auto</span> &amp;positions = world.registry.getComponents&lt;component::Position&gt;();</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">auto</span> &amp;networkId = world.registry.getComponents&lt;component::NetworkId&gt;();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keyword">auto</span> &amp;velocities = world.registry.getComponents&lt;component::Velocity&gt;();</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keyword">auto</span> &amp;sizes = world.registry.getComponents&lt;component::Size&gt;();</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keyword">auto</span> &amp;types = world.registry.getComponents&lt;component::EntityType&gt;();</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordtype">size_t</span> msgId = (<span class="keywordtype">unsigned</span> char)msg[1] &lt;&lt; 8U | (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)msg[2];</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordtype">int</span> posX = (<span class="keywordtype">unsigned</span> char)msg[4] &lt;&lt; 8U | (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)msg[5];</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordtype">int</span> posY = (<span class="keywordtype">unsigned</span> char)msg[6] &lt;&lt; 8U | (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)msg[7];</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordtype">int</span> velX = msg[10];</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordtype">int</span> velY = msg[11];</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        component::EntityType type = msg[3];</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordtype">int</span> sizeX = msg[8];</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordtype">int</span> sizeY = msg[9];</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; networkId.size(); i++)</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            <span class="keywordflow">if</span> (networkId[i] &amp;&amp; networkId[i]-&gt;<span class="keywordtype">id</span> == msgId) {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                <span class="keywordflow">if</span> (i &lt; sizes.size() &amp;&amp; sizes[i]) {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                    sizes[i].value().width = msg[8];</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                    sizes[i].value().height = msg[9];</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                }</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                <span class="keywordflow">if</span> (i &lt; positions.size() &amp;&amp; positions[i]) {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                    positions[i].value().x = posX;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                    positions[i].value().y = posY;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                }</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                <span class="keywordflow">if</span> (i &lt; types.size() &amp;&amp; types[i]) {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                    types[i].value().type = msg[3];</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                }</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                <span class="keywordflow">if</span> (i &lt; velocities.size() &amp;&amp; velocities[i] &amp;&amp; msg[3]) {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                    velocities[i].value().x = msg[10];</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                    velocities[i].value().y = msg[11];</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            }</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        Entity newEntity = world.registry.spawn_entity();</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        world.registry.addComponent&lt;component::Direction&gt;(newEntity, {0, 0});</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        world.registry.addComponent&lt;component::NetworkId&gt;(newEntity, {msgId});</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        world.registry.addComponent&lt;component::Position&gt;(newEntity, {posX, posY});</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        world.registry.addComponent&lt;component::Velocity&gt;(newEntity, {velX, velY});</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        world.registry.addComponent&lt;component::Position&gt;(newEntity, {posX, posY});</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        world.registry.addComponent&lt;component::EntityType&gt;(newEntity, {type.type});</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        world.registry.addComponent&lt;component::Size&gt;(newEntity, {sizeX, sizeY});</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordflow">switch</span> (type.type) {</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keywordflow">case</span> component::EntityType::Types::Player:</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                <span class="keywordflow">if</span> (msgId != selfId)</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                    world.registry.addComponent&lt;component::EntityType&gt;(</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                        newEntity, {component::EntityType::Types::OtherPlayer});</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                    world.registry.addComponent&lt;component::EntityType&gt;(</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                        newEntity, {component::EntityType::Types::Player});</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                    world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_shootable.html">ecs::component::Shootable</a>&gt;(</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                        newEntity, <a class="code" href="structecs_1_1component_1_1_shootable.html">ecs::component::Shootable</a>(sf::Keyboard::Space));</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                    world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_controllable.html">ecs::component::Controllable</a>&gt;(</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                        newEntity, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D});</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                }</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                world.registry.addComponent&lt;component::Drawable&gt;(newEntity,</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                    {<a class="code" href="namespaceecs.html#ac7dbc71818b670fb99ddcae563cce5a3">ecs::crossPlatformPath</a>(<span class="stringliteral">&quot;assets&quot;</span>, <span class="stringliteral">&quot;textures&quot;</span>, <span class="stringliteral">&quot;players.gif&quot;</span>), {1, 1, 32, 16}});</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            <span class="keywordflow">case</span> component::EntityType::Types::EnemyBase:</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                world.registry.addComponent&lt;component::Drawable&gt;(newEntity,</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                    {<a class="code" href="namespaceecs.html#ac7dbc71818b670fb99ddcae563cce5a3">ecs::crossPlatformPath</a>(<span class="stringliteral">&quot;assets&quot;</span>, <span class="stringliteral">&quot;textures&quot;</span>, <span class="stringliteral">&quot;players.gif&quot;</span>), {1, 18, 32, 16}});</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            <span class="keywordflow">case</span> component::EntityType::Types::Bullet:</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                world.registry.addComponent&lt;component::Drawable&gt;(newEntity,</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                    {<a class="code" href="namespaceecs.html#ac7dbc71818b670fb99ddcae563cce5a3">ecs::crossPlatformPath</a>(<span class="stringliteral">&quot;assets&quot;</span>, <span class="stringliteral">&quot;textures&quot;</span>, <span class="stringliteral">&quot;players.gif&quot;</span>), {5, 5, 1, 1}});</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        }</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="comment">// } else if (msg[3] == component::EntityType::Types::EnemyBase) {</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="comment">//     world.registry.addComponent&lt;component::Drawable&gt;(newEntity,</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="comment">//         {ecs::crossPlatformPath(&quot;src&quot;, &quot;demo&quot;, &quot;assets&quot;, &quot;textures&quot;, &quot;players.gif&quot;), {1, 18, 32, 16}});</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="comment">// } else if (msg[3] == component::EntityType::Types::Bullet) {</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="comment">//     world.registry.addComponent&lt;component::Drawable&gt;(</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="comment">//         newEntity, {ecs::crossPlatformPath(&quot;src&quot;, &quot;demo&quot;, &quot;assets&quot;, &quot;textures&quot;, &quot;players.gif&quot;), {5, 5, 1,</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="comment">//         1}});</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="comment">// }</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    }</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> firstMessageHandle(World &amp;world, <a class="code" href="namespacenetwork.html#a0629cd044af39caf977e11dc2e2e0fb8">network::Message</a> &amp;msg)</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    {</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        selfId = (<span class="keywordtype">unsigned</span> char)msg[1] &lt;&lt; 8U | (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)msg[2];</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    }</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keyword">static</span> std::unordered_map&lt;char, std::function&lt;void(World &amp;, <a class="code" href="namespacenetwork.html#a0629cd044af39caf977e11dc2e2e0fb8">network::Message</a> &amp;msg)&gt;&gt; packetTypeFunction = {</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        {8, movePacketHandle}, {0, firstMessageHandle}};</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno"><a class="line" href="namespaceecs_1_1systems.html#a3ef17d23a38a80a3e15a78a0cdb5c005">  114</a></span>&#160;    std::function&lt;void(<a class="code" href="classecs_1_1_world.html">World</a> &amp;)&gt; <a class="code" href="namespaceecs_1_1systems.html#a3ef17d23a38a80a3e15a78a0cdb5c005">HandleIncomingMessages</a> = [](<a class="code" href="classecs_1_1_world.html">World</a> &amp;world) {</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="keywordflow">while</span> (!<a class="code" href="classnetwork_1_1_client.html#a21ab5dabccf30131909a19d54ff5194e">network::Client::getIncomingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a6f83affbc6d8bc587e67a5b1003678b9">empty</a>()) {</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            <a class="code" href="namespacenetwork.html#a0629cd044af39caf977e11dc2e2e0fb8">network::Message</a> msg = <a class="code" href="classnetwork_1_1_client.html#a21ab5dabccf30131909a19d54ff5194e">network::Client::getIncomingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80">pop</a>();</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            packetTypeFunction[msg[0]](world, msg);</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        }</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    };</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_world_8hpp.html">World.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_entity_type_8hpp.html">components/EntityType.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_network_id_8hpp.html">components/NetworkId.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_position_8hpp.html">components/Position.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_size_8hpp.html">components/Size.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_velocity_8hpp.html">components/Velocity.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_controllable_8hpp.html">components/client/Controllable.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_drawable_8hpp.html">components/client/Drawable.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_shootable_8hpp.html">components/client/Shootable.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs_1_1systems.html">ecs::systems</a></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">size_t</span> selfId = 0;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> movePacketHandle(World &amp;world, <a class="code" href="namespacenetwork.html#a0629cd044af39caf977e11dc2e2e0fb8">network::Message</a> &amp;msg)</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">auto</span> &amp;positions = world.registry.getComponents&lt;component::Position&gt;();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">auto</span> &amp;networkId = world.registry.getComponents&lt;component::NetworkId&gt;();</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">auto</span> &amp;velocities = world.registry.getComponents&lt;component::Velocity&gt;();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keyword">auto</span> &amp;sizes = world.registry.getComponents&lt;component::Size&gt;();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keyword">auto</span> &amp;types = world.registry.getComponents&lt;component::EntityType&gt;();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordtype">size_t</span> msgId = (<span class="keywordtype">unsigned</span> char)msg[1] &lt;&lt; 8U | (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)msg[2];</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordtype">int</span> posX = (<span class="keywordtype">unsigned</span> char)msg[4] &lt;&lt; 8U | (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)msg[5];</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordtype">int</span> posY = (<span class="keywordtype">unsigned</span> char)msg[6] &lt;&lt; 8U | (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)msg[7];</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordtype">int</span> velX = msg[10];</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordtype">int</span> velY = msg[11];</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        component::EntityType type = msg[3];</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordtype">int</span> sizeX = msg[8];</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordtype">int</span> sizeY = msg[9];</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; networkId.size(); i++)</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keywordflow">if</span> (networkId[i] &amp;&amp; networkId[i]-&gt;<span class="keywordtype">id</span> == msgId) {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                <span class="keywordflow">if</span> (i &lt; sizes.size() &amp;&amp; sizes[i]) {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                    sizes[i].value().width = msg[8];</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                    sizes[i].value().height = msg[9];</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                }</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                <span class="keywordflow">if</span> (i &lt; positions.size() &amp;&amp; positions[i]) {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                    positions[i].value().x = posX;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                    positions[i].value().y = posY;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                }</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                <span class="keywordflow">if</span> (i &lt; types.size() &amp;&amp; types[i]) {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                    types[i].value().type = msg[3];</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                }</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                <span class="keywordflow">if</span> (i &lt; velocities.size() &amp;&amp; velocities[i] &amp;&amp; msg[3]) {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                    velocities[i].value().x = msg[10];</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                    velocities[i].value().y = msg[11];</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        Entity newEntity = world.registry.spawn_entity();</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        world.registry.addComponent&lt;component::Direction&gt;(newEntity, {0, 0});</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        world.registry.addComponent&lt;component::NetworkId&gt;(newEntity, {msgId});</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        world.registry.addComponent&lt;component::Position&gt;(newEntity, {posX, posY});</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        world.registry.addComponent&lt;component::Velocity&gt;(newEntity, {velX, velY});</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        world.registry.addComponent&lt;component::Position&gt;(newEntity, {posX, posY});</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        world.registry.addComponent&lt;component::EntityType&gt;(newEntity, {type.type});</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        world.registry.addComponent&lt;component::Size&gt;(newEntity, {sizeX, sizeY});</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordflow">switch</span> (type.type) {</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            <span class="keywordflow">case</span> component::EntityType::Types::Player:</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                <span class="keywordflow">if</span> (msgId != selfId)</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                    world.registry.addComponent&lt;component::EntityType&gt;(</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                        newEntity, {component::EntityType::Types::OtherPlayer});</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                    world.registry.addComponent&lt;component::EntityType&gt;(</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                        newEntity, {component::EntityType::Types::Player});</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                    world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_shootable.html">ecs::component::Shootable</a>&gt;(</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                        newEntity, <a class="code" href="structecs_1_1component_1_1_shootable.html">ecs::component::Shootable</a>(sf::Keyboard::Space));</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                    world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_controllable.html">ecs::component::Controllable</a>&gt;(</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                        newEntity, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D});</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                world.registry.addComponent&lt;component::Drawable&gt;(newEntity, {<span class="stringliteral">&quot;players&quot;</span>, {1, 1, 32, 16}});</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="keywordflow">case</span> component::EntityType::Types::EnemyBase:</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                world.registry.addComponent&lt;component::Drawable&gt;(newEntity, {<span class="stringliteral">&quot;players&quot;</span>, {1, 18, 32, 16}});</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            <span class="keywordflow">case</span> component::EntityType::Types::Bullet:</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                world.registry.addComponent&lt;component::Drawable&gt;(newEntity, {<span class="stringliteral">&quot;players&quot;</span>, {5, 5, 1, 1}});</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        }</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="comment">// } else if (msg[3] == component::EntityType::Types::EnemyBase) {</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="comment">//     world.registry.addComponent&lt;component::Drawable&gt;(newEntity,</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="comment">//         {ecs::crossPlatformPath(&quot;src&quot;, &quot;demo&quot;, &quot;assets&quot;, &quot;textures&quot;, &quot;players.gif&quot;), {1, 18, 32, 16}});</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="comment">// } else if (msg[3] == component::EntityType::Types::Bullet) {</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="comment">//     world.registry.addComponent&lt;component::Drawable&gt;(</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="comment">//         newEntity, {ecs::crossPlatformPath(&quot;src&quot;, &quot;demo&quot;, &quot;assets&quot;, &quot;textures&quot;, &quot;players.gif&quot;), {5, 5, 1,</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="comment">//         1}});</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="comment">// }</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> firstMessageHandle(World &amp;world, <a class="code" href="namespacenetwork.html#a0629cd044af39caf977e11dc2e2e0fb8">network::Message</a> &amp;msg)</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    {</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        selfId = (<span class="keywordtype">unsigned</span> char)msg[1] &lt;&lt; 8U | (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)msg[2];</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    }</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keyword">static</span> std::unordered_map&lt;char, std::function&lt;void(World &amp;, <a class="code" href="namespacenetwork.html#a0629cd044af39caf977e11dc2e2e0fb8">network::Message</a> &amp;msg)&gt;&gt; packetTypeFunction = {</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        {8, movePacketHandle}, {0, firstMessageHandle}};</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="namespaceecs_1_1systems.html#a3ef17d23a38a80a3e15a78a0cdb5c005">  110</a></span>&#160;    std::function&lt;void(<a class="code" href="classecs_1_1_world.html">World</a> &amp;)&gt; <a class="code" href="namespaceecs_1_1systems.html#a3ef17d23a38a80a3e15a78a0cdb5c005">HandleIncomingMessages</a> = [](<a class="code" href="classecs_1_1_world.html">World</a> &amp;world) {</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keywordflow">while</span> (!<a class="code" href="classnetwork_1_1_client.html#a21ab5dabccf30131909a19d54ff5194e">network::Client::getIncomingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a6f83affbc6d8bc587e67a5b1003678b9">empty</a>()) {</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <a class="code" href="namespacenetwork.html#a0629cd044af39caf977e11dc2e2e0fb8">network::Message</a> msg = <a class="code" href="classnetwork_1_1_client.html#a21ab5dabccf30131909a19d54ff5194e">network::Client::getIncomingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80">pop</a>();</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            packetTypeFunction[msg[0]](world, msg);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        }</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    };</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="a_network_id_8hpp_html"><div class="ttname"><a href="_network_id_8hpp.html">NetworkId.hpp</a></div></div>
@@ -268,16 +264,14 @@ $(document).ready(function(){initNavTree('_handle_incoming_messages_8hpp_source.
 <div class="ttc" id="aclassnetwork_1_1_locked_queue_html_a6f83affbc6d8bc587e67a5b1003678b9"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html#a6f83affbc6d8bc587e67a5b1003678b9">network::LockedQueue::empty</a></div><div class="ttdeci">bool empty()</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:66</div></div>
 <div class="ttc" id="a_size_8hpp_html"><div class="ttname"><a href="_size_8hpp.html">Size.hpp</a></div></div>
 <div class="ttc" id="aclassnetwork_1_1_locked_queue_html_a2be6f1a5bcdc3fd83a53558377f51d80"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80">network::LockedQueue::pop</a></div><div class="ttdeci">T pop()</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:53</div></div>
-<div class="ttc" id="a_asset_manager_8hpp_html"><div class="ttname"><a href="_asset_manager_8hpp.html">AssetManager.hpp</a></div></div>
 <div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:20</div></div>
-<div class="ttc" id="anamespaceecs_1_1systems_html"><div class="ttname"><a href="namespaceecs_1_1systems.html">ecs::systems</a></div><div class="ttdef"><b>Definition:</b> Draw.hpp:22</div></div>
+<div class="ttc" id="anamespaceecs_1_1systems_html"><div class="ttname"><a href="namespaceecs_1_1systems.html">ecs::systems</a></div><div class="ttdef"><b>Definition:</b> Animate.hpp:19</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_controllable_html"><div class="ttname"><a href="structecs_1_1component_1_1_controllable.html">ecs::component::Controllable</a></div><div class="ttdef"><b>Definition:</b> Controllable.hpp:20</div></div>
-<div class="ttc" id="anamespaceecs_1_1systems_html_a3ef17d23a38a80a3e15a78a0cdb5c005"><div class="ttname"><a href="namespaceecs_1_1systems.html#a3ef17d23a38a80a3e15a78a0cdb5c005">ecs::systems::HandleIncomingMessages</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; HandleIncomingMessages</div><div class="ttdef"><b>Definition:</b> HandleIncomingMessages.hpp:114</div></div>
+<div class="ttc" id="anamespaceecs_1_1systems_html_a3ef17d23a38a80a3e15a78a0cdb5c005"><div class="ttname"><a href="namespaceecs_1_1systems.html#a3ef17d23a38a80a3e15a78a0cdb5c005">ecs::systems::HandleIncomingMessages</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; HandleIncomingMessages</div><div class="ttdef"><b>Definition:</b> HandleIncomingMessages.hpp:110</div></div>
 <div class="ttc" id="anamespacenetwork_html_a0629cd044af39caf977e11dc2e2e0fb8"><div class="ttname"><a href="namespacenetwork.html#a0629cd044af39caf977e11dc2e2e0fb8">network::Message</a></div><div class="ttdeci">std::array&lt; char, 12 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
 <div class="ttc" id="a_shootable_8hpp_html"><div class="ttname"><a href="_shootable_8hpp.html">Shootable.hpp</a></div></div>
 <div class="ttc" id="a_drawable_8hpp_html"><div class="ttname"><a href="_drawable_8hpp.html">Drawable.hpp</a></div></div>
 <div class="ttc" id="a_controllable_8hpp_html"><div class="ttname"><a href="_controllable_8hpp.html">Controllable.hpp</a></div></div>
-<div class="ttc" id="anamespaceecs_html_ac7dbc71818b670fb99ddcae563cce5a3"><div class="ttname"><a href="namespaceecs.html#ac7dbc71818b670fb99ddcae563cce5a3">ecs::crossPlatformPath</a></div><div class="ttdeci">std::filesystem::path crossPlatformPath(std::filesystem::path path)</div><div class="ttdef"><b>Definition:</b> AssetManager.hpp:14</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

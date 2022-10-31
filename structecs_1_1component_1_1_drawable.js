@@ -1,7 +1,8 @@
 var structecs_1_1component_1_1_drawable =
 [
-    [ "Drawable", "structecs_1_1component_1_1_drawable.html#a5976f9503db00650b06c94fafdabc72f", null ],
-    [ "Drawable", "structecs_1_1component_1_1_drawable.html#aa7d7f141f7b2ec0ddf3f3d1998a16c65", null ],
-    [ "Drawable", "structecs_1_1component_1_1_drawable.html#a0b05d467df327e3a008fb129ccc7bc93", null ],
-    [ "Texture", "structecs_1_1component_1_1_drawable.html#a423e3801e688d4344361848be9f7bc01", null ]
+    [ "Drawable", "structecs_1_1component_1_1_drawable.html#a215f41cad74665a0fa66f09842dd3fd3", null ],
+    [ "getTexture", "structecs_1_1component_1_1_drawable.html#ad7beaaf10a9fa577ce0cff4010b11ccb", null ],
+    [ "getTexture", "structecs_1_1component_1_1_drawable.html#af806011a057d0d9968c03526f6dde709", null ],
+    [ "rect", "structecs_1_1component_1_1_drawable.html#a6da712d36460fc432f00cdb278d5121b", null ],
+    [ "textureKey", "structecs_1_1component_1_1_drawable.html#af1cf64a2e4b8cb70221ebbbdf065c006", null ]
 ];

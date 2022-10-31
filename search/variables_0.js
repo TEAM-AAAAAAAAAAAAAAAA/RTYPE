@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['cur_5ffreq_390',['cur_freq',['../structecs_1_1component_1_1_animated.html#ae1ad7aea00d3bfeaecf7453f651c0a5f',1,'ecs::component::Animated']]],
-  ['current_391',['current',['../structecs_1_1component_1_1_animated.html#ab81c88de53a07f9df5ba8686bb690949',1,'ecs::component::Animated']]]
+  ['_5finstance_448',['_Instance',['../classasset_1_1_asset_loader.html#a4d3fdf7b86b10e58856ef93bf62e9a99',1,'asset::AssetLoader']]]
 ];

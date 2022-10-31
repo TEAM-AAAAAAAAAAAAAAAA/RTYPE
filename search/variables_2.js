@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['faction_394',['faction',['../structecs_1_1component_1_1_faction.html#afff7553e9fcd8b3281b5b86e9225c255',1,'ecs::component::Faction']]],
-  ['freq_395',['freq',['../structecs_1_1component_1_1_animated.html#a12b037bf2475efffa51d54506c46570f',1,'ecs::component::Animated']]]
+  ['cur_5ffreq_450',['cur_freq',['../structecs_1_1component_1_1_animated.html#ae1ad7aea00d3bfeaecf7453f651c0a5f',1,'ecs::component::Animated']]],
+  ['current_451',['current',['../structecs_1_1component_1_1_animated.html#ab81c88de53a07f9df5ba8686bb690949',1,'ecs::component::Animated']]]
 ];

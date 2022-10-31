@@ -1,21 +1,14 @@
 var searchData=
 [
-  ['main_111',['main',['../client_2entrypoint_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;entrypoint.cpp'],['../_demo_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;Demo.cpp'],['../server_2entrypoint_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;entrypoint.cpp']]],
-  ['manageclientevents_112',['manageClientEvents',['../namespaceecs_1_1systems.html#ac67f4a6799296119e6faddb95989b6ab',1,'ecs::systems']]],
-  ['manageclientevents_2ehpp_113',['ManageClientEvents.hpp',['../_manage_client_events_8hpp.html',1,'']]],
-  ['max_114',['max',['../structecs_1_1component_1_1_animated.html#acd62303ecb9c0c6577cf0ddcb9dd3933',1,'ecs::component::Animated']]],
-  ['message_115',['Message',['../namespacenetwork.html#a0629cd044af39caf977e11dc2e2e0fb8',1,'network']]],
-  ['move_116',['Move',['../classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0fabcccf04efda6dbf3b8e04ac74b62e719',1,'ecs::Event']]],
-  ['movedown_117',['MoveDown',['../structecs_1_1component_1_1_controllable.html#a15007d2044004baf7ca2c5d47c35a3fa',1,'ecs::component::Controllable::MoveDown()'],['../classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0faef2f5b9154b22a799ba273b47d48ff85',1,'ecs::Event::MoveDown()']]],
-  ['movedownsecondary_118',['MoveDownSecondary',['../structecs_1_1component_1_1_controllable.html#a6ce6960cc4b86adb9161a15113ca8726',1,'ecs::component::Controllable']]],
-  ['moveleft_119',['MoveLeft',['../structecs_1_1component_1_1_controllable.html#aa088718191c645089a105b7106a7ab50',1,'ecs::component::Controllable::MoveLeft()'],['../classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0fa7e3d5963883ef5e45e26fb8c3de8c440',1,'ecs::Event::MoveLeft()']]],
-  ['moveleftsecondary_120',['MoveLeftSecondary',['../structecs_1_1component_1_1_controllable.html#ab99039d81740df6d3391370aa1f98bd2',1,'ecs::component::Controllable']]],
-  ['movement_121',['movement',['../namespaceecs_1_1systems.html#a33dcdd288d54220f937db37567c5512f',1,'ecs::systems']]],
-  ['movement_2ehpp_122',['Movement.hpp',['../_movement_8hpp.html',1,'']]],
-  ['moveright_123',['MoveRight',['../structecs_1_1component_1_1_controllable.html#a0d3bdc8342e8e2e06dc49965fe219624',1,'ecs::component::Controllable::MoveRight()'],['../classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0fabafce6ee7edf346efe8f0d816c8f3955',1,'ecs::Event::MoveRight()']]],
-  ['moverightsecondary_124',['MoveRightSecondary',['../structecs_1_1component_1_1_controllable.html#a9bd4761e2fe292b8482908e1dce203ee',1,'ecs::component::Controllable']]],
-  ['movestop_125',['MoveStop',['../classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0fadc8453b770e1ca15c38d69de4861ef1a',1,'ecs::Event']]],
-  ['moveup_126',['MoveUp',['../structecs_1_1component_1_1_controllable.html#a275c349ca47cf8fc324d4fdf85f069cd',1,'ecs::component::Controllable::MoveUp()'],['../classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0fad20d8e6649de5d6afd2ca68315cb297e',1,'ecs::Event::MoveUp()']]],
-  ['moveupsecondary_127',['MoveUpSecondary',['../structecs_1_1component_1_1_controllable.html#a9ec7e60240c61b59e40b5bf5d84e9034',1,'ecs::component::Controllable']]],
-  ['multiplayer_5finfo_128',['MULTIPLAYER_INFO',['../namespaceecs_1_1constant.html#a01d4874a258e2747078bd137000e9e74a25358b541e414e685bd78164138d9333',1,'ecs::constant']]]
+  ['lastdirectionx_120',['lastDirectionX',['../structecs_1_1component_1_1_controllable.html#a37fef2d5291ea3d5aa79c551fef7cb82',1,'ecs::component::Controllable']]],
+  ['lastdirectiony_121',['lastDirectionY',['../structecs_1_1component_1_1_controllable.html#a9aa9c98c6de2e856a70871f059646b4c',1,'ecs::component::Controllable']]],
+  ['lastshoot_122',['lastShoot',['../structecs_1_1component_1_1_weapon.html#a835991f9ee0ba2ab1d514b9dcc537e89',1,'ecs::component::Weapon']]],
+  ['life_123',['life',['../structecs_1_1component_1_1_entity_life.html#af7ca521e701b4086bdd221b61fef58f7',1,'ecs::component::EntityLife']]],
+  ['loadinifile_124',['LoadIniFile',['../classasset_1_1_asset_loader.html#a259aabaae49480269917291cba241043',1,'asset::AssetLoader']]],
+  ['loadtexture_125',['LoadTexture',['../classasset_1_1_asset_loader.html#a22d3b68a45b4d58ffd509fe9ac27cffa',1,'asset::AssetLoader::LoadTexture(const std::string &amp;key, const std::filesystem::path &amp;path, std::string_view next, Args... args)'],['../classasset_1_1_asset_loader.html#a706e1921011a9f9bbab0ce1354cb0baa',1,'asset::AssetLoader::LoadTexture(const std::string &amp;key, std::vector&lt; std::string &gt; paths)']]],
+  ['lockedqueue_126',['LockedQueue',['../classnetwork_1_1_locked_queue.html',1,'network']]],
+  ['lockedqueue_2ehpp_127',['LockedQueue.hpp',['../_locked_queue_8hpp.html',1,'']]],
+  ['lockedqueue_3c_20clientmessage_20_3e_128',['LockedQueue&lt; ClientMessage &gt;',['../classnetwork_1_1_locked_queue.html',1,'network']]],
+  ['lockedqueue_3c_20message_20_3e_129',['LockedQueue&lt; Message &gt;',['../classnetwork_1_1_locked_queue.html',1,'network']]],
+  ['lockedqueue_3c_20servermessage_20_3e_130',['LockedQueue&lt; ServerMessage &gt;',['../classnetwork_1_1_locked_queue.html',1,'network']]]
 ];

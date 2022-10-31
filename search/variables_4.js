@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['id_404',['id',['../structecs_1_1component_1_1_network_id.html#a84cffedb2f99477a3ad2022d10d38062',1,'ecs::component::NetworkId']]]
+  ['faction_454',['faction',['../structecs_1_1component_1_1_faction.html#afff7553e9fcd8b3281b5b86e9225c255',1,'ecs::component::Faction']]],
+  ['freq_455',['freq',['../structecs_1_1component_1_1_animated.html#a12b037bf2475efffa51d54506c46570f',1,'ecs::component::Animated']]]
 ];

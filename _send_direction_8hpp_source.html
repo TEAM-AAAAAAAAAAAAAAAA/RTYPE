@@ -148,41 +148,40 @@ $(document).ready(function(){initNavTree('_send_direction_8hpp_source.html','');
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;../client/NetworkClient.hpp&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_asset_manager_8hpp.html">AssetManager.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_constant_8hpp.html">Constant.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_world_8hpp.html">World.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_direction_8hpp.html">components/Direction.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_controllable_8hpp.html">components/client/Controllable.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs_1_1systems.html">ecs::systems</a></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="namespaceecs_1_1systems.html#aea6fa503923e813d900cfc64890d626e">   24</a></span>&#160;    std::function&lt;void(<a class="code" href="classecs_1_1_world.html">World</a> &amp;)&gt; <a class="code" href="namespaceecs_1_1systems.html#aea6fa503923e813d900cfc64890d626e">SendDirection</a> = [](<a class="code" href="classecs_1_1_world.html">World</a> &amp;world) {</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;controllables = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_controllable.html">component::Controllable</a>&gt;();</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">auto</span> &amp;directions = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_direction.html">component::Direction</a>&gt;();</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">static</span> <span class="keyword">auto</span> clock = ecs::constant::chrono::now();</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="namespaceecs_1_1constant.html#ab5af9ff1ff8ae873264c70ee8d24ccad">ecs::constant::chronoDuration</a>(ecs::constant::chrono::now() - clock).count() &gt; 10) {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            clock = ecs::constant::chrono::now();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; controllables.size() &amp;&amp; i &lt; directions.size(); i++) {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                <span class="keywordflow">if</span> (!controllables[i] || !directions[i])</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                    <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                <span class="keywordflow">if</span> (directions[i].value().hasMoved) {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                    <a class="code" href="namespacenetwork.html#a0629cd044af39caf977e11dc2e2e0fb8">network::Message</a> msg;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                    msg.fill(0);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                    msg[0] = <a class="code" href="namespaceecs_1_1constant.html#a01d4874a258e2747078bd137000e9e74a84069a869f4e4369149010501c01eff3">ecs::constant::PLAYER_MOVE</a>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                    msg[1] = directions[i].value().x;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                    msg[2] = directions[i].value().y;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                    <a class="code" href="classnetwork_1_1_client.html#ab4ee2988395ad66a1c4e259eba436d23">network::Client::getOutgoingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">push</a>(msg);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                    directions[i].value().hasMoved = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                }</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            }</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        }</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    };</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_constant_8hpp.html">Constant.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_world_8hpp.html">World.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_direction_8hpp.html">components/Direction.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_controllable_8hpp.html">components/client/Controllable.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs_1_1systems.html">ecs::systems</a></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="namespaceecs_1_1systems.html#aea6fa503923e813d900cfc64890d626e">   23</a></span>&#160;    std::function&lt;void(<a class="code" href="classecs_1_1_world.html">World</a> &amp;)&gt; <a class="code" href="namespaceecs_1_1systems.html#aea6fa503923e813d900cfc64890d626e">SendDirection</a> = [](<a class="code" href="classecs_1_1_world.html">World</a> &amp;world) {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;controllables = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_controllable.html">component::Controllable</a>&gt;();</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keyword">auto</span> &amp;directions = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_direction.html">component::Direction</a>&gt;();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">static</span> <span class="keyword">auto</span> clock = ecs::constant::chrono::now();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="namespaceecs_1_1constant.html#ab5af9ff1ff8ae873264c70ee8d24ccad">ecs::constant::chronoDuration</a>(ecs::constant::chrono::now() - clock).count() &gt; 10) {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            clock = ecs::constant::chrono::now();</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; controllables.size() &amp;&amp; i &lt; directions.size(); i++) {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                <span class="keywordflow">if</span> (!controllables[i] || !directions[i])</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                    <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                <span class="keywordflow">if</span> (directions[i].value().hasMoved) {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                    <a class="code" href="namespacenetwork.html#a0629cd044af39caf977e11dc2e2e0fb8">network::Message</a> msg;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                    msg.fill(0);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                    msg[0] = <a class="code" href="namespaceecs_1_1constant.html#a01d4874a258e2747078bd137000e9e74a84069a869f4e4369149010501c01eff3">ecs::constant::PLAYER_MOVE</a>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                    msg[1] = directions[i].value().x;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                    msg[2] = directions[i].value().y;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                    <a class="code" href="classnetwork_1_1_client.html#ab4ee2988395ad66a1c4e259eba436d23">network::Client::getOutgoingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">push</a>(msg);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                    directions[i].value().hasMoved = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                }</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    };</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="anamespaceecs_1_1systems_html_aea6fa503923e813d900cfc64890d626e"><div class="ttname"><a href="namespaceecs_1_1systems.html#aea6fa503923e813d900cfc64890d626e">ecs::systems::SendDirection</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; SendDirection</div><div class="ttdef"><b>Definition:</b> SendDirection.hpp:24</div></div>
+<div class="ttc" id="anamespaceecs_1_1systems_html_aea6fa503923e813d900cfc64890d626e"><div class="ttname"><a href="namespaceecs_1_1systems.html#aea6fa503923e813d900cfc64890d626e">ecs::systems::SendDirection</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; SendDirection</div><div class="ttdef"><b>Definition:</b> SendDirection.hpp:23</div></div>
 <div class="ttc" id="anamespaceecs_1_1constant_html_ab5af9ff1ff8ae873264c70ee8d24ccad"><div class="ttname"><a href="namespaceecs_1_1constant.html#ab5af9ff1ff8ae873264c70ee8d24ccad">ecs::constant::chronoDuration</a></div><div class="ttdeci">std::chrono::duration&lt; double, std::milli &gt; chronoDuration</div><div class="ttdef"><b>Definition:</b> Constant.hpp:18</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_direction_html"><div class="ttname"><a href="structecs_1_1component_1_1_direction.html">ecs::component::Direction</a></div><div class="ttdef"><b>Definition:</b> Direction.hpp:18</div></div>
 <div class="ttc" id="aclassnetwork_1_1_locked_queue_html_a076e0981cce5c44eed95476e135011f2"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">network::LockedQueue::push</a></div><div class="ttdeci">void push(T value)</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:43</div></div>
@@ -190,9 +189,8 @@ $(document).ready(function(){initNavTree('_send_direction_8hpp_source.html','');
 <div class="ttc" id="a_world_8hpp_html"><div class="ttname"><a href="_world_8hpp.html">World.hpp</a></div></div>
 <div class="ttc" id="aclassnetwork_1_1_client_html_ab4ee2988395ad66a1c4e259eba436d23"><div class="ttname"><a href="classnetwork_1_1_client.html#ab4ee2988395ad66a1c4e259eba436d23">network::Client::getOutgoingMessages</a></div><div class="ttdeci">static LockedQueue&lt; Message &gt; &amp; getOutgoingMessages()</div><div class="ttdef"><b>Definition:</b> NetworkClient.hpp:55</div></div>
 <div class="ttc" id="a_constant_8hpp_html"><div class="ttname"><a href="_constant_8hpp.html">Constant.hpp</a></div></div>
-<div class="ttc" id="a_asset_manager_8hpp_html"><div class="ttname"><a href="_asset_manager_8hpp.html">AssetManager.hpp</a></div></div>
 <div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:20</div></div>
-<div class="ttc" id="anamespaceecs_1_1systems_html"><div class="ttname"><a href="namespaceecs_1_1systems.html">ecs::systems</a></div><div class="ttdef"><b>Definition:</b> Draw.hpp:22</div></div>
+<div class="ttc" id="anamespaceecs_1_1systems_html"><div class="ttname"><a href="namespaceecs_1_1systems.html">ecs::systems</a></div><div class="ttdef"><b>Definition:</b> Animate.hpp:19</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_controllable_html"><div class="ttname"><a href="structecs_1_1component_1_1_controllable.html">ecs::component::Controllable</a></div><div class="ttdef"><b>Definition:</b> Controllable.hpp:20</div></div>
 <div class="ttc" id="anamespacenetwork_html_a0629cd044af39caf977e11dc2e2e0fb8"><div class="ttname"><a href="namespacenetwork.html#a0629cd044af39caf977e11dc2e2e0fb8">network::Message</a></div><div class="ttdeci">std::array&lt; char, 12 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
 <div class="ttc" id="a_controllable_8hpp_html"><div class="ttname"><a href="_controllable_8hpp.html">Controllable.hpp</a></div></div>

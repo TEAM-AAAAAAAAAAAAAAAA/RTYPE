@@ -1,11 +1,5 @@
 var searchData=
 [
-  ['handleincomingmessages_396',['HandleIncomingMessages',['../namespaceecs_1_1systems.html#a3ef17d23a38a80a3e15a78a0cdb5c005',1,'ecs::systems']]],
-  ['handleparallaxbounds_397',['HandleParallaxBounds',['../namespaceecs_1_1systems.html#a9559eb78ab62e2fcdcebc80dc0d26673',1,'ecs::systems']]],
-  ['handlesfmlevents_398',['handleSFMLEvents',['../namespaceecs_1_1systems.html#a4294eeb80a7b9f00e1baad04f18dad03',1,'ecs::systems']]],
-  ['handlesfmlkeys_399',['handleSFMLKeys',['../namespaceecs_1_1systems.html#a4259c57e73934aa863c710dc88386edd',1,'ecs::systems']]],
-  ['hasmoved_400',['hasMoved',['../structecs_1_1component_1_1_direction.html#ad9975c7c1208041bd936b7fc5d3d69cb',1,'ecs::component::Direction']]],
-  ['hassuper_401',['hasSuper',['../structecs_1_1component_1_1_weapon.html#aafbef6cefc6918ba64b558f48c9ec4c3',1,'ecs::component::Weapon']]],
-  ['health_402',['health',['../structecs_1_1component_1_1_health.html#a690db6f5fd2224adbb8c6b61eba628f4',1,'ecs::component::Health']]],
-  ['height_403',['height',['../structecs_1_1component_1_1_size.html#a6de1fd19c7b4a0eef00d18cbb00152cb',1,'ecs::component::Size']]]
+  ['damage_452',['damage',['../structecs_1_1component_1_1_projectile.html#ae01c28d0813e0f7a134c44ae6bd6311b',1,'ecs::component::Projectile::damage()'],['../structecs_1_1component_1_1_weapon.html#ae480a3aa7ab9ad323965eb7e8f53806e',1,'ecs::component::Weapon::damage()']]],
+  ['draw_453',['draw',['../namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3',1,'ecs::systems']]]
 ];

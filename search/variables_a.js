@@ -1,10 +1,8 @@
 var searchData=
 [
-  ['senddirection_428',['SendDirection',['../namespaceecs_1_1systems.html#aea6fa503923e813d900cfc64890d626e',1,'ecs::systems']]],
-  ['serverpush_429',['serverPush',['../namespaceecs_1_1systems.html#a689ab1ddea34f047a379e06ff14f5489',1,'ecs::systems']]],
-  ['shoot_430',['Shoot',['../structecs_1_1component_1_1_shootable.html#ae3af508f64250115f2fea9f2ee1cd9f2',1,'ecs::component::Shootable']]],
-  ['shootdelay_431',['shootDelay',['../structecs_1_1component_1_1_weapon.html#aafd6d8f050a00cbc09fdcb834804d81b',1,'ecs::component::Weapon']]],
-  ['shootsecondary_432',['ShootSecondary',['../structecs_1_1component_1_1_shootable.html#a3d217ec004259c700323c848f47b8504',1,'ecs::component::Shootable']]],
-  ['superdamage_433',['superDamage',['../structecs_1_1component_1_1_weapon.html#ac8de98d6f734b4d6bc6e0ec698b690f0',1,'ecs::component::Weapon']]],
-  ['superloadingtime_434',['superLoadingTime',['../structecs_1_1component_1_1_weapon.html#a2e296d9d2ffaa2fcf8d138f10d9b4dea',1,'ecs::component::Weapon']]]
+  ['position_482',['position',['../structecs_1_1component_1_1_parallax.html#a68450d98414957d67ae0e513b92136c5',1,'ecs::component::Parallax']]],
+  ['positionlogger_483',['positionLogger',['../namespaceecs_1_1systems.html#a109fac74ab82a8543e68f4f3871e11a4',1,'ecs::systems']]],
+  ['positionupdate_484',['PositionUpdate',['../namespaceecs_1_1systems.html#a74e7bd5ae2b8cf994181c05a1fedbfb8',1,'ecs::systems']]],
+  ['projectilecollision_485',['projectileCollision',['../namespaceecs_1_1systems.html#a3ae801d63a324b2863d0b308abaa46d9',1,'ecs::systems']]],
+  ['projspeed_486',['projSpeed',['../structecs_1_1component_1_1_weapon.html#ad387085a3dcc9242007d8022a42cfa90',1,'ecs::component::Weapon']]]
 ];
