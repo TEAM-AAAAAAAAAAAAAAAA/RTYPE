@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2022
-** zappy
+** R-TYPE
 ** File description:
 ** Animation
 */
@@ -10,7 +10,7 @@
 
 #include <SFML/Graphics.hpp>
 
-namespace gui {
+namespace anim {
     /// \brief Animation class should be used to create an animation in sfml.
     /// \note It contains a vector of texture that will be updated, depending on a duration time, with the function update.
     /// You should define a duration between each frame.

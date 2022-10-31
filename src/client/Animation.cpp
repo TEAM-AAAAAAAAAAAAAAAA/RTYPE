@@ -1,13 +1,14 @@
 /*
 ** EPITECH PROJECT, 2022
-** zappy
+** R-TYPE
 ** File description:
 ** Animation
 */
 
+
 #include "Animation.hpp"
 
-using namespace gui;
+using namespace anim;
 
 Animation::Animation()
 {

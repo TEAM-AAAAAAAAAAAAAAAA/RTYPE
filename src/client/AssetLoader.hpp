@@ -30,22 +30,6 @@ namespace asset
         ~AssetLoader() = default;
 
         /**
-         * @brief end of smart path (you probably don't need to use this function)
-         * @param key the key to load the asset
-         * @param path of the asset
-         */
-        // static inline void LoadTexture(const std::string &key, const std::filesystem::path &path)
-        // {
-        //     {
-        //         sf::Texture texture;
-
-        //         if (!texture.loadFromFile(path.generic_string()))
-        //             return;
-        //         _Instance._textureMap[key] = texture;
-        //     }
-        // }
-
-        /**
          * @brief load an SFML asset and add it to the map
          * @param key the key to load the asset
          * @param path first segment of the path of the asset
