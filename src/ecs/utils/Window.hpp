@@ -24,6 +24,7 @@ namespace ecs::utils
         Window() : sf::RenderWindow(sf::VideoMode(ecs::constant::mapWidth, ecs::constant::mapHeight), "r-type")
         {
             this->setFramerateLimit(60);
+            this->setKeyRepeatEnabled(false);
         }
     };
 } // namespace ecs::utils
