@@ -19,22 +19,22 @@ namespace ecs::component
     struct Drawable {
         /**
          * @brief Construct a new Drawable object with the full texture
-         * 
+         *
          * @param texture the texture key
          */
-        Drawable(const std::string &texture) : textureKey(texture)
+        Drawable(const std::string &key) : textureKey(key)
         {
-            sf::Vector2u size = asset::AssetLoader::GetTexture(texture).getSize();
+            sf::Vector2u size = asset::AssetLoader::GetTexture(key).getSize();
             rect = {0, 0, static_cast<int>(size.x), static_cast<int>(size.y)};
         }
 
         /**
          * @brief Construct a new Drawable object
-         * 
+         *
          * @param texture the texture key
          * @param rect the rect to use from the texture
          */
-        Drawable(const std::string &texture, sf::IntRect rect) : rect(rect), textureKey(texture) {}
+        Drawable(const std::string &key, sf::IntRect rect) : rect(rect), textureKey(key) {}
 
         inline sf::Texture &getTexture() { return asset::AssetLoader::GetTexture(textureKey); }
 

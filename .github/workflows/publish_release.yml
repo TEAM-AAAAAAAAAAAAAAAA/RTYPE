@@ -45,6 +45,9 @@ jobs:
           sudo apt update -y && sudo apt upgrade -y
           sudo apt install -y libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev autoconf libtool
 
+      - name: Nuget install WiX
+        if: matrix.platform == 'windows-latest'
+        run: nuget install WiX
       - uses: actions/checkout@v3
         with:
           submodules: 'recursive'
@@ -52,7 +55,7 @@ jobs:
       - name: Run vcpkg
         uses: lukka/run-vcpkg@v4
         with:
-          vcpkgArguments: 'sfml boost-asio boost-thread'
+          vcpkgArguments: 'sfml boost-asio boost-thread boost-property-tree'
           vcpkgDirectory: '${{ github.workspace }}/vcpkg'
           vcpkgGitCommitId: '${{ env.VCPKG_COMMIT }}'
 
@@ -103,7 +106,11 @@ jobs:
           if (NOT result EQUAL 0)
             message(FATAL_ERROR "Bad exit status. Failed to build RTYPE project.")
           endif()
-          
+
+      - name: Package
+        shell: cmake -P {0}
+        if: matrix.platform != 'windows-latest'
+        run: |
           execute_process(
             COMMAND cpack 
             WORKING_DIRECTORY build
@@ -117,7 +124,11 @@ jobs:
           if (NOT result EQUAL 0)
             message(FATAL_ERROR "Bad exit status. Failed to build RTYPE project.")
           endif()
-
+      - name: Create msi installer
+        if: matrix.platform == 'windows-latest'
+        run: |
+          cd build
+          cpack -G WIX
       - name: List dir
         run: ls -lRa build
 #      - name: Upload artifact

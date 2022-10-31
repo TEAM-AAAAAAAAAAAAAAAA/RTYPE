@@ -12,17 +12,4 @@ namespace asset
 {
     AssetLoader AssetLoader::_Instance;
 
-    AssetLoader::~AssetLoader() {}
-
-    void AssetLoader::LoadTexture(const std::string &key, const std::filesystem::path &path)
-    {
-        sf::Texture texture;
-
-        if (!texture.loadFromFile(path.generic_string()))
-            return;
-        _Instance._textureMap[key] = texture;
-    }
-
-    sf::Texture &AssetLoader::GetTexture(const std::string &key) { return _Instance._textureMap[key]; }
-
 } // namespace asset
