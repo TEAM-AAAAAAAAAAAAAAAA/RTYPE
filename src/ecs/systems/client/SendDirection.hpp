@@ -10,7 +10,6 @@
 #include <functional>
 #include <iostream>
 #include "../client/NetworkClient.hpp"
-#include "AssetManager.hpp"
 #include "Constant.hpp"
 #include "World.hpp"
 #include "components/Direction.hpp"
@@ -44,4 +43,4 @@ namespace ecs::systems
             }
         }
     };
-}
+} // namespace ecs::systems

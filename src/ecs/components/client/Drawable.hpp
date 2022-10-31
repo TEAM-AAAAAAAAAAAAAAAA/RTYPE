@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include "../../../client/AssetLoader.hpp"
 #include "SFML/Graphics/Texture.hpp"
 
 namespace ecs::component
@@ -16,10 +17,12 @@ namespace ecs::component
      * It differs by constructor parameters
      */
     struct Drawable {
-        explicit Drawable(const std::filesystem::path &texture) { Texture.loadFromFile(texture.generic_string()); }
-        Drawable(const std::filesystem::path &texture, sf::IntRect rect) { Texture.loadFromFile(texture.generic_string(), rect); }
-        explicit Drawable(const sf::Texture &texture) : Texture(texture) {}
+        Drawable(const std::string &key, sf::IntRect rect) : rect(rect), textureKey(key) {}
+        inline sf::Texture &getTexture() { return asset::AssetLoader::GetTexture(textureKey); }
 
-        sf::Texture Texture;
+        inline const sf::Texture &getTexture() const { return asset::AssetLoader::GetTexture(textureKey); }
+
+        std::string textureKey;
+        sf::IntRect rect;
     };
 } // namespace ecs::component
