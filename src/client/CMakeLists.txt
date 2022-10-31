@@ -11,6 +11,8 @@ set(SRC
 )
 
 
+
+
 add_executable(${TARGET} ${SRC})
 
 target_link_libraries(${TARGET} PRIVATE
@@ -30,5 +32,4 @@ set_target_properties(${TARGET} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SO
 
 add_compile_definitions(CLIENT_COMPILATION_MODE)
 
-install(TARGETS ${TARGET} DESTINATION ${PROJECT_SOURCE_DIR}/out/bin)
-install(FILES ${ECS_SRC} DESTINATION ${PROJECT_SOURCE_DIR}/out/include/ecs)
+install(TARGETS ${TARGET} DESTINATION bin)
