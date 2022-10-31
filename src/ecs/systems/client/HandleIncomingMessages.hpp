@@ -10,7 +10,6 @@
 #include <functional>
 #include <iostream>
 #include "../client/NetworkClient.hpp"
-#include "AssetManager.hpp"
 #include "World.hpp"
 #include "components/EntityType.hpp"
 #include "components/NetworkId.hpp"
@@ -80,16 +79,13 @@ namespace ecs::systems
                     world.registry.addComponent<ecs::component::Controllable>(
                         newEntity, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D});
                 }
-                world.registry.addComponent<component::Drawable>(newEntity,
-                    {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {1, 1, 32, 16}});
+                world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 1, 32, 16}});
                 break;
             case component::EntityType::Types::EnemyBase:
-                world.registry.addComponent<component::Drawable>(newEntity,
-                    {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {1, 18, 32, 16}});
+                world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 18, 32, 16}});
                 break;
             case component::EntityType::Types::Bullet:
-                world.registry.addComponent<component::Drawable>(newEntity,
-                    {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {5, 5, 1, 1}});
+                world.registry.addComponent<component::Drawable>(newEntity, {"players", {5, 5, 1, 1}});
 
                 break;
         }

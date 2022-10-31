@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include "../../../client/AssetLoader.hpp"
 #include "SFML/Graphics/Texture.hpp"
 
 namespace ecs::component
@@ -16,10 +17,30 @@ namespace ecs::component
      * It differs by constructor parameters
      */
     struct Drawable {
-        explicit Drawable(const std::filesystem::path &texture) { Texture.loadFromFile(texture.generic_string()); }
-        Drawable(const std::filesystem::path &texture, sf::IntRect rect) { Texture.loadFromFile(texture.generic_string(), rect); }
-        explicit Drawable(const sf::Texture &texture) : Texture(texture) {}
+        /**
+         * @brief Construct a new Drawable object with the full texture
+         *
+         * @param texture the texture key
+         */
+        Drawable(const std::string &key) : textureKey(key)
+        {
+            sf::Vector2u size = asset::AssetLoader::GetTexture(key).getSize();
+            rect = {0, 0, static_cast<int>(size.x), static_cast<int>(size.y)};
+        }
 
-        sf::Texture Texture;
+        /**
+         * @brief Construct a new Drawable object
+         *
+         * @param texture the texture key
+         * @param rect the rect to use from the texture
+         */
+        Drawable(const std::string &key, sf::IntRect rect) : rect(rect), textureKey(key) {}
+
+        inline sf::Texture &getTexture() { return asset::AssetLoader::GetTexture(textureKey); }
+
+        inline const sf::Texture &getTexture() const { return asset::AssetLoader::GetTexture(textureKey); }
+
+        std::string textureKey;
+        sf::IntRect rect;
     };
 } // namespace ecs::component
