@@ -24,16 +24,20 @@ namespace ecs::systems
         auto const &positions = world.registry.getComponents<component::Position>();
         auto const &sizes = world.registry.getComponents<component::Size>();
         auto const &drawables = world.registry.getComponents<component::Drawable>();
+        auto const &animations = world.registry.getComponents<component::Animated>();
 
         world.getWindow().clear();
-        for (size_t i = 0; i < positions.size() && i < sizes.size() && i < drawables.size(); ++i) {
+        for (size_t i = 0; i < positions.size() && i < sizes.size() && i < drawables.size(); i++) {
             auto const &pos = positions[i];
             auto const &size = sizes[i];
             auto const &draw = drawables[i];
             if (pos && size && draw) {
                 sf::Sprite sprite;
                 sprite.setTexture(draw.value().getTexture());
-                sprite.setTextureRect(draw.value().rect);
+                if (i < animations.size() && animations[i])
+                    sprite.setTextureRect(animations[i].value().getFrameRect());
+                else
+                    sprite.setTextureRect(draw.value().rect);
                 float scaleX =
                     static_cast<float>(size.value().width) / static_cast<float>(sprite.getTextureRect().width);
                 float scaleY =
