@@ -27,16 +27,8 @@
 #include "systems/client/SendDirection.hpp"
 #include "systems/client/HandleParallaxBounds.hpp"
 
-/**
- * This function is used to get the game part of the world.
- * Currently registering every components to the world's registry and adding every associated systems to the world
- * @param engine The engine in which you want to operate
- * @return The world ready to be used
- */
-ecs::World getGameWorld(ecs::Engine &engine)
+static void registerAllComponents(ecs::World &world)
 {
-    ecs::World world(engine.getWindow());
-
     world.registry.registerComponent<ecs::component::EntityType>();
     world.registry.registerComponent<ecs::component::Velocity>();
     world.registry.registerComponent<ecs::component::Size>();
@@ -53,7 +45,10 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.registry.registerComponent<ecs::component::Controllable>();
     world.registry.registerComponent<ecs::component::Animated>();
     world.registry.registerComponent<ecs::component::Hitbox>();
+}
 
+static void addAllSystems(ecs::World &world)
+{
     world.addSystem(ecs::systems::handleSFMLEvents);
     world.addSystem(ecs::systems::handleSFMLKeys);
     world.addSystem(ecs::systems::manageClientEvents);
@@ -62,13 +57,16 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.addSystem(ecs::systems::SendDirection);
     world.addSystem(ecs::systems::movement);
     world.addSystem(ecs::systems::HandleParallaxBounds);
+}
 
+static void addParallaxComponents(ecs::World &world)
+{
     ecs::Entity background1 = world.registry.spawn_entity();
-    ecs::Entity backgroundp1 = world.registry.spawn_entity();
+    ecs::Entity parallaxFirstView = world.registry.spawn_entity();
     ecs::Entity background2 = world.registry.spawn_entity();
-    ecs::Entity backgroundp2 = world.registry.spawn_entity();
+    ecs::Entity parallaxSecondView = world.registry.spawn_entity();
     ecs::Entity background3 = world.registry.spawn_entity();
-    ecs::Entity backgroundp3 = world.registry.spawn_entity();
+    ecs::Entity parallaxThirdView = world.registry.spawn_entity();
 
     world.registry.addComponent<ecs::component::Position>(background1, {0, 0});
     world.registry.addComponent<ecs::component::Size>(background1, {ecs::constant::mapHeight, ecs::constant::mapWidth});
@@ -77,13 +75,13 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.registry.addComponent<ecs::component::Direction>(background1, {-1, 0});
     world.registry.addComponent<ecs::component::Parallax>(background1, {ecs::constant::mapWidth *-1, ecs::constant::mapWidth * 2});
     world.registry.addComponent<ecs::component::Animated>(background1, {640, 0, 0, 0, 5760, 15, 0});
-    world.registry.addComponent<ecs::component::Position>(backgroundp1, {ecs::constant::mapWidth, 0});
-    world.registry.addComponent<ecs::component::Size>(backgroundp1, {ecs::constant::mapHeight, ecs::constant::mapWidth});
-    world.registry.addComponent<ecs::component::Drawable>(backgroundp1, {ecs::crossPlatformPath("assets", "textures", "bg1.png"), {0, 0, 5760, 360}});
-    world.registry.addComponent<ecs::component::Velocity>(backgroundp1, {1, 0});
-    world.registry.addComponent<ecs::component::Direction>(backgroundp1, {-1, 0});
-    world.registry.addComponent<ecs::component::Parallax>(backgroundp1, {ecs::constant::mapWidth *-1, ecs::constant::mapWidth * 2});
-    world.registry.addComponent<ecs::component::Animated>(backgroundp1, {640, 0, 0, 0, 5760, 15, 0});
+    world.registry.addComponent<ecs::component::Position>(parallaxFirstView, {ecs::constant::mapWidth, 0});
+    world.registry.addComponent<ecs::component::Size>(parallaxFirstView, {ecs::constant::mapHeight, ecs::constant::mapWidth});
+    world.registry.addComponent<ecs::component::Drawable>(parallaxFirstView, {ecs::crossPlatformPath("assets", "textures", "bg1.png"), {0, 0, 5760, 360}});
+    world.registry.addComponent<ecs::component::Velocity>(parallaxFirstView, {1, 0});
+    world.registry.addComponent<ecs::component::Direction>(parallaxFirstView, {-1, 0});
+    world.registry.addComponent<ecs::component::Parallax>(parallaxFirstView, {ecs::constant::mapWidth *-1, ecs::constant::mapWidth * 2});
+    world.registry.addComponent<ecs::component::Animated>(parallaxFirstView, {640, 0, 0, 0, 5760, 15, 0});
     world.registry.addComponent<ecs::component::Position>(background2, {0, 0});
     world.registry.addComponent<ecs::component::Size>(background2, {ecs::constant::mapHeight, ecs::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(background2, {ecs::crossPlatformPath("assets", "textures", "bg2.png"), {0, 0, 5760, 360}});
@@ -91,13 +89,13 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.registry.addComponent<ecs::component::Direction>(background2, {-1, 0});
     world.registry.addComponent<ecs::component::Parallax>(background2, {ecs::constant::mapWidth *-1, ecs::constant::mapWidth * 2});
     world.registry.addComponent<ecs::component::Animated>(background2, {640, 0, 0, 0, 5760, 5, 0});
-    world.registry.addComponent<ecs::component::Position>(backgroundp2, {ecs::constant::mapWidth, 0});
-    world.registry.addComponent<ecs::component::Size>(backgroundp2, {ecs::constant::mapHeight, ecs::constant::mapWidth});
-    world.registry.addComponent<ecs::component::Drawable>(backgroundp2, {ecs::crossPlatformPath("assets", "textures", "bg2.png"), {0, 0, 5760, 360}});
-    world.registry.addComponent<ecs::component::Velocity>(backgroundp2, {2, 0});
-    world.registry.addComponent<ecs::component::Parallax>(backgroundp2, {ecs::constant::mapWidth *-1, ecs::constant::mapWidth * 2});
-    world.registry.addComponent<ecs::component::Direction>(backgroundp2, {-1, 0});
-    world.registry.addComponent<ecs::component::Animated>(backgroundp2, {640, 0, 0, 0, 5760, 5, 0});
+    world.registry.addComponent<ecs::component::Position>(parallaxSecondView, {ecs::constant::mapWidth, 0});
+    world.registry.addComponent<ecs::component::Size>(parallaxSecondView, {ecs::constant::mapHeight, ecs::constant::mapWidth});
+    world.registry.addComponent<ecs::component::Drawable>(parallaxSecondView, {ecs::crossPlatformPath("assets", "textures", "bg2.png"), {0, 0, 5760, 360}});
+    world.registry.addComponent<ecs::component::Velocity>(parallaxSecondView, {2, 0});
+    world.registry.addComponent<ecs::component::Parallax>(parallaxSecondView, {ecs::constant::mapWidth *-1, ecs::constant::mapWidth * 2});
+    world.registry.addComponent<ecs::component::Direction>(parallaxSecondView, {-1, 0});
+    world.registry.addComponent<ecs::component::Animated>(parallaxSecondView, {640, 0, 0, 0, 5760, 5, 0});
     world.registry.addComponent<ecs::component::Position>(background3, {0, 0});
     world.registry.addComponent<ecs::component::Size>(background3, {ecs::constant::mapHeight, ecs::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(background3, {ecs::crossPlatformPath("assets", "textures", "bg3.png"), {0, 0, 5760, 360}});
@@ -105,13 +103,28 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.registry.addComponent<ecs::component::Parallax>(background3, {ecs::constant::mapWidth *-1, ecs::constant::mapWidth * 2});
     world.registry.addComponent<ecs::component::Direction>(background3, {-1, 0});
     world.registry.addComponent<ecs::component::Animated>(background3, {640, 0, 0, 0, 5760, 10, 0});
-    world.registry.addComponent<ecs::component::Position>(backgroundp3, {ecs::constant::mapWidth, 0});
-    world.registry.addComponent<ecs::component::Size>(backgroundp3, {ecs::constant::mapHeight, ecs::constant::mapWidth});
-    world.registry.addComponent<ecs::component::Drawable>(backgroundp3, {ecs::crossPlatformPath("assets", "textures", "bg3.png"), {0, 0, 5760, 360}});
-    world.registry.addComponent<ecs::component::Velocity>(backgroundp3, {3, 0});
-    world.registry.addComponent<ecs::component::Direction>(backgroundp3, {-1, 0});
-    world.registry.addComponent<ecs::component::Parallax>(backgroundp3, {ecs::constant::mapWidth *-1, ecs::constant::mapWidth * 2});
-    world.registry.addComponent<ecs::component::Animated>(backgroundp3, {640, 0, 0, 0, 5760, 10, 0});
+    world.registry.addComponent<ecs::component::Position>(parallaxThirdView, {ecs::constant::mapWidth, 0});
+    world.registry.addComponent<ecs::component::Size>(parallaxThirdView, {ecs::constant::mapHeight, ecs::constant::mapWidth});
+    world.registry.addComponent<ecs::component::Drawable>(parallaxThirdView, {ecs::crossPlatformPath("assets", "textures", "bg3.png"), {0, 0, 5760, 360}});
+    world.registry.addComponent<ecs::component::Velocity>(parallaxThirdView, {3, 0});
+    world.registry.addComponent<ecs::component::Direction>(parallaxThirdView, {-1, 0});
+    world.registry.addComponent<ecs::component::Parallax>(parallaxThirdView, {ecs::constant::mapWidth *-1, ecs::constant::mapWidth * 2});
+    world.registry.addComponent<ecs::component::Animated>(parallaxThirdView, {640, 0, 0, 0, 5760, 10, 0});
+}
+
+/**
+ * This function is used to get the game part of the world.
+ * Currently registering every components to the world's registry and adding every associated systems to the world
+ * @param engine The engine in which you want to operate
+ * @return The world ready to be used
+ */
+ecs::World getGameWorld(ecs::Engine &engine)
+{
+    ecs::World world(engine.getWindow());
+
+    registerAllComponents(world);
+    addAllSystems(world);
+    addParallaxComponents(world);
     return world;
 }
 
