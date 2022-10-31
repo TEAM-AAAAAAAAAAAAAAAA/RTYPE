@@ -11,14 +11,22 @@
 
 namespace ecs::component
 {
+    /**
+     * Used to show a red rectangle shape around the entity to display its hitBox
+     */
     struct Hitbox {
-        explicit Hitbox(sf::Keyboard::Key key) : enableHitBox(false), HitBoxKey(key)
+        explicit Hitbox(sf::Keyboard::Key key) : enableHitBox(false)
         {
         }
 
-        sf::Keyboard::Key HitBoxKey;
+        /**
+         * Toogle used to know if we need to enable or disable the HitBox
+         */
         bool enableHitBox;
 
+        /**
+         * Used to switch the enable/disable mode of the hitBox pressing H
+         */
         inline void switchHitBox() { enableHitBox = !enableHitBox;};
     };
 } // namespace ecs::component
