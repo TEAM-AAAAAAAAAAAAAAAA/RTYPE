@@ -1,6 +1,6 @@
 set (SRC_ROOT ${PROJECT_SOURCE_DIR}/src/client)
 set (INC_ROOT ${PROJECT_SOURCE_DIR}/src/client)
-set(ECS_SRC ../ecs)
+#set(ECS_SRC ../ecs)
 
 set(TARGET r-type_client)
 
@@ -11,6 +11,8 @@ set(SRC
     ${SRC_ROOT}/NetworkClient.cpp
     ${SRC_ROOT}/NetworkClient.hpp
 )
+
+
 
 
 add_executable(${TARGET} ${SRC})
@@ -31,3 +33,5 @@ target_include_directories(${TARGET} PRIVATE
 set_target_properties(${TARGET} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
 
 add_compile_definitions(CLIENT_COMPILATION_MODE)
+
+install(TARGETS ${TARGET} DESTINATION bin)
