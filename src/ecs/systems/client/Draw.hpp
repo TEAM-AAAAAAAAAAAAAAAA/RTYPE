@@ -25,9 +25,12 @@ namespace ecs::systems
         auto const &sizes = world.registry.getComponents<component::Size>();
         auto const &drawables = world.registry.getComponents<component::Drawable>();
         auto const &animations = world.registry.getComponents<component::Animated>();
+        auto const &deads = world.registry.getComponents<component::Dead>();
 
         world.getWindow().clear();
         for (size_t i = 0; i < positions.size() && i < sizes.size() && i < drawables.size(); i++) {
+            if (i < deads.size() && deads[i])
+                continue;
             auto const &pos = positions[i];
             auto const &size = sizes[i];
             auto const &draw = drawables[i];

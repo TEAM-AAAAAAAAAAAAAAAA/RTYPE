@@ -22,14 +22,17 @@ namespace ecs::systems
         if (!world.getWindow().hasFocus())
             return;
 
-#ifdef CLIENT_COMPILATION_MODE
         auto &controllables = world.registry.getComponents<component::Controllable>();
         auto const &shootables = world.registry.getComponents<component::Shootable>();
+        auto const &deads = world.registry.getComponents<component::Dead>();
 
         for (size_t i = 0; i < controllables.size(); ++i) {
+            if (i < deads.size() && deads[i])
+                continue;
             auto &contr = controllables[i];
 
             if (contr) {
+#pragma region move player and shoot
                 bool hasMoved = false;
                 static ecs::Event::EventType lastEventX;
                 static ecs::Event::EventType lastEventY;
@@ -76,6 +79,8 @@ namespace ecs::systems
                     lastEventY = ecs::Event::EventType::MoveStop;
                     isStopped = true;
                 }
+#pragma endregion
+#pragma region shoot
                 if (i < shootables.size()) {
                     auto const &shoot = shootables[i];
                     if (shoot) {
@@ -84,8 +89,8 @@ namespace ecs::systems
                             world.pushEvent(ecs::Event(ecs::Event::EventType::Shoot));
                     }
                 }
+#pragma endregion
             }
         }
-#endif
     };
 } // namespace ecs::systems

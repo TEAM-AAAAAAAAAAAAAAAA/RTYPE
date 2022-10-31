@@ -32,6 +32,7 @@ namespace ecs::systems
         auto &entityType = world.registry.getComponents<component::EntityType>();
         auto &sizes = world.registry.getComponents<component::Size>();
         auto &velocities = world.registry.getComponents<component::Velocity>();
+        auto const &deads = world.registry.getComponents<component::Dead>();
         static const int packetType = 0;
         static const int firstByteId = 1;
         static const int secondByteId = 2;
@@ -51,6 +52,8 @@ namespace ecs::systems
             for (size_t i = 0; i < position.size() && i < networkId.size() && i < sizes.size() && i < entityType.size()
                  && i < velocities.size();
                  i++) {
+                if (i < deads.size() && deads[i])
+                    continue;
                 auto &pos = position[i];
                 auto &size = sizes[i];
                 auto &id = networkId[i];

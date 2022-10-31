@@ -9,18 +9,24 @@
 
 #include <functional>
 #include <iostream>
+#include "../server/Server.hpp"
+#include "Constant.hpp"
 #include "World.hpp"
+#include "components/Dead.hpp"
 #include "components/Health.hpp"
 #include "components/NetworkId.hpp"
-#include "components/Dead.hpp"
+#include "components/Position.hpp"
 
 namespace ecs::systems
 {
     std::function<void(World &)> deathUpdate = [](World &world) {
         auto &healths = world.registry.getComponents<component::Health>();
         auto &networkId = world.registry.getComponents<component::NetworkId>();
+        auto const &deads = world.registry.getComponents<component::Dead>();
 
         for (size_t i = 0; i < healths.size(); ++i) {
+            if (i < deads.size() && deads[i])
+                continue;
             auto &health = healths[i];
 
             if (health) {

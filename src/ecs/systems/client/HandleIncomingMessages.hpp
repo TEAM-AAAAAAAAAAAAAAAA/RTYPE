@@ -11,6 +11,7 @@
 #include <iostream>
 #include "../client/NetworkClient.hpp"
 #include "World.hpp"
+#include "components/Dead.hpp"
 #include "components/EntityType.hpp"
 #include "components/NetworkId.hpp"
 #include "components/Position.hpp"
@@ -86,7 +87,6 @@ namespace ecs::systems
                 break;
             case component::EntityType::Types::Bullet:
                 world.registry.addComponent<component::Drawable>(newEntity, {"players", {5, 5, 1, 1}});
-
                 break;
         }
         // } else if (msg[3] == component::EntityType::Types::EnemyBase) {
@@ -108,7 +108,8 @@ namespace ecs::systems
     {
         size_t msgId = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
 
-        world.registry.killEntity(world.registry.entityFromIndex(msgId));
+        // world.registry.killEntity(world.registry.entityFromIndex(msgId));
+        world.registry.addComponent<component::Dead>(world.registry.entityFromIndex(msgId), {});
     }
 
     static std::unordered_map<char, std::function<void(World &, network::Message &msg)>> packetTypeFunction = {

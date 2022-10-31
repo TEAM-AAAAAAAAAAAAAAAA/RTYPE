@@ -11,6 +11,7 @@
 #include <iostream>
 #include "SFML/Graphics.hpp"
 #include "World.hpp"
+#include "components/Dead.hpp"
 #include "components/Position.hpp"
 #include "components/Size.hpp"
 #include "components/client/Animated.hpp"
@@ -19,11 +20,14 @@
 namespace ecs::systems
 {
     std::function<void(World &)> Animate = [](World &world) {
+        auto const &deads = world.registry.getComponents<component::Dead>();
         auto &animateds = world.registry.getComponents<component::Animated>();
 
         using chrono = std::chrono::high_resolution_clock;
         using chronoDuration = std::chrono::duration<double, std::milli>;
         for (size_t i = 0; i < animateds.size(); ++i) {
+            if (i < deads.size() && deads[i])
+                continue;
             auto &anim = animateds[i];
 
             if (anim) {

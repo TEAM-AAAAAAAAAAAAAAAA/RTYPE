@@ -19,9 +19,12 @@ namespace ecs::systems
         auto const &projectiles = world.registry.getComponents<component::Projectile>();
         auto const &positions = world.registry.getComponents<component::Position>();
         auto &healths = world.registry.getComponents<component::Health>();
+        auto const &deads = world.registry.getComponents<component::Dead>();
 
 #pragma region Proj out of map
         for (size_t i = 0; i < projectiles.size() && i < positions.size() && i < healths.size(); ++i) {
+            if (i < deads.size() && deads[i])
+                continue;
             auto const &proj = projectiles[i];
             auto const &projPos = positions[i];
             auto &projHealth = healths[i];
@@ -42,12 +45,16 @@ namespace ecs::systems
         size_t projId = 0;
 
         for (size_t i = 0; i < projectiles.size() && i < positions.size() && i < healths.size(); ++i) {
+            if (i < deads.size() && deads[i])
+                continue;
             auto const &proj = projectiles[i];
             auto const &projPos = positions[i];
             auto &projHealth = healths[i];
 
             if (proj && projPos && projHealth) {
                 for (size_t j = 0; j < healths.size() && j < positions.size(); ++j) {
+                    if (j < deads.size() && deads[j])
+                        continue;
                     auto &victimHealth = healths[j];
                     auto const &victimPos = positions[j];
                     auto const &victimSize = sizes[j];

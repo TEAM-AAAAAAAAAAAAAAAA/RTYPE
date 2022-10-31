@@ -7,6 +7,7 @@
 
 #include "Engine.hpp"
 #include "NetworkClient.hpp"
+#include "components/Dead.hpp"
 #include "components/Direction.hpp"
 #include "components/Faction.hpp"
 #include "components/Health.hpp"
@@ -52,6 +53,7 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.registry.registerComponent<ecs::component::Shootable>();
     world.registry.registerComponent<ecs::component::Controllable>();
     world.registry.registerComponent<ecs::component::Animated>();
+    world.registry.registerComponent<ecs::component::Dead>();
 
     world.addSystem(ecs::systems::handleSFMLEvents);
     world.addSystem(ecs::systems::handleSFMLKeys);

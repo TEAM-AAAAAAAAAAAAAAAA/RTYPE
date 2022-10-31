@@ -1,13 +1,14 @@
 #include <iostream>
 #include "Engine.hpp"
 #include "Server.hpp"
+#include "components/Dead.hpp"
 #include "components/Faction.hpp"
 #include "components/Health.hpp"
 #include "components/NetworkId.hpp"
 #include "systems/Movement.hpp"
 #include "systems/server/HandleIncomingMessage.hpp"
-#include "systems/server/ProjectileCollision.hpp"
 #include "systems/server/PositionUpdate.hpp"
+#include "systems/server/ProjectileCollision.hpp"
 #include "systems/server/DeathUpdate.hpp"
 
 ecs::World getGameWorld(ecs::Engine &engine)
@@ -27,6 +28,7 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.registry.registerComponent<ecs::component::Faction>();
     world.registry.registerComponent<ecs::component::Position>();
     world.registry.registerComponent<ecs::component::Health>();
+    world.registry.registerComponent<ecs::component::Dead>();
 
     world.addSystem(ecs::systems::movement);
     world.addSystem(ecs::systems::projectileCollision);
