@@ -21,11 +21,23 @@ namespace ecs::systems
      */
     std::function<void(World &)> handleSFMLEvents = [](World &world) {
 #ifdef CLIENT_COMPILATION_MODE
-        sf::Event event;
+      sf::Event event;
+      auto &hitBoxes = world.registry.getComponents<component::Hitbox>();
 
-        while (world.getWindow().pollEvent(event))
-            if (event.type == sf::Event::Closed)
-                world.getWindow().close();
+      while (world.getWindow().pollEvent(event)) {
+          if (event.type == sf::Event::Closed)
+              world.getWindow().close();
+          if (event.type == sf::Event::KeyReleased) {
+              if (event.key.code == sf::Keyboard::H) {
+                  for (auto &hitBox : hitBoxes) {
+                      if (hitBox == std::nullopt)
+                          continue;
+                      world.pushEvent(ecs::Event(ecs::Event::EventType::HitBox));
+                  }
+              }
+          }
+
+      }
 #endif
     };
 } // namespace ecs::systems
