@@ -180,8 +180,24 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Used to set the scale, the position and the texture of the entity before display it </p>
-
+<b>Initial value:</b><div class="fragment"><div class="line">= [](World &amp;world) {</div>
+<div class="line">        <span class="keyword">auto</span> &amp;animateds = world.registry.getComponents&lt;component::Animated&gt;();</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">using</span> <a class="code" href="namespaceecs_1_1constant.html#aab4cd5ff863d8c9fcba240ad9bde517d">chrono</a> = std::chrono::high_resolution_clock;</div>
+<div class="line">        <span class="keyword">using</span> <a class="code" href="namespaceecs_1_1constant.html#ab5af9ff1ff8ae873264c70ee8d24ccad">chronoDuration</a> = std::chrono::duration&lt;double, std::milli&gt;;</div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; animateds.size(); ++i) {</div>
+<div class="line">            <span class="keyword">auto</span> &amp;<a class="code" href="namespaceanim.html">anim</a> = animateds[i];</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (<a class="code" href="namespaceanim.html">anim</a>) {</div>
+<div class="line">                <span class="keywordflow">if</span> (chrono::now().time_since_epoch().count() - <a class="code" href="namespaceanim.html">anim</a>.value().lastSwitch</div>
+<div class="line">                    &gt; <a class="code" href="namespaceanim.html">anim</a>.value().getFrame().delay) {</div>
+<div class="line">                    <a class="code" href="namespaceanim.html">anim</a>.value().nextFrame();</div>
+<div class="line">                    <a class="code" href="namespaceanim.html">anim</a>.value().lastSwitch = chrono::now().time_since_epoch().count();</div>
+<div class="line">                }</div>
+<div class="line">            }</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="ab7690be6352e10d6bf8b0c79bcd2bcd3"></a>
@@ -199,16 +215,20 @@ Variables</h2></td></tr>
 <div class="line">        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;positions = world.registry.getComponents&lt;component::Position&gt;();</div>
 <div class="line">        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;sizes = world.registry.getComponents&lt;component::Size&gt;();</div>
 <div class="line">        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;drawables = world.registry.getComponents&lt;component::Drawable&gt;();</div>
+<div class="line">        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;animations = world.registry.getComponents&lt;component::Animated&gt;();</div>
 <div class="line"> </div>
 <div class="line">        world.getWindow().clear();</div>
-<div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; positions.size() &amp;&amp; i &lt; sizes.size() &amp;&amp; i &lt; drawables.size(); ++i) {</div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; positions.size() &amp;&amp; i &lt; sizes.size() &amp;&amp; i &lt; drawables.size(); i++) {</div>
 <div class="line">            <span class="keyword">auto</span> <span class="keyword">const</span> &amp;pos = positions[i];</div>
 <div class="line">            <span class="keyword">auto</span> <span class="keyword">const</span> &amp;size = sizes[i];</div>
 <div class="line">            <span class="keyword">auto</span> <span class="keyword">const</span> &amp;<a class="code" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">draw</a> = drawables[i];</div>
 <div class="line">            <span class="keywordflow">if</span> (pos &amp;&amp; size &amp;&amp; <a class="code" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">draw</a>) {</div>
 <div class="line">                sf::Sprite sprite;</div>
 <div class="line">                sprite.setTexture(<a class="code" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">draw</a>.value().getTexture());</div>
-<div class="line">                sprite.setTextureRect(<a class="code" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">draw</a>.value().rect);</div>
+<div class="line">                <span class="keywordflow">if</span> (i &lt; animations.size() &amp;&amp; animations[i])</div>
+<div class="line">                    sprite.setTextureRect(animations[i].value().getFrameRect());</div>
+<div class="line">                <span class="keywordflow">else</span></div>
+<div class="line">                    sprite.setTextureRect(<a class="code" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">draw</a>.value().rect);</div>
 <div class="line">                <span class="keywordtype">float</span> scaleX =</div>
 <div class="line">                    <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(size.value().width) / <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(sprite.getTextureRect().width);</div>
 <div class="line">                <span class="keywordtype">float</span> scaleY =</div>
@@ -492,6 +512,7 @@ Variables</h2></td></tr>
 <div class="ttc" id="anamespacenetwork_html_a0629cd044af39caf977e11dc2e2e0fb8"><div class="ttname"><a href="namespacenetwork.html#a0629cd044af39caf977e11dc2e2e0fb8">network::Message</a></div><div class="ttdeci">std::array&lt; char, 12 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
 <div class="ttc" id="anamespaceecs_1_1systems_html_ab7690be6352e10d6bf8b0c79bcd2bcd3"><div class="ttname"><a href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">ecs::systems::draw</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; draw</div><div class="ttdef"><b>Definition:</b> Draw.hpp:23</div></div>
 <div class="ttc" id="anamespaceecs_1_1constant_html_a01d4874a258e2747078bd137000e9e74a84069a869f4e4369149010501c01eff3"><div class="ttname"><a href="namespaceecs_1_1constant.html#a01d4874a258e2747078bd137000e9e74a84069a869f4e4369149010501c01eff3">ecs::constant::PLAYER_MOVE</a></div><div class="ttdeci">@ PLAYER_MOVE</div><div class="ttdef"><b>Definition:</b> Constant.hpp:25</div></div>
+<div class="ttc" id="anamespaceanim_html"><div class="ttname"><a href="namespaceanim.html">anim</a></div><div class="ttdef"><b>Definition:</b> Animation.hpp:13</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['texturekey_496',['textureKey',['../structecs_1_1component_1_1_drawable.html#af1cf64a2e4b8cb70221ebbbdf065c006',1,'ecs::component::Drawable']]],
-  ['threshold_497',['threshold',['../structecs_1_1component_1_1_parallax.html#a1a6ce9aadda80b2ab96cf0f67018cc71',1,'ecs::component::Parallax']]],
-  ['type_498',['type',['../structecs_1_1component_1_1_entity_type.html#a1059654495c06a65f2c7430f70477e23',1,'ecs::component::EntityType']]]
+  ['x_502',['x',['../structecs_1_1component_1_1_animated_1_1_anim_frame.html#aa53d8684cc431a925f7726f6b6f2ce98',1,'ecs::component::Animated::AnimFrame::x()'],['../structecs_1_1component_1_1_direction.html#a5f84b023526f216923180dcb1ef385b1',1,'ecs::component::Direction::x()'],['../structecs_1_1component_1_1_position.html#a3d72213f7aed875ca0f04c64b5a4a2cf',1,'ecs::component::Position::x()'],['../structecs_1_1component_1_1_velocity.html#ae49476305ddc3758feaa8f6facdd03a6',1,'ecs::component::Velocity::x()']]]
 ];

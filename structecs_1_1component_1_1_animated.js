@@ -1,10 +1,12 @@
 var structecs_1_1component_1_1_animated =
 [
-    [ "cur_freq", "structecs_1_1component_1_1_animated.html#ae1ad7aea00d3bfeaecf7453f651c0a5f", null ],
-    [ "current", "structecs_1_1component_1_1_animated.html#ab81c88de53a07f9df5ba8686bb690949", null ],
-    [ "freq", "structecs_1_1component_1_1_animated.html#a12b037bf2475efffa51d54506c46570f", null ],
-    [ "max", "structecs_1_1component_1_1_animated.html#acd62303ecb9c0c6577cf0ddcb9dd3933", null ],
-    [ "origin_x", "structecs_1_1component_1_1_animated.html#a0ab684ad6150c1d344e412c1c9237a36", null ],
-    [ "origin_y", "structecs_1_1component_1_1_animated.html#a7efb050a6f2a0235b19e17d8a1658e64", null ],
-    [ "width", "structecs_1_1component_1_1_animated.html#afe02410d67da1af64b0afe0b433f0a1b", null ]
+    [ "AnimFrame", "structecs_1_1component_1_1_animated_1_1_anim_frame.html", "structecs_1_1component_1_1_animated_1_1_anim_frame" ],
+    [ "Animated", "structecs_1_1component_1_1_animated.html#a0a0f017208ea1aa83a4c0693ea051001", null ],
+    [ "Animated", "structecs_1_1component_1_1_animated.html#a198e3f4d1d8445f98ffdcd2a8e5fd458", null ],
+    [ "getFrame", "structecs_1_1component_1_1_animated.html#a40584900e18f8283ce922fb0e05a6655", null ],
+    [ "getFrame", "structecs_1_1component_1_1_animated.html#a44ced49c4c496de2428d6743c659e993", null ],
+    [ "getFrameRect", "structecs_1_1component_1_1_animated.html#ac7f29a072acb81d7aceb45eae5326f72", null ],
+    [ "getFrameRect", "structecs_1_1component_1_1_animated.html#a75c64ee5f555e91340d4fcb8e5a89634", null ],
+    [ "nextFrame", "structecs_1_1component_1_1_animated.html#aa6167acaccc8fbea98526b47a81ac78c", null ],
+    [ "lastSwitch", "structecs_1_1component_1_1_animated.html#a01af4e250f696b66ff4395ce96f0a070", null ]
 ];

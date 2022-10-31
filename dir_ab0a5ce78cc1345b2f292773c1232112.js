@@ -1,7 +1,8 @@
 var dir_ab0a5ce78cc1345b2f292773c1232112 =
 [
     [ "Animated.hpp", "_animated_8hpp.html", [
-      [ "Animated", "structecs_1_1component_1_1_animated.html", "structecs_1_1component_1_1_animated" ]
+      [ "Animated", "structecs_1_1component_1_1_animated.html", "structecs_1_1component_1_1_animated" ],
+      [ "AnimFrame", "structecs_1_1component_1_1_animated_1_1_anim_frame.html", "structecs_1_1component_1_1_animated_1_1_anim_frame" ]
     ] ],
     [ "Controllable.hpp", "_controllable_8hpp.html", [
       [ "Controllable", "structecs_1_1component_1_1_controllable.html", "structecs_1_1component_1_1_controllable" ]

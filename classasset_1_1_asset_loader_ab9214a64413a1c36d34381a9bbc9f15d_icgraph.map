@@ -1,4 +1,5 @@
 <map id="asset::AssetLoader::GetTexture" name="asset::AssetLoader::GetTexture">
-<area shape="rect" id="node1" title="Get an Asset object from the map." alt="" coords="248,5,393,47"/>
-<area shape="rect" id="node2" href="$structecs_1_1component_1_1_drawable.html#ad7beaaf10a9fa577ce0cff4010b11ccb" title=" " alt="" coords="5,5,200,47"/>
+<area shape="rect" id="node1" title="Get an Asset object from the map." alt="" coords="248,39,393,80"/>
+<area shape="rect" id="node2" href="$structecs_1_1component_1_1_drawable.html#a56df10af508a05f40d0d4ea12a1577f8" title="Construct a new Drawable object with the full texture." alt="" coords="5,5,200,47"/>
+<area shape="rect" id="node3" href="$structecs_1_1component_1_1_drawable.html#ad7beaaf10a9fa577ce0cff4010b11ccb" title=" " alt="" coords="5,71,200,112"/>
 </map>
