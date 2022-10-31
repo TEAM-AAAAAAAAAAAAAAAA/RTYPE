@@ -86,10 +86,10 @@ namespace asset
          * @brief Load a .ini file with boost loading assets into the map
          *
          */
-        static void LoadIniFile(const std::string &path)
+        static void LoadIniFile(const std::filesystem::path &path)
         {
             boost::property_tree::ptree pt;
-            boost::property_tree::ini_parser::read_ini(path, pt);
+            boost::property_tree::ini_parser::read_ini(path.generic_string(), pt);
 
             // loop through the sections
             for (auto &section : pt) {
