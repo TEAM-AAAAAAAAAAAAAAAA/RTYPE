@@ -27,17 +27,8 @@
 #include "systems/client/SendDirection.hpp"
 #include "systems/client/HandleParallaxBounds.hpp"
 
-/**
- * This function is used to get the game part of the world.
- * Currently registering every components to the world's registry and adding every associated systems to the world
- * @param engine The engine in which you want to operate
- * @return The world ready to be used
- */
-ecs::World getGameWorld(ecs::Engine &engine)
+static void registerAllComponents(ecs::World &world)
 {
-    ecs::World world(engine.getWindow());
-
-
     world.registry.registerComponent<ecs::component::EntityType>();
     world.registry.registerComponent<ecs::component::Velocity>();
     world.registry.registerComponent<ecs::component::Size>();
@@ -53,7 +44,10 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.registry.registerComponent<ecs::component::Shootable>();
     world.registry.registerComponent<ecs::component::Controllable>();
     world.registry.registerComponent<ecs::component::Animated>();
+}
 
+static void addAllSystems(ecs::World &world)
+{
     world.addSystem(ecs::systems::handleSFMLEvents);
     world.addSystem(ecs::systems::handleSFMLKeys);
     world.addSystem(ecs::systems::manageClientEvents);
@@ -62,7 +56,10 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.addSystem(ecs::systems::SendDirection);
     world.addSystem(ecs::systems::movement);
     world.addSystem(ecs::systems::HandleParallaxBounds);
+}
 
+static void addAllComponents(ecs::World &world)
+{
     ecs::Entity background1 = world.registry.spawn_entity();
     ecs::Entity backgroundp1 = world.registry.spawn_entity();
     ecs::Entity background2 = world.registry.spawn_entity();
@@ -112,6 +109,41 @@ ecs::World getGameWorld(ecs::Engine &engine)
     world.registry.addComponent<ecs::component::Direction>(backgroundp3, {-1, 0});
     world.registry.addComponent<ecs::component::Parallax>(backgroundp3, {ecs::constant::mapWidth *-1, ecs::constant::mapWidth * 2});
     world.registry.addComponent<ecs::component::Animated>(backgroundp3, {640, 0, 0, 0, 5760, 10, 0});
+}
+
+/**
+ * This function is used to get the game part of the world.
+ * Currently registering every components to the world's registry and adding every associated systems to the world
+ * @param engine The engine in which you want to operate
+ * @return The world ready to be used
+ */
+ecs::World getGameWorld(ecs::Engine &engine)
+{
+    ecs::World world(engine.getWindow());
+
+    registerAllComponents(world);
+    addAllSystems(world);
+    addAllComponents(world);
+
+    return world;
+}
+
+ecs::World getMainMenuWorld(ecs::Engine &engine)
+{
+    ecs::World world(engine.getWindow());
+    registerAllComponents(world);
+    addAllSystems(world);
+    ecs::Entity bg_menu = world.registry.spawn_entity();
+    world.registry.addComponent<ecs::component::Position>(bg_menu, {0, 0});
+    world.registry.addComponent<ecs::component::Size>(bg_menu, {ecs::constant::mapHeight, ecs::constant::mapWidth});
+    world.registry.addComponent<ecs::component::Drawable>(bg_menu, {"bg_menu", {0, 0, 5760, 360}});
+    world.registry.addComponent<ecs::component::Velocity>(bg_menu, {0, 0});
+    world.registry.addComponent<ecs::component::Direction>(bg_menu, {0, 0});
+    world.registry.addComponent<ecs::component::Parallax>(bg_menu, {ecs::constant::mapWidth *-1, ecs::constant::mapWidth * 2});
+    world.registry.addComponent<ecs::component::Animated>(bg_menu, {1920, 0, 0, 0, 0, 0, 0});
+    // if (true) {
+    //     engine.setWaitingWorld(getGameWorld(engine));
+    // }
     return world;
 }
 
@@ -129,7 +161,7 @@ int main()
     network::Message msg;
     msg.fill(0);
 
-    engine.setWaitingWorld(getGameWorld(engine));
+    engine.setWaitingWorld(getMainMenuWorld(engine));
     network::Client::getOutgoingMessages().push(msg);
 
     engine.run();
