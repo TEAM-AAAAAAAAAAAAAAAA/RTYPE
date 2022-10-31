@@ -121,7 +121,7 @@ ecs::World getGameWorld(ecs::Engine &engine)
  */
 int main()
 {
-    asset::AssetLoader::LoadIniFile("./config.ini");
+    asset::AssetLoader::LoadIniFile(asset::AssetLoader::smartPath("assets", "config.ini"));
     network::Client::setHost("localhost");
     network::Client::setPort("8000");
     network::Client::connect();
