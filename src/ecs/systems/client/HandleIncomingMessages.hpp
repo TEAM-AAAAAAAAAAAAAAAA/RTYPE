@@ -112,9 +112,10 @@ namespace ecs::systems
 
         for (size_t i = 0; i < netIds.size(); i++) {
             if (netIds[i])
-                if (netIds[i].value().id == msgId)
+                if (netIds[i].value().id == msgId) {
                     // world.registry.killEntity(world.registry.entityFromIndex(msgId));
                     world.registry.addComponent<component::Dead>(world.registry.entityFromIndex(i), {});
+                }
         }
     }
 

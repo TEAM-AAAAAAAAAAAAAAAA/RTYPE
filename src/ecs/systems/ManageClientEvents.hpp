@@ -39,8 +39,11 @@ namespace ecs::systems
                 || world.getEvent() == ecs::Event::EventType::MoveStop) {
                 auto &directions = world.registry.getComponents<component::Direction>();
                 auto &controllables = world.registry.getComponents<component::Controllable>();
+                auto const &deads = world.registry.getComponents<component::Dead>();
 
                 for (size_t i = 0; i < directions.size() && i < controllables.size(); ++i) {
+                    if (i < deads.size() && deads[i])
+                        continue;
                     auto &dir = directions[i];
                     auto &con = controllables[i];
                     if (dir && con) {

@@ -14,8 +14,11 @@ namespace ecs::systems
     std::function<void(World &)> positionLogger = [](World &world) {
         auto const &positions = world.registry.getComponents<component::Position>();
         auto const &velocities = world.registry.getComponents<component::Velocity>();
+        auto const &deads = world.registry.getComponents<component::Dead>();
 
         for (size_t i = 0; i < positions.size() && i < velocities.size(); ++i) {
+            if (i < deads.size() && deads[i])
+                continue;
             auto const &pos = positions[i];
             auto const &vel = velocities[i];
             if (pos && vel) {

@@ -65,8 +65,11 @@ namespace ecs::systems
     {
         auto &directions = world.registry.getComponents<component::Direction>();
         auto &networkIds = world.registry.getComponents<component::NetworkId>();
+        auto const &deads = world.registry.getComponents<component::Dead>();
 
         for (size_t i = 0; i < directions.size() && i < networkIds.size(); ++i) {
+            if (i < deads.size() && deads[i])
+                continue;
             auto &dir = directions[i];
             auto &id = networkIds[i];
 
@@ -89,9 +92,12 @@ namespace ecs::systems
         auto const &positions = world.registry.getComponents<component::Position>();
         auto &weapons = world.registry.getComponents<component::Weapon>();
         auto const &factions = world.registry.getComponents<component::Faction>();
+        auto const &deads = world.registry.getComponents<component::Dead>();
 
         for (size_t i = 0; i < networkIds.size() && i < positions.size() && i < weapons.size() && i < factions.size();
              ++i) {
+            if (i < deads.size() && deads[i])
+                continue;
             auto &id = networkIds[i];
 
             if (id && clientNumToId[msg.second] == id.value().id) {
@@ -106,7 +112,8 @@ namespace ecs::systems
                     } else if (elapsed > weapon.value().shootDelay) {
                         weapon.value().lastShoot = constant::chrono::now().time_since_epoch().count();
                         ecs::Entity bullet = world.registry.spawn_entity();
-                        world.registry.addComponent<ecs::component::EntityType>(bullet, {component::EntityType::Bullet});
+                        world.registry.addComponent<ecs::component::EntityType>(
+                            bullet, {component::EntityType::Bullet});
                         world.registry.addComponent<ecs::component::NetworkId>(bullet, {static_cast<size_t>(bullet)});
                         world.registry.addComponent<ecs::component::Direction>(bullet, {1, 0});
                         world.registry.addComponent<ecs::component::Position>(bullet, {pos.value().x, pos.value().y});
@@ -130,6 +137,7 @@ namespace ecs::systems
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Server::getIncomingMessages().empty()) {
             network::ClientMessage msg = network::Server::getIncomingMessages().pop();
+            if (msg.first[0] == 0 || msg.first[0] == ecs::constant::PLAYER_MOVE || msg.first[0] == ecs::constant::PLAYER_SHOT)
             packetTypeFunction[msg.first[0]](world, msg);
         }
     };

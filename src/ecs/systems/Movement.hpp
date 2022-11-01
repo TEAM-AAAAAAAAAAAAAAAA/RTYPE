@@ -25,15 +25,15 @@ namespace ecs::systems
         auto &positions = world.registry.getComponents<component::Position>();
         auto const &velocities = world.registry.getComponents<component::Velocity>();
         auto &directions = world.registry.getComponents<component::Direction>();
-#ifdef CLIENT_COMPILATION_MODE
-        auto const &controllables = world.registry.getComponents<component::Controllable>();
-#endif
+        auto const &deads = world.registry.getComponents<component::Dead>();
         using chrono = std::chrono::high_resolution_clock;
         using chronoDuration = std::chrono::duration<double, std::milli>;
 
         static auto clock = chrono::now();
         if (chronoDuration(chrono::now() - clock).count() > 10) {
             for (size_t i = 0; i < positions.size() && i < velocities.size() && i < directions.size(); ++i) {
+                if (i < deads.size() && deads[i])
+                    continue;
                 auto &pos = positions[i];
                 auto const &vel = velocities[i];
                 auto &dir = directions[i];
