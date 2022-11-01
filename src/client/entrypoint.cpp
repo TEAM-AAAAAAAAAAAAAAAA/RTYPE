@@ -139,7 +139,7 @@ int main()
     network::Message msg;
     msg.fill(0);
 
-    engine.setWaitingWorld(getGameWorld(engine));
+    engine.setWaitingWorld(getGameWorld);
     network::Client::getOutgoingMessages().push(msg);
 
     engine.run();

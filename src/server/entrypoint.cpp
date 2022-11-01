@@ -48,7 +48,7 @@ ecs::World getGameWorld(ecs::Engine &engine)
 int main()
 {
     ecs::Engine engine;
-    engine.setWaitingWorld(getGameWorld(engine));
+    engine.setWaitingWorld(getGameWorld);
 
     engine.run();
     return 0;

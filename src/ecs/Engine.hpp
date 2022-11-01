@@ -8,6 +8,7 @@
 #pragma once
 
 #include <filesystem>
+#include <functional>
 #include <memory>
 #include "Engine.hpp"
 #include "Registry.hpp"
@@ -50,11 +51,11 @@ namespace ecs
          * @param world The world you want to set to release mode
          * @param worldSwitchReady Used to prevents of automatic world's switch
          */
-        void setWaitingWorld(const ecs::World &world, bool worldSwitchReady = true)
+        void setWaitingWorld(std::function<World(Engine &)> worldGen, bool worldSwitchReady = true)
         {
             if (_waitingWorld)
                 _waitingWorld.release();
-            _waitingWorld = std::make_unique<ecs::World>(world);
+            _waitingWorld = std::make_unique<ecs::World>(worldGen(*this));
             _worldSwitchReady = worldSwitchReady;
         }
 
