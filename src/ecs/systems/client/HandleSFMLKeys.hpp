@@ -32,7 +32,7 @@ namespace ecs::systems
             auto &contr = controllables[i];
 
             if (contr) {
-#pragma region move player and shoot
+#pragma region move player
                 bool hasMoved = false;
                 static ecs::Event::EventType lastEventX;
                 static ecs::Event::EventType lastEventY;
