@@ -108,8 +108,14 @@ namespace ecs::systems
     {
         size_t msgId = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
 
-        // world.registry.killEntity(world.registry.entityFromIndex(msgId));
-        world.registry.addComponent<component::Dead>(world.registry.entityFromIndex(msgId), {});
+        auto &netIds = world.registry.getComponents<component::NetworkId>();
+
+        for (size_t i = 0; i < netIds.size(); i++) {
+            if (netIds[i])
+                if (netIds[i].value().id == msgId)
+                    // world.registry.killEntity(world.registry.entityFromIndex(msgId));
+                    world.registry.addComponent<component::Dead>(world.registry.entityFromIndex(i), {});
+        }
     }
 
     static std::unordered_map<char, std::function<void(World &, network::Message &msg)>> packetTypeFunction = {
