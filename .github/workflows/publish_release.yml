@@ -127,7 +127,7 @@ jobs:
       - name: Create msi installer
         if: matrix.platform == 'windows-latest'
         run: |
-          cd build
+          cd Debug
           cpack -G WIX
       - name: List dir
         run: ls -lRa build

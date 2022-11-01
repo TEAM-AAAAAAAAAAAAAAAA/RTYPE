@@ -25,6 +25,7 @@ target_include_directories(${TARGET} PRIVATE
     ${Boost_INCLUDE_DIRS}
 )
 
+install(TARGETS ${TARGET} DESTINATION bin)
+
 set_target_properties(${TARGET} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
 
-install(TARGETS ${TARGET} DESTINATION bin)
