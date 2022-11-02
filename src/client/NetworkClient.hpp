@@ -14,6 +14,8 @@
 
 using boost::asio::ip::udp;
 
+static boost::asio::io_service service;
+
 namespace network
 {
     /**
@@ -29,8 +31,8 @@ namespace network
          */
         ~Client()
         {
-            _Instance._socket.close();
             _Instance._ioService.stop();
+            _Instance._socket.close();
             _Instance._outgoingThread.join();
             _Instance._serviceThread.join();
         }
@@ -65,23 +67,17 @@ namespace network
             udp::resolver::query query(udp::v4(), _Instance._host, _Instance._port);
             _Instance._endpoint = *resolver.resolve(query);
             _Instance._socket.open(udp::v4());
+            _Instance._started = true;
         }
 
+        bool _started;
       private:
         /**
          * Private default constructor of the Client Class
          */
-        Client() :  _socket(_ioService), _serviceThread(&Client::runService, this),
-              _outgoingThread(&Client::sendOutgoing, this) {
-			while (!_ioService.stopped()) {
-				try {
-					_ioService.run();
-				} catch (const std::exception &e) {
-					std::cerr << e.what() << '\n';
-				}
-			}
-		}
-        boost::asio::io_service _ioService;
+        Client() : _started(false), _ioService(service), _serviceThread(&Client::runService, this), _socket(_ioService),
+              _outgoingThread(&Client::sendOutgoing, this) {}
+        boost::asio::io_service &_ioService;
         udp::socket _socket;
         Message _recvBuffer{};
         udp::endpoint _endpoint;
@@ -141,9 +137,16 @@ namespace network
          */
         void runService()
         {
-            while (!_socket.is_open())
+            while (_started == false)
                 ;
             startReceive();
+            while (!_ioService.stopped()) {
+                try {
+                    _ioService.run();
+                } catch (const std::exception &e) {
+                    std::cerr << e.what() << '\n';
+                }
+            }
         }
 
         /**
@@ -151,12 +154,13 @@ namespace network
          */
         void sendOutgoing()
         {
-            while (!_socket.is_open())
+            while (_started == false)
                 ;
             while (!_ioService.stopped()) {
                 if (!_outgoingMessages.empty()) {
                     auto msg = _outgoingMessages.pop();
-                    _socket.send_to(boost::asio::buffer(msg), _endpoint);
+                    _socket.async_send_to(
+                        boost::asio::buffer(msg), _endpoint, [this](std::error_code ec, std::size_t bytesSent) {});
                 }
             }
         }
