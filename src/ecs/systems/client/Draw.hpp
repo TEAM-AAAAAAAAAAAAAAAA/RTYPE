@@ -10,11 +10,11 @@
 #include <functional>
 #include <iostream>
 #include "SFML/Graphics.hpp"
+#include "Window.hpp"
 #include "World.hpp"
 #include "components/Position.hpp"
 #include "components/Size.hpp"
 #include "components/client/Drawable.hpp"
-#include "Window.hpp"
 
 namespace ecs::systems
 {
@@ -35,10 +35,11 @@ namespace ecs::systems
             if (pos && size && draw) {
                 sf::Sprite sprite;
                 sprite.setTexture(draw.value().getTexture());
-                if (i < animations.size() && animations[i])
+                if (i < animations.size() && animations[i]) {
                     sprite.setTextureRect(animations[i].value().getFrameRect());
-                else
+                } else {
                     sprite.setTextureRect(draw.value().rect);
+                }
                 float scaleX =
                     static_cast<float>(size.value().width) / static_cast<float>(sprite.getTextureRect().width);
                 float scaleY =

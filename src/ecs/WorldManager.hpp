@@ -49,6 +49,7 @@ namespace ecs
         {
             if (_Instance._waitingWorld)
                 _Instance._currentWorld.swap(_Instance._waitingWorld);
+            _Instance._worldSwitchReady = false;
         }
     };
 } // namespace ecs

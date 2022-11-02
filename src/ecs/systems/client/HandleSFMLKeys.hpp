@@ -23,7 +23,6 @@ namespace ecs::systems
         if (!utils::Window::get().hasFocus())
             return;
 
-#ifdef CLIENT_COMPILATION_MODE
         auto &controllables = world.registry.getComponents<component::Controllable>();
         auto const &shootables = world.registry.getComponents<component::Shootable>();
 
@@ -87,6 +86,5 @@ namespace ecs::systems
                 }
             }
         }
-#endif
     };
 } // namespace ecs::systems
