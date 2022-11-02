@@ -82,7 +82,7 @@ namespace ecs::component
             _loadFrames(frames);
         }
 
-        int _currentFrame;
+        int _currentFrame = 0;
         std::vector<AnimFrame> _animFrames;
     };
 } // namespace ecs::component
