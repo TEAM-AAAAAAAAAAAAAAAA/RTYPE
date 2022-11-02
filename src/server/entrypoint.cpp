@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Constant.hpp"
 #include "Engine.hpp"
 #include "Server.hpp"
 #include "components/Faction.hpp"
@@ -6,12 +7,12 @@
 #include "components/NetworkId.hpp"
 #include "systems/Movement.hpp"
 #include "systems/server/HandleIncomingMessage.hpp"
-#include "systems/server/ProjectileCollision.hpp"
 #include "systems/server/PositionUpdate.hpp"
+#include "systems/server/ProjectileCollision.hpp"
 
-ecs::World getGameWorld(ecs::Engine &engine)
+ecs::World getGameWorld()
 {
-    ecs::World world(engine.getWindow());
+    ecs::World world;
 
     ecs::Entity player = world.registry.spawn_entity();
 

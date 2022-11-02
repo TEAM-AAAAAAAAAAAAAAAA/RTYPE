@@ -45,9 +45,9 @@ namespace ecs::systems
         static const int firstByteVelocity = 10;
         static const int secondByteVelocity = 11;
 
-        static auto clock = ecs::constant::chrono::now();
-        if (ecs::constant::chronoDuration(ecs::constant::chrono::now() - clock).count() > 10) {
-            clock = ecs::constant::chrono::now();
+        static auto clock = utils::constant::chrono::now();
+        if (utils::constant::chronoDuration(utils::constant::chrono::now() - clock).count() > 10) {
+            clock = utils::constant::chrono::now();
             for (size_t i = 0; i < position.size() && i < networkId.size() && i < sizes.size() && i < entityType.size()
                  && i < velocities.size();
                  i++) {
@@ -72,7 +72,7 @@ namespace ecs::systems
                     msg[secondByteSize] = sizeBin[1];
                     msg[firstByteVelocity] = velocities[i].value().x;
                     msg[secondByteVelocity] = velocities[i].value().y;
-                    msg[packetType] = ecs::constant::getPacketTypeKey(ecs::constant::PacketType::ENTITY_MOVE);
+                    msg[packetType] = utils::constant::getPacketTypeKey(utils::constant::PacketType::ENTITY_MOVE);
                     network::Server::getOutgoingMessages().push(
                         network::ServerMessage(msg, std::vector<unsigned int>()));
                 }

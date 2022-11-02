@@ -9,6 +9,7 @@
 
 #include <functional>
 #include "World.hpp"
+#include "Window.hpp"
 
 namespace ecs::systems
 {
@@ -20,17 +21,15 @@ namespace ecs::systems
      * if yes, we had it on world's events' stack, nothing otherwise
      */
     std::function<void(World &)> handleSFMLEvents = [](World &world) {
-#ifdef CLIENT_COMPILATION_MODE
         sf::Event event;
 
-        while (world.getWindow().pollEvent(event)) {
+        while (utils::Window::get().pollEvent(event)) {
             switch (event.type) {
-                case sf::Event::Closed: world.getWindow().close(); break;
+                case sf::Event::Closed: utils::Window::get().close(); break;
                 case sf::Event::KeyPressed: {
                 } break;
                 default: break;
             }
         }
-#endif
     };
 } // namespace ecs::systems

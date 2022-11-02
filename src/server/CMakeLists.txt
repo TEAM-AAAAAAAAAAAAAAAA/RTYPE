@@ -8,6 +8,7 @@ set(SRC
     ${SRC_ROOT}/Server.cpp
     ${SRC_ROOT}/Server.hpp
     ${SRC_ROOT}/entrypoint.cpp
+    ${UTILS_SRC}
 )
 
 add_executable(${TARGET} ${SRC})
@@ -19,6 +20,7 @@ target_link_libraries(${TARGET} PRIVATE
 
 target_include_directories(${TARGET}
         PRIVATE ${ECS_INCROOT}
+        PRIVATE ${UTILS_INCDIRS}
 )
 
 target_include_directories(${TARGET} PRIVATE

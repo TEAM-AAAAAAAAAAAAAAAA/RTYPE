@@ -11,6 +11,7 @@
 #include "World.hpp"
 #include "components/client/Controllable.hpp"
 #include "components/client/Shootable.hpp"
+#include "Window.hpp"
 
 namespace ecs::systems
 {
@@ -19,7 +20,7 @@ namespace ecs::systems
      * Refer to the Controllable.hpp documentation to learn more about managed input
      */
     std::function<void(World &)> handleSFMLKeys = [](World &world) {
-        if (!world.getWindow().hasFocus())
+        if (!utils::Window::get().hasFocus())
             return;
 
 #ifdef CLIENT_COMPILATION_MODE

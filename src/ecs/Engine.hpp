@@ -13,6 +13,7 @@
 #include "Engine.hpp"
 #include "Registry.hpp"
 #include "World.hpp"
+#include "Window.hpp"
 
 namespace ecs
 {
@@ -35,8 +36,7 @@ namespace ecs
          */
         explicit Engine() : _worldSwitchReady(false)
         {
-            _window = std::make_unique<utils::Window>();
-            ecs::World initWorld(_window);
+            ecs::World initWorld;
             _currentWorld = std::make_unique<ecs::World>(initWorld);
         }
 
@@ -51,11 +51,11 @@ namespace ecs
          * @param world The world you want to set to release mode
          * @param worldSwitchReady Used to prevents of automatic world's switch
          */
-        void setWaitingWorld(std::function<World(Engine &)> worldGen, bool worldSwitchReady = true)
+        void setWaitingWorld(std::function<World()> worldGen, bool worldSwitchReady = true)
         {
             if (_waitingWorld)
                 _waitingWorld.release();
-            _waitingWorld = std::make_unique<ecs::World>(worldGen(*this));
+            _waitingWorld = std::make_unique<ecs::World>(worldGen());
             _worldSwitchReady = worldSwitchReady;
         }
 
@@ -70,20 +70,17 @@ namespace ecs
          */
         void run()
         {
-            while (_window->isOpen()) {
+            while (utils::Window::isOpen()) {
                 _currentWorld->runSystems();
                 if (isWorldSwitchReady())
                     switchWorlds();
             }
         }
 
-        inline std::unique_ptr<utils::Window> &getWindow() { return _window; }
-
       private:
         /**
          * The window used to display every drawable component
          */
-        std::unique_ptr<utils::Window> _window;
         std::unique_ptr<ecs::World> _currentWorld;
         std::unique_ptr<ecs::World> _waitingWorld;
         bool _worldSwitchReady;
