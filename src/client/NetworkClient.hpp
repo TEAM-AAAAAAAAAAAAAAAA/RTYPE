@@ -33,18 +33,8 @@ namespace network
         {
             _Instance._ioService.stop();
             _Instance._socket.close();
-            _Instance._outgoingThread.join();
-            _Instance._serviceThread.join();
-        }
-
-        /**
-         * Read in the buffer of the instance to get the message to read
-         */
-        static Message receive()
-        {
-            Message msg;
-            _Instance._socket.receive_from(boost::asio::buffer(msg, msg.size()), _Instance._endpoint);
-            return msg;
+            _Instance._messageSendingThread.join();
+            _Instance._ioServiceThread.join();
         }
 
         /**
@@ -56,7 +46,7 @@ namespace network
 
         static inline LockedQueue<Message> &getOutgoingMessages() { return _Instance._outgoingMessages; }
 
-        static inline LockedQueue<Message> &getIncomingMessages() { return _Instance._incomingMessages; }
+        static inline LockedQueue<Message> &getReceivedMessages() { return _Instance._receivedMessages; }
 
         /**
          * Static methods used to connect to the given server (host, port) using udp::v4
@@ -67,32 +57,20 @@ namespace network
             udp::resolver::query query(udp::v4(), _Instance._host, _Instance._port);
             _Instance._endpoint = *resolver.resolve(query);
             _Instance._socket.open(udp::v4());
-            _Instance._started = true;
+            _Instance.isServiceStarted = true;
         }
 
-        bool _started;
+        bool isServiceStarted;
+
       private:
         /**
          * Private default constructor of the Client Class
          */
-        Client() : _started(false), _ioService(service), _serviceThread(&Client::runService, this), _socket(_ioService),
-              _outgoingThread(&Client::sendOutgoing, this) {}
-        boost::asio::io_service &_ioService;
-        udp::socket _socket;
-        Message _recvBuffer{};
-        udp::endpoint _endpoint;
-        std::string _host;
-        std::string _port;
-
-        /**
-         * Locked queue of all unsent outgoing messages
-         */
-        LockedQueue<Message> _outgoingMessages;
-
-        /**
-         * Locked queue of all unprocessed incoming messages
-         */
-        LockedQueue<Message> _incomingMessages;
+        Client()
+            : isServiceStarted(false), _ioService(service), _ioServiceThread(&Client::runService, this),
+              _socket(_ioService), _messageSendingThread(&Client::sendOutgoing, this)
+        {
+        }
 
         /**
          * Handles the incoming messages by placing them into the incoming
@@ -106,7 +84,7 @@ namespace network
                 try {
                     auto message = Message(_recvBuffer);
                     if (!message.empty()) {
-                        _incomingMessages.push(message);
+                        _receivedMessages.push(message);
                     }
                 } catch (const std::exception &e) {
                     std::cerr << e.what() << '\n';
@@ -125,19 +103,11 @@ namespace network
         }
 
         /**
-         * Handles the sending of packets
-         * @param message the packet as an array
-         * @param error error code of sending
-         * @param bytesTransferred the size of the outgoing packet
-         */
-        void handleSend(Message message, const std::error_code &error, std::size_t bytesTransferred) {}
-
-        /**
          * Run the client's service
          */
         void runService()
         {
-            while (_started == false)
+            while (isServiceStarted == false)
                 ;
             startReceive();
             while (!_ioService.stopped()) {
@@ -154,7 +124,7 @@ namespace network
          */
         void sendOutgoing()
         {
-            while (_started == false)
+            while (isServiceStarted == false)
                 ;
             while (!_ioService.stopped()) {
                 if (!_outgoingMessages.empty()) {
@@ -166,10 +136,38 @@ namespace network
         }
 
         /**
+         * Locked queue of all unsent outgoing messages
+         */
+        LockedQueue<Message> _outgoingMessages;
+
+        /**
+         * Locked queue of all unprocessed incoming messages
+         */
+        LockedQueue<Message> _receivedMessages;
+
+        /**
+         * Boost Asio service & socket and endpoint
+         */
+        boost::asio::io_service &_ioService;
+        udp::socket _socket;
+        udp::endpoint _endpoint;
+
+        /**
+         * Server reception buffer
+         */
+        Message _recvBuffer{};
+
+        /**
+         * Server host & port
+         */
+        std::string _host;
+        std::string _port;
+
+        /**
          * Threads used by the client class
          */
-        std::thread _serviceThread;
-        std::thread _outgoingThread;
+        std::thread _ioServiceThread;
+        std::thread _messageSendingThread;
 
         static Client _Instance;
     };

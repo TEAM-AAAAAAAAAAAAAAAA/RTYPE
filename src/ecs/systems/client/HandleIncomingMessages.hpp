@@ -108,8 +108,8 @@ namespace ecs::systems
         {8, movePacketHandle}, {0, firstMessageHandle}};
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
-        while (!network::Client::getIncomingMessages().empty()) {
-            network::Message msg = network::Client::getIncomingMessages().pop();
+        while (!network::Client::getReceivedMessages().empty()) {
+            network::Message msg = network::Client::getReceivedMessages().pop();
             packetTypeFunction[msg[0]](world, msg);
         }
     };
