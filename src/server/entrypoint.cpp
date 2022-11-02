@@ -49,7 +49,7 @@ ecs::World getGameWorld()
 int main()
 {
     ecs::Engine engine;
-    engine.setWaitingWorld(getGameWorld);
+    ecs::WorldManager::setWaitingWorld(getGameWorld);
 
     engine.run();
     return 0;

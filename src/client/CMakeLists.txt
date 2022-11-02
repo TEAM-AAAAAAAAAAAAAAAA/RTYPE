@@ -11,6 +11,7 @@ set(SRC
     ${SRC_ROOT}/NetworkClient.cpp
     ${SRC_ROOT}/NetworkClient.hpp
     ${UTILS_SRC}
+    ${ECS_SRC}
 )
 
 

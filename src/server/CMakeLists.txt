@@ -9,6 +9,7 @@ set(SRC
     ${SRC_ROOT}/Server.hpp
     ${SRC_ROOT}/entrypoint.cpp
     ${UTILS_SRC}
+    ${ECS_SRC}
 )
 
 add_executable(${TARGET} ${SRC})

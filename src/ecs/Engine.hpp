@@ -12,8 +12,9 @@
 #include <memory>
 #include "Engine.hpp"
 #include "Registry.hpp"
-#include "World.hpp"
 #include "Window.hpp"
+#include "World.hpp"
+#include "WorldManager.hpp"
 
 namespace ecs
 {
@@ -34,35 +35,12 @@ namespace ecs
          * @param wSizeHeight height size of the window in pixel, 600 as default
          * @param wTitle window's title, "r-type" as default
          */
-        explicit Engine() : _worldSwitchReady(false)
+        explicit Engine()
         {
+            ecs::WorldManager::setWorldSwitchReady(false);
             ecs::World initWorld;
-            _currentWorld = std::make_unique<ecs::World>(initWorld);
+            ecs::WorldManager::_Instance._currentWorld = std::make_unique<ecs::World>(initWorld);
         }
-
-        /**
-         * Used to get the currentWorld currently used by the ecs
-         * @return The currently used world by the ecs
-         */
-        ecs::World &getWorld() { return *_currentWorld; }
-
-        /**
-         * Set the world given as parameter to release mode
-         * @param world The world you want to set to release mode
-         * @param worldSwitchReady Used to prevents of automatic world's switch
-         */
-        void setWaitingWorld(std::function<World()> worldGen, bool worldSwitchReady = true)
-        {
-            if (_waitingWorld)
-                _waitingWorld.release();
-            _waitingWorld = std::make_unique<ecs::World>(worldGen());
-            _worldSwitchReady = worldSwitchReady;
-        }
-
-        /**
-         * Set the world given as parameter ready to switch for another one
-         */
-        void setWorldSwitchReady() { _worldSwitchReady = true; }
 
         /**
          * Main loop of the current world
@@ -71,26 +49,10 @@ namespace ecs
         void run()
         {
             while (utils::Window::isOpen()) {
-                _currentWorld->runSystems();
-                if (isWorldSwitchReady())
-                    switchWorlds();
+                ecs::WorldManager::getWorld().runSystems();
+                if (ecs::WorldManager::isWorldSwitchReady())
+                    ecs::WorldManager::switchWorlds();
             }
-        }
-
-      private:
-        /**
-         * The window used to display every drawable component
-         */
-        std::unique_ptr<ecs::World> _currentWorld;
-        std::unique_ptr<ecs::World> _waitingWorld;
-        bool _worldSwitchReady;
-
-        [[nodiscard]] bool isWorldSwitchReady() const { return _worldSwitchReady; }
-
-        void switchWorlds()
-        {
-            if (_waitingWorld)
-                _currentWorld.swap(_waitingWorld);
         }
     };
 } // namespace ecs
