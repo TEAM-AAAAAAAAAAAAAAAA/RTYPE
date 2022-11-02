@@ -8,8 +8,6 @@ set(SRC
     ${SRC_ROOT}/entrypoint.cpp
     ${SRC_ROOT}/NetworkClient.cpp
     ${SRC_ROOT}/NetworkClient.hpp
-    ${SRC_ROOT}/New_Net_Client.cpp
-    ${SRC_ROOT}/New_Net_Client.hpp
 )
 
 
