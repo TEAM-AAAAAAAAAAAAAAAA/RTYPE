@@ -1,3 +1,5 @@
+set(X_VCPKG_APPLOCAL_DEPS_INSTALL ON)
+
 cmake_minimum_required(VERSION 3.20.0)
 
 project(rtype LANGUAGES CXX)
@@ -7,6 +9,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 option(BUILD_TEST_SUITE OFF)
 option(ENABLE_CODE_COVERAGE OFF)
+
+set(SFML_DIR ${PROJECT_SOURCE_DIR}/vcpkg/installed/x64-windows/share/sfml)
 
 if (COMPILER_TYPE MATCHES "msvc")
      message(STATUS "Using static SFML libraries")
@@ -40,8 +44,12 @@ if (CLIENT_COMPILATION_MODE)
      add_compile_definitions(CLIENT_COMPILATION_MODE)
 endif()
 
+install(DIRECTORY assets DESTINATION bin/assets/)
+
 SET(RTYPE_MAJOR_VERSION 0)
 SET(RTYPE_MINOR_VERSION 1)
+
+set(CPACK_WIX_LICENSE_RTF ${PROJECT_SOURCE_DIR}/misc/windows/wix_licence.txt)
 
 include(InstallRequiredSystemLibraries)
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENSE")
