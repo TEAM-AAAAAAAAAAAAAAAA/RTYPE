@@ -9,7 +9,6 @@
 
 #include <filesystem>
 #include <memory>
-#include "AssetManager.hpp"
 #include "Engine.hpp"
 #include "Registry.hpp"
 #include "World.hpp"

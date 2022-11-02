@@ -1,6 +1,6 @@
 set (SRC_ROOT ${PROJECT_SOURCE_DIR}/src/server)
 set (INC_ROOT ${PROJECT_SOURCE_DIR}/src/server)
-set(ECS_SRC ../ecs)
+#set(ECS_SRC ../ecs)
 
 set(TARGET r-type_server)
 
@@ -25,4 +25,7 @@ target_include_directories(${TARGET} PRIVATE
     ${Boost_INCLUDE_DIRS}
 )
 
+install(TARGETS ${TARGET} DESTINATION bin)
+
 set_target_properties(${TARGET} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
+

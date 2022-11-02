@@ -7,8 +7,6 @@
 
 #pragma once
 
-#include <chrono>
-
 namespace ecs::component
 {
     struct Weapon {
