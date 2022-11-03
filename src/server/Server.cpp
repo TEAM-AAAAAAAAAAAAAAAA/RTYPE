@@ -29,7 +29,9 @@ namespace network
     Server::~Server()
     {
         _ioService.stop();
+        _socket.close();
         _serviceThread.join();
+        _outgoingThread.join();
     }
 
     /**
@@ -72,8 +74,13 @@ namespace network
         if (!error) {
             try {
                 auto message = ClientMessage(std::array(_recvBuffer), getOrCreateClientID(_remoteEndpoint));
-                if (!message.first.empty())
+                if (!message.first.empty()) {
                     _incomingMessages.push(message);
+                    for (const auto &c : message.first) {
+                        std::cerr << c;
+                    }
+                    std::cerr << std::endl;
+                }
             } catch (std::exception ex) {
                 std::cerr << "handleReceive: Error parsing incoming message:" << ex.what() << std::endl;
             } catch (...) {
