@@ -35,7 +35,7 @@ namespace ecs::component
          *
          * @return the next direction of the entity as a std::pair of chars
          */
-        const std::pair<char, char> &getNextDirection()
+        inline const std::pair<char, char> &getNextDirection()
         {
             if (_thisAI.currentIndex < _thisAI.direction.size() - 1) {
                 _thisAI.currentIndex++;
