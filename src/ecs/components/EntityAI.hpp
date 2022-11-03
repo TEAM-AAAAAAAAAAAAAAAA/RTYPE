@@ -49,7 +49,7 @@ namespace ecs::component
         /**
          * @brief Get the Delay between each AI steps
          *
-         * @return const short& delay
+         * @return the delay in seconds
          */
         inline const short &getDelay() const { return _thisAI.delay; }
 
