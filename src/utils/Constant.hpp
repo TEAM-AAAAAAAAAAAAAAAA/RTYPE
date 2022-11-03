@@ -7,10 +7,12 @@
 
 #pragma once
 
+#include <chrono>
 #include <cstddef>
 #include <map>
+#include <algorithm>
 
-namespace ecs
+namespace utils
 {
     namespace constant
     {
@@ -65,4 +67,4 @@ namespace ecs
             return -1;
         }
     } // namespace constant
-} // namespace ecs
+} // namespace utils

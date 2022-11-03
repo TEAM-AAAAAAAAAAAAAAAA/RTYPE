@@ -25,8 +25,8 @@ namespace ecs::systems
             auto const &projPos = positions[i];
 
             if (proj && projPos) {
-                if (projPos.value().x < 0 || projPos.value().x > ecs::constant::mapWidth || projPos.value().y < 0
-                    || projPos.value().y > ecs::constant::mapHeight) {
+                if (projPos.value().x < 0 || projPos.value().x > utils::constant::mapWidth || projPos.value().y < 0
+                    || projPos.value().y > utils::constant::mapHeight) {
                     world.registry.killEntity(world.registry.entityFromIndex(i));
                 }
             }

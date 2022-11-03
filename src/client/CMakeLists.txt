@@ -10,6 +10,8 @@ set(SRC
     ${SRC_ROOT}/AssetLoader.cpp
     ${SRC_ROOT}/NetworkClient.cpp
     ${SRC_ROOT}/NetworkClient.hpp
+    ${UTILS_SRC}
+    ${ECS_SRC}
 )
 
 
@@ -23,7 +25,8 @@ target_link_libraries(${TARGET} PRIVATE
 )
 
 target_include_directories(${TARGET}
-        PRIVATE ${ECS_INCROOT}
+PRIVATE ${ECS_INCROOT} 
+PRIVATE ${UTILS_INCDIRS}
 )
 
 target_include_directories(${TARGET} PRIVATE
