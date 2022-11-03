@@ -29,7 +29,9 @@ namespace network
     Server::~Server()
     {
         _ioService.stop();
+        _socket.close();
         _serviceThread.join();
+        _outgoingThread.join();
     }
 
     /**
@@ -112,7 +114,8 @@ namespace network
      */
     void Server::send(const Message &message, udp::endpoint endpoint)
     {
-        _socket.send_to(boost::asio::buffer(message), endpoint);
+        _socket.async_send_to(boost::asio::buffer(message), endpoint,
+        [this](std::error_code ec, std::size_t bytesSent){});
     }
 
     /**
