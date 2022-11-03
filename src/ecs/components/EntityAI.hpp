@@ -37,7 +37,7 @@ namespace ecs::component
          */
         const std::pair<char, char> &getNextDirection()
         {
-            if (_thisAI.currentIndex < _thisAI.direction.size()) {
+            if (_thisAI.currentIndex < _thisAI.direction.size() - 1) {
                 _thisAI.currentIndex++;
                 return _thisAI.direction[_thisAI.currentIndex - 1];
             } else {
