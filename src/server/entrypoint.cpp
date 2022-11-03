@@ -5,6 +5,7 @@
 #include "components/Faction.hpp"
 #include "components/Health.hpp"
 #include "components/NetworkId.hpp"
+#include "components/EnemyAI.hpp"
 #include "systems/Movement.hpp"
 #include "systems/server/HandleIncomingMessage.hpp"
 #include "systems/server/PositionUpdate.hpp"
@@ -33,10 +34,12 @@ ecs::World getGameWorld()
     world.addSystem(ecs::systems::HandleIncomingMessages);
     world.addSystem(ecs::systems::PositionUpdate);
 
+    using EnemyAI = ecs::component::EnemyAI;
+
     ecs::Entity enemy = world.registry.spawn_entity();
     world.registry.addComponent<ecs::component::Position>(enemy, {500, 500});
     world.registry.addComponent<ecs::component::Size>(enemy, {32, 64});
-    world.registry.addComponent<ecs::component::EnemyAI>(enemy, {});
+    world.registry.addComponent<ecs::component::EnemyAI>(enemy, {EnemyAI::AIType::Idle});
     world.registry.addComponent<ecs::component::Health>(enemy, {100});
     world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Enemies});
     world.registry.addComponent<ecs::component::NetworkId>(enemy, {static_cast<size_t>(enemy)});

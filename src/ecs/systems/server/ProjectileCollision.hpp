@@ -10,7 +10,6 @@
 #include "components/Size.hpp"
 #include "components/Velocity.hpp"
 #include "components/Weapon.hpp"
-#include "components/server/EnemyAI.hpp"
 #include "components/server/Projectile.hpp"
 
 namespace ecs::systems
