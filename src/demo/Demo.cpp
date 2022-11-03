@@ -21,7 +21,7 @@
     #include "SFML/Graphics.hpp"
     #include "components/Controllable.hpp"
     #include "components/Drawable.hpp"
-    #include "components/EnemyAI.hpp"
+    #include "components/EntityAI.hpp"
     #include "systems/Draw.hpp"
     #include "systems/HandleSFMLEvents.hpp"
     #include "systems/HandleSFMLKeys.hpp"
@@ -51,7 +51,7 @@ ecs::World getGameWorld(ecs::Engine &engine)
     ecs::Entity enemy = world.registry.spawn_entity();
     world.registry.addComponent<ecs::component::Position>(enemy, {500, 500});
     world.registry.addComponent<ecs::component::Size>(enemy, {64, 128});
-    world.registry.addComponent<ecs::component::EnemyAI>(enemy, {});
+    world.registry.addComponent<ecs::component::EntityAI>(enemy, {});
     world.registry.addComponent<ecs::component::Health>(enemy, {100});
     world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Enemies});
 

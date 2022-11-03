@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2022
 ** RTYPE
 ** File description:
-** EnemyAI
+** EntityAI
 */
 
 #pragma once
@@ -13,22 +13,22 @@
 
 namespace ecs::component
 {
-    /// @brief EnemyAI component
-    struct EnemyAI {
+    /// @brief EntityAI component
+    struct EntityAI {
       public:
         /**
          * @brief All possible AI created
          *
-         * @warning ALL MUST BE CREATED IN EnemyAI.cpp
+         * @warning ALL MUST BE CREATED IN EntityAI.cpp
          */
         enum AIType { Idle, BasicUpDown };
 
         /**
-         * @brief EnemyAI constructor
+         * @brief EntityAI constructor
          *
          * @param type the AIType of the entity
          */
-        EnemyAI(const AIType &type = Idle) : _thisAI(findAI(type)) {}
+        EntityAI(const AIType &type = Idle) : _thisAI(findAI(type)) {}
 
         /**
          * @brief get the next direction of the entity and cycles through the directions vector
@@ -88,7 +88,7 @@ namespace ecs::component
          *
          * @param type
          * @return the AI
-         * @warning may throw if used badly or if all AIs are not defined in EnemyAI.cpp
+         * @warning may throw if used badly or if all AIs are not defined in EntityAI.cpp
          */
         inline const AI &findAI(const AIType &type) { return _aiVector.at(type); }
 

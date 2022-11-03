@@ -3,8 +3,8 @@ set(SRCROOT ${PROJECT_SOURCE_DIR}/src/ecs/components)
 
 set(COMPONENTS_SRC
     ${SRCROOT}/Direction.hpp
-    ${SRCROOT}/EnemyAI.hpp
-    ${SRCROOT}/EnemyAI.cpp
+    ${SRCROOT}/EntityAI.hpp
+    ${SRCROOT}/EntityAI.cpp
     ${SRCROOT}/Faction.hpp
     ${SRCROOT}/Health.hpp
     ${SRCROOT}/Position.hpp
