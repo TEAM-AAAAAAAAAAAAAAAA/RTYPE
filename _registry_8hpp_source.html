@@ -196,13 +196,13 @@ $(document).ready(function(){initNavTree('_registry_8hpp_source.html',''); initR
 <div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="classecs_1_1_registry.html#a56a1512c5bd8ebbf1f59cddeea212079">   94</a></span>&#160;        <a class="code" href="classecs_1_1_entity.html">Entity</a> <a class="code" href="classecs_1_1_registry.html#a56a1512c5bd8ebbf1f59cddeea212079">entityFromIndex</a>(std::size_t idx)</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        {</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            <span class="keywordflow">if</span> (idx &gt;= _lastEntity || std::find(_entitiesBin.begin(), _entitiesBin.end(), idx) != _entitiesBin.end())</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="classecs_1_1_entity.html">Entity</a>(ecs::constant::npos);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="classecs_1_1_entity.html">Entity</a>(utils::constant::npos);</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="classecs_1_1_entity.html">Entity</a>(idx);</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        }</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
 <div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="classecs_1_1_registry.html#a2d965270a7935f60eb1b6fd40201c9f1">  106</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classecs_1_1_registry.html#a2d965270a7935f60eb1b6fd40201c9f1">killEntity</a>(<a class="code" href="classecs_1_1_entity.html">Entity</a> <span class="keyword">const</span> &amp;e)</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        {</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <span class="keywordflow">if</span> (e._id == ecs::constant::npos)</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <span class="keywordflow">if</span> (e._id == utils::constant::npos)</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                <span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;eraseFunc : _eraseFunctions)</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                eraseFunc(*<span class="keyword">this</span>, e);</div>

@@ -146,16 +146,8 @@ $(document).ready(function(){initNavTree('classecs_1_1_engine.html',''); initRes
 Public Member Functions</h2></td></tr>
 <tr class="memitem:af2fcd7f1d97c2e968bedf081c8303793"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classecs_1_1_engine.html#af2fcd7f1d97c2e968bedf081c8303793">Engine</a> ()</td></tr>
 <tr class="separator:af2fcd7f1d97c2e968bedf081c8303793"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4cfa520f1b6ab9cb0867bdb11884021d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classecs_1_1_world.html">ecs::World</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classecs_1_1_engine.html#a4cfa520f1b6ab9cb0867bdb11884021d">getWorld</a> ()</td></tr>
-<tr class="separator:a4cfa520f1b6ab9cb0867bdb11884021d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a43413bc2bc0077438efa0cb7a64c69"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classecs_1_1_engine.html#a6a43413bc2bc0077438efa0cb7a64c69">setWaitingWorld</a> (const <a class="el" href="classecs_1_1_world.html">ecs::World</a> &amp;world, bool worldSwitchReady=true)</td></tr>
-<tr class="separator:a6a43413bc2bc0077438efa0cb7a64c69"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77884f11cc05c77364c4712b731cb671"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classecs_1_1_engine.html#a77884f11cc05c77364c4712b731cb671">setWorldSwitchReady</a> ()</td></tr>
-<tr class="separator:a77884f11cc05c77364c4712b731cb671"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7ecda3685c27b8f859fdf0e764f0a94"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classecs_1_1_engine.html#aa7ecda3685c27b8f859fdf0e764f0a94">run</a> ()</td></tr>
 <tr class="separator:aa7ecda3685c27b8f859fdf0e764f0a94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42dd5702f0cf08bf90671d392cfe19bd"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classecs_1_1utils_1_1_window.html">utils::Window</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classecs_1_1_engine.html#a42dd5702f0cf08bf90671d392cfe19bd">getWindow</a> ()</td></tr>
-<tr class="separator:a42dd5702f0cf08bf90671d392cfe19bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classecs_1_1_engine.html">Engine</a> class manages the whole part of systems in ecs in a given world. Systems are, most of the time, short function using components to realise some actions. For example, to make an <a class="el" href="classecs_1_1_entity.html">Entity</a> move, we need a component Position and a component Velocity, the system is the thing who update the position of the <a class="el" href="classecs_1_1_entity.html">Entity</a> according to the Velocity component by adding velocity value to the x &amp; y member of the component position of the <a class="el" href="classecs_1_1_entity.html">Entity</a>. </p>
@@ -190,71 +182,19 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a42dd5702f0cf08bf90671d392cfe19bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a42dd5702f0cf08bf90671d392cfe19bd">&#9670;&nbsp;</a></span>getWindow()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::unique_ptr&lt;<a class="el" href="classecs_1_1utils_1_1_window.html">utils::Window</a>&gt;&amp; ecs::Engine::getWindow </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
 <div class="dynheader">
-Here is the caller graph for this function:</div>
+Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classecs_1_1_engine_a42dd5702f0cf08bf90671d392cfe19bd_icgraph.png" border="0" usemap="#classecs_1_1_engine_a42dd5702f0cf08bf90671d392cfe19bd_icgraph" alt=""/></div>
-<map name="classecs_1_1_engine_a42dd5702f0cf08bf90671d392cfe19bd_icgraph" id="classecs_1_1_engine_a42dd5702f0cf08bf90671d392cfe19bd_icgraph">
-<area shape="rect" title=" " alt="" coords="275,5,452,32"/>
-<area shape="rect" href="client_2entrypoint_8cpp.html#a2293bb028aabdca8deef07fc88b11548" title=" " alt="" coords="108,5,227,32"/>
-<area shape="rect" href="client_2entrypoint_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
+<div class="center"><img src="classecs_1_1_engine_af2fcd7f1d97c2e968bedf081c8303793_cgraph.png" border="0" usemap="#classecs_1_1_engine_af2fcd7f1d97c2e968bedf081c8303793_cgraph" alt=""/></div>
+<map name="classecs_1_1_engine_af2fcd7f1d97c2e968bedf081c8303793_cgraph" id="classecs_1_1_engine_af2fcd7f1d97c2e968bedf081c8303793_cgraph">
+<area shape="rect" title=" " alt="" coords="5,13,153,39"/>
+<area shape="rect" href="classecs_1_1_world_manager.html#a10a01120738f33cbd31627968add229c" title=" " alt="" coords="201,5,364,47"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="a4cfa520f1b6ab9cb0867bdb11884021d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4cfa520f1b6ab9cb0867bdb11884021d">&#9670;&nbsp;</a></span>getWorld()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classecs_1_1_world.html">ecs::World</a>&amp; ecs::Engine::getWorld </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Used to get the currentWorld currently used by the ecs </p><dl class="section return"><dt>Returns</dt><dd>The currently used world by the ecs </dd></dl>
-
-</div>
-</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="aa7ecda3685c27b8f859fdf0e764f0a94"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa7ecda3685c27b8f859fdf0e764f0a94">&#9670;&nbsp;</a></span>run()</h2>
 
@@ -279,6 +219,17 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 <p>Main loop of the current world Actually run while the window is open </p>
 <div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classecs_1_1_engine_aa7ecda3685c27b8f859fdf0e764f0a94_cgraph.png" border="0" usemap="#classecs_1_1_engine_aa7ecda3685c27b8f859fdf0e764f0a94_cgraph" alt=""/></div>
+<map name="classecs_1_1_engine_aa7ecda3685c27b8f859fdf0e764f0a94_cgraph" id="classecs_1_1_engine_aa7ecda3685c27b8f859fdf0e764f0a94_cgraph">
+<area shape="rect" title=" " alt="" coords="5,71,131,98"/>
+<area shape="rect" href="classecs_1_1_world_manager.html#a1e9cb1cc467c773762bfa0c3299068aa" title=" " alt="" coords="189,5,343,47"/>
+<area shape="rect" href="classutils_1_1_window.html#adf07a85381bcbdf6cb2c71db03302e38" title=" " alt="" coords="185,71,347,98"/>
+<area shape="rect" href="classecs_1_1_world.html#a0015fa0624f4eeaa5178d189bf5e233b" title=" " alt="" coords="179,122,353,149"/>
+</map>
+</div>
+<div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classecs_1_1_engine_aa7ecda3685c27b8f859fdf0e764f0a94_icgraph.png" border="0" usemap="#classecs_1_1_engine_aa7ecda3685c27b8f859fdf0e764f0a94_icgraph" alt=""/></div>
@@ -287,84 +238,6 @@ Here is the caller graph for this function:</div>
 <area shape="rect" href="client_2entrypoint_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
-
-</div>
-</div>
-<a id="a6a43413bc2bc0077438efa0cb7a64c69"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a43413bc2bc0077438efa0cb7a64c69">&#9670;&nbsp;</a></span>setWaitingWorld()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ecs::Engine::setWaitingWorld </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classecs_1_1_world.html">ecs::World</a> &amp;&#160;</td>
-          <td class="paramname"><em>world</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>worldSwitchReady</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Set the world given as parameter to release mode </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">world</td><td>The world you want to set to release mode </td></tr>
-    <tr><td class="paramname">worldSwitchReady</td><td>Used to prevents of automatic world's switch </td></tr>
-  </table>
-  </dd>
-</dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classecs_1_1_engine_a6a43413bc2bc0077438efa0cb7a64c69_icgraph.png" border="0" usemap="#classecs_1_1_engine_a6a43413bc2bc0077438efa0cb7a64c69_icgraph" alt=""/></div>
-<map name="classecs_1_1_engine_a6a43413bc2bc0077438efa0cb7a64c69_icgraph" id="classecs_1_1_engine_a6a43413bc2bc0077438efa0cb7a64c69_icgraph">
-<area shape="rect" title=" " alt="" coords="108,5,319,32"/>
-<area shape="rect" href="client_2entrypoint_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a77884f11cc05c77364c4712b731cb671"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77884f11cc05c77364c4712b731cb671">&#9670;&nbsp;</a></span>setWorldSwitchReady()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ecs::Engine::setWorldSwitchReady </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Set the world given as parameter ready to switch for another one </p>
 
 </div>
 </div>

@@ -10,7 +10,7 @@
         src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
         crossorigin="anonymous"></script>
-<title>RTYPE: src/ecs/Constant.hpp File Reference</title>
+<title>RTYPE: src/utils/Constant.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
   <!--BEGIN FULL_SIDEBAR-->
 <script type="text/javascript">var page_layout=1;</script>
@@ -140,47 +140,53 @@ $(document).ready(function(){initNavTree('_constant_8hpp.html',''); initResizabl
 <div class="title">Constant.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cstddef&gt;</code><br />
+<div class="textblock"><code>#include &lt;chrono&gt;</code><br />
+<code>#include &lt;cstddef&gt;</code><br />
 <code>#include &lt;map&gt;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Constant.hpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="_constant_8hpp__incl.png" border="0" usemap="#src_2ecs_2_constant_8hpp" alt=""/></div>
-<map name="src_2ecs_2_constant_8hpp" id="src_2ecs_2_constant_8hpp">
-<area shape="rect" title=" " alt="" coords="5,5,163,32"/>
-<area shape="rect" title=" " alt="" coords="6,80,77,107"/>
-<area shape="rect" title=" " alt="" coords="101,80,152,107"/>
+<div class="center"><img src="_constant_8hpp__incl.png" border="0" usemap="#src_2utils_2_constant_8hpp" alt=""/></div>
+<map name="src_2utils_2_constant_8hpp" id="src_2utils_2_constant_8hpp">
+<area shape="rect" title=" " alt="" coords="93,5,256,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,72,107"/>
+<area shape="rect" title=" " alt="" coords="97,80,167,107"/>
+<area shape="rect" title=" " alt="" coords="192,80,243,107"/>
+<area shape="rect" title=" " alt="" coords="267,80,352,107"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="_constant_8hpp__dep__incl.png" border="0" usemap="#src_2ecs_2_constant_8hppdep" alt=""/></div>
-<map name="src_2ecs_2_constant_8hppdep" id="src_2ecs_2_constant_8hppdep">
-<area shape="rect" title=" " alt="" coords="1577,5,1734,32"/>
-<area shape="rect" href="_registry_8hpp.html" title=" " alt="" coords="1705,155,1856,181"/>
-<area shape="rect" href="_send_direction_8hpp.html" title=" " alt="" coords="5,304,172,345"/>
-<area shape="rect" href="_manage_client_events_8hpp.html" title=" " alt="" coords="196,304,416,345"/>
-<area shape="rect" href="_death_update_8hpp.html" title=" " alt="" coords="3449,304,3619,345"/>
-<area shape="rect" href="_sparse_array_8hpp.html" title=" " alt="" coords="1567,80,1743,107"/>
-<area shape="rect" href="_engine_8hpp.html" title=" " alt="" coords="2625,311,2768,338"/>
-<area shape="rect" href="_world_8hpp.html" title=" " alt="" coords="1713,229,1849,256"/>
-<area shape="rect" href="client_2entrypoint_8cpp.html" title=" " alt="" coords="829,393,1007,420"/>
-<area shape="rect" href="_demo_8cpp.html" title=" " alt="" coords="2411,393,2563,420"/>
-<area shape="rect" href="server_2entrypoint_8cpp.html" title=" " alt="" coords="2810,393,2994,420"/>
-<area shape="rect" href="_animate_8hpp.html" title=" " alt="" coords="1249,304,1416,345"/>
-<area shape="rect" href="_draw_8hpp.html" title=" " alt="" coords="835,304,1001,345"/>
-<area shape="rect" href="_handle_incoming_messages_8hpp.html" title=" " alt="" coords="1440,304,1665,345"/>
-<area shape="rect" href="_handle_parallax_bounds_8hpp.html" title=" " alt="" coords="1026,304,1226,345"/>
-<area shape="rect" href="_handle_s_f_m_l_events_8hpp.html" title=" " alt="" coords="441,304,619,345"/>
-<area shape="rect" href="_handle_s_f_m_l_keys_8hpp.html" title=" " alt="" coords="644,304,811,345"/>
-<area shape="rect" href="_movement_8hpp.html" title=" " alt="" coords="2373,311,2601,338"/>
-<area shape="rect" href="_position_logger_8hpp.html" title=" " alt="" coords="1689,304,1872,345"/>
-<area shape="rect" href="_push_client_movement_8hpp.html" title=" " alt="" coords="1896,304,2095,345"/>
-<area shape="rect" href="_handle_incoming_message_8hpp.html" title=" " alt="" coords="3011,304,3230,345"/>
-<area shape="rect" href="_position_update_8hpp.html" title=" " alt="" coords="3254,304,3425,345"/>
-<area shape="rect" href="_projectile_collision_8hpp.html" title=" " alt="" coords="2817,304,2987,345"/>
-<area shape="rect" href="_server_push_8hpp.html" title=" " alt="" coords="2119,311,2349,338"/>
+<div class="center"><img src="_constant_8hpp__dep__incl.png" border="0" usemap="#src_2utils_2_constant_8hppdep" alt=""/></div>
+<map name="src_2utils_2_constant_8hppdep" id="src_2utils_2_constant_8hppdep">
+<area shape="rect" title=" " alt="" coords="1879,5,2042,32"/>
+<area shape="rect" href="_registry_8hpp.html" title=" " alt="" coords="1823,155,1973,181"/>
+<area shape="rect" href="server_2entrypoint_8cpp.html" title=" " alt="" coords="2017,483,2201,509"/>
+<area shape="rect" href="_send_direction_8hpp.html" title=" " alt="" coords="29,304,196,345"/>
+<area shape="rect" href="_manage_client_events_8hpp.html" title=" " alt="" coords="220,304,440,345"/>
+<area shape="rect" href="_death_update_8hpp.html" title=" " alt="" coords="2001,304,2171,345"/>
+<area shape="rect" href="_handle_incoming_message_8hpp.html" title=" " alt="" coords="2246,304,2465,345"/>
+<area shape="rect" href="_sparse_array_8hpp.html" title=" " alt="" coords="1873,80,2049,107"/>
+<area shape="rect" href="_engine_8hpp.html" title=" " alt="" coords="1519,401,1661,427"/>
+<area shape="rect" href="_world_8hpp.html" title=" " alt="" coords="1111,229,1247,256"/>
+<area shape="rect" href="client_2entrypoint_8cpp.html" title=" " alt="" coords="490,483,669,509"/>
+<area shape="rect" href="_demo_8cpp.html" title=" " alt="" coords="1514,483,1666,509"/>
+<area shape="rect" href="_world_manager_8hpp.html" title=" " alt="" coords="1217,311,1409,338"/>
+<area shape="rect" href="_animate_8hpp.html" title=" " alt="" coords="617,304,784,345"/>
+<area shape="rect" href="_draw_8hpp.html" title=" " alt="" coords="907,393,1073,435"/>
+<area shape="rect" href="_handle_incoming_messages_8hpp.html" title=" " alt="" coords="467,393,692,435"/>
+<area shape="rect" href="_handle_parallax_bounds_8hpp.html" title=" " alt="" coords="39,393,239,435"/>
+<area shape="rect" href="_handle_s_f_m_l_events_8hpp.html" title=" " alt="" coords="263,393,442,435"/>
+<area shape="rect" href="_handle_s_f_m_l_keys_8hpp.html" title=" " alt="" coords="716,393,883,435"/>
+<area shape="rect" href="_movement_8hpp.html" title=" " alt="" coords="1709,401,1937,427"/>
+<area shape="rect" href="_position_logger_8hpp.html" title=" " alt="" coords="1097,393,1280,435"/>
+<area shape="rect" href="_push_client_movement_8hpp.html" title=" " alt="" coords="1483,304,1681,345"/>
+<area shape="rect" href="_position_update_8hpp.html" title=" " alt="" coords="1962,393,2133,435"/>
+<area shape="rect" href="_projectile_collision_8hpp.html" title=" " alt="" coords="1806,304,1977,345"/>
+<area shape="rect" href="_server_push_8hpp.html" title=" " alt="" coords="911,311,1141,338"/>
+<area shape="rect" href="_world_manager_8cpp.html" title=" " alt="" coords="1304,401,1495,427"/>
 </map>
 </div>
 </div>
@@ -188,48 +194,48 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:namespaceecs"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs.html">ecs</a></td></tr>
+<tr class="memitem:namespaceutils"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html">utils</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:namespaceecs_1_1constant"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1constant.html">ecs::constant</a></td></tr>
+<tr class="memitem:namespaceutils_1_1constant"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils_1_1constant.html">utils::constant</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:aab4cd5ff863d8c9fcba240ad9bde517d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1constant.html#aab4cd5ff863d8c9fcba240ad9bde517d">ecs::constant::chrono</a> = std::chrono::high_resolution_clock</td></tr>
-<tr class="separator:aab4cd5ff863d8c9fcba240ad9bde517d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5af9ff1ff8ae873264c70ee8d24ccad"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1constant.html#ab5af9ff1ff8ae873264c70ee8d24ccad">ecs::constant::chronoDuration</a> = std::chrono::duration&lt; double, std::milli &gt;</td></tr>
-<tr class="separator:ab5af9ff1ff8ae873264c70ee8d24ccad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4d7e2d46688914f26626a619f8326af"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils_1_1constant.html#ab4d7e2d46688914f26626a619f8326af">utils::constant::chrono</a> = std::chrono::high_resolution_clock</td></tr>
+<tr class="separator:ab4d7e2d46688914f26626a619f8326af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad903a57ac8f070571efdf25fbdcb0c29"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils_1_1constant.html#ad903a57ac8f070571efdf25fbdcb0c29">utils::constant::chronoDuration</a> = std::chrono::duration&lt; double, std::milli &gt;</td></tr>
+<tr class="separator:ad903a57ac8f070571efdf25fbdcb0c29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a01d4874a258e2747078bd137000e9e74"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1constant.html#a01d4874a258e2747078bd137000e9e74">ecs::constant::PacketType</a> { <br />
-&#160;&#160;<a class="el" href="namespaceecs_1_1constant.html#a01d4874a258e2747078bd137000e9e74a84069a869f4e4369149010501c01eff3">ecs::constant::PLAYER_MOVE</a> = 8, 
-<a class="el" href="namespaceecs_1_1constant.html#a01d4874a258e2747078bd137000e9e74ab62d9a343a2768eebffe0e47d85ba77e">ecs::constant::PLAYER_SHOT</a> = 2, 
-<a class="el" href="namespaceecs_1_1constant.html#a01d4874a258e2747078bd137000e9e74ac093abd77a401025a24fbf6c38740952">ecs::constant::PLAYER_CHARGED_SHOT</a>, 
-<a class="el" href="namespaceecs_1_1constant.html#a01d4874a258e2747078bd137000e9e74a6ad87c5f1fc35be5311821bd8a8da4a0">ecs::constant::PLAYER_POWERUP</a>, 
+<tr class="memitem:a02f29b9fcdfc8d4a1f0b8923e5b4c477"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477">utils::constant::PacketType</a> { <br />
+&#160;&#160;<a class="el" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ae5d30e9f7bb333d07bd8a1a8b35ecb06">utils::constant::PLAYER_MOVE</a> = 8, 
+<a class="el" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a9aecf06d78c05845cbb3c8f960a13d4c">utils::constant::PLAYER_SHOT</a> = 2, 
+<a class="el" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a51c64817b447958ef78b5b1b90e0fc8f">utils::constant::PLAYER_CHARGED_SHOT</a>, 
+<a class="el" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477aff0038efd7ea5dce69ec9f9c215c470a">utils::constant::PLAYER_POWERUP</a>, 
 <br />
-&#160;&#160;<a class="el" href="namespaceecs_1_1constant.html#a01d4874a258e2747078bd137000e9e74ada5d3e224c83286b7d52bd8d52127b6e">ecs::constant::ENTITY_MOVE</a>, 
-<a class="el" href="namespaceecs_1_1constant.html#a01d4874a258e2747078bd137000e9e74ad96eaaf08177212c4f4537d13e657c9b">ecs::constant::ENTITY_SPAWN</a>, 
-<a class="el" href="namespaceecs_1_1constant.html#a01d4874a258e2747078bd137000e9e74a25b36518fbb9d7026e393d2f36082251">ecs::constant::ENTITY_DEATH</a>, 
-<a class="el" href="namespaceecs_1_1constant.html#a01d4874a258e2747078bd137000e9e74a38cf7142dd6921dbe6d0fe76fb422614">ecs::constant::ENTITY_DAMAGE</a>, 
+&#160;&#160;<a class="el" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ad37895a1ffa6eafe8d42600886797632">utils::constant::ENTITY_MOVE</a>, 
+<a class="el" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477adadf6f857e0a998c40a9ea08786f56e6">utils::constant::ENTITY_SPAWN</a>, 
+<a class="el" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a509676f5d38cbf87a106deecbbb082db">utils::constant::ENTITY_DEATH</a>, 
+<a class="el" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477af7225efee2d43c8e925f609a356204b6">utils::constant::ENTITY_DAMAGE</a>, 
 <br />
-&#160;&#160;<a class="el" href="namespaceecs_1_1constant.html#a01d4874a258e2747078bd137000e9e74afb3aeeb69bf22fe06ea3f9f8fe83b6c3">ecs::constant::ENTITY_HEAL</a>, 
-<a class="el" href="namespaceecs_1_1constant.html#a01d4874a258e2747078bd137000e9e74ad3933d8a37470fbfa54875c9053027df">ecs::constant::NEW_WAVE</a>, 
-<a class="el" href="namespaceecs_1_1constant.html#a01d4874a258e2747078bd137000e9e74aa0c43c490173f906e1bdb468059ae3ba">ecs::constant::BOSS_STAGE</a>, 
-<a class="el" href="namespaceecs_1_1constant.html#a01d4874a258e2747078bd137000e9e74a8e93d2c92bcdb86420882236cca4c972">ecs::constant::GAME_OVER</a>, 
+&#160;&#160;<a class="el" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ad93bbf4577461db12ad4603ebf7ffb9f">utils::constant::ENTITY_HEAL</a>, 
+<a class="el" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ae90a0107f1ff815a930b60f5d1493e9f">utils::constant::NEW_WAVE</a>, 
+<a class="el" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a8ffa48b4a6012e684f17743bca2046d1">utils::constant::BOSS_STAGE</a>, 
+<a class="el" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ab0ada823658f01387806157db3e5ce4e">utils::constant::GAME_OVER</a>, 
 <br />
-&#160;&#160;<a class="el" href="namespaceecs_1_1constant.html#a01d4874a258e2747078bd137000e9e74a25358b541e414e685bd78164138d9333">ecs::constant::MULTIPLAYER_INFO</a>, 
-<a class="el" href="namespaceecs_1_1constant.html#a01d4874a258e2747078bd137000e9e74ab8b61475118e8185bba1576de031e69d">ecs::constant::NONE</a>
+&#160;&#160;<a class="el" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a2db5d4ec86b1378334846f309d4708fc">utils::constant::MULTIPLAYER_INFO</a>, 
+<a class="el" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a3e453aacf60bd5aa37a77fc907bcc131">utils::constant::NONE</a>
 <br />
  }</td></tr>
-<tr class="separator:a01d4874a258e2747078bd137000e9e74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a02f29b9fcdfc8d4a1f0b8923e5b4c477"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_ddca5f149c4ce13074f28b270e950ba9.html">ecs</a></li><li class="navelem"><a class="el" href="_constant_8hpp.html">Constant.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_313caf1132e152dd9b58bea13a4052ca.html">utils</a></li><li class="navelem"><a class="el" href="_constant_8hpp.html">Constant.hpp</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

@@ -148,72 +148,62 @@ $(document).ready(function(){initNavTree('_world_8hpp_source.html',''); initResi
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;queue&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_event_8hpp.html">Event.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_registry_8hpp.html">Registry.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_window_8hpp.html">utils/Window.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs.html">ecs</a></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classecs_1_1_world.html">   20</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classecs_1_1_world.html">World</a> {</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;      <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <a class="code" href="classecs_1_1_world.html#a00726c449c9d48a80a7f60f5c98692e6">World</a>() = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classecs_1_1_world.html#a140a565e397b48539e8147eb72a737a3">   30</a></span>&#160;        <span class="keyword">explicit</span> <a class="code" href="classecs_1_1_world.html#a140a565e397b48539e8147eb72a737a3">World</a>(std::unique_ptr&lt;utils::Window&gt; &amp;window) : _window(window) {}</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classecs_1_1_world.html#a0015fa0624f4eeaa5178d189bf5e233b">   35</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classecs_1_1_world.html#a0015fa0624f4eeaa5178d189bf5e233b">runSystems</a>()</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;&amp;i : _systems) {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                i(*<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            }</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        }</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs.html">ecs</a></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classecs_1_1_world.html">   19</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classecs_1_1_world.html">World</a> {</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;      <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classecs_1_1_world.html#a04ef451826234a2ad54aff696fb974ba">   24</a></span>&#160;        <a class="code" href="classecs_1_1_world.html#a04ef451826234a2ad54aff696fb974ba">World</a>() {};</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classecs_1_1_world.html#a0015fa0624f4eeaa5178d189bf5e233b">   29</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classecs_1_1_world.html#a0015fa0624f4eeaa5178d189bf5e233b">runSystems</a>()</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;&amp;i : _systems) {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                i(*<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            }</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        }</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classecs_1_1_world.html#a298b46d7b7f1742f43ac2f8cb7ef9e95">   40</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classecs_1_1_world.html#a298b46d7b7f1742f43ac2f8cb7ef9e95">addSystem</a>(<span class="keyword">const</span> std::function&lt;<span class="keywordtype">void</span>(<a class="code" href="classecs_1_1_world.html">World</a> &amp;)&gt; &amp;system) { _systems.push_back(system); }</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classecs_1_1_world.html#a298b46d7b7f1742f43ac2f8cb7ef9e95">   46</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classecs_1_1_world.html#a298b46d7b7f1742f43ac2f8cb7ef9e95">addSystem</a>(<span class="keyword">const</span> std::function&lt;<span class="keywordtype">void</span>(<a class="code" href="classecs_1_1_world.html">World</a> &amp;)&gt; &amp;system) { _systems.push_back(system); }</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classecs_1_1_world.html#a74f0effbecc49f49a39627047b5d543e">   46</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classecs_1_1_world.html#a74f0effbecc49f49a39627047b5d543e">pushEvent</a>(<span class="keyword">const</span> <a class="code" href="classecs_1_1_event.html">ecs::Event</a> event) { _events.push(event); }</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classecs_1_1_world.html#a0016f19219c7de8ff675b391cd082e9e">   48</a></span>&#160;        <span class="keyword">inline</span> <a class="code" href="classecs_1_1utils_1_1_window.html">utils::Window</a> &amp;<a class="code" href="classecs_1_1_world.html#a0016f19219c7de8ff675b391cd082e9e">getWindow</a>() { <span class="keywordflow">return</span> *_window; }</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classecs_1_1_world.html#a74f0effbecc49f49a39627047b5d543e">   54</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classecs_1_1_world.html#a74f0effbecc49f49a39627047b5d543e">pushEvent</a>(<span class="keyword">const</span> <a class="code" href="classecs_1_1_event.html">ecs::Event</a> event) { _events.push(event); }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classecs_1_1_world.html#a791357edf99771e9ff0cb1572ba68bc2">   60</a></span>&#160;        <span class="keyword">const</span> <a class="code" href="classecs_1_1_event.html">ecs::Event</a> <a class="code" href="classecs_1_1_world.html#a791357edf99771e9ff0cb1572ba68bc2">getEvent</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <span class="keywordflow">if</span> (_events.empty())</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                <span class="keywordflow">return</span> {ecs::Event::EventType::Null};</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keywordflow">return</span> _events.front();</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        }</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classecs_1_1_world.html#a677058b2b679c8521c03320fe580057c">   71</a></span>&#160;        <span class="keyword">const</span> <a class="code" href="classecs_1_1_event.html">ecs::Event</a> <a class="code" href="classecs_1_1_world.html#a677058b2b679c8521c03320fe580057c">popEvent</a>()</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordflow">if</span> (_events.empty())</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                <span class="keywordflow">return</span> {ecs::Event::EventType::Null};</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <a class="code" href="classecs_1_1_event.html">ecs::Event</a> <span class="keyword">event</span> = _events.front();</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            _events.pop();</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keywordflow">return</span> event;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        }</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classecs_1_1_world.html#a71b5c2fb034c78a6270c44e42a0e2360">   83</a></span>&#160;        <a class="code" href="classecs_1_1_registry.html">Registry</a> <a class="code" href="classecs_1_1_world.html#a71b5c2fb034c78a6270c44e42a0e2360">registry</a>;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        std::unique_ptr&lt;utils::Window&gt; &amp;_window;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        std::vector&lt;std::function&lt;void(<a class="code" href="classecs_1_1_world.html">World</a> &amp;)&gt;&gt; _systems;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        std::queue&lt;ecs::Event&gt; _events;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    };</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;} <span class="comment">// namespace ecs</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classecs_1_1_world.html#a791357edf99771e9ff0cb1572ba68bc2">   52</a></span>&#160;        <span class="keyword">const</span> <a class="code" href="classecs_1_1_event.html">ecs::Event</a> <a class="code" href="classecs_1_1_world.html#a791357edf99771e9ff0cb1572ba68bc2">getEvent</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keywordflow">if</span> (_events.empty())</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                <span class="keywordflow">return</span> {ecs::Event::EventType::Null};</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keywordflow">return</span> _events.front();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        }</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classecs_1_1_world.html#a677058b2b679c8521c03320fe580057c">   63</a></span>&#160;        <span class="keyword">const</span> <a class="code" href="classecs_1_1_event.html">ecs::Event</a> <a class="code" href="classecs_1_1_world.html#a677058b2b679c8521c03320fe580057c">popEvent</a>()</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keywordflow">if</span> (_events.empty())</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                <span class="keywordflow">return</span> {ecs::Event::EventType::Null};</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <a class="code" href="classecs_1_1_event.html">ecs::Event</a> <span class="keyword">event</span> = _events.front();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            _events.pop();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="keywordflow">return</span> event;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="classecs_1_1_world.html#a71b5c2fb034c78a6270c44e42a0e2360">   75</a></span>&#160;        <a class="code" href="classecs_1_1_registry.html">Registry</a> <a class="code" href="classecs_1_1_world.html#a71b5c2fb034c78a6270c44e42a0e2360">registry</a>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        std::vector&lt;std::function&lt;void(<a class="code" href="classecs_1_1_world.html">World</a> &amp;)&gt;&gt; _systems;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        std::queue&lt;ecs::Event&gt; _events;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    };</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;} <span class="comment">// namespace ecs</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclassecs_1_1_world_html_a00726c449c9d48a80a7f60f5c98692e6"><div class="ttname"><a href="classecs_1_1_world.html#a00726c449c9d48a80a7f60f5c98692e6">ecs::World::World</a></div><div class="ttdeci">World()=delete</div></div>
-<div class="ttc" id="aclassecs_1_1_world_html_a74f0effbecc49f49a39627047b5d543e"><div class="ttname"><a href="classecs_1_1_world.html#a74f0effbecc49f49a39627047b5d543e">ecs::World::pushEvent</a></div><div class="ttdeci">void pushEvent(const ecs::Event event)</div><div class="ttdef"><b>Definition:</b> World.hpp:54</div></div>
-<div class="ttc" id="aclassecs_1_1_world_html_a677058b2b679c8521c03320fe580057c"><div class="ttname"><a href="classecs_1_1_world.html#a677058b2b679c8521c03320fe580057c">ecs::World::popEvent</a></div><div class="ttdeci">const ecs::Event popEvent()</div><div class="ttdef"><b>Definition:</b> World.hpp:71</div></div>
+<div class="ttc" id="aclassecs_1_1_world_html_a74f0effbecc49f49a39627047b5d543e"><div class="ttname"><a href="classecs_1_1_world.html#a74f0effbecc49f49a39627047b5d543e">ecs::World::pushEvent</a></div><div class="ttdeci">void pushEvent(const ecs::Event event)</div><div class="ttdef"><b>Definition:</b> World.hpp:46</div></div>
+<div class="ttc" id="aclassecs_1_1_world_html_a677058b2b679c8521c03320fe580057c"><div class="ttname"><a href="classecs_1_1_world.html#a677058b2b679c8521c03320fe580057c">ecs::World::popEvent</a></div><div class="ttdeci">const ecs::Event popEvent()</div><div class="ttdef"><b>Definition:</b> World.hpp:63</div></div>
+<div class="ttc" id="aclassecs_1_1_world_html_a04ef451826234a2ad54aff696fb974ba"><div class="ttname"><a href="classecs_1_1_world.html#a04ef451826234a2ad54aff696fb974ba">ecs::World::World</a></div><div class="ttdeci">World()</div><div class="ttdef"><b>Definition:</b> World.hpp:24</div></div>
 <div class="ttc" id="aclassecs_1_1_event_html"><div class="ttname"><a href="classecs_1_1_event.html">ecs::Event</a></div><div class="ttdef"><b>Definition:</b> Event.hpp:16</div></div>
 <div class="ttc" id="a_registry_8hpp_html"><div class="ttname"><a href="_registry_8hpp.html">Registry.hpp</a></div></div>
 <div class="ttc" id="aclassecs_1_1_registry_html"><div class="ttname"><a href="classecs_1_1_registry.html">ecs::Registry</a></div><div class="ttdef"><b>Definition:</b> Registry.hpp:24</div></div>
-<div class="ttc" id="aclassecs_1_1_world_html_a140a565e397b48539e8147eb72a737a3"><div class="ttname"><a href="classecs_1_1_world.html#a140a565e397b48539e8147eb72a737a3">ecs::World::World</a></div><div class="ttdeci">World(std::unique_ptr&lt; utils::Window &gt; &amp;window)</div><div class="ttdef"><b>Definition:</b> World.hpp:30</div></div>
-<div class="ttc" id="aclassecs_1_1_world_html_a0015fa0624f4eeaa5178d189bf5e233b"><div class="ttname"><a href="classecs_1_1_world.html#a0015fa0624f4eeaa5178d189bf5e233b">ecs::World::runSystems</a></div><div class="ttdeci">void runSystems()</div><div class="ttdef"><b>Definition:</b> World.hpp:35</div></div>
-<div class="ttc" id="a_window_8hpp_html"><div class="ttname"><a href="_window_8hpp.html">Window.hpp</a></div></div>
+<div class="ttc" id="aclassecs_1_1_world_html_a0015fa0624f4eeaa5178d189bf5e233b"><div class="ttname"><a href="classecs_1_1_world.html#a0015fa0624f4eeaa5178d189bf5e233b">ecs::World::runSystems</a></div><div class="ttdeci">void runSystems()</div><div class="ttdef"><b>Definition:</b> World.hpp:29</div></div>
 <div class="ttc" id="a_event_8hpp_html"><div class="ttname"><a href="_event_8hpp.html">Event.hpp</a></div></div>
-<div class="ttc" id="aclassecs_1_1utils_1_1_window_html"><div class="ttname"><a href="classecs_1_1utils_1_1_window.html">ecs::utils::Window</a></div><div class="ttdef"><b>Definition:</b> Window.hpp:33</div></div>
-<div class="ttc" id="aclassecs_1_1_world_html_a71b5c2fb034c78a6270c44e42a0e2360"><div class="ttname"><a href="classecs_1_1_world.html#a71b5c2fb034c78a6270c44e42a0e2360">ecs::World::registry</a></div><div class="ttdeci">Registry registry</div><div class="ttdef"><b>Definition:</b> World.hpp:83</div></div>
-<div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:20</div></div>
-<div class="ttc" id="aclassecs_1_1_world_html_a0016f19219c7de8ff675b391cd082e9e"><div class="ttname"><a href="classecs_1_1_world.html#a0016f19219c7de8ff675b391cd082e9e">ecs::World::getWindow</a></div><div class="ttdeci">utils::Window &amp; getWindow()</div><div class="ttdef"><b>Definition:</b> World.hpp:48</div></div>
-<div class="ttc" id="aclassecs_1_1_world_html_a298b46d7b7f1742f43ac2f8cb7ef9e95"><div class="ttname"><a href="classecs_1_1_world.html#a298b46d7b7f1742f43ac2f8cb7ef9e95">ecs::World::addSystem</a></div><div class="ttdeci">void addSystem(const std::function&lt; void(World &amp;)&gt; &amp;system)</div><div class="ttdef"><b>Definition:</b> World.hpp:46</div></div>
-<div class="ttc" id="aclassecs_1_1_world_html_a791357edf99771e9ff0cb1572ba68bc2"><div class="ttname"><a href="classecs_1_1_world.html#a791357edf99771e9ff0cb1572ba68bc2">ecs::World::getEvent</a></div><div class="ttdeci">const ecs::Event getEvent() const</div><div class="ttdef"><b>Definition:</b> World.hpp:60</div></div>
+<div class="ttc" id="aclassecs_1_1_world_html_a71b5c2fb034c78a6270c44e42a0e2360"><div class="ttname"><a href="classecs_1_1_world.html#a71b5c2fb034c78a6270c44e42a0e2360">ecs::World::registry</a></div><div class="ttdeci">Registry registry</div><div class="ttdef"><b>Definition:</b> World.hpp:75</div></div>
+<div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:19</div></div>
+<div class="ttc" id="aclassecs_1_1_world_html_a298b46d7b7f1742f43ac2f8cb7ef9e95"><div class="ttname"><a href="classecs_1_1_world.html#a298b46d7b7f1742f43ac2f8cb7ef9e95">ecs::World::addSystem</a></div><div class="ttdeci">void addSystem(const std::function&lt; void(World &amp;)&gt; &amp;system)</div><div class="ttdef"><b>Definition:</b> World.hpp:40</div></div>
+<div class="ttc" id="aclassecs_1_1_world_html_a791357edf99771e9ff0cb1572ba68bc2"><div class="ttname"><a href="classecs_1_1_world.html#a791357edf99771e9ff0cb1572ba68bc2">ecs::World::getEvent</a></div><div class="ttdeci">const ecs::Event getEvent() const</div><div class="ttdef"><b>Definition:</b> World.hpp:52</div></div>
 <div class="ttc" id="anamespaceecs_html"><div class="ttname"><a href="namespaceecs.html">ecs</a></div><div class="ttdef"><b>Definition:</b> Animated.hpp:12</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

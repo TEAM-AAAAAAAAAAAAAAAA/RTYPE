@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['registry_558',['Registry',['../classecs_1_1_entity.html#ac7b716e6d41ff508ad2d8e5dad655d72',1,'ecs::Entity']]]
+  ['registry_571',['Registry',['../classecs_1_1_entity.html#ac7b716e6d41ff508ad2d8e5dad655d72',1,'ecs::Entity']]]
 ];

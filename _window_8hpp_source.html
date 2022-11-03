@@ -10,7 +10,7 @@
         src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
         crossorigin="anonymous"></script>
-<title>RTYPE: src/ecs/utils/Window.hpp Source File</title>
+<title>RTYPE: src/utils/Window.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
   <!--BEGIN FULL_SIDEBAR-->
 <script type="text/javascript">var page_layout=1;</script>
@@ -146,39 +146,44 @@ $(document).ready(function(){initNavTree('_window_8hpp_source.html',''); initRes
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#ifdef CLIENT_COMPILATION_MODE</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">    #include &quot;SFML/Graphics.hpp&quot;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">    #include &quot;<a class="code" href="_constant_8hpp.html">Constant.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">    #include &quot;<a class="code" href="_constant_8hpp.html">Constant.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">    #include &quot;SFML/Graphics.hpp&quot;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs_1_1utils.html">ecs::utils</a></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceutils.html">utils</a></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">class </span>Window : <span class="keyword">public</span> sf::RenderWindow {</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">class </span>Window {</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;      <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        Window() : sf::RenderWindow(sf::VideoMode(<a class="code" href="namespaceecs.html">ecs</a>::constant::mapWidth, <a class="code" href="namespaceecs.html">ecs</a>::constant::mapHeight), <span class="stringliteral">&quot;r-type&quot;</span>)</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            this-&gt;setFramerateLimit(60);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        }</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    };</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;} <span class="comment">// namespace ecs::utils</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="namespaceecs_1_1utils.html">   31</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs_1_1utils.html">ecs::utils</a></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classecs_1_1utils_1_1_window.html">   33</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classecs_1_1utils_1_1_window.html">Window</a> {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;      <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classecs_1_1utils_1_1_window.html#aba432739d57a9b74615eaec9c05ee97e">   35</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classecs_1_1utils_1_1_window.html#aba432739d57a9b74615eaec9c05ee97e">isOpen</a>() { <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    };</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;} <span class="comment">// namespace ecs::utils</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        Window() { _Instance.setFramerateLimit(60); }</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <a class="code" href="classutils_1_1_window.html#a772a6cd99723f6dad2f59c3821809e9f">~Window</a>() {}</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">static</span> <span class="keyword">inline</span> sf::RenderWindow &amp;get() { <span class="keywordflow">return</span> _Instance; }</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classutils_1_1_window.html#adf07a85381bcbdf6cb2c71db03302e38">isOpen</a>() { <span class="keywordflow">return</span> _Instance.isOpen(); }</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;      <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">static</span> sf::RenderWindow _Instance;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    };</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;} <span class="comment">// namespace utils</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceutils.html">utils</a></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classutils_1_1_window.html">   39</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classutils_1_1_window.html">Window</a> {</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;      <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classutils_1_1_window.html#a772a6cd99723f6dad2f59c3821809e9f">   41</a></span>&#160;        <a class="code" href="classutils_1_1_window.html#a772a6cd99723f6dad2f59c3821809e9f">~Window</a>() {}</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classutils_1_1_window.html#adf07a85381bcbdf6cb2c71db03302e38">   42</a></span>&#160;        <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classutils_1_1_window.html#adf07a85381bcbdf6cb2c71db03302e38">isOpen</a>() { <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    };</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;} <span class="comment">// namespace utils</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="anamespaceecs_1_1utils_html"><div class="ttname"><a href="namespaceecs_1_1utils.html">ecs::utils</a></div><div class="ttdef"><b>Definition:</b> Window.hpp:31</div></div>
-<div class="ttc" id="aclassecs_1_1utils_1_1_window_html_aba432739d57a9b74615eaec9c05ee97e"><div class="ttname"><a href="classecs_1_1utils_1_1_window.html#aba432739d57a9b74615eaec9c05ee97e">ecs::utils::Window::isOpen</a></div><div class="ttdeci">bool isOpen()</div><div class="ttdef"><b>Definition:</b> Window.hpp:35</div></div>
+<div class="ttc" id="aclassutils_1_1_window_html"><div class="ttname"><a href="classutils_1_1_window.html">utils::Window</a></div><div class="ttdef"><b>Definition:</b> Window.hpp:39</div></div>
+<div class="ttc" id="aclassutils_1_1_window_html_adf07a85381bcbdf6cb2c71db03302e38"><div class="ttname"><a href="classutils_1_1_window.html#adf07a85381bcbdf6cb2c71db03302e38">utils::Window::isOpen</a></div><div class="ttdeci">static bool isOpen()</div><div class="ttdef"><b>Definition:</b> Window.hpp:42</div></div>
+<div class="ttc" id="aclassutils_1_1_window_html_a772a6cd99723f6dad2f59c3821809e9f"><div class="ttname"><a href="classutils_1_1_window.html#a772a6cd99723f6dad2f59c3821809e9f">utils::Window::~Window</a></div><div class="ttdeci">~Window()</div><div class="ttdef"><b>Definition:</b> Window.hpp:41</div></div>
+<div class="ttc" id="a_window_8hpp_html"><div class="ttname"><a href="_window_8hpp.html">Window.hpp</a></div></div>
 <div class="ttc" id="a_constant_8hpp_html"><div class="ttname"><a href="_constant_8hpp.html">Constant.hpp</a></div></div>
-<div class="ttc" id="aclassecs_1_1utils_1_1_window_html"><div class="ttname"><a href="classecs_1_1utils_1_1_window.html">ecs::utils::Window</a></div><div class="ttdef"><b>Definition:</b> Window.hpp:33</div></div>
-<div class="ttc" id="anamespaceecs_html"><div class="ttname"><a href="namespaceecs.html">ecs</a></div><div class="ttdef"><b>Definition:</b> Animated.hpp:12</div></div>
+<div class="ttc" id="anamespaceutils_html"><div class="ttname"><a href="namespaceutils.html">utils</a></div><div class="ttdef"><b>Definition:</b> Constant.hpp:15</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_ddca5f149c4ce13074f28b270e950ba9.html">ecs</a></li><li class="navelem"><a class="el" href="dir_83de878cbf206cf71c56377983eef047.html">utils</a></li><li class="navelem"><a class="el" href="_window_8hpp.html">Window.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_313caf1132e152dd9b58bea13a4052ca.html">utils</a></li><li class="navelem"><a class="el" href="_window_8hpp.html">Window.hpp</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

@@ -163,8 +163,8 @@ $(document).ready(function(){initNavTree('_projectile_collision_8hpp_source.html
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span> &amp;projPos = positions[i];</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            <span class="keywordflow">if</span> (proj &amp;&amp; projPos) {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                <span class="keywordflow">if</span> (projPos.value().x &lt; 0 || projPos.value().x &gt; ecs::constant::mapWidth || projPos.value().y &lt; 0</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                    || projPos.value().y &gt; ecs::constant::mapHeight) {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                <span class="keywordflow">if</span> (projPos.value().x &lt; 0 || projPos.value().x &gt; utils::constant::mapWidth || projPos.value().y &lt; 0</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                    || projPos.value().y &gt; utils::constant::mapHeight) {</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                    world.registry.killEntity(world.registry.entityFromIndex(i));</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                }</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            }</div>
@@ -226,7 +226,7 @@ $(document).ready(function(){initNavTree('_projectile_collision_8hpp_source.html
 <div class="ttc" id="a_projectile_8hpp_html"><div class="ttname"><a href="_projectile_8hpp.html">Projectile.hpp</a></div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_faction_html"><div class="ttname"><a href="structecs_1_1component_1_1_faction.html">ecs::component::Faction</a></div><div class="ttdef"><b>Definition:</b> Faction.hpp:12</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_projectile_html"><div class="ttname"><a href="structecs_1_1component_1_1_projectile.html">ecs::component::Projectile</a></div><div class="ttdef"><b>Definition:</b> Projectile.hpp:12</div></div>
-<div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:20</div></div>
+<div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:19</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_size_html"><div class="ttname"><a href="structecs_1_1component_1_1_size.html">ecs::component::Size</a></div><div class="ttdoc">Size component.</div><div class="ttdef"><b>Definition:</b> Size.hpp:6</div></div>
 <div class="ttc" id="anamespaceecs_1_1systems_html"><div class="ttname"><a href="namespaceecs_1_1systems.html">ecs::systems</a></div><div class="ttdef"><b>Definition:</b> Animate.hpp:19</div></div>
 <div class="ttc" id="anamespaceecs_1_1systems_html_a3ae801d63a324b2863d0b308abaa46d9"><div class="ttname"><a href="namespaceecs_1_1systems.html#a3ae801d63a324b2863d0b308abaa46d9">ecs::systems::projectileCollision</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; projectileCollision</div><div class="ttdef"><b>Definition:</b> ProjectileCollision.hpp:18</div></div>
