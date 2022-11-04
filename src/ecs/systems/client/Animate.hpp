@@ -18,7 +18,7 @@
 
 namespace ecs::systems
 {
-    std::function<void(World &)> Animate = [](World &world) {
+    std::function<void(World &)> animate = [](World &world) {
         auto &animateds = world.registry.getComponents<component::Animated>();
 
         using chrono = std::chrono::high_resolution_clock;
@@ -28,7 +28,7 @@ namespace ecs::systems
 
             if (anim) {
                 if (chrono::now().time_since_epoch().count() - anim.value().lastSwitch
-                    > anim.value().getFrame().delay) {
+                    > static_cast<size_t>(anim.value().getFrame().delay) * 1000000) {
                     anim.value().nextFrame();
                     anim.value().lastSwitch = chrono::now().time_since_epoch().count();
                 }
