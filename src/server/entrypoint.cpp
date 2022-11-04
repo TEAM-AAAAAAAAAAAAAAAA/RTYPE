@@ -5,7 +5,9 @@
 #include "components/Faction.hpp"
 #include "components/Health.hpp"
 #include "components/NetworkId.hpp"
+#include "components/EntityAI.hpp"
 #include "systems/Movement.hpp"
+#include "systems/RunAI.hpp"
 #include "systems/server/HandleIncomingMessage.hpp"
 #include "systems/server/PositionUpdate.hpp"
 #include "systems/server/ProjectileCollision.hpp"
@@ -17,7 +19,7 @@ ecs::World getGameWorld()
     ecs::Entity player = world.registry.spawn_entity();
 
     world.registry.registerComponent<ecs::component::Projectile>();
-    world.registry.registerComponent<ecs::component::EnemyAI>();
+    world.registry.registerComponent<ecs::component::EntityAI>();
     world.registry.registerComponent<ecs::component::Direction>();
     world.registry.registerComponent<ecs::component::Weapon>();
     world.registry.registerComponent<ecs::component::Velocity>();
@@ -32,11 +34,15 @@ ecs::World getGameWorld()
     world.addSystem(ecs::systems::projectileCollision);
     world.addSystem(ecs::systems::HandleIncomingMessages);
     world.addSystem(ecs::systems::PositionUpdate);
+    world.addSystem(ecs::systems::runAI);
+
+    using EntityAI = ecs::component::EntityAI;
 
     ecs::Entity enemy = world.registry.spawn_entity();
     world.registry.addComponent<ecs::component::Position>(enemy, {500, 500});
+    world.registry.addComponent<ecs::component::Direction>(enemy, {0, 0});
     world.registry.addComponent<ecs::component::Size>(enemy, {32, 64});
-    world.registry.addComponent<ecs::component::EnemyAI>(enemy, {});
+    world.registry.addComponent<ecs::component::EntityAI>(enemy, {EntityAI::AIType::BasicUpDown});
     world.registry.addComponent<ecs::component::Health>(enemy, {100});
     world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Enemies});
     world.registry.addComponent<ecs::component::NetworkId>(enemy, {static_cast<size_t>(enemy)});
