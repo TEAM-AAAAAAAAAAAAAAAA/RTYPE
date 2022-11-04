@@ -138,7 +138,7 @@ namespace ecs::systems
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Server::getIncomingMessages().empty()) {
             network::ClientMessage msg = network::Server::getIncomingMessages().pop();
-            if (msg.first[0] == 0 || msg.first[0] == ecs::constant::PLAYER_MOVE || msg.first[0] == ecs::constant::PLAYER_SHOT)
+            if (msg.first[0] == 0 || msg.first[0] == utils::constant::PLAYER_MOVE || msg.first[0] == utils::constant::PLAYER_SHOT)
             packetTypeFunction[msg.first[0]](world, msg);
         }
     };
