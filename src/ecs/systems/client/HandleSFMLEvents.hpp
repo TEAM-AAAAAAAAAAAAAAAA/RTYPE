@@ -8,10 +8,29 @@
 #pragma once
 
 #include <functional>
+#include "Window.hpp"
 #include "World.hpp"
 
 namespace ecs::systems
 {
+    std::function<World(void)> getTestWorld = []() {
+        ecs::World world;
+
+        Entity newEntity = world.registry.spawn_entity();
+
+        world.registry.registerComponent<component::Position>();
+        world.registry.registerComponent<component::Size>();
+        world.registry.registerComponent<component::Drawable>();
+        world.registry.registerComponent<component::Animated>();
+
+        world.registry.addComponent<component::Position>(newEntity, {100, 100});
+        world.registry.addComponent<component::Size>(newEntity, {100, 100});
+        world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 35, 32, 16}});
+
+        world.addSystem(ecs::systems::draw);
+
+        return world;
+    };
     /**
      * Used to manage Sfml events
      * Currently able to manage the following actions:
@@ -20,17 +39,17 @@ namespace ecs::systems
      * if yes, we had it on world's events' stack, nothing otherwise
      */
     std::function<void(World &)> handleSFMLEvents = [](World &world) {
-#ifdef CLIENT_COMPILATION_MODE
         sf::Event event;
 
-        while (world.getWindow().pollEvent(event)) {
+        while (utils::Window::get().pollEvent(event)) {
             switch (event.type) {
-                case sf::Event::Closed: world.getWindow().close(); break;
+                case sf::Event::Closed: utils::Window::get().close(); break;
                 case sf::Event::KeyPressed: {
+                    if (event.key.code == sf::Keyboard::Key::W)
+                        ecs::WorldManager::setWaitingWorld(getTestWorld);
                 } break;
                 default: break;
             }
         }
-#endif
     };
 } // namespace ecs::systems

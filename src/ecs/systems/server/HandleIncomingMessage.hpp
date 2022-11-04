@@ -10,6 +10,7 @@
 #include <functional>
 #include <iostream>
 #include "../server/Server.hpp"
+#include "Constant.hpp"
 #include "World.hpp"
 #include "components/Direction.hpp"
 #include "components/EntityType.hpp"
@@ -106,11 +107,11 @@ namespace ecs::systems
                 auto &fac = factions[i];
 
                 if (pos && weapon && fac) {
-                    auto elapsed = constant::chrono::now().time_since_epoch().count() - weapon.value().lastShoot;
+                    auto elapsed = utils::constant::chrono::now().time_since_epoch().count() - weapon.value().lastShoot;
                     if (weapon.value().hasSuper && elapsed > weapon.value().superLoadingTime) {
-                        weapon.value().lastShoot = constant::chrono::now().time_since_epoch().count();
+                        weapon.value().lastShoot = utils::constant::chrono::now().time_since_epoch().count();
                     } else if (elapsed > weapon.value().shootDelay) {
-                        weapon.value().lastShoot = constant::chrono::now().time_since_epoch().count();
+                        weapon.value().lastShoot = utils::constant::chrono::now().time_since_epoch().count();
                         ecs::Entity bullet = world.registry.spawn_entity();
                         world.registry.addComponent<ecs::component::EntityType>(
                             bullet, {component::EntityType::Bullet});
@@ -132,7 +133,7 @@ namespace ecs::systems
     }
 
     static std::unordered_map<char, std::function<void(World &, network::ClientMessage &msg)>> packetTypeFunction = {
-        {0, createPlayer}, {ecs::constant::PLAYER_MOVE, movePlayer}, {ecs::constant::PLAYER_SHOT, playerShoot}};
+        {0, createPlayer}, {utils::constant::PLAYER_MOVE, movePlayer}, {utils::constant::PLAYER_SHOT, playerShoot}};
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Server::getIncomingMessages().empty()) {

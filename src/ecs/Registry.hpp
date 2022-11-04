@@ -94,7 +94,7 @@ namespace ecs
         Entity entityFromIndex(std::size_t idx)
         {
             // if (idx >= _lastEntity || std::find(_entitiesBin.begin(), _entitiesBin.end(), idx) != _entitiesBin.end())
-            //     return Entity(ecs::constant::npos);
+            //     return Entity(utils::constant::npos);
             return Entity(idx);
         }
 
@@ -105,7 +105,7 @@ namespace ecs
          */
         void killEntity(Entity const &e)
         {
-            if (e._id == ecs::constant::npos)
+            if (e._id == utils::constant::npos)
                 return;
             for (const auto &eraseFunc : _eraseFunctions)
                 eraseFunc(*this, e);

@@ -24,9 +24,9 @@ namespace ecs::systems
         auto const &controllables = world.registry.getComponents<component::Controllable>();
         auto &directions = world.registry.getComponents<component::Direction>();
 
-        static auto clock = ecs::constant::chrono::now();
-        if (ecs::constant::chronoDuration(ecs::constant::chrono::now() - clock).count() > 10) {
-            clock = ecs::constant::chrono::now();
+        static auto clock = utils::constant::chrono::now();
+        if (utils::constant::chronoDuration(utils::constant::chrono::now() - clock).count() > 10) {
+            clock = utils::constant::chrono::now();
             for (size_t i = 0; i < controllables.size() && i < directions.size(); i++) {
                 if (!controllables[i] || !directions[i])
                     continue;
@@ -34,7 +34,7 @@ namespace ecs::systems
                 if (directions[i].value().hasMoved) {
                     network::Message msg;
                     msg.fill(0);
-                    msg[0] = ecs::constant::PLAYER_MOVE;
+                    msg[0] = utils::constant::PLAYER_MOVE;
                     msg[1] = directions[i].value().x;
                     msg[2] = directions[i].value().y;
                     network::Client::getOutgoingMessages().push(msg);

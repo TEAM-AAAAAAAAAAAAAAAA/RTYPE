@@ -38,7 +38,7 @@ namespace ecs::systems
                             std::array<char, 2> idBin = id.value().serialize();
 
                             network::Message msg;
-                            msg[0] = ecs::constant::getPacketTypeKey(ecs::constant::PacketType::ENTITY_DEATH);
+                            msg[0] = utils::constant::getPacketTypeKey(utils::constant::PacketType::ENTITY_DEATH);
                             msg[1] = idBin[0];
                             msg[2] = idBin[1];
                             network::Server::getOutgoingMessages().push(
