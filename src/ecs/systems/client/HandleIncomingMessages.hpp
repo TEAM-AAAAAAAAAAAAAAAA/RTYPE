@@ -32,14 +32,17 @@ namespace ecs::systems
         auto &velocities = world.registry.getComponents<component::Velocity>();
         auto &sizes = world.registry.getComponents<component::Size>();
         auto &types = world.registry.getComponents<component::EntityType>();
+        auto &directions = world.registry.getComponents<component::Direction>();
         size_t msgId = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
+        component::EntityType type = msg[3];
         int posX = (unsigned char)msg[4] << 8U | (unsigned char)msg[5];
         int posY = (unsigned char)msg[6] << 8U | (unsigned char)msg[7];
-        int velX = msg[10];
-        int velY = msg[11];
-        component::EntityType type = msg[3];
         int sizeX = msg[8];
         int sizeY = msg[9];
+        int velX = msg[10];
+        int velY = msg[11];
+        char dirX = msg[12];
+        char dirY = msg[13];
 
         for (size_t i = 0; i < networkId.size(); i++)
             if (networkId[i] && networkId[i]->id == msgId) {
@@ -58,10 +61,14 @@ namespace ecs::systems
                     velocities[i].value().x = msg[10];
                     velocities[i].value().y = msg[11];
                 }
+                if (msgId != selfId && i < directions.size() && directions[i]) {
+                    directions[i].value().x = dirX;
+                    directions[i].value().y = dirY;
+                }
                 return;
             }
         Entity newEntity = world.registry.spawn_entity();
-        world.registry.addComponent<component::Direction>(newEntity, {0, 0});
+        world.registry.addComponent<component::Direction>(newEntity, {dirX, dirY});
         world.registry.addComponent<component::NetworkId>(newEntity, {msgId});
         world.registry.addComponent<component::Position>(newEntity, {posX, posY});
         world.registry.addComponent<component::Velocity>(newEntity, {velX, velY});
@@ -81,14 +88,30 @@ namespace ecs::systems
                         newEntity, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D});
                 }
                 world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 1, 32, 16}});
-                world.registry.addComponent<ecs::component::Animated>(newEntity, {AnimFrame(1, 1, 32, 16, 100), AnimFrame(34, 1, 32, 16, 100), AnimFrame(67, 1, 32, 16, 100), AnimFrame(100, 1, 32, 16, 100), AnimFrame(133, 1, 32, 16, 100), AnimFrame(100, 1, 32, 16, 100), AnimFrame(67, 1, 32, 16, 100), AnimFrame(34, 1, 32, 16, 100)});
+                world.registry.addComponent<ecs::component::Animated>(newEntity,
+                    {AnimFrame(1, 1, 32, 16, 100), AnimFrame(34, 1, 32, 16, 100), AnimFrame(67, 1, 32, 16, 100),
+                        AnimFrame(100, 1, 32, 16, 100), AnimFrame(133, 1, 32, 16, 100), AnimFrame(100, 1, 32, 16, 100),
+                        AnimFrame(67, 1, 32, 16, 100), AnimFrame(34, 1, 32, 16, 100)});
                 break;
             case component::EntityType::Types::EnemyBase:
                 world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 18, 32, 16}});
+                world.registry.addComponent<ecs::component::Animated>(newEntity,
+                    {AnimFrame(1, 18, 32, 16, 100), AnimFrame(34, 18, 32, 16, 100), AnimFrame(67, 18, 32, 16, 100),
+                        AnimFrame(100, 18, 32, 16, 100), AnimFrame(133, 18, 32, 16, 100),
+                        AnimFrame(100, 18, 32, 16, 100), AnimFrame(67, 18, 32, 16, 100),
+                        AnimFrame(34, 18, 32, 16, 100)});
                 break;
             case component::EntityType::Types::Bullet:
-                world.registry.addComponent<component::Drawable>(newEntity, {"players", {5, 5, 1, 1}});
+                short rotation = 0;
+                if (dirX == 1)
+                    rotation = 90;
+                else if (dirX == -1)
+                    rotation = -90;
+                else if (dirY == 1)
+                    rotation = 180;
+                world.registry.addComponent<component::Drawable>(newEntity, {"bullet", {10, 7, 12, 19}, rotation});
 
+                std::cout << sizeX << " " << sizeY << std::endl;
                 break;
         }
     }
