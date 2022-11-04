@@ -125,6 +125,8 @@ ecs::World getGameWorld(ecs::Engine &engine)
     return world;
 }
 
+#include <iostream>
+
 /**
  * Main function of the client, running everything to start the game
  * @return 0 if no error, anything otherwise
@@ -135,6 +137,7 @@ int main()
     network::Client::setHost("localhost");
     network::Client::setPort("8000");
     network::Client::connect();
+	std::cerr << "Connected to server" << std::endl;
     ecs::Engine engine;
     network::Message msg;
     msg.fill(0);
@@ -142,6 +145,7 @@ int main()
     engine.setWaitingWorld(getGameWorld(engine));
     network::Client::getOutgoingMessages().push(msg);
 
+	network::Client::runService();
     engine.run();
     return 0;
 }

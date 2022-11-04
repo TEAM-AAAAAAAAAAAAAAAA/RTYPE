@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2022
-** RTYPE
+** rtype
 ** File description:
-** NetworkClient
+** Client
 */
 
 #pragma once
@@ -13,8 +13,6 @@
 #include "LockedQueue.hpp"
 
 using boost::asio::ip::udp;
-
-static boost::asio::io_service service;
 
 namespace network
 {
@@ -32,14 +30,12 @@ namespace network
         ~Client()
         {
             _Instance._ioService.stop();
-            _Instance._socket.close();
-            _Instance._messageSendingThread.join();
-            _Instance._ioServiceThread.join();
+            _Instance._socket->close();
+            _Instance._outgoingService.join();
+            _Instance._incomingService.join();
+			_Instance._serviceThread.join();
         }
 
-        /**
-         * Getters & Setters of client Class
-         */
         static inline void setHost(const std::string &host) { _Instance._host = host; }
 
         static void setPort(const std::string &port) { _Instance._port = port; }
@@ -48,127 +44,144 @@ namespace network
 
         static inline LockedQueue<Message> &getReceivedMessages() { return _Instance._receivedMessages; }
 
+		static void runService()
+		{
+			while (_Instance._isServiceStarted) {
+				_Instance.receiveIncoming();
+				_Instance.sendOutgoing();
+				_Instance._ioService.run();
+			}
+		}
+
+		/**
+		* Static methods used to connect to the given server (host, port) using udp::v4
+		*/
+		static void connect()
+		{
+			_Instance._socket = new udp::socket(_Instance._ioService, udp::endpoint(udp::v4(), 0));
+			udp::resolver resolver = udp::resolver(_Instance._ioService);
+			_Instance._endpoint = *resolver.resolve({udp::v4(), _Instance._host, _Instance._port});
+			_Instance.startServices();
+			_Instance._isServiceStarted = true;
+		}
+
+		/**
+		* Static methods used to disconnect from the given server (host, port) using udp::v4
+		*/
+		static void disconnect()
+		{
+			_Instance._ioService.stop();
+			_Instance._socket->close();
+			_Instance.stopServices();
+		}
+		private:
         /**
-         * Static methods used to connect to the given server (host, port) using udp::v4
+         * Service threads for managing incoming & outgoing messages, using the `Client::_outgoingMessages` &
+         * `Client::_receivedMessages queues
          */
-        static inline void connect()
-        {
-            udp::resolver resolver(_Instance._ioService);
-            udp::resolver::query query(udp::v4(), _Instance._host, _Instance._port);
-            _Instance._endpoint = *resolver.resolve(query);
-            _Instance._socket.open(udp::v4());
-            _Instance.isServiceStarted = true;
-        }
+        std::thread _outgoingService;
+        std::thread _incomingService;
 
-        bool isServiceStarted;
-
-      private:
-        /**
-         * Private default constructor of the Client Class
-         */
-        Client()
-            : isServiceStarted(false), _ioService(service), _ioServiceThread(&Client::runService, this),
-              _socket(_ioService), _messageSendingThread(&Client::sendOutgoing, this)
-        {
-        }
+		std::thread _serviceThread;
 
         /**
-         * Handles the incoming messages by placing them into the incoming
-         * messages locked queue
-         * @param error error of reception
-         * @param bytesTransferred the size of the incoming packet
-         */
-        void handleReceive(const std::error_code &error, std::size_t bytesTransferred)
-        {
-            if (!error) {
-                try {
-                    auto message = Message(_recvBuffer);
-                    if (!message.empty()) {
-                        _receivedMessages.push(message);
-                    }
-                } catch (const std::exception &e) {
-                    std::cerr << e.what() << '\n';
-                }
-            }
-            startReceive();
-        }
-
-        void startReceive()
-        {
-            udp::endpoint senderEndpoint;
-
-            _recvBuffer.fill(0);
-            _socket.async_receive_from(boost::asio::buffer(_recvBuffer), senderEndpoint,
-                [this](std::error_code ec, std::size_t bytesRecvd) { this->handleReceive(ec, bytesRecvd); });
-        }
-
-        /**
-         * Run the client's service
-         */
-        void runService()
-        {
-            while (isServiceStarted == false)
-                ;
-            startReceive();
-            while (!_ioService.stopped()) {
-                try {
-                    _ioService.run();
-                } catch (const std::exception &e) {
-                    std::cerr << e.what() << '\n';
-                }
-            }
-        }
-
-        /**
-         * Send messages in the outgoing message queue
-         */
-        void sendOutgoing()
-        {
-            while (isServiceStarted == false)
-                ;
-            while (!_ioService.stopped()) {
-                if (!_outgoingMessages.empty()) {
-                    auto msg = _outgoingMessages.pop();
-                    _socket.async_send_to(
-                        boost::asio::buffer(msg), _endpoint, [this](std::error_code ec, std::size_t bytesSent) {});
-                }
-            }
-        }
-
-        /**
-         * Locked queue of all unsent outgoing messages
+         * Message queues for incoming & outgoing messages
          */
         LockedQueue<Message> _outgoingMessages;
-
-        /**
-         * Locked queue of all unprocessed incoming messages
-         */
         LockedQueue<Message> _receivedMessages;
 
         /**
-         * Boost Asio service & socket and endpoint
+         * Boost Asio service & socket
          */
-        boost::asio::io_service &_ioService;
-        udp::socket _socket;
+        bool _isServiceStarted = false;
+        boost::asio::io_service _ioService;
+        udp::socket *_socket;
         udp::endpoint _endpoint;
-
-        /**
-         * Server reception buffer
-         */
-        Message _recvBuffer{};
-
-        /**
-         * Server host & port
-         */
         std::string _host;
         std::string _port;
+        Message _recvbuffer{};
 
         /**
-         * Threads used by the client class
+         * Start the service threads for managing incoming & outgoing messages
          */
-        std::thread _ioServiceThread;
-        std::thread _messageSendingThread;
+        static void startServices()
+		{
+			_Instance.sendOutgoing();
+			_Instance.receiveIncoming();
+			_Instance._serviceThread = std::thread(&Client::runService);
+//            _Instance._incomingService = std::thread(&Client::receiveIncoming, &_Instance);
+//            _Instance._outgoingSedrvice = std::thread(&Client::sendOutgoing, &_Instance);
+		}
 
+		static void stopServices()
+		{
+			_Instance._serviceThread.join();
+//			_Instance._outgoingService.join();
+//			_Instance._incomingService.join();
+		}
+
+        void receiveIncoming()
+        {
+            std::function<void()> receive = [&]() {
+                _socket->async_receive_from(boost::asio::buffer(_recvbuffer, _recvbuffer.size()), _endpoint,
+                    [](const boost::system::error_code &ec, std::size_t bytes) {
+                        if (ec)
+                            std::cerr << "Error while receiving message: " << ec.message() << std::endl;
+                        else
+                            _Instance._receivedMessages.push(_Instance._recvbuffer);
+                    });
+            };
+            while (!_socket->is_open())
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+			receive();
+//            _ioService.run();
+        }
+
+        /**
+         * Private default constructor of the Client Class
+         */
+        Client() = default;
+
+        void sendOutgoing()
+        {
+            std::function<void()> send = [&]() {
+                if (!_outgoingMessages.empty()) {
+                    Message msg = _outgoingMessages.pop();
+                    _socket->async_send_to(boost::asio::buffer(msg, msg.size()), _endpoint,
+                        [](const boost::system::error_code &ec, std::size_t bytes) {
+							if (ec)
+                                std::cerr << "Error while sending message: " << ec.message() << std::endl;
+                        });
+                }
+            };
+//            while (!_socket->is_open())
+//                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+//            send();
+//            while (!_ioService.stopped()) {
+//                _ioService.run();
+//            }
+        }
+
+        //			/**
+        //			 * Read in the buffer of the instance to get the message to read
+        //			 */
+        //			static Message receive()
+        //			{
+        //				Message msg;
+        //				_Instance._socket.receive_from(boost::asio::buffer(msg, msg.size()), _Instance._endpoint);
+        //				return msg;
+        //			}
+        //
+        //			/**
+        //			 * Getters & Setters of client Class
+        //			 */
+        //
+        //
+        //
+        /**
+         * Static instance of the Client class, lazy loaded
+         */
         static Client _Instance;
     };
+
 } // namespace network

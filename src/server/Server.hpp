@@ -85,7 +85,7 @@ namespace network
          * Threads used by the server class
          */
         std::thread _serviceThread;
-        std::thread _outgoingThread;
+        std::thread _outgoingService;
 
         /**
          * Locked queue of all unprocessed incoming messages

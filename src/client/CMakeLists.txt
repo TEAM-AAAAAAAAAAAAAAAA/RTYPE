@@ -8,10 +8,10 @@ set(SRC
     ${SRC_ROOT}/entrypoint.cpp
     ${SRC_ROOT}/Animation.cpp
     ${SRC_ROOT}/AssetLoader.cpp
-    # ${SRC_ROOT}/NetworkClient.cpp
-    # ${SRC_ROOT}/NetworkClient.hpp
-    ${SRC_ROOT}/New_Net_Client.cpp
-    ${SRC_ROOT}/New_Net_Client.hpp
+     ${SRC_ROOT}/NetworkClient.cpp
+     ${SRC_ROOT}/NetworkClient.hpp
+#    ${SRC_ROOT}/New_Net_Client.cpp
+#    ${SRC_ROOT}/New_Net_Client.hpp
 )
 
 
@@ -25,7 +25,7 @@ target_link_libraries(${TARGET} PRIVATE
 )
 
 target_include_directories(${TARGET}
-        PRIVATE ${ECS_INCROOT}
+    PRIVATE ${ECS_INCROOT}
 )
 
 target_include_directories(${TARGET} PRIVATE

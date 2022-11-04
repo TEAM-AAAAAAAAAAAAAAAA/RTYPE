@@ -13,12 +13,12 @@ namespace network
 
     /**
      * Default Constructor of the Server Class, initializing every part of it, socket, endpointk,
-     * serviceThread, _nextClientID, _outgoingThread
+     * serviceThread, _nextClientID, _outgoingService
      * @param localPort The open localPort of the server
      */
     Server::Server(unsigned short localPort)
         : _socket(_ioService, udp::endpoint(udp::v4(), localPort)), _serviceThread(&Server::runService, this),
-          _nextClientID(0L), _outgoingThread(&Server::sendOutgoing, this)
+          _nextClientID(0L), _outgoingService(&Server::sendOutgoing, this)
     {
         std::cerr << "Starting server on port " << localPort << std::endl;
     };
@@ -31,7 +31,7 @@ namespace network
         _ioService.stop();
         _socket.close();
         _serviceThread.join();
-        _outgoingThread.join();
+        _outgoingService.join();
     }
 
     /**
@@ -75,6 +75,7 @@ namespace network
             try {
                 auto message = ClientMessage(std::array(_recvBuffer), getOrCreateClientID(_remoteEndpoint));
                 if (!message.first.empty()) {
+					std::cerr << "Received message from client" << std::endl;
                     _incomingMessages.push(message);
                     for (const auto &c : message.first) {
                         std::cerr << c;
