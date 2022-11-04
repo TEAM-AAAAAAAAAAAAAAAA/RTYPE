@@ -25,6 +25,8 @@ namespace ecs::systems
     static size_t selfId = 0;
     static void movePacketHandle(World &world, network::Message &msg)
     {
+        using AnimFrame = ecs::component::Animated::AnimFrame;
+
         auto &positions = world.registry.getComponents<component::Position>();
         auto &networkId = world.registry.getComponents<component::NetworkId>();
         auto &velocities = world.registry.getComponents<component::Velocity>();
@@ -79,6 +81,7 @@ namespace ecs::systems
                         newEntity, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D});
                 }
                 world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 1, 32, 16}});
+                world.registry.addComponent<ecs::component::Animated>(newEntity, {AnimFrame(1, 1, 32, 16, 100), AnimFrame(34, 1, 32, 16, 100), AnimFrame(67, 1, 32, 16, 100), AnimFrame(100, 1, 32, 16, 100), AnimFrame(133, 1, 32, 16, 100), AnimFrame(100, 1, 32, 16, 100), AnimFrame(67, 1, 32, 16, 100), AnimFrame(34, 1, 32, 16, 100)});
                 break;
             case component::EntityType::Types::EnemyBase:
                 world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 18, 32, 16}});
@@ -88,14 +91,6 @@ namespace ecs::systems
 
                 break;
         }
-        // } else if (msg[3] == component::EntityType::Types::EnemyBase) {
-        //     world.registry.addComponent<component::Drawable>(newEntity,
-        //         {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {1, 18, 32, 16}});
-        // } else if (msg[3] == component::EntityType::Types::Bullet) {
-        //     world.registry.addComponent<component::Drawable>(
-        //         newEntity, {ecs::crossPlatformPath("src", "demo", "assets", "textures", "players.gif"), {5, 5, 1,
-        //         1}});
-        // }
     }
 
     static void firstMessageHandle(World &world, network::Message &msg)
