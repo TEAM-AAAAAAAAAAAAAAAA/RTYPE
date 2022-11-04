@@ -110,9 +110,9 @@ namespace ecs::systems
                 else if (dirY == 1)
                     rotation = 180;
                 world.registry.addComponent<component::Drawable>(newEntity, {"bullet", {10, 7, 12, 19}, rotation});
-                world.registry.addComponent<component::Animated>(newEntity, {AnimFrame(10, 7, 12, 19, 100), AnimFrame(42, 7, 12, 19, 100), AnimFrame(74, 7, 12, 19, 100), AnimFrame(106, 7, 12, 19, 100)});
-
-                std::cout << sizeX << " " << sizeY << std::endl;
+                world.registry.addComponent<component::Animated>(newEntity,
+                    {AnimFrame(10, 7, 12, 19, 100), AnimFrame(42, 7, 12, 19, 100), AnimFrame(74, 7, 12, 19, 100),
+                        AnimFrame(106, 7, 12, 19, 100)});
                 break;
         }
     }
