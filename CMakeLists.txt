@@ -1,5 +1,6 @@
 set(X_VCPKG_APPLOCAL_DEPS_INSTALL ON)
 
+
 cmake_minimum_required(VERSION 3.20.0)
 
 project(rtype LANGUAGES CXX)
@@ -50,6 +51,16 @@ SET(RTYPE_MAJOR_VERSION 0)
 SET(RTYPE_MINOR_VERSION 1)
 
 set(CPACK_WIX_LICENSE_RTF ${PROJECT_SOURCE_DIR}/misc/windows/wix_licence.txt)
+
+message(STATUS "Registering DEB package infos")
+set(CPACK_DEBIAN_PACKAGE_NAME "r-thaaaaaai")
+set(CPACK_DEBIAN_PACKAGE_VERSION "${RTYPE_MAJOR_VERSION}.${RTYPE_MINOR_VERSION}")
+set(CPACK_DEBIAN_PACKAGE_CONTACT "constant.vigneron@epitech.eu")
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "TEAM-AAAAAAAAAAAAAAAA")
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "libsfml-dev, libboost-dev")
+
+
+set(CPACK_GENERATOR "DEB;RPM;TGZ")
 
 include(InstallRequiredSystemLibraries)
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENSE")
