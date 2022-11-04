@@ -163,6 +163,8 @@ Variables</h2></td></tr>
 <tr class="separator:a33dcdd288d54220f937db37567c5512f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a109fac74ab82a8543e68f4f3871e11a4"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#a109fac74ab82a8543e68f4f3871e11a4">positionLogger</a></td></tr>
 <tr class="separator:a109fac74ab82a8543e68f4f3871e11a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a724f2f255d1e449f789bf61c97bcc940"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#a724f2f255d1e449f789bf61c97bcc940">runAI</a></td></tr>
+<tr class="separator:a724f2f255d1e449f789bf61c97bcc940"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a689ab1ddea34f047a379e06ff14f5489"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#a689ab1ddea34f047a379e06ff14f5489">serverPush</a></td></tr>
 <tr class="separator:a689ab1ddea34f047a379e06ff14f5489"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74e7bd5ae2b8cf994181c05a1fedbfb8"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#a74e7bd5ae2b8cf994181c05a1fedbfb8">PositionUpdate</a></td></tr>
@@ -478,6 +480,45 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a724f2f255d1e449f789bf61c97bcc940"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a724f2f255d1e449f789bf61c97bcc940">&#9670;&nbsp;</a></span>runAI</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt; ecs::systems::runAI</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= [](World &amp;world) {</div>
+<div class="line">        <span class="keyword">auto</span> &amp;directions = world.registry.getComponents&lt;component::Direction&gt;();</div>
+<div class="line">        <span class="keyword">auto</span> &amp;entityAIs = world.registry.getComponents&lt;component::EntityAI&gt;();</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">using</span> <a class="code" href="namespaceutils_1_1constant.html#ab4d7e2d46688914f26626a619f8326af">chrono</a> = std::chrono::high_resolution_clock;</div>
+<div class="line">        <span class="keyword">using</span> <a class="code" href="namespaceutils_1_1constant.html#ad903a57ac8f070571efdf25fbdcb0c29">chronoDuration</a> = std::chrono::duration&lt;double, std::milli&gt;;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">static</span> <span class="keyword">auto</span> clock = chrono::now();</div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; directions.size() &amp;&amp; i &lt; entityAIs.size(); ++i) {</div>
+<div class="line">            <span class="keyword">auto</span> &amp;dir = directions[i];</div>
+<div class="line">            <span class="keyword">auto</span> &amp;ai = entityAIs[i];</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (dir &amp;&amp; ai) {</div>
+<div class="line">                <span class="keywordflow">if</span> (<a class="code" href="namespaceutils_1_1constant.html#ad903a57ac8f070571efdf25fbdcb0c29">chronoDuration</a>(chrono::now() - clock).count()</div>
+<div class="line">                    &gt; <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(ai.value().getDelay()) * 1000) {</div>
+<div class="line">                    <span class="keyword">auto</span> &amp;tmpDir = ai.value().getNextDirection();</div>
+<div class="line">                    dir.value().x = tmpDir.first;</div>
+<div class="line">                    dir.value().y = tmpDir.second;</div>
+<div class="line">                    dir.value().hasMoved = <span class="keyword">true</span>;</div>
+<div class="line">                    clock = chrono::now();</div>
+<div class="line">                }</div>
+<div class="line">            }</div>
+<div class="line">        };</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Runs the AIs stored in the enities </p>
 
 </div>
 </div>

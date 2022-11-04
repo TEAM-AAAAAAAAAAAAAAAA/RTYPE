@@ -10,7 +10,7 @@
         src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
         crossorigin="anonymous"></script>
-<title>RTYPE: src/ecs/components/server/EnemyAI.hpp File Reference</title>
+<title>RTYPE: src/ecs/systems/RunAI.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
   <!--BEGIN FULL_SIDEBAR-->
 <script type="text/javascript">var page_layout=1;</script>
@@ -113,7 +113,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('_enemy_a_i_8hpp.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('_run_a_i_8hpp.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -133,44 +133,77 @@ $(document).ready(function(){initNavTree('_enemy_a_i_8hpp.html',''); initResizab
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">EnemyAI.hpp File Reference</div>  </div>
+<div class="title">RunAI.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><div class="dynheader">
+<div class="textblock"><code>#include &lt;chrono&gt;</code><br />
+<code>#include &lt;functional&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &quot;<a class="el" href="_world_8hpp_source.html">World.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_direction_8hpp_source.html">components/Direction.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_entity_a_i_8hpp_source.html">components/EntityAI.hpp</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for RunAI.hpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="_run_a_i_8hpp__incl.png" border="0" usemap="#src_2ecs_2systems_2_run_a_i_8hpp" alt=""/></div>
+<map name="src_2ecs_2systems_2_run_a_i_8hpp" id="src_2ecs_2systems_2_run_a_i_8hpp">
+<area shape="rect" title=" " alt="" coords="305,5,501,32"/>
+<area shape="rect" title=" " alt="" coords="41,379,108,405"/>
+<area shape="rect" title=" " alt="" coords="293,229,379,256"/>
+<area shape="rect" title=" " alt="" coords="763,304,843,331"/>
+<area shape="rect" href="_world_8hpp.html" title=" " alt="" coords="402,80,489,107"/>
+<area shape="rect" href="_direction_8hpp.html" title=" " alt="" coords="991,80,1185,107"/>
+<area shape="rect" href="_entity_a_i_8hpp.html" title=" " alt="" coords="78,155,263,181"/>
+<area shape="rect" title=" " alt="" coords="357,155,419,181"/>
+<area shape="rect" href="_event_8hpp.html" title=" " alt="" coords="443,155,530,181"/>
+<area shape="rect" href="_registry_8hpp.html" title=" " alt="" coords="554,155,657,181"/>
+<area shape="rect" title=" " alt="" coords="403,229,450,256"/>
+<area shape="rect" title=" " alt="" coords="651,304,738,331"/>
+<area shape="rect" title=" " alt="" coords="677,229,763,256"/>
+<area shape="rect" href="_constant_8hpp.html" title=" " alt="" coords="419,304,527,331"/>
+<area shape="rect" href="_entity_8hpp.html" title=" " alt="" coords="867,304,954,331"/>
+<area shape="rect" href="_sparse_array_8hpp.html" title=" " alt="" coords="526,229,653,256"/>
+<area shape="rect" title=" " alt="" coords="145,229,269,256"/>
+<area shape="rect" title=" " alt="" coords="699,379,770,405"/>
+<area shape="rect" title=" " alt="" coords="448,379,499,405"/>
+<area shape="rect" title=" " alt="" coords="269,379,355,405"/>
+<area shape="rect" title=" " alt="" coords="552,304,627,331"/>
+<area shape="rect" title=" " alt="" coords="214,304,277,331"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="_enemy_a_i_8hpp__dep__incl.png" border="0" usemap="#src_2ecs_2components_2server_2_enemy_a_i_8hppdep" alt=""/></div>
-<map name="src_2ecs_2components_2server_2_enemy_a_i_8hppdep" id="src_2ecs_2components_2server_2_enemy_a_i_8hppdep">
-<area shape="rect" title=" " alt="" coords="19,5,176,47"/>
-<area shape="rect" href="_projectile_collision_8hpp.html" title=" " alt="" coords="12,95,183,136"/>
-<area shape="rect" href="server_2entrypoint_8cpp.html" title=" " alt="" coords="5,184,189,211"/>
+<div class="center"><img src="_run_a_i_8hpp__dep__incl.png" border="0" usemap="#src_2ecs_2systems_2_run_a_i_8hppdep" alt=""/></div>
+<map name="src_2ecs_2systems_2_run_a_i_8hppdep" id="src_2ecs_2systems_2_run_a_i_8hppdep">
+<area shape="rect" title=" " alt="" coords="5,5,201,32"/>
+<area shape="rect" href="server_2entrypoint_8cpp.html" title=" " alt="" coords="11,80,195,107"/>
 </map>
 </div>
 </div>
-<p><a href="_enemy_a_i_8hpp_source.html">Go to the source code of this file.</a></p>
+<p><a href="_run_a_i_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecs_1_1component_1_1_enemy_a_i.html">ecs::component::EnemyAI</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structecs_1_1component_1_1_enemy_a_i.html" title="EnemyAI component.">EnemyAI</a> component.  <a href="structecs_1_1component_1_1_enemy_a_i.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespaceecs"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs.html">ecs</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:namespaceecs_1_1component"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1component.html">ecs::component</a></td></tr>
+<tr class="memitem:namespaceecs_1_1systems"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html">ecs::systems</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a724f2f255d1e449f789bf61c97bcc940"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(World &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#a724f2f255d1e449f789bf61c97bcc940">ecs::systems::runAI</a></td></tr>
+<tr class="separator:a724f2f255d1e449f789bf61c97bcc940"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_ddca5f149c4ce13074f28b270e950ba9.html">ecs</a></li><li class="navelem"><a class="el" href="dir_c145e94a3511d74671e0de53a480e354.html">components</a></li><li class="navelem"><a class="el" href="dir_a83849123e93de1405174e2beca1638f.html">server</a></li><li class="navelem"><a class="el" href="_enemy_a_i_8hpp.html">EnemyAI.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_ddca5f149c4ce13074f28b270e950ba9.html">ecs</a></li><li class="navelem"><a class="el" href="dir_21b124123231556e587af26d290be4a8.html">systems</a></li><li class="navelem"><a class="el" href="_run_a_i_8hpp.html">RunAI.hpp</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

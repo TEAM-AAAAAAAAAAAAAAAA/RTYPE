@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['shoot_564',['Shoot',['../classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0fa5cbb2eabb0d4eaea3ab9cc076339f935',1,'ecs::Event']]]
+  ['quit_579',['Quit',['../classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0fada6e6d8dbf14cbbccf6acf74148a69e9',1,'ecs::Event']]]
 ];

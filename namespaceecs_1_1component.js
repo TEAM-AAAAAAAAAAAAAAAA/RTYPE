@@ -4,7 +4,7 @@ var namespaceecs_1_1component =
     [ "Controllable", "structecs_1_1component_1_1_controllable.html", "structecs_1_1component_1_1_controllable" ],
     [ "Direction", "structecs_1_1component_1_1_direction.html", "structecs_1_1component_1_1_direction" ],
     [ "Drawable", "structecs_1_1component_1_1_drawable.html", "structecs_1_1component_1_1_drawable" ],
-    [ "EnemyAI", "structecs_1_1component_1_1_enemy_a_i.html", "structecs_1_1component_1_1_enemy_a_i" ],
+    [ "EntityAI", "structecs_1_1component_1_1_entity_a_i.html", "structecs_1_1component_1_1_entity_a_i" ],
     [ "EntityLife", "structecs_1_1component_1_1_entity_life.html", "structecs_1_1component_1_1_entity_life" ],
     [ "EntityType", "structecs_1_1component_1_1_entity_type.html", "structecs_1_1component_1_1_entity_type" ],
     [ "Faction", "structecs_1_1component_1_1_faction.html", "structecs_1_1component_1_1_faction" ],

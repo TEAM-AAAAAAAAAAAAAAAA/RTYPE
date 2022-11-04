@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['packettype_533',['PacketType',['../namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477',1,'utils::constant']]]
+  ['factions_546',['Factions',['../structecs_1_1component_1_1_faction.html#af6ff333bfa9135fc5709a76af44ca55b',1,'ecs::component::Faction']]]
 ];
