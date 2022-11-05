@@ -128,11 +128,10 @@ namespace ecs::systems
             if (netIds[i])
                 if (netIds[i].value().id == msgId) {
                     world.registry.killEntity(world.registry.entityFromIndex(i));
-                    std::cout << "Killed entity " << i << std::endl;
                     return;
                 }
         }
-        std::cerr << "Error: Client couldn't kill unknown entity with nedId '" << msgId << "'." << std::endl;
+        std::cerr << "Error: Client couldn't kill unknown entity with netId '" << msgId << "'." << std::endl;
     }
 
     static std::unordered_map<char, std::function<void(World &, network::Message &msg)>> packetTypeFunction = {

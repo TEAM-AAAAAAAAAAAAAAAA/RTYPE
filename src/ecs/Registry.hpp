@@ -93,9 +93,8 @@ namespace ecs
          */
         Entity entityFromIndex(std::size_t idx)
         {
-            if (idx >= _lastEntity/* || std::find(_entitiesBin.begin(), _entitiesBin.end(), idx) != _entitiesBin.end()*/) {
+            if (idx >= _lastEntity) {
                 std::cerr << "Error with entity " << idx << "(" << _lastEntity << " max)" << std::endl;
-                // return Entity(utils::constant::npos);
             }
             return Entity(idx);
         }

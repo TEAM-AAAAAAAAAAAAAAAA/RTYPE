@@ -29,7 +29,6 @@ namespace ecs::systems
                 if (projPos.value().x < 0 || projPos.value().x > utils::constant::mapWidth || projPos.value().y < 0
                     || projPos.value().y > utils::constant::mapHeight) {
                     projHealth.value().health = 0;
-                    // world.registry.killEntity(world.registry.entityFromIndex(i));
                 }
             }
         };
