@@ -22,6 +22,37 @@
 
 namespace ecs::systems
 {
+    /**
+     * @brief Get the object draw rotation from a direction
+     *
+     * @param dirX X direction
+     * @param dirY Y direction
+     * @return 0 to 360
+     */
+    static short getRotationFromDir(short dirX, short dirY)
+    {
+        if (dirX == 1)
+            if (dirY == -1)
+                return 45;
+            else if (dirY == 1)
+                return 135;
+            else
+                return 90;
+        else if (dirX == -1)
+            if (dirY == -1)
+                return -45;
+            else if (dirY == 1)
+                return -135;
+            else
+                return -90;
+        else if (dirY == -1)
+            return 0;
+        else if (dirY == 1)
+            return 180;
+        else
+            return 0;
+    }
+
     static size_t selfId = 0;
     static void movePacketHandle(World &world, network::Message &msg)
     {
@@ -102,14 +133,8 @@ namespace ecs::systems
                         AnimFrame(34, 18, 32, 16, 100)});
                 break;
             case component::EntityType::Types::Bullet:
-                short rotation = 0;
-                if (dirX == 1)
-                    rotation = 90;
-                else if (dirX == -1)
-                    rotation = -90;
-                else if (dirY == 1)
-                    rotation = 180;
-                world.registry.addComponent<component::Drawable>(newEntity, {"bullet", {10, 7, 12, 19}, rotation});
+                world.registry.addComponent<component::Drawable>(
+                    newEntity, {"bullet", {10, 7, 12, 19}, getRotationFromDir(dirX, dirY)});
                 world.registry.addComponent<component::Animated>(newEntity,
                     {AnimFrame(10, 7, 12, 19, 100), AnimFrame(42, 7, 12, 19, 100), AnimFrame(74, 7, 12, 19, 100),
                         AnimFrame(106, 7, 12, 19, 100)});
