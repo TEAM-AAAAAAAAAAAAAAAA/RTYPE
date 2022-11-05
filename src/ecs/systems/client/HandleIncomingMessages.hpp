@@ -9,7 +9,6 @@
 
 #include <functional>
 #include <iostream>
-#include <numbers>
 #include <valarray>
 #include "../client/NetworkClient.hpp"
 #include "World.hpp"
@@ -106,8 +105,7 @@ namespace ecs::systems
             case component::EntityType::Types::Bullet:
                 world.registry.addComponent<component::Drawable>(newEntity,
                     {"bullet", {10, 7, 12, 19},
-                        std::atan2(static_cast<float>(dirX), static_cast<float>(dirY)) * 180
-                            / std::numbers::pi_v<float>});
+                        std::atan2(static_cast<float>(dirX), static_cast<float>(dirY)) * 180 / 3.14159265359f});
                 world.registry.addComponent<component::Animated>(newEntity,
                     {AnimFrame(10, 7, 12, 19, 100), AnimFrame(42, 7, 12, 19, 100), AnimFrame(74, 7, 12, 19, 100),
                         AnimFrame(106, 7, 12, 19, 100)});
