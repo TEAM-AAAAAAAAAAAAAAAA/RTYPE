@@ -15,9 +15,8 @@ env:
   BUILD_TYPE: Release
   SERV_BIN: rtype_server
   CLIENT_BIN: rtype_client
-  VCPKG_COMMIT: 57d3194e702a2959e86a6748999ad71fc24f7922
-  VCPKG_DISABLE_METRICS: true
 
+  VCPKG_DISABLE_METRICS: true
 jobs:
   build:
     strategy:
@@ -57,7 +56,6 @@ jobs:
         with:
           vcpkgArguments: 'sfml boost-asio boost-thread boost-property-tree'
           vcpkgDirectory: '${{ github.workspace }}/vcpkg'
-          vcpkgGitCommitId: '${{ env.VCPKG_COMMIT }}'
 
       - uses: seanmiddleditch/gha-setup-ninja@master
 
@@ -128,6 +126,7 @@ jobs:
       - name: Create msi installer
         if: matrix.platform == 'windows-latest'
         run: |
+          cd build
           cpack -G WIX
       - name: Upload Linux artifact
         if: matrix.platform == 'ubuntu-latest'
