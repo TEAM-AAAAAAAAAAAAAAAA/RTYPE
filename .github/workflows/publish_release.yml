@@ -107,6 +107,11 @@ jobs:
             message(FATAL_ERROR "Bad exit status. Failed to build RTYPE project.")
           endif()
 
+      - name: Debug list windows directory
+        if: matrix.platform == 'windows-latest'
+        shell: bash
+        run: |
+          ls -lRa Debug
       - name: Package
         shell: cmake -P {0}
         if: matrix.platform == 'ubuntu-latest'
@@ -122,8 +127,8 @@ jobs:
           endif()
       - name: Create msi installer
         if: matrix.platform == 'windows-latest'
+        working-directory: Debug
         run: |
-          cd Debug/${{ matrix.triplet }}
           cpack -G WIX
       - name: Upload Linux artifact
         if: matrix.platform == 'ubuntu-latest'
