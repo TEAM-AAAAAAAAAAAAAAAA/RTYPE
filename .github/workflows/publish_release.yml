@@ -197,15 +197,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-            release_output = ${{ needs.create_release.outputs.upload_url }}
-            parsed_output = $(echo $release_output | cut -d '{' -f 1)
             echo "Release output: $parsed_output"
             for file in ${{ github.workspace }}/${{ matrix.artifacts }}/*; do
                 echo "Uploading $file"
                 gh api \
                 --method PATCH \
               -H "Accept: application/vnd.github+json" \
-                $parsed_output \
+                $(echo ${{ needs.create_release.outputs.upload_url }} | cut -d '{' -f 1) \
                 -f name=$file \
             done
           
