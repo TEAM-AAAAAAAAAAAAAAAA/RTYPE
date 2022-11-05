@@ -127,7 +127,7 @@ jobs:
         if: matrix.platform == 'windows-latest'
         run: |
           cd build
-          cpack -G WIX
+          cpack -G WIX -C Debug
       - name: Upload Linux artifact
         if: matrix.platform == 'ubuntu-latest'
         uses: actions/upload-artifact@v3
