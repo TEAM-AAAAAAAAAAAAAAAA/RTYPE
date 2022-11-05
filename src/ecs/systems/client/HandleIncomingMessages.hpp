@@ -63,7 +63,6 @@ namespace ecs::systems
         world.registry.addComponent<component::NetworkId>(newEntity, {msgId});
         world.registry.addComponent<component::Position>(newEntity, {posX, posY});
         world.registry.addComponent<component::Velocity>(newEntity, {velX, velY});
-        world.registry.addComponent<component::Position>(newEntity, {posX, posY});
         world.registry.addComponent<component::EntityType>(newEntity, {type.type});
         world.registry.addComponent<component::Size>(newEntity, {sizeX, sizeY});
         switch (type.type) {

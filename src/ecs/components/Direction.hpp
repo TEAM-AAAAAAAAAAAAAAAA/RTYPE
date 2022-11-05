@@ -16,9 +16,9 @@ namespace ecs::component
      * hasMoved is used to know if the entity changed its direction since the last synchronisation with the server
      */
     struct Direction {
-        Direction(int x, int y, bool hasMoved = false) : x(x), y(y), hasMoved(hasMoved) {}
-        int x;
-        int y;
+        Direction(char x, char y, bool hasMoved = false) : x(x), y(y), hasMoved(hasMoved) {}
+        char x;
+        char y;
         bool hasMoved;
     };
 } // namespace ecs::component
