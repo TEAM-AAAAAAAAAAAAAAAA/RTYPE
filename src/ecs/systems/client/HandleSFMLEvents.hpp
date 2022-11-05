@@ -41,6 +41,7 @@ namespace ecs::systems
     std::function<void(World &)> handleSFMLEvents = [](World &world) {
         sf::Event event;
         auto &hitBoxes = world.registry.getComponents<component::Hitbox>();
+        auto &controllables = world.registry.getComponents<component::Controllable>();
 
         while (utils::Window::get().pollEvent(event)) {
             switch (event.type) {
@@ -50,11 +51,18 @@ namespace ecs::systems
                         ecs::WorldManager::setWaitingWorld(getTestWorld);
                 } break;
                 case sf::Event::KeyReleased: {
-                    for (auto &hitBox : hitBoxes) {
-                        if (hitBox == std::nullopt)
+                    for (size_t i = 0; i < controllables.size(); i++) {
+                        auto &contr = controllables[i];
+
+                        if (contr == std::nullopt)
                             continue;
-                        if (event.key.code == sf::Keyboard::H) {
-                            hitBox->switchHitBox();
+                        if (event.key.code == contr.value().HitBox) {
+                            for (size_t j = 0; j < hitBoxes.size(); j++) {
+                                auto &hitBox = hitBoxes[j];
+
+                                if (hitBox)
+                                    hitBox->switchHitBox();
+                            }
                             break;
                         }
                     }
