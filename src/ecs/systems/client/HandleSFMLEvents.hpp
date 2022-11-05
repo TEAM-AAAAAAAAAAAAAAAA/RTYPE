@@ -28,11 +28,12 @@ namespace ecs::systems
           if (event.type == sf::Event::Closed)
               world.getWindow().close();
           if (event.type == sf::Event::KeyReleased) {
-              if (event.key.code == sf::Keyboard::H) {
-                  for (auto &hitBox : hitBoxes) {
-                      if (hitBox == std::nullopt)
-                          continue;
-                      world.pushEvent(ecs::Event(ecs::Event::EventType::HitBox));
+              for (auto &hitBox : hitBoxes) {
+                  if (hitBox == std::nullopt)
+                      continue;
+                  if (event.key.code == sf::Keyboard::H) {
+                      hitBox->switchHitBox();
+                      break;
                   }
               }
           }
