@@ -19,12 +19,12 @@ namespace ecs::component
      */
     struct Controllable {
         Controllable(sf::Keyboard::Key moveUp, sf::Keyboard::Key moveLeft, sf::Keyboard::Key moveDown,
-            sf::Keyboard::Key moveRight, sf::Keyboard::Key moveUpSecondary = sf::Keyboard::Unknown,
+            sf::Keyboard::Key moveRight, sf::Keyboard::Key hitBox, sf::Keyboard::Key moveUpSecondary = sf::Keyboard::Unknown,
             sf::Keyboard::Key moveLeftSecondary = sf::Keyboard::Unknown,
             sf::Keyboard::Key moveDownSecondary = sf::Keyboard::Unknown,
             sf::Keyboard::Key moveRightSecondary = sf::Keyboard::Unknown)
             : MoveUp(moveUp), MoveLeft(moveLeft), MoveDown(moveDown), MoveRight(moveRight),
-              MoveRightSecondary(moveRightSecondary), MoveUpSecondary(moveUpSecondary),
+              HitBox(hitBox), MoveRightSecondary(moveRightSecondary), MoveUpSecondary(moveUpSecondary),
               MoveDownSecondary(moveDownSecondary), MoveLeftSecondary(moveLeftSecondary)
         {
         }
@@ -39,7 +39,6 @@ namespace ecs::component
         sf::Keyboard::Key MoveDownSecondary;
         sf::Keyboard::Key MoveRightSecondary;
 
-        ecs::Event::EventType lastDirectionX;
-        ecs::Event::EventType lastDirectionY;
+        sf::Keyboard::Key HitBox;
     };
 } // namespace ecs::component
