@@ -187,11 +187,13 @@ jobs:
           name: ${{ matrix.artifacts }}
           path: ${{ github.workspace }}/${{ matrix.artifacts }}
 
-      - name: Upload Release Assets
-        id: upload_release_assets
-        uses: softprops/action-gh-release@v1
+      - name: Upload release binaries
+        id: upload_release_asset
+        uses: alexellis/upload-assets@0.4.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: ${{ github.workspace }}/${{ matrix.artifacts }}/*
+          asset_paths: '["${{ github.workspace }}/${{ matrix.artifacts }}/*"]'
           draft: false
           prerelease: false
 
