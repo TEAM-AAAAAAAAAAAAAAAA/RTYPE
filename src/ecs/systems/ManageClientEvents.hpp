@@ -79,16 +79,6 @@ namespace ecs::systems
                 network::Client::getOutgoingMessages().push(msg);
             }
 #pragma endregion
-#pragma region HitBox
-            else if (world.getEvent() == ecs::Event::EventType::HitBox) {
-                auto &hitBoxes = world.registry.getComponents<component::Hitbox>();
-
-                for (auto & hitBox : hitBoxes)
-                    if (hitBox != std::nullopt) {
-                        hitBox->switchHitBox();
-                    }
-            }
-#pragma endregion
             world.popEvent();
         }
     };
