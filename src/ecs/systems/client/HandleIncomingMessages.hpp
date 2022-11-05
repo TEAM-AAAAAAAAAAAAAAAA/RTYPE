@@ -76,17 +76,21 @@ namespace ecs::systems
                     world.registry.addComponent<ecs::component::Shootable>(
                         newEntity, ecs::component::Shootable(sf::Keyboard::Space));
                     world.registry.addComponent<ecs::component::Controllable>(
-                        newEntity, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D});
+                        newEntity, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D, sf::Keyboard::H});
                     world.registry.addComponent<ecs::component::Hitbox>(
-                        newEntity, {ecs::component::Hitbox(sf::Keyboard::H)});
+                        newEntity, {ecs::component::Hitbox()});
                 }
                 world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 1, 32, 16}});
                 break;
             case component::EntityType::Types::EnemyBase:
                 world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 18, 32, 16}});
+                world.registry.addComponent<ecs::component::Hitbox>(
+                    newEntity, {ecs::component::Hitbox()});
                 break;
             case component::EntityType::Types::Bullet:
                 world.registry.addComponent<component::Drawable>(newEntity, {"players", {5, 5, 1, 1}});
+                world.registry.addComponent<ecs::component::Hitbox>(
+                    newEntity, {ecs::component::Hitbox()});
 
                 break;
         }
