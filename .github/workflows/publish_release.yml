@@ -123,7 +123,7 @@ jobs:
       - name: Create msi installer
         if: matrix.platform == 'windows-latest'
         run: |
-          cd Debug
+          cd Debug/${{ matrix.triplet }}
           cpack -G WIX
       - name: Upload Linux artifact
         if: matrix.platform == 'ubuntu-latest'
