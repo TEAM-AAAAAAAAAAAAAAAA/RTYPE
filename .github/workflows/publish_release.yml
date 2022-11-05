@@ -146,46 +146,37 @@ jobs:
             ${{ github.workspace }}/build/rtype-*-win64.msi
             
 
-  create_release:
-    runs-on: ubuntu-latest
-    needs: build
-    permissions:
-      contents: write
-    environment:
-      name: production
-    outputs:
-      upload_url: ${{ steps.create_release.outputs.upload_url }}
-    steps:
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.event.inputs.version }}
-          release_name: Release ${{ github.event.inputs.version }}
-          body: ${{ github.event.inputs.body }}
-          draft: false
-          prerelease: false
+#  create_release:
+#    runs-on: ubuntu-latest
+#    needs: build
+#    permissions:
+#      contents: write
+#    environment:
+#      name: production
+#    outputs:
+#      upload_url: ${{ steps.create_release.outputs.upload_url }}
+#    steps:
+#      - name: Create Release
+#        id: create_release
+#        uses: actions/create-release@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          tag_name: ${{ github.event.inputs.version }}
+#          release_name: Release ${{ github.event.inputs.version }}
+#          body: ${{ github.event.inputs.body }}
+#          draft: false
+#          prerelease: false
 
-  upload_release_assets:
+  publish:
     runs-on: ubuntu-latest
     needs: create_release
     permissions:
       contents: write
     environment:
       name: production
-    strategy:
-      fail-fast: true
-      matrix:
-        artifacts: [ windows-latest, ubuntu-latest ]
     steps:
-      - name: Download Artifacts
-        id: download_artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: ${{ matrix.artifacts }}
-          path: ${{ github.workspace }}/${{ matrix.artifacts }}
+      - uses: actions/download-artifact@v3
 
       - name: Debug list directory
         shell: bash
@@ -197,7 +188,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release upload ${{ github.workspace }}/${{ matrix.artifacts }}/*
+          gh release create ${{ github.event.inputs.version }} -t ${{ github.event.inputs.version }}  -n ${{ github.event.inputs.body }} ${{ github.workspace }}/ubuntu-latest/* ${{ github.workspace }}/windows-latest/*
 #            echo "Release output: $parsed_output"
 #            for file in ${{ github.workspace }}/${{ matrix.artifacts }}/*; do
 #                echo "Uploading $file"
