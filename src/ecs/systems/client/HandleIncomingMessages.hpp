@@ -9,6 +9,8 @@
 
 #include <functional>
 #include <iostream>
+#include <numbers>
+#include <valarray>
 #include "../client/NetworkClient.hpp"
 #include "World.hpp"
 #include "components/EntityType.hpp"
@@ -102,14 +104,10 @@ namespace ecs::systems
                         AnimFrame(34, 18, 32, 16, 100)});
                 break;
             case component::EntityType::Types::Bullet:
-                short rotation = 0;
-                if (dirX == 1)
-                    rotation = 90;
-                else if (dirX == -1)
-                    rotation = -90;
-                else if (dirY == 1)
-                    rotation = 180;
-                world.registry.addComponent<component::Drawable>(newEntity, {"bullet", {10, 7, 12, 19}, rotation});
+                world.registry.addComponent<component::Drawable>(newEntity,
+                    {"bullet", {10, 7, 12, 19},
+                        std::atan2(static_cast<float>(dirX), static_cast<float>(dirY)) * 180
+                            / std::numbers::pi_v<float>});
                 world.registry.addComponent<component::Animated>(newEntity,
                     {AnimFrame(10, 7, 12, 19, 100), AnimFrame(42, 7, 12, 19, 100), AnimFrame(74, 7, 12, 19, 100),
                         AnimFrame(106, 7, 12, 19, 100)});
