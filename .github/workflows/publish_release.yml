@@ -203,7 +203,7 @@ jobs:
                 gh api \
                 --method PATCH \
               -H "Accept: application/vnd.github+json" \
-                $(echo "${{ needs.create_release.outputs.upload_url }}" | cut -d '{' -f 1) \
+                $(echo '${{ needs.create_release.outputs.upload_url }}' | cut -d '{' -f 1) \
                 -f name=$file \
             done
           
