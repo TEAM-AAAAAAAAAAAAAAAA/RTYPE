@@ -197,14 +197,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+            echo "Release output: $parsed_output"
             for file in ${{ github.workspace }}/${{ matrix.artifacts }}/*; do
                 echo "Uploading $file"
-                curl \
-                -X POST \
-                -H "Authorization: token $GITHUB_TOKEN" \
-                -H "Content-Type: $(file -b --mime-type $file)" \
-                --data-binary @"$file" \
-                "${{ needs.create_release.outputs.upload_url }}?name=$(basename $file)"
+                gh api \
+                --method PATCH \
+              -H "Accept: application/vnd.github+json" \
+                $(echo ${{ needs.create_release.outputs.upload_url }} | cut -d '{' -f 1) \
+                -f name=$file \
             done
           
 
