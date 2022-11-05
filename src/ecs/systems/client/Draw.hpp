@@ -9,16 +9,14 @@
 
 #include <functional>
 #include <iostream>
+#include "SFML/Graphics.hpp"
+#include "Window.hpp"
 #include "World.hpp"
-#include "components/client/Drawable.hpp"
-#include "components/client/HitBox.hpp"
 #include "components/Position.hpp"
 #include "components/Size.hpp"
 #include "components/client/Animated.hpp"
-
-#ifdef CLIENT_COMPILATION_MODE
-#include "SFML/Graphics.hpp"
-#endif
+#include "components/client/Drawable.hpp"
+#include "components/client/Hitbox.hpp"
 
 namespace ecs::systems
 {
@@ -26,76 +24,50 @@ namespace ecs::systems
      * Used to set the scale, the position and the texture of the entity before display it
      */
     std::function<void(World &)> draw = [](World &world) {
-#ifdef CLIENT_COMPILATION_MODE
-      auto const &positions = world.registry.getComponents<component::Position>();
-      auto const &sizes = world.registry.getComponents<component::Size>();
-      auto const &drawables = world.registry.getComponents<component::Drawable>();
-      auto &animateds = world.registry.getComponents<component::Animated>();
-      auto const &hitBoxes = world.registry.getComponents<component::Hitbox>();
+        auto const &positions = world.registry.getComponents<component::Position>();
+        auto const &sizes = world.registry.getComponents<component::Size>();
+        auto const &drawables = world.registry.getComponents<component::Drawable>();
+        auto const &animations = world.registry.getComponents<component::Animated>();
+        auto const &hitBoxes = world.registry.getComponents<component::Hitbox>();
 
-      world.getWindow().clear();
-      for (size_t i = 0; i < positions.size() && i < sizes.size() && i < drawables.size(); ++i) {
-          auto const &pos = positions[i];
-          auto const &size = sizes[i];
-          auto const &draw = drawables[i];
+        utils::Window::get().clear();
+        for (size_t i = 0; i < positions.size() && i < sizes.size() && i < drawables.size(); i++) {
+            auto const &pos = positions[i];
+            auto const &size = sizes[i];
+            auto const &draw = drawables[i];
+            if (pos && size && draw) {
+                sf::Sprite sprite;
+                sprite.setTexture(draw.value().getTexture());
+                if (i < animations.size() && animations[i]) {
+                    sprite.setTextureRect(animations[i].value().getFrameRect());
+                } else {
+                    sprite.setTextureRect(draw.value().rect);
+                }
+                float scaleX =
+                    static_cast<float>(size.value().width) / static_cast<float>(sprite.getTextureRect().width);
+                float scaleY =
+                    static_cast<float>(size.value().height) / static_cast<float>(sprite.getTextureRect().height);
+                sprite.setScale(scaleX, scaleY);
+                sprite.setPosition({static_cast<float>(pos.value().x), static_cast<float>(pos.value().y)});
+                utils::Window::get().draw(sprite);
+            }
+            if (i < hitBoxes.size()) {
+                auto const &hitBox = hitBoxes[i];
 
-          if (pos && size && draw) {
-              sf::Sprite sprite;
-              float scaleX;
-              float scaleY;
+                if (hitBox && size && pos) {
+                    if (hitBox->enableHitBox) {
+                        sf::RectangleShape hitBoxRec({0, 0});
 
-              sprite.setTexture(draw.value().Texture);
-              if (i < animateds.size() && animateds[i]) {
-                  auto &anim = animateds[i];
-                  sprite.setTextureRect(sf::IntRect(anim.value().width * anim.value().current + anim.value().origin_x, anim.value().origin_y, anim.value().width, draw.value().Texture.getSize().y));
-                  anim.value().cur_freq++;
-                  if (anim.value().cur_freq >= anim.value().freq) {
-                      anim.value().cur_freq = 0;
-                      anim.value().current++;
-                      if (anim.value().current * anim.value().width + anim.value().origin_x >= anim.value().max)
-                          anim.value().current = 0;
-                  }
-                  if (static_cast<float>(draw.value().Texture.getSize().x != 0))
-                      scaleX = static_cast<float>(size.value().width) / static_cast<float>(anim.value().width);
-                  else
-                      scaleX = 0;
-                  if (static_cast<float>(draw.value().Texture.getSize().y != 0))
-                      scaleY = static_cast<float>(size.value().height) / static_cast<float>(draw.value().Texture.getSize().y);
-                  else
-                      scaleY = 0;
-                  scaleY = static_cast<float>(size.value().height) / static_cast<float>(draw.value().Texture.getSize().y);
-              } else {
-                  if (static_cast<float>(draw.value().Texture.getSize().x != 0))
-                      scaleX = static_cast<float>(size.value().width) / static_cast<float>(draw.value().Texture.getSize().x);
-                  else
-                      scaleX = 0;
-                  if (static_cast<float>(draw.value().Texture.getSize().y != 0))
-                      scaleY = static_cast<float>(size.value().height) / static_cast<float>(draw.value().Texture.getSize().y);
-                  else
-                      scaleY = 0;
-              }
-              sprite.setScale(scaleX, scaleY);
-              sprite.setPosition({static_cast<float>(pos.value().x), static_cast<float>(pos.value().y)});
-              world.getWindow().draw(sprite);
-          }
-          if (i < hitBoxes.size()) {
-              auto const &hitBox = hitBoxes[i];
-
-              if (hitBox && size && pos) {
-                  if (hitBox->enableHitBox) {
-                      sf::RectangleShape hitBoxRec({0, 0});
-
-                      hitBoxRec.setFillColor(sf::Color::Transparent);
-                      hitBoxRec.setOutlineColor(sf::Color::Red);
-                      hitBoxRec.setOutlineThickness(2);
-                      hitBoxRec.setSize({(float)size->width, (float)size->height});
-                      hitBoxRec.setPosition({(float)(pos->x), (float)(pos->y)});
-                      world.getWindow().draw(hitBoxRec);
-                  }
-              }
-          }
-      };
-      world.getWindow().display();
-#endif
+                        hitBoxRec.setFillColor(sf::Color::Transparent);
+                        hitBoxRec.setOutlineColor(sf::Color::Red);
+                        hitBoxRec.setOutlineThickness(2);
+                        hitBoxRec.setSize({(float)size->width, (float)size->height});
+                        hitBoxRec.setPosition({(float)(pos->x), (float)(pos->y)});
+                        utils::Window::get().draw(hitBoxRec);
+                    }
+                }
+            }
+        };
+        utils::Window::get().display();
     };
 } // namespace ecs::systems

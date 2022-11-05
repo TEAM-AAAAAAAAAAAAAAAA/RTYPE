@@ -1,3 +1,6 @@
+set(X_VCPKG_APPLOCAL_DEPS_INSTALL ON)
+
+
 cmake_minimum_required(VERSION 3.20.0)
 
 project(rtype LANGUAGES CXX)
@@ -7,6 +10,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 option(BUILD_TEST_SUITE OFF)
 option(ENABLE_CODE_COVERAGE OFF)
+
+set(SFML_DIR ${PROJECT_SOURCE_DIR}/vcpkg/installed/x64-windows/share/sfml)
 
 if (COMPILER_TYPE MATCHES "msvc")
      message(STATUS "Using static SFML libraries")
@@ -39,3 +44,27 @@ if (BUILD_TEST_SUITE)
 if (CLIENT_COMPILATION_MODE)
      add_compile_definitions(CLIENT_COMPILATION_MODE)
 endif()
+
+install(DIRECTORY assets DESTINATION bin/assets/)
+
+SET(RTYPE_MAJOR_VERSION 0)
+SET(RTYPE_MINOR_VERSION 1)
+
+set(CPACK_WIX_LICENSE_RTF ${PROJECT_SOURCE_DIR}/misc/windows/wix_licence.txt)
+
+message(STATUS "Registering DEB package infos")
+set(CPACK_DEBIAN_PACKAGE_NAME "r-thaaaaaai")
+set(CPACK_DEBIAN_PACKAGE_VERSION "${RTYPE_MAJOR_VERSION}.${RTYPE_MINOR_VERSION}")
+set(CPACK_DEBIAN_PACKAGE_CONTACT "constant.vigneron@epitech.eu")
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "TEAM-AAAAAAAAAAAAAAAA")
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "libsfml-dev, libboost-dev")
+
+
+set(CPACK_GENERATOR "DEB;RPM;TGZ")
+
+include(InstallRequiredSystemLibraries)
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENSE")
+set(CPACK_PACKAGE_VERSION_MAJOR "${RTYPE_MAJOR_VERSION}")
+set(CPACK_PACKAGE_VERSION_MINOR "${RTYPE_MINOR_VERSION}")
+include(CPack)
+

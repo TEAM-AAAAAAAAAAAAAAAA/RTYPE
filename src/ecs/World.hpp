@@ -10,7 +10,6 @@
 #include <queue>
 #include "Event.hpp"
 #include "Registry.hpp"
-#include "utils/Window.hpp"
 
 namespace ecs
 {
@@ -20,14 +19,9 @@ namespace ecs
     class World {
       public:
         /**
-         * Default constructor is deleted because you have to inform in which window you want to proceed
+         * Default constructor
          */
-        World() = delete;
-        /**
-         * Default constructor of World class
-         * @param window The window in which the world have to proceed
-         */
-        explicit World(std::unique_ptr<utils::Window> &window) : _window(window) {}
+        World() {};
 
         /**
          * Used to operate all the systems in the world
@@ -44,8 +38,6 @@ namespace ecs
          * @param system The system you want to add in the world in a constant manner
          */
         void addSystem(const std::function<void(World &)> &system) { _systems.push_back(system); }
-
-        inline utils::Window &getWindow() { return *_window; }
 
         /**
          * Used to add a new event into the world
@@ -83,11 +75,6 @@ namespace ecs
         Registry registry;
 
       private:
-        /**
-         * The window used to display any information by the World class
-         */
-        std::unique_ptr<utils::Window> &_window;
-
         /**
          * Private system's vector of the World class
          */

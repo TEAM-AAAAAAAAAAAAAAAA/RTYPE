@@ -10,7 +10,6 @@
 #include <functional>
 #include <iostream>
 #include "../client/NetworkClient.hpp"
-#include "AssetManager.hpp"
 #include "World.hpp"
 #include "components/EntityType.hpp"
 #include "components/NetworkId.hpp"
@@ -64,7 +63,6 @@ namespace ecs::systems
         world.registry.addComponent<component::NetworkId>(newEntity, {msgId});
         world.registry.addComponent<component::Position>(newEntity, {posX, posY});
         world.registry.addComponent<component::Velocity>(newEntity, {velX, velY});
-        world.registry.addComponent<component::Position>(newEntity, {posX, posY});
         world.registry.addComponent<component::EntityType>(newEntity, {type.type});
         world.registry.addComponent<component::Size>(newEntity, {sizeX, sizeY});
         switch (type.type) {
@@ -82,16 +80,13 @@ namespace ecs::systems
                     world.registry.addComponent<ecs::component::Hitbox>(
                         newEntity, {ecs::component::Hitbox(sf::Keyboard::H)});
                 }
-                world.registry.addComponent<component::Drawable>(newEntity,
-                    {ecs::crossPlatformPath("assets", "textures", "players.gif"), {1, 1, 32, 16}});
+                world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 1, 32, 16}});
                 break;
             case component::EntityType::Types::EnemyBase:
-                world.registry.addComponent<component::Drawable>(newEntity,
-                    {ecs::crossPlatformPath("assets", "textures", "players.gif"), {1, 18, 32, 16}});
+                world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 18, 32, 16}});
                 break;
             case component::EntityType::Types::Bullet:
-                world.registry.addComponent<component::Drawable>(newEntity,
-                    {ecs::crossPlatformPath("assets", "textures", "players.gif"), {5, 5, 1, 1}});
+                world.registry.addComponent<component::Drawable>(newEntity, {"players", {5, 5, 1, 1}});
 
                 break;
         }

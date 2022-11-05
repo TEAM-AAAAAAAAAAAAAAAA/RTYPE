@@ -5,11 +5,8 @@ set(SYSTEMS_SRC
     ${SRCROOT}/ManageClientEvents.hpp
     ${SRCROOT}/Movement.hpp
     ${SRCROOT}/PositionLogger.hpp
-    ${SRCROOT}/ProjectileCollision.hpp
+    ${SRCROOT}/RunAI.hpp
     ${SRCROOT}/ServerPush.hpp
-    ${SRCROOT}/PositionUpdate.hpp
-    ${SRCROOT}/DeathUpdate.hpp
-    ${SRCROOT}/ShowHitBox.hpp
     PARENT_SCOPE
 )
 

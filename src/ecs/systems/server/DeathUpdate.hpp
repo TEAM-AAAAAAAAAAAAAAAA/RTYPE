@@ -57,7 +57,7 @@ namespace ecs::systems
                 msg[secondBytePos] = posBin[1];
                 msg[thirdBytePos] = posBin[2];
                 msg[fourthBytePos] = posBin[3];
-                msg[packetType] = ecs::constant::getPacketTypeKey(ecs::constant::PacketType::ENTITY_DEATH);
+                msg[packetType] = utils::constant::getPacketTypeKey(utils::constant::PacketType::ENTITY_DEATH);
                 serv.value().serv.outgoingQueue.push(
                     msg); // This is to be replaced when possible, it will not work nor should it
             }

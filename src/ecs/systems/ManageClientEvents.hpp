@@ -16,9 +16,9 @@
 #include "components/Faction.hpp"
 #include "components/Weapon.hpp"
 #include "components/client/Controllable.hpp"
-#include "components/server/Projectile.hpp"
+#include "components/client/Hitbox.hpp"
 #include "components/client/Shootable.hpp"
-#include "components/client/HitBox.hpp"
+#include "components/server/Projectile.hpp"
 
 namespace ecs::systems
 {
@@ -75,7 +75,7 @@ namespace ecs::systems
             else if (world.getEvent() == ecs::Event::EventType::Shoot) {
                 network::Message msg;
                 msg.fill(0);
-                msg.at(0) = constant::getPacketTypeKey(ecs::constant::PacketType::PLAYER_SHOT);
+                msg.at(0) = utils::constant::getPacketTypeKey(utils::constant::PacketType::PLAYER_SHOT);
                 network::Client::getOutgoingMessages().push(msg);
             }
 #pragma endregion

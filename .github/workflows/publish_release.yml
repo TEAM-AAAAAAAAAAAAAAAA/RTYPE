@@ -15,9 +15,8 @@ env:
   BUILD_TYPE: Release
   SERV_BIN: rtype_server
   CLIENT_BIN: rtype_client
-  VCPKG_COMMIT: 57d3194e702a2959e86a6748999ad71fc24f7922
-  VCPKG_DISABLE_METRICS: true
 
+  VCPKG_DISABLE_METRICS: true
 jobs:
   build:
     strategy:
@@ -45,6 +44,9 @@ jobs:
           sudo apt update -y && sudo apt upgrade -y
           sudo apt install -y libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev autoconf libtool
 
+      - name: Nuget install WiX
+        if: matrix.platform == 'windows-latest'
+        run: nuget install WiX
       - uses: actions/checkout@v3
         with:
           submodules: 'recursive'
@@ -52,9 +54,8 @@ jobs:
       - name: Run vcpkg
         uses: lukka/run-vcpkg@v4
         with:
-          vcpkgArguments: 'sfml boost-asio boost-thread'
+          vcpkgArguments: 'sfml boost-asio boost-thread boost-property-tree'
           vcpkgDirectory: '${{ github.workspace }}/vcpkg'
-          vcpkgGitCommitId: '${{ env.VCPKG_COMMIT }}'
 
       - uses: seanmiddleditch/gha-setup-ninja@master
 
@@ -100,24 +101,50 @@ jobs:
             COMMAND cmake --build build
             RESULT_VARIABLE result
           )
-          if (${{ matrix.platform }} STREQUAL "windows-latest")
-            configure_file(${{ github.workspace }}/Debug/r-type_client.exe ${{ github.workspace }} COPYONLY)
-            configure_file(${{ github.workspace }}/Debug/r-type_server.exe ${{ github.workspace }} COPYONLY)
-          endif()
           if (NOT result EQUAL 0)
             message(FATAL_ERROR "Bad exit status. Failed to build RTYPE project.")
           endif()
 
-      - name: Upload artifact
+      - name: Debug list windows directory
+        if: matrix.platform == 'windows-latest'
+        shell: bash
+        run: |
+          ls -lRa
+      - name: Package
+        shell: cmake -P {0}
+        if: matrix.platform == 'ubuntu-latest'
+        run: |
+          execute_process(
+            COMMAND cpack 
+            WORKING_DIRECTORY build
+            RESULT_VARIABLE result
+          )
+
+          if (NOT result EQUAL 0)
+            message(FATAL_ERROR "Bad exit status. Failed to build RTYPE project.")
+          endif()
+      - name: Create msi installer
+        if: matrix.platform == 'windows-latest'
+        run: |
+          cd build
+          cpack -G WIX -C Debug
+      - name: Upload Linux artifact
+        if: matrix.platform == 'ubuntu-latest'
         uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.platform }}
           path: |
-            ${{ github.workspace }}/assets
-            ${{ github.workspace }}/vcpkg/installed/${{ matrix.triplet }}/
-            ${{ github.workspace }}/vcpkg/scripts/
-            ${{ github.workspace }}/r-type_client*
-            ${{ github.workspace }}/r-type_server*
+            ${{ github.workspace }}/build/rtype-*-Linux.tar.gz
+            ${{ github.workspace }}/build/rtype-*-Linux.rpm
+            ${{ github.workspace }}/build/rtype-*-Linux.deb
+      - name: Upload Windows artifact
+        if: matrix.platform == 'windows-latest'
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.platform }}
+          path: |
+            ${{ github.workspace }}/build/rtype-*-win64.msi
+            
 
   create_release:
     runs-on: ubuntu-latest
@@ -151,7 +178,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        artifacts: [ windows-latest, ubuntu-latest, macos-latest ]
+        artifacts: [ windows-latest, ubuntu-latest ]
     steps:
       - name: Download Artifacts
         id: download_artifacts
@@ -169,3 +196,4 @@ jobs:
             asset_path: ${{ github.workspace }}/${{ matrix.artifacts }}
             asset_name: ${{ matrix.artifacts }}
             upload_url: ${{ needs.create_release.outputs.upload_url }}
+            asset_content_type: application/zip
