@@ -127,7 +127,7 @@ jobs:
         if: matrix.platform == 'windows-latest'
         run: |
           cd build
-          cpack -G WIX
+          cpack -G WIX -C Debug
       - name: Upload Linux artifact
         if: matrix.platform == 'ubuntu-latest'
         uses: actions/upload-artifact@v3
@@ -143,7 +143,7 @@ jobs:
         with:
           name: ${{ matrix.platform }}
           path: |
-            ${{ github.workspace }}/Debug/rtype-*-win64.msi
+            ${{ github.workspace }}/build/rtype-*-win64.msi
             
 
   create_release:
@@ -187,12 +187,35 @@ jobs:
           name: ${{ matrix.artifacts }}
           path: ${{ github.workspace }}/${{ matrix.artifacts }}
 
-      - name: Upload Release Assets
-        id: upload_release_assets
-        uses: actions/upload-release-asset@v1
+      - name: Debug list directory
+        shell: bash
+        run: |
+          ls -lRa
+
+      - name: Upload release binaries
+        id: upload_release_asset
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-            asset_path: ${{ github.workspace }}/${{ matrix.artifacts }}
-            asset_name: ${{ matrix.artifacts }}
-            upload_url: ${{ needs.create_release.outputs.upload_url }}
+        run: |
+            for file in ${{ github.workspace }}/${{ matrix.artifacts }}/*; do
+                echo "Uploading $file"
+                curl \
+                -X POST \
+                -H "Authorization: token $GITHUB_TOKEN" \
+                -H "Content-Type: $(file -b --mime-type $file)" \
+                --data-binary @"$file" \
+                "${{ needs.create_release.outputs.upload_url }}?name=$(basename $file)"
+            done
+          
+
+
+#      - name: Upload Release Assets
+#        id: upload_release_assets
+#        uses: actions/upload-release-asset@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#            asset_path: ${{ github.workspace }}/${{ matrix.artifacts }}
+#            asset_name: ${{ matrix.artifacts }}
+#            upload_url: ${{ needs.create_release.outputs.upload_url }}
+#            asset_content_type: application/zip
