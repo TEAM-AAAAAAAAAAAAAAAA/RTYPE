@@ -187,6 +187,11 @@ jobs:
           name: ${{ matrix.artifacts }}
           path: ${{ github.workspace }}/${{ matrix.artifacts }}
 
+      - name: Debug list directory
+        shell: bash
+        run: |
+          ls -lRa
+
       - name: Upload release binaries
         id: upload_release_asset
         uses: alexellis/upload-assets@0.4.0
@@ -194,8 +199,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           asset_paths: '["${{ github.workspace }}/${{ matrix.artifacts }}/*"]'
-          draft: false
-          prerelease: false
+
 
 #      - name: Upload Release Assets
 #        id: upload_release_assets
