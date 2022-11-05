@@ -32,6 +32,7 @@ namespace ecs::systems
         auto &entityType = world.registry.getComponents<component::EntityType>();
         auto &sizes = world.registry.getComponents<component::Size>();
         auto &velocities = world.registry.getComponents<component::Velocity>();
+        auto &directions = world.registry.getComponents<component::Direction>();
         static const int packetType = 0;
         static const int firstByteId = 1;
         static const int secondByteId = 2;
@@ -44,19 +45,22 @@ namespace ecs::systems
         static const int secondByteSize = 9;
         static const int firstByteVelocity = 10;
         static const int secondByteVelocity = 11;
+        static const int dirX = 12;
+        static const int dirY = 13;
 
-        static auto clock = ecs::constant::chrono::now();
-        if (ecs::constant::chronoDuration(ecs::constant::chrono::now() - clock).count() > 10) {
-            clock = ecs::constant::chrono::now();
+        static auto clock = utils::constant::chrono::now();
+        if (utils::constant::chronoDuration(utils::constant::chrono::now() - clock).count() > 10) {
+            clock = utils::constant::chrono::now();
             for (size_t i = 0; i < position.size() && i < networkId.size() && i < sizes.size() && i < entityType.size()
-                 && i < velocities.size();
+                 && i < velocities.size() && i < directions.size();
                  i++) {
                 auto &pos = position[i];
                 auto &size = sizes[i];
                 auto &id = networkId[i];
                 auto &type = entityType[i];
                 auto &vel = velocities[i];
-                if (pos && id && size && type && vel) {
+                auto &dir = directions[i];
+                if (pos && id && size && type && vel && dir) {
                     std::array<char, 2> idBin = id.value().serialize();
                     std::array<char, 4> posBin = pos.value().serialize();
                     std::array<char, 2> sizeBin = size.value().serialize();
@@ -72,7 +76,9 @@ namespace ecs::systems
                     msg[secondByteSize] = sizeBin[1];
                     msg[firstByteVelocity] = velocities[i].value().x;
                     msg[secondByteVelocity] = velocities[i].value().y;
-                    msg[packetType] = ecs::constant::getPacketTypeKey(ecs::constant::PacketType::ENTITY_MOVE);
+                    msg[dirX] = directions[i].value().x;
+                    msg[dirY] = directions[i].value().y;
+                    msg[packetType] = utils::constant::getPacketTypeKey(utils::constant::PacketType::ENTITY_MOVE);
                     network::Server::getOutgoingMessages().push(
                         network::ServerMessage(msg, std::vector<unsigned int>()));
                 }

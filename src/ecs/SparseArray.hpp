@@ -84,16 +84,16 @@ namespace ecs
 
         referenceType insertAt(sizeType pos, Component const &c)
         {
-            if (pos > _data.capacity())
-                _data.resize(pos, std::nullopt);
+            if (pos >= _data.capacity())
+                _data.resize(pos + 1, std::nullopt);
             _data.emplace(_data.begin() + pos, c);
             return _data[pos];
         }
 
         referenceType insertAt(sizeType pos, Component &&c)
         {
-            if (pos > _data.capacity())
-                _data.resize(pos, std::nullopt);
+            if (pos >= _data.capacity())
+                _data.resize(pos + 1, std::nullopt);
             _data.emplace(_data.begin() + pos, std::move(c));
             return _data[pos];
         }
@@ -101,7 +101,7 @@ namespace ecs
         template <class... Params> referenceType emplaceAt(sizeType pos, Params &&...args)
         {
             if (pos >= _data.capacity())
-                _data.resize(pos, std::nullopt);
+                _data.resize(pos + 1, std::nullopt);
             _data.emplace(_data.begin() + pos, Component(args...));
             return _data[pos];
         }
@@ -118,12 +118,12 @@ namespace ecs
         {
             std::size_t cpt = 0;
             if (!c.has_value())
-                return ecs::constant::npos;
+                return utils::constant::npos;
             for (valueType iterator = _data.begin(); iterator != _data.end(); iterator++, cpt++)
                 if (iterator.has_value() && iterator.value() == c.value()) {
                     return cpt;
                 }
-            return ecs::constant::npos;
+            return utils::constant::npos;
         }
 
       private:

@@ -26,6 +26,7 @@
 #include "systems/client/HandleSFMLEvents.hpp"
 #include "systems/client/HandleSFMLKeys.hpp"
 #include "systems/client/SendDirection.hpp"
+#include "systems/client/Animate.hpp"
 
 using AnimFrame = ecs::component::Animated::AnimFrame;
 
@@ -58,6 +59,7 @@ static void addAllSystems(ecs::World &world)
     world.addSystem(ecs::systems::SendDirection);
     world.addSystem(ecs::systems::movement);
     world.addSystem(ecs::systems::HandleParallaxBounds);
+    world.addSystem(ecs::systems::animate);
 }
 
 static void addAllComponents(ecs::World &world)
@@ -70,50 +72,50 @@ static void addAllComponents(ecs::World &world)
     ecs::Entity backgroundp3 = world.registry.spawn_entity();
 
     world.registry.addComponent<ecs::component::Position>(background1, {0, 0});
-    world.registry.addComponent<ecs::component::Size>(background1, {ecs::constant::mapHeight, ecs::constant::mapWidth});
+    world.registry.addComponent<ecs::component::Size>(background1, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(background1, {"bg1", {0, 0, 5760, 360}});
     world.registry.addComponent<ecs::component::Velocity>(background1, {1, 0});
     world.registry.addComponent<ecs::component::Direction>(background1, {-1, 0});
     world.registry.addComponent<ecs::component::Parallax>(
-        background1, {ecs::constant::mapWidth * -1, ecs::constant::mapWidth * 2});
-    world.registry.addComponent<ecs::component::Animated>(background1, AnimFrame(0, 0, 640, 360, 15));
-    world.registry.addComponent<ecs::component::Position>(backgroundp1, {ecs::constant::mapWidth, 0});
+        background1, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
+    world.registry.addComponent<ecs::component::Animated>(background1, {AnimFrame(0, 0, 640, 360, 15)});
+    world.registry.addComponent<ecs::component::Position>(backgroundp1, {utils::constant::mapWidth, 0});
     world.registry.addComponent<ecs::component::Size>(
-        backgroundp1, {ecs::constant::mapHeight, ecs::constant::mapWidth});
+        backgroundp1, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(backgroundp1, {"bg1", {0, 0, 5760, 360}});
     world.registry.addComponent<ecs::component::Velocity>(backgroundp1, {1, 0});
     world.registry.addComponent<ecs::component::Direction>(backgroundp1, {-1, 0});
     world.registry.addComponent<ecs::component::Parallax>(
-        backgroundp1, {ecs::constant::mapWidth * -1, ecs::constant::mapWidth * 2});
-    world.registry.addComponent<ecs::component::Animated>(backgroundp1, AnimFrame(0, 0, 640, 360, 15));
+        backgroundp1, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
+    world.registry.addComponent<ecs::component::Animated>(backgroundp1, {AnimFrame(0, 0, 640, 360, 15)});
     world.registry.addComponent<ecs::component::Position>(background2, {0, 0});
-    world.registry.addComponent<ecs::component::Size>(background2, {ecs::constant::mapHeight, ecs::constant::mapWidth});
+    world.registry.addComponent<ecs::component::Size>(background2, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(background2, {"bg2", {0, 0, 5760, 360}});
     world.registry.addComponent<ecs::component::Velocity>(background2, {2, 0});
     world.registry.addComponent<ecs::component::Direction>(background2, {-1, 0});
     world.registry.addComponent<ecs::component::Parallax>(
-        background2, {ecs::constant::mapWidth * -1, ecs::constant::mapWidth * 2});
-    world.registry.addComponent<ecs::component::Animated>(background2, AnimFrame(0, 0, 640, 360, 5));
-    world.registry.addComponent<ecs::component::Position>(backgroundp2, {ecs::constant::mapWidth, 0});
+        background2, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
+    world.registry.addComponent<ecs::component::Animated>(background2, {AnimFrame(0, 0, 640, 360, 5)});
+    world.registry.addComponent<ecs::component::Position>(backgroundp2, {utils::constant::mapWidth, 0});
     world.registry.addComponent<ecs::component::Size>(
-        backgroundp2, {ecs::constant::mapHeight, ecs::constant::mapWidth});
+        backgroundp2, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(backgroundp2, {"bg2", {0, 0, 5760, 360}});
     world.registry.addComponent<ecs::component::Velocity>(backgroundp2, {2, 0});
     world.registry.addComponent<ecs::component::Parallax>(
-        backgroundp2, {ecs::constant::mapWidth * -1, ecs::constant::mapWidth * 2});
+        backgroundp2, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
     world.registry.addComponent<ecs::component::Direction>(backgroundp2, {-1, 0});
-    world.registry.addComponent<ecs::component::Animated>(backgroundp2, AnimFrame(0, 0, 640, 360, 5));
+    world.registry.addComponent<ecs::component::Animated>(backgroundp2, {AnimFrame(0, 0, 640, 360, 5)});
     world.registry.addComponent<ecs::component::Position>(background3, {0, 0});
-    world.registry.addComponent<ecs::component::Size>(background3, {ecs::constant::mapHeight, ecs::constant::mapWidth});
+    world.registry.addComponent<ecs::component::Size>(background3, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(background3, {"bg3", {0, 0, 5760, 360}});
     world.registry.addComponent<ecs::component::Velocity>(background3, {3, 0});
     world.registry.addComponent<ecs::component::Parallax>(
-        background3, {ecs::constant::mapWidth * -1, ecs::constant::mapWidth * 2});
+        background3, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
     world.registry.addComponent<ecs::component::Direction>(background3, {-1, 0});
-    world.registry.addComponent<ecs::component::Animated>(background3, AnimFrame(0, 0, 640, 360, 10));
-    world.registry.addComponent<ecs::component::Position>(backgroundp3, {ecs::constant::mapWidth, 0});
+    world.registry.addComponent<ecs::component::Animated>(background3, {AnimFrame(0, 0, 640, 360, 10)});
+    world.registry.addComponent<ecs::component::Position>(backgroundp3, {utils::constant::mapWidth, 0});
     world.registry.addComponent<ecs::component::Size>(
-        backgroundp3, {ecs::constant::mapHeight, ecs::constant::mapWidth});
+        backgroundp3, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(backgroundp3, {"bg3", {0, 0, 5760, 360}});
     world.registry.addComponent<ecs::component::Velocity>(backgroundp3, {3, 0});
     world.registry.addComponent<ecs::component::Direction>(backgroundp3, {-1, 0});
@@ -165,11 +167,12 @@ int main()
     network::Client::setHost("localhost");
     network::Client::setPort("8000");
     network::Client::connect();
+    utils::Window::get().setFramerateLimit(60);
     ecs::Engine engine;
     network::Message msg;
     msg.fill(0);
 
-    engine.setWaitingWorld(getMainMenuWorld(engine));
+    ecs::WorldManager::setWaitingWorld(getGameWorld);
     network::Client::getOutgoingMessages().push(msg);
 
     engine.run();

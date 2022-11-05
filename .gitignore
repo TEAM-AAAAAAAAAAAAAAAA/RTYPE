@@ -31,11 +31,12 @@
 *.out
 *.app
 
-# Jetbrain tools
+# Editors tools
 .idea
 .vscode
 .obsidian
 .fleet
+.vs
 
 # build Folder
 build
@@ -52,10 +53,11 @@ test_main
 
 Testing/
 
-vcpkg/
 
-rtype_client
+r-type_client.*
+r-type_server.*
 
 rtype_server
 !/graph/
 docs/html
+out/
