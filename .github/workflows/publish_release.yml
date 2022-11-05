@@ -194,11 +194,19 @@ jobs:
 
       - name: Upload release binaries
         id: upload_release_asset
-        uses: alexellis/upload-assets@0.4.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          asset_paths: '["${{ github.workspace }}/${{ matrix.artifacts }}/*"]'
+        run: |
+            for file in ${{ github.workspace }}/${{ matrix.artifacts }}/*; do
+                echo "Uploading $file"
+                curl \
+                -X POST \
+                -H "Authorization: token $GITHUB_TOKEN" \
+                -H "Content-Type: $(file -b --mime-type $file)" \
+                --data-binary @"$file" \
+                "${{ needs.create_release.outputs.upload_url }}?name=$(basename $file)"
+            done
+          
 
 
 #      - name: Upload Release Assets
