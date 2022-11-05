@@ -111,7 +111,7 @@ jobs:
         if: matrix.platform == 'windows-latest'
         shell: bash
         run: |
-          ls -lRa Debug
+          ls -lRa
       - name: Package
         shell: cmake -P {0}
         if: matrix.platform == 'ubuntu-latest'
@@ -127,7 +127,6 @@ jobs:
           endif()
       - name: Create msi installer
         if: matrix.platform == 'windows-latest'
-        working-directory: Debug
         run: |
           cpack -G WIX
       - name: Upload Linux artifact
