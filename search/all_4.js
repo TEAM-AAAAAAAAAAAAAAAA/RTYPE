@@ -9,6 +9,6 @@ var searchData=
   ['display_5fkey_5ffrom_5fmap_42',['display_key_from_map',['../classasset_1_1_asset_loader.html#a72591f665720f906fd307c829b25b024',1,'asset::AssetLoader']]],
   ['draw_43',['draw',['../namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3',1,'ecs::systems']]],
   ['draw_2ehpp_44',['Draw.hpp',['../_draw_8hpp.html',1,'']]],
-  ['drawable_45',['Drawable',['../structecs_1_1component_1_1_drawable.html',1,'ecs::component::Drawable'],['../structecs_1_1component_1_1_drawable.html#a56df10af508a05f40d0d4ea12a1577f8',1,'ecs::component::Drawable::Drawable(const std::string &amp;key)'],['../structecs_1_1component_1_1_drawable.html#a215f41cad74665a0fa66f09842dd3fd3',1,'ecs::component::Drawable::Drawable(const std::string &amp;key, sf::IntRect rect)']]],
+  ['drawable_45',['Drawable',['../structecs_1_1component_1_1_drawable.html',1,'ecs::component::Drawable'],['../structecs_1_1component_1_1_drawable.html#a5d55f9868b9335fc7690b2c41cc7a518',1,'ecs::component::Drawable::Drawable(const std::string &amp;key, float rotation=0.0)'],['../structecs_1_1component_1_1_drawable.html#a5524989da358f95c227ec4367a17e9c7',1,'ecs::component::Drawable::Drawable(const std::string &amp;key, sf::IntRect rect, float rotation=0.0)']]],
   ['drawable_2ehpp_46',['Drawable.hpp',['../_drawable_8hpp.html',1,'']]]
 ];

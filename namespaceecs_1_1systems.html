@@ -141,8 +141,8 @@ $(document).ready(function(){initNavTree('namespaceecs_1_1systems.html',''); ini
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:af26616c1c767f67219a3748a74d561e5"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#af26616c1c767f67219a3748a74d561e5">Animate</a></td></tr>
-<tr class="separator:af26616c1c767f67219a3748a74d561e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fd9edee75e08faf0781a87e9e9c3def"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#a2fd9edee75e08faf0781a87e9e9c3def">animate</a></td></tr>
+<tr class="separator:a2fd9edee75e08faf0781a87e9e9c3def"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7690be6352e10d6bf8b0c79bcd2bcd3"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">draw</a></td></tr>
 <tr class="separator:ab7690be6352e10d6bf8b0c79bcd2bcd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ef17d23a38a80a3e15a78a0cdb5c005"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#a3ef17d23a38a80a3e15a78a0cdb5c005">HandleIncomingMessages</a></td></tr>
@@ -173,14 +173,14 @@ Variables</h2></td></tr>
 <tr class="separator:a3ae801d63a324b2863d0b308abaa46d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="af26616c1c767f67219a3748a74d561e5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af26616c1c767f67219a3748a74d561e5">&#9670;&nbsp;</a></span>Animate</h2>
+<a id="a2fd9edee75e08faf0781a87e9e9c3def"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fd9edee75e08faf0781a87e9e9c3def">&#9670;&nbsp;</a></span>animate</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::function&lt;void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt; ecs::systems::Animate</td>
+          <td class="memname">std::function&lt;void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt; ecs::systems::animate</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -194,7 +194,7 @@ Variables</h2></td></tr>
 <div class="line"> </div>
 <div class="line">            <span class="keywordflow">if</span> (<a class="code" href="namespaceanim.html">anim</a>) {</div>
 <div class="line">                <span class="keywordflow">if</span> (chrono::now().time_since_epoch().count() - <a class="code" href="namespaceanim.html">anim</a>.value().lastSwitch</div>
-<div class="line">                    &gt; <a class="code" href="namespaceanim.html">anim</a>.value().getFrame().delay) {</div>
+<div class="line">                    &gt; <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(<a class="code" href="namespaceanim.html">anim</a>.value().getFrame().delay) * 1000000) {</div>
 <div class="line">                    <a class="code" href="namespaceanim.html">anim</a>.value().nextFrame();</div>
 <div class="line">                    <a class="code" href="namespaceanim.html">anim</a>.value().lastSwitch = chrono::now().time_since_epoch().count();</div>
 <div class="line">                }</div>
@@ -215,37 +215,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= [](World &amp;world) {</div>
-<div class="line">        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;positions = world.registry.getComponents&lt;component::Position&gt;();</div>
-<div class="line">        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;sizes = world.registry.getComponents&lt;component::Size&gt;();</div>
-<div class="line">        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;drawables = world.registry.getComponents&lt;component::Drawable&gt;();</div>
-<div class="line">        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;animations = world.registry.getComponents&lt;component::Animated&gt;();</div>
-<div class="line"> </div>
-<div class="line">        utils::Window::get().clear();</div>
-<div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; positions.size() &amp;&amp; i &lt; sizes.size() &amp;&amp; i &lt; drawables.size(); i++) {</div>
-<div class="line">            <span class="keyword">auto</span> <span class="keyword">const</span> &amp;pos = positions[i];</div>
-<div class="line">            <span class="keyword">auto</span> <span class="keyword">const</span> &amp;size = sizes[i];</div>
-<div class="line">            <span class="keyword">auto</span> <span class="keyword">const</span> &amp;<a class="code" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">draw</a> = drawables[i];</div>
-<div class="line">            <span class="keywordflow">if</span> (pos &amp;&amp; size &amp;&amp; <a class="code" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">draw</a>) {</div>
-<div class="line">                sf::Sprite sprite;</div>
-<div class="line">                sprite.setTexture(<a class="code" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">draw</a>.value().getTexture());</div>
-<div class="line">                <span class="keywordflow">if</span> (i &lt; animations.size() &amp;&amp; animations[i]) {</div>
-<div class="line">                    sprite.setTextureRect(animations[i].value().getFrameRect());</div>
-<div class="line">                } <span class="keywordflow">else</span> {</div>
-<div class="line">                    sprite.setTextureRect(<a class="code" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">draw</a>.value().rect);</div>
-<div class="line">                }</div>
-<div class="line">                <span class="keywordtype">float</span> scaleX =</div>
-<div class="line">                    <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(size.value().width) / <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(sprite.getTextureRect().width);</div>
-<div class="line">                <span class="keywordtype">float</span> scaleY =</div>
-<div class="line">                    <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(size.value().height) / <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(sprite.getTextureRect().height);</div>
-<div class="line">                sprite.setScale(scaleX, scaleY);</div>
-<div class="line">                sprite.setPosition({<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(pos.value().x), <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(pos.value().y)});</div>
-<div class="line">                utils::Window::get().draw(sprite);</div>
-<div class="line">            }</div>
-<div class="line">        };</div>
-<div class="line">        utils::Window::get().display();</div>
-<div class="line">    }</div>
-</div><!-- fragment --><p>Used to set the scale, the position and the texture of the entity before display it </p>
+<p>Used to set the scale, the position and the texture of the entity before display it </p>
 
 </div>
 </div>
@@ -294,7 +264,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= [](World &amp;world) {</div>
 <div class="line">        <span class="keywordflow">while</span> (!<a class="code" href="classnetwork_1_1_client.html#a21ab5dabccf30131909a19d54ff5194e">network::Client::getIncomingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a6f83affbc6d8bc587e67a5b1003678b9">empty</a>()) {</div>
-<div class="line">            <a class="code" href="namespacenetwork.html#a0629cd044af39caf977e11dc2e2e0fb8">network::Message</a> msg = <a class="code" href="classnetwork_1_1_client.html#a21ab5dabccf30131909a19d54ff5194e">network::Client::getIncomingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80">pop</a>();</div>
+<div class="line">            <a class="code" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">network::Message</a> msg = <a class="code" href="classnetwork_1_1_client.html#a21ab5dabccf30131909a19d54ff5194e">network::Client::getIncomingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80">pop</a>();</div>
 <div class="line">            packetTypeFunction[msg[0]](world, msg);</div>
 <div class="line">        }</div>
 <div class="line">    }</div>
@@ -545,7 +515,7 @@ Variables</h2></td></tr>
 <div class="line">                    <span class="keywordflow">continue</span>;</div>
 <div class="line"> </div>
 <div class="line">                <span class="keywordflow">if</span> (directions[i].value().hasMoved) {</div>
-<div class="line">                    <a class="code" href="namespacenetwork.html#a0629cd044af39caf977e11dc2e2e0fb8">network::Message</a> msg;</div>
+<div class="line">                    <a class="code" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">network::Message</a> msg;</div>
 <div class="line">                    msg.fill(0);</div>
 <div class="line">                    msg[0] = <a class="code" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ae5d30e9f7bb333d07bd8a1a8b35ecb06">utils::constant::PLAYER_MOVE</a>;</div>
 <div class="line">                    msg[1] = directions[i].value().x;</div>
@@ -589,10 +559,10 @@ Variables</h2></td></tr>
 <div class="ttc" id="aclassnetwork_1_1_locked_queue_html_a6f83affbc6d8bc587e67a5b1003678b9"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html#a6f83affbc6d8bc587e67a5b1003678b9">network::LockedQueue::empty</a></div><div class="ttdeci">bool empty()</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:66</div></div>
 <div class="ttc" id="aclassnetwork_1_1_locked_queue_html_a2be6f1a5bcdc3fd83a53558377f51d80"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80">network::LockedQueue::pop</a></div><div class="ttdeci">T pop()</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:53</div></div>
 <div class="ttc" id="aclassnetwork_1_1_client_html_ab4ee2988395ad66a1c4e259eba436d23"><div class="ttname"><a href="classnetwork_1_1_client.html#ab4ee2988395ad66a1c4e259eba436d23">network::Client::getOutgoingMessages</a></div><div class="ttdeci">static LockedQueue&lt; Message &gt; &amp; getOutgoingMessages()</div><div class="ttdef"><b>Definition:</b> NetworkClient.hpp:55</div></div>
+<div class="ttc" id="anamespacenetwork_html_a56091a576a11d5ae809e0e832167d051"><div class="ttname"><a href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">network::Message</a></div><div class="ttdeci">std::array&lt; char, 14 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
 <div class="ttc" id="anamespaceecs_1_1systems_html_a9e53dea2cf4c6c53caa0bf6658a51a9c"><div class="ttname"><a href="namespaceecs_1_1systems.html#a9e53dea2cf4c6c53caa0bf6658a51a9c">ecs::systems::getTestWorld</a></div><div class="ttdeci">std::function&lt; World(void)&gt; getTestWorld</div><div class="ttdef"><b>Definition:</b> HandleSFMLEvents.hpp:16</div></div>
 <div class="ttc" id="aclassecs_1_1_world_html_a71b5c2fb034c78a6270c44e42a0e2360"><div class="ttname"><a href="classecs_1_1_world.html#a71b5c2fb034c78a6270c44e42a0e2360">ecs::World::registry</a></div><div class="ttdeci">Registry registry</div><div class="ttdef"><b>Definition:</b> World.hpp:75</div></div>
 <div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:19</div></div>
-<div class="ttc" id="anamespacenetwork_html_a0629cd044af39caf977e11dc2e2e0fb8"><div class="ttname"><a href="namespacenetwork.html#a0629cd044af39caf977e11dc2e2e0fb8">network::Message</a></div><div class="ttdeci">std::array&lt; char, 12 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
 <div class="ttc" id="aclassecs_1_1_world_html_a298b46d7b7f1742f43ac2f8cb7ef9e95"><div class="ttname"><a href="classecs_1_1_world.html#a298b46d7b7f1742f43ac2f8cb7ef9e95">ecs::World::addSystem</a></div><div class="ttdeci">void addSystem(const std::function&lt; void(World &amp;)&gt; &amp;system)</div><div class="ttdef"><b>Definition:</b> World.hpp:40</div></div>
 <div class="ttc" id="anamespaceecs_1_1systems_html_ab7690be6352e10d6bf8b0c79bcd2bcd3"><div class="ttname"><a href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">ecs::systems::draw</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; draw</div><div class="ttdef"><b>Definition:</b> Draw.hpp:24</div></div>
 <div class="ttc" id="anamespaceanim_html"><div class="ttname"><a href="namespaceanim.html">anim</a></div><div class="ttdef"><b>Definition:</b> Animation.hpp:13</div></div>

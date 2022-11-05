@@ -154,9 +154,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0a0f017208ea1aa83a4c0693ea051001"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecs_1_1component_1_1_animated.html#a0a0f017208ea1aa83a4c0693ea051001">Animated</a> (const <a class="el" href="structecs_1_1component_1_1_animated_1_1_anim_frame.html">AnimFrame</a> &amp;frame)</td></tr>
 <tr class="memdesc:a0a0f017208ea1aa83a4c0693ea051001"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="structecs_1_1component_1_1_animated.html">Animated</a> object with only one frame (replace <a class="el" href="structecs_1_1component_1_1_drawable.html">Drawable</a>'s rect)  <a href="structecs_1_1component_1_1_animated.html#a0a0f017208ea1aa83a4c0693ea051001">More...</a><br /></td></tr>
 <tr class="separator:a0a0f017208ea1aa83a4c0693ea051001"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a198e3f4d1d8445f98ffdcd2a8e5fd458"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecs_1_1component_1_1_animated.html#a198e3f4d1d8445f98ffdcd2a8e5fd458">Animated</a> (const <a class="el" href="structecs_1_1component_1_1_animated_1_1_anim_frame.html">AnimFrame</a> &amp;first, <a class="el" href="structecs_1_1component_1_1_animated_1_1_anim_frame.html">AnimFrame</a> frames...)</td></tr>
-<tr class="memdesc:a198e3f4d1d8445f98ffdcd2a8e5fd458"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="structecs_1_1component_1_1_animated.html">Animated</a> object.  <a href="structecs_1_1component_1_1_animated.html#a198e3f4d1d8445f98ffdcd2a8e5fd458">More...</a><br /></td></tr>
-<tr class="separator:a198e3f4d1d8445f98ffdcd2a8e5fd458"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05586c1a28d20d901e4a0a67136789cb"><td class="memTemplParams" colspan="2">template&lt;class... Frames&gt; </td></tr>
+<tr class="memitem:a05586c1a28d20d901e4a0a67136789cb"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structecs_1_1component_1_1_animated.html#a05586c1a28d20d901e4a0a67136789cb">Animated</a> (const <a class="el" href="structecs_1_1component_1_1_animated_1_1_anim_frame.html">AnimFrame</a> &amp;first, Frames... frames)</td></tr>
+<tr class="memdesc:a05586c1a28d20d901e4a0a67136789cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="structecs_1_1component_1_1_animated.html">Animated</a> object.  <a href="structecs_1_1component_1_1_animated.html#a05586c1a28d20d901e4a0a67136789cb">More...</a><br /></td></tr>
+<tr class="separator:a05586c1a28d20d901e4a0a67136789cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40584900e18f8283ce922fb0e05a6655"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structecs_1_1component_1_1_animated_1_1_anim_frame.html">AnimFrame</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecs_1_1component_1_1_animated.html#a40584900e18f8283ce922fb0e05a6655">getFrame</a> ()</td></tr>
 <tr class="separator:a40584900e18f8283ce922fb0e05a6655"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44ced49c4c496de2428d6743c659e993"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structecs_1_1component_1_1_animated_1_1_anim_frame.html">AnimFrame</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecs_1_1component_1_1_animated.html#a44ced49c4c496de2428d6743c659e993">getFrame</a> () const</td></tr>
@@ -208,11 +209,13 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a198e3f4d1d8445f98ffdcd2a8e5fd458"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a198e3f4d1d8445f98ffdcd2a8e5fd458">&#9670;&nbsp;</a></span>Animated() <span class="overload">[2/2]</span></h2>
+<a id="a05586c1a28d20d901e4a0a67136789cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05586c1a28d20d901e4a0a67136789cb">&#9670;&nbsp;</a></span>Animated() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class... Frames&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -226,8 +229,8 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structecs_1_1component_1_1_animated_1_1_anim_frame.html">AnimFrame</a>&#160;</td>
-          <td class="paramname"><em>frames...</em>&#160;</td>
+          <td class="paramtype">Frames...&#160;</td>
+          <td class="paramname"><em>frames</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
