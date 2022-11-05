@@ -89,7 +89,11 @@ namespace asset
         static void LoadIniFile(const std::filesystem::path &path)
         {
             boost::property_tree::ptree pt;
-            boost::property_tree::ini_parser::read_ini(path.generic_string(), pt);
+            try {
+                boost::property_tree::ini_parser::read_ini(path.generic_string(), pt);
+            } catch (std::exception &e) {
+                std::cout << e.what() << std::endl;
+            }
 
             // loop through the sections
             for (auto &section : pt) {
