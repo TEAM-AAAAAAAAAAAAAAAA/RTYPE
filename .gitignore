@@ -40,6 +40,7 @@
 # build Folder
 build
 cmake-build-debug
+cmake-build-release
 r-type_client
 r-type_server
 r-type_demo
