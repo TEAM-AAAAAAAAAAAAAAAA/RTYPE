@@ -145,7 +145,6 @@ int main()
     engine.setWaitingWorld(getGameWorld(engine));
     network::Client::getOutgoingMessages().push(msg);
 
-	network::Client::runService();
     engine.run();
     return 0;
 }
