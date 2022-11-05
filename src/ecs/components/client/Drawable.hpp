@@ -22,7 +22,7 @@ namespace ecs::component
          *
          * @param texture the texture key
          */
-        Drawable(const std::string &key, short rotation = 0) : textureKey(key), rotation(rotation)
+        Drawable(const std::string &key, float rotation = 0.0) : textureKey(key), rotation(rotation)
         {
             sf::Vector2u size = asset::AssetLoader::GetTexture(key).getSize();
             rect = {0, 0, static_cast<int>(size.x), static_cast<int>(size.y)};
@@ -34,7 +34,7 @@ namespace ecs::component
          * @param texture the texture key
          * @param rect the rect to use from the texture
          */
-        Drawable(const std::string &key, sf::IntRect rect, short rotation = 0)
+        Drawable(const std::string &key, sf::IntRect rect, float rotation = 0.0)
             : rect(rect), textureKey(key), rotation(rotation)
         {
         }
@@ -45,6 +45,6 @@ namespace ecs::component
 
         std::string textureKey;
         sf::IntRect rect;
-        short rotation;
+        float rotation;
     };
 } // namespace ecs::component
