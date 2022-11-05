@@ -199,12 +199,11 @@ jobs:
         run: |
             for file in ${{ github.workspace }}/${{ matrix.artifacts }}/*; do
                 echo "Uploading $file"
-                curl \
-                -X POST \
-                -H "Authorization: token $GITHUB_TOKEN" \
-                -H "Content-Type: $(file -b --mime-type $file)" \
-                --data-binary @"$file" \
-                "${{ needs.create_release.outputs.upload_url }}?name=$(basename $file)"
+                gh api \
+                --method PATCH \
+              -H "Accept: application/vnd.github+json" \
+                ${{ needs.create_release.outputs.upload_url }} \
+                -f name=$file \
             done
           
 
