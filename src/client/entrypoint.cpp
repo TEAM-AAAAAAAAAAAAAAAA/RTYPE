@@ -7,7 +7,7 @@
 
 #include "Engine.hpp"
 #include "AssetLoader.hpp"
-#include "MenuWorld.hpp"
+#include "GetWorld.hpp"
 
 /**
  * Main function of the client, running everything to start the game
