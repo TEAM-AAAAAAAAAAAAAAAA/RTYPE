@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2022
-** rtype
+** RTYPE
 ** File description:
-** Client
+** NetworkClient
 */
 
 #pragma once
@@ -30,7 +30,8 @@ namespace network
         ~Client()
         {
             _Instance._ioService.stop();
-            _Instance.stopServices();
+            _Instance._outgoingService.join();
+            _Instance._incomingService.join();
             _Instance._socket.close();
         }
 
@@ -48,71 +49,46 @@ namespace network
         /**
          * Static methods used to connect to the given server (host, port) using udp::v4
          */
-        static void connect()
+        static inline void connect()
         {
-            _Instance._socket = udp::socket(_Instance._ioService, udp::endpoint(udp::v4(), 0));
-            udp::resolver resolver = udp::resolver(_Instance._ioService);
-            _Instance._endpoint = *resolver.resolve({udp::v4(), _Instance._host, _Instance._port});
-            _Instance.startServices();
-        }
-
-        /**
-         * Static methods used to disconnect from the given server (host, port) using udp::v4
-         */
-        static void disconnect()
-        {
-            _Instance._ioService.stop();
-            _Instance._socket.close();
-            _Instance.stopServices();
-        }
-
-        /**
-         * Start the service threads for managing incoming & outgoing messages
-         */
-        static void startServices()
-        {
-            _Instance._incomingService = std::thread(&Client::receiveIncoming, &_Instance);
-            _Instance._outgoingService = std::thread(&Client::sendOutgoing, &_Instance);
+            udp::resolver resolver(_Instance._ioService);
+            udp::resolver::query query(udp::v4(), _Instance._host, _Instance._port);
+            _Instance._endpoint = *resolver.resolve(query);
+            _Instance._socket.open(udp::v4());
         }
 
       private:
         /**
          * Private default constructor of the Client Class
          */
-        Client() : _socket(_ioService) {};
-
-        /**
-         * Service threads for managing incoming & outgoing messages, using the `Client::_outgoingMessages` &
-         * `Client::_receivedMessages queues
-         */
-        std::thread _outgoingService;
-        std::thread _incomingService;
-
-        /**
-         * Message queues for incoming & outgoing messages
-         */
-        LockedQueue<Message> _outgoingMessages;
-        LockedQueue<Message> _receivedMessages;
+        Client() : _socket(_ioService), _incomingService(&Client::receiveIncoming, this),
+              _outgoingService(&Client::sendOutgoing, this) {}
 
         /**
          * Boost Asio service & socket
          */
         boost::asio::io_service _ioService;
         udp::socket _socket;
+        Message _recvBuffer{};
         udp::endpoint _endpoint;
         std::string _host;
         std::string _port;
-        Message _recvBuffer{};
-
-        static void stopServices()
-        {
-            _Instance._outgoingService.join();
-            _Instance._incomingService.join();
-        }
 
         /**
-         * Handle the received message by pushing it into the `Client::_receivedMessages`
-         * queue or by printing the error
+         * Locked queue of all unsent outgoing messages
+         */
+        LockedQueue<Message> _outgoingMessages;
+
+        /**
+         * Locked queue of all unprocessed incoming messages
+         */
+        LockedQueue<Message> _receivedMessages;
+
+        /**
+         * Handles the incoming messages by placing them into the incoming
+         * messages locked queue
+         * @param error error of reception
+         * @param bytesTransferred the size of the incoming packet
          */
         void handleReceive(const std::error_code &error, std::size_t bytesTransferred)
         {
@@ -129,9 +105,6 @@ namespace network
             startReceive();
         }
 
-        /**
-         * Receive the next incoming message and push it into the `Client::_receivedMessages` queue
-         */
         void startReceive()
         {
             udp::endpoint senderEndpoint;
@@ -142,15 +115,22 @@ namespace network
         }
 
         /**
-         * Run the ioService and send incoming messages to locked queue for handling
+         * Handles the sending of packets
+         * @param message the packet as an array
+         * @param error error code of sending
+         * @param bytesTransferred the size of the outgoing packet
+         */
+        void handleSend(Message message, const std::error_code &error, std::size_t bytesTransferred) {}
+
+        /**
+         * Run the client's service
          */
         void receiveIncoming()
         {
-            while (!_Instance._socket.is_open())
+            while (!_socket.is_open())
                 ;
             startReceive();
             while (!_ioService.stopped()) {
-                std::cerr << "Here" << std::endl;
                 try {
                     _ioService.run();
                 } catch (const std::exception &e) {
@@ -159,24 +139,27 @@ namespace network
             }
         }
 
+        /**
+         * Send messages in the outgoing message queue
+         */
         void sendOutgoing()
         {
-            while (!_Instance._socket.is_open())
+            while (!_socket.is_open())
                 ;
             while (!_ioService.stopped()) {
                 if (!_outgoingMessages.empty()) {
-                    Message msg = _outgoingMessages.pop();
-                    _socket.async_send_to(boost::asio::buffer(msg, msg.size()), _endpoint,
-                        [](const boost::system::error_code &ec, std::size_t bytes) {
-                            if (ec)
-                                std::cerr << "Error while sending message: " << ec.message() << std::endl;
-                        });
+                    auto msg = _outgoingMessages.pop();
+                    _socket.async_send_to(boost::asio::buffer(msg), _endpoint, [](const boost::system::error_code &ec, std::size_t bytes){});
                 }
             }
-        };
+        }
+
         /**
-         * Static instance of the Client class, lazy loaded
+         * Threads used by the client class
          */
+        std::thread _incomingService;
+        std::thread _outgoingService;
+
         static Client _Instance;
     };
 } // namespace network

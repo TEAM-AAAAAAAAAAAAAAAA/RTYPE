@@ -154,11 +154,7 @@ int main()
     network::Client::setHost("localhost");
     network::Client::setPort("8000");
     network::Client::connect();
-<<<<<<< HEAD
-	std::cerr << "Connected to server" << std::endl;
-=======
     utils::Window::get().setFramerateLimit(60);
->>>>>>> main
     ecs::Engine engine;
     network::Message msg;
     msg.fill(0);
