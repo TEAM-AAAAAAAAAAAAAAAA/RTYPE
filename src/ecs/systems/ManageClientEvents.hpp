@@ -73,7 +73,7 @@ namespace ecs::systems
             else if (world.getEvent() == ecs::Event::EventType::Shoot) {
                 network::Message msg;
                 msg.fill(0);
-                msg.at(0) = constant::getPacketTypeKey(ecs::constant::PacketType::PLAYER_SHOT);
+                msg.at(0) = utils::constant::getPacketTypeKey(utils::constant::PacketType::PLAYER_SHOT);
                 network::Client::getOutgoingMessages().push(msg);
             }
 #pragma endregion

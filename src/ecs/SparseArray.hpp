@@ -118,12 +118,12 @@ namespace ecs
         {
             std::size_t cpt = 0;
             if (!c.has_value())
-                return ecs::constant::npos;
+                return utils::constant::npos;
             for (valueType iterator = _data.begin(); iterator != _data.end(); iterator++, cpt++)
                 if (iterator.has_value() && iterator.value() == c.value()) {
                     return cpt;
                 }
-            return ecs::constant::npos;
+            return utils::constant::npos;
         }
 
       private:

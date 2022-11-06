@@ -5,9 +5,10 @@ set(TARGET ${PROJECT_NAME}_ecs)
 
 add_subdirectory(components)
 add_subdirectory(systems)
-add_subdirectory(utils)
 
 set(ECS_SRC
+    ${ECS_SRCROOT}/WorldManager.cpp
+    ${ECS_SRCROOT}/WorldManager.hpp
     ${COMPONENTS_SRC}
     ${SYSTEMS_SRC}
     PARENT_SCOPE

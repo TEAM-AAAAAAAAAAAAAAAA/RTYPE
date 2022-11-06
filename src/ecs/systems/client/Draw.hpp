@@ -10,6 +10,7 @@
 #include <functional>
 #include <iostream>
 #include "SFML/Graphics.hpp"
+#include "Window.hpp"
 #include "World.hpp"
 #include "components/Position.hpp"
 #include "components/Size.hpp"
@@ -26,7 +27,7 @@ namespace ecs::systems
         auto const &drawables = world.registry.getComponents<component::Drawable>();
         auto const &animations = world.registry.getComponents<component::Animated>();
 
-        world.getWindow().clear();
+        utils::Window::get().clear();
         for (size_t i = 0; i < positions.size() && i < sizes.size() && i < drawables.size(); i++) {
             auto const &pos = positions[i];
             auto const &size = sizes[i];
@@ -34,19 +35,20 @@ namespace ecs::systems
             if (pos && size && draw) {
                 sf::Sprite sprite;
                 sprite.setTexture(draw.value().getTexture());
-                if (i < animations.size() && animations[i])
+                if (i < animations.size() && animations[i]) {
                     sprite.setTextureRect(animations[i].value().getFrameRect());
-                else
+                } else {
                     sprite.setTextureRect(draw.value().rect);
+                }
                 float scaleX =
                     static_cast<float>(size.value().width) / static_cast<float>(sprite.getTextureRect().width);
                 float scaleY =
                     static_cast<float>(size.value().height) / static_cast<float>(sprite.getTextureRect().height);
                 sprite.setScale(scaleX, scaleY);
                 sprite.setPosition({static_cast<float>(pos.value().x), static_cast<float>(pos.value().y)});
-                world.getWindow().draw(sprite);
+                utils::Window::get().draw(sprite);
             }
         };
-        world.getWindow().display();
+        utils::Window::get().display();
     };
 } // namespace ecs::systems
