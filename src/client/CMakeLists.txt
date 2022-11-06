@@ -12,6 +12,8 @@ set(SRC
     ${SRC_ROOT}/NetworkClient.hpp
     ${UTILS_SRC}
     ${ECS_SRC}
+    ${SRC_ROOT}/SoundBox.cpp
+    ${SRC_ROOT}/SoundBox.hpp
 )
 
 
@@ -20,7 +22,7 @@ set(SRC
 add_executable(${TARGET} ${SRC})
 
 target_link_libraries(${TARGET} PRIVATE
-    sfml-system sfml-network sfml-graphics sfml-window
+    sfml-system sfml-network sfml-graphics sfml-window sfml-audio
     Boost::boost
 )
 
