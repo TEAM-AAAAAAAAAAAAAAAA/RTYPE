@@ -49,6 +49,7 @@ static void registerComponents(ecs::World &world)
     world.registry.registerComponent<ecs::component::Controllable>();
     world.registry.registerComponent<ecs::component::Animated>();
     world.registry.registerComponent<ecs::component::Hitbox>();
+    world.registry.registerComponent<ecs::component::Text>();
 }
 
 static void addGameSystems(ecs::World &world)
@@ -162,7 +163,27 @@ static void addMenuSystems(ecs::World &world)
 
 static void setMenuBackground(ecs::World &world)
 {
-    //TODO Need to implement the background of the menu, assets, button etc...
+    ecs::Entity playButton = world.registry.spawn_entity();
+    ecs::Entity optionButton = world.registry.spawn_entity();
+    ecs::Entity quitButton = world.registry.spawn_entity();
+
+    world.registry.addComponent<ecs::component::Position>(playButton, {300, 300});
+    world.registry.addComponent<ecs::component::Size>(playButton, {31, 100});
+    world.registry.addComponent<ecs::component::Drawable>(playButton, {"menu", {324, 2079, 916, 292}});
+
+    world.registry.addComponent<ecs::component::Position>(optionButton, {300, 400});
+    world.registry.addComponent<ecs::component::Size>(optionButton, {31, 100});
+    world.registry.addComponent<ecs::component::Drawable>(optionButton, {"menu", {3651, 2079, 916, 292}});
+
+    world.registry.addComponent<ecs::component::Position>(quitButton, {300, 500});
+    world.registry.addComponent<ecs::component::Size>(quitButton, {31, 100});
+    world.registry.addComponent<ecs::component::Drawable>(quitButton, {"menu", {4760, 2079, 916, 292}});
+
+}
+
+static void destroyMenu(ecs::World &world)
+{
+
 }
 
 ecs::World getMenuWorld()
@@ -170,6 +191,7 @@ ecs::World getMenuWorld()
     ecs::World world;
 
     utils::Window::get().setFramerateLimit(FRAME_LIMIT);
+    utils::Window::Color = sf::Color(18, 32, 45, 255);
     registerComponents(world);
     addMenuSystems(world);
     setMenuBackground(world);
