@@ -1,6 +1,5 @@
 set (SRC_ROOT ${PROJECT_SOURCE_DIR}/src/client)
 set (INC_ROOT ${PROJECT_SOURCE_DIR}/src/client)
-#set(ECS_SRC ../ecs)
 
 set(TARGET r-type_client)
 
@@ -10,9 +9,14 @@ set(SRC
     ${SRC_ROOT}/AssetLoader.cpp
     ${SRC_ROOT}/NetworkClient.cpp
     ${SRC_ROOT}/NetworkClient.hpp
+    ${SRC_ROOT}/GameWorld.cpp
+    ${SRC_ROOT}/MenuWorld.cpp
+    ${SRC_ROOT}/GameWorld.hpp
+    ${SRC_ROOT}/MenuWorld.hpp
+    ${SRC_ROOT}/MenuWorld.cpp
     ${UTILS_SRC}
     ${ECS_SRC}
-)
+    )
 
 
 
