@@ -12,6 +12,6 @@ var searchData=
   ['constiterator_31',['constIterator',['../classecs_1_1_sparse_array.html#aa30b60611a41f329dce4ee58c5089978',1,'ecs::SparseArray']]],
   ['constreferencetype_32',['constReferenceType',['../classecs_1_1_sparse_array.html#aa745c62e1bf03b88e3ed3db3c1e96359',1,'ecs::SparseArray']]],
   ['container_33',['container',['../classecs_1_1_sparse_array.html#a01915e69121efbb9bf4895ee958b4d46',1,'ecs::SparseArray']]],
-  ['controllable_34',['Controllable',['../structecs_1_1component_1_1_controllable.html',1,'ecs::component::Controllable'],['../structecs_1_1component_1_1_controllable.html#a610a98456ca0ca990bd1f8e72903f23c',1,'ecs::component::Controllable::Controllable()']]],
+  ['controllable_34',['Controllable',['../structecs_1_1component_1_1_controllable.html',1,'ecs::component::Controllable'],['../structecs_1_1component_1_1_controllable.html#a8f27adc7233ec917a1ed0dd34f0595c9',1,'ecs::component::Controllable::Controllable()']]],
   ['controllable_2ehpp_35',['Controllable.hpp',['../_controllable_8hpp.html',1,'']]]
 ];

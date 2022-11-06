@@ -1,23 +1,16 @@
 <map id="main" name="main">
-<area shape="rect" id="node1" title=" " alt="" coords="5,300,60,327"/>
-<area shape="rect" id="node2" href="$classnetwork_1_1_client.html#ab803b1a4b60b0d5ca35b84e95729c2b4" title=" " alt="" coords="123,31,303,57"/>
-<area shape="rect" id="node3" href="$client_2entrypoint_8cpp.html#a998c7eb0e92409953a713476a37a8250" title=" " alt="" coords="153,81,272,108"/>
-<area shape="rect" id="node11" href="$classnetwork_1_1_client.html#ab4ee2988395ad66a1c4e259eba436d23" title=" " alt="" coords="108,133,317,174"/>
-<area shape="rect" id="node12" href="$classasset_1_1_asset_loader.html#a259aabaae49480269917291cba241043" title="Load a .ini file with boost loading assets into the map." alt="" coords="140,198,285,239"/>
-<area shape="rect" id="node13" href="$classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2" title=" " alt="" coords="127,263,298,305"/>
-<area shape="rect" id="node14" href="$classecs_1_1_engine.html#aa7ecda3685c27b8f859fdf0e764f0a94" title=" " alt="" coords="150,329,275,356"/>
-<area shape="rect" id="node18" href="$classnetwork_1_1_client.html#a07fc7307d327b56735af419262a5160d" title=" " alt="" coords="123,380,302,407"/>
-<area shape="rect" id="node19" href="$classnetwork_1_1_client.html#a54f38a429fe6e96c68f10ddf3f226eb9" title=" " alt="" coords="125,431,300,457"/>
-<area shape="rect" id="node20" href="$classecs_1_1_world_manager.html#ab8a3b57448589e5301d8ae65f7dbf88e" title=" " alt="" coords="135,482,290,523"/>
-<area shape="rect" id="node21" href="$classasset_1_1_asset_loader.html#a5d2e326963a2a9bf49587a28de5fc006" title="create a smartpath from a vector of string" alt="" coords="140,547,285,589"/>
-<area shape="rect" id="node4" href="$classecs_1_1_registry.html#a84a2d80e15dc9014520feec1a134302a" title=" " alt="" coords="379,5,591,32"/>
-<area shape="rect" id="node5" href="$classecs_1_1_world.html#a298b46d7b7f1742f43ac2f8cb7ef9e95" title=" " alt="" coords="399,56,570,83"/>
-<area shape="rect" id="node6" href="$classecs_1_1_registry.html#a62e5024139f23f3f18859e01f70856ba" title=" " alt="" coords="365,107,604,133"/>
-<area shape="rect" id="node10" href="$classecs_1_1_registry.html#a960bf8fcdaa237dc3a8594cf53290085" title=" " alt="" coords="407,158,562,199"/>
-<area shape="rect" id="node7" href="$classecs_1_1_sparse_array.html#abcc31b0e8950b62375bf75b4b92339e2" title=" " alt="" coords="673,56,847,83"/>
-<area shape="rect" id="node8" href="$classecs_1_1_registry.html#af1bb5ae13485a9755528c3d2f71aa4d1" title=" " alt="" coords="652,107,868,133"/>
-<area shape="rect" id="node9" href="$classecs_1_1_sparse_array.html#ae1d59f9a67c3ede1c870af0d1d5fe06b" title=" " alt="" coords="678,157,842,184"/>
-<area shape="rect" id="node15" href="$classecs_1_1_world_manager.html#a1e9cb1cc467c773762bfa0c3299068aa" title=" " alt="" coords="407,263,562,305"/>
-<area shape="rect" id="node16" href="$classutils_1_1_window.html#adf07a85381bcbdf6cb2c71db03302e38" title=" " alt="" coords="403,329,566,356"/>
-<area shape="rect" id="node17" href="$classecs_1_1_world.html#a0015fa0624f4eeaa5178d189bf5e233b" title=" " alt="" coords="397,380,572,407"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,275,60,301"/>
+<area shape="rect" id="node2" href="$classnetwork_1_1_client.html#ab803b1a4b60b0d5ca35b84e95729c2b4" title=" " alt="" coords="123,5,303,32"/>
+<area shape="rect" id="node3" href="$client_2entrypoint_8cpp.html#a998c7eb0e92409953a713476a37a8250" title=" " alt="" coords="153,56,272,83"/>
+<area shape="rect" id="node4" href="$classnetwork_1_1_client.html#ab4ee2988395ad66a1c4e259eba436d23" title=" " alt="" coords="108,107,317,149"/>
+<area shape="rect" id="node5" href="$classasset_1_1_asset_loader.html#a259aabaae49480269917291cba241043" title="Load a .ini file with boost loading assets into the map." alt="" coords="140,173,285,214"/>
+<area shape="rect" id="node6" href="$classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2" title=" " alt="" coords="127,238,298,279"/>
+<area shape="rect" id="node7" href="$classecs_1_1_engine.html#aa7ecda3685c27b8f859fdf0e764f0a94" title=" " alt="" coords="150,304,275,331"/>
+<area shape="rect" id="node11" href="$classnetwork_1_1_client.html#a07fc7307d327b56735af419262a5160d" title=" " alt="" coords="123,355,302,381"/>
+<area shape="rect" id="node12" href="$classnetwork_1_1_client.html#a54f38a429fe6e96c68f10ddf3f226eb9" title=" " alt="" coords="125,405,300,432"/>
+<area shape="rect" id="node13" href="$classecs_1_1_world_manager.html#ab8a3b57448589e5301d8ae65f7dbf88e" title=" " alt="" coords="135,457,290,498"/>
+<area shape="rect" id="node14" href="$classasset_1_1_asset_loader.html#a5d2e326963a2a9bf49587a28de5fc006" title="create a smartpath from a vector of string" alt="" coords="140,522,285,563"/>
+<area shape="rect" id="node8" href="$classecs_1_1_world_manager.html#a1e9cb1cc467c773762bfa0c3299068aa" title=" " alt="" coords="375,238,530,279"/>
+<area shape="rect" id="node9" href="$classutils_1_1_window.html#adf07a85381bcbdf6cb2c71db03302e38" title=" " alt="" coords="371,304,534,331"/>
+<area shape="rect" id="node10" href="$classecs_1_1_world.html#a0015fa0624f4eeaa5178d189bf5e233b" title=" " alt="" coords="365,355,540,381"/>
 </map>

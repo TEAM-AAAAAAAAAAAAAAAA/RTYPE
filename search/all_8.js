@@ -14,5 +14,7 @@ var searchData=
   ['hassuper_115',['hasSuper',['../structecs_1_1component_1_1_weapon.html#aafbef6cefc6918ba64b558f48c9ec4c3',1,'ecs::component::Weapon']]],
   ['health_116',['Health',['../structecs_1_1component_1_1_health.html',1,'ecs::component::Health'],['../structecs_1_1component_1_1_health.html#a690db6f5fd2224adbb8c6b61eba628f4',1,'ecs::component::Health::health()']]],
   ['health_2ehpp_117',['Health.hpp',['../_health_8hpp.html',1,'']]],
-  ['height_118',['height',['../structecs_1_1component_1_1_animated_1_1_anim_frame.html#ab157868dbb8f33153fba76d2fa3b0cec',1,'ecs::component::Animated::AnimFrame::height()'],['../structecs_1_1component_1_1_size.html#a6de1fd19c7b4a0eef00d18cbb00152cb',1,'ecs::component::Size::height()']]]
+  ['height_118',['height',['../structecs_1_1component_1_1_animated_1_1_anim_frame.html#ab157868dbb8f33153fba76d2fa3b0cec',1,'ecs::component::Animated::AnimFrame::height()'],['../structecs_1_1component_1_1_size.html#a6de1fd19c7b4a0eef00d18cbb00152cb',1,'ecs::component::Size::height()']]],
+  ['hitbox_119',['Hitbox',['../structecs_1_1component_1_1_hitbox.html',1,'ecs::component::Hitbox'],['../structecs_1_1component_1_1_hitbox.html#a1a898d76591eed1d48d7144ce6a4166c',1,'ecs::component::Hitbox::Hitbox()'],['../structecs_1_1component_1_1_controllable.html#ab6db51abc80420e6026d4003b35b4f2e',1,'ecs::component::Controllable::HitBox()'],['../classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0fa53581ad1cfd61e65a94e18da863903c7',1,'ecs::Event::HitBox()']]],
+  ['hitbox_2ehpp_120',['Hitbox.hpp',['../_hitbox_8hpp.html',1,'']]]
 ];

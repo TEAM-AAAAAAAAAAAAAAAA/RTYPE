@@ -145,8 +145,8 @@ $(document).ready(function(){initNavTree('structecs_1_1component_1_1_controllabl
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a610a98456ca0ca990bd1f8e72903f23c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecs_1_1component_1_1_controllable.html#a610a98456ca0ca990bd1f8e72903f23c">Controllable</a> (sf::Keyboard::Key moveUp, sf::Keyboard::Key moveLeft, sf::Keyboard::Key moveDown, sf::Keyboard::Key moveRight, sf::Keyboard::Key moveUpSecondary=sf::Keyboard::Unknown, sf::Keyboard::Key moveLeftSecondary=sf::Keyboard::Unknown, sf::Keyboard::Key moveDownSecondary=sf::Keyboard::Unknown, sf::Keyboard::Key moveRightSecondary=sf::Keyboard::Unknown)</td></tr>
-<tr class="separator:a610a98456ca0ca990bd1f8e72903f23c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f27adc7233ec917a1ed0dd34f0595c9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecs_1_1component_1_1_controllable.html#a8f27adc7233ec917a1ed0dd34f0595c9">Controllable</a> (sf::Keyboard::Key moveUp, sf::Keyboard::Key moveLeft, sf::Keyboard::Key moveDown, sf::Keyboard::Key moveRight, sf::Keyboard::Key hitBox, sf::Keyboard::Key moveUpSecondary=sf::Keyboard::Unknown, sf::Keyboard::Key moveLeftSecondary=sf::Keyboard::Unknown, sf::Keyboard::Key moveDownSecondary=sf::Keyboard::Unknown, sf::Keyboard::Key moveRightSecondary=sf::Keyboard::Unknown)</td></tr>
+<tr class="separator:a8f27adc7233ec917a1ed0dd34f0595c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -166,16 +166,14 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a6ce6960cc4b86adb9161a15113ca8726"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9bd4761e2fe292b8482908e1dce203ee"><td class="memItemLeft" align="right" valign="top">sf::Keyboard::Key&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecs_1_1component_1_1_controllable.html#a9bd4761e2fe292b8482908e1dce203ee">MoveRightSecondary</a></td></tr>
 <tr class="separator:a9bd4761e2fe292b8482908e1dce203ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37fef2d5291ea3d5aa79c551fef7cb82"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0f">ecs::Event::EventType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecs_1_1component_1_1_controllable.html#a37fef2d5291ea3d5aa79c551fef7cb82">lastDirectionX</a></td></tr>
-<tr class="separator:a37fef2d5291ea3d5aa79c551fef7cb82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9aa9c98c6de2e856a70871f059646b4c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0f">ecs::Event::EventType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecs_1_1component_1_1_controllable.html#a9aa9c98c6de2e856a70871f059646b4c">lastDirectionY</a></td></tr>
-<tr class="separator:a9aa9c98c6de2e856a70871f059646b4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6db51abc80420e6026d4003b35b4f2e"><td class="memItemLeft" align="right" valign="top">sf::Keyboard::Key&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecs_1_1component_1_1_controllable.html#ab6db51abc80420e6026d4003b35b4f2e">HitBox</a></td></tr>
+<tr class="separator:ab6db51abc80420e6026d4003b35b4f2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="structecs_1_1component_1_1_controllable.html">Controllable</a> component represents all the authorized input for the user In brief, it currently manage the following inputs : Up, Down, Right, Left Secondary Up, Secondary Down, Secondary Left, Secondary Right, </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a610a98456ca0ca990bd1f8e72903f23c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a610a98456ca0ca990bd1f8e72903f23c">&#9670;&nbsp;</a></span>Controllable()</h2>
+<a id="a8f27adc7233ec917a1ed0dd34f0595c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f27adc7233ec917a1ed0dd34f0595c9">&#9670;&nbsp;</a></span>Controllable()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -206,6 +204,12 @@ Public Attributes</h2></td></tr>
           <td></td>
           <td class="paramtype">sf::Keyboard::Key&#160;</td>
           <td class="paramname"><em>moveRight</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">sf::Keyboard::Key&#160;</td>
+          <td class="paramname"><em>hitBox</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -247,28 +251,14 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a37fef2d5291ea3d5aa79c551fef7cb82"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a37fef2d5291ea3d5aa79c551fef7cb82">&#9670;&nbsp;</a></span>lastDirectionX</h2>
+<a id="ab6db51abc80420e6026d4003b35b4f2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6db51abc80420e6026d4003b35b4f2e">&#9670;&nbsp;</a></span>HitBox</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0f">ecs::Event::EventType</a> ecs::component::Controllable::lastDirectionX</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a9aa9c98c6de2e856a70871f059646b4c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9aa9c98c6de2e856a70871f059646b4c">&#9670;&nbsp;</a></span>lastDirectionY</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0f">ecs::Event::EventType</a> ecs::component::Controllable::lastDirectionY</td>
+          <td class="memname">sf::Keyboard::Key ecs::component::Controllable::HitBox</td>
         </tr>
       </table>
 </div><div class="memdoc">

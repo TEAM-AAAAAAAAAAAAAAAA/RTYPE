@@ -32,5 +32,6 @@ var searchData=
   ['sparsearray_2ehpp_240',['SparseArray.hpp',['../_sparse_array_8hpp.html',1,'']]],
   ['spawn_5fentity_241',['spawn_entity',['../classecs_1_1_registry.html#a960bf8fcdaa237dc3a8594cf53290085',1,'ecs::Registry']]],
   ['superdamage_242',['superDamage',['../structecs_1_1component_1_1_weapon.html#ac8de98d6f734b4d6bc6e0ec698b690f0',1,'ecs::component::Weapon']]],
-  ['superloadingtime_243',['superLoadingTime',['../structecs_1_1component_1_1_weapon.html#a2e296d9d2ffaa2fcf8d138f10d9b4dea',1,'ecs::component::Weapon']]]
+  ['superloadingtime_243',['superLoadingTime',['../structecs_1_1component_1_1_weapon.html#a2e296d9d2ffaa2fcf8d138f10d9b4dea',1,'ecs::component::Weapon']]],
+  ['switchhitbox_244',['switchHitBox',['../structecs_1_1component_1_1_hitbox.html#a6d240b123e2298c42ddf3b8fad7c3735',1,'ecs::component::Hitbox']]]
 ];

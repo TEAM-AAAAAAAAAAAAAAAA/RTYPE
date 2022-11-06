@@ -10,6 +10,9 @@ var dir_ab0a5ce78cc1345b2f292773c1232112 =
     [ "Drawable.hpp", "_drawable_8hpp.html", [
       [ "Drawable", "structecs_1_1component_1_1_drawable.html", "structecs_1_1component_1_1_drawable" ]
     ] ],
+    [ "Hitbox.hpp", "_hitbox_8hpp.html", [
+      [ "Hitbox", "structecs_1_1component_1_1_hitbox.html", "structecs_1_1component_1_1_hitbox" ]
+    ] ],
     [ "Parallax.hpp", "_parallax_8hpp.html", [
       [ "Parallax", "structecs_1_1component_1_1_parallax.html", "structecs_1_1component_1_1_parallax" ]
     ] ],

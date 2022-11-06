@@ -10,6 +10,7 @@ var classecs_1_1_event =
       [ "MoveDown", "classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0faef2f5b9154b22a799ba273b47d48ff85", null ],
       [ "MoveRight", "classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0fabafce6ee7edf346efe8f0d816c8f3955", null ],
       [ "MoveStop", "classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0fadc8453b770e1ca15c38d69de4861ef1a", null ],
+      [ "HitBox", "classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0fa53581ad1cfd61e65a94e18da863903c7", null ],
       [ "Shoot", "classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0fa5cbb2eabb0d4eaea3ab9cc076339f935", null ],
       [ "UIUp", "classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0fafb32c15535dfe4c1b7e07c6ec0fab954", null ],
       [ "UILeft", "classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0fa5adcab2f3911adb362777aabd9214caa", null ],

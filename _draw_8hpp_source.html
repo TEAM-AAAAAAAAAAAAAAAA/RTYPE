@@ -148,60 +148,81 @@ $(document).ready(function(){initNavTree('_draw_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;SFML/Graphics.hpp&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_window_8hpp.html">Window.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;Window.hpp&quot;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_world_8hpp.html">World.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_position_8hpp.html">components/Position.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_size_8hpp.html">components/Size.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_drawable_8hpp.html">components/client/Drawable.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs_1_1systems.html">ecs::systems</a></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">   24</a></span>&#160;    std::function&lt;void(<a class="code" href="classecs_1_1_world.html">World</a> &amp;)&gt; <a class="code" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">draw</a> = [](<a class="code" href="classecs_1_1_world.html">World</a> &amp;world) {</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;positions = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_position.html">component::Position</a>&gt;();</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;sizes = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_size.html">component::Size</a>&gt;();</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;drawables = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_drawable.html">component::Drawable</a>&gt;();</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;animations = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_animated.html">component::Animated</a>&gt;();</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        utils::Window::get().clear();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; positions.size() &amp;&amp; i &lt; sizes.size() &amp;&amp; i &lt; drawables.size(); i++) {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span> &amp;pos = positions[i];</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span> &amp;size = sizes[i];</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span> &amp;<a class="code" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">draw</a> = drawables[i];</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            <span class="keywordflow">if</span> (pos &amp;&amp; size &amp;&amp; <a class="code" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">draw</a>) {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                sf::Sprite sprite;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                sprite.setTexture(<a class="code" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">draw</a>.value().getTexture());</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                <span class="keywordflow">if</span> (i &lt; animations.size() &amp;&amp; animations[i]) {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                    sprite.setTextureRect(animations[i].value().getFrameRect());</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                    sprite.setTextureRect(<a class="code" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">draw</a>.value().rect);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                }</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                <span class="keywordtype">float</span> scaleX =</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                    <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(size.value().width) / <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(sprite.getTextureRect().width);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                <span class="keywordtype">float</span> scaleY =</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                    <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(size.value().height) / <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(sprite.getTextureRect().height);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                sprite.setScale(scaleX, scaleY);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                sprite.setPosition({<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(pos.value().x), <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(pos.value().y)});</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                sprite.setRotation(<a class="code" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">draw</a>.value().rotation);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                utils::Window::get().draw(sprite);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        };</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        utils::Window::get().display();</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    };</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_animated_8hpp.html">components/client/Animated.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_drawable_8hpp.html">components/client/Drawable.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_hitbox_8hpp.html">components/client/Hitbox.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs_1_1systems.html">ecs::systems</a></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">   26</a></span>&#160;    std::function&lt;void(<a class="code" href="classecs_1_1_world.html">World</a> &amp;)&gt; <a class="code" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">draw</a> = [](<a class="code" href="classecs_1_1_world.html">World</a> &amp;world) {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;positions = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_position.html">component::Position</a>&gt;();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;sizes = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_size.html">component::Size</a>&gt;();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;drawables = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_drawable.html">component::Drawable</a>&gt;();</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;animations = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_animated.html">component::Animated</a>&gt;();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;hitBoxes = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_hitbox.html">component::Hitbox</a>&gt;();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        utils::Window::get().clear();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; positions.size() &amp;&amp; i &lt; sizes.size() &amp;&amp; i &lt; drawables.size(); i++) {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span> &amp;pos = positions[i];</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span> &amp;size = sizes[i];</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span> &amp;<a class="code" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">draw</a> = drawables[i];</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keywordflow">if</span> (pos &amp;&amp; size &amp;&amp; <a class="code" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">draw</a>) {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                sf::Sprite sprite;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                sprite.setTexture(<a class="code" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">draw</a>.value().getTexture());</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                <span class="keywordflow">if</span> (i &lt; animations.size() &amp;&amp; animations[i]) {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                    sprite.setTextureRect(animations[i].value().getFrameRect());</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                    sprite.setTextureRect(<a class="code" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">draw</a>.value().rect);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                }</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                <span class="keywordtype">float</span> scaleX =</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                    <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(size.value().width) / <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(sprite.getTextureRect().width);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                <span class="keywordtype">float</span> scaleY =</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                    <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(size.value().height) / <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(sprite.getTextureRect().height);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                sprite.setScale(scaleX, scaleY);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                sprite.setPosition({<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(pos.value().x), <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(pos.value().y)});</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                sprite.setRotation(<a class="code" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">draw</a>.value().rotation);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                utils::Window::get().draw(sprite);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            }</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keywordflow">if</span> (i &lt; hitBoxes.size()) {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                <span class="keyword">auto</span> <span class="keyword">const</span> &amp;hitBox = hitBoxes[i];</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                <span class="keywordflow">if</span> (hitBox &amp;&amp; size &amp;&amp; pos) {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                    <span class="keywordflow">if</span> (hitBox-&gt;enableHitBox) {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                        sf::RectangleShape hitBoxRec({0, 0});</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                        hitBoxRec.setFillColor(sf::Color::Transparent);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                        hitBoxRec.setOutlineColor(sf::Color::Red);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                        hitBoxRec.setOutlineThickness(2);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                        hitBoxRec.setSize({(float)size-&gt;width, (<span class="keywordtype">float</span>)size-&gt;height});</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                        hitBoxRec.setPosition({(float)(pos-&gt;x), (float)(pos-&gt;y)});</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                        utils::Window::get().draw(hitBoxRec);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                    }</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                }</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        };</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        utils::Window::get().display();</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    };</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="astructecs_1_1component_1_1_drawable_html"><div class="ttname"><a href="structecs_1_1component_1_1_drawable.html">ecs::component::Drawable</a></div><div class="ttdef"><b>Definition:</b> Drawable.hpp:19</div></div>
 <div class="ttc" id="a_position_8hpp_html"><div class="ttname"><a href="_position_8hpp.html">Position.hpp</a></div></div>
-<div class="ttc" id="a_window_8hpp_html"><div class="ttname"><a href="_window_8hpp.html">Window.hpp</a></div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_animated_html"><div class="ttname"><a href="structecs_1_1component_1_1_animated.html">ecs::component::Animated</a></div><div class="ttdef"><b>Definition:</b> Animated.hpp:14</div></div>
 <div class="ttc" id="a_world_8hpp_html"><div class="ttname"><a href="_world_8hpp.html">World.hpp</a></div></div>
 <div class="ttc" id="a_size_8hpp_html"><div class="ttname"><a href="_size_8hpp.html">Size.hpp</a></div></div>
+<div class="ttc" id="a_animated_8hpp_html"><div class="ttname"><a href="_animated_8hpp.html">Animated.hpp</a></div></div>
 <div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:19</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_size_html"><div class="ttname"><a href="structecs_1_1component_1_1_size.html">ecs::component::Size</a></div><div class="ttdoc">Size component.</div><div class="ttdef"><b>Definition:</b> Size.hpp:6</div></div>
 <div class="ttc" id="anamespaceecs_1_1systems_html"><div class="ttname"><a href="namespaceecs_1_1systems.html">ecs::systems</a></div><div class="ttdef"><b>Definition:</b> Animate.hpp:19</div></div>
+<div class="ttc" id="a_hitbox_8hpp_html"><div class="ttname"><a href="_hitbox_8hpp.html">Hitbox.hpp</a></div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_position_html"><div class="ttname"><a href="structecs_1_1component_1_1_position.html">ecs::component::Position</a></div><div class="ttdef"><b>Definition:</b> Position.hpp:14</div></div>
 <div class="ttc" id="a_drawable_8hpp_html"><div class="ttname"><a href="_drawable_8hpp.html">Drawable.hpp</a></div></div>
-<div class="ttc" id="anamespaceecs_1_1systems_html_ab7690be6352e10d6bf8b0c79bcd2bcd3"><div class="ttname"><a href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">ecs::systems::draw</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; draw</div><div class="ttdef"><b>Definition:</b> Draw.hpp:24</div></div>
+<div class="ttc" id="anamespaceecs_1_1systems_html_ab7690be6352e10d6bf8b0c79bcd2bcd3"><div class="ttname"><a href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">ecs::systems::draw</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; draw</div><div class="ttdef"><b>Definition:</b> Draw.hpp:26</div></div>
+<div class="ttc" id="astructecs_1_1component_1_1_hitbox_html"><div class="ttname"><a href="structecs_1_1component_1_1_hitbox.html">ecs::component::Hitbox</a></div><div class="ttdef"><b>Definition:</b> Hitbox.hpp:17</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

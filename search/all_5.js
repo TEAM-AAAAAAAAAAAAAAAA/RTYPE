@@ -1,10 +1,11 @@
 var searchData=
 [
-  ['component_47',['component',['../namespaceecs_1_1component.html',1,'ecs']]],
-  ['ecs_48',['ecs',['../namespaceecs.html',1,'']]],
-  ['emplaceat_49',['emplaceAt',['../classecs_1_1_sparse_array.html#a8c024916668c6a7ddd5265861e3e2bc5',1,'ecs::SparseArray']]],
-  ['emplacecomponent_50',['emplaceComponent',['../classecs_1_1_registry.html#a669eace40b445fce60219ef5f744b417',1,'ecs::Registry']]],
-  ['empty_51',['empty',['../classnetwork_1_1_locked_queue.html#a6f83affbc6d8bc587e67a5b1003678b9',1,'network::LockedQueue']]],
+  ['component_46',['component',['../namespaceecs_1_1component.html',1,'ecs']]],
+  ['ecs_47',['ecs',['../namespaceecs.html',1,'']]],
+  ['emplaceat_48',['emplaceAt',['../classecs_1_1_sparse_array.html#a8c024916668c6a7ddd5265861e3e2bc5',1,'ecs::SparseArray']]],
+  ['emplacecomponent_49',['emplaceComponent',['../classecs_1_1_registry.html#a669eace40b445fce60219ef5f744b417',1,'ecs::Registry']]],
+  ['empty_50',['empty',['../classnetwork_1_1_locked_queue.html#a6f83affbc6d8bc587e67a5b1003678b9',1,'network::LockedQueue']]],
+  ['enablehitbox_51',['enableHitBox',['../structecs_1_1component_1_1_hitbox.html#ac87f36dbd1591176ff2354684f02cb8c',1,'ecs::component::Hitbox']]],
   ['end_52',['end',['../classecs_1_1_sparse_array.html#acb0dda3580f64435b62bc2097519e8ad',1,'ecs::SparseArray::end()'],['../classecs_1_1_sparse_array.html#a47d254e67297d68b59e0be4625703c15',1,'ecs::SparseArray::end() const']]],
   ['enemies_53',['Enemies',['../structecs_1_1component_1_1_faction.html#af6ff333bfa9135fc5709a76af44ca55ba29ea24fe5e810ed26ecbe1a123126164',1,'ecs::component::Faction']]],
   ['enemybase_54',['EnemyBase',['../structecs_1_1component_1_1_entity_type.html#af64becff8cb6fbfeba4815b3d3824449a76bf7a9f3e5a13044c75d622936a703f',1,'ecs::component::EntityType']]],

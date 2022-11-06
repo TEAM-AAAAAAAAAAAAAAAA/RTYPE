@@ -308,21 +308,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= [](World &amp;world) {</div>
-<div class="line">        sf::Event event;</div>
-<div class="line"> </div>
-<div class="line">        <span class="keywordflow">while</span> (utils::Window::get().pollEvent(event)) {</div>
-<div class="line">            <span class="keywordflow">switch</span> (event.type) {</div>
-<div class="line">                <span class="keywordflow">case</span> sf::Event::Closed: utils::Window::get().close(); <span class="keywordflow">break</span>;</div>
-<div class="line">                <span class="keywordflow">case</span> sf::Event::KeyPressed: {</div>
-<div class="line">                    <span class="keywordflow">if</span> (event.key.code == sf::Keyboard::Key::W)</div>
-<div class="line">                        <a class="code" href="classecs_1_1_world_manager.html#ab8a3b57448589e5301d8ae65f7dbf88e">ecs::WorldManager::setWaitingWorld</a>(<a class="code" href="namespaceecs_1_1systems.html#a9e53dea2cf4c6c53caa0bf6658a51a9c">getTestWorld</a>);</div>
-<div class="line">                } <span class="keywordflow">break</span>;</div>
-<div class="line">                <span class="keywordflow">default</span>: <span class="keywordflow">break</span>;</div>
-<div class="line">            }</div>
-<div class="line">        }</div>
-<div class="line">    }</div>
-</div><!-- fragment --><p>Used to manage Sfml events Currently able to manage the following actions: Close the window KeyPressed, in this case, we check if the bind is known from sfml: if yes, we had it on world's events' stack, nothing otherwise </p>
+<p>Used to manage Sfml events Currently able to manage the following actions: Close the window KeyPressed, in this case, we check if the bind is known from sfml: if yes, we had it on world's events' stack, nothing otherwise </p>
 
 </div>
 </div>
@@ -560,13 +546,11 @@ Variables</h2></td></tr>
 <div class="ttc" id="aclassnetwork_1_1_locked_queue_html_a2be6f1a5bcdc3fd83a53558377f51d80"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80">network::LockedQueue::pop</a></div><div class="ttdeci">T pop()</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:53</div></div>
 <div class="ttc" id="aclassnetwork_1_1_client_html_ab4ee2988395ad66a1c4e259eba436d23"><div class="ttname"><a href="classnetwork_1_1_client.html#ab4ee2988395ad66a1c4e259eba436d23">network::Client::getOutgoingMessages</a></div><div class="ttdeci">static LockedQueue&lt; Message &gt; &amp; getOutgoingMessages()</div><div class="ttdef"><b>Definition:</b> NetworkClient.hpp:55</div></div>
 <div class="ttc" id="anamespacenetwork_html_a56091a576a11d5ae809e0e832167d051"><div class="ttname"><a href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">network::Message</a></div><div class="ttdeci">std::array&lt; char, 14 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
-<div class="ttc" id="anamespaceecs_1_1systems_html_a9e53dea2cf4c6c53caa0bf6658a51a9c"><div class="ttname"><a href="namespaceecs_1_1systems.html#a9e53dea2cf4c6c53caa0bf6658a51a9c">ecs::systems::getTestWorld</a></div><div class="ttdeci">std::function&lt; World(void)&gt; getTestWorld</div><div class="ttdef"><b>Definition:</b> HandleSFMLEvents.hpp:16</div></div>
 <div class="ttc" id="aclassecs_1_1_world_html_a71b5c2fb034c78a6270c44e42a0e2360"><div class="ttname"><a href="classecs_1_1_world.html#a71b5c2fb034c78a6270c44e42a0e2360">ecs::World::registry</a></div><div class="ttdeci">Registry registry</div><div class="ttdef"><b>Definition:</b> World.hpp:75</div></div>
 <div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:19</div></div>
 <div class="ttc" id="aclassecs_1_1_world_html_a298b46d7b7f1742f43ac2f8cb7ef9e95"><div class="ttname"><a href="classecs_1_1_world.html#a298b46d7b7f1742f43ac2f8cb7ef9e95">ecs::World::addSystem</a></div><div class="ttdeci">void addSystem(const std::function&lt; void(World &amp;)&gt; &amp;system)</div><div class="ttdef"><b>Definition:</b> World.hpp:40</div></div>
-<div class="ttc" id="anamespaceecs_1_1systems_html_ab7690be6352e10d6bf8b0c79bcd2bcd3"><div class="ttname"><a href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">ecs::systems::draw</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; draw</div><div class="ttdef"><b>Definition:</b> Draw.hpp:24</div></div>
+<div class="ttc" id="anamespaceecs_1_1systems_html_ab7690be6352e10d6bf8b0c79bcd2bcd3"><div class="ttname"><a href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">ecs::systems::draw</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; draw</div><div class="ttdef"><b>Definition:</b> Draw.hpp:26</div></div>
 <div class="ttc" id="anamespaceanim_html"><div class="ttname"><a href="namespaceanim.html">anim</a></div><div class="ttdef"><b>Definition:</b> Animation.hpp:13</div></div>
-<div class="ttc" id="aclassecs_1_1_world_manager_html_ab8a3b57448589e5301d8ae65f7dbf88e"><div class="ttname"><a href="classecs_1_1_world_manager.html#ab8a3b57448589e5301d8ae65f7dbf88e">ecs::WorldManager::setWaitingWorld</a></div><div class="ttdeci">static void setWaitingWorld(std::function&lt; World()&gt; worldGen, bool worldSwitchReady=true)</div><div class="ttdef"><b>Definition:</b> WorldManager.hpp:26</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

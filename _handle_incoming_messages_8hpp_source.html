@@ -224,48 +224,54 @@ $(document).ready(function(){initNavTree('_handle_incoming_messages_8hpp_source.
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                    world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_shootable.html">ecs::component::Shootable</a>&gt;(</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                        newEntity, <a class="code" href="structecs_1_1component_1_1_shootable.html">ecs::component::Shootable</a>(sf::Keyboard::Space));</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                    world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_controllable.html">ecs::component::Controllable</a>&gt;(</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                        newEntity, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D});</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                }</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                world.registry.addComponent&lt;component::Drawable&gt;(newEntity, {<span class="stringliteral">&quot;players&quot;</span>, {1, 1, 32, 16}});</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_animated.html">ecs::component::Animated</a>&gt;(newEntity,</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                    {AnimFrame(1, 1, 32, 16, 100), AnimFrame(34, 1, 32, 16, 100), AnimFrame(67, 1, 32, 16, 100),</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                        AnimFrame(100, 1, 32, 16, 100), AnimFrame(133, 1, 32, 16, 100), AnimFrame(100, 1, 32, 16, 100),</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                        AnimFrame(67, 1, 32, 16, 100), AnimFrame(34, 1, 32, 16, 100)});</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <span class="keywordflow">case</span> component::EntityType::Types::EnemyBase:</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                world.registry.addComponent&lt;component::Drawable&gt;(newEntity, {<span class="stringliteral">&quot;players&quot;</span>, {1, 18, 32, 16}});</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_animated.html">ecs::component::Animated</a>&gt;(newEntity,</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                    {AnimFrame(1, 18, 32, 16, 100), AnimFrame(34, 18, 32, 16, 100), AnimFrame(67, 18, 32, 16, 100),</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                        AnimFrame(100, 18, 32, 16, 100), AnimFrame(133, 18, 32, 16, 100),</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                        AnimFrame(100, 18, 32, 16, 100), AnimFrame(67, 18, 32, 16, 100),</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                        AnimFrame(34, 18, 32, 16, 100)});</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            <span class="keywordflow">case</span> component::EntityType::Types::Bullet:</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                world.registry.addComponent&lt;component::Drawable&gt;(newEntity,</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                    {<span class="stringliteral">&quot;bullet&quot;</span>, {10, 7, 12, 19},</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                        std::atan2(<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(dirX), <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(dirY)) * 180 / 3.14159265359f});</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                world.registry.addComponent&lt;component::Animated&gt;(newEntity,</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                    {AnimFrame(10, 7, 12, 19, 100), AnimFrame(42, 7, 12, 19, 100), AnimFrame(74, 7, 12, 19, 100),</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                        AnimFrame(106, 7, 12, 19, 100)});</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        }</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    }</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> firstMessageHandle(World &amp;world, <a class="code" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">network::Message</a> &amp;msg)</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    {</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        selfId = (<span class="keywordtype">unsigned</span> char)msg[1] &lt;&lt; 8U | (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)msg[2];</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    }</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keyword">static</span> std::unordered_map&lt;char, std::function&lt;void(World &amp;, <a class="code" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">network::Message</a> &amp;msg)&gt;&gt; packetTypeFunction = {</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        {8, movePacketHandle}, {0, firstMessageHandle}};</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
-<div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="namespaceecs_1_1systems.html#a3ef17d23a38a80a3e15a78a0cdb5c005">  124</a></span>&#160;    std::function&lt;void(<a class="code" href="classecs_1_1_world.html">World</a> &amp;)&gt; <a class="code" href="namespaceecs_1_1systems.html#a3ef17d23a38a80a3e15a78a0cdb5c005">HandleIncomingMessages</a> = [](<a class="code" href="classecs_1_1_world.html">World</a> &amp;world) {</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="keywordflow">while</span> (!<a class="code" href="classnetwork_1_1_client.html#a21ab5dabccf30131909a19d54ff5194e">network::Client::getIncomingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a6f83affbc6d8bc587e67a5b1003678b9">empty</a>()) {</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            <a class="code" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">network::Message</a> msg = <a class="code" href="classnetwork_1_1_client.html#a21ab5dabccf30131909a19d54ff5194e">network::Client::getIncomingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80">pop</a>();</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            packetTypeFunction[msg[0]](world, msg);</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        }</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    };</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                        newEntity, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D, sf::Keyboard::H});</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                    world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_hitbox.html">ecs::component::Hitbox</a>&gt;(</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                        newEntity, {<a class="code" href="structecs_1_1component_1_1_hitbox.html">ecs::component::Hitbox</a>()});</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                }</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                world.registry.addComponent&lt;component::Drawable&gt;(newEntity, {<span class="stringliteral">&quot;players&quot;</span>, {1, 1, 32, 16}});</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_animated.html">ecs::component::Animated</a>&gt;(newEntity,</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                    {AnimFrame(1, 1, 32, 16, 100), AnimFrame(34, 1, 32, 16, 100), AnimFrame(67, 1, 32, 16, 100),</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                        AnimFrame(100, 1, 32, 16, 100), AnimFrame(133, 1, 32, 16, 100), AnimFrame(100, 1, 32, 16, 100),</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                        AnimFrame(67, 1, 32, 16, 100), AnimFrame(34, 1, 32, 16, 100)});</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <span class="keywordflow">case</span> component::EntityType::Types::EnemyBase:</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                world.registry.addComponent&lt;component::Drawable&gt;(newEntity, {<span class="stringliteral">&quot;players&quot;</span>, {1, 18, 32, 16}});</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_hitbox.html">ecs::component::Hitbox</a>&gt;(</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                    newEntity, {<a class="code" href="structecs_1_1component_1_1_hitbox.html">ecs::component::Hitbox</a>()});</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_animated.html">ecs::component::Animated</a>&gt;(newEntity,</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                    {AnimFrame(1, 18, 32, 16, 100), AnimFrame(34, 18, 32, 16, 100), AnimFrame(67, 18, 32, 16, 100),</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                        AnimFrame(100, 18, 32, 16, 100), AnimFrame(133, 18, 32, 16, 100),</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                        AnimFrame(100, 18, 32, 16, 100), AnimFrame(67, 18, 32, 16, 100),</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                        AnimFrame(34, 18, 32, 16, 100)});</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            <span class="keywordflow">case</span> component::EntityType::Types::Bullet:</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                world.registry.addComponent&lt;component::Drawable&gt;(newEntity,</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                    {<span class="stringliteral">&quot;bullet&quot;</span>, {10, 7, 12, 19},</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                        std::atan2(<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(dirX), <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(dirY)) * 180 / 3.14159265359f});</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                world.registry.addComponent&lt;component::Animated&gt;(newEntity,</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                    {AnimFrame(10, 7, 12, 19, 100), AnimFrame(42, 7, 12, 19, 100), AnimFrame(74, 7, 12, 19, 100),</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                        AnimFrame(106, 7, 12, 19, 100)});</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                world.registry.addComponent&lt;<a class="code" href="structecs_1_1component_1_1_hitbox.html">ecs::component::Hitbox</a>&gt;(</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                    newEntity, {<a class="code" href="structecs_1_1component_1_1_hitbox.html">ecs::component::Hitbox</a>()});</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        }</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    }</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> firstMessageHandle(World &amp;world, <a class="code" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">network::Message</a> &amp;msg)</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    {</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        selfId = (<span class="keywordtype">unsigned</span> char)msg[1] &lt;&lt; 8U | (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)msg[2];</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    }</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keyword">static</span> std::unordered_map&lt;char, std::function&lt;void(World &amp;, <a class="code" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">network::Message</a> &amp;msg)&gt;&gt; packetTypeFunction = {</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        {8, movePacketHandle}, {0, firstMessageHandle}};</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="namespaceecs_1_1systems.html#a3ef17d23a38a80a3e15a78a0cdb5c005">  130</a></span>&#160;    std::function&lt;void(<a class="code" href="classecs_1_1_world.html">World</a> &amp;)&gt; <a class="code" href="namespaceecs_1_1systems.html#a3ef17d23a38a80a3e15a78a0cdb5c005">HandleIncomingMessages</a> = [](<a class="code" href="classecs_1_1_world.html">World</a> &amp;world) {</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keywordflow">while</span> (!<a class="code" href="classnetwork_1_1_client.html#a21ab5dabccf30131909a19d54ff5194e">network::Client::getIncomingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a6f83affbc6d8bc587e67a5b1003678b9">empty</a>()) {</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            <a class="code" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">network::Message</a> msg = <a class="code" href="classnetwork_1_1_client.html#a21ab5dabccf30131909a19d54ff5194e">network::Client::getIncomingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80">pop</a>();</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            packetTypeFunction[msg[0]](world, msg);</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        }</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    };</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="a_network_id_8hpp_html"><div class="ttname"><a href="_network_id_8hpp.html">NetworkId.hpp</a></div></div>
@@ -284,10 +290,11 @@ $(document).ready(function(){initNavTree('_handle_incoming_messages_8hpp_source.
 <div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:19</div></div>
 <div class="ttc" id="anamespaceecs_1_1systems_html"><div class="ttname"><a href="namespaceecs_1_1systems.html">ecs::systems</a></div><div class="ttdef"><b>Definition:</b> Animate.hpp:19</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_controllable_html"><div class="ttname"><a href="structecs_1_1component_1_1_controllable.html">ecs::component::Controllable</a></div><div class="ttdef"><b>Definition:</b> Controllable.hpp:20</div></div>
-<div class="ttc" id="anamespaceecs_1_1systems_html_a3ef17d23a38a80a3e15a78a0cdb5c005"><div class="ttname"><a href="namespaceecs_1_1systems.html#a3ef17d23a38a80a3e15a78a0cdb5c005">ecs::systems::HandleIncomingMessages</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; HandleIncomingMessages</div><div class="ttdef"><b>Definition:</b> HandleIncomingMessages.hpp:124</div></div>
+<div class="ttc" id="anamespaceecs_1_1systems_html_a3ef17d23a38a80a3e15a78a0cdb5c005"><div class="ttname"><a href="namespaceecs_1_1systems.html#a3ef17d23a38a80a3e15a78a0cdb5c005">ecs::systems::HandleIncomingMessages</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; HandleIncomingMessages</div><div class="ttdef"><b>Definition:</b> HandleIncomingMessages.hpp:130</div></div>
 <div class="ttc" id="a_shootable_8hpp_html"><div class="ttname"><a href="_shootable_8hpp.html">Shootable.hpp</a></div></div>
 <div class="ttc" id="a_drawable_8hpp_html"><div class="ttname"><a href="_drawable_8hpp.html">Drawable.hpp</a></div></div>
 <div class="ttc" id="a_controllable_8hpp_html"><div class="ttname"><a href="_controllable_8hpp.html">Controllable.hpp</a></div></div>
+<div class="ttc" id="astructecs_1_1component_1_1_hitbox_html"><div class="ttname"><a href="structecs_1_1component_1_1_hitbox.html">ecs::component::Hitbox</a></div><div class="ttdef"><b>Definition:</b> Hitbox.hpp:17</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_animated_1_1_anim_frame_html_a9ff95a11f62cf6abc6c39917204aa834"><div class="ttname"><a href="structecs_1_1component_1_1_animated_1_1_anim_frame.html#a9ff95a11f62cf6abc6c39917204aa834">ecs::component::Animated::AnimFrame::width</a></div><div class="ttdeci">int width</div><div class="ttdef"><b>Definition:</b> Animated.hpp:31</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

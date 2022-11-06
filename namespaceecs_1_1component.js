@@ -9,6 +9,7 @@ var namespaceecs_1_1component =
     [ "EntityType", "structecs_1_1component_1_1_entity_type.html", "structecs_1_1component_1_1_entity_type" ],
     [ "Faction", "structecs_1_1component_1_1_faction.html", "structecs_1_1component_1_1_faction" ],
     [ "Health", "structecs_1_1component_1_1_health.html", "structecs_1_1component_1_1_health" ],
+    [ "Hitbox", "structecs_1_1component_1_1_hitbox.html", "structecs_1_1component_1_1_hitbox" ],
     [ "NetworkId", "structecs_1_1component_1_1_network_id.html", "structecs_1_1component_1_1_network_id" ],
     [ "Parallax", "structecs_1_1component_1_1_parallax.html", "structecs_1_1component_1_1_parallax" ],
     [ "Position", "structecs_1_1component_1_1_position.html", "structecs_1_1component_1_1_position" ],
