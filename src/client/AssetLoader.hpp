@@ -20,11 +20,13 @@
 #include <boost/property_tree/ptree.hpp>
 #include <unordered_map>
 
-/**
- * AssetLoader class which is used by the game to load assets
- */
 namespace asset
 {
+	/**
+	 * This class loads all the assets neened by the game and stores them in a map
+	 * Basic operatations on assets are supported
+	 * An asset is either a texture, a sound or a font
+	 */
     class AssetLoader {
       public:
         /**

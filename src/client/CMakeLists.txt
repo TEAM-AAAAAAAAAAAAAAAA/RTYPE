@@ -12,8 +12,8 @@ set(SRC
     ${SRC_ROOT}/NetworkClient.hpp
     ${UTILS_SRC}
     ${ECS_SRC}
-    ${SRC_ROOT}/SoundBox.cpp
-    ${SRC_ROOT}/SoundBox.hpp
+    ${SRC_ROOT}/AudioManager.cpp
+    ${SRC_ROOT}/AudioManager.hpp
 )
 
 
