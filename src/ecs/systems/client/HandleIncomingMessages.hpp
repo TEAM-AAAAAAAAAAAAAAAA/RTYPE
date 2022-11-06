@@ -85,8 +85,9 @@ namespace ecs::systems
                         newEntity, {component::EntityType::Types::Player});
                     world.registry.addComponent<ecs::component::Shootable>(
                         newEntity, ecs::component::Shootable(sf::Keyboard::Space));
-                    world.registry.addComponent<ecs::component::Controllable>(
-                        newEntity, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D});
+                    world.registry.addComponent<ecs::component::Controllable>(newEntity,
+                        {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D, sf::Keyboard::H});
+                    world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
                 }
                 world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 1, 32, 16}});
                 world.registry.addComponent<ecs::component::Animated>(newEntity,
@@ -96,6 +97,7 @@ namespace ecs::systems
                 break;
             case component::EntityType::Types::EnemyBase:
                 world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 18, 32, 16}});
+                world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
                 world.registry.addComponent<ecs::component::Animated>(newEntity,
                     {AnimFrame(1, 18, 32, 16, 100), AnimFrame(34, 18, 32, 16, 100), AnimFrame(67, 18, 32, 16, 100),
                         AnimFrame(100, 18, 32, 16, 100), AnimFrame(133, 18, 32, 16, 100),
@@ -109,6 +111,7 @@ namespace ecs::systems
                 world.registry.addComponent<component::Animated>(newEntity,
                     {AnimFrame(10, 7, 12, 19, 100), AnimFrame(42, 7, 12, 19, 100), AnimFrame(74, 7, 12, 19, 100),
                         AnimFrame(106, 7, 12, 19, 100)});
+                world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
                 break;
         }
     }
@@ -118,13 +121,41 @@ namespace ecs::systems
         selfId = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
     }
 
+    static void deathMessageHandle(World &world, network::Message &msg)
+    {
+        size_t msgId = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
+
+        auto &netIds = world.registry.getComponents<component::NetworkId>();
+
+        for (size_t i = 0; i < netIds.size(); i++) {
+            if (netIds[i])
+                if (netIds[i].value().id == msgId) {
+                    world.registry.killEntity(world.registry.entityFromIndex(i));
+                    return;
+                }
+        }
+        std::cerr << "Error: Client couldn't kill unknown entity with netId '" << msgId << "'." << std::endl;
+    }
+
     static std::unordered_map<char, std::function<void(World &, network::Message &msg)>> packetTypeFunction = {
-        {8, movePacketHandle}, {0, firstMessageHandle}};
+        {utils::constant::getPacketTypeKey(utils::constant::PacketType::ENTITY_MOVE), movePacketHandle},
+        {0, firstMessageHandle},
+        {utils::constant::getPacketTypeKey(utils::constant::PacketType::ENTITY_DEATH), deathMessageHandle}};
+
+    bool packetTypeFunctionExists(char type)
+    {
+        for (auto &&i : packetTypeFunction) {
+            if (i.first == type)
+                return true;
+        }
+        return false;
+    }
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Client::getIncomingMessages().empty()) {
             network::Message msg = network::Client::getIncomingMessages().pop();
-            packetTypeFunction[msg[0]](world, msg);
+            if (packetTypeFunctionExists(msg[0]))
+                packetTypeFunction[msg[0]](world, msg);
         }
     };
 } // namespace ecs::systems

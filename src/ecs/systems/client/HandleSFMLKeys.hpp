@@ -8,10 +8,11 @@
 #pragma once
 
 #include <functional>
+#include "Window.hpp"
 #include "World.hpp"
 #include "components/client/Controllable.hpp"
+#include "components/client/Hitbox.hpp"
 #include "components/client/Shootable.hpp"
-#include "Window.hpp"
 
 namespace ecs::systems
 {
