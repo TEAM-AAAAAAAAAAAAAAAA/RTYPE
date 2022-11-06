@@ -9,11 +9,8 @@ set(SRC
     ${SRC_ROOT}/AssetLoader.cpp
     ${SRC_ROOT}/NetworkClient.cpp
     ${SRC_ROOT}/NetworkClient.hpp
-    ${SRC_ROOT}/GameWorld.cpp
-    ${SRC_ROOT}/MenuWorld.cpp
-    ${SRC_ROOT}/GameWorld.hpp
-    ${SRC_ROOT}/MenuWorld.hpp
-    ${SRC_ROOT}/MenuWorld.cpp
+    ${SRC_ROOT}/GetWorld.cpp
+    ${SRC_ROOT}/GetWorld.hpp
     ${UTILS_SRC}
     ${ECS_SRC}
     )
