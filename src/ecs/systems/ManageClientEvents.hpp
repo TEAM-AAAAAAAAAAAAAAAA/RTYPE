@@ -16,6 +16,8 @@
 #include "components/Faction.hpp"
 #include "components/Weapon.hpp"
 #include "components/client/Controllable.hpp"
+#include "components/client/Hitbox.hpp"
+#include "components/client/Shootable.hpp"
 #include "components/server/Projectile.hpp"
 
 namespace ecs::systems
@@ -77,7 +79,6 @@ namespace ecs::systems
                 network::Client::getOutgoingMessages().push(msg);
             }
 #pragma endregion
-
             world.popEvent();
         }
     };
