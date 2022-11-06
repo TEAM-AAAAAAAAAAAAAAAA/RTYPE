@@ -76,7 +76,8 @@ static void setGameParallax(ecs::World &world)
     ecs::Entity parallaxThirdView = world.registry.spawn_entity();
 
     world.registry.addComponent<ecs::component::Position>(background1, {0, 0});
-    world.registry.addComponent<ecs::component::Size>(background1, {utils::constant::mapHeight, utils::constant::mapWidth});
+    world.registry.addComponent<ecs::component::Size>(
+        background1, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(background1, {"bg1", {0, 0, 5760, 360}});
     world.registry.addComponent<ecs::component::Velocity>(background1, {1, 0});
     world.registry.addComponent<ecs::component::Direction>(background1, {-1, 0});
@@ -93,7 +94,8 @@ static void setGameParallax(ecs::World &world)
         parallaxFirstView, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
     world.registry.addComponent<ecs::component::Animated>(parallaxFirstView, AnimFrame(0, 0, 640, 360, 15));
     world.registry.addComponent<ecs::component::Position>(background2, {0, 0});
-    world.registry.addComponent<ecs::component::Size>(background2, {utils::constant::mapHeight, utils::constant::mapWidth});
+    world.registry.addComponent<ecs::component::Size>(
+        background2, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(background2, {"bg2", {0, 0, 5760, 360}});
     world.registry.addComponent<ecs::component::Velocity>(background2, {2, 0});
     world.registry.addComponent<ecs::component::Direction>(background2, {-1, 0});
@@ -110,7 +112,8 @@ static void setGameParallax(ecs::World &world)
     world.registry.addComponent<ecs::component::Direction>(parallaxSecondView, {-1, 0});
     world.registry.addComponent<ecs::component::Animated>(parallaxSecondView, AnimFrame(0, 0, 640, 360, 5));
     world.registry.addComponent<ecs::component::Position>(background3, {0, 0});
-    world.registry.addComponent<ecs::component::Size>(background3, {utils::constant::mapHeight, utils::constant::mapWidth});
+    world.registry.addComponent<ecs::component::Size>(
+        background3, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(background3, {"bg3", {0, 0, 5760, 360}});
     world.registry.addComponent<ecs::component::Velocity>(background3, {3, 0});
     world.registry.addComponent<ecs::component::Parallax>(
@@ -134,7 +137,7 @@ static void setGameParallax(ecs::World &world)
  * @param engine The engine in which you want to operate
  * @return The world ready to be used
  */
-ecs::World getGameWorld(const std::string& port, const std::string& host)
+ecs::World getGameWorld(const std::string &port, const std::string &host)
 {
     ecs::World world;
     network::Message msg;
@@ -166,6 +169,15 @@ static void setMenuBackground(ecs::World &world)
     ecs::Entity playButton = world.registry.spawn_entity();
     ecs::Entity optionButton = world.registry.spawn_entity();
     ecs::Entity quitButton = world.registry.spawn_entity();
+    ecs::Entity player = world.registry.spawn_entity();
+
+    world.registry.addComponent<ecs::component::Position>(player, {100, 100});
+    world.registry.addComponent<ecs::component::Size>(player, {50, 100});
+    world.registry.addComponent<ecs::component::Controllable>(
+        player, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D, sf::Keyboard::H});
+    world.registry.addComponent<ecs::component::Velocity>(player, {10, 10});
+    world.registry.addComponent<ecs::component::Direction>(player, {10, 10});
+    world.registry.addComponent<ecs::component::Drawable>(player, {"players", {1, 1, 32, 16}});
 
     world.registry.addComponent<ecs::component::Position>(playButton, {300, 300});
     world.registry.addComponent<ecs::component::Size>(playButton, {31, 100});
@@ -178,13 +190,9 @@ static void setMenuBackground(ecs::World &world)
     world.registry.addComponent<ecs::component::Position>(quitButton, {300, 500});
     world.registry.addComponent<ecs::component::Size>(quitButton, {31, 100});
     world.registry.addComponent<ecs::component::Drawable>(quitButton, {"menu", {4760, 2079, 916, 292}});
-
 }
 
-static void destroyMenu(ecs::World &world)
-{
-
-}
+static void destroyMenu(ecs::World &world) {}
 
 ecs::World getMenuWorld()
 {
