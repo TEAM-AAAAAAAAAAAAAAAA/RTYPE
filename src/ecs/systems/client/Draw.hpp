@@ -17,6 +17,7 @@
 #include "components/client/Animated.hpp"
 #include "components/client/Drawable.hpp"
 #include "components/client/Hitbox.hpp"
+#include "components/client/Text.hpp"
 
 namespace ecs::systems
 {
@@ -30,7 +31,7 @@ namespace ecs::systems
         auto const &animations = world.registry.getComponents<component::Animated>();
         auto const &hitBoxes = world.registry.getComponents<component::Hitbox>();
 
-        utils::Window::get().clear();
+        utils::Window::get().clear(utils::Window::Color);
         for (size_t i = 0; i < positions.size() && i < sizes.size() && i < drawables.size(); i++) {
             auto const &pos = positions[i];
             auto const &size = sizes[i];
