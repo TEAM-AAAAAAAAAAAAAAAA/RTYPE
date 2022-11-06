@@ -58,7 +58,7 @@ namespace ecs::component
             AI(std::vector<PatternType> patterns) : currentAttack(0)
             {
                 for (auto &&p : patterns) {
-                    _thisPatterns.push_back(_patternMap.at(p));
+                    _thisPatterns.push_back(patterns.at(p));
                 }
             }
 
@@ -69,13 +69,13 @@ namespace ecs::component
              */
             AI(const AI &other) : currentAttack(other.currentAttack), _thisPatterns(other._thisPatterns) {}
 
-            inline const std::vector<Pattern> getPatterns() const { return _thisPatterns; }
+            inline const std::vector<PatternType> getPatterns() const { return _thisPatterns; }
+
+            static const std::unordered_map<PatternType, Pattern> patterns;
 
           private:
             short currentAttack;
-            std::vector<Pattern> _thisPatterns;
-
-            static const std::unordered_map<PatternType, Pattern> _patternMap;
+            std::vector<PatternType> _thisPatterns;
         };
 
         /**
@@ -89,7 +89,7 @@ namespace ecs::component
         {
             int attack = std::rand() % _thisAI.getPatterns().size();
             std::cout << "AI chose attack: " << attack << std::endl;
-            return _thisAI.getPatterns().at(attack);
+            return AI::patterns.at(static_cast<PatternType>(attack));
         }
 
       private:
