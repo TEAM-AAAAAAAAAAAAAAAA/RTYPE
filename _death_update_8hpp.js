@@ -1,4 +1,4 @@
 var _death_update_8hpp =
 [
-    [ "serverPush", "_death_update_8hpp.html#a689ab1ddea34f047a379e06ff14f5489", null ]
+    [ "deathUpdate", "_death_update_8hpp.html#a2e0f6b7daf53150a7faa7b7f59d47d5e", null ]
 ];

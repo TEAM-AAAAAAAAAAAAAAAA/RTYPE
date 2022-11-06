@@ -5,7 +5,5 @@ var dir_21b124123231556e587af26d290be4a8 =
     [ "ManageClientEvents.hpp", "_manage_client_events_8hpp.html", "_manage_client_events_8hpp" ],
     [ "Movement.hpp", "_movement_8hpp.html", "_movement_8hpp" ],
     [ "PositionLogger.hpp", "_position_logger_8hpp.html", "_position_logger_8hpp" ],
-    [ "PushClientMovement.hpp", "_push_client_movement_8hpp.html", null ],
-    [ "RunAI.hpp", "_run_a_i_8hpp.html", "_run_a_i_8hpp" ],
-    [ "ServerPush.hpp", "_server_push_8hpp.html", null ]
+    [ "RunAI.hpp", "_run_a_i_8hpp.html", "_run_a_i_8hpp" ]
 ];
