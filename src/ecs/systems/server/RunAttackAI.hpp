@@ -31,7 +31,7 @@ namespace ecs::systems
 
             if (atkAI) {
                 if (chronoDuration(chrono::now() - clock).count() - atkAI.value().lastAttack
-                    > atkAI.value().lastAttackDelay * 1000) {
+                    > atkAI.value().lastAttackDelay) {
                     auto &nextAtk = atkAI.value().getRandomAttack();
                     nextAtk.pattern(world, i);
                     atkAI.value().lastAttack = chronoDuration(chrono::now() - clock).count();

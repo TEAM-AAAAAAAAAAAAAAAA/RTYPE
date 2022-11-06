@@ -30,7 +30,7 @@ namespace ecs::component
          *
          * @warning ALL MUST BE CREATED IN AttackAI.cpp
          */
-        enum PatternType { ShootBullet, ShootEnergyBalls };
+        enum PatternType { ShootBullet, ShootEnergySphere };
 
         size_t lastAttack;
         size_t lastAttackDelay;
