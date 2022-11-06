@@ -23,8 +23,11 @@ namespace utils
          */
         Window() { _Instance.setFramerateLimit(60); }
         ~Window() {}
+        static sf::Color Color;
+
         static inline sf::RenderWindow &get() { return _Instance; }
         static inline bool isOpen() { return _Instance.isOpen(); }
+
 
       private:
         static sf::RenderWindow _Instance;
