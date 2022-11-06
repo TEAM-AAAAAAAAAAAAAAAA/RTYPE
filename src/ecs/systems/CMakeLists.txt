@@ -4,8 +4,8 @@ set(SRCROOT ${PROJECT_SOURCE_DIR}/src/ecs/systems)
 set(SYSTEMS_SRC
     ${SRCROOT}/ManageClientEvents.hpp
     ${SRCROOT}/Movement.hpp
-    ${SRCROOT}/PositionLogger.hpp
     ${SRCROOT}/RunMovementAI.hpp
+    ${SRCROOT}/PositionLogger.hpp
     PARENT_SCOPE
 )
 
