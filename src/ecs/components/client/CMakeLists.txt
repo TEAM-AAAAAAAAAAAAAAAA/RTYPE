@@ -8,6 +8,7 @@ set(COMPONENTS_SRC
     ${SRCROOT}/Hitbox.hpp
     ${SRCROOT}/Parallax.hpp
     ${SRCROOT}/Animated.hpp
+    ${SRCROOT}/Text.hpp
     PARENT_SCOPE
 )
 
