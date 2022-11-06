@@ -5,7 +5,7 @@
 ** rtype
 */
 
-#include "GameWorld.hpp"
+#include "GetWorld.hpp"
 #include "NetworkClient.hpp"
 #include "components/Direction.hpp"
 #include "components/Faction.hpp"
@@ -30,7 +30,8 @@
 
 static const int FRAME_LIMIT = 60;
 
-static void registerAllComponent(ecs::World &world)
+#pragma region GameWorld
+static void registerComponents(ecs::World &world)
 {
     world.registry.registerComponent<ecs::component::EntityType>();
     world.registry.registerComponent<ecs::component::Velocity>();
@@ -50,7 +51,7 @@ static void registerAllComponent(ecs::World &world)
     world.registry.registerComponent<ecs::component::Hitbox>();
 }
 
-static void addAllSystems(ecs::World &world)
+static void addGameSystems(ecs::World &world)
 {
     world.addSystem(ecs::systems::handleSFMLEvents);
     world.addSystem(ecs::systems::handleSFMLKeys);
@@ -62,7 +63,7 @@ static void addAllSystems(ecs::World &world)
     world.addSystem(ecs::systems::HandleParallaxBounds);
 }
 
-static void setParallax(ecs::World &world)
+static void setGameParallax(ecs::World &world)
 {
     using AnimFrame = ecs::component::Animated::AnimFrame;
 
@@ -142,8 +143,36 @@ ecs::World getGameWorld(const std::string& port, const std::string& host)
     network::Client::connect();
     utils::Window::get().setFramerateLimit(FRAME_LIMIT);
     msg.fill(0);
-    registerAllComponent(world);
-    addAllSystems(world);
-    setParallax(world);
+    registerComponents(world);
+    addGameSystems(world);
+    setGameParallax(world);
     return world;
 }
+#pragma endregion GameWorld
+
+#pragma region MenuWorld
+static void addMenuSystems(ecs::World &world)
+{
+    world.addSystem(ecs::systems::handleSFMLEvents);
+    world.addSystem(ecs::systems::handleSFMLKeys);
+    world.addSystem(ecs::systems::manageClientEvents);
+    world.addSystem(ecs::systems::draw);
+    world.addSystem(ecs::systems::movement);
+}
+
+static void setMenuBackground(ecs::World &world)
+{
+    //TODO Need to implement the background of the menu, assets, button etc...
+}
+
+ecs::World getMenuWorld()
+{
+    ecs::World world;
+
+    utils::Window::get().setFramerateLimit(FRAME_LIMIT);
+    registerComponents(world);
+    addMenuSystems(world);
+    setMenuBackground(world);
+    return world;
+}
+#pragma endregion MenuWorld
