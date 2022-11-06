@@ -49,6 +49,7 @@ namespace ecs::systems
                     static_cast<float>(size.value().height) / static_cast<float>(sprite.getTextureRect().height);
                 sprite.setScale(scaleX, scaleY);
                 sprite.setPosition({static_cast<float>(pos.value().x), static_cast<float>(pos.value().y)});
+                sprite.setRotation(draw.value().rotation);
                 utils::Window::get().draw(sprite);
             }
             if (i < hitBoxes.size()) {

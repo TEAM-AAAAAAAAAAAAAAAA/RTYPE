@@ -27,6 +27,7 @@
 #include "systems/client/HandleSFMLEvents.hpp"
 #include "systems/client/HandleSFMLKeys.hpp"
 #include "systems/client/SendDirection.hpp"
+#include "systems/client/Animate.hpp"
 
 static void registerAllComponent(ecs::World &world)
 {
@@ -104,7 +105,6 @@ static void setParallax(ecs::World &world)
     world.registry.addComponent<ecs::component::Parallax>(
         parallaxSecondView, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
     world.registry.addComponent<ecs::component::Direction>(parallaxSecondView, {-1, 0});
-    world.registry.addComponent<ecs::component::Animated>(parallaxSecondView, AnimFrame(0, 0, 640, 360, 5));
     world.registry.addComponent<ecs::component::Position>(background3, {0, 0});
     world.registry.addComponent<ecs::component::Size>(background3, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(background3, {"bg3", {0, 0, 5760, 360}});
@@ -150,6 +150,7 @@ int main()
     network::Client::setHost("localhost");
     network::Client::setPort("8000");
     network::Client::connect();
+    utils::Window::get().setFramerateLimit(60);
     ecs::Engine engine;
     network::Message msg;
     msg.fill(0);
