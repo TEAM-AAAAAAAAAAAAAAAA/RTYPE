@@ -42,7 +42,7 @@ namespace ecs::systems
         world.registry.addComponent<ecs::component::Size>(newPlayer, {32, 64});
         world.registry.addComponent<ecs::component::Direction>(newPlayer, {0, 0});
         world.registry.addComponent<ecs::component::EntityType>(newPlayer, {ecs::component::EntityType::Types::Player});
-        world.registry.addComponent<ecs::component::Weapon>(newPlayer, {100, 10, 10});
+        world.registry.addComponent<ecs::component::Weapon>(newPlayer, {100, 10, 10, {20, 20}});
         world.registry.addComponent<ecs::component::Health>(newPlayer, {100});
         world.registry.addComponent<ecs::component::NetworkId>(newPlayer, {static_cast<size_t>(newPlayer)});
         world.registry.addComponent<ecs::component::Faction>(newPlayer, {ecs::component::Faction::Factions::Players});
@@ -112,13 +112,15 @@ namespace ecs::systems
                         world.registry.addComponent<ecs::component::NetworkId>(bullet, {static_cast<size_t>(bullet)});
                         world.registry.addComponent<ecs::component::Direction>(bullet, {1, 0});
                         world.registry.addComponent<ecs::component::Position>(bullet, {pos.value().x, pos.value().y});
-                        world.registry.addComponent<ecs::component::Size>(bullet, {10, 10});
+                        world.registry.addComponent<ecs::component::Size>(
+                            bullet, {weapon.value().projSize.first, weapon.value().projSize.second});
                         world.registry.addComponent<ecs::component::Velocity>(bullet, {weapon.value().projSpeed, 0});
                         world.registry.addComponent<ecs::component::Projectile>(bullet, {weapon.value().damage});
                         ecs::component::Faction::Factions fac = ecs::component::Faction::Factions::None;
                         if (i < factions.size() && factions[i])
                             fac = factions[i].value().faction;
                         world.registry.addComponent<ecs::component::Faction>(bullet, {fac});
+                        world.registry.addComponent<ecs::component::Health>(bullet, {1});
                     }
                 }
             }
@@ -131,7 +133,9 @@ namespace ecs::systems
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Server::getIncomingMessages().empty()) {
             network::ClientMessage msg = network::Server::getIncomingMessages().pop();
-            packetTypeFunction[msg.first[0]](world, msg);
+            if (msg.first[0] == 0 || msg.first[0] == utils::constant::PLAYER_MOVE
+                || msg.first[0] == utils::constant::PLAYER_SHOT)
+                packetTypeFunction[msg.first[0]](world, msg);
         }
     };
 } // namespace ecs::systems

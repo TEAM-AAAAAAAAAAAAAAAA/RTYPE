@@ -2,12 +2,13 @@
 #include "Constant.hpp"
 #include "Engine.hpp"
 #include "Server.hpp"
+#include "components/EntityAI.hpp"
 #include "components/Faction.hpp"
 #include "components/Health.hpp"
 #include "components/NetworkId.hpp"
-#include "components/EntityAI.hpp"
 #include "systems/Movement.hpp"
 #include "systems/RunAI.hpp"
+#include "systems/server/DeathUpdate.hpp"
 #include "systems/server/HandleIncomingMessage.hpp"
 #include "systems/server/PositionUpdate.hpp"
 #include "systems/server/ProjectileCollision.hpp"
@@ -35,6 +36,7 @@ ecs::World getGameWorld()
     world.addSystem(ecs::systems::HandleIncomingMessages);
     world.addSystem(ecs::systems::PositionUpdate);
     world.addSystem(ecs::systems::runAI);
+    world.addSystem(ecs::systems::deathUpdate);
 
     using EntityAI = ecs::component::EntityAI;
 
