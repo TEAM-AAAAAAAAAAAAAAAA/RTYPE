@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2022
 ** RTYPE
 ** File description:
-** RunAI
+** RunMovementAI
 */
 
 #pragma once
@@ -19,7 +19,7 @@ namespace ecs::systems
     /**
      * Runs the AIs stored in the enities
      */
-    std::function<void(World &)> runAI = [](World &world) {
+    std::function<void(World &)> runMovementAI = [](World &world) {
         auto &directions = world.registry.getComponents<component::Direction>();
         auto &movementAIs = world.registry.getComponents<component::MovementAI>();
 
