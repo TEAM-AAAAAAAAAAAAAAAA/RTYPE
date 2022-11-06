@@ -10,6 +10,7 @@
 #include <functional>
 #include "Window.hpp"
 #include "World.hpp"
+#include "WorldManager.hpp"
 
 namespace ecs::systems
 {
