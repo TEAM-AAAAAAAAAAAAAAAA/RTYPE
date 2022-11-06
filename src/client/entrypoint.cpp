@@ -59,6 +59,7 @@ static void addAllSystems(ecs::World &world)
     world.addSystem(ecs::systems::SendDirection);
     world.addSystem(ecs::systems::movement);
     world.addSystem(ecs::systems::HandleParallaxBounds);
+    world.addSystem(ecs::systems::animate);
 }
 
 static void setParallax(ecs::World &world)
@@ -104,6 +105,7 @@ static void setParallax(ecs::World &world)
     world.registry.addComponent<ecs::component::Velocity>(parallaxSecondView, {2, 0});
     world.registry.addComponent<ecs::component::Parallax>(
         parallaxSecondView, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
+    world.registry.addComponent<ecs::component::Animated>(parallaxSecondView, AnimFrame(0, 0, 640, 360, 5));
     world.registry.addComponent<ecs::component::Direction>(parallaxSecondView, {-1, 0});
     world.registry.addComponent<ecs::component::Position>(background3, {0, 0});
     world.registry.addComponent<ecs::component::Size>(background3, {utils::constant::mapHeight, utils::constant::mapWidth});
