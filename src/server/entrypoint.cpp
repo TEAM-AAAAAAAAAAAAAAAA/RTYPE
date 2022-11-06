@@ -7,10 +7,11 @@
 #include "components/MovementAI.hpp"
 #include "components/NetworkId.hpp"
 #include "systems/Movement.hpp"
-#include "systems/RunAI.hpp"
+#include "systems/RunMovementAI.hpp"
 #include "systems/server/HandleIncomingMessage.hpp"
 #include "systems/server/PositionUpdate.hpp"
 #include "systems/server/ProjectileCollision.hpp"
+#include "systems/server/RunAttackAI.hpp"
 
 ecs::World getGameWorld()
 {
@@ -29,14 +30,17 @@ ecs::World getGameWorld()
     world.registry.registerComponent<ecs::component::Faction>();
     world.registry.registerComponent<ecs::component::Position>();
     world.registry.registerComponent<ecs::component::Health>();
+    world.registry.registerComponent<ecs::component::AttackAI>();
 
     world.addSystem(ecs::systems::movement);
     world.addSystem(ecs::systems::projectileCollision);
     world.addSystem(ecs::systems::HandleIncomingMessages);
     world.addSystem(ecs::systems::PositionUpdate);
-    world.addSystem(ecs::systems::runAI);
+    world.addSystem(ecs::systems::runMovementAI);
+    world.addSystem(ecs::systems::runAttackAI);
 
     using MovementAI = ecs::component::MovementAI;
+    using AttackAI = ecs::component::AttackAI;
 
     ecs::Entity enemy = world.registry.spawn_entity();
     world.registry.addComponent<ecs::component::Position>(enemy, {500, 500});
@@ -48,12 +52,14 @@ ecs::World getGameWorld()
     world.registry.addComponent<ecs::component::NetworkId>(enemy, {static_cast<size_t>(enemy)});
     world.registry.addComponent<ecs::component::EntityType>(enemy, {ecs::component::EntityType::Types::EnemyBase});
     world.registry.addComponent<ecs::component::Velocity>(enemy, {1, 1});
+    world.registry.addComponent<ecs::component::AttackAI>(enemy, {AttackAI::AIType::Fighter});
 
     return world;
 }
 
 int main()
 {
+    std::srand(std::time(NULL));
     ecs::Engine engine;
     ecs::WorldManager::setWaitingWorld(getGameWorld);
 
