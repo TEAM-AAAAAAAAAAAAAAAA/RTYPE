@@ -77,13 +77,13 @@ namespace ecs
         {
             size_t front;
 
-            if (_entitiesBin.empty()) {
+            // if (_entitiesBin.empty()) {
                 _lastEntity++;
                 return Entity(_lastEntity - 1);
-            }
-            front = _entitiesBin.front();
-            _entitiesBin.erase(_entitiesBin.begin());
-            return Entity(front);
+            // }
+            // front = _entitiesBin.front();
+            // _entitiesBin.erase(_entitiesBin.begin());
+            // return Entity(front);
         }
 
         /**
@@ -93,8 +93,9 @@ namespace ecs
          */
         Entity entityFromIndex(std::size_t idx)
         {
-            if (idx >= _lastEntity || std::find(_entitiesBin.begin(), _entitiesBin.end(), idx) != _entitiesBin.end())
-                return Entity(utils::constant::npos);
+            if (idx >= _lastEntity) {
+                std::cerr << "Error with entity " << idx << "(" << _lastEntity << " max)" << std::endl;
+            }
             return Entity(idx);
         }
 
