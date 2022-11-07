@@ -171,7 +171,7 @@ namespace network
          */
         void receiveIncoming()
         {
-            while (!_isRunning) {}
+            while (!_isRunning) {usleep(1000);}
             startReceive();
             while (!_ioService.stopped()) {
                 try {
@@ -211,12 +211,13 @@ namespace network
             _socket.async_send_to(
                 boost::asio::buffer(message), endpoint, [](std::error_code ec, std::size_t bytesRecvd) {});
         }
+
         /**
          * Used to send message to clients with the outgoingMessages array isn't empty
          */
         [[noreturn]] void sendOutgoing()
         {
-            while (!_isRunning) {}
+            while (!_isRunning) {usleep(1000);}
             while (!_ioService.stopped()) {
                 if (!_outgoingMessages.empty()) {
                     ServerMessage message = _outgoingMessages.pop();
@@ -228,6 +229,7 @@ namespace network
                 }
             }
         }
+
         /**
          *  Clients of the server
          */
