@@ -29,6 +29,7 @@ namespace network
          */
         ~Client()
         {
+            _Instance._isStillRunning = false;
             _Instance._ioService.stop();
             _Instance._outgoingService.join();
             _Instance._incomingService.join();
@@ -52,17 +53,27 @@ namespace network
         static inline void connect()
         {
             udp::resolver resolver(_Instance._ioService);
+            _Instance._socket = udp::socket(_Instance._ioService);
             udp::resolver::query query(udp::v4(), _Instance._host, _Instance._port);
             _Instance._endpoint = *resolver.resolve(query);
             _Instance._socket.open(udp::v4());
+        }
+
+        static inline void disconnect()
+        {
+            _Instance._ioService.stop();
+            _Instance._socket.close();
         }
 
       private:
         /**
          * Private default constructor of the Client Class
          */
-        Client() : _socket(_ioService), _incomingService(&Client::receiveIncoming, this),
-              _outgoingService(&Client::sendOutgoing, this) {}
+        Client()
+            : _socket(_ioService), _incomingService(&Client::receiveIncoming, this),
+              _outgoingService(&Client::sendOutgoing, this)
+        {
+        }
 
         /**
          * Boost Asio service & socket
@@ -73,6 +84,7 @@ namespace network
         udp::endpoint _endpoint;
         std::string _host;
         std::string _port;
+        bool _isStillRunning = true;
 
         /**
          * Locked queue of all unsent outgoing messages
@@ -127,14 +139,17 @@ namespace network
          */
         void receiveIncoming()
         {
-            while (!_socket.is_open())
-                ;
-            startReceive();
-            while (!_ioService.stopped()) {
-                try {
-                    _ioService.run();
-                } catch (const std::exception &e) {
-                    std::cerr << e.what() << '\n';
+            while (_isStillRunning) {
+                while (!_socket.is_open())
+                    if (!_isStillRunning)
+                        return;
+                startReceive();
+                while (!_ioService.stopped()) {
+                    try {
+                        _ioService.run();
+                    } catch (const std::exception &e) {
+                        std::cerr << e.what() << '\n';
+                    }
                 }
             }
         }
@@ -144,12 +159,16 @@ namespace network
          */
         void sendOutgoing()
         {
-            while (!_socket.is_open())
-                ;
-            while (!_ioService.stopped()) {
-                if (!_outgoingMessages.empty()) {
-                    auto msg = _outgoingMessages.pop();
-                    _socket.async_send_to(boost::asio::buffer(msg), _endpoint, [](const boost::system::error_code &ec, std::size_t bytes){});
+            while (_isStillRunning) {
+                while (!_socket.is_open())
+                    if (!_isStillRunning)
+                        return;
+                while (!_ioService.stopped()) {
+                    if (!_outgoingMessages.empty()) {
+                        auto msg = _outgoingMessages.pop();
+                        _socket.async_send_to(boost::asio::buffer(msg), _endpoint,
+                            [](const boost::system::error_code &ec, std::size_t bytes) {});
+                    }
                 }
             }
         }

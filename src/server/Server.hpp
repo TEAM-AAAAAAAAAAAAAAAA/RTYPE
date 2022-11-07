@@ -143,9 +143,7 @@ namespace network
                     if (!message.first.empty()) {
                         _receivedMessages.push(message);
                         for (const auto &c : message.first) {
-                            std::cerr << c;
                         }
-                        std::cerr << std::endl;
                     }
                 } catch (std::exception ex) {
                     std::cerr << "handleReceive: Error parsing incoming message:" << ex.what() << std::endl;
