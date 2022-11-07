@@ -33,7 +33,7 @@ namespace ecs::systems
                 if (chronoDuration(chrono::now() - clock).count() - atkAI.value().lastAttack
                     > atkAI.value().lastAttackDelay) {
                     auto &nextAtk = atkAI.value().getRandomAttack();
-                    nextAtk.pattern(world, i);
+                    nextAtk.run(i);
                     atkAI.value().lastAttack = chronoDuration(chrono::now() - clock).count();
                     atkAI.value().lastAttackDelay = nextAtk.reloadTime;
                     clock = chrono::now();

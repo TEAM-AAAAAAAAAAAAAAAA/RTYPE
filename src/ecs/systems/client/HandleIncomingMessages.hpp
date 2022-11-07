@@ -58,7 +58,7 @@ namespace ecs::systems
                 if (i < types.size() && types[i]) {
                     types[i].value().type = msg[3];
                 }
-                if (i < velocities.size() && velocities[i] && msg[3]) {
+                if (i < velocities.size() && velocities[i]) {
                     velocities[i].value().x = msg[10];
                     velocities[i].value().y = msg[11];
                 }

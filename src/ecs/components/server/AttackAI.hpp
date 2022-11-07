@@ -42,13 +42,17 @@ namespace ecs::component
          */
         struct AI {
             struct Pattern {
-                Pattern(short reloadTime, std::function<void(ecs::World &, const std::size_t &)> pattern)
-                    : reloadTime(reloadTime), pattern(pattern)
+                Pattern(short reloadTime, std::function<void(const std::size_t)> pattern)
+                    : reloadTime(reloadTime), _function(pattern)
                 {
                 }
 
+                void run(const std::size_t &i) const { _function(i); }
+
                 short reloadTime;
-                std::function<void(ecs::World &, const std::size_t &)> pattern;
+
+              private:
+                std::function<void(const std::size_t)> _function;
             };
 
             /**
@@ -81,12 +85,12 @@ namespace ecs::component
         };
 
         struct Action {
-            static void shootBulletAttack(World &world, const std::size_t &shooter);
-            static void shootEneryBallsAttack(World &world, const std::size_t &shooter);
+            static void shootBulletAttack(const std::size_t shooter);
+            static void shootEnerySphereAttack(const std::size_t shooter);
 
           private:
-            static void spawnNewBullet(World &world, component::EntityType::Types type, int posX, int posY, char dirX,
-                char dirY, int sizeX, int sizeY, int velX, int velY, int dmg, ecs::component::Faction::Factions fac);
+            static void spawnNewBullet(component::EntityType::Types type, int posX, int posY, char dirX, char dirY,
+                int sizeX, int sizeY, int velX, int velY, int dmg, ecs::component::Faction::Factions fac);
         };
 
         /**
