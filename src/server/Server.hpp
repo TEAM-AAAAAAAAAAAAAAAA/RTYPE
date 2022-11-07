@@ -31,9 +31,9 @@ namespace network
         ~Server()
         {
             _ioService.stop();
-            _socket.close();
             _serviceThread.join();
             _outgoingService.join();
+            _socket.close();
         }
 
         /**
@@ -83,6 +83,13 @@ namespace network
             for (int i = 0; i < index; i++)
                 ++it;
             return it->first;
+        }
+
+        static inline void start(unsigned short localPort)
+        {
+            _Instance._socket = udp::socket(_Instance._ioService, udp::endpoint(udp::v4(), localPort));
+            _Instance._isRunning = true;
+            std::cerr << "Server started on port " << localPort << std::endl;
         }
 
         /**
@@ -142,8 +149,7 @@ namespace network
                     auto message = ClientMessage(std::array(_recvBuffer), getOrCreateClientID(_remoteEndpoint));
                     if (!message.first.empty()) {
                         _receivedMessages.push(message);
-                        for (const auto &c : message.first) {
-                        }
+                        for (const auto &c : message.first) {}
                     }
                 } catch (std::exception ex) {
                     std::cerr << "handleReceive: Error parsing incoming message:" << ex.what() << std::endl;
@@ -163,6 +169,7 @@ namespace network
          */
         void receiveIncoming()
         {
+            while (!_isRunning) {}
             startReceive();
             while (!_ioService.stopped()) {
                 try {
@@ -207,7 +214,8 @@ namespace network
          */
         [[noreturn]] void sendOutgoing()
         {
-            while (1) {
+            while (!_isRunning) {}
+            while (!_ioService.stopped()) {
                 if (!_outgoingMessages.empty()) {
                     ServerMessage message = _outgoingMessages.pop();
                     if (message.second.empty())
@@ -225,16 +233,18 @@ namespace network
         int _nextClientID;
 
         /**
+         * Used to know if the server is running or not
+         */
+        bool _isRunning;
+
+        /**
          * Default Constructor of the Server Class, initializing every part of it, socket, endpointk,
          * serviceThread, _nextClientID, _outgoingService
          * @param localPort The open localPort of the server
          */
-        Server(unsigned short localPort = 8000)
-            : _socket(_ioService, udp::endpoint(udp::v4(), localPort)), _serviceThread(&network::Server::receiveIncoming, this),
-              _nextClientID(0L), _outgoingService(&network::Server::sendOutgoing, this)
-        {
-            std::cerr << "Starting server on port " << localPort << std::endl;
-        };
+        Server()
+            : _socket(_ioService), _isRunning(false), _serviceThread(&network::Server::receiveIncoming, this),
+              _nextClientID(0L), _outgoingService(&network::Server::sendOutgoing, this){};
 
         static Server _Instance;
     };

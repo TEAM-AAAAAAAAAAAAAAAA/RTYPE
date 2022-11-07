@@ -56,6 +56,7 @@ ecs::World getGameWorld()
 
 int main()
 {
+    network::Server::start(8000);
     ecs::Engine engine;
     ecs::WorldManager::setWaitingWorld(getGameWorld);
 
