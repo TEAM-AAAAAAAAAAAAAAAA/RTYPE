@@ -8,14 +8,11 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
 #include <filesystem>
 #include <iostream>
 #include <memory>
 #include <optional>
-#include <any>
 #include <string>
-#include <functional>
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <unordered_map>
@@ -242,35 +239,15 @@ namespace asset
 
         static void display_key_from_map()
         {
-			std::cout << "Textures:" << std::endl;
-			std::cout << "=========" << std::endl;
-			for (auto &it : _Instance._textureMap)
-				std::cout << "\t" << it.first << std::endl;
-			std::cout << "Textures count: " << _Instance._textureMap.size() << std::endl;
-            std::cout << "=========" << std::endl;
-			std::cout << "BGM:" << std::endl;
-			std::cout << "=========" << std::endl;
-			for (auto &it : _Instance._bgmMap)
-				std::cout << "\t" << it.first << std::endl;
-			std::cout << "BGM count: " << _Instance._bgmMap.size() << std::endl;
-			std::cout << "=========" << std::endl;
-			std::cout << "SFX:" << std::endl;
-			std::cout << "=========" << std::endl;
-			for (auto &it : _Instance._sfxMap)
-				std::cout << "\t" << it.first << std::endl;
-			std::cout << "SFX count: " << _Instance._sfxMap.size() << std::endl;
-			std::cout << "=========" << std::endl;
-			std::cout << "Fonts:" << std::endl;
-			std::cout << "=========" << std::endl;
-			for (auto &it : _Instance._fontMap)
-				std::cout << "\t" << it.first << std::endl;
-			std::cout << "Fonts count: " << _Instance._fontMap.size() << std::endl;
-			std::cout << "=========" << std::endl;
+            std::cout << "len of map: " << _Instance._textureMap.size() << std::endl;
+            for (auto &key : _Instance._textureMap) {
+                std::cout << key.first << std::endl;
+            }
         }
 
       private:
         /**
-         * Map of all the textures
+         * Map of all the assets
          */
         std::unordered_map<std::string, sf::Texture> _textureMap;
 
