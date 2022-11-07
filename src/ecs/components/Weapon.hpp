@@ -10,14 +10,15 @@
 namespace ecs::component
 {
     struct Weapon {
-        Weapon(int shootDelay, int damage, int projSpeed, bool hasSuper = false, int superDamage = 0, int superLoadingTime = 0)
-            : shootDelay(shootDelay * 1000000), damage(damage), projSpeed(projSpeed), hasSuper(hasSuper), superDamage(superDamage), superLoadingTime(superLoadingTime), lastShoot(0)
+        Weapon(int shootDelay, int damage, int projSpeed, std::pair<unsigned char, unsigned char> projSize, bool hasSuper = false, int superDamage = 0, int superLoadingTime = 0)
+            : shootDelay(shootDelay * 1000000), damage(damage), projSpeed(projSpeed), projSize(projSize), hasSuper(hasSuper), superDamage(superDamage), superLoadingTime(superLoadingTime), lastShoot(0)
         {
         }
 
         int shootDelay;
         int damage;
         int projSpeed;
+        std::pair<unsigned char, unsigned char> projSize;
         int64_t lastShoot;
         bool hasSuper;
         int superDamage;

@@ -14,7 +14,9 @@
 #include "World.hpp"
 #include "components/Position.hpp"
 #include "components/Size.hpp"
+#include "components/client/Animated.hpp"
 #include "components/client/Drawable.hpp"
+#include "components/client/Hitbox.hpp"
 
 namespace ecs::systems
 {
@@ -26,6 +28,7 @@ namespace ecs::systems
         auto const &sizes = world.registry.getComponents<component::Size>();
         auto const &drawables = world.registry.getComponents<component::Drawable>();
         auto const &animations = world.registry.getComponents<component::Animated>();
+        auto const &hitBoxes = world.registry.getComponents<component::Hitbox>();
 
         utils::Window::get().clear();
         for (size_t i = 0; i < positions.size() && i < sizes.size() && i < drawables.size(); i++) {
@@ -46,7 +49,24 @@ namespace ecs::systems
                     static_cast<float>(size.value().height) / static_cast<float>(sprite.getTextureRect().height);
                 sprite.setScale(scaleX, scaleY);
                 sprite.setPosition({static_cast<float>(pos.value().x), static_cast<float>(pos.value().y)});
+                sprite.setRotation(draw.value().rotation);
                 utils::Window::get().draw(sprite);
+            }
+            if (i < hitBoxes.size()) {
+                auto const &hitBox = hitBoxes[i];
+
+                if (hitBox && size && pos) {
+                    if (hitBox->enableHitBox) {
+                        sf::RectangleShape hitBoxRec({0, 0});
+
+                        hitBoxRec.setFillColor(sf::Color::Transparent);
+                        hitBoxRec.setOutlineColor(sf::Color::Red);
+                        hitBoxRec.setOutlineThickness(2);
+                        hitBoxRec.setSize({(float)size->width, (float)size->height});
+                        hitBoxRec.setPosition({(float)(pos->x), (float)(pos->y)});
+                        utils::Window::get().draw(hitBoxRec);
+                    }
+                }
             }
         };
         utils::Window::get().display();

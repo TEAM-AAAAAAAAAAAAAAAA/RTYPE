@@ -15,9 +15,8 @@ env:
   BUILD_TYPE: Release
   SERV_BIN: rtype_server
   CLIENT_BIN: rtype_client
-  VCPKG_COMMIT: 57d3194e702a2959e86a6748999ad71fc24f7922
-  VCPKG_DISABLE_METRICS: true
 
+  VCPKG_DISABLE_METRICS: true
 jobs:
   build:
     strategy:
@@ -57,7 +56,6 @@ jobs:
         with:
           vcpkgArguments: 'sfml boost-asio boost-thread boost-property-tree'
           vcpkgDirectory: '${{ github.workspace }}/vcpkg'
-          vcpkgGitCommitId: '${{ env.VCPKG_COMMIT }}'
 
       - uses: seanmiddleditch/gha-setup-ninja@master
 
@@ -107,6 +105,11 @@ jobs:
             message(FATAL_ERROR "Bad exit status. Failed to build RTYPE project.")
           endif()
 
+      - name: Debug list windows directory
+        if: matrix.platform == 'windows-latest'
+        shell: bash
+        run: |
+          ls -lRa
       - name: Package
         shell: cmake -P {0}
         if: matrix.platform == 'ubuntu-latest'
@@ -123,8 +126,8 @@ jobs:
       - name: Create msi installer
         if: matrix.platform == 'windows-latest'
         run: |
-          cd Debug
-          cpack -G WIX
+          cd build
+          cpack -G WIX -C Debug
       - name: Upload Linux artifact
         if: matrix.platform == 'ubuntu-latest'
         uses: actions/upload-artifact@v3
@@ -140,56 +143,28 @@ jobs:
         with:
           name: ${{ matrix.platform }}
           path: |
-            ${{ github.workspace }}/Debug/rtype-*-win64.msi
-            
+            ${{ github.workspace }}/build/rtype-*-win64.msi  
 
-  create_release:
+  publish:
     runs-on: ubuntu-latest
     needs: build
     permissions:
       contents: write
     environment:
       name: production
-    outputs:
-      upload_url: ${{ steps.create_release.outputs.upload_url }}
     steps:
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
+      - uses: actions/checkout@v3
+
+      - uses: actions/download-artifact@v3
+
+      - name: Debug list directory
+        shell: bash
+        run: |
+          ls -lRa
+
+      - name: Upload release binaries
+        id: upload_release_asset
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.event.inputs.version }}
-          release_name: Release ${{ github.event.inputs.version }}
-          body: ${{ github.event.inputs.body }}
-          draft: false
-          prerelease: false
-
-  upload_release_assets:
-    runs-on: ubuntu-latest
-    needs: create_release
-    permissions:
-      contents: write
-    environment:
-      name: production
-    strategy:
-      fail-fast: true
-      matrix:
-        artifacts: [ windows-latest, ubuntu-latest ]
-    steps:
-      - name: Download Artifacts
-        id: download_artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: ${{ matrix.artifacts }}
-          path: ${{ github.workspace }}/${{ matrix.artifacts }}
-
-      - name: Upload Release Assets
-        id: upload_release_assets
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-            asset_path: ${{ github.workspace }}/${{ matrix.artifacts }}
-            asset_name: ${{ matrix.artifacts }}
-            upload_url: ${{ needs.create_release.outputs.upload_url }}
+        run: |
+          gh release create "${{ github.event.inputs.version }}" -t "${{ github.event.inputs.version }}"  -n "${{ github.event.inputs.body }}" ${{ github.workspace }}/ubuntu-latest/* ${{ github.workspace }}/windows-latest/*
