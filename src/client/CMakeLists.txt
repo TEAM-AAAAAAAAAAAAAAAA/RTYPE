@@ -22,8 +22,8 @@ set(SRC
 add_executable(${TARGET} ${SRC})
 
 target_link_libraries(${TARGET} PRIVATE
-    sfml-system sfml-network sfml-graphics sfml-window sfml-audio
-    Boost::boost dl
+    sfml-window sfml-graphics sfml-system sfml-audio
+    Boost::boost
 )
 
 target_include_directories(${TARGET}
