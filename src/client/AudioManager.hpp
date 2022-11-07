@@ -9,6 +9,8 @@
 
 #include <string>
 #include <vector>
+#include <SFML/Audio.hpp>
+#include "LockedQueue.hpp"
 
 namespace audio {
 
@@ -25,7 +27,7 @@ namespace audio {
 			 * @param key the key relative to the AssetLoader
 			 * @return true if the music was loaded
 			 */
-			bool loadBGM(const std::string &key);
+			static bool loadBGM(const std::string &key);
 
 			/**
 			 * play the current background music
@@ -33,73 +35,72 @@ namespace audio {
 			 * @param volume the volume of the music, defaulted to 100
 			 * @return true if the music is playing, false otherwise
 			 */
-			bool playBGM(bool loop = true);
+			static bool playBGM(bool loop = true);
 
 			/**
 			 * stop the current background music
 			 * @return true if the music is stopped, false otherwise
 			 */
-			bool stopBGM();
+			static bool stopBGM();
 
 			/**
 			 * Set the background music volume
 			 * @param volume, 0 = min, 100 = max
 			 * @return true if the volume is set, false otherwise
 			 */
-			bool setBGMVolume(float volume);
+			static bool setBGMVolume(float volume);
+
+			[[nodiscard]] static float getBGMVolume();
+
+			[[nodiscard]] static sf::SoundSource::Status getBGMStatus();
 
 			/**
 			 * Set whether or not the stream should loop after reaching the end.
 			 * @param loop true to play in loop, false to play once
 			 */
-			void loopBGM(bool loop);
+			static void loopBGM(bool loop);
 
 			/**
 			 * @brief load a sound effect to be played
 			 * @param key the key relative to the AssetLoader
+			 * @deprecated
+			 * @warning Do not use, this is for development only
 			 */
-			void loadSFX(const std::string &key);
+			static void loadSFX(const std::string &key);
+
+			static void playSFX(const std::string &key);
 
 			/**
 			 *  Set the sound effects volume
 			 * @param volume, 0 = min, 100 = max
 			 * @return true if the volume is set, false otherwise
 			 */
-			bool setSFXVolume(float volume);
+			static void setSFXVolume(float volume);
 
+			[[nodiscard]] static float getSFXVolume();
 
 		private:
 			AudioManager() = default;
 
 			/**
-			 * Key relative to the AssetLoader
+			 * Current BGM music key
 			 */
-			std::string currentBGM;
-
-			/**
-			 * Queue containing the next BGM to play, if any
-			 * If the queue is empty, the current BGM will loop
-			 * If the queue is not empty, the current BGM will be replaced by the next BGM
-			 * The next BGM will be removed from the queue
-			 * If the queue is not empty, the next BGM will be played
-			 * BGMQueue[0] is the current BGM playing
-			 */
-			std::vector<std::string> BGMQueue;
+			std::string _currentBGMKey;
 
 			/**
 			 * Queue of sound effects to play
 			 */
-			std::vector<std::string> currentSFX;
+			std::string _currentSFXKey;
 
 			/**
 			 * The volume of the background music
 			 */
-			float BGMVolume = 50.0f;
+			float _BGMVolume = 50.0f;
 
 			/**
 			 * The volume of the sound effects
 			 */
-			float SFXVolume = 50.0f;
+			float _SFXVolume = 50.0f;
 
 			/**
 			 * Instance of the AudioManager, lazy loaded

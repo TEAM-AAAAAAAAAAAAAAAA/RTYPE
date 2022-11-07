@@ -28,6 +28,7 @@
 #include "systems/client/HandleSFMLKeys.hpp"
 #include "systems/client/SendDirection.hpp"
 #include "systems/client/Animate.hpp"
+#include "AudioManager.hpp"
 
 static void registerAllComponent(ecs::World &world)
 {
@@ -149,6 +150,9 @@ ecs::World getGameWorld()
 int main()
 {
     asset::AssetLoader::LoadIniFile(asset::AssetLoader::smartPath("assets", "config.ini"));
+	audio::AudioManager::playSFX("startup");
+	audio::AudioManager::loadBGM("roll");
+	audio::AudioManager::playBGM(true);
     network::Client::setHost("localhost");
     network::Client::setPort("8000");
     network::Client::connect();
