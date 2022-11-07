@@ -71,7 +71,7 @@ namespace ecs::systems
             auto &dir = directions[i];
             auto &id = networkIds[i];
 
-            if (dir && clientNumToId[msg.second] == id.value().id) {
+            if (dir && id && clientNumToId[msg.second] == id.value().id) {
                 dir.value().x = (int)msg.first[1];
                 dir.value().y = (int)msg.first[2];
                 return;

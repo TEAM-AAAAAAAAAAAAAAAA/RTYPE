@@ -40,7 +40,7 @@ namespace ecs::component
             -1, 0, 20, 20, 10, 0, 10, fac);
     }
 
-    static void shootEneryBallsAttack(World &world, const std::size_t &shooter)
+    static void shootEnerySphereAttack(World &world, const std::size_t &shooter)
     {
         auto const &positions = world.registry.getComponents<component::Position>();
         auto const &factions = world.registry.getComponents<component::Faction>();
@@ -52,12 +52,12 @@ namespace ecs::component
         ecs::component::Faction::Factions fac = ecs::component::Faction::Factions::None;
         if (shooter < factions.size() && factions[shooter])
             fac = factions[shooter].value().faction;
-        spawnNewBullet(world, component::EntityType::EnergySphere, positions[shooter].value().x,
+        spawnNewBullet(world, component::EntityType::Bullet, positions[shooter].value().x,
             positions[shooter].value().y, -1, 0, 50, 50, 5, 0, 50, fac);
     }
 
     const std::unordered_map<AttackAI::PatternType, AttackAI::AI::Pattern> AttackAI::AI::patterns(
-        {{ShootBullet, {200, shootBulletAttack}}, {ShootEnergySphere, {300, shootEneryBallsAttack}}});
+        {{ShootBullet, {200, shootBulletAttack}}, {ShootEnergySphere, {300, shootEnerySphereAttack}}});
 
     const std::unordered_map<AttackAI::AIType, AttackAI::AI> AttackAI::_aiVector(
         {{Scout, AttackAI::AI({ShootBullet})}, {Fighter, AttackAI::AI({ShootBullet, ShootEnergySphere})}});

@@ -113,6 +113,17 @@ namespace ecs::systems
                         AnimFrame(106, 7, 12, 19, 100)});
                 world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
                 break;
+            // case component::EntityType::Types::EnergySphere:
+            //     world.registry.addComponent<component::Drawable>(newEntity,
+            //         {"bullet", {0, 0, 32, 32},
+            //             std::atan2(static_cast<float>(dirX), static_cast<float>(dirY)) * 180 / 3.14159265359f});
+            //     world.registry.addComponent<component::Animated>(newEntity,
+            //         {AnimFrame(0, 0, 32, 32, 100), AnimFrame(32, 0, 32, 32, 100), AnimFrame(64, 0, 32, 32, 100),
+            //             AnimFrame(96, 0, 32, 32, 100), AnimFrame(128, 0, 32, 32, 100), AnimFrame(160, 0, 32, 32, 100),
+            //             AnimFrame(192, 0, 32, 32, 100), AnimFrame(224, 0, 32, 32, 100), AnimFrame(256, 0, 32, 32, 100),
+            //             AnimFrame(288, 0, 32, 32, 100)});
+            //     world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
+            //     break;
         }
     }
 
