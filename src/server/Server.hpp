@@ -87,6 +87,8 @@ namespace network
 
         static inline void start(unsigned short localPort)
         {
+            if (_Instance._isRunning)
+                return;
             _Instance._socket = udp::socket(_Instance._ioService, udp::endpoint(udp::v4(), localPort));
             _Instance._isRunning = true;
             std::cerr << "Server started on port " << localPort << std::endl;
