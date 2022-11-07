@@ -171,7 +171,9 @@ namespace network
          */
         void receiveIncoming()
         {
-            while (!_isRunning) {usleep(1000);}
+            while (!_isRunning) {
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            }
             startReceive();
             while (!_ioService.stopped()) {
                 try {
@@ -217,7 +219,9 @@ namespace network
          */
         [[noreturn]] void sendOutgoing()
         {
-            while (!_isRunning) {usleep(1000);}
+            while (!_isRunning) {
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            }
             while (!_ioService.stopped()) {
                 if (!_outgoingMessages.empty()) {
                     ServerMessage message = _outgoingMessages.pop();
