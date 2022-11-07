@@ -40,6 +40,13 @@ namespace utils
             NONE
         };
 
+        enum ButtonType
+        {
+            PLAY,
+            QUIT,
+            OPTIONS
+        };
+
         static std::map<int, PacketType> mapPacketType{
             {1, PLAYER_MOVE},
             {2, PLAYER_SHOT},

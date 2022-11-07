@@ -8,6 +8,7 @@ set(SYSTEMS_SRC
     ${SRCROOT}/HandleSFMLKeys.hpp
     ${SRCROOT}/SendDirection.hpp
     ${SRCROOT}/HandleParallaxBounds.hpp
+    ${SRCROOT}/Buttons.hpp
     PARENT_SCOPE
 )
 
