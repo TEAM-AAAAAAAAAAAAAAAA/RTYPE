@@ -11,6 +11,8 @@
 #include <functional>
 #include <vector>
 #include "World.hpp"
+#include "components/EntityType.hpp"
+#include "components/Faction.hpp"
 #include <unordered_map>
 
 namespace ecs::component
@@ -76,6 +78,15 @@ namespace ecs::component
           private:
             short currentAttack;
             std::vector<PatternType> _thisPatterns;
+        };
+
+        struct Action {
+            static void shootBulletAttack(World &world, const std::size_t &shooter);
+            static void shootEneryBallsAttack(World &world, const std::size_t &shooter);
+
+          private:
+            static void spawnNewBullet(World &world, component::EntityType::Types type, int posX, int posY, char dirX,
+                char dirY, int sizeX, int sizeY, int velX, int velY, int dmg, ecs::component::Faction::Factions fac);
         };
 
         /**
