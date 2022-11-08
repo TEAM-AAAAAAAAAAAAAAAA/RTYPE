@@ -129,7 +129,8 @@ namespace ecs::systems
 
     static void firstMessageHandle(World &world, network::Message &msg)
     {
-        selfId = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
+        if (selfId == 0)
+            selfId = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
     }
 
     static void deathMessageHandle(World &world, network::Message &msg)

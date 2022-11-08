@@ -217,7 +217,7 @@ namespace network
         /**
          * Used to send message to clients with the outgoingMessages array isn't empty
          */
-        [[noreturn]] void sendOutgoing()
+        void sendOutgoing()
         {
             while (!_isRunning) {
                 std::this_thread::sleep_for(std::chrono::milliseconds(100));

@@ -25,7 +25,7 @@
 
 namespace ecs::systems
 {
-    static std::map<unsigned int, size_t> clientNumToId;
+    static std::map<unsigned int, size_t> clientNumToId = {};
 
     /**
      * In goal of create a player, first, we need to add every components of the player.
@@ -48,13 +48,11 @@ namespace ecs::systems
         world.registry.addComponent<ecs::component::Faction>(newPlayer, {ecs::component::Faction::Factions::Players});
 
         clientNumToId[msg.second] = static_cast<size_t>(newPlayer);
-        network::ServerMessage message;
-        message.first.fill(0);
-        message.first[1] = static_cast<size_t>(newPlayer) >> 8;
-        message.first[2] = static_cast<size_t>(newPlayer) & 0xFF;
-        message.second.clear();
-        message.second.push_back(msg.second);
-        network::Server::getOutgoingMessages().push(message);
+        network::Message message;
+        message.fill(0);
+        message[1] = static_cast<size_t>(newPlayer) >> 8;
+        message[2] = static_cast<size_t>(newPlayer) & 0xFF;
+        network::Server::getOutgoingMessages().push(network::ServerMessage(message, std::vector<unsigned int>()));
     }
 
     /**
@@ -95,7 +93,7 @@ namespace ecs::systems
              ++i) {
             auto &id = networkIds[i];
 
-            if (id && clientNumToId[msg.second] == id.value().id) {
+            if (id && clientNumToId.find(msg.second) != clientNumToId.end() & clientNumToId[msg.second] == id.value().id) {
                 auto &pos = positions[i];
                 auto &weapon = weapons[i];
                 auto &fac = factions[i];
@@ -133,8 +131,7 @@ namespace ecs::systems
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Server::GetReceivedMessages().empty()) {
             network::ClientMessage msg = network::Server::GetReceivedMessages().pop();
-            if (msg.first[0] == 0 || msg.first[0] == utils::constant::PLAYER_MOVE
-                || msg.first[0] == utils::constant::PLAYER_SHOT)
+            if (packetTypeFunction.find(msg.first[0]) != packetTypeFunction.end())
                 packetTypeFunction[msg.first[0]](world, msg);
         }
     };
