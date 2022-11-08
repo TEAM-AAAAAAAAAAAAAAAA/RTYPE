@@ -48,7 +48,8 @@ namespace ecs::component
         int sizeX, int sizeY, int velX, int velY, int dmg, ecs::component::Faction::Factions fac)
     {
         ecs::Entity bullet = ecs::WorldManager::getWorld().registry.spawn_entity();
-        ecs::WorldManager::getWorld().registry.addComponent<ecs::component::EntityType>(bullet, {type});
+        ecs::WorldManager::getWorld().registry.addComponent<ecs::component::EntityType>(
+            bullet, {static_cast<char>(type)});
         ecs::WorldManager::getWorld().registry.addComponent<ecs::component::NetworkId>(
             bullet, {static_cast<size_t>(bullet)});
         ecs::WorldManager::getWorld().registry.addComponent<ecs::component::Position>(bullet, {posX, posY});
