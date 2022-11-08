@@ -10,6 +10,7 @@
 #include <functional>
 #include <iostream>
 #include "SFML/Graphics.hpp"
+#include "../../../client/Menu.hpp"
 #include "Window.hpp"
 #include "World.hpp"
 #include "components/Position.hpp"
@@ -32,6 +33,7 @@ namespace ecs::systems
         auto const &hitBoxes = world.registry.getComponents<component::Hitbox>();
 
         utils::Window::get().clear(utils::Window::Color);
+        menu::Menu::displayMenu();
         for (size_t i = 0; i < positions.size() && i < sizes.size() && i < drawables.size(); i++) {
             auto const &pos = positions[i];
             auto const &size = sizes[i];

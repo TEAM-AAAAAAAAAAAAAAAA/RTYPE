@@ -11,6 +11,8 @@ set(SRC
     ${SRC_ROOT}/NetworkClient.hpp
     ${SRC_ROOT}/GetWorld.cpp
     ${SRC_ROOT}/GetWorld.hpp
+    ${SRC_ROOT}/Menu.cpp
+    ${SRC_ROOT}/Menu.hpp
     ${UTILS_SRC}
     ${ECS_SRC}
     )
@@ -26,7 +28,7 @@ target_link_libraries(${TARGET} PRIVATE
 )
 
 target_include_directories(${TARGET}
-PRIVATE ${ECS_INCROOT} 
+PRIVATE ${ECS_INCROOT}
 PRIVATE ${UTILS_INCDIRS}
 )
 

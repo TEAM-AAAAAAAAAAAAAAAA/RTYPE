@@ -19,20 +19,20 @@ namespace ecs::component
          *
          * @param active default at false
          */
-        explicit Activable(utils::constant::ButtonType type, bool hidle = false) : _type(type), _hidle(hidle), _selected(false){};
+        explicit Activable(utils::constant::ButtonType type, bool hover = false) : _type(type), _hover(hover), _selected(false){};
         /**
          * @brief Get the state of the object
          *
          * @return true
          * @return false
          */
-        inline bool getHidle() const { return _hidle; };
+        inline bool getHover() const { return _hover; };
         /**
          * @brief Set the state of object
          *
          * @param active boolean
          */
-        inline void setHidle(bool hidle) { _hidle = hidle; };
+        inline void setHover(bool hover) { _hover = hover; };
         /**
          * @brief Get the state of the object
          *
@@ -53,10 +53,10 @@ namespace ecs::component
 
       private:
         /**
-         * @brief state hidle of the object
+         * @brief state hover of the object
          *
          */
-        bool _hidle;
+        bool _hover;
         /**
          * @brief state selected of the object
          *
