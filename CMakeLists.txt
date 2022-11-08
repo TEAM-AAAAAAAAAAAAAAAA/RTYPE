@@ -21,7 +21,7 @@ set(SFML_DIR ${PROJECT_SOURCE_DIR}/vcpkg/installed/x64-windows/share/sfml)
 # Add ./cmake to the module path
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
-find_package(SFML COMPONENTS system window graphics audio CONFIG REQUIRED)
+find_package(SFML COMPONENTS graphics window audio system CONFIG REQUIRED)
 find_package(Boost REQUIRED COMPONENTS thread)
 
 if(NOT DEFINED CMAKE_SUPPRESS_DEVELOPER_WARNINGS)

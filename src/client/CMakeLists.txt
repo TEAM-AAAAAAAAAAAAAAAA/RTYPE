@@ -22,7 +22,7 @@ set(SRC
 add_executable(${TARGET} ${SRC})
 
 target_link_libraries(${TARGET} PRIVATE
-    sfml-window sfml-graphics sfml-system sfml-audio
+    sfml-graphics sfml-window sfml-audio sfml-system
     Boost::boost
 )
 

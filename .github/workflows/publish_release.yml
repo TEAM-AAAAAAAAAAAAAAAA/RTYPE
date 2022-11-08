@@ -97,7 +97,7 @@ jobs:
           message(STATUS "Using host CMake version: ${CMAKE_VERSION}")
 
           execute_process(
-            COMMAND cmake --build build
+            COMMAND cmake --build build -v
             RESULT_VARIABLE result
           )
           if (NOT result EQUAL 0)
