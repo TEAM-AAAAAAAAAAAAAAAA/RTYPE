@@ -77,13 +77,13 @@ namespace ecs
         {
             size_t front;
 
-            // if (_entitiesBin.empty()) {
+            if (_entitiesBin.empty()) {
                 _lastEntity++;
                 return Entity(_lastEntity - 1);
-            // }
-            // front = _entitiesBin.front();
-            // _entitiesBin.erase(_entitiesBin.begin());
-            // return Entity(front);
+            }
+            front = _entitiesBin.front();
+            _entitiesBin.erase(_entitiesBin.begin());
+            return Entity(front);
         }
 
         /**
