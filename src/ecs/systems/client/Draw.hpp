@@ -30,7 +30,7 @@ namespace ecs::systems
         auto const &animations = world.registry.getComponents<component::Animated>();
         auto const &hitBoxes = world.registry.getComponents<component::Hitbox>();
 
-        utils::Window::get().clear();
+        utils::Window::getInstance().clear();
         for (size_t i = 0; i < positions.size() && i < sizes.size() && i < drawables.size(); i++) {
             auto const &pos = positions[i];
             auto const &size = sizes[i];
@@ -53,7 +53,7 @@ namespace ecs::systems
                 //     sprite.setOrigin(size.value().width / 2, size.value().height / 2);
                 //     sprite.setRotation(draw.value().rotation);
                 // }
-                utils::Window::get().draw(sprite);
+                utils::Window::getInstance().draw(sprite);
             }
             if (i < hitBoxes.size()) {
                 auto const &hitBox = hitBoxes[i];
@@ -67,11 +67,11 @@ namespace ecs::systems
                         hitBoxRec.setOutlineThickness(2);
                         hitBoxRec.setSize({(float)size->width, (float)size->height});
                         hitBoxRec.setPosition({(float)(pos->x), (float)(pos->y)});
-                        utils::Window::get().draw(hitBoxRec);
+                        utils::Window::getInstance().draw(hitBoxRec);
                     }
                 }
             }
         };
-        utils::Window::get().display();
+        utils::Window::getInstance().display();
     };
 } // namespace ecs::systems
