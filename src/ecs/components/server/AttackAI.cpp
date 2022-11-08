@@ -62,7 +62,7 @@ namespace ecs::component
     }
 
     const std::unordered_map<AttackAI::PatternType, AttackAI::AI::Pattern> AttackAI::AI::patterns(
-        {{ShootBullet, {200, AttackAI::Action::shootBulletAttack}},
+        {{ShootBullet, {100, AttackAI::Action::shootBulletAttack}},
             {ShootEnergySphere, {300, AttackAI::Action::shootEnerySphereAttack}}});
 
     const std::unordered_map<AttackAI::AIType, AttackAI::AI> AttackAI::_aiVector(

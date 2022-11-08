@@ -97,7 +97,7 @@ namespace ecs::component
              *
              * @return const std::vector<PatternType>
              */
-            inline const std::vector<PatternType> getPatterns() const { return _thisPatterns; }
+            inline const std::vector<PatternType> &getPatterns() const { return _thisPatterns; }
 
             static const std::unordered_map<PatternType, Pattern> patterns;
 

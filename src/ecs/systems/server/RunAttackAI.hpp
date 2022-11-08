@@ -25,18 +25,16 @@ namespace ecs::systems
         using chrono = std::chrono::high_resolution_clock;
         using chronoDuration = std::chrono::duration<double, std::milli>;
 
-        static auto clock = chrono::now();
         for (size_t i = 0; i < attackAIs.size(); ++i) {
             auto &atkAI = attackAIs[i];
 
             if (atkAI) {
-                if (chronoDuration(chrono::now() - clock).count() - atkAI.value().lastAttack
+                if ((chrono::now().time_since_epoch().count() - atkAI.value().lastAttack) / 10000000
                     > atkAI.value().lastAttackDelay) {
                     auto &nextAtk = atkAI.value().getRandomAttack();
                     nextAtk.run(i);
-                    atkAI.value().lastAttack = chronoDuration(chrono::now() - clock).count();
+                    atkAI.value().lastAttack = chrono::now().time_since_epoch().count();
                     atkAI.value().lastAttackDelay = nextAtk.reloadTime;
-                    clock = chrono::now();
                 }
             }
         };

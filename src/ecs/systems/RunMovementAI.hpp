@@ -26,19 +26,18 @@ namespace ecs::systems
         using chrono = std::chrono::high_resolution_clock;
         using chronoDuration = std::chrono::duration<double, std::milli>;
 
-        static auto clock = chrono::now();
         for (size_t i = 0; i < directions.size() && i < movementAIs.size(); ++i) {
             auto &dir = directions[i];
             auto &movAI = movementAIs[i];
 
             if (dir && movAI) {
-                if (chronoDuration(chrono::now() - clock).count()
-                    > static_cast<size_t>(movAI.value().getDelay()) * 1000) {
+                if ((chrono::now().time_since_epoch().count() - movAI.value().getLastMovement()) / 100000000
+                    > static_cast<size_t>(movAI.value().getDelay())) {
                     auto &tmpDir = movAI.value().getNextDirection();
                     dir.value().x = tmpDir.first;
                     dir.value().y = tmpDir.second;
                     dir.value().hasMoved = true;
-                    clock = chrono::now();
+                    movAI.value().setLastMovement(chrono::now().time_since_epoch().count());
                 }
             }
         };
