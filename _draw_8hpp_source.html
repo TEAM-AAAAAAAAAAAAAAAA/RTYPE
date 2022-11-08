@@ -184,29 +184,32 @@ $(document).ready(function(){initNavTree('_draw_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                    <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(size.value().height) / <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(sprite.getTextureRect().height);</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                sprite.setScale(scaleX, scaleY);</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                sprite.setPosition({<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(pos.value().x), <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(pos.value().y)});</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                sprite.setRotation(<a class="code" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">draw</a>.value().rotation);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                utils::Window::get().draw(sprite);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keywordflow">if</span> (i &lt; hitBoxes.size()) {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                <span class="keyword">auto</span> <span class="keyword">const</span> &amp;hitBox = hitBoxes[i];</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                <span class="keywordflow">if</span> (hitBox &amp;&amp; size &amp;&amp; pos) {</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                    <span class="keywordflow">if</span> (hitBox-&gt;enableHitBox) {</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                        sf::RectangleShape hitBoxRec({0, 0});</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                        hitBoxRec.setFillColor(sf::Color::Transparent);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                        hitBoxRec.setOutlineColor(sf::Color::Red);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                        hitBoxRec.setOutlineThickness(2);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                        hitBoxRec.setSize({(float)size-&gt;width, (<span class="keywordtype">float</span>)size-&gt;height});</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                        hitBoxRec.setPosition({(float)(pos-&gt;x), (float)(pos-&gt;y)});</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                        utils::Window::get().draw(hitBoxRec);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                    }</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                }</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            }</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        };</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        utils::Window::get().display();</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    };</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                <span class="comment">// if (draw.value().rotation) {</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                <span class="comment">//     sprite.setOrigin(size.value().width / 2, size.value().height / 2);</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                <span class="comment">//     sprite.setRotation(draw.value().rotation);</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                <span class="comment">// }</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                utils::Window::get().draw(sprite);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            }</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordflow">if</span> (i &lt; hitBoxes.size()) {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                <span class="keyword">auto</span> <span class="keyword">const</span> &amp;hitBox = hitBoxes[i];</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                <span class="keywordflow">if</span> (hitBox &amp;&amp; size &amp;&amp; pos) {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                    <span class="keywordflow">if</span> (hitBox-&gt;enableHitBox) {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                        sf::RectangleShape hitBoxRec({0, 0});</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                        hitBoxRec.setFillColor(sf::Color::Transparent);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                        hitBoxRec.setOutlineColor(sf::Color::Red);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                        hitBoxRec.setOutlineThickness(2);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                        hitBoxRec.setSize({(float)size-&gt;width, (<span class="keywordtype">float</span>)size-&gt;height});</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                        hitBoxRec.setPosition({(float)(pos-&gt;x), (float)(pos-&gt;y)});</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                        utils::Window::get().draw(hitBoxRec);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                    }</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                }</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        };</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        utils::Window::get().display();</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    };</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="astructecs_1_1component_1_1_drawable_html"><div class="ttname"><a href="structecs_1_1component_1_1_drawable.html">ecs::component::Drawable</a></div><div class="ttdef"><b>Definition:</b> Drawable.hpp:19</div></div>

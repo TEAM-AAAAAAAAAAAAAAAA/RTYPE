@@ -1,0 +1,4 @@
+<map id="ecs::component::AttackAI::getRandomAttack" name="ecs::component::AttackAI::getRandomAttack">
+<area shape="rect" id="node1" title="Get a random attack from the AI." alt="" coords="5,5,193,47"/>
+<area shape="rect" id="node2" href="$structecs_1_1component_1_1_attack_a_i_1_1_a_i.html#ad03bd3a763e76fb47e321f171d0a4c4d" title="Get the Patterns of this AI." alt="" coords="241,5,429,47"/>
+</map>

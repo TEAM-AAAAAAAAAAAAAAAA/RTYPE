@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['idle_566',['Idle',['../structecs_1_1component_1_1_entity_a_i.html#ab7922dc8e32e2fb195ced100e94891c4a8ebd84ff8ce76514001da5eb9ea90907',1,'ecs::component::EntityAI']]]
+  ['hitbox_609',['HitBox',['../classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0fa53581ad1cfd61e65a94e18da863903c7',1,'ecs::Event']]]
 ];

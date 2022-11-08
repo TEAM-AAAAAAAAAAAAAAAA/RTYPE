@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['game_5fover_564',['GAME_OVER',['../namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ab0ada823658f01387806157db3e5ce4e',1,'utils::constant']]]
+  ['fighter_607',['Fighter',['../structecs_1_1component_1_1_attack_a_i.html#aac7c4d7eb279c3e085e52330edc31d9cae57af34bd8b4eac4855677bad8994369',1,'ecs::component::AttackAI']]]
 ];

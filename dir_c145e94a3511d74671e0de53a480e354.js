@@ -5,10 +5,6 @@ var dir_c145e94a3511d74671e0de53a480e354 =
     [ "Direction.hpp", "_direction_8hpp.html", [
       [ "Direction", "structecs_1_1component_1_1_direction.html", "structecs_1_1component_1_1_direction" ]
     ] ],
-    [ "EntityAI.cpp", "_entity_a_i_8cpp.html", null ],
-    [ "EntityAI.hpp", "_entity_a_i_8hpp.html", [
-      [ "EntityAI", "structecs_1_1component_1_1_entity_a_i.html", "structecs_1_1component_1_1_entity_a_i" ]
-    ] ],
     [ "EntityLife.hpp", "_entity_life_8hpp.html", [
       [ "EntityLife", "structecs_1_1component_1_1_entity_life.html", "structecs_1_1component_1_1_entity_life" ]
     ] ],
@@ -20,6 +16,10 @@ var dir_c145e94a3511d74671e0de53a480e354 =
     ] ],
     [ "Health.hpp", "_health_8hpp.html", [
       [ "Health", "structecs_1_1component_1_1_health.html", "structecs_1_1component_1_1_health" ]
+    ] ],
+    [ "MovementAI.cpp", "_movement_a_i_8cpp.html", null ],
+    [ "MovementAI.hpp", "_movement_a_i_8hpp.html", [
+      [ "MovementAI", "structecs_1_1component_1_1_movement_a_i.html", "structecs_1_1component_1_1_movement_a_i" ]
     ] ],
     [ "NetworkId.hpp", "_network_id_8hpp.html", [
       [ "NetworkId", "structecs_1_1component_1_1_network_id.html", "structecs_1_1component_1_1_network_id" ]
