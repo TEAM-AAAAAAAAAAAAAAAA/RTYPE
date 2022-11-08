@@ -41,13 +41,30 @@ namespace ecs::component
          * @brief The AI structure where the pattern of the entity is defined
          */
         struct AI {
+            /**
+             * @brief The Pattern structure contains a std::functions and a reloadTime. Patterns are created in the CPP
+             * file.
+             *
+             */
             struct Pattern {
+                /**
+                 * @brief Construct a new Pattern object
+                 *
+                 * @param reloadTime the time the entity will have to wait before using another pattern again after this
+                 * one
+                 * @param pattern the function to call when this pattern is selected to be used by the AI
+                 */
                 Pattern(short reloadTime, std::function<void(const std::size_t)> pattern)
                     : reloadTime(reloadTime), _function(pattern)
                 {
                 }
 
-                void run(const std::size_t &i) const { _function(i); }
+                /**
+                 * @brief Run the pattern's function
+                 *
+                 * @param shooter which entity triggered the action
+                 */
+                void run(const std::size_t &shooter) const { _function(shooter); }
 
                 short reloadTime;
 
@@ -75,6 +92,11 @@ namespace ecs::component
              */
             AI(const AI &other) : currentAttack(other.currentAttack), _thisPatterns(other._thisPatterns) {}
 
+            /**
+             * @brief Get the Patterns of this AI
+             *
+             * @return const std::vector<PatternType>
+             */
             inline const std::vector<PatternType> getPatterns() const { return _thisPatterns; }
 
             static const std::unordered_map<PatternType, Pattern> patterns;
@@ -84,11 +106,18 @@ namespace ecs::component
             std::vector<PatternType> _thisPatterns;
         };
 
+        /**
+         * @brief The Action structure contains the prototypes of the functions used by patterns
+         *
+         */
         struct Action {
             static void shootBulletAttack(const std::size_t shooter);
             static void shootEnerySphereAttack(const std::size_t shooter);
 
           private:
+            /**
+             * @brief Utility function used by action functions to reduce code reusing
+             */
             static void spawnNewBullet(component::EntityType::Types type, int posX, int posY, char dirX, char dirY,
                 int sizeX, int sizeY, int velX, int velY, int dmg, ecs::component::Faction::Factions fac);
         };
@@ -100,6 +129,9 @@ namespace ecs::component
          */
         AttackAI(const AIType &type = Scout) : _thisAI(findAI(type)), lastAttack(0), lastAttackDelay(0) {}
 
+        /**
+         * @brief Get a random attack from the AI
+         */
         const AttackAI::AI::Pattern &getRandomAttack() const
         {
             int attack = std::rand() % _thisAI.getPatterns().size();
