@@ -142,6 +142,8 @@ ecs::World getGameWorld()
     return world;
 }
 
+#include <iostream>
+
 /**
  * Main function of the client, running everything to start the game
  * @return 0 if no error, anything otherwise

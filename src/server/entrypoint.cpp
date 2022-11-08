@@ -61,6 +61,7 @@ ecs::World getGameWorld()
 
 int main()
 {
+    network::Server::start(8000);
     std::srand(std::time(NULL));
     ecs::Engine engine;
     ecs::WorldManager::setWaitingWorld(getGameWorld);

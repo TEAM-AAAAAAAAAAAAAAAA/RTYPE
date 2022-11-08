@@ -61,4 +61,5 @@ r-type_server.*
 rtype_server
 !/graph/
 docs/html
+cmake-build-release/
 out/
