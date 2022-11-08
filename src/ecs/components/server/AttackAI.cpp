@@ -57,6 +57,7 @@ namespace ecs::component
         ecs::WorldManager::getWorld().registry.addComponent<ecs::component::Velocity>(bullet, {velX, velY});
         ecs::WorldManager::getWorld().registry.addComponent<ecs::component::Projectile>(bullet, {dmg});
         ecs::WorldManager::getWorld().registry.addComponent<ecs::component::Faction>(bullet, {fac});
+        ecs::WorldManager::getWorld().registry.addComponent<ecs::component::Health>(bullet, {1});
     }
 
     const std::unordered_map<AttackAI::PatternType, AttackAI::AI::Pattern> AttackAI::AI::patterns(
