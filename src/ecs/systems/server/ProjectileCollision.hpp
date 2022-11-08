@@ -26,8 +26,10 @@ namespace ecs::systems
             auto &projHealth = healths[i];
 
             if (proj && projPos && projHealth) {
-                if (projPos.value().x < 0 || projPos.value().x > utils::constant::mapWidth || projPos.value().y < 0
-                    || projPos.value().y > utils::constant::mapHeight) {
+                if (projPos.value().x < 0 - utils::constant::mapWidth * 0.5
+                    || projPos.value().x > utils::constant::mapWidth * 1.5
+                    || projPos.value().y < 0 - utils::constant::mapHeight * 0.5
+                    || projPos.value().y > utils::constant::mapHeight * 1.5) {
                     projHealth.value().health = 0;
                 }
             }
