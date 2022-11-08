@@ -18,6 +18,12 @@ set(SRC
 
 add_executable(${TARGET} ${SRC})
 
+if (NOT COMPILER_TYPE MATCHES "msvc")
+    target_link_libraries(${TARGET} PRIVATE
+            dl
+            )
+endif ()
+
 target_link_libraries(${TARGET} PRIVATE
     sfml-graphics sfml-window sfml-audio sfml-system
     Boost::boost
@@ -31,12 +37,6 @@ PRIVATE ${UTILS_INCDIRS}
 target_include_directories(${TARGET} PRIVATE
     ${Boost_INCLUDE_DIRS}
 )
-
-if (NOT WIN32)
-    target_link_libraries(${TARGET} PRIVATE
-        dl
-    )
-endif()
 
 set_target_properties(${TARGET} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
 
