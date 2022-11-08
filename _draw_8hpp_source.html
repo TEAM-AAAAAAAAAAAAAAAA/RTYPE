@@ -165,7 +165,7 @@ $(document).ready(function(){initNavTree('_draw_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;animations = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_animated.html">component::Animated</a>&gt;();</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;hitBoxes = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_hitbox.html">component::Hitbox</a>&gt;();</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        utils::Window::get().clear();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        utils::Window::getInstance().clear();</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; positions.size() &amp;&amp; i &lt; sizes.size() &amp;&amp; i &lt; drawables.size(); i++) {</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span> &amp;pos = positions[i];</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <span class="keyword">auto</span> <span class="keyword">const</span> &amp;size = sizes[i];</div>
@@ -188,7 +188,7 @@ $(document).ready(function(){initNavTree('_draw_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                <span class="comment">//     sprite.setOrigin(size.value().width / 2, size.value().height / 2);</span></div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                <span class="comment">//     sprite.setRotation(draw.value().rotation);</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                <span class="comment">// }</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                utils::Window::get().draw(sprite);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                utils::Window::getInstance().draw(sprite);</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            }</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordflow">if</span> (i &lt; hitBoxes.size()) {</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                <span class="keyword">auto</span> <span class="keyword">const</span> &amp;hitBox = hitBoxes[i];</div>
@@ -202,12 +202,12 @@ $(document).ready(function(){initNavTree('_draw_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                        hitBoxRec.setOutlineThickness(2);</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                        hitBoxRec.setSize({(float)size-&gt;width, (<span class="keywordtype">float</span>)size-&gt;height});</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                        hitBoxRec.setPosition({(float)(pos-&gt;x), (float)(pos-&gt;y)});</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                        utils::Window::get().draw(hitBoxRec);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                        utils::Window::getInstance().draw(hitBoxRec);</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                    }</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                }</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            }</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        };</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        utils::Window::get().display();</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        utils::Window::getInstance().display();</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    };</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
 </div><!-- fragment --></div><!-- contents -->

@@ -174,9 +174,9 @@ $(document).ready(function(){initNavTree('_handle_s_f_m_l_events_8hpp_source.htm
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keyword">auto</span> &amp;hitBoxes = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_hitbox.html">component::Hitbox</a>&gt;();</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keyword">auto</span> &amp;controllables = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_controllable.html">component::Controllable</a>&gt;();</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordflow">while</span> (utils::Window::get().pollEvent(event)) {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordflow">while</span> (utils::Window::getInstance().pollEvent(event)) {</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keywordflow">switch</span> (event.type) {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                <span class="keywordflow">case</span> sf::Event::Closed: utils::Window::get().close(); <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                <span class="keywordflow">case</span> sf::Event::Closed: utils::Window::getInstance().close(); <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                <span class="keywordflow">case</span> sf::Event::KeyPressed: {</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                    <span class="keywordflow">if</span> (event.key.code == sf::Keyboard::Key::W)</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                        <a class="code" href="classecs_1_1_world_manager.html#ab8a3b57448589e5301d8ae65f7dbf88e">ecs::WorldManager::setWaitingWorld</a>(<a class="code" href="namespaceecs_1_1systems.html#a9e53dea2cf4c6c53caa0bf6658a51a9c">getTestWorld</a>);</div>
