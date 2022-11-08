@@ -16,9 +16,6 @@ set(SRC
     ${SRC_ROOT}/AudioManager.hpp
 )
 
-
-
-
 add_executable(${TARGET} ${SRC})
 
 target_link_libraries(${TARGET} PRIVATE
@@ -34,6 +31,10 @@ PRIVATE ${UTILS_INCDIRS}
 target_include_directories(${TARGET} PRIVATE
     ${Boost_INCLUDE_DIRS}
 )
+
+if (NOT WIN32)
+    target_compile_options(${TARGET} PRIVATE "-ldl")
+endif()
 
 set_target_properties(${TARGET} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
 
