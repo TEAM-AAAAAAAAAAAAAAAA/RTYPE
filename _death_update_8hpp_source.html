@@ -173,7 +173,7 @@ $(document).ready(function(){initNavTree('_death_update_8hpp_source.html',''); i
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                            msg[0] = utils::constant::getPacketTypeKey(<a class="code" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a509676f5d38cbf87a106deecbbb082db">utils::constant::PacketType::ENTITY_DEATH</a>);</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                            msg[1] = idBin[0];</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                            msg[2] = idBin[1];</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                            <a class="code" href="classnetwork_1_1_server.html#a61cac88b84dbf8bb0e04d79b826b31b8">network::Server::getOutgoingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">push</a>(</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                            <a class="code" href="classnetwork_1_1_server.html#a0c64a21c5e324114615c0073596cb403">network::Server::getOutgoingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">push</a>(</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                                <a class="code" href="namespacenetwork.html#a1290ee51c4c8d07f57076ac8f7505129">network::ServerMessage</a>(msg, std::vector&lt;unsigned int&gt;()));</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                        }</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                    }</div>
@@ -185,7 +185,7 @@ $(document).ready(function(){initNavTree('_death_update_8hpp_source.html',''); i
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclassnetwork_1_1_server_html_a61cac88b84dbf8bb0e04d79b826b31b8"><div class="ttname"><a href="classnetwork_1_1_server.html#a61cac88b84dbf8bb0e04d79b826b31b8">network::Server::getOutgoingMessages</a></div><div class="ttdeci">static LockedQueue&lt; ServerMessage &gt; &amp; getOutgoingMessages()</div><div class="ttdef"><b>Definition:</b> Server.cpp:179</div></div>
+<div class="ttc" id="aclassnetwork_1_1_server_html_a0c64a21c5e324114615c0073596cb403"><div class="ttname"><a href="classnetwork_1_1_server.html#a0c64a21c5e324114615c0073596cb403">network::Server::getOutgoingMessages</a></div><div class="ttdeci">static LockedQueue&lt; ServerMessage &gt; &amp; getOutgoingMessages()</div><div class="ttdef"><b>Definition:</b> Server.hpp:101</div></div>
 <div class="ttc" id="a_network_id_8hpp_html"><div class="ttname"><a href="_network_id_8hpp.html">NetworkId.hpp</a></div></div>
 <div class="ttc" id="a_position_8hpp_html"><div class="ttname"><a href="_position_8hpp.html">Position.hpp</a></div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_network_id_html"><div class="ttname"><a href="structecs_1_1component_1_1_network_id.html">ecs::component::NetworkId</a></div><div class="ttdoc">NetworkId component related to the entity sent to the client.</div><div class="ttdef"><b>Definition:</b> NetworkId.hpp:15</div></div>

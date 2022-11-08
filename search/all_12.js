@@ -3,8 +3,8 @@ var searchData=
   ['scout_228',['Scout',['../structecs_1_1component_1_1_attack_a_i.html#aac7c4d7eb279c3e085e52330edc31d9cac84a81f28492be21d844f31fec1c1eac',1,'ecs::component::AttackAI']]],
   ['senddirection_229',['SendDirection',['../namespaceecs_1_1systems.html#aea6fa503923e813d900cfc64890d626e',1,'ecs::systems']]],
   ['senddirection_2ehpp_230',['SendDirection.hpp',['../_send_direction_8hpp.html',1,'']]],
-  ['sendtoall_231',['sendToAll',['../classnetwork_1_1_server.html#a1c14becd10ff2c468a61c5674cd20be6',1,'network::Server']]],
-  ['sendtoclient_232',['sendToClient',['../classnetwork_1_1_server.html#a67cb2ddc5b82ade2c477d6f11da3369a',1,'network::Server']]],
+  ['sendtoall_231',['sendToAll',['../classnetwork_1_1_server.html#a2b7c28fd5a3a978fd923e583e45bf539',1,'network::Server']]],
+  ['sendtoclient_232',['sendToClient',['../classnetwork_1_1_server.html#a559a7de7206b15f85172d0ce6e1482de',1,'network::Server']]],
   ['serialize_233',['serialize',['../structecs_1_1component_1_1_network_id.html#af97cbf26359666293fbe10e06020c345',1,'ecs::component::NetworkId::serialize()'],['../structecs_1_1component_1_1_position.html#aa6eb9519f8bd02b4c8290ef48749169c',1,'ecs::component::Position::serialize()'],['../structecs_1_1component_1_1_size.html#afe5d3d31fe7ed4d0136c6faaf9b7a308',1,'ecs::component::Size::serialize()'],['../classecs_1_1_event.html#aba458ae4c5aeb4fc7452b27130bfa31c',1,'ecs::Event::serialize()']]],
   ['server_234',['Server',['../classnetwork_1_1_server.html',1,'network']]],
   ['server_2ecpp_235',['Server.cpp',['../_server_8cpp.html',1,'']]],
@@ -34,7 +34,8 @@ var searchData=
   ['sparsearray_259',['SparseArray',['../classecs_1_1_sparse_array.html',1,'ecs::SparseArray&lt; Component &gt;'],['../classecs_1_1_sparse_array.html#a61ccc34c05864d9b536dc3f7de33b9f5',1,'ecs::SparseArray::SparseArray()'],['../classecs_1_1_sparse_array.html#abd3c8f8be422ad1af9fe244ac59ffeb7',1,'ecs::SparseArray::SparseArray(SparseArray const &amp;other)'],['../classecs_1_1_sparse_array.html#a81a21b769be543413084985c956d48a3',1,'ecs::SparseArray::SparseArray(SparseArray &amp;&amp;other) noexcept']]],
   ['sparsearray_2ehpp_260',['SparseArray.hpp',['../_sparse_array_8hpp.html',1,'']]],
   ['spawn_5fentity_261',['spawn_entity',['../classecs_1_1_registry.html#a960bf8fcdaa237dc3a8594cf53290085',1,'ecs::Registry']]],
-  ['superdamage_262',['superDamage',['../structecs_1_1component_1_1_weapon.html#ac8de98d6f734b4d6bc6e0ec698b690f0',1,'ecs::component::Weapon']]],
-  ['superloadingtime_263',['superLoadingTime',['../structecs_1_1component_1_1_weapon.html#a2e296d9d2ffaa2fcf8d138f10d9b4dea',1,'ecs::component::Weapon']]],
-  ['switchhitbox_264',['switchHitBox',['../structecs_1_1component_1_1_hitbox.html#a6d240b123e2298c42ddf3b8fad7c3735',1,'ecs::component::Hitbox']]]
+  ['start_262',['start',['../classnetwork_1_1_server.html#a6ff2736a5b571d1f4b76b1a7c8286822',1,'network::Server']]],
+  ['superdamage_263',['superDamage',['../structecs_1_1component_1_1_weapon.html#ac8de98d6f734b4d6bc6e0ec698b690f0',1,'ecs::component::Weapon']]],
+  ['superloadingtime_264',['superLoadingTime',['../structecs_1_1component_1_1_weapon.html#a2e296d9d2ffaa2fcf8d138f10d9b4dea',1,'ecs::component::Weapon']]],
+  ['switchhitbox_265',['switchHitBox',['../structecs_1_1component_1_1_hitbox.html#a6d240b123e2298c42ddf3b8fad7c3735',1,'ecs::component::Hitbox']]]
 ];

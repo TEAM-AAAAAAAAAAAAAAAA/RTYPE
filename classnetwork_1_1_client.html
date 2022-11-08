@@ -150,18 +150,18 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a8e112442a2ce634cc04ae797ab0fc5ba"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">Message</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetwork_1_1_client.html#a8e112442a2ce634cc04ae797ab0fc5ba">receive</a> ()</td></tr>
-<tr class="separator:a8e112442a2ce634cc04ae797ab0fc5ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07fc7307d327b56735af419262a5160d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetwork_1_1_client.html#a07fc7307d327b56735af419262a5160d">setHost</a> (const std::string &amp;host)</td></tr>
 <tr class="separator:a07fc7307d327b56735af419262a5160d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54f38a429fe6e96c68f10ddf3f226eb9"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetwork_1_1_client.html#a54f38a429fe6e96c68f10ddf3f226eb9">setPort</a> (const std::string &amp;port)</td></tr>
 <tr class="separator:a54f38a429fe6e96c68f10ddf3f226eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4ee2988395ad66a1c4e259eba436d23"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classnetwork_1_1_locked_queue.html">LockedQueue</a>&lt; <a class="el" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">Message</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetwork_1_1_client.html#ab4ee2988395ad66a1c4e259eba436d23">getOutgoingMessages</a> ()</td></tr>
 <tr class="separator:ab4ee2988395ad66a1c4e259eba436d23"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21ab5dabccf30131909a19d54ff5194e"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classnetwork_1_1_locked_queue.html">LockedQueue</a>&lt; <a class="el" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">Message</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetwork_1_1_client.html#a21ab5dabccf30131909a19d54ff5194e">getIncomingMessages</a> ()</td></tr>
-<tr class="separator:a21ab5dabccf30131909a19d54ff5194e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8d5bead7d861e42f7b7258eba61fd54"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classnetwork_1_1_locked_queue.html">LockedQueue</a>&lt; <a class="el" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">Message</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetwork_1_1_client.html#ac8d5bead7d861e42f7b7258eba61fd54">getReceivedMessages</a> ()</td></tr>
+<tr class="separator:ac8d5bead7d861e42f7b7258eba61fd54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab803b1a4b60b0d5ca35b84e95729c2b4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetwork_1_1_client.html#ab803b1a4b60b0d5ca35b84e95729c2b4">connect</a> ()</td></tr>
 <tr class="separator:ab803b1a4b60b0d5ca35b84e95729c2b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affcc70412c322e28ae5af64f8293d4b7"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetwork_1_1_client.html#affcc70412c322e28ae5af64f8293d4b7">disconnect</a> ()</td></tr>
+<tr class="separator:affcc70412c322e28ae5af64f8293d4b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classnetwork_1_1_client.html">Client</a> class is one of the big parts in the game. It represents the way for the gamer to communicate with the servers by sending and receiving some message. To understand those messages in a more specifically way, just refer to the RFC. <a class="el" href="classnetwork_1_1_client.html">Client</a> is able to join a specific server by a given ip &amp; port, communicating with it using sockets &amp; buffers </p>
@@ -228,8 +228,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a21ab5dabccf30131909a19d54ff5194e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21ab5dabccf30131909a19d54ff5194e">&#9670;&nbsp;</a></span>getIncomingMessages()</h2>
+<a id="affcc70412c322e28ae5af64f8293d4b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affcc70412c322e28ae5af64f8293d4b7">&#9670;&nbsp;</a></span>disconnect()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -238,7 +238,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classnetwork_1_1_locked_queue.html">LockedQueue</a>&lt;<a class="el" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">Message</a>&gt;&amp; network::Client::getIncomingMessages </td>
+          <td class="memname">static void network::Client::disconnect </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -287,8 +287,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a8e112442a2ce634cc04ae797ab0fc5ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e112442a2ce634cc04ae797ab0fc5ba">&#9670;&nbsp;</a></span>receive()</h2>
+<a id="ac8d5bead7d861e42f7b7258eba61fd54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8d5bead7d861e42f7b7258eba61fd54">&#9670;&nbsp;</a></span>getReceivedMessages()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -297,7 +297,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">Message</a> network::Client::receive </td>
+          <td class="memname">static <a class="el" href="classnetwork_1_1_locked_queue.html">LockedQueue</a>&lt;<a class="el" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">Message</a>&gt;&amp; network::Client::getReceivedMessages </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -309,7 +309,6 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read in the buffer of the instance to get the message to read </p>
 
 </div>
 </div>

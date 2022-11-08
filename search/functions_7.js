@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['hasmessages_455',['hasMessages',['../classnetwork_1_1_server.html#a3db2364590c0dda7b544ef9a4cee9dc8',1,'network::Server']]],
-  ['hitbox_456',['Hitbox',['../structecs_1_1component_1_1_hitbox.html#a1a898d76591eed1d48d7144ce6a4166c',1,'ecs::component::Hitbox']]]
+  ['hasmessages_457',['hasMessages',['../classnetwork_1_1_server.html#a9d372185a335562311ea01b43c47f9d1',1,'network::Server']]],
+  ['hitbox_458',['Hitbox',['../structecs_1_1component_1_1_hitbox.html#a1a898d76591eed1d48d7144ce6a4166c',1,'ecs::component::Hitbox']]]
 ];

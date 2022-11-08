@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['readme_2emd_212',['README.md',['../src_2ecs_2_r_e_a_d_m_e_8md.html',1,'(Global Namespace)'],['../_r_e_a_d_m_e_8md.html',1,'(Global Namespace)']]],
-  ['receive_213',['receive',['../classnetwork_1_1_client.html#a8e112442a2ce634cc04ae797ab0fc5ba',1,'network::Client']]],
+  ['readme_2emd_213',['README.md',['../src_2ecs_2_r_e_a_d_m_e_8md.html',1,'(Global Namespace)'],['../_r_e_a_d_m_e_8md.html',1,'(Global Namespace)']]],
   ['rect_214',['rect',['../structecs_1_1component_1_1_drawable.html#a6da712d36460fc432f00cdb278d5121b',1,'ecs::component::Drawable']]],
   ['referencetype_215',['referenceType',['../classecs_1_1_sparse_array.html#a204812c0707a2ff60c541d7a53346472',1,'ecs::SparseArray']]],
   ['registercomponent_216',['registerComponent',['../classecs_1_1_registry.html#a62e5024139f23f3f18859e01f70856ba',1,'ecs::Registry']]],
