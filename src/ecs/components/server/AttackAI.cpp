@@ -24,7 +24,7 @@ namespace ecs::component
         ecs::component::Faction::Factions fac = ecs::component::Faction::Factions::None;
         if (shooter < factions.size() && factions[shooter])
             fac = factions[shooter].value().faction;
-        spawnNewBullet(component::EntityType::Bullet, positions[shooter].value().x, positions[shooter].value().y, -1, 0,
+        AttackAI::Action::spawnNewBullet(component::EntityType::Bullet, positions[shooter].value().x, positions[shooter].value().y, -1, 0,
             20, 20, 10, 0, 10, fac);
     }
 
