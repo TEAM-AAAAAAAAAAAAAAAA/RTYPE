@@ -54,8 +54,11 @@ jobs:
       - name: Run vcpkg
         uses: lukka/run-vcpkg@v4
         with:
-          vcpkgArguments: 'sfml boost-asio boost-thread boost-property-tree'
+          runVcpkgInstall: false
+          vcpkgJsonGlob: '**/vcpkg.json'
+          #          vcpkgArguments: 'sfml boost-asio boost-thread boost-property-tree'
           vcpkgDirectory: '${{ github.workspace }}/vcpkg'
+          vcpkgGitCommitId: '${{ env.VCPKG_COMMIT }}'
 
       - uses: seanmiddleditch/gha-setup-ninja@master
 
