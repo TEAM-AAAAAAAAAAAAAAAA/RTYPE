@@ -51,7 +51,7 @@ ecs::World getGameWorld()
         world.registry.addComponent<ecs::component::Size>(enemy, {32, 64});
         world.registry.addComponent<ecs::component::MovementAI>(enemy, {MovementAI::AIType::Idle});
         world.registry.addComponent<ecs::component::Health>(enemy, {100});
-        world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Enemies});
+        world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Mars});
         world.registry.addComponent<ecs::component::NetworkId>(enemy, {static_cast<size_t>(enemy)});
         world.registry.addComponent<ecs::component::EntityType>(enemy, {ecs::component::EntityType::Types::EnemyBase});
         world.registry.addComponent<ecs::component::Velocity>(enemy, {1, 1});
@@ -65,7 +65,7 @@ ecs::World getGameWorld()
         world.registry.addComponent<ecs::component::Size>(enemy, {32, 64});
         world.registry.addComponent<ecs::component::MovementAI>(enemy, {MovementAI::AIType::QuickUpDown});
         world.registry.addComponent<ecs::component::Health>(enemy, {100});
-        world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Enemies});
+        world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Mars});
         world.registry.addComponent<ecs::component::NetworkId>(enemy, {static_cast<size_t>(enemy)});
         world.registry.addComponent<ecs::component::EntityType>(enemy, {ecs::component::EntityType::Types::EnemyBase});
         world.registry.addComponent<ecs::component::Velocity>(enemy, {1, 1});
@@ -79,7 +79,7 @@ ecs::World getGameWorld()
         world.registry.addComponent<ecs::component::Size>(enemy, {32, 64});
         world.registry.addComponent<ecs::component::MovementAI>(enemy, {MovementAI::AIType::QuickLeftRight});
         world.registry.addComponent<ecs::component::Health>(enemy, {100});
-        world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Enemies});
+        world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Mars});
         world.registry.addComponent<ecs::component::NetworkId>(enemy, {static_cast<size_t>(enemy)});
         world.registry.addComponent<ecs::component::EntityType>(enemy, {ecs::component::EntityType::Types::EnemyBase});
         world.registry.addComponent<ecs::component::Velocity>(enemy, {1, 1});
@@ -93,7 +93,7 @@ ecs::World getGameWorld()
         world.registry.addComponent<ecs::component::Size>(enemy, {32, 64});
         world.registry.addComponent<ecs::component::MovementAI>(enemy, {MovementAI::AIType::LongUpDown});
         world.registry.addComponent<ecs::component::Health>(enemy, {100});
-        world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Enemies});
+        world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Mars});
         world.registry.addComponent<ecs::component::NetworkId>(enemy, {static_cast<size_t>(enemy)});
         world.registry.addComponent<ecs::component::EntityType>(enemy, {ecs::component::EntityType::Types::EnemyBase});
         world.registry.addComponent<ecs::component::Velocity>(enemy, {1, 1});
@@ -107,7 +107,7 @@ ecs::World getGameWorld()
         world.registry.addComponent<ecs::component::Size>(enemy, {32, 64});
         world.registry.addComponent<ecs::component::MovementAI>(enemy, {MovementAI::AIType::LongLeftRight});
         world.registry.addComponent<ecs::component::Health>(enemy, {100});
-        world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Enemies});
+        world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Mars});
         world.registry.addComponent<ecs::component::NetworkId>(enemy, {static_cast<size_t>(enemy)});
         world.registry.addComponent<ecs::component::EntityType>(enemy, {ecs::component::EntityType::Types::EnemyBase});
         world.registry.addComponent<ecs::component::Velocity>(enemy, {1, 1});
@@ -121,7 +121,7 @@ ecs::World getGameWorld()
         world.registry.addComponent<ecs::component::Size>(enemy, {32, 64});
         world.registry.addComponent<ecs::component::MovementAI>(enemy, {MovementAI::AIType::ClockwiseSmall});
         world.registry.addComponent<ecs::component::Health>(enemy, {100});
-        world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Enemies});
+        world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Mars});
         world.registry.addComponent<ecs::component::NetworkId>(enemy, {static_cast<size_t>(enemy)});
         world.registry.addComponent<ecs::component::EntityType>(enemy, {ecs::component::EntityType::Types::EnemyBase});
         world.registry.addComponent<ecs::component::Velocity>(enemy, {1, 1});
@@ -135,7 +135,7 @@ ecs::World getGameWorld()
         world.registry.addComponent<ecs::component::Size>(enemy, {32, 64});
         world.registry.addComponent<ecs::component::MovementAI>(enemy, {MovementAI::AIType::ClockwiseBig});
         world.registry.addComponent<ecs::component::Health>(enemy, {100});
-        world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Enemies});
+        world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Mars});
         world.registry.addComponent<ecs::component::NetworkId>(enemy, {static_cast<size_t>(enemy)});
         world.registry.addComponent<ecs::component::EntityType>(enemy, {ecs::component::EntityType::Types::EnemyBase});
         world.registry.addComponent<ecs::component::Velocity>(enemy, {1, 1});
@@ -149,7 +149,7 @@ ecs::World getGameWorld()
         world.registry.addComponent<ecs::component::Size>(enemy, {32, 64});
         world.registry.addComponent<ecs::component::MovementAI>(enemy, {MovementAI::AIType::AntiClockwiseSmall});
         world.registry.addComponent<ecs::component::Health>(enemy, {100});
-        world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Enemies});
+        world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Mars});
         world.registry.addComponent<ecs::component::NetworkId>(enemy, {static_cast<size_t>(enemy)});
         world.registry.addComponent<ecs::component::EntityType>(enemy, {ecs::component::EntityType::Types::EnemyBase});
         world.registry.addComponent<ecs::component::Velocity>(enemy, {1, 1});
@@ -163,7 +163,7 @@ ecs::World getGameWorld()
         world.registry.addComponent<ecs::component::Size>(enemy, {32, 64});
         world.registry.addComponent<ecs::component::MovementAI>(enemy, {MovementAI::AIType::AntiClockwiseBig});
         world.registry.addComponent<ecs::component::Health>(enemy, {100});
-        world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Enemies});
+        world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Mars});
         world.registry.addComponent<ecs::component::NetworkId>(enemy, {static_cast<size_t>(enemy)});
         world.registry.addComponent<ecs::component::EntityType>(enemy, {ecs::component::EntityType::Types::EnemyBase});
         world.registry.addComponent<ecs::component::Velocity>(enemy, {1, 1});
