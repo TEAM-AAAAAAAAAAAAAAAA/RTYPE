@@ -131,8 +131,8 @@ namespace ecs::systems
         {0, createPlayer}, {utils::constant::PLAYER_MOVE, movePlayer}, {utils::constant::PLAYER_SHOT, playerShoot}};
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
-        while (!network::Server::getIncomingMessages().empty()) {
-            network::ClientMessage msg = network::Server::getIncomingMessages().pop();
+        while (!network::Server::GetReceivedMessages().empty()) {
+            network::ClientMessage msg = network::Server::GetReceivedMessages().pop();
             if (msg.first[0] == 0 || msg.first[0] == utils::constant::PLAYER_MOVE
                 || msg.first[0] == utils::constant::PLAYER_SHOT)
                 packetTypeFunction[msg.first[0]](world, msg);

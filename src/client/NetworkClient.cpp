@@ -1,12 +1,12 @@
 /*
 ** EPITECH PROJECT, 2022
-** RTYPE
+** rtype
 ** File description:
-** NetworkClient
+** Client
 */
 
 #include "NetworkClient.hpp"
 
 namespace network {
-    Client Client::_Instance;
+	Client Client::_Instance;
 }
