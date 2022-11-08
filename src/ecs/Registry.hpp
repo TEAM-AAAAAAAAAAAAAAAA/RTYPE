@@ -4,11 +4,11 @@
 #include <exception>
 #include <functional>
 #include <iostream>
+#include <map>
 #include <typeindex>
 #include "Constant.hpp"
 #include "Entity.hpp"
 #include "SparseArray.hpp"
-#include <unordered_map>
 
 namespace ecs
 {
@@ -77,13 +77,13 @@ namespace ecs
         {
             size_t front;
 
-            // if (_entitiesBin.empty()) {
+            if (_entitiesBin.empty()) {
                 _lastEntity++;
                 return Entity(_lastEntity - 1);
-            // }
-            // front = _entitiesBin.front();
-            // _entitiesBin.erase(_entitiesBin.begin());
-            // return Entity(front);
+            }
+            front = _entitiesBin.front();
+            _entitiesBin.erase(_entitiesBin.begin());
+            return Entity(front);
         }
 
         /**
@@ -158,7 +158,7 @@ namespace ecs
         /**
          * Private member _components_array represents the group of component already registered in the Registry class
          */
-        std::unordered_map<std::type_index, std::any> _componentsArrays;
+        std::map<std::type_index, std::any> _componentsArrays;
 
         /**
          * Private member _eraseFunctions represents self erase function of each component
