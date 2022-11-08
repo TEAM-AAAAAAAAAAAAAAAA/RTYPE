@@ -8,21 +8,21 @@
     },
     {
       "name": "boost-asio",
-      "version>=": "1.75.0"
+      "version>=": "1.80.0"
     },
     {
       "name": "boost-thread",
-      "version>=": "1.75.0"
+      "version>=": "1.80.0"
     },
     {
       "name": "boost-property-tree",
-      "version>=": "1.75.0"
+      "version>=": "1.80.0"
     }
   ],
   "overrides": [
-    { "name":  "boost-asio", "version": "1.75.0"},
-    { "name":  "boost-thread", "version": "1.75.0"},
-    { "name":  "boost-property-tree", "version": "1.75.0"},
+    { "name":  "boost-asio", "version": "1.80.0"},
+    { "name":  "boost-thread", "version": "1.80.0"},
+    { "name":  "boost-property-tree", "version": "1.80.0"},
     { "name":  "sfml", "version": "2.5.1#14"}
   ],
   "builtin-baseline": "57d3194e702a2959e86a6748999ad71fc24f7922"
