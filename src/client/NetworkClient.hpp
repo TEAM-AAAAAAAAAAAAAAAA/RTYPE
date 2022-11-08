@@ -143,6 +143,7 @@ namespace network
                 while (!_socket.is_open())
                     if (!_isStillRunning)
                         return;
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
                 startReceive();
                 while (!_ioService.stopped()) {
                     try {
@@ -160,6 +161,7 @@ namespace network
         void sendOutgoing()
         {
             while (_isStillRunning) {
+                std::this_thread::sleep_for(std::chrono::milliseconds(1000));
                 while (!_socket.is_open())
                     if (!_isStillRunning)
                         return;
