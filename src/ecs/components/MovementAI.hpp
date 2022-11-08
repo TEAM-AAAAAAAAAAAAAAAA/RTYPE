@@ -21,7 +21,7 @@ namespace ecs::component
          *
          * @warning ALL MUST BE CREATED IN MovementAI.cpp
          */
-        enum AIType { Idle, BasicUpDown };
+        enum AIType { Idle, BasicUpDown, ClockwiseSmall, ClockwiseBig };
 
         /**
          * @brief MovementAI constructor
@@ -53,6 +53,20 @@ namespace ecs::component
          */
         inline const short &getDelay() const { return _thisAI.delay; }
 
+        /**
+         * @brief Get the last time the AI entity has moved
+         *
+         * @return the last time the AI has moved
+         */
+        inline const std::size_t &getLastMovement() const { return _thisAI.lastMovement; }
+
+        /**
+         * @brief Set the last time the AI entity has moved
+         * 
+         * @param lastMovement the last time the AI has moved
+         */
+        inline void setLastMovement(const std::size_t &lastMovement) { _thisAI.lastMovement = lastMovement; }
+
       private:
         /**
          * @brief The AI structure where the pattern of the entity is defined
@@ -79,6 +93,7 @@ namespace ecs::component
             std::vector<std::pair<char, char>> direction;
             int currentIndex;
             short delay;
+            std::size_t lastMovement;
         };
 
         AI _thisAI;
