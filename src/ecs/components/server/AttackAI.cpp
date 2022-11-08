@@ -13,18 +13,18 @@ namespace ecs::component
 {
     void AttackAI::Action::shootBulletAttack(const std::size_t shooter)
     {
-        // auto const &positions = ecs::WorldManager::getWorld().registry.getComponents<component::Position>();
-        // auto const &factions = ecs::WorldManager::getWorld().registry.getComponents<component::Faction>();
+        auto const &positions = ecs::WorldManager::getWorld().registry.getComponents<component::Position>();
+        auto const &factions = ecs::WorldManager::getWorld().registry.getComponents<component::Faction>();
 
-        // if (!(shooter < positions.size()))
-        //     return;
-        // if (!(positions[shooter]))
-        //     return;
-        // ecs::component::Faction::Factions fac = ecs::component::Faction::Factions::None;
-        // if (shooter < factions.size() && factions[shooter])
-        //     fac = factions[shooter].value().faction;
-        // spawnNewBullet(component::EntityType::Bullet, positions[shooter].value().x, positions[shooter].value().y, -1,
-        // 0, 20, 20, 10, 0, 10, fac);
+        if (!(shooter < positions.size()))
+            return;
+        if (!(positions[shooter]))
+            return;
+        ecs::component::Faction::Factions fac = ecs::component::Faction::Factions::None;
+        if (shooter < factions.size() && factions[shooter])
+            fac = factions[shooter].value().faction;
+        spawnNewBullet(component::EntityType::Bullet, positions[shooter].value().x, positions[shooter].value().y, -1,
+        0, 20, 20, 10, 0, 10, fac);
     }
 
     void AttackAI::Action::shootEnerySphereAttack(const std::size_t shooter)
