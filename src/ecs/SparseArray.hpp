@@ -84,7 +84,6 @@ namespace ecs
 
         referenceType insertAt(sizeType pos, Component const &c)
         {
-            std::cout << pos << " " << _data.capacity() << " " << _data.size() << std::endl;
             if (pos >= _data.size())
                 _data.resize(pos + 1, std::nullopt);
             _data.at(pos) = c;

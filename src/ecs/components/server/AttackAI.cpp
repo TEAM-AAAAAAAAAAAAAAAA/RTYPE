@@ -3,6 +3,7 @@
 #include "components/Direction.hpp"
 #include "components/EntityType.hpp"
 #include "components/Faction.hpp"
+#include "components/Health.hpp"
 #include "components/NetworkId.hpp"
 #include "components/Position.hpp"
 #include "components/Size.hpp"
@@ -23,25 +24,24 @@ namespace ecs::component
         ecs::component::Faction::Factions fac = ecs::component::Faction::Factions::None;
         if (shooter < factions.size() && factions[shooter])
             fac = factions[shooter].value().faction;
-        spawnNewBullet(component::EntityType::Bullet, positions[shooter].value().x, positions[shooter].value().y, -1,
-        0, 20, 20, 10, 0, 10, fac);
+        spawnNewBullet(component::EntityType::Bullet, positions[shooter].value().x, positions[shooter].value().y, -1, 0,
+            20, 20, 10, 0, 10, fac);
     }
 
     void AttackAI::Action::shootEnerySphereAttack(const std::size_t shooter)
     {
-        // auto const &positions = ecs::WorldManager::getWorld().registry.getComponents<component::Position>();
-        // auto const &factions = ecs::WorldManager::getWorld().registry.getComponents<component::Faction>();
+        auto const &positions = ecs::WorldManager::getWorld().registry.getComponents<component::Position>();
+        auto const &factions = ecs::WorldManager::getWorld().registry.getComponents<component::Faction>();
 
-        // if (!(shooter < positions.size()))
-        //     return;
-        // if (!(positions[shooter]))
-        //     return;
-        // ecs::component::Faction::Factions fac = ecs::component::Faction::Factions::None;
-        // if (shooter < factions.size() && factions[shooter])
-        //     fac = factions[shooter].value().faction;
-        // spawnNewBullet(component::EntityType::EnergySphere, positions[shooter].value().x,
-        // positions[shooter].value().y,
-        //     -1, 0, 50, 50, 5, 0, 50, fac);
+        if (!(shooter < positions.size()))
+            return;
+        if (!(positions[shooter]))
+            return;
+        ecs::component::Faction::Factions fac = ecs::component::Faction::Factions::None;
+        if (shooter < factions.size() && factions[shooter])
+            fac = factions[shooter].value().faction;
+        spawnNewBullet(component::EntityType::EnergySphere, positions[shooter].value().x, positions[shooter].value().y,
+            -1, 0, 50, 50, 5, 0, 50, fac);
     }
 
     void AttackAI::Action::spawnNewBullet(component::EntityType::Types type, int posX, int posY, char dirX, char dirY,

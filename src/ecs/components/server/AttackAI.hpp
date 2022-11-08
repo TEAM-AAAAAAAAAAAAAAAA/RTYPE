@@ -103,7 +103,6 @@ namespace ecs::component
         const AttackAI::AI::Pattern &getRandomAttack() const
         {
             int attack = std::rand() % _thisAI.getPatterns().size();
-            std::cout << "AI chose attack: " << attack << std::endl;
             return AI::patterns.at(static_cast<PatternType>(attack));
         }
 
