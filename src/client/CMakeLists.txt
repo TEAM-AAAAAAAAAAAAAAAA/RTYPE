@@ -33,7 +33,9 @@ target_include_directories(${TARGET} PRIVATE
 )
 
 if (NOT WIN32)
-    target_compile_options(${TARGET} PRIVATE "-ldl")
+    target_link_libraries(${TARGET} PRIVATE
+        dl
+    )
 endif()
 
 set_target_properties(${TARGET} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
