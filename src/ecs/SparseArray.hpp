@@ -84,25 +84,26 @@ namespace ecs
 
         referenceType insertAt(sizeType pos, Component const &c)
         {
-            if (pos >= _data.capacity())
+            std::cout << pos << " " << _data.capacity() << " " << _data.size() << std::endl;
+            if (pos >= _data.size())
                 _data.resize(pos + 1, std::nullopt);
-            _data.emplace(_data.begin() + pos, c);
+            _data.at(pos) = c;
             return _data[pos];
         }
 
         referenceType insertAt(sizeType pos, Component &&c)
         {
-            if (pos >= _data.capacity())
+            if (pos >= _data.size())
                 _data.resize(pos + 1, std::nullopt);
-            _data.emplace(_data.begin() + pos, std::move(c));
+            _data.at(pos) = c;
             return _data[pos];
         }
 
         template <class... Params> referenceType emplaceAt(sizeType pos, Params &&...args)
         {
-            if (pos >= _data.capacity())
+            if (pos >= _data.size())
                 _data.resize(pos + 1, std::nullopt);
-            _data.emplace(_data.begin() + pos, Component(args...));
+            _data.at(pos) = Component(args...);
             return _data[pos];
         }
 
