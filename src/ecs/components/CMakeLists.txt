@@ -1,8 +1,6 @@
 set(INCROOT ${PROJECT_SOURCE_DIR}/src/ecs/components)
 set(SRCROOT ${PROJECT_SOURCE_DIR}/src/ecs/components)
 
-# add_subdirectory(server)
-
 set(COMPONENTS_SRC
     ${SRCROOT}/server/AttackAI.hpp
     ${SRCROOT}/server/AttackAI.cpp
