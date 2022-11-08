@@ -21,7 +21,7 @@ namespace ecs::component
          *
          * @warning ALL MUST BE CREATED IN MovementAI.cpp
          */
-        enum AIType { Idle, BasicUpDown, ClockwiseSmall, ClockwiseBig };
+        enum AIType { Idle, QuickUpDown, LongUpDown, QuickLeftRight, LongLeftRight, ClockwiseSmall, ClockwiseBig, AntiClockwiseSmall, AntiClockwiseBig };
 
         /**
          * @brief MovementAI constructor
