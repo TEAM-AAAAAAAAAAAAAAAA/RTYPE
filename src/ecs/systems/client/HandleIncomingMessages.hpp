@@ -285,8 +285,7 @@ namespace ecs::systems
                 break;
 #pragma endregion
             case component::EntityType::Types::NoodleMonster:
-                world.registry.addComponent<component::Drawable>(
-                    newEntity, {"noodle-monster" /*, {0, 0, 1280, 1027}*/});
+                world.registry.addComponent<component::Drawable>(newEntity, {"noodle-monster"});
                 world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
                 break;
             case component::EntityType::Types::Bullet:
