@@ -9,6 +9,7 @@
 
 #include "World.hpp"
 #include "SFML/Graphics.hpp"
+#include "../../../client/GetWorld.hpp"
 
 namespace ecs::systems
 {
@@ -28,19 +29,18 @@ namespace ecs::systems
           if (draw && pos && size) {
               if ((mousePosition.x >= pos->x && mousePosition.x <= pos->x + size->width) && (mousePosition.y >= pos->y && mousePosition.y <= pos->y + size->height) && draw->IsButton) {
                   draw->rect.top = itHoveredButton->second.rectTop;
-                  if (draw->rect.left == 324) {
-//                      if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-//                          ecs::WorldManager::setWaitingWorld([] { return getGameWorld("8000", "localhost"); });
+                  if (draw->rect.left == 324)
                       draw->rect.left = 220;
-                  } else if (draw->rect.left == 3651) {
-//                      if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-//                              ;
+                  else if (draw->rect.left == 3651)
                       draw->rect.left = 3542;
-                  } else if (draw->rect.left == 4760) {
+                  else if (draw->rect.left == 4760)
+                      draw->rect.left = 4670;
+                  if (draw->rect.left == 220)
+                      if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+                          ecs::WorldManager::setWaitingWorld([] { return getGameWorld("8000", "localhost"); });
+                  if (draw->rect.left == 4670)
                       if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
                           utils::Window::getInstance().close();
-                      draw->rect.left = 4670;
-                  }
                   draw->rect.width = itHoveredButton->second.defaultRectWidth;
                   draw->rect.height = itHoveredButton->second.defaultRectHeight;
                   draw->hovered = true;
