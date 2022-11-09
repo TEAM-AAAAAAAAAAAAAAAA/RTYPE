@@ -106,7 +106,7 @@ namespace ecs::systems
                 break;
             case component::EntityType::Types::Bullet:
                 world.registry.addComponent<component::Drawable>(newEntity,
-                    {"bullet", {10, 7, 12, 19},
+                    {"bullet", {10, 7, 12, 19}, true, false,
                         std::atan2(static_cast<float>(dirX), static_cast<float>(dirY)) * 180 / 3.14159265359f});
                 world.registry.addComponent<component::Animated>(newEntity,
                     {AnimFrame(10, 7, 12, 19, 100), AnimFrame(42, 7, 12, 19, 100), AnimFrame(74, 7, 12, 19, 100),
@@ -115,7 +115,7 @@ namespace ecs::systems
                 break;
             case component::EntityType::Types::EnergySphere:
                 world.registry.addComponent<component::Drawable>(newEntity,
-                    {"energy-sphere", {0, 0, 32, 32},
+                    {"energy-sphere", {0, 0, 32, 32}, true, false,
                         std::atan2(static_cast<float>(dirX), static_cast<float>(dirY)) * 180 / 3.14159265359f});
                 world.registry.addComponent<component::Animated>(newEntity,
                     {AnimFrame(0, 0, 32, 32, 100), AnimFrame(32, 0, 32, 32, 100), AnimFrame(64, 0, 32, 32, 100),

@@ -20,6 +20,7 @@ namespace ecs::systems
         static bool executed = false;
 
         if (!executed) {
+            std::cout << "BONJOUR\n";
             network::Message msg;
             msg.fill(0);
             network::Client::connect();

@@ -150,6 +150,7 @@ namespace network
                 try {
                     auto message = ClientMessage(std::array(_recvBuffer), getOrCreateClientID(_remoteEndpoint));
                     if (!message.first.empty()) {
+                        std::cout << "New connection\n";
                         _receivedMessages.push(message);
                         for (const auto &c : message.first) {}
                     }
