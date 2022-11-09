@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 option(BUILD_TEST_SUITE OFF)
 option(ENABLE_CODE_COVERAGE OFF)
 
-set(SFML_DIR ${PROJECT_SOURCE_DIR}/vcpkg/installed/x64-windows-dynamic/share/sfml)
+#set(SFML_DIR ${PROJECT_SOURCE_DIR}/vcpkg/installed/x64-windows-dynamic/share/sfml)
 
 #if (COMPILER_TYPE MATCHES "msvc")
 #     message(STATUS "Using static SFML libraries")
