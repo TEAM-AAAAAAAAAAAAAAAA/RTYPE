@@ -20,8 +20,12 @@ add_executable(${TARGET} ${SRC})
 
 target_link_libraries(${TARGET} PRIVATE
     sfml-graphics sfml-window sfml-audio sfml-system
-    Boost::boost pthread ${CMAKE_DL_LIBS}
+    Boost::boost ${CMAKE_DL_LIBS}
 )
+
+if (NOT WIN32)
+    target_link_libraries(${TARGET} PRIVATE pthread)
+endif()
 
 target_include_directories(${TARGET}
 PRIVATE ${ECS_INCROOT} 
