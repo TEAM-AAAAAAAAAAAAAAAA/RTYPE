@@ -95,6 +95,7 @@ namespace ecs::systems
                         AnimFrame(100, 1, 32, 16, 100), AnimFrame(133, 1, 32, 16, 100), AnimFrame(100, 1, 32, 16, 100),
                         AnimFrame(67, 1, 32, 16, 100), AnimFrame(34, 1, 32, 16, 100)});
                 break;
+#pragma region uranus ships
             case component::EntityType::Types::UranusBattlecruiser:
                 world.registry.addComponent<component::Drawable>(newEntity, {"uranus-battlecruiser", {11, 26, 92, 76}});
                 world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
@@ -154,6 +155,8 @@ namespace ecs::systems
                         AnimFrame(14, 834, 30, 60, 100), AnimFrame(14, 898, 30, 60, 100),
                         AnimFrame(14, 962, 30, 60, 100)});
                 break;
+#pragma endregion
+#pragma region janitor ships
             case component::EntityType::Types::JanitorBattlecruiser:
                 world.registry.addComponent<component::Drawable>(
                     newEntity, {"janitor-battlecruiser", {12, 31, 90, 66}});
@@ -220,6 +223,8 @@ namespace ecs::systems
                         AnimFrame(17, 580, 32, 56, 100), AnimFrame(17, 644, 32, 56, 100),
                         AnimFrame(17, 708, 32, 56, 100)});
                 break;
+#pragma endregion
+#pragma region alien ships
             case component::EntityType::Types::AlienBattlecruiser:
                 world.registry.addComponent<component::Drawable>(newEntity, {"alien-battlecruiser", {18, 26, 94, 76}});
                 world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
@@ -278,6 +283,7 @@ namespace ecs::systems
                         AnimFrame(16, 834, 30, 60, 100), AnimFrame(16, 898, 30, 60, 100),
                         AnimFrame(16, 962, 30, 60, 100)});
                 break;
+#pragma endregion
             case component::EntityType::Types::Bullet:
                 world.registry.addComponent<component::Drawable>(newEntity,
                     {"bullet", {10, 7, 12, 19},
