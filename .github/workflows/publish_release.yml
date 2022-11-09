@@ -22,14 +22,12 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        platform: [ windows-latest, ubuntu-latest, macos-latest ]
+        platform: [ windows-latest, ubuntu-latest ]
         include:
           - platform: windows-latest
             triplet: x64-windows
           - platform: ubuntu-latest
-            triplet: x64-linux
-          - platform: macos-latest
-            triplet: x64-osx
+            triplet: x64-linux-dynamic
     runs-on: ${{ matrix.platform }}
     env:
         VCPKG_DEFAULT_TRIPLET: ${{ matrix.triplet }}
@@ -85,6 +83,8 @@ jobs:
                 -B build
                 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
                 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_TOOLCHAIN_PATH}
+                -DBoost_NO_SYSTEM_PATHS=ON
+                -DBOOST_ROOT=${{ github.workspace }}/vcpkg/installed/${{ matrix.triplet }}
               RESULT_VARIABLE result
             )
           endif()
