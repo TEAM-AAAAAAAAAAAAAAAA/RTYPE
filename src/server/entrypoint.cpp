@@ -109,7 +109,63 @@ ecs::World getGameWorld()
         world.registry.addComponent<ecs::component::Health>(enemy, {25});
         world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Uranus});
         world.registry.addComponent<ecs::component::NetworkId>(enemy, {static_cast<size_t>(enemy)});
-        world.registry.addComponent<ecs::component::EntityType>(enemy, {ecs::component::EntityType::Types::UranusScout});
+        world.registry.addComponent<ecs::component::EntityType>(enemy, {ecs::component::EntityType::Types::JanitorFighter});
+        world.registry.addComponent<ecs::component::Velocity>(enemy, {5, 5});
+        world.registry.addComponent<ecs::component::AttackAI>(enemy, {AttackAI::AIType::Scout});
+    }
+
+    {
+        ecs::Entity enemy = world.registry.spawn_entity();
+        world.registry.addComponent<ecs::component::Position>(enemy, {650, 700});
+        world.registry.addComponent<ecs::component::Direction>(enemy, {0, 0});
+        world.registry.addComponent<ecs::component::Size>(enemy, {32, 32});
+        world.registry.addComponent<ecs::component::MovementAI>(enemy, {MovementAI::AIType::LongLeftRight});
+        world.registry.addComponent<ecs::component::Health>(enemy, {25});
+        world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Uranus});
+        world.registry.addComponent<ecs::component::NetworkId>(enemy, {static_cast<size_t>(enemy)});
+        world.registry.addComponent<ecs::component::EntityType>(enemy, {ecs::component::EntityType::Types::JanitorBattlecruiser});
+        world.registry.addComponent<ecs::component::Velocity>(enemy, {5, 5});
+        world.registry.addComponent<ecs::component::AttackAI>(enemy, {AttackAI::AIType::Scout});
+    }
+
+    {
+        ecs::Entity enemy = world.registry.spawn_entity();
+        world.registry.addComponent<ecs::component::Position>(enemy, {700, 650});
+        world.registry.addComponent<ecs::component::Direction>(enemy, {0, 0});
+        world.registry.addComponent<ecs::component::Size>(enemy, {32, 32});
+        world.registry.addComponent<ecs::component::MovementAI>(enemy, {MovementAI::AIType::LongLeftRight});
+        world.registry.addComponent<ecs::component::Health>(enemy, {25});
+        world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Uranus});
+        world.registry.addComponent<ecs::component::NetworkId>(enemy, {static_cast<size_t>(enemy)});
+        world.registry.addComponent<ecs::component::EntityType>(enemy, {ecs::component::EntityType::Types::JanitorDreadnought});
+        world.registry.addComponent<ecs::component::Velocity>(enemy, {5, 5});
+        world.registry.addComponent<ecs::component::AttackAI>(enemy, {AttackAI::AIType::Scout});
+    }
+
+    {
+        ecs::Entity enemy = world.registry.spawn_entity();
+        world.registry.addComponent<ecs::component::Position>(enemy, {700, 700});
+        world.registry.addComponent<ecs::component::Direction>(enemy, {0, 0});
+        world.registry.addComponent<ecs::component::Size>(enemy, {32, 32});
+        world.registry.addComponent<ecs::component::MovementAI>(enemy, {MovementAI::AIType::LongLeftRight});
+        world.registry.addComponent<ecs::component::Health>(enemy, {25});
+        world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Uranus});
+        world.registry.addComponent<ecs::component::NetworkId>(enemy, {static_cast<size_t>(enemy)});
+        world.registry.addComponent<ecs::component::EntityType>(enemy, {ecs::component::EntityType::Types::JanitorFrigate});
+        world.registry.addComponent<ecs::component::Velocity>(enemy, {5, 5});
+        world.registry.addComponent<ecs::component::AttackAI>(enemy, {AttackAI::AIType::Scout});
+    }
+
+    {
+        ecs::Entity enemy = world.registry.spawn_entity();
+        world.registry.addComponent<ecs::component::Position>(enemy, {750, 750});
+        world.registry.addComponent<ecs::component::Direction>(enemy, {0, 0});
+        world.registry.addComponent<ecs::component::Size>(enemy, {32, 32});
+        world.registry.addComponent<ecs::component::MovementAI>(enemy, {MovementAI::AIType::LongLeftRight});
+        world.registry.addComponent<ecs::component::Health>(enemy, {25});
+        world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Uranus});
+        world.registry.addComponent<ecs::component::NetworkId>(enemy, {static_cast<size_t>(enemy)});
+        world.registry.addComponent<ecs::component::EntityType>(enemy, {ecs::component::EntityType::Types::JanitorTorpedo});
         world.registry.addComponent<ecs::component::Velocity>(enemy, {5, 5});
         world.registry.addComponent<ecs::component::AttackAI>(enemy, {AttackAI::AIType::Scout});
     }
@@ -123,7 +179,7 @@ ecs::World getGameWorld()
         world.registry.addComponent<ecs::component::Health>(enemy, {25});
         world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Uranus});
         world.registry.addComponent<ecs::component::NetworkId>(enemy, {static_cast<size_t>(enemy)});
-        world.registry.addComponent<ecs::component::EntityType>(enemy, {ecs::component::EntityType::Types::UranusScout});
+        world.registry.addComponent<ecs::component::EntityType>(enemy, {ecs::component::EntityType::Types::JanitorScout});
         world.registry.addComponent<ecs::component::Velocity>(enemy, {5, 5});
         world.registry.addComponent<ecs::component::AttackAI>(enemy, {AttackAI::AIType::Scout});
     }
@@ -137,7 +193,7 @@ ecs::World getGameWorld()
         world.registry.addComponent<ecs::component::Health>(enemy, {25});
         world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Uranus});
         world.registry.addComponent<ecs::component::NetworkId>(enemy, {static_cast<size_t>(enemy)});
-        world.registry.addComponent<ecs::component::EntityType>(enemy, {ecs::component::EntityType::Types::UranusScout});
+        world.registry.addComponent<ecs::component::EntityType>(enemy, {ecs::component::EntityType::Types::AlienScout});
         world.registry.addComponent<ecs::component::Velocity>(enemy, {5, 5});
         world.registry.addComponent<ecs::component::AttackAI>(enemy, {AttackAI::AIType::Scout});
     }
