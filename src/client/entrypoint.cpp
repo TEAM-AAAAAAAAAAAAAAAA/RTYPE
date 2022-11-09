@@ -152,8 +152,8 @@ ecs::World getGameWorld()
 int main()
 {
     asset::AssetLoader::LoadIniFile(asset::AssetLoader::smartPath("assets", "config.ini"));
-	audio::AudioManager::playSFX("startup");
-	audio::AudioManager::loadBGM("roll");
+	audio::AudioManager::playSFX("splash_screen");
+	audio::AudioManager::loadBGM("bgm1");
 	audio::AudioManager::playBGM(true);
     network::Client::setHost("localhost");
     network::Client::setPort("8000");
