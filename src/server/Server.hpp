@@ -26,51 +26,92 @@ namespace network
     class Server {
       public:
         /**
-         * Destroy the Server object and join all thread pools
+         * Default destructor of the server Class, stopping the ioService & make all the threads join
          */
-        ~Server();
+        ~Server()
+        {
+            _ioService.stop();
+            _serviceThread.join();
+            _outgoingService.join();
+            _socket.close();
+        }
 
         /**
          * This function allows us to check if the server has received messages
          *@return true if there are messages
          */
-        static bool hasMessages();
+        static bool hasMessages() { return !_Instance._receivedMessages.empty(); };
 
         /**
-         * This function sends a message to a client determined by his ID
-         * @param message the message to send
-         * @param clientID the ID of the client
+         * Used to send a message to a client given as parameter
+         * @param message The message you want to send
+         * @param clientID The id of the client you want to communicate with
          */
-        static void sendToClient(const Message &message, uint32_t clientID);
+        static void sendToClient(const Message &message, uint32_t clientID)
+        {
+            try {
+                _Instance.send(message, _Instance._clients.at(clientID));
+            } catch (std::out_of_range) {
+                std::cerr << "sendToClient : Unknown client ID " << clientID << std::endl;
+            }
+        }
 
         /**
-         * Send a message to all clients that have connected to the server
-         *@param message the message to send
+         * Used to send a message to every available clients
+         * @param message The message you want to send
          */
-        static void sendToAll(const Message &message);
+        static void sendToAll(const Message &message)
+        {
+            for (auto client : _Instance._clients)
+                _Instance.send(message, client.second);
+        }
 
         /**
          * Get the amount of clients that are connected
          * @return Amount of connected clients
          */
-        static size_t getClientCount();
+        static size_t getClientCount() { return _Instance._clients.size(); }
 
         /**
          * Get the ID of client from the clients array
          * @param index the index for the array
          * @return client ID of client n
          */
-        static uint32_t getClientIdByIndex(size_t index);
+        static uint32_t getClientIdByIndex(size_t index)
+        {
+            auto it = _Instance._clients.begin();
+            for (int i = 0; i < index; i++)
+                ++it;
+            return it->first;
+        }
 
-        static LockedQueue<ServerMessage> &getOutgoingMessages();
+        static inline void start(unsigned short localPort)
+        {
+            if (_Instance._isRunning)
+                return;
+            _Instance._socket = udp::socket(_Instance._ioService, udp::endpoint(udp::v4(), localPort));
+            _Instance._isRunning = true;
+            std::cerr << "Server started on port " << localPort << std::endl;
+        }
 
-        static LockedQueue<ClientMessage> &getIncomingMessages();
+        /**
+         * Getters & Setters of the Server Class
+         */
+
+        static LockedQueue<ServerMessage> &getOutgoingMessages() { return _Instance._outgoingMessages; }
+
+        static LockedQueue<ClientMessage> &GetReceivedMessages() { return _Instance._receivedMessages; }
 
       private:
         /**
          * Locked queue of all unprocessed incoming messages
          */
         LockedQueue<ServerMessage> _outgoingMessages;
+
+        /**
+         * Locked queue of all unprocessed received messages
+         */
+        LockedQueue<ClientMessage> _receivedMessages;
 
         /**
          * All network related variables
@@ -85,69 +126,113 @@ namespace network
          * Threads used by the server class
          */
         std::thread _serviceThread;
-        std::thread _outgoingThread;
-
-        /**
-         * Locked queue of all unprocessed incoming messages
-         */
-        LockedQueue<ClientMessage> _incomingMessages;
+        std::thread _outgoingService;
 
         /**
          * Starts the reception of messages for the server
          */
-        void startReceive();
+        void startReceive()
+        {
+            _recvBuffer.fill(0);
+            _socket.async_receive_from(boost::asio::buffer(_recvBuffer), _remoteEndpoint,
+                [this](std::error_code ec, std::size_t bytesRecvd) { this->handleReceive(ec, bytesRecvd); });
+        }
 
         /**
-         * Handling of error from sending/receiving
-         * @param errorCode the code of the error being handled
-         * @param remoteEndpoint the endpoint where the error occured
+         * Used to push incoming messages in _receivedMessages array if no error occurs, display the message of the
+         * error otherwise
+         * @param error
+         * @param bytesTransferred
          */
-        void handleRemoteError(const std::error_code errorCode, const udp::endpoint& endpoint);
+        void handleReceive(const std::error_code &error, std::size_t bytesTransferred)
+        {
+            if (!error) {
+                try {
+                    auto message = ClientMessage(std::array(_recvBuffer), getOrCreateClientID(_remoteEndpoint));
+                    if (!message.first.empty()) {
+                        _receivedMessages.push(message);
+                        for (const auto &c : message.first) {}
+                    }
+                } catch (std::exception ex) {
+                    std::cerr << "handleReceive: Error parsing incoming message:" << ex.what() << std::endl;
+                } catch (...) {
+                    std::cerr << "handleReceive: Unknown error while parsing incoming message" << std::endl;
+                    ;
+                }
+            } else {
+                std::cerr << "handleReceive: error: " << error.message() << " while receiving from address "
+                          << _remoteEndpoint << std::endl;
+            }
+            startReceive();
+        }
 
         /**
-         * Handles the incoming messages by placing them into the incoming
-         * messages locked queue
-         * @param error error of reception
-         * @param bytesTransferred the size of the incoming packet
+         * Main function of the communication between server and clients, catch and throw errors if any
          */
-        void handleReceive(const std::error_code &error, std::size_t bytesTransferred);
+        void receiveIncoming()
+        {
+            while (!_isRunning) {
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            }
+            startReceive();
+            while (!_ioService.stopped()) {
+                try {
+                    _ioService.run();
+                } catch (const std::exception &e) {
+                    std::cerr << "Server: Network exception: " << e.what() << std::endl;
+                } catch (...) {
+                    std::cerr << "Server: Network exception: unknown" << std::endl;
+                }
+            }
+            std::cerr << "Server network thread stopped" << std::endl;
+        }
 
         /**
-         * Handles the sending of packets
-         * @param message the packet as an array
-         * @param error error code of sending
-         * @param bytesTransferred the size of the outgoing packet
+         * Used to get the id of the client given as parameter if it exists, creating it otherwise
+         * @param endpoint The given client id
+         * @return The id of the client
          */
-        void handleSend(Message message, const std::error_code &error, std::size_t bytesTransferred) {}
+        int32_t getOrCreateClientID(udp::endpoint endpoint)
+        {
+            for (const auto &client : _clients)
+                if (client.second == endpoint)
+                    return client.first;
+
+            auto id = ++_nextClientID;
+            _clients.insert(Client(id, endpoint));
+            return id;
+        }
 
         /**
-         * Run the server's service
+         * Send a specified message to a specified client
+         * @param message  The message to send
+         * @param endpoint The client you want to communicate with
          */
-        void runService();
+        void send(const Message &message, udp::endpoint endpoint)
+        {
+            _socket.async_send_to(
+                boost::asio::buffer(message), endpoint, [](std::error_code ec, std::size_t bytesRecvd) {});
+        }
 
         /**
-         *Get the or create client id object
-         * @param endpoint endpoint of the client
-         * @return int32_t the ID of the client
+         * Used to send message to clients with the outgoingMessages array isn't empty
          */
-        int32_t getOrCreateClientID(udp::endpoint endpoint);
-
-        /**
-         * Send message to the endpoint
-         * @param message message as an array
-         * @param target endpoint of the receiving client
-         */
-        void send(const Message &message, udp::endpoint target);
-
-        /**
-         * Interpret incoming messages
-         */
-        void interpretIncoming();
-
-        /**
-         * Send messages in the outgoing message queue
-         */
-        [[noreturn]] void sendOutgoing();
+        [[noreturn]] void sendOutgoing()
+        {
+            while (!_isRunning) {
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            }
+            while (!_ioService.stopped()) {
+                if (!_outgoingMessages.empty()) {
+                    ServerMessage message = _outgoingMessages.pop();
+                    if (message.second.empty())
+                        sendToAll(message.first);
+                    else
+                        for (auto &client : message.second)
+                            sendToClient(message.first, client);
+                }
+            }
+        }
 
         /**
          *  Clients of the server
@@ -156,10 +241,18 @@ namespace network
         int _nextClientID;
 
         /**
-         * Constructor which runs a thread for handling server inputs
-         * @param localPort the port on which the server runs
+         * Used to know if the server is running or not
          */
-        Server(unsigned short localPort = 8000);
+        bool _isRunning;
+
+        /**
+         * Default Constructor of the Server Class, initializing every part of it, socket, endpointk,
+         * serviceThread, _nextClientID, _outgoingService
+         * @param localPort The open localPort of the server
+         */
+        Server()
+            : _socket(_ioService), _isRunning(false), _serviceThread(&network::Server::receiveIncoming, this),
+              _nextClientID(0L), _outgoingService(&network::Server::sendOutgoing, this){};
 
         static Server _Instance;
     };
