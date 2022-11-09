@@ -70,14 +70,31 @@ static void addGameSystems(ecs::World &world)
     world.addSystem(ecs::systems::score);
 }
 
-static void setGameTexts(ecs::World &world)
+static void setGameHUD(ecs::World &world)
 {
     ecs::Entity textScore = world.registry.spawn_entity();
+    // ecs::Entity textHealth = world.registry.spawn_entity();
+    ecs::Entity health = world.registry.spawn_entity();
+    ecs::Entity healthBar = world.registry.spawn_entity();
 
     world.registry.addComponent<ecs::component::Position>(textScore, {10, 10});
     world.registry.addComponent<ecs::component::Size>(textScore, {60, 60});
     world.registry.addComponent<ecs::component::Text>(textScore, ecs::component::Text("Score: ", "nasa"));
+
+    // world.registry.addComponent<ecs::component::Position>(textHealth, {10, 70});
+    // world.registry.addComponent<ecs::component::Size>(textHealth, {60, 60});
+    // world.registry.addComponent<ecs::component::Text>(textHealth, ecs::component::Text("Health: ", "nasa"));
+
+    world.registry.addComponent<ecs::component::Position>(health, {6, 900});
+    world.registry.addComponent<ecs::component::Size>(health, {100, 400});
+    world.registry.addComponent<ecs::component::Drawable>(health, {"menu", {3475, 844, 1011, 256}});
+
+    world.registry.addComponent<ecs::component::Position>(healthBar, {118, 922});
+    world.registry.addComponent<ecs::component::Size>(healthBar, {50, 282});
+    world.registry.addComponent<ecs::component::Drawable>(healthBar, {"menu", {3767, 719, 714, 97}});
+    world.registry.addComponent<ecs::component::Health>(healthBar, {utils::constant::maxPlayerHealth});
 }
+
 static void setGameParallax(ecs::World &world)
 {
     using AnimFrame = ecs::component::Animated::AnimFrame;
@@ -166,7 +183,7 @@ ecs::World getGameWorld(/*const std::string &port, const std::string &host*/)
     registerComponents(world);
     addGameSystems(world);
     setGameParallax(world);
-    setGameTexts(world);
+    setGameHUD(world);
     network::Client::getOutgoingMessages().push(msg);
     return world;
 }

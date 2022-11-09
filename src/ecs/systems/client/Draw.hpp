@@ -14,6 +14,7 @@
 #include "World.hpp"
 #include "components/Position.hpp"
 #include "components/Size.hpp"
+#include "components/Health.hpp"
 #include "components/client/Animated.hpp"
 #include "components/client/Drawable.hpp"
 #include "components/client/Hitbox.hpp"
@@ -26,13 +27,14 @@ namespace ecs::systems
      */
     std::function<void(World &)> draw = [](World &world) {
         auto const &positions = world.registry.getComponents<component::Position>();
-        auto const &sizes = world.registry.getComponents<component::Size>();
+        auto &sizes = world.registry.getComponents<component::Size>();
         auto const &drawables = world.registry.getComponents<component::Drawable>();
         auto const &animations = world.registry.getComponents<component::Animated>();
         auto const &hitBoxes = world.registry.getComponents<component::Hitbox>();
         auto const &texts = world.registry.getComponents<component::Text>();
+        auto const &healths = world.registry.getComponents<component::Health>();
         utils::Window::getInstance().clear();
-        for (size_t i = 0; i < positions.size() && i < sizes.size() && i < drawables.size() && i < texts.size(); i++) {
+        for (size_t i = 0; i < positions.size() && i < sizes.size() && i < drawables.size(); i++) {
             auto const &pos = positions[i];
             auto const &size = sizes[i];
             auto const &draw = drawables[i];
@@ -87,6 +89,19 @@ namespace ecs::systems
                 sfText.setPosition({static_cast<float>(pos.value().x), static_cast<float>(pos.value().y)});
                 utils::Window::getInstance().draw(sfText);
             }
+        }
+        for (size_t i = 0; i < positions.size() && i < sizes.size() && i < healths.size(); i++) {
+            auto const &pos = positions[i];
+            auto &size = sizes[i];
+            auto const &health = healths[i];
+
+            if (pos && size && health) {
+                if (health->health >= 0)
+                    size.value().width = 282 * health->health / 100;
+                else if (health->health < 0)
+                    size.value().width = 0;
+            }
+
         }
         utils::Window::getInstance().display();
     };

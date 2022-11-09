@@ -22,6 +22,7 @@ namespace utils
         static const std::size_t npos = -1;
         static short mapWidth = 1920;
         static short mapHeight = 1080;
+        static short maxPlayerHealth = 100;
 
         enum PacketType {
             PLAYER_MOVE = 8,
