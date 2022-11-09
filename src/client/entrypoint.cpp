@@ -18,7 +18,7 @@ int main()
     ecs::Engine engine;
     asset::AssetLoader::LoadIniFile(asset::AssetLoader::smartPath("assets", "config.ini"));
     ecs::WorldManager::setWaitingWorld(getMenuWorld);
-
+//    ecs::WorldManager::setWaitingWorld([] { return getGameWorld("8000", "localhost"); });
     engine.run();
     return 0;
 }
