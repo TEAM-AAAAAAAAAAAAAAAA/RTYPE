@@ -1,0 +1,6 @@
+<map id="asset::AssetLoader::GetSFX" name="asset::AssetLoader::GetSFX">
+<area shape="rect" id="node1" title="Get a sound effect object from the map." alt="" coords="316,39,461,80"/>
+<area shape="rect" id="node2" href="$classaudio_1_1_audio_manager.html#ac3974320e61eb1e2ada3ade2bac07306" title="load a sound effect to be played" alt="" coords="108,5,268,47"/>
+<area shape="rect" id="node3" href="$classaudio_1_1_audio_manager.html#ac01493a92b3a76bf9212e12b28167223" title=" " alt="" coords="108,71,268,112"/>
+<area shape="rect" id="node4" href="$client_2entrypoint_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,78,60,105"/>
+</map>

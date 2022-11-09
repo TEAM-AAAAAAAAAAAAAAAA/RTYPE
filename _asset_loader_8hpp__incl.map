@@ -1,12 +1,13 @@
 <map id="src/client/AssetLoader.hpp" name="src/client/AssetLoader.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="437,5,629,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,87,152,114"/>
-<area shape="rect" id="node3" title=" " alt="" coords="176,87,267,114"/>
-<area shape="rect" id="node4" title=" " alt="" coords="291,87,371,114"/>
-<area shape="rect" id="node5" title=" " alt="" coords="395,87,472,114"/>
-<area shape="rect" id="node6" title=" " alt="" coords="496,87,571,114"/>
-<area shape="rect" id="node7" title=" " alt="" coords="595,87,653,114"/>
-<area shape="rect" id="node8" title=" " alt="" coords="678,80,829,121"/>
-<area shape="rect" id="node9" title=" " alt="" coords="853,80,1003,121"/>
-<area shape="rect" id="node10" title=" " alt="" coords="1027,87,1151,114"/>
+<area shape="rect" id="node1" title=" " alt="" coords="538,5,730,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,87,132,114"/>
+<area shape="rect" id="node3" title=" " alt="" coords="157,87,303,114"/>
+<area shape="rect" id="node4" title=" " alt="" coords="327,87,418,114"/>
+<area shape="rect" id="node5" title=" " alt="" coords="442,87,522,114"/>
+<area shape="rect" id="node6" title=" " alt="" coords="546,87,623,114"/>
+<area shape="rect" id="node7" title=" " alt="" coords="647,87,722,114"/>
+<area shape="rect" id="node8" title=" " alt="" coords="746,87,805,114"/>
+<area shape="rect" id="node9" title=" " alt="" coords="829,80,980,121"/>
+<area shape="rect" id="node10" title=" " alt="" coords="1004,80,1155,121"/>
+<area shape="rect" id="node11" title=" " alt="" coords="1179,87,1303,114"/>
 </map>

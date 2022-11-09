@@ -1,0 +1,10 @@
+<map id="asset::AssetLoader::GetBGM" name="asset::AssetLoader::GetBGM">
+<area shape="rect" id="node1" title="Get a background music object from the map." alt="" coords="316,169,461,211"/>
+<area shape="rect" id="node2" href="$classaudio_1_1_audio_manager.html#a023feb4ca83fcc432506ec5f1234df11" title=" " alt="" coords="108,5,268,47"/>
+<area shape="rect" id="node3" href="$classaudio_1_1_audio_manager.html#ad9db14006b01e84f7442791256574a9e" title="load a background music to be played" alt="" coords="108,71,268,112"/>
+<area shape="rect" id="node5" href="$classaudio_1_1_audio_manager.html#a25a646bae0c42cf204ec516e9c1fc828" title=" " alt="" coords="108,136,268,177"/>
+<area shape="rect" id="node6" href="$classaudio_1_1_audio_manager.html#acc9e148ad7ca3b078aabfebeeee18fbc" title=" " alt="" coords="108,201,268,243"/>
+<area shape="rect" id="node7" href="$classaudio_1_1_audio_manager.html#a683ab7aa039fa232acceaa98fd88a7f9" title=" " alt="" coords="108,267,268,308"/>
+<area shape="rect" id="node8" href="$classaudio_1_1_audio_manager.html#ac504f4df750396558cf034c21874d1d2" title=" " alt="" coords="108,332,268,373"/>
+<area shape="rect" id="node4" href="$client_2entrypoint_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,143,60,170"/>
+</map>

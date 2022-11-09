@@ -31,6 +31,7 @@ var NAVTREE =
       [ "<h3 style=\"text-align: center; color:orange\">Worlds</h3>", "index.html#autotoc_md9", null ],
       [ "<h3 style=\"text-align: center; color:orange\">Example</h3>", "index.html#autotoc_md11", null ]
     ] ],
+    [ "Deprecated List", "deprecated.html", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -68,7 +69,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_animate_8hpp.html",
-"classnetwork_1_1_server.html#ad45f59f763b247db82bfc77b9c87af38"
+"classnetwork_1_1_locked_queue.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
