@@ -13,14 +13,14 @@ namespace ecs::component
     static const std::pair<char, char> UP_RIGHT = {1, -1};
 
     const std::unordered_map<MovementAI::AIType, MovementAI::AI> MovementAI::_aiVector({
-        {Idle, MovementAI::AI({{0, 0}}, 100)},
-        {QuickUpDown, MovementAI::AI({UP, DOWN}, 5)},
-        {LongUpDown, MovementAI::AI({UP, DOWN}, 15)},
-        {QuickLeftRight, MovementAI::AI({LEFT, RIGHT}, 5)},
-        {LongLeftRight, MovementAI::AI({LEFT, RIGHT}, 15)},
-        {ClockwiseSmall, MovementAI::AI({DOWN_RIGHT, DOWN_LEFT, UP_LEFT, UP_RIGHT}, 5)},
-        {ClockwiseBig, MovementAI::AI({DOWN_RIGHT, DOWN_LEFT, UP_LEFT, UP_RIGHT}, 15)},
-        {AntiClockwiseSmall, MovementAI::AI({DOWN_LEFT, DOWN_RIGHT, UP_RIGHT, UP_LEFT}, 5)},
-        {AntiClockwiseBig, MovementAI::AI({DOWN_LEFT, DOWN_RIGHT, UP_RIGHT, UP_LEFT}, 15)}
+        {Idle, MovementAI::AI({{0, 0}}, 1000000)},
+        {QuickUpDown, MovementAI::AI({UP, DOWN}, 30)},
+        {LongUpDown, MovementAI::AI({UP, DOWN}, 60)},
+        {QuickLeftRight, MovementAI::AI({LEFT, RIGHT}, 30)},
+        {LongLeftRight, MovementAI::AI({LEFT, RIGHT}, 60)},
+        {ClockwiseSmall, MovementAI::AI({DOWN_RIGHT, DOWN_LEFT, UP_LEFT, UP_RIGHT}, 15)},
+        {ClockwiseBig, MovementAI::AI({DOWN_RIGHT, DOWN_LEFT, UP_LEFT, UP_RIGHT}, 30)},
+        {AntiClockwiseSmall, MovementAI::AI({DOWN_LEFT, DOWN_RIGHT, UP_RIGHT, UP_LEFT}, 15)},
+        {AntiClockwiseBig, MovementAI::AI({DOWN_LEFT, DOWN_RIGHT, UP_RIGHT, UP_LEFT}, 30)}
     });
 }

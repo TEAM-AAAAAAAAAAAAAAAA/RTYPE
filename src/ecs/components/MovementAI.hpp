@@ -51,7 +51,7 @@ namespace ecs::component
          *
          * @return the delay in seconds
          */
-        inline const short &getDelay() const { return _thisAI.delay; }
+        inline const std::size_t &getDelay() const { return _thisAI.delay; }
 
         /**
          * @brief Get the last time the AI entity has moved
@@ -78,7 +78,7 @@ namespace ecs::component
              * @param direction vector that takes pairs of chars
              * @param delay the delay between each step
              */
-            AI(std::vector<std::pair<char, char>> direction, short delay)
+            AI(std::vector<std::pair<char, char>> direction, std::size_t delay)
                 : direction(direction), delay(delay), currentIndex(0)
             {
             }
@@ -92,7 +92,7 @@ namespace ecs::component
 
             std::vector<std::pair<char, char>> direction;
             int currentIndex;
-            short delay;
+            std::size_t delay;
             std::size_t lastMovement;
         };
 

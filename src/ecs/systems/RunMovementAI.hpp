@@ -31,7 +31,7 @@ namespace ecs::systems
             auto &movAI = movementAIs[i];
 
             if (dir && movAI) {
-                if ((chrono::now().time_since_epoch().count() - movAI.value().getLastMovement()) / 100000000
+                if ((chrono::now().time_since_epoch().count() - movAI.value().getLastMovement()) / 10000000
                     > static_cast<size_t>(movAI.value().getDelay())) {
                     auto &tmpDir = movAI.value().getNextDirection();
                     dir.value().x = tmpDir.first;
