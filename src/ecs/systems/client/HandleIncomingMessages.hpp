@@ -214,67 +214,69 @@ namespace ecs::systems
                 world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
                 world.registry.addComponent<ecs::component::Animated>(newEntity,
                     {AnimFrame(17, 4, 32, 56, 100), AnimFrame(17, 68, 32, 56, 100), AnimFrame(17, 132, 32, 56, 100),
-                        AnimFrame(17, 196, 32, 56, 100), AnimFrame(17, 260, 32, 56, 100), AnimFrame(17, 324, 32, 56, 100),
-                        AnimFrame(17, 388, 32, 56, 100), AnimFrame(17, 452, 32, 56, 100), AnimFrame(17, 516, 32, 56, 100),
-                        AnimFrame(17, 580, 32, 56, 100), AnimFrame(17, 644, 32, 56, 100), AnimFrame(17, 708, 32, 56, 100)});
+                        AnimFrame(17, 196, 32, 56, 100), AnimFrame(17, 260, 32, 56, 100),
+                        AnimFrame(17, 324, 32, 56, 100), AnimFrame(17, 388, 32, 56, 100),
+                        AnimFrame(17, 452, 32, 56, 100), AnimFrame(17, 516, 32, 56, 100),
+                        AnimFrame(17, 580, 32, 56, 100), AnimFrame(17, 644, 32, 56, 100),
+                        AnimFrame(17, 708, 32, 56, 100)});
                 break;
             case component::EntityType::Types::AlienBattlecruiser:
-                world.registry.addComponent<component::Drawable>(newEntity, {"alien-battlecruiser", {11, 26, 92, 76}});
+                world.registry.addComponent<component::Drawable>(newEntity, {"alien-battlecruiser", {18, 26, 94, 76}});
                 world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
-                // world.registry.addComponent<ecs::component::Animated>(newEntity,
-                //     {AnimFrame(11, 26, 92, 76, 100), AnimFrame(11, 154, 92, 76, 100), AnimFrame(11, 282, 92, 76,
-                //     100),
-                //         AnimFrame(11, 410, 92, 76, 100), AnimFrame(11, 538, 92, 76, 100),
-                //         AnimFrame(11, 666, 92, 76, 100), AnimFrame(11, 794, 92, 76, 100),
-                //         AnimFrame(11, 922, 92, 76, 100), AnimFrame(11, 1050, 92, 76, 100),
-                //         AnimFrame(11, 1178, 92, 76, 100), AnimFrame(11, 1306, 92, 76, 100)/*,
-                //         AnimFrame(11, 538, 92, 76, 100), AnimFrame(11, 538, 92, 76, 100),
-                //         AnimFrame(11, 538, 92, 76, 100), AnimFrame(11, 538, 92, 76, 100),
-                //         AnimFrame(11, 538, 92, 76, 100), AnimFrame(11, 538, 92, 76, 100),
-                //         AnimFrame(11, 538, 92, 76, 100), AnimFrame(11, 538, 92, 76, 100),
-                //         AnimFrame(11, 538, 92, 76, 100), AnimFrame(11, 538, 92, 76, 100),
-                //         AnimFrame(11, 538, 92, 76, 100), AnimFrame(11, 538, 92, 76, 100),
-                //         AnimFrame(11, 538, 92, 76, 100), AnimFrame(11, 538, 92, 76, 100),
-                //         AnimFrame(11, 538, 92, 76, 100), AnimFrame(11, 538, 92, 76, 100),
-                //         AnimFrame(11, 538, 92, 76, 100), AnimFrame(11, 538, 92, 76, 100)*/});
+                world.registry.addComponent<ecs::component::Animated>(newEntity,
+                    {AnimFrame(18, 26, 94, 76, 100), AnimFrame(18, 154, 94, 76, 100), AnimFrame(18, 282, 94, 76, 100),
+                        AnimFrame(18, 410, 94, 76, 100), AnimFrame(18, 538, 94, 76, 100),
+                        AnimFrame(18, 666, 94, 76, 100), AnimFrame(18, 794, 94, 76, 100),
+                        AnimFrame(18, 922, 94, 76, 100), AnimFrame(18, 1050, 94, 76, 100)});
                 break;
             case component::EntityType::Types::AlienDreadnought:
-                world.registry.addComponent<component::Drawable>(newEntity, {"alien-dreadnought", {11, 26, 104, 76}});
+                world.registry.addComponent<component::Drawable>(newEntity, {"alien-dreadnought", {16, 26, 102, 76}});
                 world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
-                // world.registry.addComponent<ecs::component::Animated>(
-                //     newEntity, {AnimFrame(11, 26, 104, 76, 100), AnimFrame(11, 154, 104, 76, 100)});
+                world.registry.addComponent<ecs::component::Animated>(newEntity,
+                    {AnimFrame(16, 26, 102, 76, 100), AnimFrame(16, 154, 102, 76, 100),
+                        AnimFrame(16, 282, 102, 76, 100), AnimFrame(16, 410, 102, 76, 100),
+                        AnimFrame(16, 538, 102, 76, 100), AnimFrame(16, 666, 102, 76, 100),
+                        AnimFrame(16, 794, 102, 76, 100), AnimFrame(16, 922, 102, 76, 100),
+                        AnimFrame(16, 1050, 102, 76, 100)});
                 break;
             case component::EntityType::Types::AlienFighter:
-                world.registry.addComponent<component::Drawable>(newEntity, {"alien-fighter", {20, 20, 24, 24}});
+                world.registry.addComponent<component::Drawable>(newEntity, {"alien-fighter", {15, 14, 32, 36}});
                 world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
-                // world.registry.addComponent<ecs::component::Animated>(newEntity,
-                //     {AnimFrame(20, 20, 24, 24, 100), AnimFrame(20, 84, 24, 24, 100), AnimFrame(20, 148, 24, 24, 100),
-                //         AnimFrame(20, 212, 24, 24, 100), AnimFrame(20, 276, 24, 24, 100)});
+                world.registry.addComponent<ecs::component::Animated>(newEntity,
+                    {AnimFrame(15, 14, 32, 36, 100), AnimFrame(15, 78, 32, 36, 100), AnimFrame(15, 142, 32, 36, 100),
+                        AnimFrame(15, 206, 32, 36, 100), AnimFrame(15, 270, 32, 36, 100),
+                        AnimFrame(15, 334, 32, 36, 100), AnimFrame(15, 398, 32, 36, 100),
+                        AnimFrame(15, 462, 32, 36, 100), AnimFrame(15, 526, 32, 36, 100)});
                 break;
             case component::EntityType::Types::AlienFrigate:
-                world.registry.addComponent<component::Drawable>(newEntity, {"alien-frigate", {9, 12, 42, 40}});
+                world.registry.addComponent<component::Drawable>(newEntity, {"alien-frigate", {11, 8, 40, 48}});
                 world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
-                // world.registry.addComponent<ecs::component::Animated>(newEntity,
-                //     {AnimFrame(9, 12, 42, 40, 100), AnimFrame(9, 76, 42, 40, 100), AnimFrame(9, 140, 42, 40, 100),
-                //         AnimFrame(9, 204, 42, 40, 100), AnimFrame(9, 268, 42, 40, 100)});
+                world.registry.addComponent<ecs::component::Animated>(newEntity,
+                    {AnimFrame(11, 8, 40, 48, 100), AnimFrame(11, 72, 40, 48, 100), AnimFrame(11, 136, 40, 48, 100),
+                        AnimFrame(11, 200, 40, 48, 100), AnimFrame(11, 264, 40, 48, 100),
+                        AnimFrame(11, 328, 40, 48, 100), AnimFrame(11, 392, 40, 48, 100),
+                        AnimFrame(11, 456, 40, 48, 100), AnimFrame(11, 520, 40, 48, 100)});
                 break;
             case component::EntityType::Types::AlienScout:
-                world.registry.addComponent<component::Drawable>(newEntity, {"alien-scout", {21, 20, 24, 24}});
+                world.registry.addComponent<component::Drawable>(newEntity, {"alien-scout", {19, 14, 32, 36}});
                 world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
-                // world.registry.addComponent<ecs::component::Animated>(newEntity,
-                //     {AnimFrame(21, 20, 24, 24, 100), AnimFrame(21, 84, 24, 24, 100), AnimFrame(21, 148, 24, 24, 100),
-                //         AnimFrame(21, 212, 24, 24, 100), AnimFrame(21, 276, 24, 24, 100)});
+                world.registry.addComponent<ecs::component::Animated>(newEntity,
+                    {AnimFrame(19, 14, 32, 36, 100), AnimFrame(19, 78, 32, 36, 100), AnimFrame(19, 142, 32, 36, 100),
+                        AnimFrame(19, 206, 32, 36, 100), AnimFrame(19, 270, 32, 36, 100),
+                        AnimFrame(19, 334, 32, 36, 100), AnimFrame(19, 398, 32, 36, 100)});
                 break;
             case component::EntityType::Types::AlienTorpedo:
                 world.registry.addComponent<component::Drawable>(newEntity, {"alien-torpedo", {14, 2, 30, 60}});
                 world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
-                // world.registry.addComponent<ecs::component::Animated>(newEntity,
-                //     {AnimFrame(14, 2, 30, 60, 100), AnimFrame(14, 66, 30, 60, 100), AnimFrame(14, 130, 30, 60, 100),
-                //         AnimFrame(14, 194, 30, 60, 100), AnimFrame(14, 258, 30, 60, 100), AnimFrame(14, 322, 30, 60,
-                //         100), AnimFrame(14, 386, 30, 60, 100), AnimFrame(14, 450, 30, 60, 100), AnimFrame(14, 514,
-                //         30, 60, 100), AnimFrame(14, 578, 30, 60, 100), AnimFrame(14, 642, 30, 60, 100), AnimFrame(14,
-                //         706, 30, 60, 100), AnimFrame(14, 770, 30, 60, 100), AnimFrame(14, 834, 30, 60, 100),
-                //         AnimFrame(14, 898, 30, 60, 100), AnimFrame(14, 962, 30, 60, 100)});
+                world.registry.addComponent<ecs::component::Animated>(newEntity,
+                    {AnimFrame(16, 2, 30, 60, 100), AnimFrame(16, 66, 30, 60, 100), AnimFrame(16, 130, 30, 60, 100),
+                        AnimFrame(16, 194, 30, 60, 100), AnimFrame(16, 258, 30, 60, 100),
+                        AnimFrame(16, 322, 30, 60, 100), AnimFrame(16, 386, 30, 60, 100),
+                        AnimFrame(16, 450, 30, 60, 100), AnimFrame(16, 514, 30, 60, 100),
+                        AnimFrame(16, 578, 30, 60, 100), AnimFrame(16, 642, 30, 60, 100),
+                        AnimFrame(16, 706, 30, 60, 100), AnimFrame(16, 770, 30, 60, 100),
+                        AnimFrame(16, 834, 30, 60, 100), AnimFrame(16, 898, 30, 60, 100),
+                        AnimFrame(16, 962, 30, 60, 100)});
                 break;
             case component::EntityType::Types::Bullet:
                 world.registry.addComponent<component::Drawable>(newEntity,
