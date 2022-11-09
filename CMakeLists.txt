@@ -20,7 +20,7 @@ set(SFML_DIR ${PROJECT_SOURCE_DIR}/vcpkg/installed/x64-linux-dynamic/share/sfml)
 # Add ./cmake to the module path
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
-set(SFML_STATIC_LIBRARIES FALSE)
+
 find_package(SFML COMPONENTS graphics window audio system CONFIG REQUIRED)
 find_package(Boost REQUIRED COMPONENTS thread)
 
