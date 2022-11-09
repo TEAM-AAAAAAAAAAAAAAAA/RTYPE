@@ -9,6 +9,7 @@
 #include "Engine.hpp"
 #include "GetWorld.hpp"
 #include "AudioManager.hpp"
+#include "NetworkClient.hpp"
 
 /**
  * Main function of the client, running everything to start the game
