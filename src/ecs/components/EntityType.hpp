@@ -16,6 +16,8 @@ namespace ecs::component
             OtherPlayer,
             Bullet,
             EnergySphere,
+            Laser,
+            Rocket,
             EnemyBase,
             EnemyBoss,
         };
