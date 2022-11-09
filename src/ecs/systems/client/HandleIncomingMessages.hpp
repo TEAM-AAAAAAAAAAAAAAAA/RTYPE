@@ -95,12 +95,30 @@ namespace ecs::systems
                         AnimFrame(100, 1, 32, 16, 100), AnimFrame(133, 1, 32, 16, 100), AnimFrame(100, 1, 32, 16, 100),
                         AnimFrame(67, 1, 32, 16, 100), AnimFrame(34, 1, 32, 16, 100)});
                 break;
-            case component::EntityType::Types::UranusScout:
-                world.registry.addComponent<component::Drawable>(newEntity, {"uranus-scout", {21, 20, 24, 24}});
+            case component::EntityType::Types::UranusBattlecruiser:
+                world.registry.addComponent<component::Drawable>(newEntity, {"uranus-battlecruiser", {11, 26, 92, 76}});
                 world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
                 world.registry.addComponent<ecs::component::Animated>(newEntity,
-                    {AnimFrame(21, 20, 24, 24, 100), AnimFrame(21, 84, 24, 24, 100), AnimFrame(21, 148, 24, 24, 100),
-                        AnimFrame(21, 212, 24, 24, 100), AnimFrame(21, 276, 24, 24, 100)});
+                    {AnimFrame(11, 26, 92, 76, 100), AnimFrame(11, 154, 92, 76, 100), AnimFrame(11, 282, 92, 76, 100),
+                        AnimFrame(11, 410, 92, 76, 100), AnimFrame(11, 538, 92, 76, 100),
+                        AnimFrame(11, 666, 92, 76, 100), AnimFrame(11, 794, 92, 76, 100),
+                        AnimFrame(11, 922, 92, 76, 100), AnimFrame(11, 1050, 92, 76, 100),
+                        AnimFrame(11, 1178, 92, 76, 100), AnimFrame(11, 1306, 92, 76, 100)/*,
+                        AnimFrame(11, 538, 92, 76, 100), AnimFrame(11, 538, 92, 76, 100),
+                        AnimFrame(11, 538, 92, 76, 100), AnimFrame(11, 538, 92, 76, 100),
+                        AnimFrame(11, 538, 92, 76, 100), AnimFrame(11, 538, 92, 76, 100),
+                        AnimFrame(11, 538, 92, 76, 100), AnimFrame(11, 538, 92, 76, 100),
+                        AnimFrame(11, 538, 92, 76, 100), AnimFrame(11, 538, 92, 76, 100),
+                        AnimFrame(11, 538, 92, 76, 100), AnimFrame(11, 538, 92, 76, 100),
+                        AnimFrame(11, 538, 92, 76, 100), AnimFrame(11, 538, 92, 76, 100),
+                        AnimFrame(11, 538, 92, 76, 100), AnimFrame(11, 538, 92, 76, 100),
+                        AnimFrame(11, 538, 92, 76, 100), AnimFrame(11, 538, 92, 76, 100)*/});
+                break;
+            case component::EntityType::Types::UranusDreadnought:
+                world.registry.addComponent<component::Drawable>(newEntity, {"uranus-dreadnought", {11, 26, 104, 76}});
+                world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
+                world.registry.addComponent<ecs::component::Animated>(
+                    newEntity, {AnimFrame(11, 26, 104, 76, 100), AnimFrame(11, 154, 104, 76, 100)});
                 break;
             case component::EntityType::Types::UranusFighter:
                 world.registry.addComponent<component::Drawable>(newEntity, {"uranus-fighter", {20, 20, 24, 24}});
@@ -108,6 +126,31 @@ namespace ecs::systems
                 world.registry.addComponent<ecs::component::Animated>(newEntity,
                     {AnimFrame(20, 20, 24, 24, 100), AnimFrame(20, 84, 24, 24, 100), AnimFrame(20, 148, 24, 24, 100),
                         AnimFrame(20, 212, 24, 24, 100), AnimFrame(20, 276, 24, 24, 100)});
+                break;
+            case component::EntityType::Types::UranusFrigate:
+                world.registry.addComponent<component::Drawable>(newEntity, {"uranus-frigate", {9, 12, 42, 40}});
+                world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
+                world.registry.addComponent<ecs::component::Animated>(newEntity,
+                    {AnimFrame(9, 12, 42, 40, 100), AnimFrame(9, 76, 42, 40, 100), AnimFrame(9, 140, 42, 40, 100),
+                        AnimFrame(9, 204, 42, 40, 100), AnimFrame(9, 268, 42, 40, 100)});
+                break;
+            case component::EntityType::Types::UranusScout:
+                world.registry.addComponent<component::Drawable>(newEntity, {"uranus-scout", {21, 20, 24, 24}});
+                world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
+                world.registry.addComponent<ecs::component::Animated>(newEntity,
+                    {AnimFrame(21, 20, 24, 24, 100), AnimFrame(21, 84, 24, 24, 100), AnimFrame(21, 148, 24, 24, 100),
+                        AnimFrame(21, 212, 24, 24, 100), AnimFrame(21, 276, 24, 24, 100)});
+                break;
+            case component::EntityType::Types::UranusTorpedo:
+                world.registry.addComponent<component::Drawable>(newEntity, {"uranus-torpedo", {14, 2, 30, 60}});
+                world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
+                world.registry.addComponent<ecs::component::Animated>(newEntity,
+                    {AnimFrame(14, 2, 30, 60, 100), AnimFrame(14, 66, 30, 60, 100), AnimFrame(14, 130, 30, 60, 100),
+                        AnimFrame(14, 194, 30, 60, 100), AnimFrame(14, 258, 30, 60, 100), AnimFrame(14, 322, 30, 60, 100),
+                        AnimFrame(14, 386, 30, 60, 100), AnimFrame(14, 450, 30, 60, 100), AnimFrame(14, 514, 30, 60, 100),
+                        AnimFrame(14, 578, 30, 60, 100), AnimFrame(14, 642, 30, 60, 100), AnimFrame(14, 706, 30, 60, 100),
+                        AnimFrame(14, 770, 30, 60, 100), AnimFrame(14, 834, 30, 60, 100), AnimFrame(14, 898, 30, 60, 100),
+                        AnimFrame(14, 962, 30, 60, 100)});
                 break;
             case component::EntityType::Types::Bullet:
                 world.registry.addComponent<component::Drawable>(newEntity,
