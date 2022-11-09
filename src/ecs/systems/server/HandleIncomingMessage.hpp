@@ -69,10 +69,12 @@ namespace ecs::systems
             auto &dir = directions[i];
             auto &id = networkIds[i];
 
-            if (dir && clientNumToId[msg.second] == id.value().id) {
-                dir.value().x = (int)msg.first[1];
-                dir.value().y = (int)msg.first[2];
-                return;
+            if (dir && id) {
+                if (clientNumToId[msg.second] == id.value().id) {
+                    dir.value().x = (int)msg.first[1];
+                    dir.value().y = (int)msg.first[2];
+                    return;
+                }
             }
         }
     }
@@ -93,7 +95,8 @@ namespace ecs::systems
              ++i) {
             auto &id = networkIds[i];
 
-            if (id && clientNumToId.find(msg.second) != clientNumToId.end() & clientNumToId[msg.second] == id.value().id) {
+            if (id
+                && clientNumToId.find(msg.second) != clientNumToId.end() & clientNumToId[msg.second] == id.value().id) {
                 auto &pos = positions[i];
                 auto &weapon = weapons[i];
                 auto &fac = factions[i];
