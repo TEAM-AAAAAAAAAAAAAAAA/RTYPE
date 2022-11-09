@@ -10,7 +10,6 @@
 #include <string>
 #include <vector>
 #include <SFML/Audio.hpp>
-#include "LockedQueue.hpp"
 
 namespace audio {
 

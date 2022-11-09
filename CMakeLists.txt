@@ -1,6 +1,5 @@
 set(X_VCPKG_APPLOCAL_DEPS_INSTALL ON)
 
-
 cmake_minimum_required(VERSION 3.20.0)
 
 project(rtype LANGUAGES CXX)
@@ -34,6 +33,11 @@ option(BUILD_TEST_SUITE OFF)
 include(CompilerFlags)
 include(DetectCompiler)
 
+if (NOT DEFINED WIN32)
+    set(VCPKG_TARGET_TRIPLET "x64-linux-dynamic")
+else()
+    set(VCPKG_TARGET_TRIPLET "x64-windows")
+endif()
 # add_subdirectory(dependencies)
 
 add_subdirectory(src)

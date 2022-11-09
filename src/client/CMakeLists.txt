@@ -18,15 +18,9 @@ set(SRC
 
 add_executable(${TARGET} ${SRC})
 
-if (NOT COMPILER_TYPE MATCHES "msvc")
-    target_link_libraries(${TARGET} PRIVATE
-            dl
-            )
-endif ()
-
 target_link_libraries(${TARGET} PRIVATE
     sfml-graphics sfml-window sfml-audio sfml-system
-    Boost::boost
+    Boost::boost ${CMAKE_DL_LIBS}
 )
 
 target_include_directories(${TARGET}
