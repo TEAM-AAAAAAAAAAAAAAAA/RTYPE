@@ -33,7 +33,7 @@ option(BUILD_TEST_SUITE OFF)
 include(CompilerFlags)
 include(DetectCompiler)
 
-if (NOT DEFINED WIN32)
+if (COMPILER_TYPE MATCHES "gcc" OR COMPILER_TYPE MATCHES "clang")
     set(VCPKG_TARGET_TRIPLET "x64-linux-dynamic")
 else()
     set(VCPKG_TARGET_TRIPLET "x64-windows")
