@@ -52,11 +52,11 @@ jobs:
         platform: [ windows-latest, ubuntu-latest, macos-latest ]
         include:
           - platform: windows-latest
-            triplet: x64-windows
+            triplet: x64-windows-dynamic
           - platform: ubuntu-latest
-            triplet: x64-linux
+            triplet: x64-linux-dynamic
           - platform: macos-latest
-            triplet: x64-osx
+            triplet: x64-osx-dynamic
     needs: [clean_repo]
     runs-on: ${{ matrix.platform }}
     env:
@@ -66,7 +66,7 @@ jobs:
         if: matrix.platform == 'ubuntu-latest'
         run: |
           sudo apt update -y && sudo apt upgrade -y
-          sudo apt install -y libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev autoconf libtool
+          sudo apt install -y libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev autoconf libtool libopenal-dev libalut-dev
 
       - uses: actions/checkout@v3
         with:
@@ -77,7 +77,6 @@ jobs:
         with:
           vcpkgDirectory: '${{ github.workspace }}/vcpkg'
           vcpkgGitCommitId: '${{ env.VCPKG_COMMIT }}'
-
 
 #      - name: Install windows pthreads
 #        if: matrix.platform == 'windows-latest'
