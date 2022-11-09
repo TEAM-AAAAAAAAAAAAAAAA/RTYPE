@@ -24,6 +24,10 @@ target_link_libraries(${TARGET} PRIVATE
     Boost::boost ${CMAKE_DL_LIBS}
 )
 
+if (NOT WIN32)
+    target_link_libraries(${TARGET} PRIVATE pthread)
+endif()
+
 target_include_directories(${TARGET}
 PRIVATE ${ECS_INCROOT}
 PRIVATE ${UTILS_INCDIRS}

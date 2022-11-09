@@ -16,7 +16,7 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 option(BUILD_TEST_SUITE OFF)
 option(ENABLE_CODE_COVERAGE OFF)
 
-set(SFML_DIR ${PROJECT_SOURCE_DIR}/vcpkg/installed/x64-windows-dynamic/share/sfml)
+set(SFML_DIR ${PROJECT_SOURCE_DIR}/vcpkg/installed/x64-linux-dynamic/share/sfml)
 
 #if (COMPILER_TYPE MATCHES "msvc")
 #     message(STATUS "Using static SFML libraries")
@@ -26,7 +26,7 @@ set(SFML_DIR ${PROJECT_SOURCE_DIR}/vcpkg/installed/x64-windows-dynamic/share/sfm
 # Add ./cmake to the module path
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
-set(SFML_STATIC_LIBRARIES FALSE)
+
 find_package(SFML COMPONENTS graphics window audio system CONFIG REQUIRED)
 find_package(Boost REQUIRED COMPONENTS thread)
 

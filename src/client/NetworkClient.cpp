@@ -7,6 +7,7 @@
 
 #include "NetworkClient.hpp"
 
-namespace network {
-	Client Client::_Instance;
+namespace network
+{
+    Client Client::_Instance;
 }
