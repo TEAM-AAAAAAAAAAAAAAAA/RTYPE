@@ -7,6 +7,8 @@ add_subdirectory(components)
 add_subdirectory(systems)
 
 set(ECS_SRC
+    ${ECS_SRCROOT}/EnemyFactory.cpp
+    ${ECS_SRCROOT}/EnemyFactory.hpp
     ${ECS_SRCROOT}/WorldManager.cpp
     ${ECS_SRCROOT}/WorldManager.hpp
     ${COMPONENTS_SRC}

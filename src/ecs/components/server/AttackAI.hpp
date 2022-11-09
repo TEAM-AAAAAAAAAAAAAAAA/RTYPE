@@ -25,7 +25,7 @@ namespace ecs::component
          *
          * @warning ALL MUST BE CREATED IN AttackAI.cpp
          */
-        enum AIType { None, Battlecruiser, Dreadnought, Fighter, Frigate, Scout, Torpedo };
+        enum AIType { None, Battlecruiser, Dreadnought, Fighter, Frigate, Scout, Torpedo, NoodleMonster };
 
         /**
          * @brief All possible Patterns created

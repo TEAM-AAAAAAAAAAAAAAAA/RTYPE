@@ -115,6 +115,7 @@ namespace ecs::component
         {Fighter, AttackAI::AI({ShootLaser, ShootBullet})},
         {Frigate, AttackAI::AI({ShootEnergySphere})},
         {Scout, AttackAI::AI({ShootLaser})},
-        {Torpedo, AttackAI::AI({ShootRocket})}
+        {Torpedo, AttackAI::AI({ShootRocket})},
+        {NoodleMonster, AttackAI::AI({Wait})}
     });
 } // namespace ecs::component
