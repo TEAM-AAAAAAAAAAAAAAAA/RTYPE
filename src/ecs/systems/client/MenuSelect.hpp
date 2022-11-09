@@ -27,25 +27,32 @@ namespace ecs::systems
 
           if (draw && pos && size) {
               if ((mousePosition.x >= pos->x && mousePosition.x <= pos->x + size->width) && (mousePosition.y >= pos->y && mousePosition.y <= pos->y + size->height) && draw->IsButton) {
-                  draw->rect.top = itButton->second.rectTop + 79;
-                  if (draw->rect.left == 324)
+                  draw->rect.top = itHoveredButton->second.rectTop;
+                  if (draw->rect.left == 324) {
+//                      if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+//                          ecs::WorldManager::setWaitingWorld([] { return getGameWorld("8000", "localhost"); });
                       draw->rect.left = 220;
-                  else if (draw->rect.left == 3651)
+                  } else if (draw->rect.left == 3651) {
+//                      if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+//                              ;
                       draw->rect.left = 3542;
-                  else if (draw->rect.left == 4760)
+                  } else if (draw->rect.left == 4760) {
+                      if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+                          utils::Window::getInstance().close();
                       draw->rect.left = 4670;
-                  draw->rect.width = itHoveredButton->second.rectWidth;
+                  }
+                  draw->rect.width = itHoveredButton->second.defaultRectWidth;
                   draw->rect.height = itHoveredButton->second.defaultRectHeight;
                   draw->hovered = true;
               } else if (draw->hovered && draw->IsButton){
-                  draw->rect.top = itHoveredButton->second.rectTop - 79;
+                  draw->rect.top = itButton->second.rectTop;
                   if (draw->rect.left == 220)
                       draw->rect.left = 324;
                   else if (draw->rect.left == 3542)
                       draw->rect.left = 3651;
                   else if (draw->rect.left == 4670)
                       draw->rect.left = 4760;
-                  draw->rect.width = itButton->second.rectWidth;
+                  draw->rect.width = itButton->second.defaultRectWidth;
                   draw->rect.height = itButton->second.defaultRectHeight;
                   draw->hovered = false;
               }
