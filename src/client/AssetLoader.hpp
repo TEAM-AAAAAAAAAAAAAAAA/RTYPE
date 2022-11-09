@@ -8,6 +8,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <filesystem>
 #include <iostream>
 #include <memory>
@@ -17,11 +18,13 @@
 #include <boost/property_tree/ptree.hpp>
 #include <unordered_map>
 
-/**
- * AssetLoader class which is used by the game to load assets
- */
 namespace asset
 {
+	/**
+	 * This class loads all the assets neened by the game and stores them in a map
+	 * Basic operatations on assets are supported
+	 * An asset is either a texture, a sound or a font
+	 */
     class AssetLoader {
       public:
         /**
@@ -60,6 +63,91 @@ namespace asset
             _Instance._textureMap[key] = texture;
         }
 
+		/**
+		 * @brief Load a background music and add it to the map
+		 * @tparam Args Path segments
+		 * @param key the key to load the asset
+		 * @param path first segment of the path of the asset
+		 * @param next next segment of the path of the asset
+		 * @param args other segments of the path
+		 */
+		template<class... Args>
+		static void LoadBGM(
+			const std::string &key, const std::filesystem::path &path, std::string_view next, Args... args)
+		{
+			std::filesystem::path smart = smartPath(path, next, args...);
+
+			if (!_Instance._bgmMap[key].openFromFile(smart.generic_string()))
+				return;
+		}
+
+		static void LoadBGM(const std::string &key, std::vector<std::string> paths)
+		{
+			std::filesystem::path smart = smartPath(paths);
+
+			if (!_Instance._bgmMap[key].openFromFile(smart.generic_string()))
+				return;
+		}
+
+		/**
+		 * @brief Load a sound effect and add it to the map
+		 * @tparam Args Path segments
+		 * @param key the key to load the asset
+		 * @param path first segment of the path of the asset
+		 * @param next next segment of the path of the asset
+		 * @param args other segments of the path
+		 */
+		template<class... Args>
+		static void LoadSFX(
+			const std::string &key, const std::filesystem::path &path, std::string_view next, Args... args)
+		{
+			std::filesystem::path smart = smartPath(path, next, args...);
+
+			if (!_Instance._sfxBufferMap[key].loadFromFile(smart.generic_string()))
+				return;
+			_Instance._sfxMap[key].setBuffer(_Instance._sfxBufferMap[key]);
+		}
+
+		static void LoadSFX(const std::string &key, std::vector<std::string> paths)
+		{
+			std::filesystem::path smart = smartPath(paths);
+
+			if (!_Instance._sfxBufferMap[key].loadFromFile(smart.generic_string()))
+				return;
+			_Instance._sfxMap[key].setBuffer(_Instance._sfxBufferMap[key]);
+		}
+
+		/**
+		 * @brief load a font and add it to the map
+		 * @param key the key to load the font
+		 * @param path first segment of the path of the font
+		 * @param next next segment of the path of the font
+		 * @param args other segments of the path
+		 */
+		template<class... Args>
+		static void LoadFont(
+			const std::string &key, const std::filesystem::path &path, std::string_view next, Args... args)
+		{
+			sf::Font font;
+
+			std::filesystem::path smart = smartPath(path, next, args...);
+
+			if (!font.loadFromFile(smart.generic_string()))
+				return;
+			_Instance._fontMap[key] = font;
+		}
+
+		static void LoadFont(const std::string &key, std::vector<std::string> paths)
+		{
+			sf::Font font;
+
+			std::filesystem::path smart = smartPath(paths);
+
+			if (!font.loadFromFile(smart.generic_string()))
+				return;
+			_Instance._fontMap[key] = font;
+		}
+
         /**
          * @brief create a smartpath from a vector of string
          *
@@ -76,15 +164,34 @@ namespace asset
 
         /**
          * @brief Get an Asset object from the map
-         *
          * @param key of the asset to get
          * @return sf::Texture& the texture
          */
         static sf::Texture &GetTexture(const std::string &key) { return _Instance._textureMap[key]; }
 
+		/**
+		 * @brief Get a background music object from the map
+		 * @param key of the asset to get
+		 * @return sf::Music& the music
+		 */
+		static sf::Music &GetBGM(const std::string &key) { return _Instance._bgmMap[key]; }
+
+		/**
+		 * @brief Get a sound effect object from the map
+		 * @param key of the asset to get
+		 * @return sf::Sound& the sound effect
+		 */
+		static sf::Sound &GetSFX(const std::string &key) { return _Instance._sfxMap[key]; }
+
+		/**
+		 * @brief Get a font object from the mapb
+		 * @param key of the asset to get
+		 * @return sf::Font& the font
+		 */
+		static sf::Font &GetFont(const std::string &key) { return _Instance._fontMap[key]; }
+
         /**
          * @brief Load a .ini file with boost loading assets into the map
-         *
          */
         static void LoadIniFile(const std::filesystem::path &path)
         {
@@ -105,7 +212,15 @@ namespace asset
                         value.second.data().erase(0, value.second.data().find("/") + 1);
                     }
                     paths.push_back(value.second.data());
-                    LoadTexture(value.first.data(), paths);
+
+					if (section.first == "texture")
+						LoadTexture(value.first, paths);
+					if (section.first == "bgm")
+						LoadBGM(value.first, paths);
+					if (section.first == "sfx")
+						LoadSFX(value.first, paths);
+					if (section.first == "font")
+						LoadFont(value.first, paths);
                 }
             }
         }
@@ -136,5 +251,25 @@ namespace asset
          * Map of all the assets
          */
         std::unordered_map<std::string, sf::Texture> _textureMap;
+
+		/**
+		 * Map of all the background music
+		 */
+		std::unordered_map<std::string, sf::Music> _bgmMap;
+
+		/**
+		 * Map of all the sound buffer used by the `sf::Sounds` inside
+		 */
+		std::unordered_map<std::string, sf::SoundBuffer> _sfxBufferMap;
+
+		/**
+		 * Map of all the sound effects
+		 */
+		std::unordered_map<std::string, sf::Sound> _sfxMap;
+
+		/**
+		 * Map of all the fonts
+		 */
+		std::unordered_map<std::string, sf::Font> _fontMap;
     };
 } // namespace asset

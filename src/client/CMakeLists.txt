@@ -13,16 +13,15 @@ set(SRC
     ${SRC_ROOT}/GetWorld.hpp
     ${UTILS_SRC}
     ${ECS_SRC}
-    )
-
-
-
+    ${SRC_ROOT}/AudioManager.cpp
+    ${SRC_ROOT}/AudioManager.hpp
+)
 
 add_executable(${TARGET} ${SRC})
 
 target_link_libraries(${TARGET} PRIVATE
-    sfml-system sfml-network sfml-graphics sfml-window
-    Boost::boost
+    sfml-graphics sfml-window sfml-audio sfml-system
+    Boost::boost ${CMAKE_DL_LIBS}
 )
 
 target_include_directories(${TARGET}

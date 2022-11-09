@@ -52,10 +52,10 @@ jobs:
           submodules: 'recursive'
 
       - name: Run vcpkg
-        uses: lukka/run-vcpkg@v4
+        uses: lukka/run-vcpkg@v10
         with:
-          vcpkgArguments: 'sfml boost-asio boost-thread boost-property-tree'
           vcpkgDirectory: '${{ github.workspace }}/vcpkg'
+          vcpkgGitCommitId: '${{ env.VCPKG_COMMIT }}'
 
       - uses: seanmiddleditch/gha-setup-ninja@master
 
@@ -75,7 +75,6 @@ jobs:
                 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
                 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_TOOLCHAIN_PATH}
                 -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE
-                -DBUILD_SHARED_LIBS=TRUE
             RESULT_VARIABLE result
             )
           else()
@@ -98,7 +97,7 @@ jobs:
           message(STATUS "Using host CMake version: ${CMAKE_VERSION}")
 
           execute_process(
-            COMMAND cmake --build build
+            COMMAND cmake --build build -v
             RESULT_VARIABLE result
           )
           if (NOT result EQUAL 0)

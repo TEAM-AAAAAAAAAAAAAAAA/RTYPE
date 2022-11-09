@@ -8,6 +8,7 @@
 #include "AssetLoader.hpp"
 #include "Engine.hpp"
 #include "GetWorld.hpp"
+#include "AudioManager.hpp"
 
 /**
  * Main function of the client, running everything to start the game
@@ -15,9 +16,14 @@
  */
 int main()
 {
-    ecs::Engine engine;
     asset::AssetLoader::LoadIniFile(asset::AssetLoader::smartPath("assets", "config.ini"));
-    ecs::WorldManager::setWaitingWorld(getMenuWorld);
+	audio::AudioManager::playSFX("startup");
+	audio::AudioManager::loadBGM("roll");
+	audio::AudioManager::playBGM(true);
+    utils::Window::getInstance().setFramerateLimit(60);
+    ecs::Engine engine;
+    // ecs::WorldManager::setWaitingWorld(getMenuWorld);
+    ecs::WorldManager::setWaitingWorld(getGameWorld);
 
     engine.run();
     return 0;

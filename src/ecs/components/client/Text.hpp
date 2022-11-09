@@ -9,25 +9,23 @@
 
 #include <string>
 #include <utility>
-#include "sfml/Graphics/Text.hpp"
+#include "SFML/Graphics/Text.hpp"
 
 namespace ecs::component
 {
     struct Text {
-        explicit Text(std::string &content, const std::string &key, unsigned int size = 42, sf::Color color)
-            : _content(content), _fontKey(key) _size(size), _color(color){};
+        explicit Text(const std::string &cont, const std::string &key, sf::Color col = sf::Color::White)
+            : content(cont), fontKey(key), color(col), value(std::string()){};
 
-        inline std::string getContent() const { return _content; };
-        inline void setContent(std::string &content) { _content = content; };
+        inline sf::Font &getFont() { return asset::AssetLoader::GetFont(fontKey); }
 
-        inline sf::Font &getFont() { return asset::AssetLoader::GetFont(_fontKey); }
+        inline const sf::Font &getFont() const { return asset::AssetLoader::GetFont(fontKey); }
 
-        inline const sf::Font &getFont() const { return asset::AssetLoader::GetFont(_fontKey); }
+        inline void setValue(const std::string &val) { value = val; }
 
-      private:
-        std::string _content;
-        std::string _fontKey;
-        unsigned int _size;
-        sf::Color _color;
+        std::string content;
+        std::string value;
+        std::string fontKey;
+        sf::Color color;
     };
 } // namespace ecs::component

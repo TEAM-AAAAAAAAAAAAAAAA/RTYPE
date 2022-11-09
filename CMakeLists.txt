@@ -1,6 +1,5 @@
 set(X_VCPKG_APPLOCAL_DEPS_INSTALL ON)
 
-
 cmake_minimum_required(VERSION 3.20.0)
 
 project(rtype LANGUAGES CXX)
@@ -17,21 +16,22 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 option(BUILD_TEST_SUITE OFF)
 option(ENABLE_CODE_COVERAGE OFF)
 
-set(SFML_DIR ${PROJECT_SOURCE_DIR}/vcpkg/installed/x64-windows/share/sfml)
+set(SFML_DIR ${PROJECT_SOURCE_DIR}/vcpkg/installed/x64-windows-dynamic/share/sfml)
 
-if (COMPILER_TYPE MATCHES "msvc")
-     message(STATUS "Using static SFML libraries")
-     set(SFML_STATIC_LIBRARIES TRUE)
-endif()
+#if (COMPILER_TYPE MATCHES "msvc")
+#     message(STATUS "Using static SFML libraries")
+#     set(SFML_STATIC_LIBRARIES TRUE)
+#endif()
 
 # Add ./cmake to the module path
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
-find_package(SFML COMPONENTS system window graphics CONFIG REQUIRED)
+set(SFML_STATIC_LIBRARIES FALSE)
+find_package(SFML COMPONENTS graphics window audio system CONFIG REQUIRED)
 find_package(Boost REQUIRED COMPONENTS thread)
 
 if(NOT DEFINED CMAKE_SUPPRESS_DEVELOPER_WARNINGS)
-     set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1 CACHE INTERNAL "No dev warnings")
+    set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1 CACHE INTERNAL "No dev warnings")
 endif()
 
 option(BUILD_TEST_SUITE OFF)
@@ -39,19 +39,19 @@ option(BUILD_TEST_SUITE OFF)
 include(CompilerFlags)
 include(DetectCompiler)
 
-# add_subdirectory(dependencies)
+set(VCPKG_TARGET_TRIPLET x64-linux-dynamic)
 
 add_subdirectory(src)
 if (BUILD_TEST_SUITE)
-     enable_testing()
-     add_subdirectory(tests)
-     endif()
-
-if (CLIENT_COMPILATION_MODE)
-     add_compile_definitions(CLIENT_COMPILATION_MODE)
+    enable_testing()
+    add_subdirectory(tests)
 endif()
 
-install(DIRECTORY assets DESTINATION bin/)
+if (CLIENT_COMPILATION_MODE)
+    add_compile_definitions(CLIENT_COMPILATION_MODE)
+endif()
+
+install(DIRECTORY assets DESTINATION bin)
 
 SET(RTYPE_MAJOR_VERSION 0)
 SET(RTYPE_MINOR_VERSION 1)

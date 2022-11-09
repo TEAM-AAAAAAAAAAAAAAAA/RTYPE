@@ -31,13 +31,11 @@ namespace ecs::systems
         auto const &animations = world.registry.getComponents<component::Animated>();
         auto const &hitBoxes = world.registry.getComponents<component::Hitbox>();
         auto const &texts = world.registry.getComponents<component::Text>();
-
         utils::Window::getInstance().clear();
         for (size_t i = 0; i < positions.size() && i < sizes.size() && i < drawables.size() && i < texts.size(); i++) {
             auto const &pos = positions[i];
             auto const &size = sizes[i];
             auto const &draw = drawables[i];
-            auto const &text = texts[i];
             if (pos && size && draw) {
                 sf::Sprite sprite;
                 sprite.setTexture(draw.value().getTexture());
@@ -58,15 +56,6 @@ namespace ecs::systems
                 // }
                 utils::Window::getInstance().draw(sprite);
             }
-            if (text && pos && size) {
-                sf::Text sfText;
-                sfText.setFont(text.value().font);
-                sfText.setString(text.value().text);
-                sfText.setCharacterSize(text.value().size);
-                sfText.setFillColor(text.value().color);
-                sfText.setPosition({static_cast<float>(pos.value().x), static_cast<float>(pos.value().y)});
-                utils::Window::getInstance().draw(sfText);
-            }
             if (i < hitBoxes.size()) {
                 auto const &hitBox = hitBoxes[i];
 
@@ -83,7 +72,22 @@ namespace ecs::systems
                     }
                 }
             }
-        };
+        }
+        for (size_t i = 0; i < positions.size() && i < sizes.size() && i < texts.size(); i++) {
+            auto const &pos = positions[i];
+            auto const &size = sizes[i];
+            auto const &text = texts[i];
+
+            if (pos && size && text) {
+                sf::Text sfText;
+                sfText.setFont(text.value().getFont());
+                sfText.setString(text.value().content + text.value().value);
+                sfText.setCharacterSize(size.value().height);
+                sfText.setFillColor(text.value().color);
+                sfText.setPosition({static_cast<float>(pos.value().x), static_cast<float>(pos.value().y)});
+                utils::Window::getInstance().draw(sfText);
+            }
+        }
         utils::Window::getInstance().display();
     };
 } // namespace ecs::systems

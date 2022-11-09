@@ -14,21 +14,22 @@
 #include "components/Size.hpp"
 #include "components/Velocity.hpp"
 #include "components/Weapon.hpp"
+#include "components/client/Activable.hpp"
 #include "components/client/Animated.hpp"
 #include "components/client/Controllable.hpp"
 #include "components/client/Drawable.hpp"
 #include "components/client/Hitbox.hpp"
 #include "components/client/Parallax.hpp"
-#include "components/client/Activable.hpp"
 #include "systems/ManageClientEvents.hpp"
 #include "systems/Movement.hpp"
+#include "systems/client/Buttons.hpp"
 #include "systems/client/Draw.hpp"
 #include "systems/client/HandleIncomingMessages.hpp"
 #include "systems/client/HandleParallaxBounds.hpp"
 #include "systems/client/HandleSFMLEvents.hpp"
 #include "systems/client/HandleSFMLKeys.hpp"
 #include "systems/client/SendDirection.hpp"
-#include "systems/client/Buttons.hpp"
+#include "systems/client/Score.hpp"
 
 static const int FRAME_LIMIT = 60;
 
@@ -66,8 +67,17 @@ static void addGameSystems(ecs::World &world)
     world.addSystem(ecs::systems::SendDirection);
     world.addSystem(ecs::systems::movement);
     world.addSystem(ecs::systems::HandleParallaxBounds);
+    world.addSystem(ecs::systems::score);
 }
 
+static void setGameTexts(ecs::World &world)
+{
+    ecs::Entity textScore = world.registry.spawn_entity();
+
+    world.registry.addComponent<ecs::component::Position>(textScore, {10, 10});
+    world.registry.addComponent<ecs::component::Size>(textScore, {60, 60});
+    world.registry.addComponent<ecs::component::Text>(textScore, ecs::component::Text("Score: ", "nasa"));
+}
 static void setGameParallax(ecs::World &world)
 {
     using AnimFrame = ecs::component::Animated::AnimFrame;
@@ -141,10 +151,12 @@ static void setGameParallax(ecs::World &world)
  * @param engine The engine in which you want to operate
  * @return The world ready to be used
  */
-ecs::World getGameWorld(const std::string &port, const std::string &host)
+ecs::World getGameWorld(/*const std::string &port, const std::string &host*/)
 {
     ecs::World world;
     network::Message msg;
+    std::string port = "8000";
+    std::string host = "localhost";
 
     network::Client::setHost(host);
     network::Client::setPort(port);
@@ -154,6 +166,7 @@ ecs::World getGameWorld(const std::string &port, const std::string &host)
     registerComponents(world);
     addGameSystems(world);
     setGameParallax(world);
+    setGameTexts(world);
     network::Client::getOutgoingMessages().push(msg);
     return world;
 }
@@ -176,30 +189,39 @@ static void setMenuBackground(ecs::World &world)
     ecs::Entity optionButton = world.registry.spawn_entity();
     ecs::Entity quitButton = world.registry.spawn_entity();
     ecs::Entity player = world.registry.spawn_entity();
+    ecs::Entity text = world.registry.spawn_entity();
 
     int buttonWidth = 600;
     int buttonHeight = 150;
 
-     std::cout << "Setting menu background" << std::endl;
-     world.registry.addComponent<ecs::component::Position>(player, {(utils::constant::mapWidth / 2 - buttonWidth), (utils::constant::mapHeight / 3) - buttonHeight / 2});
-     world.registry.addComponent<ecs::component::Size>(player, {100, 200});
-     world.registry.addComponent<ecs::component::Drawable>(player, {"players", {1, 1, 32, 16}});
-     world.registry.addComponent<ecs::component::Controllable>(player, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D, sf::Keyboard::H});
-     std::cout << "Setting menu 2 background" << std::endl;
-     world.registry.addComponent<ecs::component::Position>(playButton, {utils::constant::mapWidth / 2 - buttonWidth / 2, (utils::constant::mapHeight / 3) - buttonHeight / 2});
-     world.registry.addComponent<ecs::component::Size>(playButton, {buttonHeight, buttonWidth});
-     world.registry.addComponent<ecs::component::Drawable>(playButton, {"menu", {324, 2079, 916, 292}});
-     world.registry.addComponent<ecs::component::Activable>(playButton, ecs::component::Activable(utils::constant::PLAY, true));
+    std::cout << "Setting menu background" << std::endl;
+    world.registry.addComponent<ecs::component::Position>(
+        player, {(utils::constant::mapWidth / 2 - buttonWidth), (utils::constant::mapHeight / 3) - buttonHeight / 2});
+    world.registry.addComponent<ecs::component::Size>(player, {100, 200});
+    world.registry.addComponent<ecs::component::Drawable>(player, {"players", {1, 1, 32, 16}});
+    world.registry.addComponent<ecs::component::Controllable>(
+        player, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D, sf::Keyboard::H});
+    std::cout << "Setting menu 2 background" << std::endl;
+    world.registry.addComponent<ecs::component::Position>(playButton,
+        {utils::constant::mapWidth / 2 - buttonWidth / 2, (utils::constant::mapHeight / 3) - buttonHeight / 2});
+    world.registry.addComponent<ecs::component::Size>(playButton, {buttonHeight, buttonWidth});
+    world.registry.addComponent<ecs::component::Drawable>(playButton, {"menu", {324, 2079, 916, 292}});
+    world.registry.addComponent<ecs::component::Activable>(
+        playButton, ecs::component::Activable(utils::constant::PLAY, true));
 
-     world.registry.addComponent<ecs::component::Position>(optionButton, {utils::constant::mapWidth / 2 - buttonWidth / 2, (utils::constant::mapHeight / 3 + 300) - buttonHeight / 2});
-     world.registry.addComponent<ecs::component::Size>(optionButton, {buttonHeight, buttonWidth});
-     world.registry.addComponent<ecs::component::Drawable>(optionButton, {"menu", {3651, 2079, 916, 292}});
-     world.registry.addComponent<ecs::component::Activable>(optionButton, ecs::component::Activable(utils::constant::OPTIONS));
+    world.registry.addComponent<ecs::component::Position>(optionButton,
+        {utils::constant::mapWidth / 2 - buttonWidth / 2, (utils::constant::mapHeight / 3 + 300) - buttonHeight / 2});
+    world.registry.addComponent<ecs::component::Size>(optionButton, {buttonHeight, buttonWidth});
+    world.registry.addComponent<ecs::component::Drawable>(optionButton, {"menu", {3651, 2079, 916, 292}});
+    world.registry.addComponent<ecs::component::Activable>(
+        optionButton, ecs::component::Activable(utils::constant::OPTIONS));
 
-     world.registry.addComponent<ecs::component::Position>(quitButton, {utils::constant::mapWidth / 2 - buttonWidth / 2, (utils::constant::mapHeight / 3 + 500) - buttonHeight / 2});
-     world.registry.addComponent<ecs::component::Size>(quitButton, {buttonHeight, buttonWidth});
-     world.registry.addComponent<ecs::component::Drawable>(quitButton, {"menu", {4760, 2079, 916, 292}});
-     world.registry.addComponent<ecs::component::Activable>(quitButton, ecs::component::Activable(utils::constant::QUIT));
+    world.registry.addComponent<ecs::component::Position>(quitButton,
+        {utils::constant::mapWidth / 2 - buttonWidth / 2, (utils::constant::mapHeight / 3 + 500) - buttonHeight / 2});
+    world.registry.addComponent<ecs::component::Size>(quitButton, {buttonHeight, buttonWidth});
+    world.registry.addComponent<ecs::component::Drawable>(quitButton, {"menu", {4760, 2079, 916, 292}});
+    world.registry.addComponent<ecs::component::Activable>(
+        quitButton, ecs::component::Activable(utils::constant::QUIT));
 }
 
 static void destroyMenu(ecs::World &world) {}

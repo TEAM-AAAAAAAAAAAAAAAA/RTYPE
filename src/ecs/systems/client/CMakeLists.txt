@@ -9,6 +9,7 @@ set(SYSTEMS_SRC
     ${SRCROOT}/SendDirection.hpp
     ${SRCROOT}/HandleParallaxBounds.hpp
     ${SRCROOT}/Buttons.hpp
+    ${SRCROOT}/Score.hpp
     PARENT_SCOPE
 )
 
