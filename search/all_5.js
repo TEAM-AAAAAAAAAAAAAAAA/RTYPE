@@ -21,14 +21,12 @@ var searchData=
   ['entity_5fmove_71',['ENTITY_MOVE',['../namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ad37895a1ffa6eafe8d42600886797632',1,'utils::constant']]],
   ['entity_5fspawn_72',['ENTITY_SPAWN',['../namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477adadf6f857e0a998c40a9ea08786f56e6',1,'utils::constant']]],
   ['entityfromindex_73',['entityFromIndex',['../classecs_1_1_registry.html#a56a1512c5bd8ebbf1f59cddeea212079',1,'ecs::Registry']]],
-  ['entitylife_74',['EntityLife',['../structecs_1_1component_1_1_entity_life.html',1,'ecs::component']]],
-  ['entitylife_2ehpp_75',['EntityLife.hpp',['../_entity_life_8hpp.html',1,'']]],
-  ['entitytype_76',['EntityType',['../structecs_1_1component_1_1_entity_type.html',1,'ecs::component::EntityType'],['../structecs_1_1component_1_1_entity_type.html#ad75569c40782b31ebd52c486b76d2564',1,'ecs::component::EntityType::EntityType()']]],
-  ['entitytype_2ehpp_77',['EntityType.hpp',['../_entity_type_8hpp.html',1,'']]],
-  ['entrypoint_2ecpp_78',['entrypoint.cpp',['../client_2entrypoint_8cpp.html',1,'(Global Namespace)'],['../server_2entrypoint_8cpp.html',1,'(Global Namespace)']]],
-  ['erase_79',['erase',['../classecs_1_1_sparse_array.html#abcc31b0e8950b62375bf75b4b92339e2',1,'ecs::SparseArray']]],
-  ['event_80',['Event',['../classecs_1_1_event.html',1,'ecs::Event'],['../classecs_1_1_event.html#a2164a9f1154b465d76109d3339aef13c',1,'ecs::Event::Event()=delete'],['../classecs_1_1_event.html#a17fd3921036d70cc1d76aa69bcfd68ac',1,'ecs::Event::Event(EventType e)']]],
-  ['event_2ehpp_81',['Event.hpp',['../_event_8hpp.html',1,'']]],
-  ['eventtype_82',['EventType',['../classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0f',1,'ecs::Event']]],
-  ['systems_83',['systems',['../namespaceecs_1_1systems.html',1,'ecs']]]
+  ['entitytype_74',['EntityType',['../structecs_1_1component_1_1_entity_type.html',1,'ecs::component::EntityType'],['../structecs_1_1component_1_1_entity_type.html#ad75569c40782b31ebd52c486b76d2564',1,'ecs::component::EntityType::EntityType()']]],
+  ['entitytype_2ehpp_75',['EntityType.hpp',['../_entity_type_8hpp.html',1,'']]],
+  ['entrypoint_2ecpp_76',['entrypoint.cpp',['../client_2entrypoint_8cpp.html',1,'(Global Namespace)'],['../server_2entrypoint_8cpp.html',1,'(Global Namespace)']]],
+  ['erase_77',['erase',['../classecs_1_1_sparse_array.html#abcc31b0e8950b62375bf75b4b92339e2',1,'ecs::SparseArray']]],
+  ['event_78',['Event',['../classecs_1_1_event.html',1,'ecs::Event'],['../classecs_1_1_event.html#a2164a9f1154b465d76109d3339aef13c',1,'ecs::Event::Event()=delete'],['../classecs_1_1_event.html#a17fd3921036d70cc1d76aa69bcfd68ac',1,'ecs::Event::Event(EventType e)']]],
+  ['event_2ehpp_79',['Event.hpp',['../_event_8hpp.html',1,'']]],
+  ['eventtype_80',['EventType',['../classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0f',1,'ecs::Event']]],
+  ['systems_81',['systems',['../namespaceecs_1_1systems.html',1,'ecs']]]
 ];

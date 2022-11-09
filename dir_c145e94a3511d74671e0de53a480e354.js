@@ -5,9 +5,6 @@ var dir_c145e94a3511d74671e0de53a480e354 =
     [ "Direction.hpp", "_direction_8hpp.html", [
       [ "Direction", "structecs_1_1component_1_1_direction.html", "structecs_1_1component_1_1_direction" ]
     ] ],
-    [ "EntityLife.hpp", "_entity_life_8hpp.html", [
-      [ "EntityLife", "structecs_1_1component_1_1_entity_life.html", "structecs_1_1component_1_1_entity_life" ]
-    ] ],
     [ "EntityType.hpp", "_entity_type_8hpp.html", [
       [ "EntityType", "structecs_1_1component_1_1_entity_type.html", "structecs_1_1component_1_1_entity_type" ]
     ] ],

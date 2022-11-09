@@ -398,32 +398,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= [](World &amp;world) {</div>
-<div class="line">        <span class="keyword">auto</span> &amp;positions = world.registry.getComponents&lt;component::Position&gt;();</div>
-<div class="line">        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;velocities = world.registry.getComponents&lt;component::Velocity&gt;();</div>
-<div class="line">        <span class="keyword">auto</span> &amp;directions = world.registry.getComponents&lt;component::Direction&gt;();</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line">        <span class="keyword">using</span> <a class="code" href="namespaceutils_1_1constant.html#ab4d7e2d46688914f26626a619f8326af">chrono</a> = std::chrono::high_resolution_clock;</div>
-<div class="line">        <span class="keyword">using</span> <a class="code" href="namespaceutils_1_1constant.html#ad903a57ac8f070571efdf25fbdcb0c29">chronoDuration</a> = std::chrono::duration&lt;double, std::milli&gt;;</div>
-<div class="line"> </div>
-<div class="line">        <span class="keyword">static</span> <span class="keyword">auto</span> clock = chrono::now();</div>
-<div class="line">        <span class="keywordflow">if</span> (<a class="code" href="namespaceutils_1_1constant.html#ad903a57ac8f070571efdf25fbdcb0c29">chronoDuration</a>(chrono::now() - clock).count() &gt; 10) {</div>
-<div class="line">            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; positions.size() &amp;&amp; i &lt; velocities.size() &amp;&amp; i &lt; directions.size(); ++i) {</div>
-<div class="line">                <span class="keyword">auto</span> &amp;pos = positions[i];</div>
-<div class="line">                <span class="keyword">auto</span> <span class="keyword">const</span> &amp;vel = velocities[i];</div>
-<div class="line">                <span class="keyword">auto</span> &amp;dir = directions[i];</div>
-<div class="line"> </div>
-<div class="line">                <span class="keywordflow">if</span> (pos &amp;&amp; vel &amp;&amp; dir) {</div>
-<div class="line">                    pos.value().x += vel.value().x * dir.value().x;</div>
-<div class="line">                    pos.value().y += vel.value().y * dir.value().y;</div>
-<div class="line">                }</div>
-<div class="line">            };</div>
-<div class="line">            clock = chrono::now();</div>
-<div class="line">        }</div>
-<div class="line">    }</div>
-</div><!-- fragment --><p>Used to apply the values of the velocity component to the position component according to the internal clock of the system </p>
+<p>Used to apply the values of the velocity component to the position component according to the internal clock of the system </p>
 
 </div>
 </div>
