@@ -40,11 +40,37 @@ namespace utils
             NONE
         };
 
-        enum ButtonType
-        {
+        enum ButtonActionType {
+            PLAY_ACTION,
+            QUIT_ACTION,
+            OPTIONS_ACTION,
+            CONNECT_ACTION
+        };
+
+        enum ButtonType {
             PLAY,
+            OPTIONS,
             QUIT,
-            OPTIONS
+            PLAY_HOVER,
+            OPTION_HOVER,
+            QUIT_HOVER,
+        };
+
+        struct ButtonValue {
+            short rectLeft;
+            short rectTop;
+            short defaultRectWidth;
+            short defaultRectHeight;
+            short rectWidth;
+        };
+
+        static const std::map<ButtonType, ButtonValue> buttonValueMap {
+            {PLAY, {324, 2079, 916, 292, 200}},
+            {OPTIONS, {3651, 2079, 916, 292, 200}},
+            {QUIT, {4760, 2079, 916, 292, 200}},
+            {PLAY_HOVER, {220, 2449, 1114, 356, 200}},
+            {OPTION_HOVER, {3542, 2456, 1114, 356, 200}},
+            {QUIT_HOVER, {4670, 2451, 1114, 356, 200}},
         };
 
         static std::map<int, PacketType> mapPacketType{
