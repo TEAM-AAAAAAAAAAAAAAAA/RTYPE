@@ -13,7 +13,7 @@ namespace ecs::component
     static const std::pair<char, char> UP_RIGHT = {1, -1};
 
     const std::unordered_map<MovementAI::AIType, MovementAI::AI> MovementAI::_aiVector({
-        {Idle, MovementAI::AI({{0, 0}}, 1000000)},
+        {Idle, MovementAI::AI({STOP}, 1000000)},
         {QuickUpDown, MovementAI::AI({UP, DOWN}, 30)},
         {LongUpDown, MovementAI::AI({UP, DOWN}, 60)},
         {QuickLeftRight, MovementAI::AI({LEFT, RIGHT}, 30)},
