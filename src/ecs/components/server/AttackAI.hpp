@@ -32,7 +32,7 @@ namespace ecs::component
          *
          * @warning ALL MUST BE CREATED IN AttackAI.cpp
          */
-        enum PatternType { ShootBullet, ShootEnergySphere };
+        enum PatternType { Wait, ShootBullet, ShootEnergySphere, ShootLaser, ShootRocket };
 
         size_t lastAttack;
         size_t lastAttackDelay;
@@ -78,12 +78,7 @@ namespace ecs::component
              * @param direction vector that takes pairs of chars
              * @param delay the delay between each step
              */
-            AI(std::vector<PatternType> patterns) : currentAttack(0)
-            {
-                for (auto &&p : patterns) {
-                    _thisPatterns.push_back(patterns.at(p));
-                }
-            }
+            AI(std::vector<PatternType> pattern) : _thisPatterns(pattern), currentAttack(0) {}
 
             /**
              * @brief AI copy constructor
@@ -111,8 +106,11 @@ namespace ecs::component
          *
          */
         struct Action {
+            static void waitAttack(const std::size_t shooter);
             static void shootBulletAttack(const std::size_t shooter);
             static void shootEnerySphereAttack(const std::size_t shooter);
+            static void shootLaserAttack(const std::size_t shooter);
+            static void shootRocketAttack(const std::size_t shooter);
 
           private:
             /**
