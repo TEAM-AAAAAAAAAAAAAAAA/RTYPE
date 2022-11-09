@@ -25,14 +25,14 @@ namespace ecs::component
          *
          * @warning ALL MUST BE CREATED IN AttackAI.cpp
          */
-        enum AIType { Scout, Fighter };
+        enum AIType { None, Battlecruiser, Dreadnought, Fighter, Frigate, Scout, Torpedo };
 
         /**
          * @brief All possible Patterns created
          *
          * @warning ALL MUST BE CREATED IN AttackAI.cpp
          */
-        enum PatternType { Wait, ShootBullet, ShootEnergySphere, ShootLaser, ShootRocket };
+        enum PatternType { Wait, WaitShort, WaitLong, ShootBullet, ShootEnergySphere, ShootLaser, ShootRocket, InvokeAllies };
 
         size_t lastAttack;
         size_t lastAttackDelay;
@@ -111,6 +111,7 @@ namespace ecs::component
             static void shootEnerySphereAttack(const std::size_t shooter);
             static void shootLaserAttack(const std::size_t shooter);
             static void shootRocketAttack(const std::size_t shooter);
+            static void invokeAlliesAttack(const std::size_t shooter);
 
           private:
             /**
@@ -125,7 +126,7 @@ namespace ecs::component
          *
          * @param type the AIType of the entity
          */
-        AttackAI(const AIType &type = Scout) : _thisAI(findAI(type)), lastAttack(0), lastAttackDelay(0) {}
+        AttackAI(const AIType &type = None) : _thisAI(findAI(type)), lastAttack(0), lastAttackDelay(0) {}
 
         /**
          * @brief Get a random attack from the AI

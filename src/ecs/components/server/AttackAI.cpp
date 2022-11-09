@@ -95,13 +95,26 @@ namespace ecs::component
             positions[shooter].value().y, -1, 0, 30, 20, 15, 0, 25, fac);
     }
 
-    const std::unordered_map<AttackAI::PatternType, AttackAI::AI::Pattern> AttackAI::AI::patterns(
-        {{Wait, AI::Pattern(1000, AttackAI::Action::waitAttack)},
-            {ShootBullet, AI::Pattern(100, AttackAI::Action::shootBulletAttack)},
-            {ShootEnergySphere, AI::Pattern(300, AttackAI::Action::shootEnerySphereAttack)},
-            {ShootLaser, AI::Pattern(1000, AttackAI::Action::shootLaserAttack)},
-            {ShootRocket, AI::Pattern(1000, AttackAI::Action::shootRocketAttack)}});
+    void AttackAI::Action::invokeAlliesAttack(const std::size_t shooter) {}
 
-    const std::unordered_map<AttackAI::AIType, AttackAI::AI> AttackAI::_aiVector(
-        {{Scout, AttackAI::AI({ShootBullet})}, {Fighter, AttackAI::AI({ShootBullet, ShootEnergySphere})}});
+    const std::unordered_map<AttackAI::PatternType, AttackAI::AI::Pattern> AttackAI::AI::patterns({
+        {Wait, AI::Pattern(1000, AttackAI::Action::waitAttack)},
+        {WaitShort, AI::Pattern(500, AttackAI::Action::waitAttack)},
+        {WaitLong, AI::Pattern(2000, AttackAI::Action::waitAttack)},
+        {ShootBullet, AI::Pattern(250, AttackAI::Action::shootBulletAttack)},
+        {ShootEnergySphere, AI::Pattern(500, AttackAI::Action::shootEnerySphereAttack)},
+        {ShootLaser, AI::Pattern(100, AttackAI::Action::shootLaserAttack)},
+        {ShootRocket, AI::Pattern(350, AttackAI::Action::shootRocketAttack)},
+        {InvokeAllies, AI::Pattern(5000, AttackAI::Action::invokeAlliesAttack)}
+    });
+
+    const std::unordered_map<AttackAI::AIType, AttackAI::AI> AttackAI::_aiVector({
+        {None, AttackAI::AI({WaitLong})},
+        {Battlecruiser, AttackAI::AI({ShootLaser, ShootBullet, ShootEnergySphere})},
+        {Dreadnought, AttackAI::AI({InvokeAllies})},
+        {Fighter, AttackAI::AI({ShootLaser, ShootBullet})},
+        {Frigate, AttackAI::AI({ShootEnergySphere})},
+        {Scout, AttackAI::AI({ShootLaser})},
+        {Torpedo, AttackAI::AI({ShootRocket})}
+    });
 } // namespace ecs::component
