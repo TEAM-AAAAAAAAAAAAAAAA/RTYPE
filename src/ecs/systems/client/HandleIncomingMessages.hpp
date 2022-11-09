@@ -38,29 +38,29 @@ namespace ecs::systems
         component::EntityType type = msg[3];
         int posX = (unsigned char)msg[4] << 8U | (unsigned char)msg[5];
         int posY = (unsigned char)msg[6] << 8U | (unsigned char)msg[7];
-        int sizeX = msg[8];
-        int sizeY = msg[9];
-        int velX = msg[10];
-        int velY = msg[11];
-        char dirX = msg[12];
-        char dirY = msg[13];
+        int sizeX = (unsigned char)msg[8] << 8U | (unsigned char)msg[9];
+        int sizeY = (unsigned char)msg[10] << 8U | (unsigned char)msg[11];
+        int velX = msg[12];
+        int velY = msg[13];
+        char dirX = msg[14];
+        char dirY = msg[15];
 
         for (size_t i = 0; i < networkId.size(); i++)
             if (networkId[i] && networkId[i]->id == msgId) {
                 if (i < sizes.size() && sizes[i]) {
-                    sizes[i].value().width = msg[8];
-                    sizes[i].value().height = msg[9];
+                    sizes[i].value().width = sizeX;
+                    sizes[i].value().height = sizeY;
                 }
                 if (i < positions.size() && positions[i]) {
                     positions[i].value().x = posX;
                     positions[i].value().y = posY;
                 }
                 if (i < types.size() && types[i]) {
-                    types[i].value().type = msg[3];
+                    types[i].value().type = type.type;
                 }
                 if (i < velocities.size() && velocities[i]) {
-                    velocities[i].value().x = msg[10];
-                    velocities[i].value().y = msg[11];
+                    velocities[i].value().x = velX;
+                    velocities[i].value().y = velY;
                 }
                 if (msgId != selfId && i < directions.size() && directions[i]) {
                     directions[i].value().x = dirX;
@@ -284,6 +284,10 @@ namespace ecs::systems
                         AnimFrame(16, 962, 30, 60, 100)});
                 break;
 #pragma endregion
+            case component::EntityType::Types::NoodleMonster:
+                world.registry.addComponent<component::Drawable>(newEntity, {"noodle-monster"/*, {0, 0, 1280, 1027}*/});
+                world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
+                break;
             case component::EntityType::Types::Bullet:
                 world.registry.addComponent<component::Drawable>(newEntity,
                     {"bullet", {10, 7, 12, 19},

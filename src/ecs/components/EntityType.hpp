@@ -38,7 +38,8 @@ namespace ecs::component
             AlienTorpedo,
             NoodleMonster,
         };
-        EntityType(char type) : type(type) {}
-        char type;
+        EntityType(char type) : type(static_cast<Types>(type)) {}
+        EntityType(Types type) : type(type) {}
+        Types type;
     };
 } // namespace ecs::component

@@ -296,6 +296,20 @@ ecs::World getGameWorld()
         world.registry.addComponent<ecs::component::AttackAI>(enemy, {AttackAI::AIType::Scout});
     }
 
+    {
+        ecs::Entity enemy = world.registry.spawn_entity();
+        world.registry.addComponent<ecs::component::Position>(enemy, {400, 400});
+        world.registry.addComponent<ecs::component::Direction>(enemy, {0, 0});
+        world.registry.addComponent<ecs::component::Size>(enemy, {512, 512});
+        world.registry.addComponent<ecs::component::MovementAI>(enemy, {MovementAI::AIType::LongUpDown});
+        world.registry.addComponent<ecs::component::Health>(enemy, {25});
+        world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::None});
+        world.registry.addComponent<ecs::component::NetworkId>(enemy, {static_cast<size_t>(enemy)});
+        world.registry.addComponent<ecs::component::EntityType>(enemy, {ecs::component::EntityType::Types::NoodleMonster});
+        world.registry.addComponent<ecs::component::Velocity>(enemy, {1, 1});
+        world.registry.addComponent<ecs::component::AttackAI>(enemy, {AttackAI::AIType::Scout});
+    }
+
     return world;
 }
 
