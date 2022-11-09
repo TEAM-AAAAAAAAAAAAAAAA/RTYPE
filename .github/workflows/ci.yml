@@ -73,12 +73,10 @@ jobs:
           submodules: 'recursive'
 
       - name: Run vcpkg
-        uses: lukka/run-vcpkg@v10
+        uses: lukka/run-vcpkg@4
         with:
           vcpkgDirectory: '${{ github.workspace }}/vcpkg'
-          runVcpkgInstall: true
-          runVcpkgFormatString: 'install sfml:${{ matrix.triplet }} boost-asio:${{ matrix.triplet }} boost-thread:${{ matrix.triplet }} boost-property-tree::${{ matrix.triplet }}'
-#          vcpkgArguments: 'sfml:${{ matrix.triplet }} boost-asio:${{ matrix.triplet }} boost-thread:${{ matrix.triplet }} boost-property-tree::${{ matrix.triplet }}'
+          vcpkgArguments: 'sfml:${{ matrix.triplet }} boost-asio:${{ matrix.triplet }} boost-thread:${{ matrix.triplet }} boost-property-tree::${{ matrix.triplet }}'
           vcpkgGitCommitId: '${{ env.VCPKG_COMMIT }}'
 
 #      - name: Install windows pthreads
