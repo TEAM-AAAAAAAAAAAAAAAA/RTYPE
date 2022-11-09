@@ -52,7 +52,7 @@ jobs:
         platform: [ windows-latest, ubuntu-latest, macos-latest ]
         include:
           - platform: windows-latest
-            triplet: x64-windows-dynamic
+            triplet: x64-windows
           - platform: ubuntu-latest
             triplet: x64-linux-dynamic
           - platform: macos-latest
@@ -76,7 +76,7 @@ jobs:
         uses: lukka/run-vcpkg@v4
         with:
           vcpkgDirectory: '${{ github.workspace }}/vcpkg'
-          vcpkgArguments: 'sfml:${{ matrix.triplet }} boost-asio:${{ matrix.triplet }} boost-thread:${{ matrix.triplet }} boost-property-tree::${{ matrix.triplet }}'
+          vcpkgArguments: 'sfml:${{ matrix.triplet }} boost-asio:${{ matrix.triplet }} boost-thread:${{ matrix.triplet }} boost-property-tree:${{ matrix.triplet }}'
           vcpkgGitCommitId: '${{ env.VCPKG_COMMIT }}'
 
 #      - name: Install windows pthreads
