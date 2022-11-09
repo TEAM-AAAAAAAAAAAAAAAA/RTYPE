@@ -175,7 +175,7 @@ static void setMenuBackground(ecs::World &world)
     ecs::Entity playButton = world.registry.spawn_entity();
     ecs::Entity optionButton = world.registry.spawn_entity();
     ecs::Entity quitButton = world.registry.spawn_entity();
-    ecs::Entity connectButton = world.registry.spawn_entity();
+    ecs::Entity connectInterface = world.registry.spawn_entity();
 //    ecs::Entity player = world.registry.spawn_entity();
 
     auto itPlay = utils::constant::buttonValueMap.find(utils::constant::PLAY);
@@ -184,36 +184,35 @@ static void setMenuBackground(ecs::World &world)
     const int defaultConnectWidth = 1705;
     const int defaultConnectHeight = 1920;
     const int buttonHeight = (itPlay->second.defaultRectHeight * itPlay->second.rectWidth) / itPlay->second.defaultRectWidth;
-    const int buttonDistanceY = buttonHeight + 50;
     const int connectWidth = (defaultConnectWidth * itPlay->second.rectWidth) / itPlay->second.defaultRectWidth;
     const int connectHeight = (defaultConnectHeight * buttonHeight) / itPlay->second.defaultRectHeight;
-    const int buttonX = 50;
-    const int buttonY = 300;
 
 //     world.registry.addComponent<ecs::component::Position>(player, {(utils::constant::mapWidth / 2 - itPlay->second.rectWidth), (utils::constant::mapHeight / 3) - buttonHeight / 2});
 //     world.registry.addComponent<ecs::component::Size>(player, {100, 200});
 //     world.registry.addComponent<ecs::component::Drawable>(player, {"players", {1, 1, 32, 16}});
 //     world.registry.addComponent<ecs::component::Controllable>(player, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D, sf::Keyboard::H});
 //     world.registry.addComponent<ecs::component::Position>(playButton, {utils::constant::mapWidth / 2 - itPlay->second.rectWidth / 2, (utils::constant::mapHeight / 3) - buttonHeight / 2});
-    world.registry.addComponent<ecs::component::Position>(playButton, {buttonX, buttonY});
+    world.registry.addComponent<ecs::component::Position>(playButton, {itPlay->second.posX, itPlay->second.posY});
     world.registry.addComponent<ecs::component::Size>(playButton, {buttonHeight, itPlay->second.rectWidth});
-    world.registry.addComponent<ecs::component::Drawable>(playButton, {"menu", {324, 2079, itPlay->second.defaultRectWidth, itPlay->second.defaultRectHeight}});
-    world.registry.addComponent<ecs::component::Activable>(playButton, ecs::component::Activable(utils::constant::PLAY_ACTION, true));
+    world.registry.addComponent<ecs::component::Drawable>(playButton, {"menu", {itPlay->second.rectLeft, itPlay->second.rectTop, itPlay->second.defaultRectWidth, itPlay->second.defaultRectHeight}, true, true});
+    world.registry.addComponent<ecs::component::Activable>(playButton, ecs::component::Activable(utils::constant::PLAY_ACTION));
 
-    world.registry.addComponent<ecs::component::Position>(optionButton, {buttonX, buttonY + buttonDistanceY});
+    world.registry.addComponent<ecs::component::Position>(optionButton, {itOptions->second.posX, itOptions->second.posY});
     world.registry.addComponent<ecs::component::Size>(optionButton, {buttonHeight, itPlay->second.rectWidth});
-    world.registry.addComponent<ecs::component::Drawable>(optionButton, {"menu", {3651, 2079, itPlay->second.defaultRectWidth, itPlay->second.defaultRectHeight}});
+    world.registry.addComponent<ecs::component::Drawable>(optionButton, {"menu", {itOptions->second.rectLeft, itOptions->second.rectTop, itPlay->second.defaultRectWidth, itPlay->second.defaultRectHeight}, true, true});
     world.registry.addComponent<ecs::component::Activable>(optionButton, ecs::component::Activable(utils::constant::OPTIONS_ACTION));
 
-    world.registry.addComponent<ecs::component::Position>(quitButton, {buttonX, buttonY + buttonDistanceY * 2});
+    world.registry.addComponent<ecs::component::Position>(quitButton, {itQuit->second.posX, itQuit->second.posY});
     world.registry.addComponent<ecs::component::Size>(quitButton, {buttonHeight, itPlay->second.rectWidth});
-    world.registry.addComponent<ecs::component::Drawable>(quitButton, {"menu", {4760, 2079, itPlay->second.defaultRectWidth, itPlay->second.defaultRectHeight}});
+    world.registry.addComponent<ecs::component::Drawable>(quitButton, {"menu", {itQuit->second.rectLeft, itQuit->second.rectTop, itPlay->second.defaultRectWidth, itPlay->second.defaultRectHeight}, true, true});
     world.registry.addComponent<ecs::component::Activable>(quitButton, ecs::component::Activable(utils::constant::QUIT_ACTION));
 
-    world.registry.addComponent<ecs::component::Position>(connectButton, {buttonX + 220, buttonY - 100});
-    world.registry.addComponent<ecs::component::Size>(connectButton, {connectHeight, connectWidth});
-    world.registry.addComponent<ecs::component::Drawable>(connectButton, {"menu", {1612, 100, defaultConnectWidth, defaultConnectHeight}, false});
-    world.registry.addComponent<ecs::component::Activable>(connectButton, ecs::component::Activable(utils::constant::CONNECT_ACTION));
+    world.registry.addComponent<ecs::component::Position>(connectInterface, {itPlay->second.posX + 220, itPlay->second.posY - 50});
+    world.registry.addComponent<ecs::component::Size>(connectInterface, {connectHeight, connectWidth});
+    world.registry.addComponent<ecs::component::Drawable>(
+        connectInterface, {"menu", {1612, 100, defaultConnectWidth, defaultConnectHeight}, false});
+    world.registry.addComponent<ecs::component::Activable>(
+        connectInterface, ecs::component::Activable(utils::constant::CONNECT_ACTION));
 }
 
 static void destroyMenu(ecs::World &world) {}
