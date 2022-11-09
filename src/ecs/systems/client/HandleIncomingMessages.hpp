@@ -95,7 +95,7 @@ namespace ecs::systems
                         AnimFrame(100, 1, 32, 16, 100), AnimFrame(133, 1, 32, 16, 100), AnimFrame(100, 1, 32, 16, 100),
                         AnimFrame(67, 1, 32, 16, 100), AnimFrame(34, 1, 32, 16, 100)});
                 break;
-            case component::EntityType::Types::EnemyBase:
+            case component::EntityType::Types::UranusScout:
                 world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 18, 32, 16}});
                 world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
                 world.registry.addComponent<ecs::component::Animated>(newEntity,

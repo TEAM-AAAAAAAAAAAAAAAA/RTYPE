@@ -45,7 +45,7 @@ namespace ecs::systems
         world.registry.addComponent<ecs::component::Weapon>(newPlayer, {100, 10, 10, {20, 20}});
         world.registry.addComponent<ecs::component::Health>(newPlayer, {100});
         world.registry.addComponent<ecs::component::NetworkId>(newPlayer, {static_cast<size_t>(newPlayer)});
-        world.registry.addComponent<ecs::component::Faction>(newPlayer, {ecs::component::Faction::Factions::Players});
+        world.registry.addComponent<ecs::component::Faction>(newPlayer, {ecs::component::Faction::Factions::Chefs});
 
         clientNumToId[msg.second] = static_cast<size_t>(newPlayer);
         network::Message message;
