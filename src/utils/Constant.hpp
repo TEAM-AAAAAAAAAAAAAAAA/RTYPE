@@ -23,6 +23,7 @@ namespace utils
         static short mapWidth = 1920;
         static short mapHeight = 1080;
         static short maxPlayerHealth = 100;
+        static short sizeHealthBar = 282;
 
         enum PacketType {
             PLAYER_MOVE = 8,

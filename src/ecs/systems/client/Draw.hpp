@@ -12,6 +12,7 @@
 #include "SFML/Graphics.hpp"
 #include "Window.hpp"
 #include "World.hpp"
+#include "Constant.hpp"
 #include "components/Position.hpp"
 #include "components/Size.hpp"
 #include "components/Health.hpp"
@@ -96,10 +97,12 @@ namespace ecs::systems
             auto const &health = healths[i];
 
             if (pos && size && health) {
-                if (health->health >= 0)
-                    size.value().width = 282 * health->health / 100;
-                else if (health->health < 0)
+                if (health->health >= 0 && health->health < utils::constant::maxPlayerHealth) {
+                    size.value().width = utils::constant::sizeHealthBar * health->health / 100;
+                } else if (health->health < 0)
                     size.value().width = 0;
+                else
+                    size.value().width = utils::constant::sizeHealthBar;
             }
 
         }
