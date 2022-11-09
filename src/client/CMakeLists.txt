@@ -11,8 +11,6 @@ set(SRC
     ${SRC_ROOT}/NetworkClient.hpp
     ${SRC_ROOT}/GetWorld.cpp
     ${SRC_ROOT}/GetWorld.hpp
-    ${SRC_ROOT}/Menu.cpp
-    ${SRC_ROOT}/Menu.hpp
     ${UTILS_SRC}
     ${ECS_SRC}
     )
