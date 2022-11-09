@@ -52,10 +52,6 @@ namespace ecs
                 ecs::WorldManager::getWorld().runSystems();
                 if (ecs::WorldManager::isWorldSwitchReady())
                     ecs::WorldManager::switchWorlds();
-                if (menu::Menu::_play == true) {
-                    std::cout << "PLAY\n";
-                    // ecs::WorldManager::setWaitingWorld([] { return getGameWorld("8000", "localhost"); });
-                }
             }
         }
     };
