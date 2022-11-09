@@ -6,6 +6,7 @@ set(SYSTEMS_SRC
     ${SRCROOT}/HandleIncomingMessages.hpp
     ${SRCROOT}/HandleSFMLEvents.hpp
     ${SRCROOT}/HandleSFMLKeys.hpp
+    ${SRCROOT}/MenuSelect.hpp
     ${SRCROOT}/SendDirection.hpp
     ${SRCROOT}/HandleParallaxBounds.hpp
     ${SRCROOT}/Buttons.hpp
