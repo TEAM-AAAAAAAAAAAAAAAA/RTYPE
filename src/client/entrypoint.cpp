@@ -142,6 +142,8 @@ ecs::World getGameWorld()
     return world;
 }
 
+#include <iostream>
+
 /**
  * Main function of the client, running everything to start the game
  * @return 0 if no error, anything otherwise
@@ -152,7 +154,7 @@ int main()
     network::Client::setHost("localhost");
     network::Client::setPort("8000");
     network::Client::connect();
-    utils::Window::get().setFramerateLimit(60);
+    utils::Window::getInstance().setFramerateLimit(60);
     ecs::Engine engine;
     network::Message msg;
     msg.fill(0);

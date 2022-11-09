@@ -2,11 +2,13 @@ set(INCROOT ${PROJECT_SOURCE_DIR}/src/ecs/components)
 set(SRCROOT ${PROJECT_SOURCE_DIR}/src/ecs/components)
 
 set(COMPONENTS_SRC
+    ${SRCROOT}/server/AttackAI.hpp
+    ${SRCROOT}/server/AttackAI.cpp
     ${SRCROOT}/Direction.hpp
-    ${SRCROOT}/EntityAI.hpp
-    ${SRCROOT}/EntityAI.cpp
     ${SRCROOT}/Faction.hpp
     ${SRCROOT}/Health.hpp
+    ${SRCROOT}/MovementAI.hpp
+    ${SRCROOT}/MovementAI.cpp
     ${SRCROOT}/Position.hpp
     ${SRCROOT}/Size.hpp
     ${SRCROOT}/Velocity.hpp

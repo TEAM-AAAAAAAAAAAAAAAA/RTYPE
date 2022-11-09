@@ -21,13 +21,17 @@ namespace utils
         /**
          * Default constructor of window class, setting by default the FrameLimit to 60 (representing 65 fps)
          */
-        Window() { _Instance.setFramerateLimit(60); }
+        Window() {}
         ~Window() {}
-        static inline sf::RenderWindow &get() { return _Instance; }
-        static inline bool isOpen() { return _Instance.isOpen(); }
+        // static inline sf::RenderWindow &get() { return _Instance; }
+        static inline bool isOpen() { return getInstance().isOpen(); }
 
-      private:
-        static sf::RenderWindow _Instance;
+        static sf::RenderWindow &getInstance()
+        {
+            static sf::RenderWindow instance(
+                sf::RenderWindow(sf::VideoMode(utils::constant::mapWidth, utils::constant::mapHeight), "r-type"));
+            return instance;
+        }
     };
 } // namespace utils
 #else

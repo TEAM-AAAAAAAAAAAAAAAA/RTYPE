@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2022
 ** RTYPE
 ** File description:
-** RunAI
+** RunMovementAI
 */
 
 #pragma once
@@ -12,29 +12,29 @@
 #include <iostream>
 #include "World.hpp"
 #include "components/Direction.hpp"
-#include "components/EntityAI.hpp"
+#include "components/MovementAI.hpp"
 
 namespace ecs::systems
 {
     /**
      * Runs the AIs stored in the enities
      */
-    std::function<void(World &)> runAI = [](World &world) {
+    std::function<void(World &)> runMovementAI = [](World &world) {
         auto &directions = world.registry.getComponents<component::Direction>();
-        auto &entityAIs = world.registry.getComponents<component::EntityAI>();
+        auto &movementAIs = world.registry.getComponents<component::MovementAI>();
 
         using chrono = std::chrono::high_resolution_clock;
         using chronoDuration = std::chrono::duration<double, std::milli>;
 
         static auto clock = chrono::now();
-        for (size_t i = 0; i < directions.size() && i < entityAIs.size(); ++i) {
+        for (size_t i = 0; i < directions.size() && i < movementAIs.size(); ++i) {
             auto &dir = directions[i];
-            auto &ai = entityAIs[i];
+            auto &movAI = movementAIs[i];
 
-            if (dir && ai) {
+            if (dir && movAI) {
                 if (chronoDuration(chrono::now() - clock).count()
-                    > static_cast<size_t>(ai.value().getDelay()) * 1000) {
-                    auto &tmpDir = ai.value().getNextDirection();
+                    > static_cast<size_t>(movAI.value().getDelay()) * 1000) {
+                    auto &tmpDir = movAI.value().getNextDirection();
                     dir.value().x = tmpDir.first;
                     dir.value().y = tmpDir.second;
                     dir.value().hasMoved = true;
