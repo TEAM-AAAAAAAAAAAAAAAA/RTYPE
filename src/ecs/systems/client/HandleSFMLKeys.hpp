@@ -21,7 +21,7 @@ namespace ecs::systems
      * Refer to the Controllable.hpp documentation to learn more about managed input
      */
     std::function<void(World &)> handleSFMLKeys = [](World &world) {
-        if (!utils::Window::get().hasFocus())
+        if (!utils::Window::getInstance().hasFocus())
             return;
 
         auto &controllables = world.registry.getComponents<component::Controllable>();

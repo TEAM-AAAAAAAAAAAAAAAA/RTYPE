@@ -5,8 +5,7 @@ set(SYSTEMS_SRC
     ${SRCROOT}/ManageClientEvents.hpp
     ${SRCROOT}/Movement.hpp
     ${SRCROOT}/PositionLogger.hpp
-    ${SRCROOT}/RunAI.hpp
-    ${SRCROOT}/ServerPush.hpp
+    ${SRCROOT}/RunMovementAI.hpp
     PARENT_SCOPE
 )
 

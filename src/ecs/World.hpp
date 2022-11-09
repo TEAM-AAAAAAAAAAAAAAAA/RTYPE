@@ -49,7 +49,7 @@ namespace ecs
          * Used to get the first event of the private stack _events
          * @return The first event of the private stack if it exists, ecs::Event::EventType::Null otherwise
          */
-        ecs::Event getEvent() const
+        const ecs::Event getEvent() const
         {
             if (_events.empty())
                 return {ecs::Event::EventType::Null};
@@ -60,7 +60,7 @@ namespace ecs
          * Used to pop the first event of the private stack _events
          * @return The event you just popped out of the stack if it exists, ecs::Event::EventType::Null otherwise
          */
-        ecs::Event popEvent()
+        const ecs::Event popEvent()
         {
             if (_events.empty())
                 return {ecs::Event::EventType::Null};

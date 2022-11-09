@@ -4,11 +4,11 @@
 #include <exception>
 #include <functional>
 #include <iostream>
+#include <map>
 #include <typeindex>
 #include "Constant.hpp"
 #include "Entity.hpp"
 #include "SparseArray.hpp"
-#include <unordered_map>
 
 namespace ecs
 {
@@ -93,8 +93,9 @@ namespace ecs
          */
         Entity entityFromIndex(std::size_t idx)
         {
-            if (idx >= _lastEntity || std::find(_entitiesBin.begin(), _entitiesBin.end(), idx) != _entitiesBin.end())
-                return Entity(utils::constant::npos);
+            if (idx >= _lastEntity) {
+                std::cerr << "Error with entity " << idx << "(" << _lastEntity << " max)" << std::endl;
+            }
             return Entity(idx);
         }
 
@@ -157,7 +158,7 @@ namespace ecs
         /**
          * Private member _components_array represents the group of component already registered in the Registry class
          */
-        std::unordered_map<std::type_index, std::any> _componentsArrays;
+        std::map<std::type_index, std::any> _componentsArrays;
 
         /**
          * Private member _eraseFunctions represents self erase function of each component

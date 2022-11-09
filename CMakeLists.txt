@@ -45,7 +45,7 @@ if (CLIENT_COMPILATION_MODE)
      add_compile_definitions(CLIENT_COMPILATION_MODE)
 endif()
 
-install(DIRECTORY assets DESTINATION bin/assets/)
+install(DIRECTORY assets DESTINATION bin/)
 
 SET(RTYPE_MAJOR_VERSION 0)
 SET(RTYPE_MINOR_VERSION 1)

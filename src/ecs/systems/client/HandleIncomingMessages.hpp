@@ -9,6 +9,7 @@
 
 #include <functional>
 #include <iostream>
+#include <valarray>
 #include "../client/NetworkClient.hpp"
 #include "World.hpp"
 #include "components/EntityType.hpp"
@@ -57,7 +58,7 @@ namespace ecs::systems
                 if (i < types.size() && types[i]) {
                     types[i].value().type = msg[3];
                 }
-                if (i < velocities.size() && velocities[i] && msg[3]) {
+                if (i < velocities.size() && velocities[i]) {
                     velocities[i].value().x = msg[10];
                     velocities[i].value().y = msg[11];
                 }
@@ -84,10 +85,9 @@ namespace ecs::systems
                         newEntity, {component::EntityType::Types::Player});
                     world.registry.addComponent<ecs::component::Shootable>(
                         newEntity, ecs::component::Shootable(sf::Keyboard::Space));
-                    world.registry.addComponent<ecs::component::Controllable>(
-                        newEntity, {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D, sf::Keyboard::H});
-                    world.registry.addComponent<ecs::component::Hitbox>(
-                        newEntity, {ecs::component::Hitbox()});
+                    world.registry.addComponent<ecs::component::Controllable>(newEntity,
+                        {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D, sf::Keyboard::H});
+                    world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
                 }
                 world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 1, 32, 16}});
                 world.registry.addComponent<ecs::component::Animated>(newEntity,
@@ -97,8 +97,7 @@ namespace ecs::systems
                 break;
             case component::EntityType::Types::EnemyBase:
                 world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 18, 32, 16}});
-                world.registry.addComponent<ecs::component::Hitbox>(
-                    newEntity, {ecs::component::Hitbox()});
+                world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
                 world.registry.addComponent<ecs::component::Animated>(newEntity,
                     {AnimFrame(1, 18, 32, 16, 100), AnimFrame(34, 18, 32, 16, 100), AnimFrame(67, 18, 32, 16, 100),
                         AnimFrame(100, 18, 32, 16, 100), AnimFrame(133, 18, 32, 16, 100),
@@ -112,8 +111,18 @@ namespace ecs::systems
                 world.registry.addComponent<component::Animated>(newEntity,
                     {AnimFrame(10, 7, 12, 19, 100), AnimFrame(42, 7, 12, 19, 100), AnimFrame(74, 7, 12, 19, 100),
                         AnimFrame(106, 7, 12, 19, 100)});
-                world.registry.addComponent<ecs::component::Hitbox>(
-                    newEntity, {ecs::component::Hitbox()});
+                world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
+                break;
+            case component::EntityType::Types::EnergySphere:
+                world.registry.addComponent<component::Drawable>(newEntity,
+                    {"energy-sphere", {0, 0, 32, 32},
+                        std::atan2(static_cast<float>(dirX), static_cast<float>(dirY)) * 180 / 3.14159265359f});
+                world.registry.addComponent<component::Animated>(newEntity,
+                    {AnimFrame(0, 0, 32, 32, 100), AnimFrame(32, 0, 32, 32, 100), AnimFrame(64, 0, 32, 32, 100),
+                        AnimFrame(96, 0, 32, 32, 100), AnimFrame(128, 0, 32, 32, 100), AnimFrame(160, 0, 32, 32, 100),
+                        AnimFrame(192, 0, 32, 32, 100), AnimFrame(224, 0, 32, 32, 100), AnimFrame(256, 0, 32, 32, 100),
+                        AnimFrame(288, 0, 32, 32, 100)});
+                world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
                 break;
         }
     }
@@ -123,12 +132,30 @@ namespace ecs::systems
         selfId = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
     }
 
+    static void deathMessageHandle(World &world, network::Message &msg)
+    {
+        size_t msgId = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
+
+        auto &netIds = world.registry.getComponents<component::NetworkId>();
+
+        for (size_t i = 0; i < netIds.size(); i++) {
+            if (netIds[i])
+                if (netIds[i].value().id == msgId) {
+                    world.registry.killEntity(world.registry.entityFromIndex(i));
+                    return;
+                }
+        }
+        std::cerr << "Error: Client couldn't kill unknown entity with netId '" << msgId << "'." << std::endl;
+    }
+
     static std::unordered_map<char, std::function<void(World &, network::Message &msg)>> packetTypeFunction = {
-        {8, movePacketHandle}, {0, firstMessageHandle}};
+        {utils::constant::getPacketTypeKey(utils::constant::PacketType::ENTITY_MOVE), movePacketHandle},
+        {0, firstMessageHandle},
+        {utils::constant::getPacketTypeKey(utils::constant::PacketType::ENTITY_DEATH), deathMessageHandle}};
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
-        while (!network::Client::getIncomingMessages().empty()) {
-            network::Message msg = network::Client::getIncomingMessages().pop();
+        while (!network::Client::getReceivedMessages().empty()) {
+            network::Message msg = network::Client::getReceivedMessages().pop();
             packetTypeFunction[msg[0]](world, msg);
         }
     };

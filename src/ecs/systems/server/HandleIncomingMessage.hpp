@@ -112,13 +112,15 @@ namespace ecs::systems
                         world.registry.addComponent<ecs::component::NetworkId>(bullet, {static_cast<size_t>(bullet)});
                         world.registry.addComponent<ecs::component::Direction>(bullet, {1, 0});
                         world.registry.addComponent<ecs::component::Position>(bullet, {pos.value().x, pos.value().y});
-                        world.registry.addComponent<ecs::component::Size>(bullet, {weapon.value().projSize.first, weapon.value().projSize.second});
+                        world.registry.addComponent<ecs::component::Size>(
+                            bullet, {weapon.value().projSize.first, weapon.value().projSize.second});
                         world.registry.addComponent<ecs::component::Velocity>(bullet, {weapon.value().projSpeed, 0});
                         world.registry.addComponent<ecs::component::Projectile>(bullet, {weapon.value().damage});
                         ecs::component::Faction::Factions fac = ecs::component::Faction::Factions::None;
                         if (i < factions.size() && factions[i])
                             fac = factions[i].value().faction;
                         world.registry.addComponent<ecs::component::Faction>(bullet, {fac});
+                        world.registry.addComponent<ecs::component::Health>(bullet, {1});
                     }
                 }
             }
@@ -129,9 +131,11 @@ namespace ecs::systems
         {0, createPlayer}, {utils::constant::PLAYER_MOVE, movePlayer}, {utils::constant::PLAYER_SHOT, playerShoot}};
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
-        while (!network::Server::getIncomingMessages().empty()) {
-            network::ClientMessage msg = network::Server::getIncomingMessages().pop();
-            packetTypeFunction[msg.first[0]](world, msg);
+        while (!network::Server::GetReceivedMessages().empty()) {
+            network::ClientMessage msg = network::Server::GetReceivedMessages().pop();
+            if (msg.first[0] == 0 || msg.first[0] == utils::constant::PLAYER_MOVE
+                || msg.first[0] == utils::constant::PLAYER_SHOT)
+                packetTypeFunction[msg.first[0]](world, msg);
         }
     };
 } // namespace ecs::systems

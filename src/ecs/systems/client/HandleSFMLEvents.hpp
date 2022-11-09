@@ -44,9 +44,9 @@ namespace ecs::systems
         auto &hitBoxes = world.registry.getComponents<component::Hitbox>();
         auto &controllables = world.registry.getComponents<component::Controllable>();
 
-        while (utils::Window::get().pollEvent(event)) {
+        while (utils::Window::getInstance().pollEvent(event)) {
             switch (event.type) {
-                case sf::Event::Closed: utils::Window::get().close(); break;
+                case sf::Event::Closed: utils::Window::getInstance().close(); break;
                 case sf::Event::KeyPressed: {
                     if (event.key.code == sf::Keyboard::Key::W)
                         ecs::WorldManager::setWaitingWorld(getTestWorld);

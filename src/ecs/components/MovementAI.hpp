@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2022
 ** RTYPE
 ** File description:
-** EntityAI
+** MovementAI
 */
 
 #pragma once
@@ -13,22 +13,22 @@
 
 namespace ecs::component
 {
-    /// @brief EntityAI component
-    struct EntityAI {
+    /// @brief MovementAI component
+    struct MovementAI {
       public:
         /**
          * @brief All possible AI created
          *
-         * @warning ALL MUST BE CREATED IN EntityAI.cpp
+         * @warning ALL MUST BE CREATED IN MovementAI.cpp
          */
         enum AIType { Idle, BasicUpDown };
 
         /**
-         * @brief EntityAI constructor
+         * @brief MovementAI constructor
          *
          * @param type the AIType of the entity
          */
-        EntityAI(const AIType &type = Idle) : _thisAI(findAI(type)) {}
+        MovementAI(const AIType &type = Idle) : _thisAI(findAI(type)) {}
 
         /**
          * @brief get the next direction of the entity and cycles through the directions vector
@@ -88,7 +88,7 @@ namespace ecs::component
          *
          * @param type
          * @return the AI
-         * @warning may throw if used badly or if all AIs are not defined in EntityAI.cpp
+         * @warning may throw if used badly or if all AIs are not defined in MovementAI.cpp
          */
         inline const AI &findAI(const AIType &type) { return _aiVector.at(type); }
 

@@ -149,11 +149,12 @@ ecs::World getGameWorld(const std::string &port, const std::string &host)
     network::Client::setHost(host);
     network::Client::setPort(port);
     network::Client::connect();
-    utils::Window::get().setFramerateLimit(FRAME_LIMIT);
+    utils::Window::getInstance().setFramerateLimit(FRAME_LIMIT);
     msg.fill(0);
     registerComponents(world);
     addGameSystems(world);
     setGameParallax(world);
+    network::Client::getOutgoingMessages().push(msg);
     return world;
 }
 #pragma endregion GameWorld
@@ -207,7 +208,7 @@ ecs::World getMenuWorld()
 {
     ecs::World world;
 
-    utils::Window::get().setFramerateLimit(FRAME_LIMIT);
+    utils::Window::getInstance().setFramerateLimit(FRAME_LIMIT);
     utils::Window::Color = sf::Color(18, 32, 45, 255);
     registerComponents(world);
     addMenuSystems(world);
