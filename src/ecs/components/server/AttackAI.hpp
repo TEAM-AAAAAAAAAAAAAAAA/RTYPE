@@ -68,7 +68,6 @@ namespace ecs::component
 
                 short reloadTime;
 
-              private:
                 std::function<void(const std::size_t)> _function;
             };
 

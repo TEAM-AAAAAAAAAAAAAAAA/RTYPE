@@ -89,7 +89,7 @@ namespace ecs
         world.registry.addComponent<ecs::component::Direction>(enemy, {0, 0});
         world.registry.addComponent<ecs::component::Size>(enemy, {64, 64});
         world.registry.addComponent<ecs::component::NetworkId>(enemy, {static_cast<size_t>(enemy)});
-        world.registry.addComponent<ecs::component::Velocity>(enemy, {10, 10});
+        world.registry.addComponent<ecs::component::Velocity>(enemy, {5, 5});
         world.registry.addComponent<ecs::component::AttackAI>(enemy, {component::AttackAI::AIType::Fighter});
         world.registry.addComponent<ecs::component::MovementAI>(enemy, {movAI});
         world.registry.addComponent<ecs::component::Health>(enemy, {500});
@@ -149,7 +149,7 @@ namespace ecs
         world.registry.addComponent<ecs::component::Direction>(enemy, {0, 0});
         world.registry.addComponent<ecs::component::Size>(enemy, {48, 48});
         world.registry.addComponent<ecs::component::NetworkId>(enemy, {static_cast<size_t>(enemy)});
-        world.registry.addComponent<ecs::component::Velocity>(enemy, {15, 15});
+        world.registry.addComponent<ecs::component::Velocity>(enemy, {10, 10});
         world.registry.addComponent<ecs::component::AttackAI>(enemy, {component::AttackAI::AIType::Scout});
         world.registry.addComponent<ecs::component::MovementAI>(enemy, {movAI});
         world.registry.addComponent<ecs::component::Health>(enemy, {250});

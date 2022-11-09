@@ -9,6 +9,7 @@
 #include "components/Size.hpp"
 #include "components/Velocity.hpp"
 #include "components/server/Projectile.hpp"
+#include "EnemyFactory.hpp"
 
 namespace ecs::component
 {
@@ -76,7 +77,7 @@ namespace ecs::component
         if (shooter < factions.size() && factions[shooter])
             fac = factions[shooter].value().faction;
         AttackAI::Action::spawnNewBullet(component::EntityType::Laser, positions[shooter].value().x,
-            positions[shooter].value().y, -1, 0, 20, 10, 15, 0, 5, fac);
+            positions[shooter].value().y, -1, 0, 6, 32, 15, 0, 5, fac);
     }
 
     void AttackAI::Action::shootRocketAttack(const std::size_t shooter)
@@ -95,7 +96,20 @@ namespace ecs::component
             positions[shooter].value().y, -1, 0, 30, 20, 15, 0, 25, fac);
     }
 
-    void AttackAI::Action::invokeAlliesAttack(const std::size_t shooter) {}
+    void AttackAI::Action::invokeAlliesAttack(const std::size_t shooter) {
+        auto const &positions = ecs::WorldManager::getWorld().registry.getComponents<component::Position>();
+        auto const &factions = ecs::WorldManager::getWorld().registry.getComponents<component::Faction>();
+
+        if (!(shooter < positions.size() && shooter < factions.size()))
+            return;
+        if (!(positions[shooter] && factions[shooter]))
+            return;
+
+        ecs::EnemyFactory::spawnEnemy(ecs::WorldManager::getWorld(), ecs::EnemyFactory::EnemyType::Fighter, positions[shooter].value().x - 75, positions[shooter].value().y - 75, factions[shooter].value().faction, MovementAI::AIType::ClockwiseSmall);
+        ecs::EnemyFactory::spawnEnemy(ecs::WorldManager::getWorld(), ecs::EnemyFactory::EnemyType::Fighter, positions[shooter].value().x, positions[shooter].value().y - 50, factions[shooter].value().faction, MovementAI::AIType::ClockwiseBig);
+        ecs::EnemyFactory::spawnEnemy(ecs::WorldManager::getWorld(), ecs::EnemyFactory::EnemyType::Fighter, positions[shooter].value().x + 50, positions[shooter].value().y + 50, factions[shooter].value().faction, MovementAI::AIType::AntiClockwiseSmall);
+        ecs::EnemyFactory::spawnEnemy(ecs::WorldManager::getWorld(), ecs::EnemyFactory::EnemyType::Fighter, positions[shooter].value().x + 50, positions[shooter].value().y - 75, factions[shooter].value().faction, MovementAI::AIType::AntiClockwiseBig);
+    }
 
     const std::unordered_map<AttackAI::PatternType, AttackAI::AI::Pattern> AttackAI::AI::patterns({
         {Wait, AI::Pattern(1000, AttackAI::Action::waitAttack)},
@@ -103,7 +117,7 @@ namespace ecs::component
         {WaitLong, AI::Pattern(2000, AttackAI::Action::waitAttack)},
         {ShootBullet, AI::Pattern(250, AttackAI::Action::shootBulletAttack)},
         {ShootEnergySphere, AI::Pattern(500, AttackAI::Action::shootEnerySphereAttack)},
-        {ShootLaser, AI::Pattern(100, AttackAI::Action::shootLaserAttack)},
+        {ShootLaser, AI::Pattern(50, AttackAI::Action::shootLaserAttack)},
         {ShootRocket, AI::Pattern(350, AttackAI::Action::shootRocketAttack)},
         {InvokeAllies, AI::Pattern(5000, AttackAI::Action::invokeAlliesAttack)}
     });
