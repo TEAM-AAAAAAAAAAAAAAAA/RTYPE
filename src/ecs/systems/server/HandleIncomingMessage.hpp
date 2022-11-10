@@ -42,7 +42,7 @@ namespace ecs::systems
         world.registry.addComponent<ecs::component::Size>(newPlayer, {32, 64});
         world.registry.addComponent<ecs::component::Direction>(newPlayer, {0, 0});
         world.registry.addComponent<ecs::component::EntityType>(newPlayer, {ecs::component::EntityType::Types::Player});
-        world.registry.addComponent<ecs::component::Weapon>(newPlayer, {100, 1000, 10, {20, 20}});
+        world.registry.addComponent<ecs::component::Weapon>(newPlayer, {100, 50, 10, {20, 20}});
         world.registry.addComponent<ecs::component::Health>(newPlayer, {100});
         world.registry.addComponent<ecs::component::NetworkId>(newPlayer, {static_cast<size_t>(newPlayer)});
         world.registry.addComponent<ecs::component::Faction>(newPlayer, {ecs::component::Faction::Factions::Chefs});
