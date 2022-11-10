@@ -136,62 +136,71 @@ $(document).ready(function(){initNavTree('_world_manager_8hpp_source.html',''); 
 <div class="title">WorldManager.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="_world_manager_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_world_8hpp.html">World.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs.html">ecs</a></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;{</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="keyword">class </span>Engine;</div>
+<a href="_world_manager_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">** EPITECH PROJECT, 2022</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">** RTYPE</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">** File description:</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">** WorldManager</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="classecs_1_1_world_manager.html">    8</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classecs_1_1_world_manager.html">WorldManager</a> {</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;      <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="classecs_1_1_world_manager.html#a4883745e53978227e09b10608e6e5b94">   10</a></span>&#160;        <span class="keyword">friend</span> <a class="code" href="classecs_1_1_world_manager.html#a4883745e53978227e09b10608e6e5b94">Engine</a>;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <a class="code" href="classecs_1_1_world_manager.html#ad664e8b3149930ecb59a0afb36733d01">~WorldManager</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_world_8hpp.html">World.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classecs_1_1_world_manager.html#add6da5772c4db1b4631c339ab26b3346">   13</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classecs_1_1_world_manager.html#add6da5772c4db1b4631c339ab26b3346">setWorldSwitchReady</a>(<span class="keywordtype">bool</span> isReady = <span class="keyword">true</span>) { _Instance._worldSwitchReady = isReady; }</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classecs_1_1_world_manager.html#a1e9cb1cc467c773762bfa0c3299068aa">   19</a></span>&#160;        <span class="keyword">static</span> <a class="code" href="classecs_1_1_world.html">ecs::World</a> &amp;<a class="code" href="classecs_1_1_world_manager.html#a1e9cb1cc467c773762bfa0c3299068aa">getWorld</a>() { <span class="keywordflow">return</span> *_Instance._currentWorld; }</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classecs_1_1_world_manager.html#ab8a3b57448589e5301d8ae65f7dbf88e">   26</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classecs_1_1_world_manager.html#ab8a3b57448589e5301d8ae65f7dbf88e">setWaitingWorld</a>(std::function&lt;<a class="code" href="classecs_1_1_world.html">World</a>()&gt; worldGen, <span class="keywordtype">bool</span> worldSwitchReady = <span class="keyword">true</span>)</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <span class="keywordflow">if</span> (_Instance._waitingWorld)</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                _Instance._waitingWorld.release();</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            _Instance._waitingWorld = std::make_unique&lt;ecs::World&gt;(worldGen());</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            _Instance._worldSwitchReady = worldSwitchReady;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        }</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classecs_1_1_world_manager.html#a10a01120738f33cbd31627968add229c">   37</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classecs_1_1_world_manager.html#a10a01120738f33cbd31627968add229c">setWorldSwitchReady</a>() { _Instance._worldSwitchReady = <span class="keyword">true</span>; }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;      <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordtype">bool</span> _worldSwitchReady;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        std::unique_ptr&lt;ecs::World&gt; _currentWorld;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        std::unique_ptr&lt;ecs::World&gt; _waitingWorld;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keyword">static</span> <a class="code" href="classecs_1_1_world_manager.html">WorldManager</a> _Instance;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        [[nodiscard]] <span class="keyword">static</span> <span class="keywordtype">bool</span> isWorldSwitchReady() { <span class="keywordflow">return</span> _Instance._worldSwitchReady; }</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs.html">ecs</a></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">class </span>Engine;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classecs_1_1_world_manager.html">   17</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classecs_1_1_world_manager.html">WorldManager</a> {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;      <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classecs_1_1_world_manager.html#a4883745e53978227e09b10608e6e5b94">   19</a></span>&#160;        <span class="keyword">friend</span> <a class="code" href="classecs_1_1_world_manager.html#a4883745e53978227e09b10608e6e5b94">Engine</a>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <a class="code" href="classecs_1_1_world_manager.html#ad664e8b3149930ecb59a0afb36733d01">~WorldManager</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classecs_1_1_world_manager.html#add6da5772c4db1b4631c339ab26b3346">   22</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classecs_1_1_world_manager.html#add6da5772c4db1b4631c339ab26b3346">setWorldSwitchReady</a>(<span class="keywordtype">bool</span> isReady = <span class="keyword">true</span>) { _Instance._worldSwitchReady = isReady; }</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classecs_1_1_world_manager.html#a1e9cb1cc467c773762bfa0c3299068aa">   28</a></span>&#160;        <span class="keyword">static</span> <a class="code" href="classecs_1_1_world.html">ecs::World</a> &amp;<a class="code" href="classecs_1_1_world_manager.html#a1e9cb1cc467c773762bfa0c3299068aa">getWorld</a>() { <span class="keywordflow">return</span> *_Instance._currentWorld; }</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classecs_1_1_world_manager.html#ab8a3b57448589e5301d8ae65f7dbf88e">   35</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classecs_1_1_world_manager.html#ab8a3b57448589e5301d8ae65f7dbf88e">setWaitingWorld</a>(std::function&lt;<a class="code" href="classecs_1_1_world.html">World</a>()&gt; worldGen, <span class="keywordtype">bool</span> worldSwitchReady = <span class="keyword">true</span>)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            <span class="keywordflow">if</span> (_Instance._waitingWorld)</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                _Instance._waitingWorld.release();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            _Instance._waitingWorld = std::make_unique&lt;ecs::World&gt;(worldGen());</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            _Instance._worldSwitchReady = worldSwitchReady;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        }</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classecs_1_1_world_manager.html#a10a01120738f33cbd31627968add229c">   46</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classecs_1_1_world_manager.html#a10a01120738f33cbd31627968add229c">setWorldSwitchReady</a>() { _Instance._worldSwitchReady = <span class="keyword">true</span>; }</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> switchWorlds()</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keywordflow">if</span> (_Instance._waitingWorld)</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                _Instance._currentWorld.swap(_Instance._waitingWorld);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            _Instance._worldSwitchReady = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        }</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    };</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;} <span class="comment">// namespace ecs</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordtype">bool</span> _worldSwitchReady;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        std::unique_ptr&lt;ecs::World&gt; _currentWorld;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        std::unique_ptr&lt;ecs::World&gt; _waitingWorld;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">static</span> <a class="code" href="classecs_1_1_world_manager.html">WorldManager</a> _Instance;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        [[nodiscard]] <span class="keyword">static</span> <span class="keywordtype">bool</span> isWorldSwitchReady() { <span class="keywordflow">return</span> _Instance._worldSwitchReady; }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> switchWorlds()</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keywordflow">if</span> (_Instance._waitingWorld)</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                _Instance._currentWorld.swap(_Instance._waitingWorld);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            _Instance._worldSwitchReady = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        }</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    };</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;} <span class="comment">// namespace ecs</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclassecs_1_1_world_manager_html_a10a01120738f33cbd31627968add229c"><div class="ttname"><a href="classecs_1_1_world_manager.html#a10a01120738f33cbd31627968add229c">ecs::WorldManager::setWorldSwitchReady</a></div><div class="ttdeci">static void setWorldSwitchReady()</div><div class="ttdef"><b>Definition:</b> WorldManager.hpp:37</div></div>
-<div class="ttc" id="aclassecs_1_1_world_manager_html_a1e9cb1cc467c773762bfa0c3299068aa"><div class="ttname"><a href="classecs_1_1_world_manager.html#a1e9cb1cc467c773762bfa0c3299068aa">ecs::WorldManager::getWorld</a></div><div class="ttdeci">static ecs::World &amp; getWorld()</div><div class="ttdef"><b>Definition:</b> WorldManager.hpp:19</div></div>
+<div class="ttc" id="aclassecs_1_1_world_manager_html_a10a01120738f33cbd31627968add229c"><div class="ttname"><a href="classecs_1_1_world_manager.html#a10a01120738f33cbd31627968add229c">ecs::WorldManager::setWorldSwitchReady</a></div><div class="ttdeci">static void setWorldSwitchReady()</div><div class="ttdef"><b>Definition:</b> WorldManager.hpp:46</div></div>
+<div class="ttc" id="aclassecs_1_1_world_manager_html_a1e9cb1cc467c773762bfa0c3299068aa"><div class="ttname"><a href="classecs_1_1_world_manager.html#a1e9cb1cc467c773762bfa0c3299068aa">ecs::WorldManager::getWorld</a></div><div class="ttdeci">static ecs::World &amp; getWorld()</div><div class="ttdef"><b>Definition:</b> WorldManager.hpp:28</div></div>
 <div class="ttc" id="aclassecs_1_1_world_manager_html_ad664e8b3149930ecb59a0afb36733d01"><div class="ttname"><a href="classecs_1_1_world_manager.html#ad664e8b3149930ecb59a0afb36733d01">ecs::WorldManager::~WorldManager</a></div><div class="ttdeci">~WorldManager()=default</div></div>
-<div class="ttc" id="aclassecs_1_1_world_manager_html_a4883745e53978227e09b10608e6e5b94"><div class="ttname"><a href="classecs_1_1_world_manager.html#a4883745e53978227e09b10608e6e5b94">ecs::WorldManager::Engine</a></div><div class="ttdeci">friend Engine</div><div class="ttdef"><b>Definition:</b> WorldManager.hpp:10</div></div>
+<div class="ttc" id="aclassecs_1_1_world_manager_html_a4883745e53978227e09b10608e6e5b94"><div class="ttname"><a href="classecs_1_1_world_manager.html#a4883745e53978227e09b10608e6e5b94">ecs::WorldManager::Engine</a></div><div class="ttdeci">friend Engine</div><div class="ttdef"><b>Definition:</b> WorldManager.hpp:19</div></div>
 <div class="ttc" id="a_world_8hpp_html"><div class="ttname"><a href="_world_8hpp.html">World.hpp</a></div></div>
 <div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:19</div></div>
 <div class="ttc" id="a_world_manager_8hpp_html"><div class="ttname"><a href="_world_manager_8hpp.html">WorldManager.hpp</a></div></div>
-<div class="ttc" id="aclassecs_1_1_world_manager_html"><div class="ttname"><a href="classecs_1_1_world_manager.html">ecs::WorldManager</a></div><div class="ttdef"><b>Definition:</b> WorldManager.hpp:8</div></div>
+<div class="ttc" id="aclassecs_1_1_world_manager_html"><div class="ttname"><a href="classecs_1_1_world_manager.html">ecs::WorldManager</a></div><div class="ttdef"><b>Definition:</b> WorldManager.hpp:17</div></div>
 <div class="ttc" id="anamespaceecs_html"><div class="ttname"><a href="namespaceecs.html">ecs</a></div><div class="ttdef"><b>Definition:</b> Animated.hpp:12</div></div>
-<div class="ttc" id="aclassecs_1_1_world_manager_html_ab8a3b57448589e5301d8ae65f7dbf88e"><div class="ttname"><a href="classecs_1_1_world_manager.html#ab8a3b57448589e5301d8ae65f7dbf88e">ecs::WorldManager::setWaitingWorld</a></div><div class="ttdeci">static void setWaitingWorld(std::function&lt; World()&gt; worldGen, bool worldSwitchReady=true)</div><div class="ttdef"><b>Definition:</b> WorldManager.hpp:26</div></div>
-<div class="ttc" id="aclassecs_1_1_world_manager_html_add6da5772c4db1b4631c339ab26b3346"><div class="ttname"><a href="classecs_1_1_world_manager.html#add6da5772c4db1b4631c339ab26b3346">ecs::WorldManager::setWorldSwitchReady</a></div><div class="ttdeci">static void setWorldSwitchReady(bool isReady=true)</div><div class="ttdef"><b>Definition:</b> WorldManager.hpp:13</div></div>
+<div class="ttc" id="aclassecs_1_1_world_manager_html_ab8a3b57448589e5301d8ae65f7dbf88e"><div class="ttname"><a href="classecs_1_1_world_manager.html#ab8a3b57448589e5301d8ae65f7dbf88e">ecs::WorldManager::setWaitingWorld</a></div><div class="ttdeci">static void setWaitingWorld(std::function&lt; World()&gt; worldGen, bool worldSwitchReady=true)</div><div class="ttdef"><b>Definition:</b> WorldManager.hpp:35</div></div>
+<div class="ttc" id="aclassecs_1_1_world_manager_html_add6da5772c4db1b4631c339ab26b3346"><div class="ttname"><a href="classecs_1_1_world_manager.html#add6da5772c4db1b4631c339ab26b3346">ecs::WorldManager::setWorldSwitchReady</a></div><div class="ttdeci">static void setWorldSwitchReady(bool isReady=true)</div><div class="ttdef"><b>Definition:</b> WorldManager.hpp:22</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
