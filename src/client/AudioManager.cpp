@@ -10,7 +10,11 @@
 
 namespace audio
 {
-    AudioManager AudioManager::_Instance;
+    AudioManager &AudioManager::getInstance()
+    {
+        static AudioManager _Instance;
+        return _Instance;
+    }
 
     bool AudioManager::loadBGM(const std::string &key)
     {
