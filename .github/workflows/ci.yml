@@ -54,7 +54,7 @@ jobs:
           - platform: windows-latest
             triplet: x64-windows
           - platform: ubuntu-latest
-            triplet: x64-linux-dynamic 
+            triplet: x64-linux-dynamic
     needs: [clean_repo]
     runs-on: ${{ matrix.platform }}
     env:
@@ -96,7 +96,7 @@ jobs:
         run: |
           cmake_path(SET VCPKG_TOOLCHAIN_PATH ${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake)
           message(STATUS "Using vcpkg.cmake in: ${VCPKG_TOOLCHAIN_PATH}")
-          cmake_path(SET SFML_DIR ${{ github.workspace }}/vcpkg/installed/${{ matrix.triplet }}/share/sfml)
+          cmake_path(SET SFML_DIR ${{ github.workspace }}/vcpkg/installed/${{ matrix.triplet }}/lib)
           message(STATUS "Using SFML_DIR: ${SFML_DIR}")
           if (${{ matrix.platform }} STREQUAL "windows-latest")
             execute_process(
