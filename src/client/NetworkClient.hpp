@@ -29,40 +29,40 @@ namespace network
          */
         ~Client()
         {
-            _Instance._isStillRunning = false;
-            _Instance._ioService.stop();
-            _Instance._outgoingService.join();
-            _Instance._incomingService.join();
-            _Instance._socket.close();
+            getInstance()._isStillRunning = false;
+            getInstance()._ioService.stop();
+            getInstance()._outgoingService.join();
+            getInstance()._incomingService.join();
+            getInstance()._socket.close();
         }
 
         /**
          * Getters & Setters of client Class
          */
-        static inline void setHost(const std::string &host) { _Instance._host = host; }
+        static inline void setHost(const std::string &host) { getInstance()._host = host; }
 
-        static void setPort(const std::string &port) { _Instance._port = port; }
+        static void setPort(const std::string &port) { getInstance()._port = port; }
 
-        static inline LockedQueue<Message> &getOutgoingMessages() { return _Instance._outgoingMessages; }
+        static inline LockedQueue<Message> &getOutgoingMessages() { return getInstance()._outgoingMessages; }
 
-        static inline LockedQueue<Message> &getReceivedMessages() { return _Instance._receivedMessages; }
+        static inline LockedQueue<Message> &getReceivedMessages() { return getInstance()._receivedMessages; }
 
         /**
          * Static methods used to connect to the given server (host, port) using udp::v4
          */
         static inline void connect()
         {
-            udp::resolver resolver(_Instance._ioService);
-            _Instance._socket = udp::socket(_Instance._ioService);
-            udp::resolver::query query(udp::v4(), _Instance._host, _Instance._port);
-            _Instance._endpoint = *resolver.resolve(query);
-            _Instance._socket.open(udp::v4());
+            udp::resolver resolver(getInstance()._ioService);
+            getInstance()._socket = udp::socket(getInstance()._ioService);
+            udp::resolver::query query(udp::v4(), getInstance()._host, getInstance()._port);
+            getInstance()._endpoint = *resolver.resolve(query);
+            getInstance()._socket.open(udp::v4());
         }
 
         static inline void disconnect()
         {
-            _Instance._ioService.stop();
-            _Instance._socket.close();
+            getInstance()._ioService.stop();
+            getInstance()._socket.close();
         }
 
       private:
@@ -180,7 +180,8 @@ namespace network
          */
         std::thread _incomingService;
         std::thread _outgoingService;
-
-        static Client _Instance;
+        
+        static Client &getInstance();
+//        static Client getInstance();
     };
 } // namespace network
