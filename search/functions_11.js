@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['update_606',['update',['../classanim_1_1_animation.html#a4318baf0b0735e7da87b2c6d3d3a2705',1,'anim::Animation']]]
+  ['text_669',['Text',['../structecs_1_1component_1_1_text.html#a0a48becf28e630a5304067f2d32e6855',1,'ecs::component::Text']]]
 ];

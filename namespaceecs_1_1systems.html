@@ -145,6 +145,8 @@ Variables</h2></td></tr>
 <tr class="separator:a2fd9edee75e08faf0781a87e9e9c3def"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7690be6352e10d6bf8b0c79bcd2bcd3"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">draw</a></td></tr>
 <tr class="separator:ab7690be6352e10d6bf8b0c79bcd2bcd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0f0d16128e4e5a8d8137f4927d8619c"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#af0f0d16128e4e5a8d8137f4927d8619c">executeOnce</a></td></tr>
+<tr class="separator:af0f0d16128e4e5a8d8137f4927d8619c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ef17d23a38a80a3e15a78a0cdb5c005"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#a3ef17d23a38a80a3e15a78a0cdb5c005">HandleIncomingMessages</a></td></tr>
 <tr class="separator:a3ef17d23a38a80a3e15a78a0cdb5c005"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9559eb78ab62e2fcdcebc80dc0d26673"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#a9559eb78ab62e2fcdcebc80dc0d26673">HandleParallaxBounds</a></td></tr>
@@ -155,6 +157,8 @@ Variables</h2></td></tr>
 <tr class="separator:a4294eeb80a7b9f00e1baad04f18dad03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4259c57e73934aa863c710dc88386edd"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#a4259c57e73934aa863c710dc88386edd">handleSFMLKeys</a></td></tr>
 <tr class="separator:a4259c57e73934aa863c710dc88386edd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0d6f19299b7bdd362a9196562574ec8"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#aa0d6f19299b7bdd362a9196562574ec8">menuSelect</a></td></tr>
+<tr class="separator:aa0d6f19299b7bdd362a9196562574ec8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea6fa503923e813d900cfc64890d626e"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#aea6fa503923e813d900cfc64890d626e">SendDirection</a></td></tr>
 <tr class="separator:aea6fa503923e813d900cfc64890d626e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac67f4a6799296119e6faddb95989b6ab"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#ac67f4a6799296119e6faddb95989b6ab">manageClientEvents</a></td></tr>
@@ -263,6 +267,32 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Used to set the scale, the position and the texture of the entity before display it </p>
+
+</div>
+</div>
+<a id="af0f0d16128e4e5a8d8137f4927d8619c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0f0d16128e4e5a8d8137f4927d8619c">&#9670;&nbsp;</a></span>executeOnce</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt; ecs::systems::executeOnce</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= [](World &amp;world) {</div>
+<div class="line">        <span class="keyword">static</span> <span class="keywordtype">bool</span> executed = <span class="keyword">false</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (!executed) {</div>
+<div class="line">            <a class="code" href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a> msg;</div>
+<div class="line">            msg.fill(0);</div>
+<div class="line">            <a class="code" href="classnetwork_1_1_client.html#ab803b1a4b60b0d5ca35b84e95729c2b4">network::Client::connect</a>();</div>
+<div class="line">            <a class="code" href="classnetwork_1_1_client.html#ab4ee2988395ad66a1c4e259eba436d23">network::Client::getOutgoingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">push</a>(msg);</div>
+<div class="line">            executed = <span class="keyword">true</span>;</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Login to the server only once </p>
 
 </div>
 </div>
@@ -386,6 +416,20 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Used to manage every client' events Refer to SFMLEvents.hpp documentation to learn more about managed events </p>
+
+</div>
+</div>
+<a id="aa0d6f19299b7bdd362a9196562574ec8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0d6f19299b7bdd362a9196562574ec8">&#9670;&nbsp;</a></span>menuSelect</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt; ecs::systems::menuSelect</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -585,9 +629,10 @@ Variables</h2></td></tr>
 <div class="ttc" id="aclassnetwork_1_1_client_html_ab4ee2988395ad66a1c4e259eba436d23"><div class="ttname"><a href="classnetwork_1_1_client.html#ab4ee2988395ad66a1c4e259eba436d23">network::Client::getOutgoingMessages</a></div><div class="ttdeci">static LockedQueue&lt; Message &gt; &amp; getOutgoingMessages()</div><div class="ttdef"><b>Definition:</b> NetworkClient.hpp:46</div></div>
 <div class="ttc" id="aclassecs_1_1_world_html_a71b5c2fb034c78a6270c44e42a0e2360"><div class="ttname"><a href="classecs_1_1_world.html#a71b5c2fb034c78a6270c44e42a0e2360">ecs::World::registry</a></div><div class="ttdeci">Registry registry</div><div class="ttdef"><b>Definition:</b> World.hpp:75</div></div>
 <div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:19</div></div>
+<div class="ttc" id="aclassnetwork_1_1_client_html_ab803b1a4b60b0d5ca35b84e95729c2b4"><div class="ttname"><a href="classnetwork_1_1_client.html#ab803b1a4b60b0d5ca35b84e95729c2b4">network::Client::connect</a></div><div class="ttdeci">static void connect()</div><div class="ttdef"><b>Definition:</b> NetworkClient.hpp:53</div></div>
 <div class="ttc" id="aclassecs_1_1_world_html_a298b46d7b7f1742f43ac2f8cb7ef9e95"><div class="ttname"><a href="classecs_1_1_world.html#a298b46d7b7f1742f43ac2f8cb7ef9e95">ecs::World::addSystem</a></div><div class="ttdeci">void addSystem(const std::function&lt; void(World &amp;)&gt; &amp;system)</div><div class="ttdef"><b>Definition:</b> World.hpp:40</div></div>
-<div class="ttc" id="anamespaceecs_1_1systems_html_ab7690be6352e10d6bf8b0c79bcd2bcd3"><div class="ttname"><a href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">ecs::systems::draw</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; draw</div><div class="ttdef"><b>Definition:</b> Draw.hpp:26</div></div>
-<div class="ttc" id="anamespaceanim_html"><div class="ttname"><a href="namespaceanim.html">anim</a></div><div class="ttdef"><b>Definition:</b> Animation.hpp:13</div></div>
+<div class="ttc" id="anamespaceecs_1_1systems_html_ab7690be6352e10d6bf8b0c79bcd2bcd3"><div class="ttname"><a href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">ecs::systems::draw</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; draw</div><div class="ttdef"><b>Definition:</b> Draw.hpp:27</div></div>
+<div class="ttc" id="anamespaceanim_html"><div class="ttname"><a href="namespaceanim.html">anim</a></div><div class="ttdef"><b>Definition:</b> Animation.hpp:12</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

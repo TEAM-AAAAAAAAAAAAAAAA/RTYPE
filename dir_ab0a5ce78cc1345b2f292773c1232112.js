@@ -1,5 +1,8 @@
 var dir_ab0a5ce78cc1345b2f292773c1232112 =
 [
+    [ "Activable.hpp", "_activable_8hpp.html", [
+      [ "Activable", "structecs_1_1component_1_1_activable.html", "structecs_1_1component_1_1_activable" ]
+    ] ],
     [ "Animated.hpp", "_animated_8hpp.html", [
       [ "Animated", "structecs_1_1component_1_1_animated.html", "structecs_1_1component_1_1_animated" ],
       [ "AnimFrame", "structecs_1_1component_1_1_animated_1_1_anim_frame.html", "structecs_1_1component_1_1_animated_1_1_anim_frame" ]
@@ -18,5 +21,8 @@ var dir_ab0a5ce78cc1345b2f292773c1232112 =
     ] ],
     [ "Shootable.hpp", "_shootable_8hpp.html", [
       [ "Shootable", "structecs_1_1component_1_1_shootable.html", "structecs_1_1component_1_1_shootable" ]
+    ] ],
+    [ "Text.hpp", "_text_8hpp.html", [
+      [ "Text", "structecs_1_1component_1_1_text.html", "structecs_1_1component_1_1_text" ]
     ] ]
 ];

@@ -150,7 +150,7 @@ $(document).ready(function(){initNavTree('_engine_8hpp_source.html',''); initRes
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_engine_8hpp.html">Engine.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_registry_8hpp.html">Registry.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;Window.hpp&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_window_8hpp.html">Window.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_world_8hpp.html">World.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_world_manager_8hpp.html">WorldManager.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
@@ -162,7 +162,7 @@ $(document).ready(function(){initNavTree('_engine_8hpp_source.html',''); initRes
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        {</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <a class="code" href="classecs_1_1_world_manager.html#a10a01120738f33cbd31627968add229c">ecs::WorldManager::setWorldSwitchReady</a>(<span class="keyword">false</span>);</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <a class="code" href="classecs_1_1_world.html">ecs::World</a> initWorld;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            ecs::WorldManager::_Instance._currentWorld = std::make_unique&lt;ecs::World&gt;(initWorld);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            ecs::WorldManager::getInstance()._currentWorld = std::make_unique&lt;ecs::World&gt;(initWorld);</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        }</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classecs_1_1_engine.html#aa7ecda3685c27b8f859fdf0e764f0a94">   49</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classecs_1_1_engine.html#aa7ecda3685c27b8f859fdf0e764f0a94">run</a>()</div>
@@ -178,17 +178,18 @@ $(document).ready(function(){initNavTree('_engine_8hpp_source.html',''); initRes
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclassecs_1_1_engine_html_af2fcd7f1d97c2e968bedf081c8303793"><div class="ttname"><a href="classecs_1_1_engine.html#af2fcd7f1d97c2e968bedf081c8303793">ecs::Engine::Engine</a></div><div class="ttdeci">Engine()</div><div class="ttdef"><b>Definition:</b> Engine.hpp:38</div></div>
-<div class="ttc" id="aclassecs_1_1_world_manager_html_a10a01120738f33cbd31627968add229c"><div class="ttname"><a href="classecs_1_1_world_manager.html#a10a01120738f33cbd31627968add229c">ecs::WorldManager::setWorldSwitchReady</a></div><div class="ttdeci">static void setWorldSwitchReady()</div><div class="ttdef"><b>Definition:</b> WorldManager.hpp:46</div></div>
+<div class="ttc" id="aclassecs_1_1_world_manager_html_a10a01120738f33cbd31627968add229c"><div class="ttname"><a href="classecs_1_1_world_manager.html#a10a01120738f33cbd31627968add229c">ecs::WorldManager::setWorldSwitchReady</a></div><div class="ttdeci">static void setWorldSwitchReady()</div><div class="ttdef"><b>Definition:</b> WorldManager.hpp:45</div></div>
 <div class="ttc" id="aclassutils_1_1_window_html_adf07a85381bcbdf6cb2c71db03302e38"><div class="ttname"><a href="classutils_1_1_window.html#adf07a85381bcbdf6cb2c71db03302e38">utils::Window::isOpen</a></div><div class="ttdeci">static bool isOpen()</div><div class="ttdef"><b>Definition:</b> Window.hpp:46</div></div>
-<div class="ttc" id="aclassecs_1_1_world_manager_html_a1e9cb1cc467c773762bfa0c3299068aa"><div class="ttname"><a href="classecs_1_1_world_manager.html#a1e9cb1cc467c773762bfa0c3299068aa">ecs::WorldManager::getWorld</a></div><div class="ttdeci">static ecs::World &amp; getWorld()</div><div class="ttdef"><b>Definition:</b> WorldManager.hpp:28</div></div>
+<div class="ttc" id="aclassecs_1_1_world_manager_html_a1e9cb1cc467c773762bfa0c3299068aa"><div class="ttname"><a href="classecs_1_1_world_manager.html#a1e9cb1cc467c773762bfa0c3299068aa">ecs::WorldManager::getWorld</a></div><div class="ttdeci">static ecs::World &amp; getWorld()</div><div class="ttdef"><b>Definition:</b> WorldManager.hpp:27</div></div>
 <div class="ttc" id="a_registry_8hpp_html"><div class="ttname"><a href="_registry_8hpp.html">Registry.hpp</a></div></div>
 <div class="ttc" id="aclassecs_1_1_world_html_a0015fa0624f4eeaa5178d189bf5e233b"><div class="ttname"><a href="classecs_1_1_world.html#a0015fa0624f4eeaa5178d189bf5e233b">ecs::World::runSystems</a></div><div class="ttdeci">void runSystems()</div><div class="ttdef"><b>Definition:</b> World.hpp:29</div></div>
+<div class="ttc" id="a_window_8hpp_html"><div class="ttname"><a href="_window_8hpp.html">Window.hpp</a></div></div>
 <div class="ttc" id="a_world_8hpp_html"><div class="ttname"><a href="_world_8hpp.html">World.hpp</a></div></div>
 <div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:19</div></div>
 <div class="ttc" id="a_world_manager_8hpp_html"><div class="ttname"><a href="_world_manager_8hpp.html">WorldManager.hpp</a></div></div>
 <div class="ttc" id="aclassecs_1_1_engine_html_aa7ecda3685c27b8f859fdf0e764f0a94"><div class="ttname"><a href="classecs_1_1_engine.html#aa7ecda3685c27b8f859fdf0e764f0a94">ecs::Engine::run</a></div><div class="ttdeci">void run()</div><div class="ttdef"><b>Definition:</b> Engine.hpp:49</div></div>
 <div class="ttc" id="a_engine_8hpp_html"><div class="ttname"><a href="_engine_8hpp.html">Engine.hpp</a></div></div>
-<div class="ttc" id="anamespaceecs_html"><div class="ttname"><a href="namespaceecs.html">ecs</a></div><div class="ttdef"><b>Definition:</b> Animated.hpp:12</div></div>
+<div class="ttc" id="anamespaceecs_html"><div class="ttname"><a href="namespaceecs.html">ecs</a></div><div class="ttdef"><b>Definition:</b> Activable.hpp:14</div></div>
 <div class="ttc" id="aclassecs_1_1_engine_html"><div class="ttname"><a href="classecs_1_1_engine.html">ecs::Engine</a></div><div class="ttdef"><b>Definition:</b> Engine.hpp:28</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

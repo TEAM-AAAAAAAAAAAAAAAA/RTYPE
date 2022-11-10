@@ -1,5 +1,6 @@
 var namespaceecs_1_1component =
 [
+    [ "Activable", "structecs_1_1component_1_1_activable.html", "structecs_1_1component_1_1_activable" ],
     [ "Animated", "structecs_1_1component_1_1_animated.html", "structecs_1_1component_1_1_animated" ],
     [ "AttackAI", "structecs_1_1component_1_1_attack_a_i.html", "structecs_1_1component_1_1_attack_a_i" ],
     [ "Controllable", "structecs_1_1component_1_1_controllable.html", "structecs_1_1component_1_1_controllable" ],
@@ -16,6 +17,7 @@ var namespaceecs_1_1component =
     [ "Projectile", "structecs_1_1component_1_1_projectile.html", "structecs_1_1component_1_1_projectile" ],
     [ "Shootable", "structecs_1_1component_1_1_shootable.html", "structecs_1_1component_1_1_shootable" ],
     [ "Size", "structecs_1_1component_1_1_size.html", "structecs_1_1component_1_1_size" ],
+    [ "Text", "structecs_1_1component_1_1_text.html", "structecs_1_1component_1_1_text" ],
     [ "Velocity", "structecs_1_1component_1_1_velocity.html", "structecs_1_1component_1_1_velocity" ],
     [ "Weapon", "structecs_1_1component_1_1_weapon.html", "structecs_1_1component_1_1_weapon" ]
 ];

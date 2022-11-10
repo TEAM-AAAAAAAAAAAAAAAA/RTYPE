@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['enemytype_694',['EnemyType',['../classecs_1_1_enemy_factory.html#a61e138c0eaa79a98c9839a06fc9ce2a2',1,'ecs::EnemyFactory']]],
-  ['eventtype_695',['EventType',['../classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0f',1,'ecs::Event']]]
+  ['buttonactiontype_771',['ButtonActionType',['../namespaceutils_1_1constant.html#aedab96aa6a623b7cdf76c0aba84861b4',1,'utils::constant']]],
+  ['buttontype_772',['ButtonType',['../namespaceutils_1_1constant.html#a2a092789810efba5b9fd04d4edf0d4cd',1,'utils::constant']]]
 ];

@@ -1,7 +1,22 @@
 var _constant_8hpp =
 [
+    [ "ButtonValue", "structutils_1_1constant_1_1_button_value.html", "structutils_1_1constant_1_1_button_value" ],
     [ "chrono", "_constant_8hpp.html#ab4d7e2d46688914f26626a619f8326af", null ],
     [ "chronoDuration", "_constant_8hpp.html#ad903a57ac8f070571efdf25fbdcb0c29", null ],
+    [ "ButtonActionType", "_constant_8hpp.html#aedab96aa6a623b7cdf76c0aba84861b4", [
+      [ "PLAY_ACTION", "_constant_8hpp.html#aedab96aa6a623b7cdf76c0aba84861b4abeac19d1265f51e2bba68cf5fb490b63", null ],
+      [ "QUIT_ACTION", "_constant_8hpp.html#aedab96aa6a623b7cdf76c0aba84861b4a6aaa945d6b4336fdcf7b8282e7b0699b", null ],
+      [ "OPTIONS_ACTION", "_constant_8hpp.html#aedab96aa6a623b7cdf76c0aba84861b4a16d271dd41ca3cbbe920623ec74b6678", null ],
+      [ "CONNECT_ACTION", "_constant_8hpp.html#aedab96aa6a623b7cdf76c0aba84861b4a698e623dc682a2dfa58d557ad2633e4b", null ]
+    ] ],
+    [ "ButtonType", "_constant_8hpp.html#a2a092789810efba5b9fd04d4edf0d4cd", [
+      [ "PLAY", "_constant_8hpp.html#a2a092789810efba5b9fd04d4edf0d4cdac983a45a542e7fb4b4f319ef12fe1cf3", null ],
+      [ "OPTIONS", "_constant_8hpp.html#a2a092789810efba5b9fd04d4edf0d4cda36fa97f7562cf2ed2651034ddbde46a3", null ],
+      [ "QUIT", "_constant_8hpp.html#a2a092789810efba5b9fd04d4edf0d4cda6a12a755c6555b029258043dd9683f68", null ],
+      [ "PLAY_HOVER", "_constant_8hpp.html#a2a092789810efba5b9fd04d4edf0d4cdab5a03b6cf978241b6354065fb57d9a5e", null ],
+      [ "OPTION_HOVER", "_constant_8hpp.html#a2a092789810efba5b9fd04d4edf0d4cdae92898cb56fc8ec823b694b44f5b5b0e", null ],
+      [ "QUIT_HOVER", "_constant_8hpp.html#a2a092789810efba5b9fd04d4edf0d4cdaf7c1ce0dd91059c2609122672335adcd", null ]
+    ] ],
     [ "PacketType", "_constant_8hpp.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477", [
       [ "PLAYER_MOVE", "_constant_8hpp.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ae5d30e9f7bb333d07bd8a1a8b35ecb06", null ],
       [ "PLAYER_SHOT", "_constant_8hpp.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a9aecf06d78c05845cbb3c8f960a13d4c", null ],

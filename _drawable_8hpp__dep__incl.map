@@ -1,7 +1,7 @@
 <map id="src/ecs/components/client/Drawable.hpp" name="src/ecs/components/client/Drawable.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="127,5,283,47"/>
-<area shape="rect" id="node2" href="$client_2entrypoint_8cpp.html" title=" " alt="" coords="116,184,294,211"/>
-<area shape="rect" id="node3" href="$_animate_8hpp.html" title=" " alt="" coords="27,95,194,136"/>
-<area shape="rect" id="node4" href="$_draw_8hpp.html" title=" " alt="" coords="218,95,384,136"/>
-<area shape="rect" id="node5" href="$_handle_incoming_messages_8hpp.html" title=" " alt="" coords="408,95,634,136"/>
+<area shape="rect" id="node1" title=" " alt="" coords="128,5,284,47"/>
+<area shape="rect" id="node2" href="$_get_world_8cpp.html" title=" " alt="" coords="216,184,388,211"/>
+<area shape="rect" id="node3" href="$_animate_8hpp.html" title=" " alt="" coords="28,95,195,136"/>
+<area shape="rect" id="node4" href="$_draw_8hpp.html" title=" " alt="" coords="219,95,385,136"/>
+<area shape="rect" id="node5" href="$_handle_incoming_messages_8hpp.html" title=" " alt="" coords="409,95,635,136"/>
 </map>

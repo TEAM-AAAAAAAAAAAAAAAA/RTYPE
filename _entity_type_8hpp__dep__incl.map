@@ -1,13 +1,13 @@
 <map id="src/ecs/components/EntityType.hpp" name="src/ecs/components/EntityType.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="600,5,751,47"/>
-<area shape="rect" id="node2" href="$_attack_a_i_8hpp.html" title=" " alt="" coords="229,95,383,136"/>
+<area shape="rect" id="node1" title=" " alt="" coords="595,5,745,47"/>
+<area shape="rect" id="node2" href="$_attack_a_i_8hpp.html" title=" " alt="" coords="226,95,381,136"/>
 <area shape="rect" id="node3" href="$_attack_a_i_8cpp.html" title=" " alt="" coords="5,184,159,225"/>
-<area shape="rect" id="node7" href="$_handle_incoming_messages_8hpp.html" title=" " alt="" coords="437,95,663,136"/>
-<area shape="rect" id="node9" href="$_movement_8hpp.html" title=" " alt="" coords="687,102,915,129"/>
-<area shape="rect" id="node10" href="$_handle_incoming_message_8hpp.html" title=" " alt="" coords="843,184,1062,225"/>
-<area shape="rect" id="node11" href="$_position_update_8hpp.html" title=" " alt="" coords="1002,95,1173,136"/>
+<area shape="rect" id="node7" href="$_handle_incoming_messages_8hpp.html" title=" " alt="" coords="432,95,657,136"/>
+<area shape="rect" id="node9" href="$_movement_8hpp.html" title=" " alt="" coords="681,102,909,129"/>
+<area shape="rect" id="node10" href="$_handle_incoming_message_8hpp.html" title=" " alt="" coords="838,184,1057,225"/>
+<area shape="rect" id="node11" href="$_position_update_8hpp.html" title=" " alt="" coords="997,95,1167,136"/>
 <area shape="rect" id="node4" href="$_enemy_factory_8cpp.html" title=" " alt="" coords="183,191,371,218"/>
 <area shape="rect" id="node5" href="$_run_attack_a_i_8hpp.html" title=" " alt="" coords="395,184,566,225"/>
-<area shape="rect" id="node6" href="$server_2entrypoint_8cpp.html" title=" " alt="" coords="787,273,971,300"/>
-<area shape="rect" id="node8" href="$client_2entrypoint_8cpp.html" title=" " alt="" coords="590,191,769,218"/>
+<area shape="rect" id="node6" href="$server_2entrypoint_8cpp.html" title=" " alt="" coords="782,273,966,300"/>
+<area shape="rect" id="node8" href="$_get_world_8cpp.html" title=" " alt="" coords="591,191,763,218"/>
 </map>
