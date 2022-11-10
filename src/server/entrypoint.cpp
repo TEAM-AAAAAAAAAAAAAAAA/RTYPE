@@ -14,6 +14,7 @@
 #include "systems/server/PositionUpdate.hpp"
 #include "systems/server/ProjectileCollision.hpp"
 #include "systems/server/RunAttackAI.hpp"
+#include "systems/server/Waves.hpp"
 
 ecs::World getGameWorld()
 {
@@ -41,17 +42,18 @@ ecs::World getGameWorld()
     world.addSystem(ecs::systems::runMovementAI);
     world.addSystem(ecs::systems::runAttackAI);
     world.addSystem(ecs::systems::deathUpdate);
+    world.addSystem(ecs::systems::waves);
 
     using AtkAI = ecs::component::AttackAI::AIType;
     using MovAI = ecs::component::MovementAI::AIType;
     using Fac = ecs::component::Faction;
     using EType = ecs::EnemyFactory::EnemyType;
 
-    ecs::EnemyFactory::spawnEnemy(world, EType::Dreadnought, 800, 400, Fac::Uranus, MovAI::Idle);
-    ecs::EnemyFactory::spawnEnemy(world, EType::Fighter, 400, 400, Fac::Janitor, MovAI::QuickLeftRight);
-    ecs::EnemyFactory::spawnEnemy(world, EType::Torpedo, 400, 400, Fac::Alien, MovAI::AntiClockwiseSmall);
-    ecs::EnemyFactory::spawnEnemy(world, EType::NoodleMonster, 1000, 400, Fac::None, MovAI::LongUpDown);
-    ecs::EnemyFactory::spawnEnemy(world, EType::Scout, 800, 800, Fac::Uranus, MovAI::Idle);
+    // ecs::EnemyFactory::spawnEnemy(world, EType::Dreadnought, 800, 400, Fac::Uranus, MovAI::Idle);
+    // ecs::EnemyFactory::spawnEnemy(world, EType::Fighter, 400, 400, Fac::Janitor, MovAI::QuickLeftRight);
+    // ecs::EnemyFactory::spawnEnemy(world, EType::Torpedo, 400, 400, Fac::Alien, MovAI::AntiClockwiseSmall);
+    // ecs::EnemyFactory::spawnEnemy(world, EType::NoodleMonster, 1000, 400, Fac::None, MovAI::LongUpDown);
+    // ecs::EnemyFactory::spawnEnemy(world, EType::Scout, 800, 800, Fac::Uranus, MovAI::Idle);
 
     return world;
 }

@@ -213,7 +213,7 @@ namespace ecs
         world.registry.addComponent<ecs::component::AttackAI>(enemy, {component::AttackAI::AIType::NoodleMonster});
         world.registry.addComponent<ecs::component::MovementAI>(enemy, {movAI});
         world.registry.addComponent<ecs::component::Health>(enemy, {25000});
-        world.registry.addComponent<ecs::component::Faction>(enemy, {component::Faction::Factions::None});
+        world.registry.addComponent<ecs::component::Faction>(enemy, {component::Faction::Factions::Amalgam});
         world.registry.addComponent<ecs::component::EntityType>(
             enemy, {ecs::component::EntityType::Types::NoodleMonster});
     }

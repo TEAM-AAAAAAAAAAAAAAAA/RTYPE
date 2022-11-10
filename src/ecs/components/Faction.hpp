@@ -16,6 +16,7 @@ namespace ecs::component
             Uranus,
             Janitor,
             Alien,
+            Amalgam,
         };
 
         Faction(Factions faction = Factions::None) : faction(faction) {}
