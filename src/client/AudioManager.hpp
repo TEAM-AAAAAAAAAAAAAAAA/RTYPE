@@ -105,6 +105,6 @@ namespace audio
         /**
          * Instance of the AudioManager, lazy loaded
          */
-        AudioManager &getInstance();
+        static AudioManager &getInstance();
     };
 } // namespace audio

@@ -18,13 +18,13 @@ namespace ecs
         friend Engine;
         ~WorldManager() = default;
 
-        static void setWorldSwitchReady(bool isReady = true) { _Instance._worldSwitchReady = isReady; }
+        static void setWorldSwitchReady(bool isReady = true) { getInstance()._worldSwitchReady = isReady; }
 
         /**
          * Used to get the currentWorld currently used by the ecs
          * @return The currently used world by the ecs
          */
-        static ecs::World &getWorld() { return *_Instance._currentWorld; }
+        static ecs::World &getWorld() { return *getInstance()._currentWorld; }
 
         /**
          * Set the world given as parameter to release mode
@@ -33,31 +33,32 @@ namespace ecs
          */
         static void setWaitingWorld(std::function<World()> worldGen, bool worldSwitchReady = true)
         {
-            if (_Instance._waitingWorld)
-                _Instance._waitingWorld.release();
-            _Instance._waitingWorld = std::make_unique<ecs::World>(worldGen());
-            _Instance._worldSwitchReady = worldSwitchReady;
+            if (getInstance()._waitingWorld)
+                getInstance()._waitingWorld.release();
+            getInstance()._waitingWorld = std::make_unique<ecs::World>(worldGen());
+            getInstance()._worldSwitchReady = worldSwitchReady;
         }
 
         /**
          * Set the world given as parameter ready to switch for another one
          */
-        static void setWorldSwitchReady() { _Instance._worldSwitchReady = true; }
+        static void setWorldSwitchReady() { getInstance()._worldSwitchReady = true; }
 
       private:
         bool _worldSwitchReady;
         std::unique_ptr<ecs::World> _currentWorld;
         std::unique_ptr<ecs::World> _waitingWorld;
 
-        static WorldManager _Instance;
 
-        [[nodiscard]] static bool isWorldSwitchReady() { return _Instance._worldSwitchReady; }
+        static WorldManager &getInstance();
+
+        [[nodiscard]] static bool isWorldSwitchReady() { return getInstance()._worldSwitchReady; }
 
         static void switchWorlds()
         {
-            if (_Instance._waitingWorld)
-                _Instance._currentWorld.swap(_Instance._waitingWorld);
-            _Instance._worldSwitchReady = false;
+            if (getInstance()._waitingWorld)
+                getInstance()._currentWorld.swap(getInstance()._waitingWorld);
+            getInstance()._worldSwitchReady = false;
         }
     };
 } // namespace ecs

@@ -9,5 +9,9 @@
 
 namespace ecs
 {
-    WorldManager WorldManager::_Instance;
+    WorldManager &WorldManager::getInstance()
+    {
+        static WorldManager _Instance;
+        return _Instance;
+    }
 }
