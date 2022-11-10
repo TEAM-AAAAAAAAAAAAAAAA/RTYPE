@@ -32,12 +32,12 @@ class HubServer {
                 exit(84);
             }
             if (_pids[i] == 0) {
-                buffer[0] = (char *)(std::to_string(_port + i).c_str());
-                buffer[1] = (char *)(std::to_string(_port + i).c_str());
+                buffer[0] = (char *)(std::to_string(_port + 1 + i).c_str());
+                buffer[1] = (char *)(std::to_string(_port + 1 + i).c_str());
                 execve("./r-type_server", buffer, nullptr);
                 exit(0);
             } else {
-                _serverPorts[i] = _port + i;
+                _serverPorts[i] = _port + i + 1;
                 _serverSlots[i] = 0;
                 _serverIds[i] = network::Server::connect("localhost", std::to_string(_port + i));
                 response.first[0] = 68;
@@ -47,7 +47,13 @@ class HubServer {
         }
     };
 
-    ~HubServer(){};
+    ~HubServer()
+    {
+        for (size_t i = 0; i < 4; i++) {
+            if (_pids[i] != 0)
+                kill(_pids[i], SIGKILL);
+        }
+    };
 
     void handleIncomingMessages()
     {
