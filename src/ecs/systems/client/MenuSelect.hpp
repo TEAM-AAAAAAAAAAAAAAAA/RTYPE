@@ -44,7 +44,7 @@ namespace ecs::systems
                   draw->rect.width = itHoveredButton->second.defaultRectWidth;
                   draw->rect.height = itHoveredButton->second.defaultRectHeight;
                   draw->hovered = true;
-              } else if (draw->hovered && draw->IsButton){
+              } else if (draw->hovered && draw->IsButton) {
                   draw->rect.top = itButton->second.rectTop;
                   if (draw->rect.left == 220)
                       draw->rect.left = 324;

@@ -22,7 +22,6 @@ int main()
     audio::AudioManager::loadBGM("bgm1");
     audio::AudioManager::playBGM(true);
     ecs::WorldManager::setWaitingWorld(getMenuWorld);
-    ecs::WorldManager::setWaitingWorld([] { return getGameWorld("8000", "localhost"); });
     engine.run();
     return 0;
 }
