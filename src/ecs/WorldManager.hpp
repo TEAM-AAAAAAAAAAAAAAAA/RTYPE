@@ -8,7 +8,7 @@ namespace ecs
     class WorldManager {
       public:
         friend Engine;
-        ~WorldManager() {}
+        ~WorldManager() = default;
 
         static void setWorldSwitchReady(bool isReady = true) { _Instance._worldSwitchReady = isReady; }
 

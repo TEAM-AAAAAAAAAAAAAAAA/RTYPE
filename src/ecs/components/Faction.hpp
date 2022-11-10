@@ -12,8 +12,10 @@ namespace ecs::component
     struct Faction {
         enum Factions {
             None,
-            Players,
-            Enemies,
+            Chefs,
+            Uranus,
+            Janitor,
+            Alien,
         };
 
         Faction(Factions faction = Factions::None) : faction(faction) {}

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Constant.hpp"
+#include "EnemyFactory.hpp"
 #include "Engine.hpp"
 #include "Server.hpp"
 #include "components/Faction.hpp"
@@ -41,20 +42,16 @@ ecs::World getGameWorld()
     world.addSystem(ecs::systems::runAttackAI);
     world.addSystem(ecs::systems::deathUpdate);
 
-    using MovementAI = ecs::component::MovementAI;
-    using AttackAI = ecs::component::AttackAI;
+    using AtkAI = ecs::component::AttackAI::AIType;
+    using MovAI = ecs::component::MovementAI::AIType;
+    using Fac = ecs::component::Faction;
+    using EType = ecs::EnemyFactory::EnemyType;
 
-    ecs::Entity enemy = world.registry.spawn_entity();
-    world.registry.addComponent<ecs::component::Position>(enemy, {500, 500});
-    world.registry.addComponent<ecs::component::Direction>(enemy, {0, 0});
-    world.registry.addComponent<ecs::component::Size>(enemy, {32, 64});
-    world.registry.addComponent<ecs::component::MovementAI>(enemy, {MovementAI::AIType::BasicUpDown});
-    world.registry.addComponent<ecs::component::Health>(enemy, {100});
-    world.registry.addComponent<ecs::component::Faction>(enemy, {ecs::component::Faction::Factions::Enemies});
-    world.registry.addComponent<ecs::component::NetworkId>(enemy, {static_cast<size_t>(enemy)});
-    world.registry.addComponent<ecs::component::EntityType>(enemy, {ecs::component::EntityType::Types::EnemyBase});
-    world.registry.addComponent<ecs::component::Velocity>(enemy, {1, 1});
-    world.registry.addComponent<ecs::component::AttackAI>(enemy, {AttackAI::AIType::Fighter});
+    ecs::EnemyFactory::spawnEnemy(world, EType::Dreadnought, 800, 400, Fac::Uranus, MovAI::Idle);
+    ecs::EnemyFactory::spawnEnemy(world, EType::Fighter, 400, 400, Fac::Janitor, MovAI::QuickLeftRight);
+    ecs::EnemyFactory::spawnEnemy(world, EType::Torpedo, 400, 400, Fac::Alien, MovAI::AntiClockwiseSmall);
+    ecs::EnemyFactory::spawnEnemy(world, EType::NoodleMonster, 1000, 400, Fac::None, MovAI::LongUpDown);
+    ecs::EnemyFactory::spawnEnemy(world, EType::Scout, 800, 800, Fac::Uranus, MovAI::Idle);
 
     return world;
 }

@@ -25,14 +25,14 @@ namespace ecs::component
          *
          * @warning ALL MUST BE CREATED IN AttackAI.cpp
          */
-        enum AIType { Scout, Fighter };
+        enum AIType { None, Battlecruiser, Dreadnought, Fighter, Frigate, Scout, Torpedo, NoodleMonster };
 
         /**
          * @brief All possible Patterns created
          *
          * @warning ALL MUST BE CREATED IN AttackAI.cpp
          */
-        enum PatternType { ShootBullet, ShootEnergySphere };
+        enum PatternType { Wait, WaitShort, WaitLong, ShootBullet, ShootEnergySphere, ShootLaser, ShootRocket, InvokeAllies };
 
         size_t lastAttack;
         size_t lastAttackDelay;
@@ -68,7 +68,6 @@ namespace ecs::component
 
                 short reloadTime;
 
-              private:
                 std::function<void(const std::size_t)> _function;
             };
 
@@ -78,12 +77,7 @@ namespace ecs::component
              * @param direction vector that takes pairs of chars
              * @param delay the delay between each step
              */
-            AI(std::vector<PatternType> patterns) : currentAttack(0)
-            {
-                for (auto &&p : patterns) {
-                    _thisPatterns.push_back(patterns.at(p));
-                }
-            }
+            AI(std::vector<PatternType> pattern) : _thisPatterns(pattern), currentAttack(0) {}
 
             /**
              * @brief AI copy constructor
@@ -97,7 +91,7 @@ namespace ecs::component
              *
              * @return const std::vector<PatternType>
              */
-            inline const std::vector<PatternType> getPatterns() const { return _thisPatterns; }
+            inline const std::vector<PatternType> &getPatterns() const { return _thisPatterns; }
 
             static const std::unordered_map<PatternType, Pattern> patterns;
 
@@ -111,8 +105,12 @@ namespace ecs::component
          *
          */
         struct Action {
+            static void waitAttack(const std::size_t shooter);
             static void shootBulletAttack(const std::size_t shooter);
             static void shootEnerySphereAttack(const std::size_t shooter);
+            static void shootLaserAttack(const std::size_t shooter);
+            static void shootRocketAttack(const std::size_t shooter);
+            static void invokeAlliesAttack(const std::size_t shooter);
 
           private:
             /**
@@ -127,14 +125,14 @@ namespace ecs::component
          *
          * @param type the AIType of the entity
          */
-        AttackAI(const AIType &type = Scout) : _thisAI(findAI(type)), lastAttack(0), lastAttackDelay(0) {}
+        AttackAI(const AIType &type = None) : _thisAI(findAI(type)), lastAttack(0), lastAttackDelay(0) {}
 
         /**
          * @brief Get a random attack from the AI
          */
         const AttackAI::AI::Pattern &getRandomAttack() const
         {
-            int attack = std::rand() % _thisAI.getPatterns().size();
+            int attack = _thisAI.getPatterns().at(std::rand() % _thisAI.getPatterns().size());
             return AI::patterns.at(static_cast<PatternType>(attack));
         }
 
