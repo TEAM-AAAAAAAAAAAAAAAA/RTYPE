@@ -28,7 +28,7 @@ int main(int argc, char **argv)
     }
     int base = std::stoi(argv[1]);
     network::Server::start(std::stoi(argv[1]));
-    HubServer hubServer;
+    HubServer hubServer(base);
     while (1)
         hubServer.handleIncomingMessages();
     return 0;

@@ -128,8 +128,24 @@ namespace ecs::systems
         };
     }
 
+    /**
+     * Used send information about the room to the hub server
+     * @param world Not used in this function
+     * @param msg Only used to check packet type
+     */
+    static void sendRoomInfo(World &world, network::ClientMessage &msg)
+    {
+        network::ServerMessage message;
+
+        message.first.fill(0);
+        message.first[0] = 130;
+        message.first[1] = network::Server::getClientCount() & 0xFF;
+        message.second.push_back(msg.second);
+        network::Server::getOutgoingMessages().push(message);
+    }
+
     static std::unordered_map<char, std::function<void(World &, network::ClientMessage &msg)>> packetTypeFunction = {
-        {0, createPlayer}, {utils::constant::PLAYER_MOVE, movePlayer}, {utils::constant::PLAYER_SHOT, playerShoot}};
+        {0, createPlayer}, {utils::constant::PLAYER_MOVE, movePlayer}, {utils::constant::PLAYER_SHOT, playerShoot}, {utils::constant::ROOM_INFO, sendRoomInfo}};
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Server::GetReceivedMessages().empty()) {

@@ -86,6 +86,14 @@ namespace network
             return it->first;
         }
 
+        static uint32_t connect(std::string host, std::string port)
+        {
+            udp::resolver resolver(_Instance._ioService);
+            udp::resolver::query query(udp::v4(), host, port);
+            udp::endpoint endpoint = *resolver.resolve(query);
+            return _Instance.getOrCreateClientID(endpoint);
+        }
+
         /**
          * Remove a client from the clients map
          * @param clientId the clients ID
@@ -128,7 +136,6 @@ namespace network
          * All network related variables
          */
         boost::asio::io_service _ioService;
-        udp::endpoint _serverEndpoint;
         udp::endpoint _remoteEndpoint;
         Message _recvBuffer;
         udp::socket _socket;
@@ -159,6 +166,9 @@ namespace network
         {
             if (!error) {
                 try {
+                    if (_recvBuffer[0] == 68) {
+                        _hubID = getOrCreateClientID(_remoteEndpoint);
+                    }
                     auto message = ClientMessage(std::array(_recvBuffer), getOrCreateClientID(_remoteEndpoint));
                     if (!message.first.empty()) {
                         _receivedMessages.push(message);
@@ -210,7 +220,6 @@ namespace network
             for (const auto &client : _clients)
                 if (client.second == endpoint)
                     return client.first;
-
             auto id = ++_nextClientID;
             _clients.insert(Client(id, endpoint));
             return id;
@@ -254,6 +263,7 @@ namespace network
          */
         ClientList _clients;
         int _nextClientID;
+        int _hubID;
 
         /**
          * Used to know if the server is running or not
@@ -267,8 +277,8 @@ namespace network
          * @param localPort The open localPort of the server
          */
         Server()
-            : _socket(_ioService), _serviceThread(&network::Server::receiveIncoming, this),
-              _nextClientID(0L), _outgoingService(&network::Server::sendOutgoing, this){};
+            : _socket(_ioService), _serviceThread(&network::Server::receiveIncoming, this), _nextClientID(0L),
+              _outgoingService(&network::Server::sendOutgoing, this){};
 
         static Server _Instance;
     };
