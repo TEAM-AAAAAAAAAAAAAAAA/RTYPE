@@ -1,3 +1,12 @@
+/*
+** EPITECH PROJECT, 2022
+** RTYPE
+** File description:
+** WorldManager
+*/
+
+#pragma once
+
 #include <memory>
 #include "World.hpp"
 

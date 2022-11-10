@@ -14,6 +14,7 @@ namespace ecs::component
         enum Types {
             Player,
             OtherPlayer,
+            PlayerBot,
             Bullet,
             EnergySphere,
             Laser,
