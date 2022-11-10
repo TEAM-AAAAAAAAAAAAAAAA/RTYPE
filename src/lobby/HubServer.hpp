@@ -38,10 +38,12 @@ class HubServer {
                 std::array<char, 4> name;
                 std::copy(msg.first.begin() + 1, msg.first.begin() + 5, name.begin());
                 _clientNames.push_back(std::pair(msg.second, name));
+                response.first[0] = 64;
                 response.second.push_back(msg.second);
                 network::Server::getOutgoingMessages().push(response);
             }
             if (msg.first[0] == 128) {
+                response.second.push_back(msg.second);
                 int clientPort = (unsigned char)msg.first[1] << 8U | (unsigned char)msg.first[2];
                 for (size_t i = 0; i < _pids.size(); i++) {
                     if (_pids[i] != 0 && _serverPorts[i] != 0) {
@@ -55,6 +57,7 @@ class HubServer {
                         response.first[5] = tmp;
                         response.first[6] = _serverPorts[i] & 0xff;
                         response.first[7] = _serverSlots[i];
+                        network::Server::getOutgoingMessages().push(response);
                     }
                 }
             }
@@ -91,19 +94,20 @@ class HubServer {
             }
             if (msg.first[0] == 255) {
                 int clientPort = (unsigned char)msg.first[1] << 8U | (unsigned char)msg.first[2];
-                for (size_t i = 0; i < _pids.size(); i++) {
+                size_t i = 0;
+                for (; i < _pids.size(); i++) {
                     if (_serverPorts[i] == clientPort) {
-                        _serverSlots[i] += 1;
                         break;
                     }
                 }
-                for (auto &client : _clientNames) {
-                    if (client.first == msg.second) {
-                        _clientNames.erase(
-                            std::remove(_clientNames.begin(), _clientNames.end(), client), _clientNames.end());
-                        
-                        break;
-                    }
+                response.second.push_back(msg.second);
+                if (_serverPorts[i] == clientPort && _serverSlots[i] < 4) {
+                    _serverSlots[i]++;
+                    response.first[0] = 65;
+                    network::Server::getOutgoingMessages().push(response);
+                } else {
+                    response.first[0] = 66;
+                    network::Server::getOutgoingMessages().push(response);
                 }
             }
         }
