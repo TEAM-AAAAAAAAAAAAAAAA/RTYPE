@@ -12,6 +12,7 @@
 #include <iostream>
 #include "World.hpp"
 #include "components/Direction.hpp"
+#include "components/EntityType.hpp"
 #include "components/Position.hpp"
 #include "components/Velocity.hpp"
 
@@ -25,9 +26,8 @@ namespace ecs::systems
         auto &positions = world.registry.getComponents<component::Position>();
         auto const &velocities = world.registry.getComponents<component::Velocity>();
         auto &directions = world.registry.getComponents<component::Direction>();
-#ifdef CLIENT_COMPILATION_MODE
-        auto const &controllables = world.registry.getComponents<component::Controllable>();
-#endif
+        auto const &entityTypes = world.registry.getComponents<component::EntityType>();
+
         using chrono = std::chrono::high_resolution_clock;
         using chronoDuration = std::chrono::duration<double, std::milli>;
 
@@ -41,6 +41,18 @@ namespace ecs::systems
                 if (pos && vel && dir) {
                     pos.value().x += vel.value().x * dir.value().x;
                     pos.value().y += vel.value().y * dir.value().y;
+                    if (i < entityTypes.size() && entityTypes[i]) {
+                        if (entityTypes[i].value().type == component::EntityType::Types::Player) {
+                            if (pos.value().x < 0)
+                                pos.value().x = 0;
+                            else if (pos.value().x > utils::constant::mapWidth)
+                                pos.value().x = utils::constant::mapWidth;
+                            if (pos.value().y < 0)
+                                pos.value().y = 0;
+                            else if (pos.value().y > utils::constant::mapHeight)
+                                pos.value().y = utils::constant::mapHeight;
+                        }
+                    }
                 }
             };
             clock = chrono::now();

@@ -106,7 +106,12 @@ namespace ecs
             return _data[pos];
         }
 
-        void erase(sizeType pos) { _data[pos] = std::nullopt; }
+        void erase(sizeType pos)
+        {
+            if (pos < _data.size())
+                if (_data[pos])
+                    _data[pos] = std::nullopt;
+        }
 
         /**
          * This function is used to get the index of the std::optional<Component> of the

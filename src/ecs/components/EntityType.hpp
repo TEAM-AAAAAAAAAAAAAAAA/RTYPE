@@ -14,12 +14,33 @@ namespace ecs::component
         enum Types {
             Player,
             OtherPlayer,
+            PlayerBot,
             Bullet,
             EnergySphere,
-            EnemyBase,
-            EnemyBoss,
+            Laser,
+            Rocket,
+            UranusBattlecruiser,
+            UranusDreadnought,
+            UranusFighter,
+            UranusFrigate,
+            UranusScout,
+            UranusTorpedo,
+            JanitorBattlecruiser,
+            JanitorDreadnought,
+            JanitorFighter,
+            JanitorFrigate,
+            JanitorScout,
+            JanitorTorpedo,
+            AlienBattlecruiser,
+            AlienDreadnought,
+            AlienFighter,
+            AlienFrigate,
+            AlienScout,
+            AlienTorpedo,
+            NoodleMonster,
         };
-        EntityType(char type) : type(type) {}
-        char type;
+        EntityType(char type) : type(static_cast<Types>(type)) {}
+        EntityType(Types type) : type(type) {}
+        Types type;
     };
 } // namespace ecs::component
