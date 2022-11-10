@@ -117,7 +117,7 @@ class HubServer {
                     response.second.clear();
                     response.first.fill(0);
                     response.second.push_back(_serverIds[i]);
-                    response.first[0] = 128;
+                    response.first[0] = 127;
                 }
             }
         }
