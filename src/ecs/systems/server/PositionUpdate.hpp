@@ -43,10 +43,12 @@ namespace ecs::systems
         static const int fourthBytePos = 7;
         static const int firstByteSize = 8;
         static const int secondByteSize = 9;
-        static const int firstByteVelocity = 10;
-        static const int secondByteVelocity = 11;
-        static const int dirX = 12;
-        static const int dirY = 13;
+        static const int thirdByteSize = 10;
+        static const int fourthByteSize = 11;
+        static const int firstByteVelocity = 12;
+        static const int secondByteVelocity = 13;
+        static const int dirX = 14;
+        static const int dirY = 15;
 
         static auto clock = utils::constant::chrono::now();
         if (utils::constant::chronoDuration(utils::constant::chrono::now() - clock).count() > 10) {
@@ -63,7 +65,7 @@ namespace ecs::systems
                 if (pos && id && size && type && vel && dir) {
                     std::array<char, 2> idBin = id.value().serialize();
                     std::array<char, 4> posBin = pos.value().serialize();
-                    std::array<char, 2> sizeBin = size.value().serialize();
+                    std::array<char, 4> sizeBin = size.value().serialize();
                     network::Message msg;
                     msg[firstByteId] = idBin[0];
                     msg[secondByteId] = idBin[1];
@@ -74,6 +76,8 @@ namespace ecs::systems
                     msg[fourthBytePos] = posBin[3];
                     msg[firstByteSize] = sizeBin[0];
                     msg[secondByteSize] = sizeBin[1];
+                    msg[thirdByteSize] = sizeBin[2];
+                    msg[fourthByteSize] = sizeBin[3];
                     msg[firstByteVelocity] = velocities[i].value().x;
                     msg[secondByteVelocity] = velocities[i].value().y;
                     msg[dirX] = directions[i].value().x;

@@ -1,3 +1,12 @@
+/*
+** EPITECH PROJECT, 2022
+** RTYPE
+** File description:
+** WorldManager
+*/
+
+#pragma once
+
 #include <memory>
 #include "World.hpp"
 
@@ -8,7 +17,7 @@ namespace ecs
     class WorldManager {
       public:
         friend Engine;
-        ~WorldManager() {}
+        ~WorldManager() = default;
 
         static void setWorldSwitchReady(bool isReady = true) { _Instance._worldSwitchReady = isReady; }
 

@@ -49,14 +49,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [ windows-latest, ubuntu-latest, macos-latest ]
+        platform: [ windows-latest, ubuntu-latest ]
         include:
           - platform: windows-latest
             triplet: x64-windows
           - platform: ubuntu-latest
-            triplet: x64-linux
-          - platform: macos-latest
-            triplet: x64-osx
+            triplet: x64-linux-dynamic
     needs: [clean_repo]
     runs-on: ${{ matrix.platform }}
     env:
@@ -66,7 +64,7 @@ jobs:
         if: matrix.platform == 'ubuntu-latest'
         run: |
           sudo apt update -y && sudo apt upgrade -y
-          sudo apt install -y libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev autoconf libtool
+          sudo apt install -y libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev autoconf libtool libopenal-dev libalut-dev
 
       - uses: actions/checkout@v3
         with:
@@ -75,8 +73,8 @@ jobs:
       - name: Run vcpkg
         uses: lukka/run-vcpkg@v4
         with:
-          vcpkgArguments: 'sfml boost-asio boost-thread boost-property-tree'
           vcpkgDirectory: '${{ github.workspace }}/vcpkg'
+          vcpkgArguments: 'sfml:${{ matrix.triplet }} boost-asio:${{ matrix.triplet }} boost-thread:${{ matrix.triplet }} boost-property-tree:${{ matrix.triplet }}'
           vcpkgGitCommitId: '${{ env.VCPKG_COMMIT }}'
 
 #      - name: Install windows pthreads
@@ -104,7 +102,6 @@ jobs:
                 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
                 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_TOOLCHAIN_PATH}
                 -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE
-                -DBUILD_SHARED_LIBS=TRUE
             RESULT_VARIABLE result
             )
           else()
@@ -114,6 +111,8 @@ jobs:
                 -B build
                 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
                 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_TOOLCHAIN_PATH}
+                -DBoost_NO_SYSTEM_PATHS=TRUE
+                -DBOOST_ROOT=${{ github.workspace }}/vcpkg/installed/${{ matrix.triplet }}
               RESULT_VARIABLE result
             )
           endif()
@@ -127,7 +126,7 @@ jobs:
           message(STATUS "Using host CMake version: ${CMAKE_VERSION}")
 
           execute_process(
-            COMMAND cmake --build build
+            COMMAND cmake --build build -v
             RESULT_VARIABLE result
           )
           if (${{ matrix.platform }} STREQUAL "windows-latest")

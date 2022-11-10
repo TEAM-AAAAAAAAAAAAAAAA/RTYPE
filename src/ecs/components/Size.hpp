@@ -8,12 +8,17 @@ namespace ecs::component
         int width;
         /// @brief serialize the component
         /// @return the serialized component
-        std::array<char, 2> serialize()
+        std::array<char, 4> serialize()
         {
-            std::array<char, 2> pos;
+            std::array<char, 4> pos;
+            size_t tmp = 0;
 
-            pos[0] = width & 0xff;
-            pos[1] = height & 0xff;
+            tmp = width >> 8;
+            pos[0] = tmp;
+            pos[1] = width & 0xff;
+            tmp = height >> 8;
+            pos[2] = tmp;
+            pos[3] = height & 0xff;
             return pos;
         }
     };

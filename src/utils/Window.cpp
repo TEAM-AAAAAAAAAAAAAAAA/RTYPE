@@ -1,5 +1,5 @@
 #ifdef CLIENT_COMPILATION_MODE
-#include "Window.hpp"
+    #include "Window.hpp"
 
 namespace utils
 {

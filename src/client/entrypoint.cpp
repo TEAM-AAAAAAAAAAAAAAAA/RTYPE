@@ -5,6 +5,7 @@
 ** rtype
 */
 
+#include "AudioManager.hpp"
 #include "Engine.hpp"
 #include "NetworkClient.hpp"
 #include "components/Direction.hpp"
@@ -21,13 +22,13 @@
 #include "components/client/Parallax.hpp"
 #include "systems/ManageClientEvents.hpp"
 #include "systems/Movement.hpp"
+#include "systems/client/Animate.hpp"
 #include "systems/client/Draw.hpp"
 #include "systems/client/HandleIncomingMessages.hpp"
 #include "systems/client/HandleParallaxBounds.hpp"
 #include "systems/client/HandleSFMLEvents.hpp"
 #include "systems/client/HandleSFMLKeys.hpp"
 #include "systems/client/SendDirection.hpp"
-#include "systems/client/Animate.hpp"
 
 static void registerAllComponent(ecs::World &world)
 {
@@ -74,7 +75,8 @@ static void setParallax(ecs::World &world)
     ecs::Entity parallaxThirdView = world.registry.spawn_entity();
 
     world.registry.addComponent<ecs::component::Position>(background1, {0, 0});
-    world.registry.addComponent<ecs::component::Size>(background1, {utils::constant::mapHeight, utils::constant::mapWidth});
+    world.registry.addComponent<ecs::component::Size>(
+        background1, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(background1, {"bg1", {0, 0, 5760, 360}});
     world.registry.addComponent<ecs::component::Velocity>(background1, {1, 0});
     world.registry.addComponent<ecs::component::Direction>(background1, {-1, 0});
@@ -91,7 +93,8 @@ static void setParallax(ecs::World &world)
         parallaxFirstView, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
     world.registry.addComponent<ecs::component::Animated>(parallaxFirstView, AnimFrame(0, 0, 640, 360, 15));
     world.registry.addComponent<ecs::component::Position>(background2, {0, 0});
-    world.registry.addComponent<ecs::component::Size>(background2, {utils::constant::mapHeight, utils::constant::mapWidth});
+    world.registry.addComponent<ecs::component::Size>(
+        background2, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(background2, {"bg2", {0, 0, 5760, 360}});
     world.registry.addComponent<ecs::component::Velocity>(background2, {2, 0});
     world.registry.addComponent<ecs::component::Direction>(background2, {-1, 0});
@@ -108,7 +111,8 @@ static void setParallax(ecs::World &world)
     world.registry.addComponent<ecs::component::Animated>(parallaxSecondView, AnimFrame(0, 0, 640, 360, 5));
     world.registry.addComponent<ecs::component::Direction>(parallaxSecondView, {-1, 0});
     world.registry.addComponent<ecs::component::Position>(background3, {0, 0});
-    world.registry.addComponent<ecs::component::Size>(background3, {utils::constant::mapHeight, utils::constant::mapWidth});
+    world.registry.addComponent<ecs::component::Size>(
+        background3, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(background3, {"bg3", {0, 0, 5760, 360}});
     world.registry.addComponent<ecs::component::Velocity>(background3, {3, 0});
     world.registry.addComponent<ecs::component::Parallax>(
@@ -151,6 +155,9 @@ ecs::World getGameWorld()
 int main()
 {
     asset::AssetLoader::LoadIniFile(asset::AssetLoader::smartPath("assets", "config.ini"));
+    audio::AudioManager::playSFX("splash_screen");
+    audio::AudioManager::loadBGM("bgm1");
+    audio::AudioManager::playBGM(true);
     network::Client::setHost("localhost");
     network::Client::setPort("8000");
     network::Client::connect();
