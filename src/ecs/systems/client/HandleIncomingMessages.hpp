@@ -317,7 +317,7 @@ namespace ecs::systems
                 break;
             case component::EntityType::Types::Laser:
                 world.registry.addComponent<component::Drawable>(newEntity,
-                    {"laser", {0, 13, 32, 6},
+                    {"laser", {0, 13, 32, 6}, true, false,
                         std::atan2(static_cast<float>(dirX), static_cast<float>(dirY)) * 180 / 3.14159265359f});
                 world.registry.addComponent<component::Animated>(newEntity,
                     {AnimFrame(0, 13, 32, 6, 100), AnimFrame(0, 45, 32, 6, 100), AnimFrame(0, 77, 32, 6, 100),
@@ -327,7 +327,7 @@ namespace ecs::systems
                 break;
             case component::EntityType::Types::Rocket:
                 world.registry.addComponent<component::Drawable>(newEntity,
-                    {"rocket", {12, 9, 7, 20},
+                    {"rocket", {12, 9, 7, 20}, true, false,
                         std::atan2(static_cast<float>(dirX), static_cast<float>(dirY)) * 180 / 3.14159265359f});
                 world.registry.addComponent<component::Animated>(newEntity,
                     {AnimFrame(12, 9, 7, 20, 100), AnimFrame(44, 9, 7, 20, 100), AnimFrame(79, 9, 7, 20, 100)});
