@@ -43,8 +43,7 @@ namespace utils
     class Window {
       public:
         ~Window() {}
-        inline bool isOpen() { return open; }
-        bool open = true;
+        static inline bool isOpen() { return true; }
     };
 } // namespace utils
 #endif

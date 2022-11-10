@@ -59,9 +59,23 @@ ecs::World getGameWorld()
     return world;
 }
 
-int main()
+int main(int argc, char **argv)
 {
-    network::Server::start(8000);
+    if (argc != 2) {
+        std::cerr << argc << std::endl;
+        std::cerr << "Usage: ./r-type_server [port]" << std::endl;
+        return 1;
+    }
+    try {
+        if (std::stoi(argv[1]) < 0) {
+            std::cerr << "Port must be greater than 0" << std::endl;
+            return 84;
+        }
+    } catch (std::exception &e) {
+        std::cerr << "Port must be a number" << std::endl;
+        return 84;
+    }
+    network::Server::start(std::stoi(argv[1]));
     std::srand(std::time(NULL));
     ecs::Engine engine;
     ecs::WorldManager::setWaitingWorld(getGameWorld);

@@ -5,6 +5,8 @@ set (INC_ROOT ${PROJECT_SOURCE_DIR}/src/lobby)
 set(TARGET r-type_lobby)
 
 set(SRC
+    ${SRC_ROOT}/../server/Server.cpp
+    ${SRC_ROOT}/HubServer.hpp
     ${SRC_ROOT}/entrypoint.cpp
 )
 

@@ -44,6 +44,7 @@ cmake-build-debug
 cmake-build-release
 r-type_client
 r-type_server
+r-type_lobby
 r-type_demo
 vcpkg_installed
 

@@ -31,6 +31,7 @@ namespace network
         ~Server()
         {
             _ioService.stop();
+            _isStopping = true;
             _serviceThread.join();
             _outgoingService.join();
             _socket.close();
@@ -83,6 +84,16 @@ namespace network
             for (int i = 0; i < index; i++)
                 ++it;
             return it->first;
+        }
+
+        /**
+         * Remove a client from the clients map
+         * @param clientId the clients ID
+         */
+        static void removeClient(uint32_t clientID)
+        {
+            if (_Instance._clients.find(clientID) != _Instance._clients.end())
+                _Instance._clients.erase(clientID);
         }
 
         static inline void start(unsigned short localPort)
@@ -172,6 +183,8 @@ namespace network
         void receiveIncoming()
         {
             while (!_isRunning) {
+                if (_isStopping)
+                    return;
                 std::this_thread::sleep_for(std::chrono::milliseconds(100));
             }
             startReceive();
@@ -217,9 +230,11 @@ namespace network
         /**
          * Used to send message to clients with the outgoingMessages array isn't empty
          */
-        [[noreturn]] void sendOutgoing()
+        void sendOutgoing()
         {
             while (!_isRunning) {
+                if (_isStopping)
+                    return;
                 std::this_thread::sleep_for(std::chrono::milliseconds(100));
             }
             while (!_ioService.stopped()) {
@@ -243,7 +258,8 @@ namespace network
         /**
          * Used to know if the server is running or not
          */
-        bool _isRunning;
+        bool _isRunning = false;
+        bool _isStopping = false;
 
         /**
          * Default Constructor of the Server Class, initializing every part of it, socket, endpointk,
@@ -251,7 +267,7 @@ namespace network
          * @param localPort The open localPort of the server
          */
         Server()
-            : _socket(_ioService), _isRunning(false), _serviceThread(&network::Server::receiveIncoming, this),
+            : _socket(_ioService), _serviceThread(&network::Server::receiveIncoming, this),
               _nextClientID(0L), _outgoingService(&network::Server::sendOutgoing, this){};
 
         static Server _Instance;
