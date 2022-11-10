@@ -97,6 +97,7 @@ jobs:
           cmake_path(SET VCPKG_TOOLCHAIN_PATH ${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake)
           message(STATUS "Using vcpkg.cmake in: ${VCPKG_TOOLCHAIN_PATH}")
           cmake_path(SET SFML_DIR ${{ github.workspace }}/vcpkg/installed/${{ matrix.triplet }}/lib)
+          list(APPEND CMAKE_PREFIX_PATH "${SFML_DIR}")
           message(STATUS "Using SFML_DIR: ${SFML_DIR}")
           if (${{ matrix.platform }} STREQUAL "windows-latest")
             execute_process(
