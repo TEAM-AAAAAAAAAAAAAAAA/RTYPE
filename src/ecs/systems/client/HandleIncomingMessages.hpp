@@ -77,10 +77,16 @@ namespace ecs::systems
         world.registry.addComponent<component::Size>(newEntity, {sizeX, sizeY});
         switch (type.type) {
             case component::EntityType::Types::Player:
-                if (msgId != selfId)
+                if (msgId != selfId) {
                     world.registry.addComponent<component::EntityType>(
                         newEntity, {component::EntityType::Types::OtherPlayer});
-                else {
+                    world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 18, 32, 16}});
+                    world.registry.addComponent<ecs::component::Animated>(newEntity,
+                        {AnimFrame(1, 18, 32, 16, 100), AnimFrame(34, 18, 32, 16, 100), AnimFrame(67, 18, 32, 16, 100),
+                            AnimFrame(100, 18, 32, 16, 100), AnimFrame(133, 18, 32, 16, 100),
+                            AnimFrame(100, 18, 32, 16, 100), AnimFrame(67, 18, 32, 16, 100),
+                            AnimFrame(34, 18, 32, 16, 100)});
+                } else {
                     world.registry.addComponent<component::EntityType>(
                         newEntity, {component::EntityType::Types::Player});
                     world.registry.addComponent<ecs::component::Shootable>(
@@ -88,12 +94,13 @@ namespace ecs::systems
                     world.registry.addComponent<ecs::component::Controllable>(newEntity,
                         {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D, sf::Keyboard::H});
                     world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
+                    world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 1, 32, 16}});
+                    world.registry.addComponent<ecs::component::Animated>(newEntity,
+                        {AnimFrame(1, 1, 32, 16, 100), AnimFrame(34, 1, 32, 16, 100), AnimFrame(67, 1, 32, 16, 100),
+                            AnimFrame(100, 1, 32, 16, 100), AnimFrame(133, 1, 32, 16, 100),
+                            AnimFrame(100, 1, 32, 16, 100), AnimFrame(67, 1, 32, 16, 100),
+                            AnimFrame(34, 1, 32, 16, 100)});
                 }
-                world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 1, 32, 16}});
-                world.registry.addComponent<ecs::component::Animated>(newEntity,
-                    {AnimFrame(1, 1, 32, 16, 100), AnimFrame(34, 1, 32, 16, 100), AnimFrame(67, 1, 32, 16, 100),
-                        AnimFrame(100, 1, 32, 16, 100), AnimFrame(133, 1, 32, 16, 100), AnimFrame(100, 1, 32, 16, 100),
-                        AnimFrame(67, 1, 32, 16, 100), AnimFrame(34, 1, 32, 16, 100)});
                 break;
 #pragma region uranus ships
             case component::EntityType::Types::UranusBattlecruiser:
