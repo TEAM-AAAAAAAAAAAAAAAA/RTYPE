@@ -10,16 +10,20 @@
 
 namespace audio
 {
-    AudioManager AudioManager::_Instance;
+    AudioManager &AudioManager::getInstance()
+    {
+        static AudioManager _Instance;
+        return _Instance;
+    }
 
     bool AudioManager::loadBGM(const std::string &key)
     {
         try {
-            asset::AssetLoader::GetBGM(_Instance._currentBGMKey).stop();
-            asset::AssetLoader::GetBGM(key).setVolume(_Instance._BGMVolume);
+            asset::AssetLoader::GetBGM(getInstance()._currentBGMKey).stop();
+            asset::AssetLoader::GetBGM(key).setVolume(getInstance()._BGMVolume);
             asset::AssetLoader::GetBGM(key).setLoop(true);
             asset::AssetLoader::GetBGM(key).play();
-            _Instance._currentBGMKey = key;
+            getInstance()._currentBGMKey = key;
         } catch (const std::exception &e) {
             return false;
         }
@@ -29,8 +33,8 @@ namespace audio
     bool AudioManager::playBGM(bool loop)
     {
         try {
-            asset::AssetLoader::GetBGM(_Instance._currentBGMKey).setLoop(loop);
-            asset::AssetLoader::GetBGM(_Instance._currentBGMKey).play();
+            asset::AssetLoader::GetBGM(getInstance()._currentBGMKey).setLoop(loop);
+            asset::AssetLoader::GetBGM(getInstance()._currentBGMKey).play();
         } catch (const std::exception &e) {
             return false;
         }
@@ -40,7 +44,7 @@ namespace audio
     bool AudioManager::stopBGM()
     {
         try {
-            asset::AssetLoader::GetBGM(_Instance._currentBGMKey).stop();
+            asset::AssetLoader::GetBGM(getInstance()._currentBGMKey).stop();
         } catch (const std::exception &e) {
             return false;
         }
@@ -50,25 +54,25 @@ namespace audio
     bool AudioManager::setBGMVolume(float volume)
     {
         try {
-            asset::AssetLoader::GetBGM(_Instance._currentBGMKey).setVolume(volume);
-            _Instance._BGMVolume = volume;
+            asset::AssetLoader::GetBGM(getInstance()._currentBGMKey).setVolume(volume);
+            getInstance()._BGMVolume = volume;
         } catch (const std::exception &e) {
             return false;
         }
         return true;
     }
 
-    float AudioManager::getBGMVolume() { return _Instance._BGMVolume; }
+    float AudioManager::getBGMVolume() { return getInstance()._BGMVolume; }
 
     sf::SoundSource::Status AudioManager::getBGMStatus()
     {
-        return asset::AssetLoader::GetBGM(_Instance._currentBGMKey).getStatus();
+        return asset::AssetLoader::GetBGM(getInstance()._currentBGMKey).getStatus();
     }
 
     void AudioManager::loopBGM(bool loop)
     {
         try {
-            asset::AssetLoader::GetBGM(_Instance._currentBGMKey).setLoop(loop);
+            asset::AssetLoader::GetBGM(getInstance()._currentBGMKey).setLoop(loop);
         } catch (const std::exception &e) {
             return;
         }
@@ -77,8 +81,8 @@ namespace audio
     void AudioManager::loadSFX(const std::string &key)
     {
         try {
-            asset::AssetLoader::GetSFX(key).setVolume(_Instance._SFXVolume);
-            _Instance._currentSFXKey = key;
+            asset::AssetLoader::GetSFX(key).setVolume(getInstance()._SFXVolume);
+            getInstance()._currentSFXKey = key;
         } catch (const std::exception &e) {
             return;
         }
@@ -93,8 +97,8 @@ namespace audio
         }
     }
 
-    void AudioManager::setSFXVolume(float volume) { _Instance._SFXVolume = volume; }
+    void AudioManager::setSFXVolume(float volume) { getInstance()._SFXVolume = volume; }
 
-    float AudioManager::getSFXVolume() { return _Instance._SFXVolume; }
+    float AudioManager::getSFXVolume() { return getInstance()._SFXVolume; }
 
 }; // namespace audio

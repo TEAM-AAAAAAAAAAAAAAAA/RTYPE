@@ -5,8 +5,7 @@
 ** Animation
 */
 
-#ifndef ANIMATION_HPP_
-#define ANIMATION_HPP_
+#pragma once
 
 #include <SFML/Graphics.hpp>
 
@@ -112,4 +111,3 @@ namespace anim {
     };
 } // namespace gui
 
-#endif /* !ANIMATION_HPP_ */

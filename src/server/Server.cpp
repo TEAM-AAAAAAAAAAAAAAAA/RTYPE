@@ -9,5 +9,9 @@
 
 namespace network
 {
-    Server Server::_Instance;
+    Server &Server::getInstance()
+    {
+        static Server _Instance;
+        return _Instance;
+    }
 } // namespace network

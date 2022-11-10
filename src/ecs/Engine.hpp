@@ -39,7 +39,7 @@ namespace ecs
         {
             ecs::WorldManager::setWorldSwitchReady(false);
             ecs::World initWorld;
-            ecs::WorldManager::_Instance._currentWorld = std::make_unique<ecs::World>(initWorld);
+            ecs::WorldManager::getInstance()._currentWorld = std::make_unique<ecs::World>(initWorld);
         }
 
         /**
