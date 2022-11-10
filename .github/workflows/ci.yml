@@ -54,7 +54,7 @@ jobs:
           - platform: windows-latest
             triplet: x64-windows
           - platform: ubuntu-latest
-            triplet: x64-linux-dynamic
+            triplet: x64-linux
     needs: [clean_repo]
     runs-on: ${{ matrix.platform }}
     env:

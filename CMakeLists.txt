@@ -11,8 +11,6 @@ option(BUILD_TEST_SUITE OFF)
 option(ENABLE_CODE_COVERAGE OFF)
 
 
-set(SFML_STATIC_LIBRARIES TRUE)
-
 #if (COMPILER_TYPE MATCHES "msvc")
 #     message(STATUS "Using static SFML libraries")
 #     set(SFML_STATIC_LIBRARIES TRUE)
