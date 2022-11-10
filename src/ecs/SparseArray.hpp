@@ -108,8 +108,9 @@ namespace ecs
 
         void erase(sizeType pos)
         {
-            if (pos < _data.size() && _data[pos])
-                _data[pos] = std::nullopt;
+            if (pos < _data.size())
+                if (_data[pos])
+                    _data[pos] = std::nullopt;
         }
 
         /**
