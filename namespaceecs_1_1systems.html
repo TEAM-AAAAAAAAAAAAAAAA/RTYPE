@@ -232,7 +232,7 @@ Variables</h2></td></tr>
 <div class="line">                        <span class="keywordflow">if</span> (<span class="keywordtype">id</span>) {</div>
 <div class="line">                            std::array&lt;char, 2&gt; idBin = <span class="keywordtype">id</span>.value().serialize();</div>
 <div class="line"> </div>
-<div class="line">                            <a class="code" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">network::Message</a> msg;</div>
+<div class="line">                            <a class="code" href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a> msg;</div>
 <div class="line">                            msg[0] = utils::constant::getPacketTypeKey(<a class="code" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a509676f5d38cbf87a106deecbbb082db">utils::constant::PacketType::ENTITY_DEATH</a>);</div>
 <div class="line">                            msg[1] = idBin[0];</div>
 <div class="line">                            msg[2] = idBin[1];</div>
@@ -309,7 +309,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= [](World &amp;world) {</div>
 <div class="line">        <span class="keywordflow">while</span> (!<a class="code" href="classnetwork_1_1_client.html#ac8d5bead7d861e42f7b7258eba61fd54">network::Client::getReceivedMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a6f83affbc6d8bc587e67a5b1003678b9">empty</a>()) {</div>
-<div class="line">            <a class="code" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">network::Message</a> msg = <a class="code" href="classnetwork_1_1_client.html#ac8d5bead7d861e42f7b7258eba61fd54">network::Client::getReceivedMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80">pop</a>();</div>
+<div class="line">            <a class="code" href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a> msg = <a class="code" href="classnetwork_1_1_client.html#ac8d5bead7d861e42f7b7258eba61fd54">network::Client::getReceivedMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80">pop</a>();</div>
 <div class="line">            packetTypeFunction[msg[0]](world, msg);</div>
 <div class="line">        }</div>
 <div class="line">    }</div>
@@ -470,29 +470,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= [](World &amp;world) {</div>
-<div class="line">        <span class="keyword">auto</span> &amp;attackAIs = world.registry.getComponents&lt;component::AttackAI&gt;();</div>
-<div class="line"> </div>
-<div class="line">        <span class="keyword">using</span> <a class="code" href="namespaceutils_1_1constant.html#ab4d7e2d46688914f26626a619f8326af">chrono</a> = std::chrono::high_resolution_clock;</div>
-<div class="line">        <span class="keyword">using</span> <a class="code" href="namespaceutils_1_1constant.html#ad903a57ac8f070571efdf25fbdcb0c29">chronoDuration</a> = std::chrono::duration&lt;double, std::milli&gt;;</div>
-<div class="line"> </div>
-<div class="line">        <span class="keyword">static</span> <span class="keyword">auto</span> clock = chrono::now();</div>
-<div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; attackAIs.size(); ++i) {</div>
-<div class="line">            <span class="keyword">auto</span> &amp;atkAI = attackAIs[i];</div>
-<div class="line"> </div>
-<div class="line">            <span class="keywordflow">if</span> (atkAI) {</div>
-<div class="line">                <span class="keywordflow">if</span> (<a class="code" href="namespaceutils_1_1constant.html#ad903a57ac8f070571efdf25fbdcb0c29">chronoDuration</a>(chrono::now() - clock).count() - atkAI.value().lastAttack</div>
-<div class="line">                    &gt; atkAI.value().lastAttackDelay) {</div>
-<div class="line">                    <span class="keyword">auto</span> &amp;nextAtk = atkAI.value().getRandomAttack();</div>
-<div class="line">                    nextAtk.run(i);</div>
-<div class="line">                    atkAI.value().lastAttack = <a class="code" href="namespaceutils_1_1constant.html#ad903a57ac8f070571efdf25fbdcb0c29">chronoDuration</a>(chrono::now() - clock).count();</div>
-<div class="line">                    atkAI.value().lastAttackDelay = nextAtk.reloadTime;</div>
-<div class="line">                    clock = chrono::now();</div>
-<div class="line">                }</div>
-<div class="line">            }</div>
-<div class="line">        };</div>
-<div class="line">    }</div>
-</div><!-- fragment --><p>Runs the AIs stored in the enities </p>
+<p>Runs the AIs stored in the enities </p>
 
 </div>
 </div>
@@ -514,19 +492,18 @@ Variables</h2></td></tr>
 <div class="line">        <span class="keyword">using</span> <a class="code" href="namespaceutils_1_1constant.html#ab4d7e2d46688914f26626a619f8326af">chrono</a> = std::chrono::high_resolution_clock;</div>
 <div class="line">        <span class="keyword">using</span> <a class="code" href="namespaceutils_1_1constant.html#ad903a57ac8f070571efdf25fbdcb0c29">chronoDuration</a> = std::chrono::duration&lt;double, std::milli&gt;;</div>
 <div class="line"> </div>
-<div class="line">        <span class="keyword">static</span> <span class="keyword">auto</span> clock = chrono::now();</div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; directions.size() &amp;&amp; i &lt; movementAIs.size(); ++i) {</div>
 <div class="line">            <span class="keyword">auto</span> &amp;dir = directions[i];</div>
 <div class="line">            <span class="keyword">auto</span> &amp;movAI = movementAIs[i];</div>
 <div class="line"> </div>
 <div class="line">            <span class="keywordflow">if</span> (dir &amp;&amp; movAI) {</div>
-<div class="line">                <span class="keywordflow">if</span> (<a class="code" href="namespaceutils_1_1constant.html#ad903a57ac8f070571efdf25fbdcb0c29">chronoDuration</a>(chrono::now() - clock).count()</div>
-<div class="line">                    &gt; <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(movAI.value().getDelay()) * 1000) {</div>
+<div class="line">                <span class="keywordflow">if</span> ((chrono::now().time_since_epoch().count() - movAI.value().getLastMovement()) / 10000000</div>
+<div class="line">                    &gt; <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(movAI.value().getDelay())) {</div>
 <div class="line">                    <span class="keyword">auto</span> &amp;tmpDir = movAI.value().getNextDirection();</div>
 <div class="line">                    dir.value().x = tmpDir.first;</div>
 <div class="line">                    dir.value().y = tmpDir.second;</div>
 <div class="line">                    dir.value().hasMoved = <span class="keyword">true</span>;</div>
-<div class="line">                    clock = chrono::now();</div>
+<div class="line">                    movAI.value().setLastMovement(chrono::now().time_since_epoch().count());</div>
 <div class="line">                }</div>
 <div class="line">            }</div>
 <div class="line">        };</div>
@@ -558,7 +535,7 @@ Variables</h2></td></tr>
 <div class="line">                    <span class="keywordflow">continue</span>;</div>
 <div class="line"> </div>
 <div class="line">                <span class="keywordflow">if</span> (directions[i].value().hasMoved) {</div>
-<div class="line">                    <a class="code" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">network::Message</a> msg;</div>
+<div class="line">                    <a class="code" href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a> msg;</div>
 <div class="line">                    msg.fill(0);</div>
 <div class="line">                    msg[0] = <a class="code" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ae5d30e9f7bb333d07bd8a1a8b35ecb06">utils::constant::PLAYER_MOVE</a>;</div>
 <div class="line">                    msg[1] = directions[i].value().x;</div>
@@ -575,6 +552,7 @@ Variables</h2></td></tr>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="anamespacenetwork_html_a6ec876aa185a7f04d2f7fba304553d21"><div class="ttname"><a href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a></div><div class="ttdeci">std::array&lt; char, 16 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
 <div class="ttc" id="aclassnetwork_1_1_server_html_a0c64a21c5e324114615c0073596cb403"><div class="ttname"><a href="classnetwork_1_1_server.html#a0c64a21c5e324114615c0073596cb403">network::Server::getOutgoingMessages</a></div><div class="ttdeci">static LockedQueue&lt; ServerMessage &gt; &amp; getOutgoingMessages()</div><div class="ttdef"><b>Definition:</b> Server.hpp:101</div></div>
 <div class="ttc" id="aclassecs_1_1_registry_html_a960bf8fcdaa237dc3a8594cf53290085"><div class="ttname"><a href="classecs_1_1_registry.html#a960bf8fcdaa237dc3a8594cf53290085">ecs::Registry::spawn_entity</a></div><div class="ttdeci">Entity spawn_entity()</div><div class="ttdef"><b>Definition:</b> Registry.hpp:76</div></div>
 <div class="ttc" id="aclassnetwork_1_1_client_html_ac8d5bead7d861e42f7b7258eba61fd54"><div class="ttname"><a href="classnetwork_1_1_client.html#ac8d5bead7d861e42f7b7258eba61fd54">network::Client::getReceivedMessages</a></div><div class="ttdeci">static LockedQueue&lt; Message &gt; &amp; getReceivedMessages()</div><div class="ttdef"><b>Definition:</b> NetworkClient.hpp:48</div></div>
@@ -589,7 +567,6 @@ Variables</h2></td></tr>
 <div class="ttc" id="aclassnetwork_1_1_locked_queue_html_a6f83affbc6d8bc587e67a5b1003678b9"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html#a6f83affbc6d8bc587e67a5b1003678b9">network::LockedQueue::empty</a></div><div class="ttdeci">bool empty()</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:66</div></div>
 <div class="ttc" id="aclassnetwork_1_1_locked_queue_html_a2be6f1a5bcdc3fd83a53558377f51d80"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80">network::LockedQueue::pop</a></div><div class="ttdeci">T pop()</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:53</div></div>
 <div class="ttc" id="aclassnetwork_1_1_client_html_ab4ee2988395ad66a1c4e259eba436d23"><div class="ttname"><a href="classnetwork_1_1_client.html#ab4ee2988395ad66a1c4e259eba436d23">network::Client::getOutgoingMessages</a></div><div class="ttdeci">static LockedQueue&lt; Message &gt; &amp; getOutgoingMessages()</div><div class="ttdef"><b>Definition:</b> NetworkClient.hpp:46</div></div>
-<div class="ttc" id="anamespacenetwork_html_a56091a576a11d5ae809e0e832167d051"><div class="ttname"><a href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">network::Message</a></div><div class="ttdeci">std::array&lt; char, 14 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
 <div class="ttc" id="aclassecs_1_1_world_html_a71b5c2fb034c78a6270c44e42a0e2360"><div class="ttname"><a href="classecs_1_1_world.html#a71b5c2fb034c78a6270c44e42a0e2360">ecs::World::registry</a></div><div class="ttdeci">Registry registry</div><div class="ttdef"><b>Definition:</b> World.hpp:75</div></div>
 <div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:19</div></div>
 <div class="ttc" id="aclassecs_1_1_world_html_a298b46d7b7f1742f43ac2f8cb7ef9e95"><div class="ttname"><a href="classecs_1_1_world.html#a298b46d7b7f1742f43ac2f8cb7ef9e95">ecs::World::addSystem</a></div><div class="ttdeci">void addSystem(const std::function&lt; void(World &amp;)&gt; &amp;system)</div><div class="ttdef"><b>Definition:</b> World.hpp:40</div></div>

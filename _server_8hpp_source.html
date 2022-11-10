@@ -170,7 +170,7 @@ $(document).ready(function(){initNavTree('_server_8hpp_source.html',''); initRes
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classnetwork_1_1_server.html#a9d372185a335562311ea01b43c47f9d1">   43</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="classnetwork_1_1_server.html#a9d372185a335562311ea01b43c47f9d1">hasMessages</a>() { <span class="keywordflow">return</span> !_Instance._receivedMessages.<a class="code" href="classnetwork_1_1_locked_queue.html#a6f83affbc6d8bc587e67a5b1003678b9">empty</a>(); };</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classnetwork_1_1_server.html#a559a7de7206b15f85172d0ce6e1482de">   50</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classnetwork_1_1_server.html#a559a7de7206b15f85172d0ce6e1482de">sendToClient</a>(<span class="keyword">const</span> <a class="code" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">Message</a> &amp;message, uint32_t clientID)</div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classnetwork_1_1_server.html#a559a7de7206b15f85172d0ce6e1482de">   50</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classnetwork_1_1_server.html#a559a7de7206b15f85172d0ce6e1482de">sendToClient</a>(<span class="keyword">const</span> <a class="code" href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">Message</a> &amp;message, uint32_t clientID)</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        {</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keywordflow">try</span> {</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                _Instance.send(message, _Instance._clients.at(clientID));</div>
@@ -179,7 +179,7 @@ $(document).ready(function(){initNavTree('_server_8hpp_source.html',''); initRes
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            }</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        }</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classnetwork_1_1_server.html#a2b7c28fd5a3a978fd923e583e45bf539">   63</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classnetwork_1_1_server.html#a2b7c28fd5a3a978fd923e583e45bf539">sendToAll</a>(<span class="keyword">const</span> <a class="code" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">Message</a> &amp;message)</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classnetwork_1_1_server.html#a2b7c28fd5a3a978fd923e583e45bf539">   63</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classnetwork_1_1_server.html#a2b7c28fd5a3a978fd923e583e45bf539">sendToAll</a>(<span class="keyword">const</span> <a class="code" href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">Message</a> &amp;message)</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        {</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span> client : _Instance._clients)</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                _Instance.send(message, client.second);</div>
@@ -216,7 +216,7 @@ $(document).ready(function(){initNavTree('_server_8hpp_source.html',''); initRes
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        boost::asio::io_service _ioService;</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        udp::endpoint _serverEndpoint;</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        udp::endpoint _remoteEndpoint;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <a class="code" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">Message</a> _recvBuffer;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <a class="code" href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">Message</a> _recvBuffer;</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        udp::socket _socket;</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        std::thread _serviceThread;</div>
@@ -280,13 +280,13 @@ $(document).ready(function(){initNavTree('_server_8hpp_source.html',''); initRes
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;            <span class="keywordflow">return</span> id;</div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        }</div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        <span class="keywordtype">void</span> send(<span class="keyword">const</span> <a class="code" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">Message</a> &amp;message, udp::endpoint endpoint)</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        <span class="keywordtype">void</span> send(<span class="keyword">const</span> <a class="code" href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">Message</a> &amp;message, udp::endpoint endpoint)</div>
 <div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        {</div>
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            _socket.async_send_to(</div>
 <div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;                boost::asio::buffer(message), endpoint, [](std::error_code ec, std::size_t bytesRecvd) {});</div>
 <div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        }</div>
 <div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        [[noreturn]] <span class="keywordtype">void</span> sendOutgoing()</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        <span class="keywordtype">void</span> sendOutgoing()</div>
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        {</div>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;            <span class="keywordflow">while</span> (!_isRunning) {</div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;                std::this_thread::sleep_for(std::chrono::milliseconds(100));</div>
@@ -318,6 +318,7 @@ $(document).ready(function(){initNavTree('_server_8hpp_source.html',''); initRes
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclassnetwork_1_1_server_html"><div class="ttname"><a href="classnetwork_1_1_server.html">network::Server</a></div><div class="ttdef"><b>Definition:</b> Server.hpp:26</div></div>
+<div class="ttc" id="anamespacenetwork_html_a6ec876aa185a7f04d2f7fba304553d21"><div class="ttname"><a href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a></div><div class="ttdeci">std::array&lt; char, 16 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
 <div class="ttc" id="aclassnetwork_1_1_server_html_a0c64a21c5e324114615c0073596cb403"><div class="ttname"><a href="classnetwork_1_1_server.html#a0c64a21c5e324114615c0073596cb403">network::Server::getOutgoingMessages</a></div><div class="ttdeci">static LockedQueue&lt; ServerMessage &gt; &amp; getOutgoingMessages()</div><div class="ttdef"><b>Definition:</b> Server.hpp:101</div></div>
 <div class="ttc" id="a_server_8hpp_html_a621a3d0b1af26fc6b724a97c867da53b"><div class="ttname"><a href="_server_8hpp.html#a621a3d0b1af26fc6b724a97c867da53b">Client</a></div><div class="ttdeci">ClientList::value_type Client</div><div class="ttdef"><b>Definition:</b> Server.hpp:19</div></div>
 <div class="ttc" id="anamespacenetwork_html_a49bd28dc5f018d107ea4a942fe6d7ae5"><div class="ttname"><a href="namespacenetwork.html#a49bd28dc5f018d107ea4a942fe6d7ae5">network::ClientMessage</a></div><div class="ttdeci">std::pair&lt; Message, unsigned int &gt; ClientMessage</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:23</div></div>
@@ -332,7 +333,6 @@ $(document).ready(function(){initNavTree('_server_8hpp_source.html',''); initRes
 <div class="ttc" id="aclassnetwork_1_1_locked_queue_html_a6f83affbc6d8bc587e67a5b1003678b9"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html#a6f83affbc6d8bc587e67a5b1003678b9">network::LockedQueue::empty</a></div><div class="ttdeci">bool empty()</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:66</div></div>
 <div class="ttc" id="aclassnetwork_1_1_locked_queue_html_a2be6f1a5bcdc3fd83a53558377f51d80"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80">network::LockedQueue::pop</a></div><div class="ttdeci">T pop()</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:53</div></div>
 <div class="ttc" id="a_server_8hpp_html"><div class="ttname"><a href="_server_8hpp.html">Server.hpp</a></div></div>
-<div class="ttc" id="anamespacenetwork_html_a56091a576a11d5ae809e0e832167d051"><div class="ttname"><a href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">network::Message</a></div><div class="ttdeci">std::array&lt; char, 14 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
 <div class="ttc" id="aclassnetwork_1_1_server_html_a3283f8b0b2e5b8f1a6a04eb66665dba6"><div class="ttname"><a href="classnetwork_1_1_server.html#a3283f8b0b2e5b8f1a6a04eb66665dba6">network::Server::GetReceivedMessages</a></div><div class="ttdeci">static LockedQueue&lt; ClientMessage &gt; &amp; GetReceivedMessages()</div><div class="ttdef"><b>Definition:</b> Server.hpp:103</div></div>
 <div class="ttc" id="a_server_8hpp_html_a7b4b9d3309381d76b118f09de13053ae"><div class="ttname"><a href="_server_8hpp.html#a7b4b9d3309381d76b118f09de13053ae">ClientList</a></div><div class="ttdeci">std::map&lt; uint32_t, udp::endpoint &gt; ClientList</div><div class="ttdef"><b>Definition:</b> Server.hpp:18</div></div>
 <div class="ttc" id="aclassnetwork_1_1_server_html_a9d372185a335562311ea01b43c47f9d1"><div class="ttname"><a href="classnetwork_1_1_server.html#a9d372185a335562311ea01b43c47f9d1">network::Server::hasMessages</a></div><div class="ttdeci">static bool hasMessages()</div><div class="ttdef"><b>Definition:</b> Server.hpp:43</div></div>

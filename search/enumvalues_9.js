@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['player_659',['Player',['../structecs_1_1component_1_1_entity_type.html#af64becff8cb6fbfeba4815b3d3824449a5e4e7a9f0dfe0efff198bece781f1df9',1,'ecs::component::EntityType']]],
-  ['player_5fcharged_5fshot_660',['PLAYER_CHARGED_SHOT',['../namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a51c64817b447958ef78b5b1b90e0fc8f',1,'utils::constant']]],
-  ['player_5fmove_661',['PLAYER_MOVE',['../namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ae5d30e9f7bb333d07bd8a1a8b35ecb06',1,'utils::constant']]],
-  ['player_5fpowerup_662',['PLAYER_POWERUP',['../namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477aff0038efd7ea5dce69ec9f9c215c470a',1,'utils::constant']]],
-  ['player_5fshot_663',['PLAYER_SHOT',['../namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a9aecf06d78c05845cbb3c8f960a13d4c',1,'utils::constant']]],
-  ['players_664',['Players',['../structecs_1_1component_1_1_faction.html#af6ff333bfa9135fc5709a76af44ca55baa84def54f661d42b89baeaa9be8f6e5d',1,'ecs::component::Faction']]]
+  ['janitor_722',['Janitor',['../structecs_1_1component_1_1_faction.html#af6ff333bfa9135fc5709a76af44ca55ba159822c5eb4bbdb5cde79a1d4310fbd9',1,'ecs::component::Faction']]],
+  ['janitorbattlecruiser_723',['JanitorBattlecruiser',['../structecs_1_1component_1_1_entity_type.html#af64becff8cb6fbfeba4815b3d3824449a1fd13a9eef10697e73c09cddbe264d23',1,'ecs::component::EntityType']]],
+  ['janitordreadnought_724',['JanitorDreadnought',['../structecs_1_1component_1_1_entity_type.html#af64becff8cb6fbfeba4815b3d3824449a586d57848e10196cb7cf000bce5c5c9d',1,'ecs::component::EntityType']]],
+  ['janitorfighter_725',['JanitorFighter',['../structecs_1_1component_1_1_entity_type.html#af64becff8cb6fbfeba4815b3d3824449a118e0053d846baea4be4c5888bce5d50',1,'ecs::component::EntityType']]],
+  ['janitorfrigate_726',['JanitorFrigate',['../structecs_1_1component_1_1_entity_type.html#af64becff8cb6fbfeba4815b3d3824449a958b4464f084acce0aef7928d05d2b32',1,'ecs::component::EntityType']]],
+  ['janitorscout_727',['JanitorScout',['../structecs_1_1component_1_1_entity_type.html#af64becff8cb6fbfeba4815b3d3824449afb2ab180f3013eebf818babffc4628e8',1,'ecs::component::EntityType']]],
+  ['janitortorpedo_728',['JanitorTorpedo',['../structecs_1_1component_1_1_entity_type.html#af64becff8cb6fbfeba4815b3d3824449a6dfee6c2d1d02df18d93db21b69f2fb7',1,'ecs::component::EntityType']]]
 ];

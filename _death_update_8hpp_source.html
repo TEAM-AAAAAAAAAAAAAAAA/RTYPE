@@ -169,7 +169,7 @@ $(document).ready(function(){initNavTree('_death_update_8hpp_source.html',''); i
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                        <span class="keywordflow">if</span> (<span class="keywordtype">id</span>) {</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                            std::array&lt;char, 2&gt; idBin = <span class="keywordtype">id</span>.value().serialize();</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                            <a class="code" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">network::Message</a> msg;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                            <a class="code" href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a> msg;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                            msg[0] = utils::constant::getPacketTypeKey(<a class="code" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a509676f5d38cbf87a106deecbbb082db">utils::constant::PacketType::ENTITY_DEATH</a>);</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                            msg[1] = idBin[0];</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                            msg[2] = idBin[1];</div>
@@ -185,6 +185,7 @@ $(document).ready(function(){initNavTree('_death_update_8hpp_source.html',''); i
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="anamespacenetwork_html_a6ec876aa185a7f04d2f7fba304553d21"><div class="ttname"><a href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a></div><div class="ttdeci">std::array&lt; char, 16 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
 <div class="ttc" id="aclassnetwork_1_1_server_html_a0c64a21c5e324114615c0073596cb403"><div class="ttname"><a href="classnetwork_1_1_server.html#a0c64a21c5e324114615c0073596cb403">network::Server::getOutgoingMessages</a></div><div class="ttdeci">static LockedQueue&lt; ServerMessage &gt; &amp; getOutgoingMessages()</div><div class="ttdef"><b>Definition:</b> Server.hpp:101</div></div>
 <div class="ttc" id="a_network_id_8hpp_html"><div class="ttname"><a href="_network_id_8hpp.html">NetworkId.hpp</a></div></div>
 <div class="ttc" id="a_position_8hpp_html"><div class="ttname"><a href="_position_8hpp.html">Position.hpp</a></div></div>
@@ -196,7 +197,6 @@ $(document).ready(function(){initNavTree('_death_update_8hpp_source.html',''); i
 <div class="ttc" id="anamespaceecs_1_1systems_html_a2e0f6b7daf53150a7faa7b7f59d47d5e"><div class="ttname"><a href="namespaceecs_1_1systems.html#a2e0f6b7daf53150a7faa7b7f59d47d5e">ecs::systems::deathUpdate</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; deathUpdate</div><div class="ttdef"><b>Definition:</b> DeathUpdate.hpp:23</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_health_html"><div class="ttname"><a href="structecs_1_1component_1_1_health.html">ecs::component::Health</a></div><div class="ttdef"><b>Definition:</b> Health.hpp:12</div></div>
 <div class="ttc" id="a_constant_8hpp_html"><div class="ttname"><a href="_constant_8hpp.html">Constant.hpp</a></div></div>
-<div class="ttc" id="anamespacenetwork_html_a56091a576a11d5ae809e0e832167d051"><div class="ttname"><a href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">network::Message</a></div><div class="ttdeci">std::array&lt; char, 14 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
 <div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:19</div></div>
 <div class="ttc" id="anamespaceecs_1_1systems_html"><div class="ttname"><a href="namespaceecs_1_1systems.html">ecs::systems</a></div><div class="ttdef"><b>Definition:</b> Animate.hpp:19</div></div>
 <!-- start footer part -->

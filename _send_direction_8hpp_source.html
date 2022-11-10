@@ -167,7 +167,7 @@ $(document).ready(function(){initNavTree('_send_direction_8hpp_source.html','');
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                    <span class="keywordflow">continue</span>;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                <span class="keywordflow">if</span> (directions[i].value().hasMoved) {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                    <a class="code" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">network::Message</a> msg;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                    <a class="code" href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a> msg;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                    msg.fill(0);</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                    msg[0] = <a class="code" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ae5d30e9f7bb333d07bd8a1a8b35ecb06">utils::constant::PLAYER_MOVE</a>;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                    msg[1] = directions[i].value().x;</div>
@@ -181,6 +181,7 @@ $(document).ready(function(){initNavTree('_send_direction_8hpp_source.html','');
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="anamespacenetwork_html_a6ec876aa185a7f04d2f7fba304553d21"><div class="ttname"><a href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a></div><div class="ttdeci">std::array&lt; char, 16 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
 <div class="ttc" id="anamespaceutils_1_1constant_html_ad903a57ac8f070571efdf25fbdcb0c29"><div class="ttname"><a href="namespaceutils_1_1constant.html#ad903a57ac8f070571efdf25fbdcb0c29">utils::constant::chronoDuration</a></div><div class="ttdeci">std::chrono::duration&lt; double, std::milli &gt; chronoDuration</div><div class="ttdef"><b>Definition:</b> Constant.hpp:20</div></div>
 <div class="ttc" id="anamespaceutils_1_1constant_html_a02f29b9fcdfc8d4a1f0b8923e5b4c477ae5d30e9f7bb333d07bd8a1a8b35ecb06"><div class="ttname"><a href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ae5d30e9f7bb333d07bd8a1a8b35ecb06">utils::constant::PLAYER_MOVE</a></div><div class="ttdeci">@ PLAYER_MOVE</div><div class="ttdef"><b>Definition:</b> Constant.hpp:27</div></div>
 <div class="ttc" id="anamespaceecs_1_1systems_html_aea6fa503923e813d900cfc64890d626e"><div class="ttname"><a href="namespaceecs_1_1systems.html#aea6fa503923e813d900cfc64890d626e">ecs::systems::SendDirection</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; SendDirection</div><div class="ttdef"><b>Definition:</b> SendDirection.hpp:23</div></div>
@@ -190,7 +191,6 @@ $(document).ready(function(){initNavTree('_send_direction_8hpp_source.html','');
 <div class="ttc" id="a_world_8hpp_html"><div class="ttname"><a href="_world_8hpp.html">World.hpp</a></div></div>
 <div class="ttc" id="aclassnetwork_1_1_client_html_ab4ee2988395ad66a1c4e259eba436d23"><div class="ttname"><a href="classnetwork_1_1_client.html#ab4ee2988395ad66a1c4e259eba436d23">network::Client::getOutgoingMessages</a></div><div class="ttdeci">static LockedQueue&lt; Message &gt; &amp; getOutgoingMessages()</div><div class="ttdef"><b>Definition:</b> NetworkClient.hpp:46</div></div>
 <div class="ttc" id="a_constant_8hpp_html"><div class="ttname"><a href="_constant_8hpp.html">Constant.hpp</a></div></div>
-<div class="ttc" id="anamespacenetwork_html_a56091a576a11d5ae809e0e832167d051"><div class="ttname"><a href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">network::Message</a></div><div class="ttdeci">std::array&lt; char, 14 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
 <div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:19</div></div>
 <div class="ttc" id="anamespaceecs_1_1systems_html"><div class="ttname"><a href="namespaceecs_1_1systems.html">ecs::systems</a></div><div class="ttdef"><b>Definition:</b> Animate.hpp:19</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_controllable_html"><div class="ttname"><a href="structecs_1_1component_1_1_controllable.html">ecs::component::Controllable</a></div><div class="ttdef"><b>Definition:</b> Controllable.hpp:20</div></div>

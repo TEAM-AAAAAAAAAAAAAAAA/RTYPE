@@ -1,0 +1,6 @@
+<map id="ecs::component::AttackAI::Action::invokeAlliesAttack" name="ecs::component::AttackAI::Action::invokeAlliesAttack">
+<area shape="rect" id="node1" title=" " alt="" coords="5,57,205,98"/>
+<area shape="rect" id="node2" href="$classecs_1_1_registry.html#af1bb5ae13485a9755528c3d2f71aa4d1" title=" " alt="" coords="253,5,469,32"/>
+<area shape="rect" id="node3" href="$classecs_1_1_world_manager.html#a1e9cb1cc467c773762bfa0c3299068aa" title=" " alt="" coords="284,57,439,98"/>
+<area shape="rect" id="node4" href="$classecs_1_1_enemy_factory.html#a9f7af8366d7f64d1993ccccbf2d15b49" title=" " alt="" coords="286,122,437,163"/>
+</map>

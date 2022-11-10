@@ -177,52 +177,57 @@ $(document).ready(function(){initNavTree('_position_update_8hpp_source.html','')
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> fourthBytePos = 7;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> firstByteSize = 8;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> secondByteSize = 9;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> firstByteVelocity = 10;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> secondByteVelocity = 11;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> dirX = 12;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> dirY = 13;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keyword">static</span> <span class="keyword">auto</span> clock = utils::constant::chrono::now();</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="namespaceutils_1_1constant.html#ad903a57ac8f070571efdf25fbdcb0c29">utils::constant::chronoDuration</a>(utils::constant::chrono::now() - clock).count() &gt; 10) {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            clock = utils::constant::chrono::now();</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; position.size() &amp;&amp; i &lt; networkId.size() &amp;&amp; i &lt; sizes.size() &amp;&amp; i &lt; entityType.size()</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                 &amp;&amp; i &lt; velocities.size() &amp;&amp; i &lt; directions.size();</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                 i++) {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                <span class="keyword">auto</span> &amp;pos = position[i];</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                <span class="keyword">auto</span> &amp;size = sizes[i];</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                <span class="keyword">auto</span> &amp;<span class="keywordtype">id</span> = networkId[i];</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                <span class="keyword">auto</span> &amp;type = entityType[i];</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                <span class="keyword">auto</span> &amp;vel = velocities[i];</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                <span class="keyword">auto</span> &amp;dir = directions[i];</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                <span class="keywordflow">if</span> (pos &amp;&amp; <span class="keywordtype">id</span> &amp;&amp; size &amp;&amp; type &amp;&amp; vel &amp;&amp; dir) {</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                    std::array&lt;char, 2&gt; idBin = <span class="keywordtype">id</span>.value().serialize();</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                    std::array&lt;char, 4&gt; posBin = pos.value().serialize();</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                    std::array&lt;char, 2&gt; sizeBin = size.value().serialize();</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                    <a class="code" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">network::Message</a> msg;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                    msg[firstByteId] = idBin[0];</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                    msg[secondByteId] = idBin[1];</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                    msg[valueType] = type.value().type;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                    msg[firstBytePos] = posBin[0];</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                    msg[secondBytePos] = posBin[1];</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                    msg[thirdBytePos] = posBin[2];</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                    msg[fourthBytePos] = posBin[3];</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                    msg[firstByteSize] = sizeBin[0];</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                    msg[secondByteSize] = sizeBin[1];</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                    msg[firstByteVelocity] = velocities[i].value().x;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                    msg[secondByteVelocity] = velocities[i].value().y;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                    msg[dirX] = directions[i].value().<a class="code" href="structecs_1_1component_1_1_velocity.html#ae49476305ddc3758feaa8f6facdd03a6">x</a>;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                    msg[dirY] = directions[i].value().<a class="code" href="structecs_1_1component_1_1_velocity.html#a9d81d0483e462287b986182b881eb7ff">y</a>;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                    msg[packetType] = utils::constant::getPacketTypeKey(<a class="code" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ad37895a1ffa6eafe8d42600886797632">utils::constant::PacketType::ENTITY_MOVE</a>);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                    <a class="code" href="classnetwork_1_1_server.html#a0c64a21c5e324114615c0073596cb403">network::Server::getOutgoingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">push</a>(</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                        <a class="code" href="namespacenetwork.html#a1290ee51c4c8d07f57076ac8f7505129">network::ServerMessage</a>(msg, std::vector&lt;unsigned int&gt;()));</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                }</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            }</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        }</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    };</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> thirdByteSize = 10;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> fourthByteSize = 11;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> firstByteVelocity = 12;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> secondByteVelocity = 13;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> dirX = 14;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> dirY = 15;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">static</span> <span class="keyword">auto</span> clock = utils::constant::chrono::now();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="namespaceutils_1_1constant.html#ad903a57ac8f070571efdf25fbdcb0c29">utils::constant::chronoDuration</a>(utils::constant::chrono::now() - clock).count() &gt; 10) {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            clock = utils::constant::chrono::now();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; position.size() &amp;&amp; i &lt; networkId.size() &amp;&amp; i &lt; sizes.size() &amp;&amp; i &lt; entityType.size()</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                 &amp;&amp; i &lt; velocities.size() &amp;&amp; i &lt; directions.size();</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                 i++) {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                <span class="keyword">auto</span> &amp;pos = position[i];</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                <span class="keyword">auto</span> &amp;size = sizes[i];</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                <span class="keyword">auto</span> &amp;<span class="keywordtype">id</span> = networkId[i];</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                <span class="keyword">auto</span> &amp;type = entityType[i];</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                <span class="keyword">auto</span> &amp;vel = velocities[i];</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                <span class="keyword">auto</span> &amp;dir = directions[i];</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                <span class="keywordflow">if</span> (pos &amp;&amp; <span class="keywordtype">id</span> &amp;&amp; size &amp;&amp; type &amp;&amp; vel &amp;&amp; dir) {</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                    std::array&lt;char, 2&gt; idBin = <span class="keywordtype">id</span>.value().serialize();</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                    std::array&lt;char, 4&gt; posBin = pos.value().serialize();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                    std::array&lt;char, 4&gt; sizeBin = size.value().serialize();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                    <a class="code" href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a> msg;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                    msg[firstByteId] = idBin[0];</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                    msg[secondByteId] = idBin[1];</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                    msg[valueType] = type.value().type;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                    msg[firstBytePos] = posBin[0];</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                    msg[secondBytePos] = posBin[1];</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                    msg[thirdBytePos] = posBin[2];</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                    msg[fourthBytePos] = posBin[3];</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                    msg[firstByteSize] = sizeBin[0];</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                    msg[secondByteSize] = sizeBin[1];</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                    msg[thirdByteSize] = sizeBin[2];</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                    msg[fourthByteSize] = sizeBin[3];</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                    msg[firstByteVelocity] = velocities[i].value().x;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                    msg[secondByteVelocity] = velocities[i].value().y;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                    msg[dirX] = directions[i].value().<a class="code" href="structecs_1_1component_1_1_velocity.html#ae49476305ddc3758feaa8f6facdd03a6">x</a>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                    msg[dirY] = directions[i].value().<a class="code" href="structecs_1_1component_1_1_velocity.html#a9d81d0483e462287b986182b881eb7ff">y</a>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                    msg[packetType] = utils::constant::getPacketTypeKey(<a class="code" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ad37895a1ffa6eafe8d42600886797632">utils::constant::PacketType::ENTITY_MOVE</a>);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                    <a class="code" href="classnetwork_1_1_server.html#a0c64a21c5e324114615c0073596cb403">network::Server::getOutgoingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">push</a>(</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                        <a class="code" href="namespacenetwork.html#a1290ee51c4c8d07f57076ac8f7505129">network::ServerMessage</a>(msg, std::vector&lt;unsigned int&gt;()));</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        }</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    };</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="astructecs_1_1component_1_1_velocity_html_a9d81d0483e462287b986182b881eb7ff"><div class="ttname"><a href="structecs_1_1component_1_1_velocity.html#a9d81d0483e462287b986182b881eb7ff">ecs::component::Velocity::y</a></div><div class="ttdeci">int y</div><div class="ttdef"><b>Definition:</b> Velocity.hpp:15</div></div>
+<div class="ttc" id="anamespacenetwork_html_a6ec876aa185a7f04d2f7fba304553d21"><div class="ttname"><a href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a></div><div class="ttdeci">std::array&lt; char, 16 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
 <div class="ttc" id="aclassnetwork_1_1_server_html_a0c64a21c5e324114615c0073596cb403"><div class="ttname"><a href="classnetwork_1_1_server.html#a0c64a21c5e324114615c0073596cb403">network::Server::getOutgoingMessages</a></div><div class="ttdeci">static LockedQueue&lt; ServerMessage &gt; &amp; getOutgoingMessages()</div><div class="ttdef"><b>Definition:</b> Server.hpp:101</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_velocity_html"><div class="ttname"><a href="structecs_1_1component_1_1_velocity.html">ecs::component::Velocity</a></div><div class="ttdoc">Velocity component.</div><div class="ttdef"><b>Definition:</b> Velocity.hpp:13</div></div>
 <div class="ttc" id="a_network_id_8hpp_html"><div class="ttname"><a href="_network_id_8hpp.html">NetworkId.hpp</a></div></div>
@@ -241,7 +246,6 @@ $(document).ready(function(){initNavTree('_position_update_8hpp_source.html','')
 <div class="ttc" id="astructecs_1_1component_1_1_velocity_html_ae49476305ddc3758feaa8f6facdd03a6"><div class="ttname"><a href="structecs_1_1component_1_1_velocity.html#ae49476305ddc3758feaa8f6facdd03a6">ecs::component::Velocity::x</a></div><div class="ttdeci">int x</div><div class="ttdef"><b>Definition:</b> Velocity.hpp:14</div></div>
 <div class="ttc" id="a_world_8hpp_html"><div class="ttname"><a href="_world_8hpp.html">World.hpp</a></div></div>
 <div class="ttc" id="a_size_8hpp_html"><div class="ttname"><a href="_size_8hpp.html">Size.hpp</a></div></div>
-<div class="ttc" id="anamespacenetwork_html_a56091a576a11d5ae809e0e832167d051"><div class="ttname"><a href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">network::Message</a></div><div class="ttdeci">std::array&lt; char, 14 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
 <div class="ttc" id="anamespaceutils_1_1constant_html_a02f29b9fcdfc8d4a1f0b8923e5b4c477ad37895a1ffa6eafe8d42600886797632"><div class="ttname"><a href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ad37895a1ffa6eafe8d42600886797632">utils::constant::ENTITY_MOVE</a></div><div class="ttdeci">@ ENTITY_MOVE</div><div class="ttdef"><b>Definition:</b> Constant.hpp:31</div></div>
 <div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:19</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_size_html"><div class="ttname"><a href="structecs_1_1component_1_1_size.html">ecs::component::Size</a></div><div class="ttdoc">Size component.</div><div class="ttdef"><b>Definition:</b> Size.hpp:6</div></div>

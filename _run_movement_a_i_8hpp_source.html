@@ -161,24 +161,23 @@ $(document).ready(function(){initNavTree('_run_movement_a_i_8hpp_source.html',''
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">using</span> <a class="code" href="namespaceutils_1_1constant.html#ab4d7e2d46688914f26626a619f8326af">chrono</a> = std::chrono::high_resolution_clock;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">using</span> <a class="code" href="namespaceutils_1_1constant.html#ad903a57ac8f070571efdf25fbdcb0c29">chronoDuration</a> = std::chrono::duration&lt;double, std::milli&gt;;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">static</span> <span class="keyword">auto</span> clock = chrono::now();</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; directions.size() &amp;&amp; i &lt; movementAIs.size(); ++i) {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keyword">auto</span> &amp;dir = directions[i];</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <span class="keyword">auto</span> &amp;movAI = movementAIs[i];</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="keywordflow">if</span> (dir &amp;&amp; movAI) {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                <span class="keywordflow">if</span> (<a class="code" href="namespaceutils_1_1constant.html#ad903a57ac8f070571efdf25fbdcb0c29">chronoDuration</a>(chrono::now() - clock).count()</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                    &gt; <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(movAI.value().getDelay()) * 1000) {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                    <span class="keyword">auto</span> &amp;tmpDir = movAI.value().getNextDirection();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                    dir.value().<a class="code" href="structecs_1_1component_1_1_direction.html#adace82c5390af95e69356052f4171213">x</a> = tmpDir.first;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                    dir.value().y = tmpDir.second;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                    dir.value().hasMoved = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                    clock = chrono::now();</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                }</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            }</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        };</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    };</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; directions.size() &amp;&amp; i &lt; movementAIs.size(); ++i) {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="keyword">auto</span> &amp;dir = directions[i];</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keyword">auto</span> &amp;movAI = movementAIs[i];</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keywordflow">if</span> (dir &amp;&amp; movAI) {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                <span class="keywordflow">if</span> ((chrono::now().time_since_epoch().count() - movAI.value().getLastMovement()) / 10000000</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                    &gt; <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(movAI.value().getDelay())) {</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                    <span class="keyword">auto</span> &amp;tmpDir = movAI.value().getNextDirection();</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                    dir.value().<a class="code" href="structecs_1_1component_1_1_direction.html#adace82c5390af95e69356052f4171213">x</a> = tmpDir.first;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                    dir.value().y = tmpDir.second;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                    dir.value().hasMoved = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                    movAI.value().setLastMovement(chrono::now().time_since_epoch().count());</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                }</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            }</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        };</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    };</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="a_movement_a_i_8hpp_html"><div class="ttname"><a href="_movement_a_i_8hpp.html">MovementAI.hpp</a></div></div>

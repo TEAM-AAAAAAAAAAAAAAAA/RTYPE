@@ -149,8 +149,19 @@ $(document).ready(function(){initNavTree('structecs_1_1component_1_1_movement_a_
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a91579cb5d99e03b8a268d3afe1b0b95f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecs_1_1component_1_1_movement_a_i.html#a91579cb5d99e03b8a268d3afe1b0b95f">AIType</a> { <a class="el" href="structecs_1_1component_1_1_movement_a_i.html#a91579cb5d99e03b8a268d3afe1b0b95fa78c22120070e7359b78c9f5508d32eee">Idle</a>, 
-<a class="el" href="structecs_1_1component_1_1_movement_a_i.html#a91579cb5d99e03b8a268d3afe1b0b95faa710e57f1e4c13caa7624dd3d779dcb1">BasicUpDown</a>
+<tr class="memitem:a91579cb5d99e03b8a268d3afe1b0b95f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecs_1_1component_1_1_movement_a_i.html#a91579cb5d99e03b8a268d3afe1b0b95f">AIType</a> { <br />
+&#160;&#160;<a class="el" href="structecs_1_1component_1_1_movement_a_i.html#a91579cb5d99e03b8a268d3afe1b0b95fa78c22120070e7359b78c9f5508d32eee">Idle</a>, 
+<a class="el" href="structecs_1_1component_1_1_movement_a_i.html#a91579cb5d99e03b8a268d3afe1b0b95fa1c7b33bb88cc663f4d6c90c5879ac45f">QuickUpDown</a>, 
+<a class="el" href="structecs_1_1component_1_1_movement_a_i.html#a91579cb5d99e03b8a268d3afe1b0b95faedffafd002b4d4df03ab342c04c0b13a">LongUpDown</a>, 
+<a class="el" href="structecs_1_1component_1_1_movement_a_i.html#a91579cb5d99e03b8a268d3afe1b0b95fa10d388af73f0a392708d903d3f4e4491">QuickLeftRight</a>, 
+<br />
+&#160;&#160;<a class="el" href="structecs_1_1component_1_1_movement_a_i.html#a91579cb5d99e03b8a268d3afe1b0b95fa89736e2740aff2da57169ecd6307d398">LongLeftRight</a>, 
+<a class="el" href="structecs_1_1component_1_1_movement_a_i.html#a91579cb5d99e03b8a268d3afe1b0b95fabd0b80eea5969e7f13e4c2d46989111c">ClockwiseSmall</a>, 
+<a class="el" href="structecs_1_1component_1_1_movement_a_i.html#a91579cb5d99e03b8a268d3afe1b0b95fa26dbdc916538d01377aebce47f2f985c">ClockwiseBig</a>, 
+<a class="el" href="structecs_1_1component_1_1_movement_a_i.html#a91579cb5d99e03b8a268d3afe1b0b95faff443b57d627539afaadb80e9a4f19ee">AntiClockwiseSmall</a>, 
+<br />
+&#160;&#160;<a class="el" href="structecs_1_1component_1_1_movement_a_i.html#a91579cb5d99e03b8a268d3afe1b0b95fab9d77a7df249a06f6814316093c2f3bf">AntiClockwiseBig</a>
+<br />
  }</td></tr>
 <tr class="memdesc:a91579cb5d99e03b8a268d3afe1b0b95f"><td class="mdescLeft">&#160;</td><td class="mdescRight">All possible AI created.  <a href="structecs_1_1component_1_1_movement_a_i.html#a91579cb5d99e03b8a268d3afe1b0b95f">More...</a><br /></td></tr>
 <tr class="separator:a91579cb5d99e03b8a268d3afe1b0b95f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,9 +174,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa1cfa3c0bf8fae734a7c3d77a72a53ef"><td class="memItemLeft" align="right" valign="top">const std::pair&lt; char, char &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecs_1_1component_1_1_movement_a_i.html#aa1cfa3c0bf8fae734a7c3d77a72a53ef">getNextDirection</a> ()</td></tr>
 <tr class="memdesc:aa1cfa3c0bf8fae734a7c3d77a72a53ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the next direction of the entity and cycles through the directions vector  <a href="structecs_1_1component_1_1_movement_a_i.html#aa1cfa3c0bf8fae734a7c3d77a72a53ef">More...</a><br /></td></tr>
 <tr class="separator:aa1cfa3c0bf8fae734a7c3d77a72a53ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad142531ee1b2b3cc7c01f5776045c92e"><td class="memItemLeft" align="right" valign="top">const short &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecs_1_1component_1_1_movement_a_i.html#ad142531ee1b2b3cc7c01f5776045c92e">getDelay</a> () const</td></tr>
-<tr class="memdesc:ad142531ee1b2b3cc7c01f5776045c92e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Delay between each AI steps.  <a href="structecs_1_1component_1_1_movement_a_i.html#ad142531ee1b2b3cc7c01f5776045c92e">More...</a><br /></td></tr>
-<tr class="separator:ad142531ee1b2b3cc7c01f5776045c92e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ff7e39cc523d14e3ac8c05143a2c41c"><td class="memItemLeft" align="right" valign="top">const std::size_t &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecs_1_1component_1_1_movement_a_i.html#a5ff7e39cc523d14e3ac8c05143a2c41c">getDelay</a> () const</td></tr>
+<tr class="memdesc:a5ff7e39cc523d14e3ac8c05143a2c41c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Delay between each AI steps.  <a href="structecs_1_1component_1_1_movement_a_i.html#a5ff7e39cc523d14e3ac8c05143a2c41c">More...</a><br /></td></tr>
+<tr class="separator:a5ff7e39cc523d14e3ac8c05143a2c41c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8e168a2758b1ee086c7029b27d2f45e"><td class="memItemLeft" align="right" valign="top">const std::size_t &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecs_1_1component_1_1_movement_a_i.html#aa8e168a2758b1ee086c7029b27d2f45e">getLastMovement</a> () const</td></tr>
+<tr class="memdesc:aa8e168a2758b1ee086c7029b27d2f45e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the last time the AI entity has moved.  <a href="structecs_1_1component_1_1_movement_a_i.html#aa8e168a2758b1ee086c7029b27d2f45e">More...</a><br /></td></tr>
+<tr class="separator:aa8e168a2758b1ee086c7029b27d2f45e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cf64fd8a7497d560ede615ddd72480c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecs_1_1component_1_1_movement_a_i.html#a2cf64fd8a7497d560ede615ddd72480c">setLastMovement</a> (const std::size_t &amp;lastMovement)</td></tr>
+<tr class="memdesc:a2cf64fd8a7497d560ede615ddd72480c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the last time the AI entity has moved.  <a href="structecs_1_1component_1_1_movement_a_i.html#a2cf64fd8a7497d560ede615ddd72480c">More...</a><br /></td></tr>
+<tr class="separator:a2cf64fd8a7497d560ede615ddd72480c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="structecs_1_1component_1_1_movement_a_i.html" title="MovementAI component.">MovementAI</a> component. </p>
@@ -186,7 +203,14 @@ Public Member Functions</h2></td></tr>
 <dl class="section warning"><dt>Warning</dt><dd>ALL MUST BE CREATED IN <a class="el" href="_movement_a_i_8cpp.html">MovementAI.cpp</a> </dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a91579cb5d99e03b8a268d3afe1b0b95fa78c22120070e7359b78c9f5508d32eee"></a>Idle&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a91579cb5d99e03b8a268d3afe1b0b95faa710e57f1e4c13caa7624dd3d779dcb1"></a>BasicUpDown&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a91579cb5d99e03b8a268d3afe1b0b95fa1c7b33bb88cc663f4d6c90c5879ac45f"></a>QuickUpDown&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a91579cb5d99e03b8a268d3afe1b0b95faedffafd002b4d4df03ab342c04c0b13a"></a>LongUpDown&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a91579cb5d99e03b8a268d3afe1b0b95fa10d388af73f0a392708d903d3f4e4491"></a>QuickLeftRight&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a91579cb5d99e03b8a268d3afe1b0b95fa89736e2740aff2da57169ecd6307d398"></a>LongLeftRight&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a91579cb5d99e03b8a268d3afe1b0b95fabd0b80eea5969e7f13e4c2d46989111c"></a>ClockwiseSmall&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a91579cb5d99e03b8a268d3afe1b0b95fa26dbdc916538d01377aebce47f2f985c"></a>ClockwiseBig&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a91579cb5d99e03b8a268d3afe1b0b95faff443b57d627539afaadb80e9a4f19ee"></a>AntiClockwiseSmall&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a91579cb5d99e03b8a268d3afe1b0b95fab9d77a7df249a06f6814316093c2f3bf"></a>AntiClockwiseBig&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -227,8 +251,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ad142531ee1b2b3cc7c01f5776045c92e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad142531ee1b2b3cc7c01f5776045c92e">&#9670;&nbsp;</a></span>getDelay()</h2>
+<a id="a5ff7e39cc523d14e3ac8c05143a2c41c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ff7e39cc523d14e3ac8c05143a2c41c">&#9670;&nbsp;</a></span>getDelay()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -237,7 +261,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const short&amp; ecs::component::MovementAI::getDelay </td>
+          <td class="memname">const std::size_t&amp; ecs::component::MovementAI::getDelay </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -252,6 +276,34 @@ Public Member Functions</h2></td></tr>
 
 <p>Get the Delay between each AI steps. </p>
 <dl class="section return"><dt>Returns</dt><dd>the delay in seconds </dd></dl>
+
+</div>
+</div>
+<a id="aa8e168a2758b1ee086c7029b27d2f45e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8e168a2758b1ee086c7029b27d2f45e">&#9670;&nbsp;</a></span>getLastMovement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::size_t&amp; ecs::component::MovementAI::getLastMovement </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the last time the AI entity has moved. </p>
+<dl class="section return"><dt>Returns</dt><dd>the last time the AI has moved </dd></dl>
 
 </div>
 </div>
@@ -280,6 +332,40 @@ Public Member Functions</h2></td></tr>
 
 <p>get the next direction of the entity and cycles through the directions vector </p>
 <dl class="section return"><dt>Returns</dt><dd>the next direction of the entity as a std::pair of chars </dd></dl>
+
+</div>
+</div>
+<a id="a2cf64fd8a7497d560ede615ddd72480c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cf64fd8a7497d560ede615ddd72480c">&#9670;&nbsp;</a></span>setLastMovement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ecs::component::MovementAI::setLastMovement </td>
+          <td>(</td>
+          <td class="paramtype">const std::size_t &amp;&#160;</td>
+          <td class="paramname"><em>lastMovement</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the last time the AI entity has moved. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lastMovement</td><td>the last time the AI has moved </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

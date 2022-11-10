@@ -143,21 +143,26 @@ $(document).ready(function(){initNavTree('_size_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="structecs_1_1component_1_1_size.html">    6</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structecs_1_1component_1_1_size.html">Size</a> {</div>
 <div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="structecs_1_1component_1_1_size.html#a6de1fd19c7b4a0eef00d18cbb00152cb">    7</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="structecs_1_1component_1_1_size.html#a6de1fd19c7b4a0eef00d18cbb00152cb">height</a>;</div>
 <div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="structecs_1_1component_1_1_size.html#a74a08ef18b4e55b48d8c02d5d6a70c79">    8</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="structecs_1_1component_1_1_size.html#a74a08ef18b4e55b48d8c02d5d6a70c79">width</a>;</div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="structecs_1_1component_1_1_size.html#afe5d3d31fe7ed4d0136c6faaf9b7a308">   11</a></span>&#160;        std::array&lt;char, 2&gt; <a class="code" href="structecs_1_1component_1_1_size.html#afe5d3d31fe7ed4d0136c6faaf9b7a308">serialize</a>()</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="structecs_1_1component_1_1_size.html#a37adab4df04ce650e6a44609ba33dfb9">   11</a></span>&#160;        std::array&lt;char, 4&gt; <a class="code" href="structecs_1_1component_1_1_size.html#a37adab4df04ce650e6a44609ba33dfb9">serialize</a>()</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;            std::array&lt;char, 2&gt; pos;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;            pos[0] = <a class="code" href="structecs_1_1component_1_1_size.html#a74a08ef18b4e55b48d8c02d5d6a70c79">width</a> &amp; 0xff;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;            pos[1] = <a class="code" href="structecs_1_1component_1_1_size.html#a6de1fd19c7b4a0eef00d18cbb00152cb">height</a> &amp; 0xff;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            <span class="keywordflow">return</span> pos;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        }</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    };</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;} <span class="comment">// namespace ecs::component</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;            std::array&lt;char, 4&gt; pos;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;            <span class="keywordtype">size_t</span> tmp = 0;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;            tmp = <a class="code" href="structecs_1_1component_1_1_size.html#a74a08ef18b4e55b48d8c02d5d6a70c79">width</a> &gt;&gt; 8;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            pos[0] = tmp;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            pos[1] = <a class="code" href="structecs_1_1component_1_1_size.html#a74a08ef18b4e55b48d8c02d5d6a70c79">width</a> &amp; 0xff;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            tmp = <a class="code" href="structecs_1_1component_1_1_size.html#a6de1fd19c7b4a0eef00d18cbb00152cb">height</a> &gt;&gt; 8;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            pos[2] = tmp;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            pos[3] = <a class="code" href="structecs_1_1component_1_1_size.html#a6de1fd19c7b4a0eef00d18cbb00152cb">height</a> &amp; 0xff;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            <span class="keywordflow">return</span> pos;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        }</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    };</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;} <span class="comment">// namespace ecs::component</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="anamespaceecs_1_1component_html"><div class="ttname"><a href="namespaceecs_1_1component.html">ecs::component</a></div><div class="ttdef"><b>Definition:</b> Animated.hpp:12</div></div>
-<div class="ttc" id="astructecs_1_1component_1_1_size_html_afe5d3d31fe7ed4d0136c6faaf9b7a308"><div class="ttname"><a href="structecs_1_1component_1_1_size.html#afe5d3d31fe7ed4d0136c6faaf9b7a308">ecs::component::Size::serialize</a></div><div class="ttdeci">std::array&lt; char, 2 &gt; serialize()</div><div class="ttdoc">serialize the component</div><div class="ttdef"><b>Definition:</b> Size.hpp:11</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_size_html_a6de1fd19c7b4a0eef00d18cbb00152cb"><div class="ttname"><a href="structecs_1_1component_1_1_size.html#a6de1fd19c7b4a0eef00d18cbb00152cb">ecs::component::Size::height</a></div><div class="ttdeci">int height</div><div class="ttdef"><b>Definition:</b> Size.hpp:7</div></div>
+<div class="ttc" id="astructecs_1_1component_1_1_size_html_a37adab4df04ce650e6a44609ba33dfb9"><div class="ttname"><a href="structecs_1_1component_1_1_size.html#a37adab4df04ce650e6a44609ba33dfb9">ecs::component::Size::serialize</a></div><div class="ttdeci">std::array&lt; char, 4 &gt; serialize()</div><div class="ttdoc">serialize the component</div><div class="ttdef"><b>Definition:</b> Size.hpp:11</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_size_html"><div class="ttname"><a href="structecs_1_1component_1_1_size.html">ecs::component::Size</a></div><div class="ttdoc">Size component.</div><div class="ttdef"><b>Definition:</b> Size.hpp:6</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_size_html_a74a08ef18b4e55b48d8c02d5d6a70c79"><div class="ttname"><a href="structecs_1_1component_1_1_size.html#a74a08ef18b4e55b48d8c02d5d6a70c79">ecs::component::Size::width</a></div><div class="ttdeci">int width</div><div class="ttdef"><b>Definition:</b> Size.hpp:8</div></div>
 <!-- start footer part -->

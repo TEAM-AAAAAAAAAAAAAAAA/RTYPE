@@ -198,7 +198,7 @@ $(document).ready(function(){initNavTree('_manage_client_events_8hpp_source.html
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#pragma region Bullet Shoot</span></div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (world.getEvent() == ecs::Event::EventType::Shoot) {</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                <a class="code" href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">network::Message</a> msg;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                <a class="code" href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a> msg;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                msg.fill(0);</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                msg.at(0) = utils::constant::getPacketTypeKey(<a class="code" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a9aecf06d78c05845cbb3c8f960a13d4c">utils::constant::PacketType::PLAYER_SHOT</a>);</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                <a class="code" href="classnetwork_1_1_client.html#ab4ee2988395ad66a1c4e259eba436d23">network::Client::getOutgoingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">push</a>(msg);</div>
@@ -210,6 +210,7 @@ $(document).ready(function(){initNavTree('_manage_client_events_8hpp_source.html
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="anamespacenetwork_html_a6ec876aa185a7f04d2f7fba304553d21"><div class="ttname"><a href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a></div><div class="ttdeci">std::array&lt; char, 16 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
 <div class="ttc" id="a_faction_8hpp_html"><div class="ttname"><a href="_faction_8hpp.html">Faction.hpp</a></div></div>
 <div class="ttc" id="anamespaceecs_1_1systems_html_ac67f4a6799296119e6faddb95989b6ab"><div class="ttname"><a href="namespaceecs_1_1systems.html#ac67f4a6799296119e6faddb95989b6ab">ecs::systems::manageClientEvents</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; manageClientEvents</div><div class="ttdef"><b>Definition:</b> ManageClientEvents.hpp:29</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_direction_html"><div class="ttname"><a href="structecs_1_1component_1_1_direction.html">ecs::component::Direction</a></div><div class="ttdef"><b>Definition:</b> Direction.hpp:18</div></div>
@@ -221,7 +222,6 @@ $(document).ready(function(){initNavTree('_manage_client_events_8hpp_source.html
 <div class="ttc" id="aclassnetwork_1_1_client_html_ab4ee2988395ad66a1c4e259eba436d23"><div class="ttname"><a href="classnetwork_1_1_client.html#ab4ee2988395ad66a1c4e259eba436d23">network::Client::getOutgoingMessages</a></div><div class="ttdeci">static LockedQueue&lt; Message &gt; &amp; getOutgoingMessages()</div><div class="ttdef"><b>Definition:</b> NetworkClient.hpp:46</div></div>
 <div class="ttc" id="a_constant_8hpp_html"><div class="ttname"><a href="_constant_8hpp.html">Constant.hpp</a></div></div>
 <div class="ttc" id="a_projectile_8hpp_html"><div class="ttname"><a href="_projectile_8hpp.html">Projectile.hpp</a></div></div>
-<div class="ttc" id="anamespacenetwork_html_a56091a576a11d5ae809e0e832167d051"><div class="ttname"><a href="namespacenetwork.html#a56091a576a11d5ae809e0e832167d051">network::Message</a></div><div class="ttdeci">std::array&lt; char, 14 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
 <div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:19</div></div>
 <div class="ttc" id="anamespaceecs_1_1systems_html"><div class="ttname"><a href="namespaceecs_1_1systems.html">ecs::systems</a></div><div class="ttdef"><b>Definition:</b> Animate.hpp:19</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_controllable_html"><div class="ttname"><a href="structecs_1_1component_1_1_controllable.html">ecs::component::Controllable</a></div><div class="ttdef"><b>Definition:</b> Controllable.hpp:20</div></div>

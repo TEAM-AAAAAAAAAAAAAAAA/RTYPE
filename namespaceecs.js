@@ -1,6 +1,7 @@
 var namespaceecs =
 [
     [ "component", "namespaceecs_1_1component.html", "namespaceecs_1_1component" ],
+    [ "EnemyFactory", "classecs_1_1_enemy_factory.html", "classecs_1_1_enemy_factory" ],
     [ "Engine", "classecs_1_1_engine.html", "classecs_1_1_engine" ],
     [ "Entity", "classecs_1_1_entity.html", "classecs_1_1_entity" ],
     [ "Event", "classecs_1_1_event.html", "classecs_1_1_event" ],
