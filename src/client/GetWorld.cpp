@@ -14,12 +14,13 @@
 #include "components/Size.hpp"
 #include "components/Velocity.hpp"
 #include "components/Weapon.hpp"
-#include "components/client/Activable.hpp"
 #include "components/client/Animated.hpp"
 #include "components/client/Controllable.hpp"
 #include "components/client/Drawable.hpp"
 #include "components/client/Hitbox.hpp"
 #include "components/client/Parallax.hpp"
+#include "components/client/Activable.hpp"
+#include "components/client/Text.hpp"
 #include "systems/ManageClientEvents.hpp"
 #include "systems/Movement.hpp"
 #include "systems/client/Animate.hpp"
@@ -87,6 +88,7 @@ static void setGameParallax(ecs::World &world)
     world.registry.addComponent<ecs::component::Size>(
         background1, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(background1, {"bg1", {0, 0, 5760, 360}});
+    world.registry.addComponent<ecs::component::Activable>(background1, {});
     world.registry.addComponent<ecs::component::Velocity>(background1, {1, 0});
     world.registry.addComponent<ecs::component::Direction>(background1, {-1, 0});
     world.registry.addComponent<ecs::component::Parallax>(
@@ -96,6 +98,7 @@ static void setGameParallax(ecs::World &world)
     world.registry.addComponent<ecs::component::Size>(
         parallaxFirstView, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(parallaxFirstView, {"bg1", {0, 0, 5760, 360}});
+    world.registry.addComponent<ecs::component::Activable>(parallaxFirstView, {});
     world.registry.addComponent<ecs::component::Velocity>(parallaxFirstView, {1, 0});
     world.registry.addComponent<ecs::component::Direction>(parallaxFirstView, {-1, 0});
     world.registry.addComponent<ecs::component::Parallax>(
@@ -105,6 +108,7 @@ static void setGameParallax(ecs::World &world)
     world.registry.addComponent<ecs::component::Size>(
         background2, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(background2, {"bg2", {0, 0, 5760, 360}});
+    world.registry.addComponent<ecs::component::Activable>(background2, {});
     world.registry.addComponent<ecs::component::Velocity>(background2, {2, 0});
     world.registry.addComponent<ecs::component::Direction>(background2, {-1, 0});
     world.registry.addComponent<ecs::component::Parallax>(
@@ -114,6 +118,7 @@ static void setGameParallax(ecs::World &world)
     world.registry.addComponent<ecs::component::Size>(
         parallaxSecondView, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(parallaxSecondView, {"bg2", {0, 0, 5760, 360}});
+    world.registry.addComponent<ecs::component::Activable>(parallaxSecondView, {});
     world.registry.addComponent<ecs::component::Velocity>(parallaxSecondView, {2, 0});
     world.registry.addComponent<ecs::component::Parallax>(
         parallaxSecondView, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
@@ -123,6 +128,7 @@ static void setGameParallax(ecs::World &world)
     world.registry.addComponent<ecs::component::Size>(
         background3, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(background3, {"bg3", {0, 0, 5760, 360}});
+    world.registry.addComponent<ecs::component::Activable>(background3, {});
     world.registry.addComponent<ecs::component::Velocity>(background3, {3, 0});
     world.registry.addComponent<ecs::component::Parallax>(
         background3, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
@@ -132,6 +138,7 @@ static void setGameParallax(ecs::World &world)
     world.registry.addComponent<ecs::component::Size>(
         parallaxThirdView, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(parallaxThirdView, {"bg3", {0, 0, 5760, 360}});
+    world.registry.addComponent<ecs::component::Activable>(parallaxThirdView, {});
     world.registry.addComponent<ecs::component::Velocity>(parallaxThirdView, {3, 0});
     world.registry.addComponent<ecs::component::Direction>(parallaxThirdView, {-1, 0});
     world.registry.addComponent<ecs::component::Parallax>(
@@ -170,67 +177,93 @@ static void addMenuSystems(ecs::World &world)
     world.addSystem(ecs::systems::menuSelect);
 }
 
-static void setMenuBackground(ecs::World &world)
+static void setMainButtons(ecs::World &world)
 {
     ecs::Entity playButton = world.registry.spawn_entity();
     ecs::Entity optionButton = world.registry.spawn_entity();
     ecs::Entity quitButton = world.registry.spawn_entity();
-    ecs::Entity connectInterface = world.registry.spawn_entity();
-
     auto itPlay = utils::constant::buttonValueMap.find(utils::constant::PLAY);
-    auto itOptions = utils::constant::buttonValueMap.find(utils::constant::OPTIONS);
+    auto itOptions = utils::constant::buttonValueMap.find(utils::constant::OPTION);
     auto itQuit = utils::constant::buttonValueMap.find(utils::constant::QUIT);
-    const int defaultConnectWidth = 1705;
-    const int defaultConnectHeight = 1920;
-    const int buttonHeight =
-        (itPlay->second.defaultRectHeight * itPlay->second.rectWidth) / itPlay->second.defaultRectWidth;
-    const int connectWidth = (defaultConnectWidth * itPlay->second.rectWidth) / itPlay->second.defaultRectWidth;
-    const int connectHeight = (defaultConnectHeight * buttonHeight) / itPlay->second.defaultRectHeight;
 
     world.registry.addComponent<ecs::component::Position>(playButton, {itPlay->second.posX, itPlay->second.posY});
-    world.registry.addComponent<ecs::component::Size>(
-        playButton, {itPlay->second.rectHeight, itPlay->second.rectWidth});
-    world.registry.addComponent<ecs::component::Drawable>(playButton,
-        {"menu",
-            {itPlay->second.rectLeft, itPlay->second.rectTop, itPlay->second.defaultRectWidth,
-                itPlay->second.defaultRectHeight},
-            true, true});
-    world.registry.addComponent<ecs::component::Activable>(
-        playButton, ecs::component::Activable(utils::constant::PLAY_ACTION));
+    world.registry.addComponent<ecs::component::Size>(playButton, {itPlay->second.rectHeight, itPlay->second.rectWidth});
+    world.registry.addComponent<ecs::component::Drawable>(playButton, {"menu", {itPlay->second.rectLeft, itPlay->second.rectTop, itPlay->second.defaultRectWidth, itPlay->second.defaultRectHeight}});
+    world.registry.addComponent<ecs::component::Activable>(playButton, {true, true, utils::constant::PLAY});
 
-    world.registry.addComponent<ecs::component::Position>(
-        optionButton, {itOptions->second.posX, itOptions->second.posY});
-    world.registry.addComponent<ecs::component::Size>(
-        optionButton, {itPlay->second.rectHeight, itPlay->second.rectWidth});
-    world.registry.addComponent<ecs::component::Drawable>(optionButton,
-        {"menu",
-            {itOptions->second.rectLeft, itOptions->second.rectTop, itPlay->second.defaultRectWidth,
-                itPlay->second.defaultRectHeight},
-            true, true});
-    world.registry.addComponent<ecs::component::Activable>(
-        optionButton, ecs::component::Activable(utils::constant::OPTIONS_ACTION));
+    world.registry.addComponent<ecs::component::Position>(optionButton, {itOptions->second.posX, itOptions->second.posY});
+    world.registry.addComponent<ecs::component::Size>(optionButton, {itPlay->second.rectHeight, itPlay->second.rectWidth});
+    world.registry.addComponent<ecs::component::Drawable>(optionButton, {"menu", {itOptions->second.rectLeft, itOptions->second.rectTop, itPlay->second.defaultRectWidth, itPlay->second.defaultRectHeight}});
+    world.registry.addComponent<ecs::component::Activable>(optionButton, {true, true, utils::constant::OPTION});
 
     world.registry.addComponent<ecs::component::Position>(quitButton, {itQuit->second.posX, itQuit->second.posY});
-    world.registry.addComponent<ecs::component::Size>(
-        quitButton, {itPlay->second.rectHeight, itPlay->second.rectWidth});
-    world.registry.addComponent<ecs::component::Drawable>(quitButton,
-        {"menu",
-            {itQuit->second.rectLeft, itQuit->second.rectTop, itPlay->second.defaultRectWidth,
-                itPlay->second.defaultRectHeight},
-            true, true});
-    world.registry.addComponent<ecs::component::Activable>(
-        quitButton, ecs::component::Activable(utils::constant::QUIT_ACTION));
-
-    world.registry.addComponent<ecs::component::Position>(
-        connectInterface, {itPlay->second.posX + 220, itPlay->second.posY - 50});
-    world.registry.addComponent<ecs::component::Size>(connectInterface, {connectHeight, connectWidth});
-    world.registry.addComponent<ecs::component::Drawable>(
-        connectInterface, {"menu", {1612, 100, defaultConnectWidth, defaultConnectHeight}, false});
-    world.registry.addComponent<ecs::component::Activable>(
-        connectInterface, ecs::component::Activable(utils::constant::CONNECT_ACTION));
+    world.registry.addComponent<ecs::component::Size>(quitButton, {itPlay->second.rectHeight, itPlay->second.rectWidth});
+    world.registry.addComponent<ecs::component::Drawable>(quitButton, {"menu", {itQuit->second.rectLeft, itQuit->second.rectTop, itPlay->second.defaultRectWidth, itPlay->second.defaultRectHeight}});
+    world.registry.addComponent<ecs::component::Activable>(quitButton, {true, true, utils::constant::QUIT});
 }
 
-static void destroyMenu(ecs::World &world) {}
+static void setRoomTexts(ecs::World &world)
+{
+    ecs::Entity textFirstRoom = world.registry.spawn_entity();
+    ecs::Entity textSecondRoom = world.registry.spawn_entity();
+    ecs::Entity textThirdRoom = world.registry.spawn_entity();
+    ecs::Entity textFourthRoom = world.registry.spawn_entity();
+    auto itRoom = utils::constant::buttonValueMap.find(utils::constant::ROOM);
+
+    world.registry.addComponent<ecs::component::Text>(textFirstRoom, {10});
+    world.registry.addComponent<ecs::component::Text>(textSecondRoom, {10});
+    world.registry.addComponent<ecs::component::Text>(textThirdRoom, {10});
+    world.registry.addComponent<ecs::component::Text>(textFourthRoom, {10});
+    world.registry.addComponent<ecs::component::Position>(textFirstRoom, {itRoom->second.posX + 60, itRoom->second.posY - 17 + itRoom->second.rectHeight / 2});
+    world.registry.addComponent<ecs::component::Position>(textSecondRoom, {itRoom->second.posX + 60, itRoom->second.posY + 103 + itRoom->second.rectHeight / 2});
+    world.registry.addComponent<ecs::component::Position>(textThirdRoom, {itRoom->second.posX + 60, itRoom->second.posY + 223 + itRoom->second.rectHeight / 2});
+    world.registry.addComponent<ecs::component::Position>(textFourthRoom, {itRoom->second.posX + 60, itRoom->second.posY + 343 + itRoom->second.rectHeight / 2});
+    world.registry.addComponent<ecs::component::Size>(textFirstRoom, {30, 0});
+    world.registry.addComponent<ecs::component::Size>(textSecondRoom, {30, 0});
+    world.registry.addComponent<ecs::component::Size>(textThirdRoom, {30, 0});
+    world.registry.addComponent<ecs::component::Size>(textFourthRoom, {30, 0});
+    world.registry.addComponent<ecs::component::Activable>(textFirstRoom, {false, false, utils::constant::ROOM_TEXT});
+    world.registry.addComponent<ecs::component::Activable>(textSecondRoom, {false, false, utils::constant::ROOM_TEXT});
+    world.registry.addComponent<ecs::component::Activable>(textThirdRoom, {false, false, utils::constant::ROOM_TEXT});
+    world.registry.addComponent<ecs::component::Activable>(textFourthRoom, {false, false, utils::constant::ROOM_TEXT});
+
+}
+
+static void setRoomButtons(ecs::World &world)
+{
+    auto itRoom = utils::constant::buttonValueMap.find(utils::constant::ROOM);
+    ecs::Entity firstRoom = world.registry.spawn_entity();
+    ecs::Entity secondRoom = world.registry.spawn_entity();
+    ecs::Entity thirdRoom = world.registry.spawn_entity();
+    ecs::Entity fourthRoom = world.registry.spawn_entity();
+
+    world.registry.addComponent<ecs::component::Position>(firstRoom, {itRoom->second.posX, itRoom->second.posY});
+    world.registry.addComponent<ecs::component::Size>(firstRoom, {itRoom->second.rectHeight, itRoom->second.rectWidth});
+    world.registry.addComponent<ecs::component::Drawable>(firstRoom, {"menu", {itRoom->second.rectLeft, itRoom->second.rectTop, itRoom->second.defaultRectWidth, itRoom->second.defaultRectHeight}});
+    world.registry.addComponent<ecs::component::Activable>(firstRoom, {false, true, utils::constant::ROOM});
+
+    world.registry.addComponent<ecs::component::Position>(secondRoom, {itRoom->second.posX, itRoom->second.posY + 120});
+    world.registry.addComponent<ecs::component::Size>(secondRoom, {itRoom->second.rectHeight, itRoom->second.rectWidth});
+    world.registry.addComponent<ecs::component::Drawable>(secondRoom, {"menu", {itRoom->second.rectLeft, itRoom->second.rectTop, itRoom->second.defaultRectWidth, itRoom->second.defaultRectHeight}});
+    world.registry.addComponent<ecs::component::Activable>(secondRoom, {false, true, utils::constant::ROOM});
+
+    world.registry.addComponent<ecs::component::Position>(thirdRoom, {itRoom->second.posX, itRoom->second.posY + 240});
+    world.registry.addComponent<ecs::component::Size>(thirdRoom, {itRoom->second.rectHeight, itRoom->second.rectWidth});
+    world.registry.addComponent<ecs::component::Drawable>(thirdRoom, {"menu", {itRoom->second.rectLeft, itRoom->second.rectTop, itRoom->second.defaultRectWidth, itRoom->second.defaultRectHeight}});
+    world.registry.addComponent<ecs::component::Activable>(thirdRoom, {false, true, utils::constant::ROOM});
+
+    world.registry.addComponent<ecs::component::Position>(fourthRoom, {itRoom->second.posX, itRoom->second.posY + 360});
+    world.registry.addComponent<ecs::component::Size>(fourthRoom, {itRoom->second.rectHeight, itRoom->second.rectWidth});
+    world.registry.addComponent<ecs::component::Drawable>(fourthRoom, {"menu", {itRoom->second.rectLeft, itRoom->second.rectTop, itRoom->second.defaultRectWidth, itRoom->second.defaultRectHeight}});
+    world.registry.addComponent<ecs::component::Activable>(fourthRoom, {false, true, utils::constant::ROOM});
+}
+
+static void setMenuBackground(ecs::World &world)
+{
+    setMainButtons(world);
+    setRoomButtons(world);
+    setRoomTexts(world);
+}
 
 ecs::World getMenuWorld()
 {

@@ -10,6 +10,7 @@
 #include <functional>
 #include <iostream>
 #include <valarray>
+#include "../client/AssetLoader.hpp"
 #include "../client/NetworkClient.hpp"
 #include "World.hpp"
 #include "components/EntityType.hpp"
@@ -20,6 +21,7 @@
 #include "components/client/Controllable.hpp"
 #include "components/client/Drawable.hpp"
 #include "components/client/Shootable.hpp"
+#include "components/client/Activable.hpp"
 
 namespace ecs::systems
 {
@@ -75,6 +77,7 @@ namespace ecs::systems
         world.registry.addComponent<component::Velocity>(newEntity, {velX, velY});
         world.registry.addComponent<component::EntityType>(newEntity, {type.type});
         world.registry.addComponent<component::Size>(newEntity, {sizeX, sizeY});
+        world.registry.addComponent<component::Activable>(newEntity, {});
         switch (type.type) {
             case component::EntityType::Types::Player:
                 if (msgId != selfId) {
@@ -90,9 +93,10 @@ namespace ecs::systems
                     world.registry.addComponent<component::EntityType>(
                         newEntity, {component::EntityType::Types::Player});
                     world.registry.addComponent<ecs::component::Shootable>(
-                        newEntity, ecs::component::Shootable(sf::Keyboard::Space));
+                        newEntity, ecs::component::Shootable(asset::AssetLoader::GetKeybind("shoot")));
                     world.registry.addComponent<ecs::component::Controllable>(newEntity,
-                        {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D, sf::Keyboard::H});
+                        {asset::AssetLoader::GetKeybind("up"), asset::AssetLoader::GetKeybind("left"),
+                            asset::AssetLoader::GetKeybind("down"), asset::AssetLoader::GetKeybind("right"), asset::AssetLoader::GetKeybind("hitbox")});
                     world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
                     world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 1, 32, 16}});
                     world.registry.addComponent<ecs::component::Animated>(newEntity,
@@ -308,7 +312,7 @@ namespace ecs::systems
                 break;
             case component::EntityType::Types::Bullet:
                 world.registry.addComponent<component::Drawable>(newEntity,
-                    {"bullet", {10, 7, 12, 19}, true, false,
+                    {"bullet", {10, 7, 12, 19},
                         std::atan2(static_cast<float>(dirX), static_cast<float>(dirY)) * 180 / 3.14159265359f});
                 world.registry.addComponent<component::Animated>(newEntity,
                     {AnimFrame(10, 7, 12, 19, 100), AnimFrame(42, 7, 12, 19, 100), AnimFrame(74, 7, 12, 19, 100),
@@ -317,7 +321,7 @@ namespace ecs::systems
                 break;
             case component::EntityType::Types::EnergySphere:
                 world.registry.addComponent<component::Drawable>(newEntity,
-                    {"energy-sphere", {0, 0, 32, 32}, true, false,
+                    {"energy-sphere", {0, 0, 32, 32},
                         std::atan2(static_cast<float>(dirX), static_cast<float>(dirY)) * 180 / 3.14159265359f});
                 world.registry.addComponent<component::Animated>(newEntity,
                     {AnimFrame(0, 0, 32, 32, 100), AnimFrame(32, 0, 32, 32, 100), AnimFrame(64, 0, 32, 32, 100),
@@ -328,7 +332,7 @@ namespace ecs::systems
                 break;
             case component::EntityType::Types::Laser:
                 world.registry.addComponent<component::Drawable>(newEntity,
-                    {"laser", {0, 13, 32, 6}, true, false,
+                    {"laser", {0, 13, 32, 6},
                         std::atan2(static_cast<float>(dirX), static_cast<float>(dirY)) * 180 / 3.14159265359f});
                 world.registry.addComponent<component::Animated>(newEntity,
                     {AnimFrame(0, 13, 32, 6, 100), AnimFrame(0, 45, 32, 6, 100), AnimFrame(0, 77, 32, 6, 100),
@@ -337,7 +341,7 @@ namespace ecs::systems
                 break;
             case component::EntityType::Types::Rocket:
                 world.registry.addComponent<component::Drawable>(newEntity,
-                    {"rocket", {12, 9, 7, 20}, true, false,
+                    {"rocket", {12, 9, 7, 20},
                         std::atan2(static_cast<float>(dirX), static_cast<float>(dirY)) * 180 / 3.14159265359f});
                 world.registry.addComponent<component::Animated>(newEntity,
                     {AnimFrame(12, 9, 7, 20, 100), AnimFrame(44, 9, 7, 20, 100), AnimFrame(79, 9, 7, 20, 100)});
@@ -345,7 +349,7 @@ namespace ecs::systems
                 break;
             case component::EntityType::Types::Asteroid:
                 world.registry.addComponent<component::Drawable>(newEntity,
-                    {"asteroid", {29, 32, 38, 33}, true, false,
+                    {"asteroid", {29, 32, 38, 33},
                         std::atan2(static_cast<float>(dirX), static_cast<float>(dirY)) * 180 / 3.14159265359f});
                 world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
                 break;

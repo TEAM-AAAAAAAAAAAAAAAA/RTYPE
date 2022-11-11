@@ -9,6 +9,8 @@
 #include "AudioManager.hpp"
 #include "Engine.hpp"
 #include "GetWorld.hpp"
+#include "LockedQueue.hpp"
+#include "NetworkClient.hpp"
 
 /**
  * Main function of the client, running everything to start the game
@@ -17,6 +19,10 @@
 int main()
 {
     ecs::Engine engine;
+//    network::Message msg;
+//    msg.fill(0);
+//    network::Client::connect();
+//    network::Client::getOutgoingMessages().push(msg);
     asset::AssetLoader::LoadIniFile(asset::AssetLoader::smartPath("assets", "config.ini"));
     audio::AudioManager::playSFX("splash_screen");
     audio::AudioManager::loadBGM("bgm1");

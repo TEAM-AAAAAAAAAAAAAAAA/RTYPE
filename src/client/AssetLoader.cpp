@@ -9,6 +9,9 @@
 
 namespace asset
 {
-    AssetLoader AssetLoader::_Instance;
-
-} // namespace asset
+    AssetLoader &AssetLoader::getInstance()
+    {
+        static AssetLoader _Instance;
+        return _Instance;
+    }
+}; // namespace asset
