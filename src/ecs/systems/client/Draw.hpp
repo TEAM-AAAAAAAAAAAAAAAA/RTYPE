@@ -78,6 +78,7 @@ namespace ecs::systems
                       if (activ->getIsActivate()) {
                           sf::Text sfText;
                           sf::Color textColor;
+                          size_t textLength = 0;
 
                           textColor.r = text->getTextColor().r;
                           textColor.g = text->getTextColor().g;
@@ -85,8 +86,9 @@ namespace ecs::systems
                           textColor.a = text->getTextColor().a;
                           sfText.setCharacterSize(size->height);
                           sfText.setFont(text->getFont());
+                          (j > 0) ? textLength = text->getContent(j - 1).length() : 0;
                           sfText.setPosition(
-                              static_cast<float>(pos->x + j * 40), static_cast<float>(pos->y));
+                              static_cast<float>(pos->x + j * size->height + textLength * size->width), static_cast<float>(pos->y));
                           sfText.setFillColor(textColor);
                           sfText.setString(text->getContent(j));
                           utils::Window::getInstance().draw(sfText);
