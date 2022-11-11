@@ -10,7 +10,8 @@ var structecs_1_1component_1_1_attack_a_i =
       [ "Frigate", "structecs_1_1component_1_1_attack_a_i.html#aac7c4d7eb279c3e085e52330edc31d9caf95fa63cd7703253da576af483be536c", null ],
       [ "Scout", "structecs_1_1component_1_1_attack_a_i.html#aac7c4d7eb279c3e085e52330edc31d9cac84a81f28492be21d844f31fec1c1eac", null ],
       [ "Torpedo", "structecs_1_1component_1_1_attack_a_i.html#aac7c4d7eb279c3e085e52330edc31d9ca8da2b323b1e42506ab862542cfba9056", null ],
-      [ "NoodleMonster", "structecs_1_1component_1_1_attack_a_i.html#aac7c4d7eb279c3e085e52330edc31d9cab912d4b5cb9e566c93be66e2f37140ad", null ]
+      [ "NoodleMonster", "structecs_1_1component_1_1_attack_a_i.html#aac7c4d7eb279c3e085e52330edc31d9cab912d4b5cb9e566c93be66e2f37140ad", null ],
+      [ "PlayerBot", "structecs_1_1component_1_1_attack_a_i.html#aac7c4d7eb279c3e085e52330edc31d9ca739ac87c88e261fc5a0a9963e19383f5", null ]
     ] ],
     [ "PatternType", "structecs_1_1component_1_1_attack_a_i.html#a32b4548e3a97a42ff56419e9bdd7c851", [
       [ "Wait", "structecs_1_1component_1_1_attack_a_i.html#a32b4548e3a97a42ff56419e9bdd7c851ae3aaaac7f09b0178b0176f9d815acad0", null ],
@@ -23,7 +24,8 @@ var structecs_1_1component_1_1_attack_a_i =
       [ "ShootRocket", "structecs_1_1component_1_1_attack_a_i.html#a32b4548e3a97a42ff56419e9bdd7c851a5910a32165bf851bdce0b7dbf65fc503", null ],
       [ "InvokeAllies", "structecs_1_1component_1_1_attack_a_i.html#a32b4548e3a97a42ff56419e9bdd7c851a11a51b908e9e7a517b25b3ff08e9c06c", null ],
       [ "InvokeAnyone", "structecs_1_1component_1_1_attack_a_i.html#a32b4548e3a97a42ff56419e9bdd7c851a227f43851bd8f64bd3514f8208718ac0", null ],
-      [ "SpawnAsteroids", "structecs_1_1component_1_1_attack_a_i.html#a32b4548e3a97a42ff56419e9bdd7c851a81bda24afa228487c006cb76bf1ebede", null ]
+      [ "SpawnAsteroids", "structecs_1_1component_1_1_attack_a_i.html#a32b4548e3a97a42ff56419e9bdd7c851a81bda24afa228487c006cb76bf1ebede", null ],
+      [ "PlayerBotLaser", "structecs_1_1component_1_1_attack_a_i.html#a32b4548e3a97a42ff56419e9bdd7c851adcf8091fa827e22451b4274c8872984d", null ]
     ] ],
     [ "AttackAI", "structecs_1_1component_1_1_attack_a_i.html#a1c228cd408d24213cb180c8db71adaa4", null ],
     [ "getRandomAttack", "structecs_1_1component_1_1_attack_a_i.html#ae8d69cf21c1de4e033b8cad57af714b4", null ],

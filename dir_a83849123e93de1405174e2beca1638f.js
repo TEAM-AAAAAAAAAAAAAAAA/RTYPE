@@ -7,6 +7,9 @@ var dir_a83849123e93de1405174e2beca1638f =
       [ "Pattern", "structecs_1_1component_1_1_attack_a_i_1_1_a_i_1_1_pattern.html", "structecs_1_1component_1_1_attack_a_i_1_1_a_i_1_1_pattern" ],
       [ "Action", "structecs_1_1component_1_1_attack_a_i_1_1_action.html", null ]
     ] ],
+    [ "FollowEntity.hpp", "_follow_entity_8hpp.html", [
+      [ "FollowEntity", "structecs_1_1component_1_1_follow_entity.html", "structecs_1_1component_1_1_follow_entity" ]
+    ] ],
     [ "Projectile.hpp", "_projectile_8hpp.html", [
       [ "Projectile", "structecs_1_1component_1_1_projectile.html", "structecs_1_1component_1_1_projectile" ]
     ] ]

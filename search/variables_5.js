@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['faction_756',['faction',['../structecs_1_1component_1_1_faction.html#afff7553e9fcd8b3281b5b86e9225c255',1,'ecs::component::Faction']]]
+  ['faction_767',['faction',['../structecs_1_1component_1_1_faction.html#afff7553e9fcd8b3281b5b86e9225c255',1,'ecs::component::Faction']]],
+  ['followentitysystem_768',['followEntitySystem',['../namespaceecs_1_1systems.html#a2801cb6900e88594ee0c970e3b8eeac7',1,'ecs::systems']]]
 ];

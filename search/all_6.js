@@ -1,8 +1,12 @@
 var searchData=
 [
-  ['faction_118',['Faction',['../structecs_1_1component_1_1_faction.html',1,'ecs::component::Faction'],['../structecs_1_1component_1_1_faction.html#a020a100149a0d7fbcddac2f4905acef1',1,'ecs::component::Faction::Faction(Factions faction=Factions::None)'],['../structecs_1_1component_1_1_faction.html#afff7553e9fcd8b3281b5b86e9225c255',1,'ecs::component::Faction::faction()']]],
-  ['faction_2ehpp_119',['Faction.hpp',['../_faction_8hpp.html',1,'']]],
-  ['factions_120',['Factions',['../structecs_1_1component_1_1_faction.html#af6ff333bfa9135fc5709a76af44ca55b',1,'ecs::component::Faction']]],
-  ['fighter_121',['Fighter',['../structecs_1_1component_1_1_attack_a_i.html#aac7c4d7eb279c3e085e52330edc31d9cae57af34bd8b4eac4855677bad8994369',1,'ecs::component::AttackAI::Fighter()'],['../classecs_1_1_enemy_factory.html#a61e138c0eaa79a98c9839a06fc9ce2a2a95f954329145b78bbd1ed9820abeebc0',1,'ecs::EnemyFactory::Fighter()']]],
-  ['frigate_122',['Frigate',['../structecs_1_1component_1_1_attack_a_i.html#aac7c4d7eb279c3e085e52330edc31d9caf95fa63cd7703253da576af483be536c',1,'ecs::component::AttackAI::Frigate()'],['../classecs_1_1_enemy_factory.html#a61e138c0eaa79a98c9839a06fc9ce2a2a7fc361fa2cf5acde47202931b068b4ab',1,'ecs::EnemyFactory::Frigate()']]]
+  ['faction_119',['Faction',['../structecs_1_1component_1_1_faction.html',1,'ecs::component::Faction'],['../structecs_1_1component_1_1_faction.html#a020a100149a0d7fbcddac2f4905acef1',1,'ecs::component::Faction::Faction(Factions faction=Factions::None)'],['../structecs_1_1component_1_1_faction.html#afff7553e9fcd8b3281b5b86e9225c255',1,'ecs::component::Faction::faction()']]],
+  ['faction_2ehpp_120',['Faction.hpp',['../_faction_8hpp.html',1,'']]],
+  ['factions_121',['Factions',['../structecs_1_1component_1_1_faction.html#af6ff333bfa9135fc5709a76af44ca55b',1,'ecs::component::Faction']]],
+  ['fighter_122',['Fighter',['../structecs_1_1component_1_1_attack_a_i.html#aac7c4d7eb279c3e085e52330edc31d9cae57af34bd8b4eac4855677bad8994369',1,'ecs::component::AttackAI::Fighter()'],['../classecs_1_1_enemy_factory.html#a61e138c0eaa79a98c9839a06fc9ce2a2a95f954329145b78bbd1ed9820abeebc0',1,'ecs::EnemyFactory::Fighter()']]],
+  ['followentity_123',['FollowEntity',['../structecs_1_1component_1_1_follow_entity.html',1,'ecs::component']]],
+  ['followentity_2ehpp_124',['FollowEntity.hpp',['../_follow_entity_8hpp.html',1,'']]],
+  ['followentitysystem_125',['followEntitySystem',['../namespaceecs_1_1systems.html#a2801cb6900e88594ee0c970e3b8eeac7',1,'ecs::systems']]],
+  ['followentitysystem_2ehpp_126',['FollowEntitySystem.hpp',['../_follow_entity_system_8hpp.html',1,'']]],
+  ['frigate_127',['Frigate',['../structecs_1_1component_1_1_attack_a_i.html#aac7c4d7eb279c3e085e52330edc31d9caf95fa63cd7703253da576af483be536c',1,'ecs::component::AttackAI::Frigate()'],['../classecs_1_1_enemy_factory.html#a61e138c0eaa79a98c9839a06fc9ce2a2a7fc361fa2cf5acde47202931b068b4ab',1,'ecs::EnemyFactory::Frigate()']]]
 ];

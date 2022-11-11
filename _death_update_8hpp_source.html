@@ -151,38 +151,62 @@ $(document).ready(function(){initNavTree('_death_update_8hpp_source.html',''); i
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_world_8hpp.html">World.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_network_id_8hpp.html">components/NetworkId.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_position_8hpp.html">components/Position.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs_1_1systems.html">ecs::systems</a></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="namespaceecs_1_1systems.html#a2e0f6b7daf53150a7faa7b7f59d47d5e">   23</a></span>&#160;    std::function&lt;void(<a class="code" href="classecs_1_1_world.html">World</a> &amp;)&gt; <a class="code" href="namespaceecs_1_1systems.html#a2e0f6b7daf53150a7faa7b7f59d47d5e">deathUpdate</a> = [](<a class="code" href="classecs_1_1_world.html">World</a> &amp;world) {</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keyword">auto</span> &amp;healths = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_health.html">component::Health</a>&gt;();</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keyword">auto</span> &amp;networkId = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_network_id.html">component::NetworkId</a>&gt;();</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; healths.size(); ++i) {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <span class="keyword">auto</span> &amp;health = healths[i];</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="keywordflow">if</span> (health) {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                <span class="keywordflow">if</span> (health.value().health &lt;= 0) {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                    <span class="keywordflow">if</span> (i &lt; networkId.size()) {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                        <span class="keyword">auto</span> &amp;<span class="keywordtype">id</span> = networkId[i];</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                        <span class="keywordflow">if</span> (<span class="keywordtype">id</span>) {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                            std::array&lt;char, 2&gt; idBin = <span class="keywordtype">id</span>.value().serialize();</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                            <a class="code" href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a> msg;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                            msg[0] = utils::constant::getPacketTypeKey(<a class="code" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a509676f5d38cbf87a106deecbbb082db">utils::constant::PacketType::ENTITY_DEATH</a>);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                            msg[1] = idBin[0];</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                            msg[2] = idBin[1];</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                            <a class="code" href="classnetwork_1_1_server.html#a0c64a21c5e324114615c0073596cb403">network::Server::getOutgoingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">push</a>(</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                                <a class="code" href="namespacenetwork.html#a1290ee51c4c8d07f57076ac8f7505129">network::ServerMessage</a>(msg, std::vector&lt;unsigned int&gt;()));</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                        }</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                    }</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                    world.registry.killEntity(world.registry.entityFromIndex(i));</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                }</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            }</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        }</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    };</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_follow_entity_8hpp.html">components/server/FollowEntity.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs_1_1systems.html">ecs::systems</a></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="namespaceecs_1_1systems.html#a2e0f6b7daf53150a7faa7b7f59d47d5e">   24</a></span>&#160;    std::function&lt;void(<a class="code" href="classecs_1_1_world.html">World</a> &amp;)&gt; <a class="code" href="namespaceecs_1_1systems.html#a2e0f6b7daf53150a7faa7b7f59d47d5e">deathUpdate</a> = [](<a class="code" href="classecs_1_1_world.html">World</a> &amp;world) {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keyword">auto</span> &amp;healths = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_health.html">component::Health</a>&gt;();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">auto</span> &amp;networkId = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_network_id.html">component::NetworkId</a>&gt;();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;follow = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_follow_entity.html">component::FollowEntity</a>&gt;();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; healths.size(); i++) {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="keyword">auto</span> &amp;health = healths[i];</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <span class="keywordflow">if</span> (health) {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                <span class="keywordflow">if</span> (health.value().health &lt;= 0) {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                    <span class="keywordflow">if</span> (i &lt; networkId.size()) {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                        <span class="keyword">auto</span> &amp;<span class="keywordtype">id</span> = networkId[i];</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                        <span class="keywordflow">if</span> (<span class="keywordtype">id</span>) {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                            std::array&lt;char, 2&gt; idBin = <span class="keywordtype">id</span>.value().serialize();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                            <a class="code" href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a> msg;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                            msg[0] = utils::constant::getPacketTypeKey(<a class="code" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a509676f5d38cbf87a106deecbbb082db">utils::constant::PacketType::ENTITY_DEATH</a>);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                            msg[1] = idBin[0];</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                            msg[2] = idBin[1];</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                            <a class="code" href="classnetwork_1_1_server.html#a0c64a21c5e324114615c0073596cb403">network::Server::getOutgoingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">push</a>(</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                                <a class="code" href="namespacenetwork.html#a1290ee51c4c8d07f57076ac8f7505129">network::ServerMessage</a>(msg, std::vector&lt;unsigned int&gt;()));</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                        }</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                    }</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                    <span class="keywordflow">for</span> (std::size_t j = 0; j &lt; follow.size(); j++) {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                        <span class="keywordflow">if</span> (follow[j]) {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                            <span class="keywordflow">if</span> (follow[j].value().entityId == i) {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                                <span class="keywordflow">if</span> (j &lt; networkId.size()) {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                                    <span class="keyword">auto</span> &amp;<span class="keywordtype">id</span> = networkId[j];</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                                    <span class="keywordflow">if</span> (<span class="keywordtype">id</span>) {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                                        std::array&lt;char, 2&gt; idBin = <span class="keywordtype">id</span>.value().serialize();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                                        <a class="code" href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a> msg;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                                        msg[0] = utils::constant::getPacketTypeKey(</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                                            <a class="code" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a509676f5d38cbf87a106deecbbb082db">utils::constant::PacketType::ENTITY_DEATH</a>);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                                        msg[1] = idBin[0];</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                                        msg[2] = idBin[1];</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                                        <a class="code" href="classnetwork_1_1_server.html#a0c64a21c5e324114615c0073596cb403">network::Server::getOutgoingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">push</a>(</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                                            <a class="code" href="namespacenetwork.html#a1290ee51c4c8d07f57076ac8f7505129">network::ServerMessage</a>(msg, std::vector&lt;unsigned int&gt;()));</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                                    }</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                                }</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                                world.registry.killEntity(world.registry.entityFromIndex(j));</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                            }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                        }</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                    }</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                    world.registry.killEntity(world.registry.entityFromIndex(i));</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                }</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            }</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    };</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="anamespacenetwork_html_a6ec876aa185a7f04d2f7fba304553d21"><div class="ttname"><a href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a></div><div class="ttdeci">std::array&lt; char, 16 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
@@ -194,11 +218,13 @@ $(document).ready(function(){initNavTree('_death_update_8hpp_source.html',''); i
 <div class="ttc" id="aclassnetwork_1_1_locked_queue_html_a076e0981cce5c44eed95476e135011f2"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">network::LockedQueue::push</a></div><div class="ttdeci">void push(T value)</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:43</div></div>
 <div class="ttc" id="anamespaceutils_1_1constant_html_a02f29b9fcdfc8d4a1f0b8923e5b4c477a509676f5d38cbf87a106deecbbb082db"><div class="ttname"><a href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a509676f5d38cbf87a106deecbbb082db">utils::constant::ENTITY_DEATH</a></div><div class="ttdeci">@ ENTITY_DEATH</div><div class="ttdef"><b>Definition:</b> Constant.hpp:33</div></div>
 <div class="ttc" id="a_world_8hpp_html"><div class="ttname"><a href="_world_8hpp.html">World.hpp</a></div></div>
-<div class="ttc" id="anamespaceecs_1_1systems_html_a2e0f6b7daf53150a7faa7b7f59d47d5e"><div class="ttname"><a href="namespaceecs_1_1systems.html#a2e0f6b7daf53150a7faa7b7f59d47d5e">ecs::systems::deathUpdate</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; deathUpdate</div><div class="ttdef"><b>Definition:</b> DeathUpdate.hpp:23</div></div>
+<div class="ttc" id="anamespaceecs_1_1systems_html_a2e0f6b7daf53150a7faa7b7f59d47d5e"><div class="ttname"><a href="namespaceecs_1_1systems.html#a2e0f6b7daf53150a7faa7b7f59d47d5e">ecs::systems::deathUpdate</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; deathUpdate</div><div class="ttdef"><b>Definition:</b> DeathUpdate.hpp:24</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_health_html"><div class="ttname"><a href="structecs_1_1component_1_1_health.html">ecs::component::Health</a></div><div class="ttdef"><b>Definition:</b> Health.hpp:12</div></div>
 <div class="ttc" id="a_constant_8hpp_html"><div class="ttname"><a href="_constant_8hpp.html">Constant.hpp</a></div></div>
+<div class="ttc" id="a_follow_entity_8hpp_html"><div class="ttname"><a href="_follow_entity_8hpp.html">FollowEntity.hpp</a></div></div>
 <div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:19</div></div>
 <div class="ttc" id="anamespaceecs_1_1systems_html"><div class="ttname"><a href="namespaceecs_1_1systems.html">ecs::systems</a></div><div class="ttdef"><b>Definition:</b> Animate.hpp:19</div></div>
+<div class="ttc" id="astructecs_1_1component_1_1_follow_entity_html"><div class="ttname"><a href="structecs_1_1component_1_1_follow_entity.html">ecs::component::FollowEntity</a></div><div class="ttdef"><b>Definition:</b> FollowEntity.hpp:14</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

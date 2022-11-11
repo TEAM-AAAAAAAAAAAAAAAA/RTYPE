@@ -8,6 +8,7 @@ var namespaceecs_1_1component =
     [ "Drawable", "structecs_1_1component_1_1_drawable.html", "structecs_1_1component_1_1_drawable" ],
     [ "EntityType", "structecs_1_1component_1_1_entity_type.html", "structecs_1_1component_1_1_entity_type" ],
     [ "Faction", "structecs_1_1component_1_1_faction.html", "structecs_1_1component_1_1_faction" ],
+    [ "FollowEntity", "structecs_1_1component_1_1_follow_entity.html", "structecs_1_1component_1_1_follow_entity" ],
     [ "Health", "structecs_1_1component_1_1_health.html", "structecs_1_1component_1_1_health" ],
     [ "Hitbox", "structecs_1_1component_1_1_hitbox.html", "structecs_1_1component_1_1_hitbox" ],
     [ "MovementAI", "structecs_1_1component_1_1_movement_a_i.html", "structecs_1_1component_1_1_movement_a_i" ],

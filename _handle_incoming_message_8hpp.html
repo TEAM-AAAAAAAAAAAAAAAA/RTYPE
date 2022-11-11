@@ -153,42 +153,47 @@ $(document).ready(function(){initNavTree('_handle_incoming_message_8hpp.html',''
 <code>#include &quot;<a class="el" href="_velocity_8hpp_source.html">components/Velocity.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_weapon_8hpp_source.html">components/Weapon.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_projectile_8hpp_source.html">components/server/Projectile.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_follow_entity_8hpp_source.html">components/server/FollowEntity.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_attack_a_i_8hpp_source.html">components/server/AttackAI.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for HandleIncomingMessage.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="_handle_incoming_message_8hpp__incl.png" border="0" usemap="#src_2ecs_2systems_2server_2_handle_incoming_message_8hpp" alt=""/></div>
 <map name="src_2ecs_2systems_2server_2_handle_incoming_message_8hpp" id="src_2ecs_2systems_2server_2_handle_incoming_message_8hpp">
-<area shape="rect" title=" " alt="" coords="1037,5,1255,47"/>
-<area shape="rect" title=" " alt="" coords="36,244,123,271"/>
-<area shape="rect" title=" " alt="" coords="221,319,301,345"/>
-<area shape="rect" title=" " alt="" coords="276,95,424,121"/>
-<area shape="rect" href="_constant_8hpp.html" title=" " alt="" coords="621,319,729,345"/>
-<area shape="rect" href="_world_8hpp.html" title=" " alt="" coords="448,95,535,121"/>
-<area shape="rect" href="_direction_8hpp.html" title=" " alt="" coords="611,95,804,121"/>
-<area shape="rect" href="_entity_type_8hpp.html" title=" " alt="" coords="829,95,1031,121"/>
-<area shape="rect" href="_faction_8hpp.html" title=" " alt="" coords="1056,95,1236,121"/>
-<area shape="rect" href="_health_8hpp.html" title=" " alt="" coords="1260,95,1437,121"/>
-<area shape="rect" href="_network_id_8hpp.html" title=" " alt="" coords="1461,95,1663,121"/>
-<area shape="rect" href="_position_8hpp.html" title=" " alt="" coords="1687,95,1874,121"/>
-<area shape="rect" href="_size_8hpp.html" title=" " alt="" coords="1899,95,2060,121"/>
-<area shape="rect" href="_velocity_8hpp.html" title=" " alt="" coords="2085,95,2269,121"/>
-<area shape="rect" href="_weapon_8hpp.html" title=" " alt="" coords="2293,95,2479,121"/>
-<area shape="rect" href="_projectile_8hpp.html" title=" " alt="" coords="2503,95,2743,121"/>
-<area shape="rect" title=" " alt="" coords="591,393,658,420"/>
-<area shape="rect" title=" " alt="" coords="1115,393,1185,420"/>
-<area shape="rect" title=" " alt="" coords="339,393,390,420"/>
-<area shape="rect" title=" " alt="" coords="682,393,767,420"/>
-<area shape="rect" title=" " alt="" coords="460,169,523,196"/>
-<area shape="rect" href="_event_8hpp.html" title=" " alt="" coords="547,169,633,196"/>
-<area shape="rect" href="_registry_8hpp.html" title=" " alt="" coords="333,169,436,196"/>
-<area shape="rect" title=" " alt="" coords="199,244,245,271"/>
-<area shape="rect" title=" " alt="" coords="511,319,597,345"/>
-<area shape="rect" title=" " alt="" coords="472,244,559,271"/>
-<area shape="rect" href="_entity_8hpp.html" title=" " alt="" coords="685,244,772,271"/>
-<area shape="rect" href="_sparse_array_8hpp.html" title=" " alt="" coords="321,244,448,271"/>
-<area shape="rect" title=" " alt="" coords="325,319,399,345"/>
-<area shape="rect" title=" " alt="" coords="424,319,487,345"/>
-<area shape="rect" title=" " alt="" coords="1573,169,1629,196"/>
+<area shape="rect" title=" " alt="" coords="1115,5,1333,47"/>
+<area shape="rect" title=" " alt="" coords="465,348,551,375"/>
+<area shape="rect" title=" " alt="" coords="1108,423,1188,449"/>
+<area shape="rect" title=" " alt="" coords="541,102,689,129"/>
+<area shape="rect" href="_constant_8hpp.html" title=" " alt="" coords="925,423,1033,449"/>
+<area shape="rect" href="_world_8hpp.html" title=" " alt="" coords="534,184,621,211"/>
+<area shape="rect" href="_direction_8hpp.html" title=" " alt="" coords="815,102,1009,129"/>
+<area shape="rect" href="_entity_type_8hpp.html" title=" " alt="" coords="5,184,208,211"/>
+<area shape="rect" href="_faction_8hpp.html" title=" " alt="" coords="645,184,825,211"/>
+<area shape="rect" href="_health_8hpp.html" title=" " alt="" coords="1135,102,1313,129"/>
+<area shape="rect" href="_network_id_8hpp.html" title=" " alt="" coords="2519,102,2721,129"/>
+<area shape="rect" href="_position_8hpp.html" title=" " alt="" coords="2308,102,2495,129"/>
+<area shape="rect" href="_size_8hpp.html" title=" " alt="" coords="1439,102,1601,129"/>
+<area shape="rect" href="_velocity_8hpp.html" title=" " alt="" coords="1625,102,1809,129"/>
+<area shape="rect" href="_weapon_8hpp.html" title=" " alt="" coords="1833,102,2020,129"/>
+<area shape="rect" href="_projectile_8hpp.html" title=" " alt="" coords="2044,102,2284,129"/>
+<area shape="rect" href="_follow_entity_8hpp.html" title=" " alt="" coords="1389,259,1582,300"/>
+<area shape="rect" href="_attack_a_i_8hpp.html" title=" " alt="" coords="321,95,514,136"/>
+<area shape="rect" title=" " alt="" coords="945,497,1012,524"/>
+<area shape="rect" title=" " alt="" coords="1450,497,1521,524"/>
+<area shape="rect" title=" " alt="" coords="735,497,785,524"/>
+<area shape="rect" title=" " alt="" coords="352,497,437,524"/>
+<area shape="rect" title=" " alt="" coords="645,266,707,293"/>
+<area shape="rect" href="_event_8hpp.html" title=" " alt="" coords="534,266,621,293"/>
+<area shape="rect" href="_registry_8hpp.html" title=" " alt="" coords="894,266,997,293"/>
+<area shape="rect" title=" " alt="" coords="1013,348,1059,375"/>
+<area shape="rect" title=" " alt="" coords="714,423,801,449"/>
+<area shape="rect" title=" " alt="" coords="902,348,989,375"/>
+<area shape="rect" href="_entity_8hpp.html" title=" " alt="" coords="1206,348,1293,375"/>
+<area shape="rect" href="_sparse_array_8hpp.html" title=" " alt="" coords="699,348,826,375"/>
+<area shape="rect" title=" " alt="" coords="825,423,900,449"/>
+<area shape="rect" title=" " alt="" coords="627,423,690,449"/>
+<area shape="rect" title=" " alt="" coords="2412,184,2468,211"/>
+<area shape="rect" title=" " alt="" coords="334,184,458,211"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
