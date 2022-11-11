@@ -20,6 +20,7 @@
 #include "components/client/Controllable.hpp"
 #include "components/client/Drawable.hpp"
 #include "components/client/Shootable.hpp"
+#include "components/client/Activable.hpp"
 
 namespace ecs::systems
 {
@@ -75,6 +76,7 @@ namespace ecs::systems
         world.registry.addComponent<component::Velocity>(newEntity, {velX, velY});
         world.registry.addComponent<component::EntityType>(newEntity, {type.type});
         world.registry.addComponent<component::Size>(newEntity, {sizeX, sizeY});
+        world.registry.addComponent<component::Activable>(newEntity, {});
         switch (type.type) {
             case component::EntityType::Types::Player:
                 if (msgId != selfId) {
@@ -335,7 +337,7 @@ namespace ecs::systems
                 break;
             case component::EntityType::Types::Asteroid:
                 world.registry.addComponent<component::Drawable>(newEntity,
-                    {"asteroid", {29, 32, 38, 33}, true, false,
+                    {"asteroid", {29, 32, 38, 33},
                         std::atan2(static_cast<float>(dirX), static_cast<float>(dirY)) * 180 / 3.14159265359f});
                 world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
                 break;
