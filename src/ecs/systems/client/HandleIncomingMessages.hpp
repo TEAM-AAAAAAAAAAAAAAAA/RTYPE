@@ -372,6 +372,9 @@ namespace ecs::systems
         for (size_t i = 0; i < netIds.size(); i++) {
             if (netIds[i]) {
                 if (netIds[i].value().id == msgId) {
+                std::cout << "netId: " << netIds[i].value().id << std::endl;
+                std::cout << "msgId: " << msgId << std::endl;
+                    std::cout << "Health: " << (int)msg[3] << std::endl;
                     for (size_t j = 0; j < healths.size(); j++)
                         if (healths[j])
                             healths[j].value().health = msg[3];

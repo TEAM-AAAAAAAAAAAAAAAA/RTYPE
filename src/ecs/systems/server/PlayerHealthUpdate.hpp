@@ -25,15 +25,14 @@ namespace ecs::systems
         auto &healths = world.registry.getComponents<component::Health>();
         auto &networkId = world.registry.getComponents<component::NetworkId>();
         auto &entity = world.registry.getComponents<component::EntityType>();
-        static short lastHealth = utils::constant::maxPlayerHealth;
         for (size_t i = 0; i < healths.size(); ++i) {
             auto &health = healths[i];
-            if (health && health.value().health != lastHealth) {
+            if (health && health.value().health != health.value().lastHealth) {
                 if (i < entity.size() && i < networkId.size()) {
                     auto &type = entity[i];
                     auto &id = networkId[i];
-                    if (type && type.value().type == component::EntityType::Types::Player) {
-                        lastHealth = health.value().health;
+                    if (type && id && type.value().type == component::EntityType::Types::Player) {
+                        health.value().lastHealth = health.value().health;
                         std::array<char, 2> idBin = id.value().serialize();
                         network::Message msg;
                         msg[0] = utils::constant::getPacketTypeKey(utils::constant::PacketType::HEALTH_UPDATE);
