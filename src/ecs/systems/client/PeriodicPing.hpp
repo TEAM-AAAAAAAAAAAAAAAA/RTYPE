@@ -21,7 +21,7 @@ namespace ecs::systems
      */
     std::function<void(World &)> periodicPing = [](World &world) {
         static auto clock = utils::constant::chrono::now();
-        if (utils::constant::chronoDuration(utils::constant::chrono::now() - clock).count() > 1000) {
+        if (utils::constant::chronoDuration(utils::constant::chrono::now() - clock).count() > 2500) {
             network::Message msg;
             msg.fill(0);
             msg[0] = 70;
