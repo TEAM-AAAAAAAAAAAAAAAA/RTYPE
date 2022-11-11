@@ -86,6 +86,7 @@ static void setGameParallax(ecs::World &world)
     world.registry.addComponent<ecs::component::Size>(
         background1, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(background1, {"bg1", {0, 0, 5760, 360}});
+    world.registry.addComponent<ecs::component::Activable>(background1, {});
     world.registry.addComponent<ecs::component::Velocity>(background1, {1, 0});
     world.registry.addComponent<ecs::component::Direction>(background1, {-1, 0});
     world.registry.addComponent<ecs::component::Parallax>(
@@ -95,6 +96,7 @@ static void setGameParallax(ecs::World &world)
     world.registry.addComponent<ecs::component::Size>(
         parallaxFirstView, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(parallaxFirstView, {"bg1", {0, 0, 5760, 360}});
+    world.registry.addComponent<ecs::component::Activable>(parallaxFirstView, {});
     world.registry.addComponent<ecs::component::Velocity>(parallaxFirstView, {1, 0});
     world.registry.addComponent<ecs::component::Direction>(parallaxFirstView, {-1, 0});
     world.registry.addComponent<ecs::component::Parallax>(
@@ -104,6 +106,7 @@ static void setGameParallax(ecs::World &world)
     world.registry.addComponent<ecs::component::Size>(
         background2, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(background2, {"bg2", {0, 0, 5760, 360}});
+    world.registry.addComponent<ecs::component::Activable>(background2, {});
     world.registry.addComponent<ecs::component::Velocity>(background2, {2, 0});
     world.registry.addComponent<ecs::component::Direction>(background2, {-1, 0});
     world.registry.addComponent<ecs::component::Parallax>(
@@ -113,6 +116,7 @@ static void setGameParallax(ecs::World &world)
     world.registry.addComponent<ecs::component::Size>(
         parallaxSecondView, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(parallaxSecondView, {"bg2", {0, 0, 5760, 360}});
+    world.registry.addComponent<ecs::component::Activable>(parallaxSecondView, {});
     world.registry.addComponent<ecs::component::Velocity>(parallaxSecondView, {2, 0});
     world.registry.addComponent<ecs::component::Parallax>(
         parallaxSecondView, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
@@ -122,6 +126,7 @@ static void setGameParallax(ecs::World &world)
     world.registry.addComponent<ecs::component::Size>(
         background3, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(background3, {"bg3", {0, 0, 5760, 360}});
+    world.registry.addComponent<ecs::component::Activable>(background3, {});
     world.registry.addComponent<ecs::component::Velocity>(background3, {3, 0});
     world.registry.addComponent<ecs::component::Parallax>(
         background3, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
@@ -131,6 +136,7 @@ static void setGameParallax(ecs::World &world)
     world.registry.addComponent<ecs::component::Size>(
         parallaxThirdView, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(parallaxThirdView, {"bg3", {0, 0, 5760, 360}});
+    world.registry.addComponent<ecs::component::Activable>(parallaxThirdView, {});
     world.registry.addComponent<ecs::component::Velocity>(parallaxThirdView, {3, 0});
     world.registry.addComponent<ecs::component::Direction>(parallaxThirdView, {-1, 0});
     world.registry.addComponent<ecs::component::Parallax>(
@@ -147,10 +153,9 @@ static void setGameParallax(ecs::World &world)
 ecs::World getGameWorld(const std::string &port = "8000", const std::string &host = "localhost")
 {
     ecs::World world;
-    network::Message msg;
+
     network::Client::setHost(host);
     network::Client::setPort(port);
-
     utils::Window::getInstance().setFramerateLimit(FRAME_LIMIT);
     registerComponents(world);
     setGameParallax(world);
