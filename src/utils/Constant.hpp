@@ -38,6 +38,7 @@ namespace utils
             GAME_OVER,
             MULTIPLAYER_INFO,
             ROOM_INFO,
+            KEEP_ALIVE,
             NONE
         };
 
@@ -91,7 +92,8 @@ namespace utils
             {7, BOSS_STAGE},
             {15, GAME_OVER},
             {31, MULTIPLAYER_INFO},
-            {128, ROOM_INFO},
+            {70, KEEP_ALIVE},
+            {128, ROOM_INFO}
         };
 
         static int getPacketTypeKey(PacketType type)

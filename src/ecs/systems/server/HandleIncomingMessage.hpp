@@ -94,7 +94,8 @@ namespace ecs::systems
             auto &id = networkIds[i];
 
             if (id
-                && network::Server::getClientToEntID().find(msg.second) != network::Server::getClientToEntID().end() & network::Server::getClientToEntID()[msg.second] == id.value().id) {
+                && network::Server::getClientToEntID().find(msg.second) != network::Server::getClientToEntID().end()
+                    & network::Server::getClientToEntID()[msg.second] == id.value().id) {
                 auto &pos = positions[i];
                 auto &weapon = weapons[i];
                 auto &fac = factions[i];
@@ -142,8 +143,16 @@ namespace ecs::systems
         network::Server::getOutgoingMessages().push(message);
     }
 
+    static void keepAliveResponse(World &world, network::ClientMessage &msg)
+    {
+        network::Message response;
+        response[0] = 71;
+        network::Server::getOutgoingMessages().push(std::pair(response, std::vector<unsigned int>()));
+    }
+
     static std::unordered_map<char, std::function<void(World &, network::ClientMessage &msg)>> packetTypeFunction = {
-        {0, createPlayer}, {utils::constant::PLAYER_MOVE, movePlayer}, {utils::constant::PLAYER_SHOT, playerShoot}, {utils::constant::ROOM_INFO, sendRoomInfo}};
+        {0, createPlayer}, {utils::constant::PLAYER_MOVE, movePlayer}, {utils::constant::PLAYER_SHOT, playerShoot},
+        {utils::constant::ROOM_INFO, sendRoomInfo}, {utils::constant::KEEP_ALIVE, keepAliveResponse}};
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Server::getReceivedMessages().empty()) {

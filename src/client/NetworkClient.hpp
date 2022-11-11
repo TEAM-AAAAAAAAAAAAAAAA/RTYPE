@@ -50,6 +50,8 @@ namespace network
 
         static inline LockedQueue<Message> &getReceivedMessages() { return getInstance()._receivedMessages; }
 
+        static inline std::chrono::_V2::system_clock::time_point getLastPing() { return getInstance()._lastPing; }
+
         /**
          * Static methods used to connect to the given server (host, port) using udp::v4
          */

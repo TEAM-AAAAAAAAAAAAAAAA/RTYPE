@@ -11,6 +11,7 @@ set(SYSTEMS_SRC
     ${SRCROOT}/MenuSelect.hpp
     ${SRCROOT}/SendDirection.hpp
     ${SRCROOT}/HandleParallaxBounds.hpp
+    ${SRCROOT}/KeepAlive.hpp
     ${SRCROOT}/Buttons.hpp
     PARENT_SCOPE
 )

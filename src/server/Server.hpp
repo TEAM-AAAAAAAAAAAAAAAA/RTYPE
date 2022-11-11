@@ -130,6 +130,8 @@ namespace network
 
         static std::map<unsigned int, size_t> &getClientToEntID() { return getInstance()._clientToEntID; }
 
+        static std::map<unsigned int, std::chrono::time_point<std::chrono::high_resolution_clock>> &getClientLastPings() { return getInstance()._clientLastPing; }
+
         static std::chrono::_V2::system_clock::time_point getLastPing(uint32_t clientID)
         {
             for (const auto &client : getInstance()._clientLastPing)
