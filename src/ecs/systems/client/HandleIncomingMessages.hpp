@@ -376,7 +376,6 @@ namespace ecs::systems
                     return;
                 }
         }
-        std::cerr << "Error: Client couldn't kill unknown entity with netId '" << msgId << "'." << std::endl;
     }
 
     static std::unordered_map<char, std::function<void(World &, network::Message &msg)>> packetTypeFunction = {
