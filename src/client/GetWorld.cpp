@@ -24,6 +24,7 @@
 #include "components/client/Text.hpp"
 #include "systems/ManageClientEvents.hpp"
 #include "systems/Movement.hpp"
+#include "systems/client/Animate.hpp"
 #include "systems/client/Draw.hpp"
 #include "systems/client/ExecuteOnce.hpp"
 #include "systems/client/HandleIncomingMessages.hpp"
@@ -75,6 +76,7 @@ static void addGameSystems(ecs::World &world)
     world.addSystem(ecs::systems::scoreUpdate);
     world.addSystem(ecs::systems::executeOnce);
     world.addSystem(ecs::systems::healthBar);
+    world.addSystem(ecs::systems::animate);
 }
 
 static void setGameHUD(ecs::World &world)

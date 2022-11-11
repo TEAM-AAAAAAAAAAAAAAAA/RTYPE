@@ -106,6 +106,17 @@ namespace ecs::systems
                             AnimFrame(34, 1, 32, 16, 100)});
                 }
                 break;
+            case component::EntityType::Types::PlayerBot:
+                world.registry.addComponent<component::EntityType>(
+                    newEntity, {component::EntityType::Types::PlayerBot});
+                world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 35, 32, 16}});
+                world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
+                    world.registry.addComponent<ecs::component::Animated>(newEntity,
+                        {AnimFrame(1, 35, 32, 16, 100), AnimFrame(34, 35, 32, 16, 100), AnimFrame(67, 35, 32, 16, 100),
+                            AnimFrame(100, 35, 32, 16, 100), AnimFrame(133, 35, 32, 16, 100),
+                            AnimFrame(100, 35, 32, 16, 100), AnimFrame(67, 35, 32, 16, 100),
+                            AnimFrame(34, 35, 32, 16, 100)});
+                break;
 #pragma region uranus ships
             case component::EntityType::Types::UranusBattlecruiser:
                 world.registry.addComponent<component::Drawable>(newEntity, {"uranus-battlecruiser", {11, 26, 92, 76}});
@@ -325,8 +336,7 @@ namespace ecs::systems
                         std::atan2(static_cast<float>(dirX), static_cast<float>(dirY)) * 180 / 3.14159265359f});
                 world.registry.addComponent<component::Animated>(newEntity,
                     {AnimFrame(0, 13, 32, 6, 100), AnimFrame(0, 45, 32, 6, 100), AnimFrame(0, 77, 32, 6, 100),
-                        AnimFrame(0, 109, 32, 6, 100), AnimFrame(0, 141, 32, 6, 100), AnimFrame(0, 473, 32, 6, 100),
-                        AnimFrame(0, 205, 32, 6, 100), AnimFrame(0, 237, 32, 6, 100)});
+                        AnimFrame(0, 109, 32, 6, 100), AnimFrame(0, 141, 32, 6, 100)});
                 world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
                 break;
             case component::EntityType::Types::Rocket:
