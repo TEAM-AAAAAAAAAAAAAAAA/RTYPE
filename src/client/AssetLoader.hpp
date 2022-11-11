@@ -18,6 +18,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include <unordered_map>
 #include <utility>
+#include "InputMap.hpp"
 
 namespace asset
 {
@@ -149,6 +150,11 @@ namespace asset
             getInstance()._fontMap[key] = font;
         }
 
+        static void loadKeybind(const std::string &action, const std::string &key)
+        {
+            getInstance()._keyMap[action] = utils::toKey(key);
+        }
+
         /**
          * @brief create a smartpath from a vector of string
          *
@@ -191,6 +197,8 @@ namespace asset
          */
         static sf::Font &GetFont(const std::string &key) { return getInstance()._fontMap[key]; }
 
+        static sf::Keyboard::Key &GetKeybind(const std::string &key) { return getInstance()._keyMap[key]; }
+
         /**
          * @brief Load a .ini file with boost loading assets into the map
          */
@@ -212,6 +220,10 @@ namespace asset
                         paths.push_back(value.second.data().substr(0, value.second.data().find('/')));
                         value.second.data().erase(0, value.second.data().find('/') + 1);
                     }
+                    if (section.first == "keybind") {
+                        loadKeybind(value.first, value.second.data());
+                        continue;
+                    }
                     paths.push_back(value.second.data());
 
                     if (section.first == "texture")
@@ -231,7 +243,7 @@ namespace asset
          */
         static AssetLoader &getInstance();
 
-            static inline std::filesystem::path smartPath(std::filesystem::path path) { return path; }
+        static inline std::filesystem::path smartPath(std::filesystem::path path) { return path; }
 
         template <class... Args>
         static std::filesystem::path smartPath(std::filesystem::path path, std::string_view next, Args... args)
@@ -249,12 +261,12 @@ namespace asset
 
       private:
         /**
-         * Map of all the assets
+         * Map of all the texture assets, loaded in the [texture] section of the .ini file
          */
         std::unordered_map<std::string, sf::Texture> _textureMap;
 
         /**
-         * Map of all the background music
+         * Map of all the background music, loaded in the [bgm] section of the .ini file
          */
         std::unordered_map<std::string, sf::Music> _bgmMap;
 
@@ -264,13 +276,18 @@ namespace asset
         std::unordered_map<std::string, sf::SoundBuffer> _sfxBufferMap;
 
         /**
-         * Map of all the sound effects
+         * Map of all the sound effects, loaded in the [sfx] section of the .ini file
          */
         std::unordered_map<std::string, sf::Sound> _sfxMap;
 
         /**
-         * Map of all the fonts
+         * Map of all the fonts, loaded in the [font] section of the .ini file
          */
         std::unordered_map<std::string, sf::Font> _fontMap;
+
+        /**
+         * Map of all the keybinds, loaded in the [keybinds] section of the .ini file
+         */
+        std::unordered_map<std::string, sf::Keyboard::Key> _keyMap;
     };
 } // namespace asset

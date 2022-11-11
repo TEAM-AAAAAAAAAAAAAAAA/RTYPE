@@ -14,4 +14,4 @@ namespace asset
         static AssetLoader _Instance;
         return _Instance;
     }
-} // namespace asset
+}; // namespace asset
