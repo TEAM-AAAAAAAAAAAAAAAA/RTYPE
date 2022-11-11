@@ -29,6 +29,7 @@
 #include "systems/client/HandleSFMLKeys.hpp"
 #include "systems/client/MenuSelect.hpp"
 #include "systems/client/SendDirection.hpp"
+#include "systems/client/PeriodicPing.hpp"
 #include "systems/client/ExecuteOnce.hpp"
 
 static const int FRAME_LIMIT = 60;
@@ -68,6 +69,7 @@ static void addGameSystems(ecs::World &world)
     world.addSystem(ecs::systems::movement);
     world.addSystem(ecs::systems::HandleParallaxBounds);
     world.addSystem(ecs::systems::executeOnce);
+    world.addSystem(ecs::systems::periodicPing);
 }
 
 static void setGameParallax(ecs::World &world)

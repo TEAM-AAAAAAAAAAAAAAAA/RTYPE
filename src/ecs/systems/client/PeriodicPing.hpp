@@ -10,8 +10,7 @@
 #include <functional>
 #include <iostream>
 #include "Constant.hpp"
-#include "NetworkClient.hpp"
-#include "Server.hpp"
+#include "../../../client/NetworkClient.hpp"
 #include "World.hpp"
 
 namespace ecs::systems
@@ -22,7 +21,7 @@ namespace ecs::systems
      */
     std::function<void(World &)> periodicPing = [](World &world) {
         static auto clock = utils::constant::chrono::now();
-        if (utils::constant::chronoDuration(utils::constant::chrono::now() - clock).count() > 10000) {
+        if (utils::constant::chronoDuration(utils::constant::chrono::now() - clock).count() > 1000) {
             network::Message msg;
             msg.fill(0);
             msg[0] = 70;

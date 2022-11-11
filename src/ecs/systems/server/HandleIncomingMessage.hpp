@@ -25,8 +25,6 @@
 
 namespace ecs::systems
 {
-    static std::map<unsigned int, size_t> clientNumToId = {};
-
     /**
      * In goal of create a player, first, we need to add every components of the player.
      * Specify to the server that there is a new connection and check if the request has been accepted
@@ -47,8 +45,10 @@ namespace ecs::systems
         world.registry.addComponent<ecs::component::NetworkId>(newPlayer, {static_cast<size_t>(newPlayer)});
         world.registry.addComponent<ecs::component::Faction>(newPlayer, {ecs::component::Faction::Factions::Chefs});
 
-        clientNumToId[msg.second] = static_cast<size_t>(newPlayer);
+        network::Server::getClientToEntID()[msg.second] = (size_t)newPlayer;
         network::Message message;
+        std::cerr << network::Server::getClientToEntID()[msg.second] << std::endl;
+        std::cerr << static_cast<size_t>(newPlayer) << std::endl;
         message.fill(0);
         message[1] = static_cast<size_t>(newPlayer) >> 8;
         message[2] = static_cast<size_t>(newPlayer) & 0xFF;
@@ -70,7 +70,7 @@ namespace ecs::systems
             auto &id = networkIds[i];
 
             if (dir && id) {
-                if (clientNumToId[msg.second] == id.value().id) {
+                if (network::Server::getClientToEntID()[msg.second] == id.value().id) {
                     dir.value().x = (int)msg.first[1];
                     dir.value().y = (int)msg.first[2];
                     return;
@@ -96,7 +96,7 @@ namespace ecs::systems
             auto &id = networkIds[i];
 
             if (id
-                && clientNumToId.find(msg.second) != clientNumToId.end() & clientNumToId[msg.second] == id.value().id) {
+                && network::Server::getClientToEntID().find(msg.second) != network::Server::getClientToEntID().end() & network::Server::getClientToEntID()[msg.second] == id.value().id) {
                 auto &pos = positions[i];
                 auto &weapon = weapons[i];
                 auto &fac = factions[i];

@@ -372,7 +372,8 @@ namespace ecs::systems
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Client::getReceivedMessages().empty()) {
             network::Message msg = network::Client::getReceivedMessages().pop();
-            packetTypeFunction[msg[0]](world, msg);
+            if (packetTypeFunction.find(msg[0]) != packetTypeFunction.end())
+                packetTypeFunction[msg[0]](world, msg);
         }
     };
 } // namespace ecs::systems

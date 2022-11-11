@@ -128,13 +128,14 @@ namespace network
 
         static LockedQueue<ClientMessage> &getReceivedMessages() { return getInstance()._receivedMessages; }
 
-        static std::map<unsigned int, size_t> getClientToEntID() { return getInstance()._clientToEntID; }
+        static std::map<unsigned int, size_t> &getClientToEntID() { return getInstance()._clientToEntID; }
 
         static std::chrono::_V2::system_clock::time_point getLastPing(uint32_t clientID)
         {
             for (const auto &client : getInstance()._clientLastPing)
                 if (client.first == clientID)
                     return client.second;
+            return chrono::now();
         }
 
       private:
@@ -186,7 +187,7 @@ namespace network
                         _hubID = getOrCreateClientID(_remoteEndpoint);
                     }
                     auto message = ClientMessage(std::array(_recvBuffer), getOrCreateClientID(_remoteEndpoint));
-                    getOrCreateLastPing(getOrCreateClientID(_remoteEndpoint)) = chrono::now();
+                    setOrCreateLastPing(getOrCreateClientID(_remoteEndpoint));
                     if (!message.first.empty()) {
                         _receivedMessages.push(message);
                         for (const auto &c : message.first) {}
@@ -248,14 +249,15 @@ namespace network
          * @param endpoint The given client id
          * @return The id of the client
          */
-        std::chrono::_V2::system_clock::time_point getOrCreateLastPing(uint32_t clientID)
+        void setOrCreateLastPing(uint32_t clientID)
         {
             for (const auto &client : _clientLastPing)
-                if (client.first == clientID)
-                    return client.second;
+                if (client.first == clientID) {
+                    _clientLastPing[clientID] = chrono::now();
+                    return;
+                }
             auto time = std::chrono::system_clock::now();
             _clientLastPing.insert(std::pair(clientID, time));
-            return time;
         }
 
         /**

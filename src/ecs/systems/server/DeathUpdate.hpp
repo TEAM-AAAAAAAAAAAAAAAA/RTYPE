@@ -54,10 +54,11 @@ namespace ecs::systems
 
             if (id) {
                 for (auto &[key, value] : _clientToEntID)
-                    if (value == id.value().id)
+                    if (value == id.value().id) {
                         clientId = key;
+                    }
                 if (utils::constant::chronoDuration(
-                        utils::constant::chrono::now() - network::Server::getLastPing(clientId)).count() > 10000) {
+                        utils::constant::chrono::now() - network::Server::getLastPing(clientId)).count() > 5000) {
                     std::array<char, 2> idBin = id.value().serialize();
 
                     network::Message msg;
@@ -67,6 +68,7 @@ namespace ecs::systems
                     network::Server::getOutgoingMessages().push(
                         network::ServerMessage(msg, std::vector<unsigned int>()));
                     network::Server::removeClient(clientId);
+                    world.registry.killEntity(world.registry.entityFromIndex(i));
                 }
             }
         }
