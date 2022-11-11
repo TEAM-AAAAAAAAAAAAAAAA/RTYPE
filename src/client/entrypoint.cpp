@@ -19,7 +19,7 @@
 int main()
 {
     ecs::Engine engine;
-    network::Message msg;
+//    network::Message msg;
 //    msg.fill(0);
 //    network::Client::connect();
 //    network::Client::getOutgoingMessages().push(msg);
