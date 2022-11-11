@@ -32,10 +32,12 @@ var NAVTREE =
       [ "<h3 style=\"text-align: center; color:orange\">Example</h3>", "index.html#autotoc_md11", null ]
     ] ],
     [ "Deprecated List", "deprecated.html", null ],
+    [ "Modules", "modules.html", "modules" ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
         [ "All", "namespacemembers.html", null ],
+        [ "Functions", "namespacemembers_func.html", null ],
         [ "Variables", "namespacemembers_vars.html", null ],
         [ "Typedefs", "namespacemembers_type.html", null ],
         [ "Enumerations", "namespacemembers_enum.html", null ],
@@ -60,7 +62,8 @@ var NAVTREE =
       [ "File Members", "globals.html", [
         [ "All", "globals.html", null ],
         [ "Functions", "globals_func.html", null ],
-        [ "Typedefs", "globals_type.html", null ]
+        [ "Typedefs", "globals_type.html", null ],
+        [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
   ] ]
@@ -69,8 +72,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_activable_8hpp.html",
-"classecs_1_1_registry.html#a99a1b5411ada253846bff2ced94e4f95",
-"structecs_1_1component_1_1_entity_type.html#af64becff8cb6fbfeba4815b3d3824449ac5ddd35053b111538b04a7760ece01b9"
+"classecs_1_1_event.html#abd9a6ddcf819caec595aadb0116b1a0fad20d8e6649de5d6afd2ca68315cb297e",
+"structecs_1_1component_1_1_drawable.html#af1cf64a2e4b8cb70221ebbbdf065c006"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

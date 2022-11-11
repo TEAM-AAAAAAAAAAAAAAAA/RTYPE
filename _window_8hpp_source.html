@@ -147,7 +147,7 @@ $(document).ready(function(){initNavTree('_window_8hpp_source.html',''); initRes
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#ifdef CLIENT_COMPILATION_MODE</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">    #include &quot;<a class="code" href="_constant_8hpp.html">Constant.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">    #include &quot;SFML/Graphics.hpp&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">    #include &lt;SFML/Graphics.hpp&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceutils.html">utils</a></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
@@ -156,9 +156,9 @@ $(document).ready(function(){initNavTree('_window_8hpp_source.html',''); initRes
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        Window() {}</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <a class="code" href="classutils_1_1_window.html#a772a6cd99723f6dad2f59c3821809e9f">~Window</a>() {}</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">static</span> sf::Color Color;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classutils_1_1_window.html#adf07a85381bcbdf6cb2c71db03302e38">isOpen</a>() { <span class="keywordflow">return</span> getInstance().isOpen(); }</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classutils_1_1_window.html#adf07a85381bcbdf6cb2c71db03302e38">isOpen</a>() { <span class="keywordflow">return</span> <a class="code" href="namespaceutils.html#a79e536d2358e77e397c975738dc4a121">getInstance</a>().isOpen(); }</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">static</span> sf::RenderWindow &amp;getInstance()</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">static</span> sf::RenderWindow &amp;<a class="code" href="namespaceutils.html#a79e536d2358e77e397c975738dc4a121">getInstance</a>()</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        {</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keyword">static</span> sf::RenderWindow instance(</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                sf::RenderWindow(sf::VideoMode(utils::constant::mapWidth, utils::constant::mapHeight), <span class="stringliteral">&quot;r-type&quot;</span>));</div>
@@ -180,6 +180,7 @@ $(document).ready(function(){initNavTree('_window_8hpp_source.html',''); initRes
 </div><!-- doc-content -->
 <div class="ttc" id="aclassutils_1_1_window_html"><div class="ttname"><a href="classutils_1_1_window.html">utils::Window</a></div><div class="ttdef"><b>Definition:</b> Window.hpp:43</div></div>
 <div class="ttc" id="aclassutils_1_1_window_html_adf07a85381bcbdf6cb2c71db03302e38"><div class="ttname"><a href="classutils_1_1_window.html#adf07a85381bcbdf6cb2c71db03302e38">utils::Window::isOpen</a></div><div class="ttdeci">static bool isOpen()</div><div class="ttdef"><b>Definition:</b> Window.hpp:46</div></div>
+<div class="ttc" id="anamespaceutils_html_a79e536d2358e77e397c975738dc4a121"><div class="ttname"><a href="namespaceutils.html#a79e536d2358e77e397c975738dc4a121">utils::getInstance</a></div><div class="ttdeci">InputMap&lt; T &gt; &amp; getInstance()</div><div class="ttdef"><b>Definition:</b> InputMap.cpp:177</div></div>
 <div class="ttc" id="aclassutils_1_1_window_html_a772a6cd99723f6dad2f59c3821809e9f"><div class="ttname"><a href="classutils_1_1_window.html#a772a6cd99723f6dad2f59c3821809e9f">utils::Window::~Window</a></div><div class="ttdeci">~Window()</div><div class="ttdef"><b>Definition:</b> Window.hpp:45</div></div>
 <div class="ttc" id="a_window_8hpp_html"><div class="ttname"><a href="_window_8hpp.html">Window.hpp</a></div></div>
 <div class="ttc" id="a_constant_8hpp_html"><div class="ttname"><a href="_constant_8hpp.html">Constant.hpp</a></div></div>

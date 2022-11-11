@@ -18,6 +18,7 @@ var namespaceecs_1_1component =
     [ "Shootable", "structecs_1_1component_1_1_shootable.html", "structecs_1_1component_1_1_shootable" ],
     [ "Size", "structecs_1_1component_1_1_size.html", "structecs_1_1component_1_1_size" ],
     [ "Text", "structecs_1_1component_1_1_text.html", "structecs_1_1component_1_1_text" ],
+    [ "textColor", "structecs_1_1component_1_1text_color.html", "structecs_1_1component_1_1text_color" ],
     [ "Velocity", "structecs_1_1component_1_1_velocity.html", "structecs_1_1component_1_1_velocity" ],
     [ "Weapon", "structecs_1_1component_1_1_weapon.html", "structecs_1_1component_1_1_weapon" ]
 ];

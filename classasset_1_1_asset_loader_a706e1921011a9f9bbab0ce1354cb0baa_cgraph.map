@@ -1,4 +1,5 @@
 <map id="asset::AssetLoader::LoadTexture" name="asset::AssetLoader::LoadTexture">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,151,47"/>
-<area shape="rect" id="node2" href="$classasset_1_1_asset_loader.html#a5d2e326963a2a9bf49587a28de5fc006" title="create a smartpath from a vector of string" alt="" coords="199,5,344,47"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,39,151,80"/>
+<area shape="rect" id="node2" href="$classasset_1_1_asset_loader.html#a50f7f49aa27c1f7648cf645915be8481" title=" " alt="" coords="199,5,344,47"/>
+<area shape="rect" id="node3" href="$classasset_1_1_asset_loader.html#a5d2e326963a2a9bf49587a28de5fc006" title="create a smartpath from a vector of string" alt="" coords="199,71,344,112"/>
 </map>

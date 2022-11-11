@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gettestworld_704',['getTestWorld',['../namespaceecs_1_1systems.html#a9e53dea2cf4c6c53caa0bf6658a51a9c',1,'ecs::systems']]]
+  ['faction_756',['faction',['../structecs_1_1component_1_1_faction.html#afff7553e9fcd8b3281b5b86e9225c255',1,'ecs::component::Faction']]]
 ];

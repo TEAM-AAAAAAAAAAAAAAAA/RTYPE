@@ -151,8 +151,6 @@ Variables</h2></td></tr>
 <tr class="separator:a3ef17d23a38a80a3e15a78a0cdb5c005"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9559eb78ab62e2fcdcebc80dc0d26673"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#a9559eb78ab62e2fcdcebc80dc0d26673">HandleParallaxBounds</a></td></tr>
 <tr class="separator:a9559eb78ab62e2fcdcebc80dc0d26673"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e53dea2cf4c6c53caa0bf6658a51a9c"><td class="memItemLeft" align="right" valign="top">std::function&lt; <a class="el" href="classecs_1_1_world.html">World</a>(void)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#a9e53dea2cf4c6c53caa0bf6658a51a9c">getTestWorld</a></td></tr>
-<tr class="separator:a9e53dea2cf4c6c53caa0bf6658a51a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4294eeb80a7b9f00e1baad04f18dad03"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#a4294eeb80a7b9f00e1baad04f18dad03">handleSFMLEvents</a></td></tr>
 <tr class="separator:a4294eeb80a7b9f00e1baad04f18dad03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4259c57e73934aa863c710dc88386edd"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(<a class="el" href="classecs_1_1_world.html">World</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs_1_1systems.html#a4259c57e73934aa863c710dc88386edd">handleSFMLKeys</a></td></tr>
@@ -294,38 +292,6 @@ Variables</h2></td></tr>
 <div class="line">    }</div>
 </div><!-- fragment --><p>Login to the server only once </p>
 
-</div>
-</div>
-<a id="a9e53dea2cf4c6c53caa0bf6658a51a9c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e53dea2cf4c6c53caa0bf6658a51a9c">&#9670;&nbsp;</a></span>getTestWorld</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::function&lt;<a class="el" href="classecs_1_1_world.html">World</a>(void)&gt; ecs::systems::getTestWorld</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= []() {</div>
-<div class="line">        <a class="code" href="classecs_1_1_world.html">ecs::World</a> world;</div>
-<div class="line"> </div>
-<div class="line">        Entity newEntity = world.<a class="code" href="classecs_1_1_world.html#a71b5c2fb034c78a6270c44e42a0e2360">registry</a>.<a class="code" href="classecs_1_1_registry.html#a960bf8fcdaa237dc3a8594cf53290085">spawn_entity</a>();</div>
-<div class="line"> </div>
-<div class="line">        world.<a class="code" href="classecs_1_1_world.html#a71b5c2fb034c78a6270c44e42a0e2360">registry</a>.<a class="code" href="classecs_1_1_registry.html#a62e5024139f23f3f18859e01f70856ba">registerComponent</a>&lt;component::Position&gt;();</div>
-<div class="line">        world.<a class="code" href="classecs_1_1_world.html#a71b5c2fb034c78a6270c44e42a0e2360">registry</a>.<a class="code" href="classecs_1_1_registry.html#a62e5024139f23f3f18859e01f70856ba">registerComponent</a>&lt;component::Size&gt;();</div>
-<div class="line">        world.<a class="code" href="classecs_1_1_world.html#a71b5c2fb034c78a6270c44e42a0e2360">registry</a>.<a class="code" href="classecs_1_1_registry.html#a62e5024139f23f3f18859e01f70856ba">registerComponent</a>&lt;component::Drawable&gt;();</div>
-<div class="line">        world.<a class="code" href="classecs_1_1_world.html#a71b5c2fb034c78a6270c44e42a0e2360">registry</a>.<a class="code" href="classecs_1_1_registry.html#a62e5024139f23f3f18859e01f70856ba">registerComponent</a>&lt;component::Animated&gt;();</div>
-<div class="line"> </div>
-<div class="line">        world.<a class="code" href="classecs_1_1_world.html#a71b5c2fb034c78a6270c44e42a0e2360">registry</a>.<a class="code" href="classecs_1_1_registry.html#a84a2d80e15dc9014520feec1a134302a">addComponent</a>&lt;component::Position&gt;(newEntity, {100, 100});</div>
-<div class="line">        world.<a class="code" href="classecs_1_1_world.html#a71b5c2fb034c78a6270c44e42a0e2360">registry</a>.<a class="code" href="classecs_1_1_registry.html#a84a2d80e15dc9014520feec1a134302a">addComponent</a>&lt;component::Size&gt;(newEntity, {100, 100});</div>
-<div class="line">        world.<a class="code" href="classecs_1_1_world.html#a71b5c2fb034c78a6270c44e42a0e2360">registry</a>.<a class="code" href="classecs_1_1_registry.html#a84a2d80e15dc9014520feec1a134302a">addComponent</a>&lt;component::Drawable&gt;(newEntity, {<span class="stringliteral">&quot;players&quot;</span>, {1, 35, 32, 16}});</div>
-<div class="line"> </div>
-<div class="line">        world.<a class="code" href="classecs_1_1_world.html#a298b46d7b7f1742f43ac2f8cb7ef9e95">addSystem</a>(<a class="code" href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">ecs::systems::draw</a>);</div>
-<div class="line"> </div>
-<div class="line">        <span class="keywordflow">return</span> world;</div>
-<div class="line">    }</div>
-</div><!-- fragment -->
 </div>
 </div>
 <a id="a3ef17d23a38a80a3e15a78a0cdb5c005"></a>
@@ -614,24 +580,17 @@ Variables</h2></td></tr>
 </div><!-- doc-content -->
 <div class="ttc" id="anamespacenetwork_html_a6ec876aa185a7f04d2f7fba304553d21"><div class="ttname"><a href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a></div><div class="ttdeci">std::array&lt; char, 16 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
 <div class="ttc" id="aclassnetwork_1_1_server_html_a0c64a21c5e324114615c0073596cb403"><div class="ttname"><a href="classnetwork_1_1_server.html#a0c64a21c5e324114615c0073596cb403">network::Server::getOutgoingMessages</a></div><div class="ttdeci">static LockedQueue&lt; ServerMessage &gt; &amp; getOutgoingMessages()</div><div class="ttdef"><b>Definition:</b> Server.hpp:101</div></div>
-<div class="ttc" id="aclassecs_1_1_registry_html_a960bf8fcdaa237dc3a8594cf53290085"><div class="ttname"><a href="classecs_1_1_registry.html#a960bf8fcdaa237dc3a8594cf53290085">ecs::Registry::spawn_entity</a></div><div class="ttdeci">Entity spawn_entity()</div><div class="ttdef"><b>Definition:</b> Registry.hpp:76</div></div>
 <div class="ttc" id="aclassnetwork_1_1_client_html_ac8d5bead7d861e42f7b7258eba61fd54"><div class="ttname"><a href="classnetwork_1_1_client.html#ac8d5bead7d861e42f7b7258eba61fd54">network::Client::getReceivedMessages</a></div><div class="ttdeci">static LockedQueue&lt; Message &gt; &amp; getReceivedMessages()</div><div class="ttdef"><b>Definition:</b> NetworkClient.hpp:48</div></div>
 <div class="ttc" id="anamespaceutils_1_1constant_html_ab4d7e2d46688914f26626a619f8326af"><div class="ttname"><a href="namespaceutils_1_1constant.html#ab4d7e2d46688914f26626a619f8326af">utils::constant::chrono</a></div><div class="ttdeci">std::chrono::high_resolution_clock chrono</div><div class="ttdef"><b>Definition:</b> Constant.hpp:19</div></div>
 <div class="ttc" id="anamespaceutils_1_1constant_html_ad903a57ac8f070571efdf25fbdcb0c29"><div class="ttname"><a href="namespaceutils_1_1constant.html#ad903a57ac8f070571efdf25fbdcb0c29">utils::constant::chronoDuration</a></div><div class="ttdeci">std::chrono::duration&lt; double, std::milli &gt; chronoDuration</div><div class="ttdef"><b>Definition:</b> Constant.hpp:20</div></div>
 <div class="ttc" id="anamespaceutils_1_1constant_html_a02f29b9fcdfc8d4a1f0b8923e5b4c477ae5d30e9f7bb333d07bd8a1a8b35ecb06"><div class="ttname"><a href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ae5d30e9f7bb333d07bd8a1a8b35ecb06">utils::constant::PLAYER_MOVE</a></div><div class="ttdeci">@ PLAYER_MOVE</div><div class="ttdef"><b>Definition:</b> Constant.hpp:27</div></div>
 <div class="ttc" id="anamespacenetwork_html_a1290ee51c4c8d07f57076ac8f7505129"><div class="ttname"><a href="namespacenetwork.html#a1290ee51c4c8d07f57076ac8f7505129">network::ServerMessage</a></div><div class="ttdeci">std::pair&lt; Message, std::vector&lt; unsigned int &gt; &gt; ServerMessage</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:24</div></div>
-<div class="ttc" id="aclassecs_1_1_registry_html_a84a2d80e15dc9014520feec1a134302a"><div class="ttname"><a href="classecs_1_1_registry.html#a84a2d80e15dc9014520feec1a134302a">ecs::Registry::addComponent</a></div><div class="ttdeci">SparseArray&lt; Component &gt;::referenceType addComponent(Entity const &amp;to, Component &amp;&amp;c)</div><div class="ttdef"><b>Definition:</b> Registry.hpp:126</div></div>
 <div class="ttc" id="aclassnetwork_1_1_locked_queue_html_a076e0981cce5c44eed95476e135011f2"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">network::LockedQueue::push</a></div><div class="ttdeci">void push(T value)</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:43</div></div>
-<div class="ttc" id="aclassecs_1_1_registry_html_a62e5024139f23f3f18859e01f70856ba"><div class="ttname"><a href="classecs_1_1_registry.html#a62e5024139f23f3f18859e01f70856ba">ecs::Registry::registerComponent</a></div><div class="ttdeci">SparseArray&lt; Component &gt; &amp; registerComponent()</div><div class="ttdef"><b>Definition:</b> Registry.hpp:33</div></div>
 <div class="ttc" id="anamespaceutils_1_1constant_html_a02f29b9fcdfc8d4a1f0b8923e5b4c477a509676f5d38cbf87a106deecbbb082db"><div class="ttname"><a href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a509676f5d38cbf87a106deecbbb082db">utils::constant::ENTITY_DEATH</a></div><div class="ttdeci">@ ENTITY_DEATH</div><div class="ttdef"><b>Definition:</b> Constant.hpp:33</div></div>
 <div class="ttc" id="aclassnetwork_1_1_locked_queue_html_a6f83affbc6d8bc587e67a5b1003678b9"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html#a6f83affbc6d8bc587e67a5b1003678b9">network::LockedQueue::empty</a></div><div class="ttdeci">bool empty()</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:66</div></div>
 <div class="ttc" id="aclassnetwork_1_1_locked_queue_html_a2be6f1a5bcdc3fd83a53558377f51d80"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80">network::LockedQueue::pop</a></div><div class="ttdeci">T pop()</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:53</div></div>
 <div class="ttc" id="aclassnetwork_1_1_client_html_ab4ee2988395ad66a1c4e259eba436d23"><div class="ttname"><a href="classnetwork_1_1_client.html#ab4ee2988395ad66a1c4e259eba436d23">network::Client::getOutgoingMessages</a></div><div class="ttdeci">static LockedQueue&lt; Message &gt; &amp; getOutgoingMessages()</div><div class="ttdef"><b>Definition:</b> NetworkClient.hpp:46</div></div>
-<div class="ttc" id="aclassecs_1_1_world_html_a71b5c2fb034c78a6270c44e42a0e2360"><div class="ttname"><a href="classecs_1_1_world.html#a71b5c2fb034c78a6270c44e42a0e2360">ecs::World::registry</a></div><div class="ttdeci">Registry registry</div><div class="ttdef"><b>Definition:</b> World.hpp:75</div></div>
-<div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:19</div></div>
-<div class="ttc" id="aclassnetwork_1_1_client_html_ab803b1a4b60b0d5ca35b84e95729c2b4"><div class="ttname"><a href="classnetwork_1_1_client.html#ab803b1a4b60b0d5ca35b84e95729c2b4">network::Client::connect</a></div><div class="ttdeci">static void connect()</div><div class="ttdef"><b>Definition:</b> NetworkClient.hpp:53</div></div>
-<div class="ttc" id="aclassecs_1_1_world_html_a298b46d7b7f1742f43ac2f8cb7ef9e95"><div class="ttname"><a href="classecs_1_1_world.html#a298b46d7b7f1742f43ac2f8cb7ef9e95">ecs::World::addSystem</a></div><div class="ttdeci">void addSystem(const std::function&lt; void(World &amp;)&gt; &amp;system)</div><div class="ttdef"><b>Definition:</b> World.hpp:40</div></div>
-<div class="ttc" id="anamespaceecs_1_1systems_html_ab7690be6352e10d6bf8b0c79bcd2bcd3"><div class="ttname"><a href="namespaceecs_1_1systems.html#ab7690be6352e10d6bf8b0c79bcd2bcd3">ecs::systems::draw</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; draw</div><div class="ttdef"><b>Definition:</b> Draw.hpp:27</div></div>
+<div class="ttc" id="aclassnetwork_1_1_client_html_ab803b1a4b60b0d5ca35b84e95729c2b4"><div class="ttname"><a href="classnetwork_1_1_client.html#ab803b1a4b60b0d5ca35b84e95729c2b4">network::Client::connect</a></div><div class="ttdeci">static void connect()</div><div class="ttdef"><b>Definition:</b> NetworkClient.hpp:56</div></div>
 <div class="ttc" id="anamespaceanim_html"><div class="ttname"><a href="namespaceanim.html">anim</a></div><div class="ttdef"><b>Definition:</b> Animation.hpp:12</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

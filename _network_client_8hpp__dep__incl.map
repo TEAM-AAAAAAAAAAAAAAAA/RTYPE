@@ -1,5 +1,6 @@
 <map id="src/client/NetworkClient.hpp" name="src/client/NetworkClient.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="95,5,301,32"/>
-<area shape="rect" id="node2" href="$_get_world_8cpp.html" title=" " alt="" coords="5,80,177,107"/>
-<area shape="rect" id="node3" href="$_network_client_8cpp.html" title=" " alt="" coords="202,80,407,107"/>
+<area shape="rect" id="node1" title=" " alt="" coords="191,5,398,32"/>
+<area shape="rect" id="node2" href="$client_2entrypoint_8cpp.html" title=" " alt="" coords="5,80,184,107"/>
+<area shape="rect" id="node3" href="$_get_world_8cpp.html" title=" " alt="" coords="209,80,381,107"/>
+<area shape="rect" id="node4" href="$_network_client_8cpp.html" title=" " alt="" coords="405,80,611,107"/>
 </map>

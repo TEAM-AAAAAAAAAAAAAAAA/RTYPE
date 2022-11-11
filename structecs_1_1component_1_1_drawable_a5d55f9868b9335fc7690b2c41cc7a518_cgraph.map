@@ -1,4 +1,5 @@
 <map id="ecs::component::Drawable::Drawable" name="ecs::component::Drawable::Drawable">
 <area shape="rect" id="node1" title="Construct a new Drawable object with the full texture." alt="" coords="5,5,200,47"/>
 <area shape="rect" id="node2" href="$classasset_1_1_asset_loader.html#ab9214a64413a1c36d34381a9bbc9f15d" title="Get an Asset object from the map." alt="" coords="248,5,393,47"/>
+<area shape="rect" id="node3" href="$classasset_1_1_asset_loader.html#a50f7f49aa27c1f7648cf645915be8481" title=" " alt="" coords="441,5,587,47"/>
 </map>

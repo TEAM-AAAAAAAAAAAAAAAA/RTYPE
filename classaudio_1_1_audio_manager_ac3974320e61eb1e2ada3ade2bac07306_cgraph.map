@@ -1,4 +1,5 @@
 <map id="audio::AudioManager::loadSFX" name="audio::AudioManager::loadSFX">
 <area shape="rect" id="node1" title="load a sound effect to be played" alt="" coords="5,5,165,47"/>
 <area shape="rect" id="node2" href="$classasset_1_1_asset_loader.html#aae5364a01b69a76bab4d489a0cc1c83e" title="Get a sound effect object from the map." alt="" coords="213,5,359,47"/>
+<area shape="rect" id="node3" href="$classasset_1_1_asset_loader.html#a50f7f49aa27c1f7648cf645915be8481" title=" " alt="" coords="407,5,552,47"/>
 </map>

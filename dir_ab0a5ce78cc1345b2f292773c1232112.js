@@ -23,6 +23,7 @@ var dir_ab0a5ce78cc1345b2f292773c1232112 =
       [ "Shootable", "structecs_1_1component_1_1_shootable.html", "structecs_1_1component_1_1_shootable" ]
     ] ],
     [ "Text.hpp", "_text_8hpp.html", [
+      [ "textColor", "structecs_1_1component_1_1text_color.html", "structecs_1_1component_1_1text_color" ],
       [ "Text", "structecs_1_1component_1_1_text.html", "structecs_1_1component_1_1_text" ]
     ] ]
 ];

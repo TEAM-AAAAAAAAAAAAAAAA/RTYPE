@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['registry_455',['Registry',['../classecs_1_1_registry.html',1,'ecs']]]
+  ['parallax_481',['Parallax',['../structecs_1_1component_1_1_parallax.html',1,'ecs::component']]],
+  ['pattern_482',['Pattern',['../structecs_1_1component_1_1_attack_a_i_1_1_a_i_1_1_pattern.html',1,'ecs::component::AttackAI::AI']]],
+  ['position_483',['Position',['../structecs_1_1component_1_1_position.html',1,'ecs::component']]],
+  ['projectile_484',['Projectile',['../structecs_1_1component_1_1_projectile.html',1,'ecs::component']]]
 ];

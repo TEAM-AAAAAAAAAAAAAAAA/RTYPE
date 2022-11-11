@@ -11,11 +11,15 @@ var _constant_8hpp =
     ] ],
     [ "ButtonType", "_constant_8hpp.html#a2a092789810efba5b9fd04d4edf0d4cd", [
       [ "PLAY", "_constant_8hpp.html#a2a092789810efba5b9fd04d4edf0d4cdac983a45a542e7fb4b4f319ef12fe1cf3", null ],
-      [ "OPTIONS", "_constant_8hpp.html#a2a092789810efba5b9fd04d4edf0d4cda36fa97f7562cf2ed2651034ddbde46a3", null ],
+      [ "OPTION", "_constant_8hpp.html#a2a092789810efba5b9fd04d4edf0d4cdac04701255621d51009f2907f13b04946", null ],
       [ "QUIT", "_constant_8hpp.html#a2a092789810efba5b9fd04d4edf0d4cda6a12a755c6555b029258043dd9683f68", null ],
       [ "PLAY_HOVER", "_constant_8hpp.html#a2a092789810efba5b9fd04d4edf0d4cdab5a03b6cf978241b6354065fb57d9a5e", null ],
       [ "OPTION_HOVER", "_constant_8hpp.html#a2a092789810efba5b9fd04d4edf0d4cdae92898cb56fc8ec823b694b44f5b5b0e", null ],
-      [ "QUIT_HOVER", "_constant_8hpp.html#a2a092789810efba5b9fd04d4edf0d4cdaf7c1ce0dd91059c2609122672335adcd", null ]
+      [ "QUIT_HOVER", "_constant_8hpp.html#a2a092789810efba5b9fd04d4edf0d4cdaf7c1ce0dd91059c2609122672335adcd", null ],
+      [ "ROOM", "_constant_8hpp.html#a2a092789810efba5b9fd04d4edf0d4cda70d9942df5a1ae2dc83b40bac3910467", null ],
+      [ "ROOM_HOVER", "_constant_8hpp.html#a2a092789810efba5b9fd04d4edf0d4cda7849ab16fa309f93eda8715cc45f02c1", null ],
+      [ "ROOM_TEXT", "_constant_8hpp.html#a2a092789810efba5b9fd04d4edf0d4cdae98af85f0f00c69e469ab688d06e3cfc", null ],
+      [ "UNDEFINED", "_constant_8hpp.html#a2a092789810efba5b9fd04d4edf0d4cda1bbc38e1308611b428d7d4715bfde0ca", null ]
     ] ],
     [ "PacketType", "_constant_8hpp.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477", [
       [ "PLAYER_MOVE", "_constant_8hpp.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ae5d30e9f7bb333d07bd8a1a8b35ecb06", null ],
