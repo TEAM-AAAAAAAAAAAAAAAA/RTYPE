@@ -1,6 +1,5 @@
 set (SRC_ROOT ${PROJECT_SOURCE_DIR}/src/client)
 set (INC_ROOT ${PROJECT_SOURCE_DIR}/src/client)
-#set(ECS_SRC ../ecs)
 
 set(TARGET r-type_client)
 
@@ -10,6 +9,8 @@ set(SRC
     ${SRC_ROOT}/AssetLoader.cpp
     ${SRC_ROOT}/NetworkClient.cpp
     ${SRC_ROOT}/NetworkClient.hpp
+    ${SRC_ROOT}/GetWorld.cpp
+    ${SRC_ROOT}/GetWorld.hpp
     ${UTILS_SRC}
     ${ECS_SRC}
     ${SRC_ROOT}/AudioManager.cpp
@@ -28,7 +29,7 @@ if (NOT WIN32)
 endif()
 
 target_include_directories(${TARGET}
-PRIVATE ${ECS_INCROOT} 
+PRIVATE ${ECS_INCROOT}
 PRIVATE ${UTILS_INCDIRS}
 )
 

@@ -23,7 +23,7 @@ namespace utils
          */
         Window() {}
         ~Window() {}
-        // static inline sf::RenderWindow &get() { return _Instance; }
+        static sf::Color Color;
         static inline bool isOpen() { return getInstance().isOpen(); }
 
         static sf::RenderWindow &getInstance()

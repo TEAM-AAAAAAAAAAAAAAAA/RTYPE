@@ -6,8 +6,14 @@
 */
 
 #include "NetworkClient.hpp"
+#include <iostream>
 
 namespace network
 {
-    Client Client::_Instance;
-}
+    Client &Client::getInstance()
+    {
+        static Client _Instance;
+        return _Instance;
+    }
+
+} // namespace network

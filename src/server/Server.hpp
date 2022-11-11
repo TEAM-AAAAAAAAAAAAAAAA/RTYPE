@@ -41,7 +41,7 @@ namespace network
          * This function allows us to check if the server has received messages
          *@return true if there are messages
          */
-        static bool hasMessages() { return !_Instance._receivedMessages.empty(); };
+        static bool hasMessages() { return !getInstance()._receivedMessages.empty(); };
 
         /**
          * Used to send a message to a client given as parameter
@@ -51,7 +51,7 @@ namespace network
         static void sendToClient(const Message &message, uint32_t clientID)
         {
             try {
-                _Instance.send(message, _Instance._clients.at(clientID));
+                getInstance().send(message, getInstance()._clients.at(clientID));
             } catch (std::out_of_range) {
                 std::cerr << "sendToClient : Unknown client ID " << clientID << std::endl;
             }
@@ -63,15 +63,15 @@ namespace network
          */
         static void sendToAll(const Message &message)
         {
-            for (auto client : _Instance._clients)
-                _Instance.send(message, client.second);
+            for (auto client : getInstance()._clients)
+                getInstance().send(message, client.second);
         }
 
         /**
          * Get the amount of clients that are connected
          * @return Amount of connected clients
          */
-        static size_t getClientCount() { return _Instance._clients.size(); }
+        static size_t getClientCount() { return getInstance()._clients.size(); }
 
         /**
          * Get the ID of client from the clients array
@@ -80,7 +80,7 @@ namespace network
          */
         static uint32_t getClientIdByIndex(size_t index)
         {
-            auto it = _Instance._clients.begin();
+            auto it = getInstance()._clients.begin();
             for (int i = 0; i < index; i++)
                 ++it;
             return it->first;
@@ -106,10 +106,10 @@ namespace network
 
         static inline void start(unsigned short localPort)
         {
-            if (_Instance._isRunning)
+            if (getInstance()._isRunning)
                 return;
-            _Instance._socket = udp::socket(_Instance._ioService, udp::endpoint(udp::v4(), localPort));
-            _Instance._isRunning = true;
+            getInstance()._socket = udp::socket(getInstance()._ioService, udp::endpoint(udp::v4(), localPort));
+            getInstance()._isRunning = true;
             std::cerr << "Server started on port " << localPort << std::endl;
         }
 
@@ -117,9 +117,9 @@ namespace network
          * Getters & Setters of the Server Class
          */
 
-        static LockedQueue<ServerMessage> &getOutgoingMessages() { return _Instance._outgoingMessages; }
+        static LockedQueue<ServerMessage> &getOutgoingMessages() { return getInstance()._outgoingMessages; }
 
-        static LockedQueue<ClientMessage> &GetReceivedMessages() { return _Instance._receivedMessages; }
+        static LockedQueue<ClientMessage> &GetReceivedMessages() { return getInstance()._receivedMessages; }
 
       private:
         /**
@@ -280,6 +280,7 @@ namespace network
             : _socket(_ioService), _serviceThread(&network::Server::receiveIncoming, this), _nextClientID(0L),
               _outgoingService(&network::Server::sendOutgoing, this){};
 
-        static Server _Instance;
+//        static Server getInstance();
+        static Server &getInstance();
     };
 } // namespace network
