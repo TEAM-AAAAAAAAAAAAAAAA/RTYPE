@@ -13,7 +13,7 @@
       "variables": [
         {
           "name": "SFML_DIR",
-          "value": "${projectDir}/vcpkg/installed/x86-windows/share/sfml",
+          "value": "${projectDir}/vcpkg/installed/x64-windows/share/sfml",
           "type": "PATH"
         }
       ],
