@@ -84,7 +84,7 @@ static void setGameHUD(ecs::World &world)
     ecs::Entity healthBar = world.registry.spawn_entity();
 
     world.registry.addComponent<ecs::component::Position>(textScore, {10, 10});
-    world.registry.addComponent<ecs::component::Size>(textScore, {60, 60});
+    world.registry.addComponent<ecs::component::Size>(textScore, {40, 15});
     world.registry.addComponent<ecs::component::Text>(textScore, {});
     world.registry.addComponent<ecs::component::Score>(textScore, {});
     world.registry.addComponent<ecs::component::Activable>(textScore, {});
@@ -243,10 +243,10 @@ static void setRoomTexts(ecs::World &world)
     world.registry.addComponent<ecs::component::Text>(textSecondRoom, {10});
     world.registry.addComponent<ecs::component::Text>(textThirdRoom, {10});
     world.registry.addComponent<ecs::component::Text>(textFourthRoom, {10});
-    world.registry.addComponent<ecs::component::Position>(textFirstRoom, {itRoom->second.posX + 60, itRoom->second.posY - 17 + itRoom->second.rectHeight / 2});
-    world.registry.addComponent<ecs::component::Position>(textSecondRoom, {itRoom->second.posX + 60, itRoom->second.posY + 103 + itRoom->second.rectHeight / 2});
-    world.registry.addComponent<ecs::component::Position>(textThirdRoom, {itRoom->second.posX + 60, itRoom->second.posY + 223 + itRoom->second.rectHeight / 2});
-    world.registry.addComponent<ecs::component::Position>(textFourthRoom, {itRoom->second.posX + 60, itRoom->second.posY + 343 + itRoom->second.rectHeight / 2});
+    world.registry.addComponent<ecs::component::Position>(textFirstRoom, {itRoom->second.posX + 100, itRoom->second.posY - 17 + itRoom->second.rectHeight / 2});
+    world.registry.addComponent<ecs::component::Position>(textSecondRoom, {itRoom->second.posX + 100, itRoom->second.posY + 103 + itRoom->second.rectHeight / 2});
+    world.registry.addComponent<ecs::component::Position>(textThirdRoom, {itRoom->second.posX + 100, itRoom->second.posY + 223 + itRoom->second.rectHeight / 2});
+    world.registry.addComponent<ecs::component::Position>(textFourthRoom, {itRoom->second.posX + 100, itRoom->second.posY + 343 + itRoom->second.rectHeight / 2});
     world.registry.addComponent<ecs::component::Size>(textFirstRoom, {30, 0});
     world.registry.addComponent<ecs::component::Size>(textSecondRoom, {30, 0});
     world.registry.addComponent<ecs::component::Size>(textThirdRoom, {30, 0});
