@@ -42,7 +42,11 @@ namespace ecs::systems
                     pos.value().x += vel.value().x * dir.value().x;
                     pos.value().y += vel.value().y * dir.value().y;
                     if (i < entityTypes.size() && entityTypes[i]) {
-                        if (entityTypes[i].value().type == component::EntityType::Types::Player) {
+                        if (entityTypes[i].value().type != component::EntityType::Types::Bullet
+                            && entityTypes[i].value().type != component::EntityType::Types::EnergySphere
+                            && entityTypes[i].value().type != component::EntityType::Types::Laser
+                            && entityTypes[i].value().type != component::EntityType::Types::Rocket
+                            && entityTypes[i].value().type != component::EntityType::Types::Asteroid) {
                             if (pos.value().x < 0)
                                 pos.value().x = 0;
                             else if (pos.value().x > utils::constant::mapWidth)

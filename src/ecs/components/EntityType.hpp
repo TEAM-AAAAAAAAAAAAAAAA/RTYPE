@@ -19,6 +19,7 @@ namespace ecs::component
             EnergySphere,
             Laser,
             Rocket,
+            Asteroid,
             UranusBattlecruiser,
             UranusDreadnought,
             UranusFighter,

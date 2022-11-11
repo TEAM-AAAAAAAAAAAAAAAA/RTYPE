@@ -32,7 +32,19 @@ namespace ecs::component
          *
          * @warning ALL MUST BE CREATED IN AttackAI.cpp
          */
-        enum PatternType { Wait, WaitShort, WaitLong, ShootBullet, ShootEnergySphere, ShootLaser, ShootRocket, InvokeAllies };
+        enum PatternType {
+            Wait,
+            WaitShort,
+            WaitLong,
+            ShootBullet,
+            ShootEnergySphere,
+            ShootEnergySphereFast,
+            ShootLaser,
+            ShootRocket,
+            InvokeAllies,
+            InvokeAnyone,
+            SpawnAsteroids
+        };
 
         size_t lastAttack;
         size_t lastAttackDelay;
@@ -111,13 +123,16 @@ namespace ecs::component
             static void shootLaserAttack(const std::size_t shooter);
             static void shootRocketAttack(const std::size_t shooter);
             static void invokeAlliesAttack(const std::size_t shooter);
+            static void spawnAsteroidsAttack(const std::size_t shooter);
+            static void invokeAnyoneAttack(const std::size_t shooter);
 
           private:
             /**
              * @brief Utility function used by action functions to reduce code reusing
              */
             static void spawnNewBullet(component::EntityType::Types type, int posX, int posY, char dirX, char dirY,
-                int sizeX, int sizeY, int velX, int velY, int dmg, ecs::component::Faction::Factions fac);
+                int sizeX, int sizeY, int velX, int velY, int dmg, ecs::component::Faction::Factions fac,
+                int bulletHealth = 1);
         };
 
         /**
