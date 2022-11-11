@@ -47,6 +47,9 @@ namespace network
 
         static inline LockedQueue<Message> &getReceivedMessages() { return getInstance()._receivedMessages; }
 
+        static inline bool getIsConnected() { return getInstance()._isConnected;}
+        static inline void setIsConnected() { getInstance()._isConnected = true;}
+
         /**
          * Static methods used to connect to the given server (host, port) using udp::v4
          */
@@ -85,6 +88,7 @@ namespace network
         std::string _host;
         std::string _port;
         bool _isStillRunning = true;
+        bool _isConnected = false;
 
         /**
          * Locked queue of all unsent outgoing messages
@@ -108,6 +112,7 @@ namespace network
                 try {
                     auto message = Message(_recvBuffer);
                     if (!message.empty()) {
+                        network::Client::setIsConnected();
                         _receivedMessages.push(message);
                     }
                 } catch (const std::exception &e) {

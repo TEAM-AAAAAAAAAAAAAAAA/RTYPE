@@ -5,6 +5,8 @@ set(UTILS_SRC
     ${SRCROOT}/Window.cpp
     ${SRCROOT}/Window.hpp
     ${SRCROOT}/Constant.hpp
+    ${SRCROOT}/InputMap.cpp
+    ${SRCROOT}/InputMap.hpp
     PARENT_SCOPE
 )
 

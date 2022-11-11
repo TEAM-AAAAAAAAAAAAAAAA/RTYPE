@@ -9,7 +9,7 @@
 
 #ifdef CLIENT_COMPILATION_MODE
     #include "Constant.hpp"
-    #include "SFML/Graphics.hpp"
+    #include <SFML/Graphics.hpp>
 
 namespace utils
 {
