@@ -102,6 +102,12 @@ namespace ecs::systems
                             AnimFrame(34, 1, 32, 16, 100)});
                 }
                 break;
+            case component::EntityType::Types::PlayerBot:
+                world.registry.addComponent<component::EntityType>(
+                    newEntity, {component::EntityType::Types::PlayerBot});
+                world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 35, 32, 16}});
+                world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
+                break;
 #pragma region uranus ships
             case component::EntityType::Types::UranusBattlecruiser:
                 world.registry.addComponent<component::Drawable>(newEntity, {"uranus-battlecruiser", {11, 26, 92, 76}});
