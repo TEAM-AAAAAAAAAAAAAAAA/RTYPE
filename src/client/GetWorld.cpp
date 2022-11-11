@@ -23,14 +23,15 @@
 #include "components/client/Text.hpp"
 #include "systems/ManageClientEvents.hpp"
 #include "systems/Movement.hpp"
+#include "systems/client/Animate.hpp"
 #include "systems/client/Draw.hpp"
+#include "systems/client/ExecuteOnce.hpp"
 #include "systems/client/HandleIncomingMessages.hpp"
 #include "systems/client/HandleParallaxBounds.hpp"
 #include "systems/client/HandleSFMLEvents.hpp"
 #include "systems/client/HandleSFMLKeys.hpp"
 #include "systems/client/MenuSelect.hpp"
 #include "systems/client/SendDirection.hpp"
-#include "systems/client/ExecuteOnce.hpp"
 
 static const int FRAME_LIMIT = 60;
 
@@ -69,6 +70,7 @@ static void addGameSystems(ecs::World &world)
     world.addSystem(ecs::systems::movement);
     world.addSystem(ecs::systems::HandleParallaxBounds);
     world.addSystem(ecs::systems::executeOnce);
+    world.addSystem(ecs::systems::animate);
 }
 
 static void setGameParallax(ecs::World &world)

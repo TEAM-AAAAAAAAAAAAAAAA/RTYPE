@@ -7,6 +7,7 @@
 #include "components/Health.hpp"
 #include "components/MovementAI.hpp"
 #include "components/NetworkId.hpp"
+#include "components/server/FollowEntity.hpp"
 #include "systems/Movement.hpp"
 #include "systems/RunMovementAI.hpp"
 #include "systems/server/DeathUpdate.hpp"
@@ -15,6 +16,7 @@
 #include "systems/server/ProjectileCollision.hpp"
 #include "systems/server/RunAttackAI.hpp"
 #include "systems/server/Waves.hpp"
+#include "systems/server/FollowEntitySystem.hpp"
 
 ecs::World getGameWorld()
 {
@@ -34,6 +36,7 @@ ecs::World getGameWorld()
     world.registry.registerComponent<ecs::component::Position>();
     world.registry.registerComponent<ecs::component::Health>();
     world.registry.registerComponent<ecs::component::AttackAI>();
+    world.registry.registerComponent<ecs::component::FollowEntity>();
 
     world.addSystem(ecs::systems::movement);
     world.addSystem(ecs::systems::projectileCollision);
@@ -43,6 +46,7 @@ ecs::World getGameWorld()
     world.addSystem(ecs::systems::runAttackAI);
     world.addSystem(ecs::systems::deathUpdate);
     world.addSystem(ecs::systems::waves);
+    world.addSystem(ecs::systems::followEntitySystem);
 
     return world;
 }

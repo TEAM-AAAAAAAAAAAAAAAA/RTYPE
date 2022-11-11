@@ -80,6 +80,22 @@ namespace ecs::component
             positions[shooter].value().y, -1, 0, 6, 32, 15, 0, 5, fac);
     }
 
+    void AttackAI::Action::playerBotLaser(const std::size_t shooter)
+    {
+        auto const &positions = ecs::WorldManager::getWorld().registry.getComponents<component::Position>();
+        auto const &factions = ecs::WorldManager::getWorld().registry.getComponents<component::Faction>();
+
+        if (!(shooter < positions.size()))
+            return;
+        if (!(positions[shooter]))
+            return;
+        ecs::component::Faction::Factions fac = ecs::component::Faction::Factions::None;
+        if (shooter < factions.size() && factions[shooter])
+            fac = factions[shooter].value().faction;
+        AttackAI::Action::spawnNewBullet(component::EntityType::Laser, positions[shooter].value().x,
+            positions[shooter].value().y, 1, 0, 6, 32, 15, 0, 5, fac);
+    }
+
     void AttackAI::Action::shootRocketAttack(const std::size_t shooter)
     {
         auto const &positions = ecs::WorldManager::getWorld().registry.getComponents<component::Position>();
@@ -199,7 +215,8 @@ namespace ecs::component
             {ShootRocket, AI::Pattern(350, AttackAI::Action::shootRocketAttack)},
             {InvokeAllies, AI::Pattern(2500, AttackAI::Action::invokeAlliesAttack)},
             {InvokeAnyone, AI::Pattern(1000, AttackAI::Action::invokeAnyoneAttack)},
-            {SpawnAsteroids, AI::Pattern(250, AttackAI::Action::spawnAsteroidsAttack)}});
+            {SpawnAsteroids, AI::Pattern(250, AttackAI::Action::spawnAsteroidsAttack)},
+            {PlayerBotLaser, AI::Pattern(50, AttackAI::Action::playerBotLaser)}});
 
     const std::unordered_map<AttackAI::AIType, AttackAI::AI> AttackAI::_aiVector({{None, AttackAI::AI({WaitLong})},
         {Battlecruiser, AttackAI::AI({ShootLaser, ShootBullet, ShootEnergySphere})},
@@ -208,5 +225,6 @@ namespace ecs::component
         {Torpedo, AttackAI::AI({ShootRocket})},
         {NoodleMonster,
             AttackAI::AI({SpawnAsteroids, SpawnAsteroids, InvokeAnyone, ShootEnergySphereFast, ShootEnergySphereFast,
-                ShootEnergySphereFast, ShootEnergySphereFast, ShootEnergySphereFast, ShootEnergySphereFast})}});
+                ShootEnergySphereFast, ShootEnergySphereFast, ShootEnergySphereFast, ShootEnergySphereFast})},
+        {PlayerBot, AttackAI::AI({PlayerBotLaser})}});
 } // namespace ecs::component

@@ -25,7 +25,7 @@ namespace ecs::component
          *
          * @warning ALL MUST BE CREATED IN AttackAI.cpp
          */
-        enum AIType { None, Battlecruiser, Dreadnought, Fighter, Frigate, Scout, Torpedo, NoodleMonster };
+        enum AIType { None, Battlecruiser, Dreadnought, Fighter, Frigate, Scout, Torpedo, NoodleMonster, PlayerBot };
 
         /**
          * @brief All possible Patterns created
@@ -43,7 +43,8 @@ namespace ecs::component
             ShootRocket,
             InvokeAllies,
             InvokeAnyone,
-            SpawnAsteroids
+            SpawnAsteroids,
+            PlayerBotLaser
         };
 
         size_t lastAttack;
@@ -125,6 +126,7 @@ namespace ecs::component
             static void invokeAlliesAttack(const std::size_t shooter);
             static void spawnAsteroidsAttack(const std::size_t shooter);
             static void invokeAnyoneAttack(const std::size_t shooter);
+            static void playerBotLaser(const std::size_t shooter);
 
           private:
             /**
