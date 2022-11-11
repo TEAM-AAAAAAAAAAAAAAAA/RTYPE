@@ -61,7 +61,7 @@ class HubServer {
             char **buffer = new char *[2];
             buffer[0] = (char *)(std::to_string(_port).c_str());
             buffer[1] = (char *)(std::to_string(_port).c_str());
-            network::ClientMessage msg = network::Server::GetReceivedMessages().pop();
+            network::ClientMessage msg = network::Server::getReceivedMessages().pop();
             network::ServerMessage response;
             response.second.clear();
             response.first.fill(0);

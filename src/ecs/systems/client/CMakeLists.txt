@@ -5,6 +5,7 @@ set(SYSTEMS_SRC
     ${SRCROOT}/Draw.hpp
     ${SRCROOT}/ExecuteOnce.hpp
     ${SRCROOT}/HandleIncomingMessages.hpp
+    ${SRCROOT}/PeriodicPing.hpp
     ${SRCROOT}/HandleSFMLEvents.hpp
     ${SRCROOT}/HandleSFMLKeys.hpp
     ${SRCROOT}/MenuSelect.hpp

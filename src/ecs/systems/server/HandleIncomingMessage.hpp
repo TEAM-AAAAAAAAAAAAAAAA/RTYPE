@@ -148,8 +148,8 @@ namespace ecs::systems
         {0, createPlayer}, {utils::constant::PLAYER_MOVE, movePlayer}, {utils::constant::PLAYER_SHOT, playerShoot}, {utils::constant::ROOM_INFO, sendRoomInfo}};
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
-        while (!network::Server::GetReceivedMessages().empty()) {
-            network::ClientMessage msg = network::Server::GetReceivedMessages().pop();
+        while (!network::Server::getReceivedMessages().empty()) {
+            network::ClientMessage msg = network::Server::getReceivedMessages().pop();
             if (packetTypeFunction.find(msg.first[0]) != packetTypeFunction.end())
                 packetTypeFunction[msg.first[0]](world, msg);
         }

@@ -9,10 +9,13 @@
 #include <map>
 #include <string>
 #include <thread>
+#include "../utils/Constant.hpp"
 #include "LockedQueue.hpp"
 #include <boost/asio/thread_pool.hpp>
 #include <boost/shared_ptr.hpp>
 
+using chrono = std::chrono::high_resolution_clock;
+using chronoDuration = std::chrono::duration<double, std::milli>;
 using boost::asio::ip::udp;
 
 typedef std::map<uint32_t, udp::endpoint> ClientList;
@@ -119,7 +122,9 @@ namespace network
 
         static LockedQueue<ServerMessage> &getOutgoingMessages() { return getInstance()._outgoingMessages; }
 
-        static LockedQueue<ClientMessage> &GetReceivedMessages() { return getInstance()._receivedMessages; }
+        static LockedQueue<ClientMessage> &getReceivedMessages() { return getInstance()._receivedMessages; }
+
+        static std::map<unsigned int, size_t> getClientToEntID() { return getInstance()._clientToEntID; }
 
       private:
         /**
@@ -170,6 +175,7 @@ namespace network
                         _hubID = getOrCreateClientID(_remoteEndpoint);
                     }
                     auto message = ClientMessage(std::array(_recvBuffer), getOrCreateClientID(_remoteEndpoint));
+                    getOrCreateLastPing(getOrCreateClientID(_remoteEndpoint)) = chrono::now();
                     if (!message.first.empty()) {
                         _receivedMessages.push(message);
                         for (const auto &c : message.first) {}
@@ -226,6 +232,21 @@ namespace network
         }
 
         /**
+         * Used to get the time of the last ping of the client given as parameter if it exists, creating it otherwise
+         * @param endpoint The given client id
+         * @return The id of the client
+         */
+        std::chrono::_V2::system_clock::time_point getOrCreateLastPing(uint32_t clientID)
+        {
+            for (const auto &client : _clientLastPing)
+                if (client.first == clientID)
+                    return client.second;
+            auto time = std::chrono::system_clock::now();
+            _clientLastPing.insert(std::pair(clientID, time));
+            return time;
+        }
+
+        /**
          * Send a specified message to a specified client
          * @param message  The message to send
          * @param endpoint The client you want to communicate with
@@ -262,9 +283,14 @@ namespace network
          *  Clients of the server
          */
         ClientList _clients;
+        std::map<unsigned int, size_t> _clientToEntID;
         int _nextClientID;
         int _hubID;
 
+        /**
+         * The timestamps of the last received messages from each client
+         */
+        std::map<uint32_t, std::chrono::_V2::system_clock::time_point> _clientLastPing;
         /**
          * Used to know if the server is running or not
          */
@@ -280,7 +306,7 @@ namespace network
             : _socket(_ioService), _serviceThread(&network::Server::receiveIncoming, this), _nextClientID(0L),
               _outgoingService(&network::Server::sendOutgoing, this){};
 
-//        static Server getInstance();
+        //        static Server getInstance();
         static Server &getInstance();
     };
 } // namespace network
