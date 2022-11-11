@@ -18,7 +18,6 @@ int main()
 {
     ecs::Engine engine;
     asset::AssetLoader::LoadIniFile(asset::AssetLoader::smartPath("assets", "config.ini"));
-
     audio::AudioManager::playSFX("splash_screen");
     audio::AudioManager::loadBGM("bgm1");
     audio::AudioManager::playBGM(true);

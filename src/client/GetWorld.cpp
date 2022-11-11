@@ -76,17 +76,12 @@ static void addGameSystems(ecs::World &world)
 static void setGameHUD(ecs::World &world)
 {
     ecs::Entity textScore = world.registry.spawn_entity();
-    // ecs::Entity textHealth = world.registry.spawn_entity();
     ecs::Entity health = world.registry.spawn_entity();
     ecs::Entity healthBar = world.registry.spawn_entity();
 
     world.registry.addComponent<ecs::component::Position>(textScore, {10, 10});
     world.registry.addComponent<ecs::component::Size>(textScore, {60, 60});
     world.registry.addComponent<ecs::component::Text>(textScore, ecs::component::Text("Score: ", "nasa"));
-
-    // world.registry.addComponent<ecs::component::Position>(textHealth, {10, 70});
-    // world.registry.addComponent<ecs::component::Size>(textHealth, {60, 60});
-    // world.registry.addComponent<ecs::component::Text>(textHealth, ecs::component::Text("Health: ", "nasa"));
 
     world.registry.addComponent<ecs::component::Position>(health, {6, 900});
     world.registry.addComponent<ecs::component::Size>(health, {100, 400});
