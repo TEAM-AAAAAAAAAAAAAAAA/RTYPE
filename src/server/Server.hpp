@@ -91,10 +91,10 @@ namespace network
 
         static uint32_t connect(std::string host, std::string port)
         {
-            udp::resolver resolver(_Instance._ioService);
+            udp::resolver resolver(getInstance()._ioService);
             udp::resolver::query query(udp::v4(), host, port);
             udp::endpoint endpoint = *resolver.resolve(query);
-            return _Instance.getOrCreateClientID(endpoint);
+            return getInstance().getOrCreateClientID(endpoint);
         }
 
         /**
@@ -103,8 +103,12 @@ namespace network
          */
         static void removeClient(uint32_t clientID)
         {
-            if (_Instance._clients.find(clientID) != _Instance._clients.end())
-                _Instance._clients.erase(clientID);
+            if (getInstance()._clients.find(clientID) != getInstance()._clients.end())
+                getInstance()._clients.erase(clientID);
+            if (getInstance()._clientToEntID.find(clientID) != getInstance()._clientToEntID.end())
+                getInstance()._clientToEntID.erase(clientID);
+            if (getInstance()._clientLastPing.find(clientID) != getInstance()._clientLastPing.end())
+                getInstance()._clientLastPing.erase(clientID);
         }
 
         static inline void start(unsigned short localPort)
@@ -125,6 +129,13 @@ namespace network
         static LockedQueue<ClientMessage> &getReceivedMessages() { return getInstance()._receivedMessages; }
 
         static std::map<unsigned int, size_t> getClientToEntID() { return getInstance()._clientToEntID; }
+
+        static std::chrono::_V2::system_clock::time_point getLastPing(uint32_t clientID)
+        {
+            for (const auto &client : getInstance()._clientLastPing)
+                if (client.first == clientID)
+                    return client.second;
+        }
 
       private:
         /**
@@ -232,7 +243,8 @@ namespace network
         }
 
         /**
-         * Used to get the time of the last ping of the client given as parameter if it exists, creating it otherwise
+         * Used to get the time of the last ping of the client given as parameter if it exists, creating it
+         * otherwise
          * @param endpoint The given client id
          * @return The id of the client
          */
@@ -291,6 +303,7 @@ namespace network
          * The timestamps of the last received messages from each client
          */
         std::map<uint32_t, std::chrono::_V2::system_clock::time_point> _clientLastPing;
+
         /**
          * Used to know if the server is running or not
          */

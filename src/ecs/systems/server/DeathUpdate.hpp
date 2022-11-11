@@ -23,6 +23,7 @@ namespace ecs::systems
     std::function<void(World &)> deathUpdate = [](World &world) {
         auto &healths = world.registry.getComponents<component::Health>();
         auto &networkId = world.registry.getComponents<component::NetworkId>();
+        std::map<unsigned int, size_t> _clientToEntID = network::Server::getClientToEntID();
 
         for (size_t i = 0; i < healths.size(); ++i) {
             auto &health = healths[i];
@@ -44,6 +45,28 @@ namespace ecs::systems
                         }
                     }
                     world.registry.killEntity(world.registry.entityFromIndex(i));
+                }
+            }
+        }
+        for (size_t i = 0; i < networkId.size(); ++i) {
+            auto &id = networkId[i];
+            int clientId = 0;
+
+            if (id) {
+                for (auto &[key, value] : _clientToEntID)
+                    if (value == id.value().id)
+                        clientId = key;
+                if (utils::constant::chronoDuration(
+                        utils::constant::chrono::now() - network::Server::getLastPing(clientId)).count() > 10000) {
+                    std::array<char, 2> idBin = id.value().serialize();
+
+                    network::Message msg;
+                    msg[0] = utils::constant::getPacketTypeKey(utils::constant::PacketType::ENTITY_DEATH);
+                    msg[1] = idBin[0];
+                    msg[2] = idBin[1];
+                    network::Server::getOutgoingMessages().push(
+                        network::ServerMessage(msg, std::vector<unsigned int>()));
+                    network::Server::removeClient(clientId);
                 }
             }
         }

@@ -11,7 +11,7 @@
 #include <iostream>
 #include "Constant.hpp"
 #include "World.hpp"
-#include "Server.hpp"
+#include "../../../server/Server.hpp"
 
 namespace ecs::systems
 {
