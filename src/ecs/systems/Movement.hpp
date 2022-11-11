@@ -14,6 +14,7 @@
 #include "components/Direction.hpp"
 #include "components/EntityType.hpp"
 #include "components/Position.hpp"
+#include "components/Size.hpp"
 #include "components/Velocity.hpp"
 
 namespace ecs::systems
@@ -27,6 +28,7 @@ namespace ecs::systems
         auto const &velocities = world.registry.getComponents<component::Velocity>();
         auto &directions = world.registry.getComponents<component::Direction>();
         auto const &entityTypes = world.registry.getComponents<component::EntityType>();
+        auto const &sizes = world.registry.getComponents<component::Size>();
 
         using chrono = std::chrono::high_resolution_clock;
         using chronoDuration = std::chrono::duration<double, std::milli>;
@@ -47,14 +49,18 @@ namespace ecs::systems
                             && entityTypes[i].value().type != component::EntityType::Types::Laser
                             && entityTypes[i].value().type != component::EntityType::Types::Rocket
                             && entityTypes[i].value().type != component::EntityType::Types::Asteroid) {
-                            if (pos.value().x < 0)
-                                pos.value().x = 0;
-                            else if (pos.value().x > utils::constant::mapWidth)
-                                pos.value().x = utils::constant::mapWidth;
-                            if (pos.value().y < 0)
-                                pos.value().y = 0;
-                            else if (pos.value().y > utils::constant::mapHeight)
-                                pos.value().y = utils::constant::mapHeight;
+                            if (i < sizes.size()) {
+                                if (sizes[i]) {
+                                    if (pos.value().x < 0)
+                                        pos.value().x = 0;
+                                    else if (pos.value().x + sizes[i].value().width > utils::constant::mapWidth)
+                                        pos.value().x = utils::constant::mapWidth - sizes[i].value().width;
+                                    if (pos.value().y < 0)
+                                        pos.value().y = 0;
+                                    else if (pos.value().y + sizes[i].value().height > utils::constant::mapHeight)
+                                        pos.value().y = utils::constant::mapHeight - sizes[i].value().height;
+                                }
+                            }
                         }
                     }
                 }
