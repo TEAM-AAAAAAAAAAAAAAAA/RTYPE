@@ -10,6 +10,7 @@
 #include <functional>
 #include <iostream>
 #include <valarray>
+#include "../client/AssetLoader.hpp"
 #include "../client/NetworkClient.hpp"
 #include "World.hpp"
 #include "components/EntityType.hpp"
@@ -92,9 +93,10 @@ namespace ecs::systems
                     world.registry.addComponent<component::EntityType>(
                         newEntity, {component::EntityType::Types::Player});
                     world.registry.addComponent<ecs::component::Shootable>(
-                        newEntity, ecs::component::Shootable(sf::Keyboard::Space));
+                        newEntity, ecs::component::Shootable(asset::AssetLoader::GetKeybind("shoot")));
                     world.registry.addComponent<ecs::component::Controllable>(newEntity,
-                        {sf::Keyboard::Z, sf::Keyboard::Q, sf::Keyboard::S, sf::Keyboard::D, sf::Keyboard::H});
+                        {asset::AssetLoader::GetKeybind("up"), asset::AssetLoader::GetKeybind("left"),
+                            asset::AssetLoader::GetKeybind("down"), asset::AssetLoader::GetKeybind("right"), asset::AssetLoader::GetKeybind("hitbox")});
                     world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
                     world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 1, 32, 16}});
                     world.registry.addComponent<ecs::component::Animated>(newEntity,
