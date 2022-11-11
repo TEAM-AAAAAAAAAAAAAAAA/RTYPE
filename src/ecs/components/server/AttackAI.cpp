@@ -157,7 +157,6 @@ namespace ecs::component
         AttackAI::Action::spawnNewBullet(component::EntityType::Asteroid, 400 + std::rand() % utils::constant::mapWidth,
             ((-utils::constant::mapHeight) / 2) + std::rand() % (utils::constant::mapHeight / 2), -1, 1, 100, 100, 10,
             10, 10, fac, 500);
-        std::cout << "spawn asteroid" << std::endl;
     }
 
     void AttackAI::Action::invokeAnyoneAttack(const std::size_t shooter)
