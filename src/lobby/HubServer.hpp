@@ -34,7 +34,7 @@ class HubServer {
             if (_pids[i] == 0) {
                 buffer[0] = (char *)(std::to_string(_port + 1 + i).c_str());
                 buffer[1] = (char *)(std::to_string(_port + 1 + i).c_str());
-                execve("./r-type_server", buffer, nullptr);
+                execv("./r-type_server", buffer);
                 exit(0);
             } else {
                 _serverPorts[i] = _port + i + 1;
