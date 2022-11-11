@@ -10,7 +10,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 option(BUILD_TEST_SUITE OFF)
 option(ENABLE_CODE_COVERAGE OFF)
 
-set(SFML_DIR ${PROJECT_SOURCE_DIR}/vcpkg/installed/x64-linux-dynamic/share/sfml)
 
 #if (COMPILER_TYPE MATCHES "msvc")
 #     message(STATUS "Using static SFML libraries")
@@ -24,6 +23,7 @@ list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 find_package(SFML COMPONENTS graphics window audio system CONFIG REQUIRED)
 find_package(Boost REQUIRED COMPONENTS thread)
 
+
 if(NOT DEFINED CMAKE_SUPPRESS_DEVELOPER_WARNINGS)
     set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1 CACHE INTERNAL "No dev warnings")
 endif()
@@ -33,7 +33,6 @@ option(BUILD_TEST_SUITE OFF)
 include(CompilerFlags)
 include(DetectCompiler)
 
-set(VCPKG_TARGET_TRIPLET x64-linux-dynamic)
 
 add_subdirectory(src)
 if (BUILD_TEST_SUITE)
