@@ -187,7 +187,7 @@ namespace network
                         _hubID = getOrCreateClientID(_remoteEndpoint);
                     }
                     auto message = ClientMessage(std::array(_recvBuffer), getOrCreateClientID(_remoteEndpoint));
-                    setOrCreateLastPing(getOrCreateClientID(_remoteEndpoint));
+                    _clientLastPing[getOrCreateClientID(_remoteEndpoint)] = std::chrono::system_clock::now();
                     if (!message.first.empty()) {
                         _receivedMessages.push(message);
                         for (const auto &c : message.first) {}
@@ -243,22 +243,6 @@ namespace network
             return id;
         }
 
-        /**
-         * Used to get the time of the last ping of the client given as parameter if it exists, creating it
-         * otherwise
-         * @param endpoint The given client id
-         * @return The id of the client
-         */
-        void setOrCreateLastPing(uint32_t clientID)
-        {
-            for (const auto &client : _clientLastPing)
-                if (client.first == clientID) {
-                    _clientLastPing[clientID] = chrono::now();
-                    return;
-                }
-            auto time = std::chrono::system_clock::now();
-            _clientLastPing.insert(std::pair(clientID, time));
-        }
 
         /**
          * Send a specified message to a specified client

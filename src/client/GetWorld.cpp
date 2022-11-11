@@ -69,7 +69,6 @@ static void addGameSystems(ecs::World &world)
     world.addSystem(ecs::systems::movement);
     world.addSystem(ecs::systems::HandleParallaxBounds);
     world.addSystem(ecs::systems::executeOnce);
-    world.addSystem(ecs::systems::periodicPing);
 }
 
 static void setGameParallax(ecs::World &world)

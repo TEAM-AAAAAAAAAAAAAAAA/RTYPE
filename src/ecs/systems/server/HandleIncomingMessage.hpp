@@ -47,8 +47,6 @@ namespace ecs::systems
 
         network::Server::getClientToEntID()[msg.second] = (size_t)newPlayer;
         network::Message message;
-        std::cerr << network::Server::getClientToEntID()[msg.second] << std::endl;
-        std::cerr << static_cast<size_t>(newPlayer) << std::endl;
         message.fill(0);
         message[1] = static_cast<size_t>(newPlayer) >> 8;
         message[2] = static_cast<size_t>(newPlayer) & 0xFF;

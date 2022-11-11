@@ -44,7 +44,6 @@ ecs::World getGameWorld()
     world.addSystem(ecs::systems::runAttackAI);
     world.addSystem(ecs::systems::deathUpdate);
     world.addSystem(ecs::systems::waves);
-    world.addSystem(ecs::systems::periodicPing);
 
     return world;
 }
