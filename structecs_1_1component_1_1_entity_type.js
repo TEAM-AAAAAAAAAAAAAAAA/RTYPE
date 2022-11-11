@@ -8,6 +8,7 @@ var structecs_1_1component_1_1_entity_type =
       [ "EnergySphere", "structecs_1_1component_1_1_entity_type.html#af64becff8cb6fbfeba4815b3d3824449ac14a3fe68d69b0f04ee3518748955485", null ],
       [ "Laser", "structecs_1_1component_1_1_entity_type.html#af64becff8cb6fbfeba4815b3d3824449ae7161ff49572036737d53cb504c61148", null ],
       [ "Rocket", "structecs_1_1component_1_1_entity_type.html#af64becff8cb6fbfeba4815b3d3824449aaaa40feb30627b39143a6e72af04e4ce", null ],
+      [ "Asteroid", "structecs_1_1component_1_1_entity_type.html#af64becff8cb6fbfeba4815b3d3824449afda6b491c6f49c8d07fd811d2a640134", null ],
       [ "UranusBattlecruiser", "structecs_1_1component_1_1_entity_type.html#af64becff8cb6fbfeba4815b3d3824449adb1305550c129bec64dd4c668a0c1a5b", null ],
       [ "UranusDreadnought", "structecs_1_1component_1_1_entity_type.html#af64becff8cb6fbfeba4815b3d3824449ab984d9cbb5e40391e733970ae46b39a7", null ],
       [ "UranusFighter", "structecs_1_1component_1_1_entity_type.html#af64becff8cb6fbfeba4815b3d3824449a5d035cebe0a7309f2de8760b2a4795e8", null ],

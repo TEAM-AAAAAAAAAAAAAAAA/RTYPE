@@ -1,4 +1,5 @@
 <map id="ecs::EnemyFactory::spawnEnemy" name="ecs::EnemyFactory::spawnEnemy">
-<area shape="rect" id="node1" title=" " alt="" coords="253,5,404,47"/>
-<area shape="rect" id="node2" href="$structecs_1_1component_1_1_attack_a_i_1_1_action.html#a315390c99eef38a1cac2c4045986dfd7" title=" " alt="" coords="5,5,205,47"/>
+<area shape="rect" id="node1" title=" " alt="" coords="267,39,417,80"/>
+<area shape="rect" id="node2" href="$structecs_1_1component_1_1_attack_a_i_1_1_action.html#a315390c99eef38a1cac2c4045986dfd7" title=" " alt="" coords="12,5,212,47"/>
+<area shape="rect" id="node3" href="$structecs_1_1component_1_1_attack_a_i_1_1_action.html#a6ef98f6ed52a3ab227ef30a37c8f8e91" title=" " alt="" coords="5,71,219,112"/>
 </map>

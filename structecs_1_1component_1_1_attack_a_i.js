@@ -18,9 +18,12 @@ var structecs_1_1component_1_1_attack_a_i =
       [ "WaitLong", "structecs_1_1component_1_1_attack_a_i.html#a32b4548e3a97a42ff56419e9bdd7c851a97443ae13bc25496585a37951df44373", null ],
       [ "ShootBullet", "structecs_1_1component_1_1_attack_a_i.html#a32b4548e3a97a42ff56419e9bdd7c851a40865b35d9162a447c99dbb1cad8d38e", null ],
       [ "ShootEnergySphere", "structecs_1_1component_1_1_attack_a_i.html#a32b4548e3a97a42ff56419e9bdd7c851ac8d3c6fcb717dea7653ce64254df749f", null ],
+      [ "ShootEnergySphereFast", "structecs_1_1component_1_1_attack_a_i.html#a32b4548e3a97a42ff56419e9bdd7c851a3aa5ecae16279947f5c5c7d84b9d4cd4", null ],
       [ "ShootLaser", "structecs_1_1component_1_1_attack_a_i.html#a32b4548e3a97a42ff56419e9bdd7c851acd9b813aa134c0f195372b54a24d04ba", null ],
       [ "ShootRocket", "structecs_1_1component_1_1_attack_a_i.html#a32b4548e3a97a42ff56419e9bdd7c851a5910a32165bf851bdce0b7dbf65fc503", null ],
-      [ "InvokeAllies", "structecs_1_1component_1_1_attack_a_i.html#a32b4548e3a97a42ff56419e9bdd7c851a11a51b908e9e7a517b25b3ff08e9c06c", null ]
+      [ "InvokeAllies", "structecs_1_1component_1_1_attack_a_i.html#a32b4548e3a97a42ff56419e9bdd7c851a11a51b908e9e7a517b25b3ff08e9c06c", null ],
+      [ "InvokeAnyone", "structecs_1_1component_1_1_attack_a_i.html#a32b4548e3a97a42ff56419e9bdd7c851a227f43851bd8f64bd3514f8208718ac0", null ],
+      [ "SpawnAsteroids", "structecs_1_1component_1_1_attack_a_i.html#a32b4548e3a97a42ff56419e9bdd7c851a81bda24afa228487c006cb76bf1ebede", null ]
     ] ],
     [ "AttackAI", "structecs_1_1component_1_1_attack_a_i.html#a1c228cd408d24213cb180c8db71adaa4", null ],
     [ "getRandomAttack", "structecs_1_1component_1_1_attack_a_i.html#ae8d69cf21c1de4e033b8cad57af714b4", null ],
