@@ -9,23 +9,57 @@
 
 #include <string>
 #include <utility>
-#include "SFML/Graphics/Text.hpp"
 
 namespace ecs::component
 {
+    struct textColor {
+        short r;
+        short g;
+        short b;
+        short a;
+    };
+
     struct Text {
-        explicit Text(const std::string &cont, const std::string &key, sf::Color col = sf::Color::White)
-            : content(cont), fontKey(key), color(col), value(std::string()){};
 
-        inline sf::Font &getFont() { return asset::AssetLoader::GetFont(fontKey); }
+        Text(size_t marginRight = 0, const std::string &key = "nasa") : _fontKey(key), _marginRight(marginRight), _textColor({255, 255, 255, 255})
+        {
+            _content.emplace_back("");
+            _content.emplace_back("");
+            _content.emplace_back("");
+            _content.emplace_back("");
+        };
 
-        inline const sf::Font &getFont() const { return asset::AssetLoader::GetFont(fontKey); }
+        std::string getContent(size_t pos) const
+        {
+            if (pos > _content.size())
+                return "";
+            return _content[pos];
+        };
+        void setContent(size_t pos, const std::string &newContent)
+        {
+            if (pos <= _content.size())
+                _content[pos] = newContent;
+        }
+        inline void addContent(std::string &content) {_content.push_back(content);};
+        inline void clearContent() {_content.clear();};
+        inline size_t getContentSize() const {return _content.size();};
+        void setTextColor(short r, short g, short b, short a)
+        {
+            _textColor.r = r;
+            _textColor.g = g;
+            _textColor.b = b;
+            _textColor.a = a;
+        };
+        inline struct textColor getTextColor() const {return _textColor;};
+        inline void setFontKey(const std::string& fontKey){_fontKey = fontKey;};
+        inline const sf::Font &getFont() const { return asset::AssetLoader::GetFont(_fontKey);};
+        inline void setMarginRight(size_t marginRight) {_marginRight = marginRight;};
+        inline size_t getMarginRight() const {return _marginRight;};
 
-        inline void setValue(const std::string &val) { value = val; }
-
-        std::string content;
-        std::string value;
-        std::string fontKey;
-        sf::Color color;
+      private:
+        std::vector<std::string> _content;
+        struct textColor _textColor;
+        std::string _fontKey;
+        size_t _marginRight;
     };
 } // namespace ecs::component
