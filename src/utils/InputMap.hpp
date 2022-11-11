@@ -24,7 +24,7 @@ namespace utils {
      * @endcode
      * @throw std::out_of_range if @a key is not a valid key
      */
-    inline std::string toString(sf::Keyboard::Key key);
+    std::string toString(sf::Keyboard::Key key);
 
     /**
      * Return the key interpretation of @a string
@@ -35,7 +35,7 @@ namespace utils {
      * @param string
      * @throw std::out_of_range if @a string is not a valid key
      */
-    inline sf::Keyboard::Key toKey(const std::string &string);
+    sf::Keyboard::Key toKey(std::string string);
 
     /** @} */
 };

@@ -10,6 +10,7 @@
 #include <map>
 #include <stdexcept>
 #include <vector>
+#include <iostream>
 
 namespace utils
 {
@@ -21,12 +22,12 @@ namespace utils
         static_assert(!std::is_same<T, std::string>::value, "InputMap: T cannot be std::string");
 
       public:
-        explicit InputMap(std::size_t keySize) : _stringsVector(keySize), _map() {}
+        explicit InputMap(std::size_t keySize, std::size_t offset) : _stringsVector(keySize + offset), _map(), _offset(offset) {}
 
-        void insert(T t, const std::string &string)
+        void insert(T t, const std::string &str)
         {
-            _stringsVector[t] = string;
-            _map[string] = t;
+            _stringsVector[t + _offset] = str;
+            _map[str] = t;
         }
 
         /**
@@ -35,7 +36,7 @@ namespace utils
         [[nodiscard]] const std::string& at(T t) const
         {
             auto idx = static_cast<std::size_t>(t);
-            if (idx >= _stringsVector.size())
+            if (idx >= (_stringsVector.size() + _offset))
                 throw std::out_of_range("InputMap: index out of range");
             else
                 return _stringsVector[idx];
@@ -54,11 +55,12 @@ namespace utils
         }
       private:
         std::vector<std::string> _stringsVector;
+        std::size_t _offset;
         std::map<std::string, T> _map;
     };
 
     InputMap<sf::Keyboard::Key> initMap(sf::Keyboard::Key) {
-        InputMap<sf::Keyboard::Key> map(sf::Keyboard::Key::KeyCount);
+        InputMap<sf::Keyboard::Key> map(sf::Keyboard::Key::KeyCount, 1);
 
         #define RTYPE_INSERT_MAP(id) map.insert(sf::Keyboard::Key::id, #id)
 
@@ -182,7 +184,7 @@ namespace utils
         return getInstance<sf::Keyboard::Key>().at(key);
     }
 
-    sf::Keyboard::Key toKey(const std::string& str) {
+    sf::Keyboard::Key toKey(std::string str) {
         return getInstance<sf::Keyboard::Key>().at(str);
     }
 }; // namespace utils
