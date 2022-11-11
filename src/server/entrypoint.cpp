@@ -10,7 +10,7 @@
 #include "systems/Movement.hpp"
 #include "systems/RunMovementAI.hpp"
 #include "systems/server/DeathUpdate.hpp"
-#include "systems/server/HealthUpdate.hpp"
+#include "systems/server/PlayerHealthUpdate.hpp"
 #include "systems/server/HandleIncomingMessage.hpp"
 #include "systems/server/PositionUpdate.hpp"
 #include "systems/server/ProjectileCollision.hpp"

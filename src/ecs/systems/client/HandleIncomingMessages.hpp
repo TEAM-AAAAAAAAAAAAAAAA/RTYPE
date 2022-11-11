@@ -351,7 +351,6 @@ namespace ecs::systems
     static void deathMessageHandle(World &world, network::Message &msg)
     {
         size_t msgId = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
-
         auto &netIds = world.registry.getComponents<component::NetworkId>();
 
         for (size_t i = 0; i < netIds.size(); i++) {
@@ -366,15 +365,20 @@ namespace ecs::systems
 
     static void playerHealthHandle(World &world, network::Message &msg)
     {
-        // size_t msgId = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
-
+        size_t msgId = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
+        auto &netIds = world.registry.getComponents<component::NetworkId>();
         auto &healths = world.registry.getComponents<component::Health>();
-        for (size_t i = 0; i < healths.size(); i++) {
-            if (healths[i]) {
-                healths[i].value().health = msg[1];
+
+        for (size_t i = 0; i < netIds.size(); i++) {
+            if (netIds[i]) {
+                if (netIds[i].value().id == msgId) {
+                    for (size_t j = 0; j < healths.size(); j++)
+                        if (healths[j])
+                            healths[j].value().health = msg[3];
+                    return;
+                }
             }
         }
-        // std::cerr << "Error: Client couldn't kill unknown entity with netId '" << msgId << "'." << std::endl;
     }
 
     static std::unordered_map<char, std::function<void(World &, network::Message &msg)>> packetTypeFunction = {
