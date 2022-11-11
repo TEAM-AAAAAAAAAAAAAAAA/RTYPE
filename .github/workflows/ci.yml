@@ -77,6 +77,11 @@ jobs:
           vcpkgArguments: 'sfml:${{ matrix.triplet }} boost-asio:${{ matrix.triplet }} boost-thread:${{ matrix.triplet }} boost-property-tree:${{ matrix.triplet }}'
           vcpkgGitCommitId: '${{ env.VCPKG_COMMIT }}'
 
+      - name: Debug list directory
+        shell: bash
+        run: |
+          ls -lRa
+
 #      - name: Install windows pthreads
 #        if: matrix.platform == 'windows-latest'
 #        uses: lukka/run-vcpkg@v4
@@ -111,6 +116,7 @@ jobs:
                 -B build
                 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
                 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_TOOLCHAIN_PATH}
+                -DSFML_DIR=${SFML_DIR}
                 -DBoost_NO_SYSTEM_PATHS=TRUE
                 -DBOOST_ROOT=${{ github.workspace }}/vcpkg/installed/${{ matrix.triplet }}
               RESULT_VARIABLE result

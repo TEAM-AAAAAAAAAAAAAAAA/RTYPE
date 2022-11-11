@@ -333,6 +333,12 @@ namespace ecs::systems
                     {AnimFrame(12, 9, 7, 20, 100), AnimFrame(44, 9, 7, 20, 100), AnimFrame(79, 9, 7, 20, 100)});
                 world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
                 break;
+            case component::EntityType::Types::Asteroid:
+                world.registry.addComponent<component::Drawable>(newEntity,
+                    {"asteroid", {29, 32, 38, 33}, true, false,
+                        std::atan2(static_cast<float>(dirX), static_cast<float>(dirY)) * 180 / 3.14159265359f});
+                world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
+                break;
         }
     }
 
