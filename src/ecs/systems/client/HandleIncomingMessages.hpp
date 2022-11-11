@@ -364,10 +364,25 @@ namespace ecs::systems
         std::cerr << "Error: Client couldn't kill unknown entity with netId '" << msgId << "'." << std::endl;
     }
 
+    static void playerHealthHandle(World &world, network::Message &msg)
+    {
+        // size_t msgId = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
+
+        auto &healths = world.registry.getComponents<component::Health>();
+        for (size_t i = 0; i < healths.size(); i++) {
+            if (healths[i]) {
+                healths[i].value().health = msg[1];
+                std::cout << "Health: " << healths[i].value().health << std::endl;
+            }
+        }
+        // std::cerr << "Error: Client couldn't kill unknown entity with netId '" << msgId << "'." << std::endl;
+    }
+
     static std::unordered_map<char, std::function<void(World &, network::Message &msg)>> packetTypeFunction = {
         {utils::constant::getPacketTypeKey(utils::constant::PacketType::ENTITY_MOVE), movePacketHandle},
         {0, firstMessageHandle},
-        {utils::constant::getPacketTypeKey(utils::constant::PacketType::ENTITY_DEATH), deathMessageHandle}};
+        {utils::constant::getPacketTypeKey(utils::constant::PacketType::ENTITY_DEATH), deathMessageHandle},
+        {utils::constant::getPacketTypeKey(utils::constant::PacketType::HEALTH_UPDATE), playerHealthHandle}};
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Client::getReceivedMessages().empty()) {
