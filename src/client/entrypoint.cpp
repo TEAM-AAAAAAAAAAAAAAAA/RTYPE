@@ -6,10 +6,9 @@
 */
 
 #include "AssetLoader.hpp"
+#include "AudioManager.hpp"
 #include "Engine.hpp"
 #include "GetWorld.hpp"
-#include "AudioManager.hpp"
-#include "NetworkClient.hpp"
 
 /**
  * Main function of the client, running everything to start the game
@@ -17,19 +16,13 @@
  */
 int main()
 {
+    ecs::Engine engine;
     asset::AssetLoader::LoadIniFile(asset::AssetLoader::smartPath("assets", "config.ini"));
 
     audio::AudioManager::playSFX("splash_screen");
     audio::AudioManager::loadBGM("bgm1");
     audio::AudioManager::playBGM(true);
-    network::Client::setHost("localhost");
-    network::Client::setPort("8000");
-    network::Client::connect();
-    utils::Window::getInstance().setFramerateLimit(60);
-    ecs::Engine engine;
-    // ecs::WorldManager::setWaitingWorld(getMenuWorld);
-    ecs::WorldManager::setWaitingWorld(getGameWorld);
-
+    ecs::WorldManager::setWaitingWorld(getMenuWorld);
     engine.run();
     return 0;
 }

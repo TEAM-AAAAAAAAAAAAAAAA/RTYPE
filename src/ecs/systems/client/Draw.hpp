@@ -62,9 +62,9 @@ namespace ecs::systems
             if (i < hitBoxes.size()) {
                 auto const &hitBox = hitBoxes[i];
 
-                if (hitBox && size && pos) {
-                    if (hitBox->enableHitBox) {
-                        sf::RectangleShape hitBoxRec({0, 0});
+              if (hitBox && size && pos) {
+                  if (hitBox->enableHitBox) {
+                      sf::RectangleShape hitBoxRec({0, 0});
 
                         hitBoxRec.setFillColor(sf::Color::Transparent);
                         hitBoxRec.setOutlineColor(sf::Color::Red);

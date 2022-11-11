@@ -19,7 +19,7 @@ namespace ecs::component
          *
          * @param active default at false
          */
-        explicit Activable(utils::constant::ButtonType type, bool hover = false) : _type(type), _hover(hover), _selected(false){};
+        explicit Activable(utils::constant::ButtonActionType type, bool hover = false) : _type(type), _hover(hover), _selected(false){};
         /**
          * @brief Get the state of the object
          *
@@ -49,7 +49,7 @@ namespace ecs::component
          * @brief Get the type of the object
          *
          */
-        inline utils::constant::ButtonType getType() const { return _type; };
+        inline utils::constant::ButtonActionType getType() const { return _type; };
 
       private:
         /**
@@ -66,6 +66,6 @@ namespace ecs::component
          * @brief type of the activable object
          *
          */
-        utils::constant::ButtonType _type;
+        utils::constant::ButtonActionType _type;
     };
 } // namespace ecs::component

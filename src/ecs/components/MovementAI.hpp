@@ -21,7 +21,7 @@ namespace ecs::component
          *
          * @warning ALL MUST BE CREATED IN MovementAI.cpp
          */
-        enum AIType { Idle, BasicUpDown };
+        enum AIType { Idle, QuickUpDown, LongUpDown, QuickLeftRight, LongLeftRight, ClockwiseSmall, ClockwiseBig, AntiClockwiseSmall, AntiClockwiseBig };
 
         /**
          * @brief MovementAI constructor
@@ -51,7 +51,21 @@ namespace ecs::component
          *
          * @return the delay in seconds
          */
-        inline const short &getDelay() const { return _thisAI.delay; }
+        inline const std::size_t &getDelay() const { return _thisAI.delay; }
+
+        /**
+         * @brief Get the last time the AI entity has moved
+         *
+         * @return the last time the AI has moved
+         */
+        inline const std::size_t &getLastMovement() const { return _thisAI.lastMovement; }
+
+        /**
+         * @brief Set the last time the AI entity has moved
+         * 
+         * @param lastMovement the last time the AI has moved
+         */
+        inline void setLastMovement(const std::size_t &lastMovement) { _thisAI.lastMovement = lastMovement; }
 
       private:
         /**
@@ -64,7 +78,7 @@ namespace ecs::component
              * @param direction vector that takes pairs of chars
              * @param delay the delay between each step
              */
-            AI(std::vector<std::pair<char, char>> direction, short delay)
+            AI(std::vector<std::pair<char, char>> direction, std::size_t delay)
                 : direction(direction), delay(delay), currentIndex(0)
             {
             }
@@ -78,7 +92,8 @@ namespace ecs::component
 
             std::vector<std::pair<char, char>> direction;
             int currentIndex;
-            short delay;
+            std::size_t delay;
+            std::size_t lastMovement;
         };
 
         AI _thisAI;

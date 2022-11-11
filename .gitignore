@@ -63,3 +63,4 @@ rtype_server
 docs/html
 cmake-build-release/
 out/
+.gdb_history
