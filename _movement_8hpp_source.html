@@ -152,51 +152,57 @@ $(document).ready(function(){initNavTree('_movement_8hpp_source.html',''); initR
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_direction_8hpp.html">components/Direction.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_entity_type_8hpp.html">components/EntityType.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_position_8hpp.html">components/Position.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_velocity_8hpp.html">components/Velocity.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs_1_1systems.html">ecs::systems</a></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="namespaceecs_1_1systems.html#a33dcdd288d54220f937db37567c5512f">   25</a></span>&#160;    std::function&lt;void(<a class="code" href="classecs_1_1_world.html">World</a> &amp;)&gt; <a class="code" href="namespaceecs_1_1systems.html#a33dcdd288d54220f937db37567c5512f">movement</a> = [](<a class="code" href="classecs_1_1_world.html">World</a> &amp;world) {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">auto</span> &amp;positions = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_position.html">component::Position</a>&gt;();</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;velocities = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_velocity.html">component::Velocity</a>&gt;();</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">auto</span> &amp;directions = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_direction.html">component::Direction</a>&gt;();</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;entityTypes = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_entity_type.html">component::EntityType</a>&gt;();</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keyword">using</span> <a class="code" href="namespaceutils_1_1constant.html#ab4d7e2d46688914f26626a619f8326af">chrono</a> = std::chrono::high_resolution_clock;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keyword">using</span> <a class="code" href="namespaceutils_1_1constant.html#ad903a57ac8f070571efdf25fbdcb0c29">chronoDuration</a> = std::chrono::duration&lt;double, std::milli&gt;;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keyword">static</span> <span class="keyword">auto</span> clock = chrono::now();</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="namespaceutils_1_1constant.html#ad903a57ac8f070571efdf25fbdcb0c29">chronoDuration</a>(chrono::now() - clock).count() &gt; 10) {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; positions.size() &amp;&amp; i &lt; velocities.size() &amp;&amp; i &lt; directions.size(); ++i) {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                <span class="keyword">auto</span> &amp;pos = positions[i];</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                <span class="keyword">auto</span> <span class="keyword">const</span> &amp;vel = velocities[i];</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                <span class="keyword">auto</span> &amp;dir = directions[i];</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                <span class="keywordflow">if</span> (pos &amp;&amp; vel &amp;&amp; dir) {</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                    pos.value().<a class="code" href="structecs_1_1component_1_1_velocity.html#ae49476305ddc3758feaa8f6facdd03a6">x</a> += vel.value().x * dir.value().x;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                    pos.value().y += vel.value().y * dir.value().y;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                    <span class="keywordflow">if</span> (i &lt; entityTypes.size() &amp;&amp; entityTypes[i]) {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                        <span class="keywordflow">if</span> (entityTypes[i].value().type != component::EntityType::Types::Bullet</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                            &amp;&amp; entityTypes[i].value().type != component::EntityType::Types::EnergySphere</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                            &amp;&amp; entityTypes[i].value().type != component::EntityType::Types::Laser</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                            &amp;&amp; entityTypes[i].value().type != component::EntityType::Types::Rocket</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                            &amp;&amp; entityTypes[i].value().type != component::EntityType::Types::Asteroid) {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                            <span class="keywordflow">if</span> (pos.value().x &lt; 0)</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                                pos.value().x = 0;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (pos.value().x &gt; utils::constant::mapWidth)</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                                pos.value().x = utils::constant::mapWidth;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                            <span class="keywordflow">if</span> (pos.value().y &lt; 0)</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                                pos.value().y = 0;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (pos.value().y &gt; utils::constant::mapHeight)</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                                pos.value().y = utils::constant::mapHeight;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                        }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                    }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            };</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            clock = chrono::now();</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        }</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    };</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_size_8hpp.html">components/Size.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_velocity_8hpp.html">components/Velocity.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs_1_1systems.html">ecs::systems</a></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="namespaceecs_1_1systems.html#a33dcdd288d54220f937db37567c5512f">   26</a></span>&#160;    std::function&lt;void(<a class="code" href="classecs_1_1_world.html">World</a> &amp;)&gt; <a class="code" href="namespaceecs_1_1systems.html#a33dcdd288d54220f937db37567c5512f">movement</a> = [](<a class="code" href="classecs_1_1_world.html">World</a> &amp;world) {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">auto</span> &amp;positions = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_position.html">component::Position</a>&gt;();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;velocities = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_velocity.html">component::Velocity</a>&gt;();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">auto</span> &amp;directions = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_direction.html">component::Direction</a>&gt;();</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;entityTypes = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_entity_type.html">component::EntityType</a>&gt;();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keyword">auto</span> <span class="keyword">const</span> &amp;sizes = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_size.html">component::Size</a>&gt;();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keyword">using</span> <a class="code" href="namespaceutils_1_1constant.html#ab4d7e2d46688914f26626a619f8326af">chrono</a> = std::chrono::high_resolution_clock;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keyword">using</span> <a class="code" href="namespaceutils_1_1constant.html#ad903a57ac8f070571efdf25fbdcb0c29">chronoDuration</a> = std::chrono::duration&lt;double, std::milli&gt;;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keyword">static</span> <span class="keyword">auto</span> clock = chrono::now();</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="namespaceutils_1_1constant.html#ad903a57ac8f070571efdf25fbdcb0c29">chronoDuration</a>(chrono::now() - clock).count() &gt; 10) {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; positions.size() &amp;&amp; i &lt; velocities.size() &amp;&amp; i &lt; directions.size(); ++i) {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                <span class="keyword">auto</span> &amp;pos = positions[i];</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                <span class="keyword">auto</span> <span class="keyword">const</span> &amp;vel = velocities[i];</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                <span class="keyword">auto</span> &amp;dir = directions[i];</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                <span class="keywordflow">if</span> (pos &amp;&amp; vel &amp;&amp; dir) {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                    pos.value().<a class="code" href="structecs_1_1component_1_1_velocity.html#ae49476305ddc3758feaa8f6facdd03a6">x</a> += vel.value().x * dir.value().x;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                    pos.value().y += vel.value().y * dir.value().y;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                    <span class="keywordflow">if</span> (i &lt; entityTypes.size() &amp;&amp; entityTypes[i]) {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                        <span class="keywordflow">if</span> (entityTypes[i].value().type != component::EntityType::Types::Bullet</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                            &amp;&amp; entityTypes[i].value().type != component::EntityType::Types::EnergySphere</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                            &amp;&amp; entityTypes[i].value().type != component::EntityType::Types::Laser</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                            &amp;&amp; entityTypes[i].value().type != component::EntityType::Types::Rocket</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                            &amp;&amp; entityTypes[i].value().type != component::EntityType::Types::Asteroid) {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                            <span class="keywordflow">if</span> (i &lt; sizes.size()) {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                                <span class="keywordflow">if</span> (sizes[i]) {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                                    <span class="keywordflow">if</span> (pos.value().x &lt; 0)</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                                        pos.value().x = 0;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (pos.value().x + sizes[i].value().width &gt; utils::constant::mapWidth)</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                                        pos.value().x = utils::constant::mapWidth - sizes[i].value().width;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                                    <span class="keywordflow">if</span> (pos.value().y &lt; 0)</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                                        pos.value().y = 0;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (pos.value().y + sizes[i].value().height &gt; utils::constant::mapHeight)</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                                        pos.value().y = utils::constant::mapHeight - sizes[i].value().height;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                                }</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                            }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                        }</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                    }</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                }</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            };</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            clock = chrono::now();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        }</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    };</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="astructecs_1_1component_1_1_velocity_html"><div class="ttname"><a href="structecs_1_1component_1_1_velocity.html">ecs::component::Velocity</a></div><div class="ttdoc">Velocity component.</div><div class="ttdef"><b>Definition:</b> Velocity.hpp:13</div></div>
@@ -210,9 +216,11 @@ $(document).ready(function(){initNavTree('_movement_8hpp_source.html',''); initR
 <div class="ttc" id="a_direction_8hpp_html"><div class="ttname"><a href="_direction_8hpp.html">Direction.hpp</a></div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_velocity_html_ae49476305ddc3758feaa8f6facdd03a6"><div class="ttname"><a href="structecs_1_1component_1_1_velocity.html#ae49476305ddc3758feaa8f6facdd03a6">ecs::component::Velocity::x</a></div><div class="ttdeci">int x</div><div class="ttdef"><b>Definition:</b> Velocity.hpp:14</div></div>
 <div class="ttc" id="a_world_8hpp_html"><div class="ttname"><a href="_world_8hpp.html">World.hpp</a></div></div>
+<div class="ttc" id="a_size_8hpp_html"><div class="ttname"><a href="_size_8hpp.html">Size.hpp</a></div></div>
 <div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:19</div></div>
+<div class="ttc" id="astructecs_1_1component_1_1_size_html"><div class="ttname"><a href="structecs_1_1component_1_1_size.html">ecs::component::Size</a></div><div class="ttdoc">Size component.</div><div class="ttdef"><b>Definition:</b> Size.hpp:6</div></div>
 <div class="ttc" id="anamespaceecs_1_1systems_html"><div class="ttname"><a href="namespaceecs_1_1systems.html">ecs::systems</a></div><div class="ttdef"><b>Definition:</b> Animate.hpp:19</div></div>
-<div class="ttc" id="anamespaceecs_1_1systems_html_a33dcdd288d54220f937db37567c5512f"><div class="ttname"><a href="namespaceecs_1_1systems.html#a33dcdd288d54220f937db37567c5512f">ecs::systems::movement</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; movement</div><div class="ttdef"><b>Definition:</b> Movement.hpp:25</div></div>
+<div class="ttc" id="anamespaceecs_1_1systems_html_a33dcdd288d54220f937db37567c5512f"><div class="ttname"><a href="namespaceecs_1_1systems.html#a33dcdd288d54220f937db37567c5512f">ecs::systems::movement</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; movement</div><div class="ttdef"><b>Definition:</b> Movement.hpp:26</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_position_html"><div class="ttname"><a href="structecs_1_1component_1_1_position.html">ecs::component::Position</a></div><div class="ttdef"><b>Definition:</b> Position.hpp:14</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
