@@ -372,7 +372,6 @@ namespace ecs::systems
         for (size_t i = 0; i < healths.size(); i++) {
             if (healths[i]) {
                 healths[i].value().health = msg[1];
-                std::cout << "Health: " << healths[i].value().health << std::endl;
             }
         }
         // std::cerr << "Error: Client couldn't kill unknown entity with netId '" << msgId << "'." << std::endl;

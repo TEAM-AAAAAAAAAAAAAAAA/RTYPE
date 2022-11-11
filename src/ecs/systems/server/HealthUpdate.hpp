@@ -35,8 +35,6 @@ namespace ecs::systems
                         network::Message msg;
                         msg[0] = utils::constant::getPacketTypeKey(utils::constant::PacketType::HEALTH_UPDATE);
                         msg[1] = health.value().health;
-                        std::cout << "Health: " << health.value().health << std::endl;
-                        std::cout << "msg: " << msg[0] << msg[1] << std::endl;
                         network::Server::getOutgoingMessages().push(
                             network::ServerMessage(msg, std::vector<unsigned int>()));
                     }
