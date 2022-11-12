@@ -91,6 +91,7 @@ namespace audio
     void AudioManager::playSFX(const std::string &key)
     {
         try {
+            asset::AssetLoader::GetSFX(key).setVolume(getInstance()._SFXVolume);
             asset::AssetLoader::GetSFX(key).play();
         } catch (const std::exception &e) {
             return;
