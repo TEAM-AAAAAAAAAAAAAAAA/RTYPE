@@ -26,6 +26,8 @@ int main()
     asset::AssetLoader::LoadIniFile(asset::AssetLoader::smartPath("assets", "config.ini"));
     audio::AudioManager::playSFX("splash_screen");
     ecs::WorldManager::setWaitingWorld(getMenuWorld);
+    audio::AudioManager::setBGMVolume(50);
+    audio::AudioManager::setSFXVolume(50);
     engine.run();
     return 0;
 }
