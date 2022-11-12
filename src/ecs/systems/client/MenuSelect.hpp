@@ -10,6 +10,7 @@
 #include "World.hpp"
 #include "SFML/Graphics.hpp"
 #include "../../../client/GetWorld.hpp"
+#include "../../../client/AudioManager.hpp"
 
 namespace ecs::systems
 {
@@ -31,6 +32,8 @@ namespace ecs::systems
 
           if (draw && pos && size && activ) {
               if ((mousePosition.x >= pos->x && mousePosition.x <= pos->x + size->width) && (mousePosition.y >= pos->y && mousePosition.y <= pos->y + size->height) && activ->getIsButton()) {
+                  if (!activ->getIsHover())
+                      audio::AudioManager::playSFX("button_hover");
                   if (activ->getButtonType() != utils::constant::ROOM_HOVER)
                       draw->rect.top = itHoveredButton->second.rectTop;
                   switch(activ->getButtonType()) {
