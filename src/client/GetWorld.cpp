@@ -217,6 +217,8 @@ static void addMenuSystems(ecs::World &world)
     world.addSystem(ecs::systems::draw);
     world.addSystem(ecs::systems::movement);
     world.addSystem(ecs::systems::menuSelect);
+    world.addSystem(ecs::systems::animate);
+    world.addSystem(ecs::systems::HandleParallaxBounds);
 }
 
 static void setMainButtons(ecs::World &world)
@@ -270,7 +272,7 @@ static void setRoomTexts(ecs::World &world)
     world.registry.addComponent<ecs::component::Text>(textThirdRoom, {10});
     world.registry.addComponent<ecs::component::Text>(textFourthRoom, {10});
     world.registry.addComponent<ecs::component::Position>(
-        textFirstRoom, {itRoom->second.posX + 100, itRoom->second.posY - 17 + itRoom->second.rectHeight / 2});
+        textFirstRoom, {itRoom->second.posX + 100, itRoom->second.posY - 0 + itRoom->second.rectHeight / 2});
     world.registry.addComponent<ecs::component::Position>(
         textSecondRoom, {itRoom->second.posX + 100, itRoom->second.posY + 103 + itRoom->second.rectHeight / 2});
     world.registry.addComponent<ecs::component::Position>(
@@ -333,100 +335,100 @@ static void setRoomButtons(ecs::World &world)
 static void setMenuBackground(ecs::World &world)
 {
     ecs::Entity planet = world.registry.spawn_entity();
-    int delay = 20;
+    int width = 7392;
+    int height = 96;
+    int nbFrame = 77;
+    int delay = 75;
 
-    world.registry.addComponent<ecs::component::Position>(planet, {900, utils::constant::mapHeight / 2});
-    world.registry.addComponent<ecs::component::Size>(planet, {62 * 4, 93 * 4});
-    world.registry.addComponent<ecs::component::Drawable>(planet, {"planet", {17, 17, (7258 / 78), 62}});
+    world.registry.addComponent<ecs::component::Position>(planet, {1200, utils::constant::mapHeight / 8});
+    world.registry.addComponent<ecs::component::Size>(planet, {height * 8, (width / nbFrame) * 8});
+    world.registry.addComponent<ecs::component::Drawable>(planet, {"planet", {0, 0, (width / nbFrame), height}});
     world.registry.addComponent<ecs::component::Activable>(planet, {});
     world.registry.addComponent<ecs::component::Animated>(planet,
         {
-            AnimFrame(17, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 2, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 3, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 4, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 5, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 6, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 7, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 8, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 9, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 10, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 11, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 12, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 13, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 14, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 15, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 16, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 17, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 18, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 19, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 20, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 21, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 22, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 23, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 24, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 25, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 26, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 27, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 28, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 29, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 30, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 31, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 32, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 33, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 34, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 35, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 36, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 37, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 38, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 39, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 40, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 41, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 42, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 43, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 44, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 45, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 46, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 47, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 48, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 49, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 50, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 51, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 52, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 53, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 54, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 55, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 56, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 57, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 58, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 59, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 60, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 61, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 62, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 63, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 64, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 65, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 66, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 67, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 68, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 69, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 70, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 71, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 72, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 73, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 74, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 75, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 76, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 77, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 78, 17, (7258 / 78), 62, delay),
-            AnimFrame(17 + 7258 / 78 * 79, 17, (7258 / 78), 62, delay),
+            AnimFrame(0, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 2, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 3, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 4, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 5, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 6, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 7, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 8, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 9, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 10, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 11, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 12, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 13, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 14, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 15, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 16, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 17, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 18, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 19, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 20, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 21, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 22, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 23, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 24, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 25, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 26, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 27, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 28, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 29, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 30, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 31, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 32, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 33, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 34, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 35, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 36, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 37, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 38, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 39, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 40, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 41, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 42, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 43, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 44, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 45, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 46, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 47, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 48, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 49, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 50, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 51, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 52, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 53, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 54, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 55, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 56, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 57, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 58, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 59, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 60, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 61, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 62, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 63, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 64, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 65, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 66, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 67, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 68, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 69, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 70, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 71, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 72, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 73, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 74, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 75, 0, (width / nbFrame), height, delay),
+            AnimFrame(width / nbFrame * 76, 0, (width / nbFrame), height, delay),
         });
 }
 
 static void setMenu(ecs::World &world)
 {
-    setGameParallax(world, false);
+    setGameParallax(world);
     setMenuBackground(world);
     setMainButtons(world);
     setRoomButtons(world);
