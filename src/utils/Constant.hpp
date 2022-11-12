@@ -77,6 +77,7 @@ namespace utils
             SETTINGS,
             SETTINGS_HOVER,
             OPTIONS_TEXT,
+            PLANET,
             UNDEFINED
         };
 
