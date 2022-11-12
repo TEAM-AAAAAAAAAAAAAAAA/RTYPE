@@ -63,13 +63,12 @@ namespace ecs::systems
                               && (mousePosition.y >= pos->y && mousePosition.y <= pos->y + size->height)
                               && activ->getIsButton()) {
                               if (activ->getButtonType() == utils::constant::PLAY_HOVER)
-                                  ecs::WorldManager::setWaitingWorld([] { return getGameWorld("8000", "localhost"); });
-//                                  if (event.key.code == sf::Mouse::Left)
-//                                      for (size_t j = 0; j < activables.size() && texts.size(); j++)
-//                                          if (activables[j]->getButtonType() == utils::constant::ROOM
-//                                              || activables[j]->getButtonType() == utils::constant::ROOM_TEXT) {
-//                                              activables[j]->switchSetIsActivate();
-//                                          }
+                                  if (event.key.code == sf::Mouse::Left)
+                                      for (size_t j = 0; j < activables.size() && texts.size(); j++)
+                                          if (activables[j]->getButtonType() == utils::constant::ROOM
+                                              || activables[j]->getButtonType() == utils::constant::ROOM_TEXT) {
+                                              activables[j]->switchSetIsActivate();
+                                          }
                           }
                       }
                   }
