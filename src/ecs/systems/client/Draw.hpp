@@ -74,7 +74,7 @@ namespace ecs::systems
 
               if (text && activ && size && pos) {
                   for (size_t j = 0; j < text->getContentSize(); j++) {
-                      if (activ->getIsActivate() && text->getContent(j) != "") {
+                      if (activ->getIsActivate() && !text->getContent(j).empty()) {
                           sf::Text sfText;
                           sf::Color textColor;
                           size_t textLength = 0;
