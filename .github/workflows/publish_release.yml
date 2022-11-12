@@ -93,6 +93,26 @@ jobs:
           if (NOT result EQUAL 0)
             message(FATAL_ERROR "Bad exit status. Failed to configure RTYPE project.")
           endif()
+
+      - name: Build
+        shell: cmake -P {0}
+        run: |
+          message(STATUS "Using host CMake version: ${CMAKE_VERSION}")
+
+          execute_process(
+            COMMAND cmake --build build -v
+            RESULT_VARIABLE result
+          )
+          if (${{ matrix.platform }} STREQUAL "windows-latest")
+            cmake_path(SET WORKSPACE_DIR ${{ github.workspace }})
+            message(STATUS "Using WORKSPACE_DIR: ${WORKSPACE_DIR}")
+            configure_file(${WORKSPACE_DIR}/Debug/r-type_client.exe ${WORKSPACE_DIR} COPYONLY)
+            configure_file(${WORKSPACE_DIR}/Debug/r-type_server.exe ${WORKSPACE_DIR} COPYONLY)
+          endif()
+          if (NOT result EQUAL 0)
+            message(FATAL_ERROR "Bad exit status. Failed to build RTYPE project.")
+          endif()
+
       - name: Create msi installer
         if: matrix.platform == 'windows-latest'
         run: |
