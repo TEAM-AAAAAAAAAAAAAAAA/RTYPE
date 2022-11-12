@@ -15,6 +15,7 @@ set(COMPONENTS_SRC
     ${SRCROOT}/Weapon.hpp
     ${SRCROOT}/EntityType.hpp
     ${SRCROOT}/NetworkId.hpp
+    ${SRCROOT}/Score.hpp
     PARENT_SCOPE
 )
 

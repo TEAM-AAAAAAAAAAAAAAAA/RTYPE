@@ -40,7 +40,7 @@ jobs:
         if: matrix.platform == 'ubuntu-latest'
         run: |
           sudo apt update -y && sudo apt upgrade -y
-          sudo apt install -y libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev autoconf libtool
+          sudo apt install -y libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev autoconf libtool libopenal-dev libalut-dev
 
       - name: Nuget install WiX
         if: matrix.platform == 'windows-latest'
@@ -73,6 +73,7 @@ jobs:
                 -G "Visual Studio 17 2022"
                 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
                 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_TOOLCHAIN_PATH}
+                -DSFML_DIR=${SFML_DIR}
                 -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE
             RESULT_VARIABLE result
             )
@@ -83,7 +84,8 @@ jobs:
                 -B build
                 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
                 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_TOOLCHAIN_PATH}
-                -DBoost_NO_SYSTEM_PATHS=ON
+                -DSFML_DIR=${SFML_DIR}
+                -DBoost_NO_SYSTEM_PATHS=TRUE
                 -DBOOST_ROOT=${{ github.workspace }}/vcpkg/installed/${{ matrix.triplet }}
               RESULT_VARIABLE result
             )
@@ -101,28 +103,16 @@ jobs:
             COMMAND cmake --build build -v
             RESULT_VARIABLE result
           )
+          if (${{ matrix.platform }} STREQUAL "windows-latest")
+            cmake_path(SET WORKSPACE_DIR ${{ github.workspace }})
+            message(STATUS "Using WORKSPACE_DIR: ${WORKSPACE_DIR}")
+            configure_file(${WORKSPACE_DIR}/Debug/r-type_client.exe ${WORKSPACE_DIR} COPYONLY)
+            configure_file(${WORKSPACE_DIR}/Debug/r-type_server.exe ${WORKSPACE_DIR} COPYONLY)
+          endif()
           if (NOT result EQUAL 0)
             message(FATAL_ERROR "Bad exit status. Failed to build RTYPE project.")
           endif()
 
-      - name: Debug list windows directory
-        if: matrix.platform == 'windows-latest'
-        shell: bash
-        run: |
-          ls -lRa
-      - name: Package
-        shell: cmake -P {0}
-        if: matrix.platform == 'ubuntu-latest'
-        run: |
-          execute_process(
-            COMMAND cpack 
-            WORKING_DIRECTORY build
-            RESULT_VARIABLE result
-          )
-
-          if (NOT result EQUAL 0)
-            message(FATAL_ERROR "Bad exit status. Failed to build RTYPE project.")
-          endif()
       - name: Create msi installer
         if: matrix.platform == 'windows-latest'
         run: |

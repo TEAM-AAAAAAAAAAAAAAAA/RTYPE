@@ -17,6 +17,8 @@
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <unordered_map>
+#include <utility>
+#include "InputMap.hpp"
 
 namespace asset
 {
@@ -49,18 +51,18 @@ namespace asset
 
             if (!texture.loadFromFile(smart.generic_string()))
                 return;
-            _Instance._textureMap[key] = texture;
+            getInstance()._textureMap[key] = texture;
         }
 
         static void LoadTexture(const std::string &key, std::vector<std::string> paths)
         {
             sf::Texture texture;
 
-            std::filesystem::path smart = smartPath(paths);
+            std::filesystem::path smart = smartPath(std::move(paths));
 
             if (!texture.loadFromFile(smart.generic_string()))
                 return;
-            _Instance._textureMap[key] = texture;
+            getInstance()._textureMap[key] = texture;
         }
 
         /**
@@ -77,15 +79,15 @@ namespace asset
         {
             std::filesystem::path smart = smartPath(path, next, args...);
 
-            if (!_Instance._bgmMap[key].openFromFile(smart.generic_string()))
+            if (!getInstance()._bgmMap[key].openFromFile(smart.generic_string()))
                 return;
         }
 
         static void LoadBGM(const std::string &key, std::vector<std::string> paths)
         {
-            std::filesystem::path smart = smartPath(paths);
+            std::filesystem::path smart = smartPath(std::move(paths));
 
-            if (!_Instance._bgmMap[key].openFromFile(smart.generic_string()))
+            if (!getInstance()._bgmMap[key].openFromFile(smart.generic_string()))
                 return;
         }
 
@@ -103,18 +105,18 @@ namespace asset
         {
             std::filesystem::path smart = smartPath(path, next, args...);
 
-            if (!_Instance._sfxBufferMap[key].loadFromFile(smart.generic_string()))
+            if (!getInstance()._sfxBufferMap[key].loadFromFile(smart.generic_string()))
                 return;
-            _Instance._sfxMap[key].setBuffer(_Instance._sfxBufferMap[key]);
+            getInstance()._sfxMap[key].setBuffer(getInstance()._sfxBufferMap[key]);
         }
 
         static void LoadSFX(const std::string &key, std::vector<std::string> paths)
         {
-            std::filesystem::path smart = smartPath(paths);
+            std::filesystem::path smart = smartPath(std::move(paths));
 
-            if (!_Instance._sfxBufferMap[key].loadFromFile(smart.generic_string()))
+            if (!getInstance()._sfxBufferMap[key].loadFromFile(smart.generic_string()))
                 return;
-            _Instance._sfxMap[key].setBuffer(_Instance._sfxBufferMap[key]);
+            getInstance()._sfxMap[key].setBuffer(getInstance()._sfxBufferMap[key]);
         }
 
         /**
@@ -134,18 +136,23 @@ namespace asset
 
             if (!font.loadFromFile(smart.generic_string()))
                 return;
-            _Instance._fontMap[key] = font;
+            getInstance()._fontMap[key] = font;
         }
 
         static void LoadFont(const std::string &key, std::vector<std::string> paths)
         {
             sf::Font font;
 
-            std::filesystem::path smart = smartPath(paths);
+            std::filesystem::path smart = smartPath(std::move(paths));
 
             if (!font.loadFromFile(smart.generic_string()))
                 return;
-            _Instance._fontMap[key] = font;
+            getInstance()._fontMap[key] = font;
+        }
+
+        static void loadKeybind(const std::string &action, const std::string &key)
+        {
+            getInstance()._keyMap[action] = utils::toKey(key);
         }
 
         /**
@@ -167,28 +174,30 @@ namespace asset
          * @param key of the asset to get
          * @return sf::Texture& the texture
          */
-        static sf::Texture &GetTexture(const std::string &key) { return _Instance._textureMap[key]; }
+        static sf::Texture &GetTexture(const std::string &key) { return getInstance()._textureMap[key]; }
 
         /**
          * @brief Get a background music object from the map
          * @param key of the asset to get
          * @return sf::Music& the music
          */
-        static sf::Music &GetBGM(const std::string &key) { return _Instance._bgmMap[key]; }
+        static sf::Music &GetBGM(const std::string &key) { return getInstance()._bgmMap[key]; }
 
         /**
          * @brief Get a sound effect object from the map
          * @param key of the asset to get
          * @return sf::Sound& the sound effect
          */
-        static sf::Sound &GetSFX(const std::string &key) { return _Instance._sfxMap[key]; }
+        static sf::Sound &GetSFX(const std::string &key) { return getInstance()._sfxMap[key]; }
 
         /**
          * @brief Get a font object from the mapb
          * @param key of the asset to get
          * @return sf::Font& the font
          */
-        static sf::Font &GetFont(const std::string &key) { return _Instance._fontMap[key]; }
+        static sf::Font &GetFont(const std::string &key) { return getInstance()._fontMap[key]; }
+
+        static sf::Keyboard::Key &GetKeybind(const std::string &key) { return getInstance()._keyMap[key]; }
 
         /**
          * @brief Load a .ini file with boost loading assets into the map
@@ -207,9 +216,13 @@ namespace asset
                 for (auto &value : section.second) {
                     std::vector<std::string> paths;
                     // parse the section.second with slash and put it in the vector
-                    while (value.second.data().find("/") != std::string::npos) {
-                        paths.push_back(value.second.data().substr(0, value.second.data().find("/")));
-                        value.second.data().erase(0, value.second.data().find("/") + 1);
+                    while (value.second.data().find('/') != std::string::npos) {
+                        paths.push_back(value.second.data().substr(0, value.second.data().find('/')));
+                        value.second.data().erase(0, value.second.data().find('/') + 1);
+                    }
+                    if (section.first == "keybind") {
+                        loadKeybind(value.first, value.second.data());
+                        continue;
                     }
                     paths.push_back(value.second.data());
 
@@ -228,7 +241,7 @@ namespace asset
         /**
          * the instance of the AssetLoader object
          */
-        static AssetLoader _Instance;
+        static AssetLoader &getInstance();
 
         static inline std::filesystem::path smartPath(std::filesystem::path path) { return path; }
 
@@ -240,20 +253,20 @@ namespace asset
 
         static void display_key_from_map()
         {
-            std::cout << "len of map: " << _Instance._textureMap.size() << std::endl;
-            for (auto &key : _Instance._textureMap) {
+            std::cout << "len of map: " << getInstance()._textureMap.size() << std::endl;
+            for (auto &key : getInstance()._textureMap) {
                 std::cout << key.first << std::endl;
             }
         }
 
       private:
         /**
-         * Map of all the assets
+         * Map of all the texture assets, loaded in the [texture] section of the .ini file
          */
         std::unordered_map<std::string, sf::Texture> _textureMap;
 
         /**
-         * Map of all the background music
+         * Map of all the background music, loaded in the [bgm] section of the .ini file
          */
         std::unordered_map<std::string, sf::Music> _bgmMap;
 
@@ -263,13 +276,18 @@ namespace asset
         std::unordered_map<std::string, sf::SoundBuffer> _sfxBufferMap;
 
         /**
-         * Map of all the sound effects
+         * Map of all the sound effects, loaded in the [sfx] section of the .ini file
          */
         std::unordered_map<std::string, sf::Sound> _sfxMap;
 
         /**
-         * Map of all the fonts
+         * Map of all the fonts, loaded in the [font] section of the .ini file
          */
         std::unordered_map<std::string, sf::Font> _fontMap;
+
+        /**
+         * Map of all the keybinds, loaded in the [keybinds] section of the .ini file
+         */
+        std::unordered_map<std::string, sf::Keyboard::Key> _keyMap;
     };
 } // namespace asset

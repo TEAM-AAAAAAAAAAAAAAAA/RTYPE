@@ -2,17 +2,16 @@
 ** EPITECH PROJECT, 2022
 ** RTYPE
 ** File description:
-** Health
+** FollowEntity
 */
 
 #pragma once
 
-#include "Constant.hpp"
+#include <cstddef>
 
 namespace ecs::component
 {
-    struct Health {
-        int health;
-        int lastHealth = utils::constant::maxPlayerHealth;
+    struct FollowEntity {
+        std::size_t entityId;
     };
 } // namespace ecs::component

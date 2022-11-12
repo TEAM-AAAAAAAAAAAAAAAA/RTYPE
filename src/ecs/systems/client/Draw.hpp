@@ -30,36 +30,76 @@ namespace ecs::systems
       auto const &drawables = world.registry.getComponents<component::Drawable>();
       auto const &animations = world.registry.getComponents<component::Animated>();
       auto const &hitBoxes = world.registry.getComponents<component::Hitbox>();
+      auto const &texts = world.registry.getComponents<component::Text>();
+      auto const &activables = world.registry.getComponents<component::Activable>();
 
       utils::Window::getInstance().clear(utils::Window::Color);
-      for (size_t i = 0; i < positions.size() && i < sizes.size() && i < drawables.size(); i++) {
-          auto const &pos = positions[i];
-          auto const &size = sizes[i];
-          auto const &draw = drawables[i];
-          if (pos && size && draw) {
-              if (draw->activated) {
-                  sf::Sprite sprite;
-                  sprite.setTexture(draw.value().getTexture());
-                  if (i < animations.size() && animations[i]) {
-                      sprite.setTextureRect(animations[i].value().getFrameRect());
-                  } else {
-                      sprite.setTextureRect(draw.value().rect);
+      for (size_t i = 0; i < positions.size()
+           || i < sizes.size() || i < drawables.size()
+           || i < animations.size() || i < hitBoxes.size()
+           || i < texts.size() || i < activables.size(); i++) {
+          if (i < drawables.size() && i < activables.size() && i < positions.size() && i < sizes.size()) {
+              auto const &draw = drawables[i];
+              auto const &activ = activables[i];
+              auto const &pos = positions[i];
+              auto const &size = sizes[i];
+
+              if (pos && size && draw && activ) {
+                  if (activ->getIsActivate()) {
+                      sf::Sprite sprite;
+                      sprite.setTexture(draw.value().getTexture());
+                      if (i < animations.size() && animations[i]) {
+                          sprite.setTextureRect(animations[i].value().getFrameRect());
+                      } else {
+                          sprite.setTextureRect(draw.value().rect);
+                      }
+                      float scaleX =
+                          static_cast<float>(size.value().width) / static_cast<float>(sprite.getTextureRect().width);
+                      float scaleY =
+                          static_cast<float>(size.value().height) / static_cast<float>(sprite.getTextureRect().height);
+                      sprite.setScale(scaleX, scaleY);
+                      sprite.setPosition({static_cast<float>(pos.value().x), static_cast<float>(pos.value().y)});
+                      // if (draw.value().rotation) {
+                      //     sprite.setOrigin(size.value().width / 2, size.value().height / 2);
+                      //     sprite.setRotation(draw.value().rotation);
+                      // }
+                      utils::Window::getInstance().draw(sprite);
                   }
-                  float scaleX =
-                      static_cast<float>(size.value().width) / static_cast<float>(sprite.getTextureRect().width);
-                  float scaleY =
-                      static_cast<float>(size.value().height) / static_cast<float>(sprite.getTextureRect().height);
-                  sprite.setScale(scaleX, scaleY);
-                  sprite.setPosition({static_cast<float>(pos.value().x), static_cast<float>(pos.value().y)});
-                  // if (draw.value().rotation) {
-                  //     sprite.setOrigin(size.value().width / 2, size.value().height / 2);
-                  //     sprite.setRotation(draw.value().rotation);
-                  // }
-                  utils::Window::getInstance().draw(sprite);
               }
           }
-          if (i < hitBoxes.size()) {
+          if (i < texts.size() && i < positions.size() && i < sizes.size() && i < activables.size()) {
+              auto const &text = texts[i];
+              auto const &activ = activables[i];
+              auto const &pos = positions[i];
+              auto const &size = sizes[i];
+
+              if (text && activ && size && pos) {
+                  for (size_t j = 0; j < text->getContentSize(); j++) {
+                      if (activ->getIsActivate()) {
+                          sf::Text sfText;
+                          sf::Color textColor;
+                          size_t textLength = 0;
+
+                          textColor.r = text->getTextColor().r;
+                          textColor.g = text->getTextColor().g;
+                          textColor.b = text->getTextColor().b;
+                          textColor.a = text->getTextColor().a;
+                          sfText.setCharacterSize(size->height);
+                          sfText.setFont(text->getFont());
+                          (j > 0) ? textLength = text->getContent(j - 1).length() : 0;
+                          sfText.setPosition(
+                              static_cast<float>(pos->x + j * size->height + textLength * size->width), static_cast<float>(pos->y));
+                          sfText.setFillColor(textColor);
+                          sfText.setString(text->getContent(j));
+                          utils::Window::getInstance().draw(sfText);
+                      }
+                  }
+              }
+          }
+          if (i < hitBoxes.size() && i < positions.size() && i < sizes.size()) {
               auto const &hitBox = hitBoxes[i];
+              auto const &pos = positions[i];
+              auto const &size = sizes[i];
 
               if (hitBox && size && pos) {
                   if (hitBox->enableHitBox) {

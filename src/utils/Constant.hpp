@@ -22,6 +22,8 @@ namespace utils
         static const std::size_t npos = -1;
         static short mapWidth = 1920;
         static short mapHeight = 1080;
+        static short maxPlayerHealth = 100;
+        static short sizeHealthBar = 282;
 
         enum PacketType {
             PLAYER_MOVE = 8,
@@ -39,6 +41,7 @@ namespace utils
             MULTIPLAYER_INFO,
             ROOM_INFO,
             KEEP_ALIVE,
+            HEALTH_UPDATE,
             NONE
         };
 
@@ -51,11 +54,15 @@ namespace utils
 
         enum ButtonType {
             PLAY,
-            OPTIONS,
+            OPTION,
             QUIT,
             PLAY_HOVER,
             OPTION_HOVER,
             QUIT_HOVER,
+            ROOM,
+            ROOM_HOVER,
+            ROOM_TEXT,
+            UNDEFINED
         };
 
         struct ButtonValue {
@@ -70,12 +77,14 @@ namespace utils
         };
 
         static const std::map<ButtonType, ButtonValue> buttonValueMap {
-            {PLAY, {324, 2079, 916, 292, 200, 63, 50, 250}},
-            {OPTIONS, {3651, 2079, 916, 292, 200, 63, 50, 420}},
-            {QUIT, {4760, 2079, 916, 292, 200, 63, 50, 590}},
-            {PLAY_HOVER, {220, 2449, 1114, 356, 200, 63, 50, 250}},
-            {OPTION_HOVER, {3542, 2456, 1114, 356, 200, 63, 50, 420}},
-            {QUIT_HOVER, {4670, 2451, 1114, 356, 200, 63, 50, 590}},
+            {PLAY, {324, 2079, 916, 292, 200, 63, 100, 250}},
+            {OPTION, {3651, 2079, 916, 292, 200, 63, 100, 420}},
+            {QUIT, {4760, 2079, 916, 292, 200, 63, 100, 590}},
+            {PLAY_HOVER, {220, 2449, 1114, 356, 200, 63, 100, 250}},
+            {OPTION_HOVER, {3542, 2456, 1114, 356, 200, 63, 100, 420}},
+            {QUIT_HOVER, {4670, 2451, 1114, 356, 200, 63, 100, 590}},
+            {ROOM, {326, 456, 1114, 356, 400, 63, 600, 250}},
+            {ROOM_HOVER, {326, 1510, 1114, 356, 400, 63, 600, 250}},
         };
 
         static std::map<int, PacketType> mapPacketType{
@@ -93,7 +102,8 @@ namespace utils
             {15, GAME_OVER},
             {31, MULTIPLAYER_INFO},
             {70, KEEP_ALIVE},
-            {128, ROOM_INFO}
+            {128, ROOM_INFO},
+            {38, HEALTH_UPDATE}
         };
 
         static int getPacketTypeKey(PacketType type)

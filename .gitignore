@@ -65,3 +65,4 @@ docs/html
 cmake-build-release/
 out/
 .gdb_history
+/cmake-build-relwithdebinfo/

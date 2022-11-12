@@ -22,6 +22,8 @@
 #include "components/Velocity.hpp"
 #include "components/Weapon.hpp"
 #include "components/server/Projectile.hpp"
+#include "components/server/FollowEntity.hpp"
+#include "components/server/AttackAI.hpp"
 
 namespace ecs::systems
 {
@@ -35,15 +37,26 @@ namespace ecs::systems
     {
         ecs::Entity newPlayer = world.registry.spawn_entity();
 
-        world.registry.addComponent<ecs::component::Position>(newPlayer, {10, 10});
+        world.registry.addComponent<ecs::component::Position>(newPlayer, {50, utils::constant::mapHeight / 2});
         world.registry.addComponent<ecs::component::Velocity>(newPlayer, {5, 5});
         world.registry.addComponent<ecs::component::Size>(newPlayer, {32, 64});
         world.registry.addComponent<ecs::component::Direction>(newPlayer, {0, 0});
         world.registry.addComponent<ecs::component::EntityType>(newPlayer, {ecs::component::EntityType::Types::Player});
         world.registry.addComponent<ecs::component::Weapon>(newPlayer, {100, 50, 10, {20, 20}});
-        world.registry.addComponent<ecs::component::Health>(newPlayer, {100});
+        world.registry.addComponent<ecs::component::Health>(newPlayer, {utils::constant::maxPlayerHealth});
         world.registry.addComponent<ecs::component::NetworkId>(newPlayer, {static_cast<size_t>(newPlayer)});
         world.registry.addComponent<ecs::component::Faction>(newPlayer, {ecs::component::Faction::Factions::Chefs});
+        ecs::Entity playerBot = world.registry.spawn_entity();
+        world.registry.addComponent<ecs::component::Position>(playerBot, {20, 5});
+        world.registry.addComponent<ecs::component::Size>(playerBot, {16, 32});
+        world.registry.addComponent<ecs::component::EntityType>(playerBot, {ecs::component::EntityType::Types::PlayerBot});
+        world.registry.addComponent<ecs::component::Velocity>(playerBot, {0, 0});
+        world.registry.addComponent<ecs::component::Direction>(playerBot, {0, 0});
+        world.registry.addComponent<ecs::component::Health>(playerBot, {100});
+        world.registry.addComponent<ecs::component::NetworkId>(playerBot, {static_cast<size_t>(playerBot)});
+        world.registry.addComponent<ecs::component::Faction>(playerBot, {ecs::component::Faction::Factions::Chefs});
+        world.registry.addComponent<ecs::component::FollowEntity>(playerBot, {static_cast<std::size_t>(newPlayer)});
+        world.registry.addComponent<ecs::component::AttackAI>(playerBot, {component::AttackAI::AIType::PlayerBot});
 
         network::Server::getClientToEntID()[msg.second] = (size_t)newPlayer;
         network::Message message;

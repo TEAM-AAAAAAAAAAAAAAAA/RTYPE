@@ -13,6 +13,8 @@ set(SYSTEMS_SRC
     ${SRCROOT}/HandleParallaxBounds.hpp
     ${SRCROOT}/KeepAlive.hpp
     ${SRCROOT}/Buttons.hpp
+    ${SRCROOT}/ScoreUpdate.hpp
+    ${SRCROOT}/HealthBar.hpp
     PARENT_SCOPE
 )
 
