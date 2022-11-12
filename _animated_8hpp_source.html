@@ -201,11 +201,11 @@ $(document).ready(function(){initNavTree('_animated_8hpp_source.html',''); initR
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      <span class="keyword">private</span>:</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordtype">void</span> _loadFrames() {}</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordtype">void</span> _loadFrames(AnimFrame first)</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordtype">void</span> _loadFrames(<a class="code" href="structecs_1_1component_1_1_animated_1_1_anim_frame.html">AnimFrame</a> first)</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        {</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            _animFrames.push_back(first);</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        }</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span>... Frames&gt; <span class="keywordtype">void</span> _loadFrames(AnimFrame first, Frames... next)</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span>... Frames&gt; <span class="keywordtype">void</span> _loadFrames(<a class="code" href="structecs_1_1component_1_1_animated_1_1_anim_frame.html">AnimFrame</a> first, Frames... next)</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        {</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            _animFrames.push_back(first);</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            _loadFrames(next...);</div>

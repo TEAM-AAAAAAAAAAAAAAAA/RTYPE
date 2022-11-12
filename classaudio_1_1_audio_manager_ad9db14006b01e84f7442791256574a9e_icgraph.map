@@ -1,4 +1,4 @@
 <map id="audio::AudioManager::loadBGM" name="audio::AudioManager::loadBGM">
-<area shape="rect" id="node1" title="load a background music to be played" alt="" coords="108,5,268,47"/>
-<area shape="rect" id="node2" href="$client_2entrypoint_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,13,60,39"/>
+<area shape="rect" id="node1" title="load a background music to be played" alt="" coords="172,5,332,47"/>
+<area shape="rect" id="node2" href="$_get_world_8hpp.html#a6477985952456c92826513c2631d2337" title=" " alt="" coords="5,13,124,39"/>
 </map>

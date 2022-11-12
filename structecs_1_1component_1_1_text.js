@@ -1,6 +1,7 @@
 var structecs_1_1component_1_1_text =
 [
     [ "Text", "structecs_1_1component_1_1_text.html#ab188e17ac97d1410fc5897e9a45969d3", null ],
+    [ "Text", "structecs_1_1component_1_1_text.html#ac2dd35e508b709cffbb6e6707826acc0", null ],
     [ "addContent", "structecs_1_1component_1_1_text.html#a1fca0d84847fe86c5fed5ec8c5ea4b7e", null ],
     [ "clearContent", "structecs_1_1component_1_1_text.html#a1c857fc209eafec5e66a78bd5a1df38d", null ],
     [ "getContent", "structecs_1_1component_1_1_text.html#ac8349b040c44e581e0afe60cfc42b97b", null ],
