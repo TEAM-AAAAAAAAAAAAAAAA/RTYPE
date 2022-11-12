@@ -39,13 +39,13 @@ namespace ecs::systems
     {
         ecs::Entity newPlayer = world.registry.spawn_entity();
 
-        world.registry.addComponent<ecs::component::Position>(newPlayer, {10, 10});
+        world.registry.addComponent<ecs::component::Position>(newPlayer, {50, utils::constant::mapHeight / 2});
         world.registry.addComponent<ecs::component::Velocity>(newPlayer, {5, 5});
         world.registry.addComponent<ecs::component::Size>(newPlayer, {32, 64});
         world.registry.addComponent<ecs::component::Direction>(newPlayer, {0, 0});
         world.registry.addComponent<ecs::component::EntityType>(newPlayer, {ecs::component::EntityType::Types::Player});
         world.registry.addComponent<ecs::component::Weapon>(newPlayer, {100, 50, 10, {20, 20}});
-        world.registry.addComponent<ecs::component::Health>(newPlayer, {100});
+        world.registry.addComponent<ecs::component::Health>(newPlayer, {utils::constant::maxPlayerHealth});
         world.registry.addComponent<ecs::component::NetworkId>(newPlayer, {static_cast<size_t>(newPlayer)});
         world.registry.addComponent<ecs::component::Faction>(newPlayer, {ecs::component::Faction::Factions::Chefs});
 

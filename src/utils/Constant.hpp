@@ -22,6 +22,8 @@ namespace utils
         static const std::size_t npos = -1;
         static short mapWidth = 1920;
         static short mapHeight = 1080;
+        static short maxPlayerHealth = 100;
+        static short sizeHealthBar = 282;
 
         enum PacketType {
             PLAYER_MOVE = 8,
@@ -37,6 +39,7 @@ namespace utils
             BOSS_STAGE,
             GAME_OVER,
             MULTIPLAYER_INFO,
+            HEALTH_UPDATE,
             NONE
         };
 
@@ -96,6 +99,7 @@ namespace utils
             {7, BOSS_STAGE},
             {15, GAME_OVER},
             {31, MULTIPLAYER_INFO},
+            {38, HEALTH_UPDATE}
         };
 
         static int getPacketTypeKey(PacketType type)

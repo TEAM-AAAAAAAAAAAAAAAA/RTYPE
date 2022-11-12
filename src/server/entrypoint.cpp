@@ -11,6 +11,7 @@
 #include "systems/Movement.hpp"
 #include "systems/RunMovementAI.hpp"
 #include "systems/server/DeathUpdate.hpp"
+#include "systems/server/PlayerHealthUpdate.hpp"
 #include "systems/server/HandleIncomingMessage.hpp"
 #include "systems/server/PositionUpdate.hpp"
 #include "systems/server/ProjectileCollision.hpp"
@@ -45,6 +46,7 @@ ecs::World getGameWorld()
     world.addSystem(ecs::systems::runMovementAI);
     world.addSystem(ecs::systems::runAttackAI);
     world.addSystem(ecs::systems::deathUpdate);
+    world.addSystem(ecs::systems::playerHealthUpdate);
     world.addSystem(ecs::systems::waves);
     world.addSystem(ecs::systems::followEntitySystem);
 

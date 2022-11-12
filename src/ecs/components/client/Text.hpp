@@ -21,7 +21,13 @@ namespace ecs::component
 
     struct Text {
 
-        Text(size_t marginRight = 0, const std::string &key = "nasa") : _fontKey(key), _marginRight(marginRight), _textColor({255, 255, 255, 255}) {};
+        Text(size_t marginRight = 0, const std::string &key = "nasa") : _fontKey(key), _marginRight(marginRight), _textColor({255, 255, 255, 255})
+        {
+            _content.emplace_back("");
+            _content.emplace_back("");
+            _content.emplace_back("");
+            _content.emplace_back("");
+        };
 
         std::string getContent(size_t pos) const
         {
@@ -29,7 +35,7 @@ namespace ecs::component
                 return "";
             return _content[pos];
         };
-        void setContent(size_t pos, std::string &newContent)
+        void setContent(size_t pos, const std::string &newContent)
         {
             if (pos <= _content.size())
                 _content[pos] = newContent;

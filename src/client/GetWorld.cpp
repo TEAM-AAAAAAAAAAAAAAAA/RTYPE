@@ -11,15 +11,16 @@
 #include "components/Faction.hpp"
 #include "components/Health.hpp"
 #include "components/Position.hpp"
+#include "components/Score.hpp"
 #include "components/Size.hpp"
 #include "components/Velocity.hpp"
 #include "components/Weapon.hpp"
+#include "components/client/Activable.hpp"
 #include "components/client/Animated.hpp"
 #include "components/client/Controllable.hpp"
 #include "components/client/Drawable.hpp"
 #include "components/client/Hitbox.hpp"
 #include "components/client/Parallax.hpp"
-#include "components/client/Activable.hpp"
 #include "components/client/Text.hpp"
 #include "systems/ManageClientEvents.hpp"
 #include "systems/Movement.hpp"
@@ -30,7 +31,9 @@
 #include "systems/client/HandleParallaxBounds.hpp"
 #include "systems/client/HandleSFMLEvents.hpp"
 #include "systems/client/HandleSFMLKeys.hpp"
+#include "systems/client/HealthBar.hpp"
 #include "systems/client/MenuSelect.hpp"
+#include "systems/client/ScoreUpdate.hpp"
 #include "systems/client/SendDirection.hpp"
 
 static const int FRAME_LIMIT = 60;
@@ -57,6 +60,7 @@ static void registerComponents(ecs::World &world)
     world.registry.registerComponent<ecs::component::Hitbox>();
     world.registry.registerComponent<ecs::component::Text>();
     world.registry.registerComponent<ecs::component::Activable>();
+    world.registry.registerComponent<ecs::component::Score>();
 }
 
 static void addGameSystems(ecs::World &world)
@@ -69,8 +73,34 @@ static void addGameSystems(ecs::World &world)
     world.addSystem(ecs::systems::SendDirection);
     world.addSystem(ecs::systems::movement);
     world.addSystem(ecs::systems::HandleParallaxBounds);
+    world.addSystem(ecs::systems::scoreUpdate);
     world.addSystem(ecs::systems::executeOnce);
+    world.addSystem(ecs::systems::healthBar);
     world.addSystem(ecs::systems::animate);
+}
+
+static void setGameHUD(ecs::World &world)
+{
+    ecs::Entity textScore = world.registry.spawn_entity();
+    ecs::Entity health = world.registry.spawn_entity();
+    ecs::Entity healthBar = world.registry.spawn_entity();
+
+    world.registry.addComponent<ecs::component::Position>(textScore, {10, 10});
+    world.registry.addComponent<ecs::component::Size>(textScore, {40, 15});
+    world.registry.addComponent<ecs::component::Text>(textScore, {});
+    world.registry.addComponent<ecs::component::Score>(textScore, {});
+    world.registry.addComponent<ecs::component::Activable>(textScore, {});
+
+    world.registry.addComponent<ecs::component::Position>(health, {6, 900});
+    world.registry.addComponent<ecs::component::Size>(health, {100, 400});
+    world.registry.addComponent<ecs::component::Drawable>(health, {"menu", {3475, 844, 1011, 256}});
+    world.registry.addComponent<ecs::component::Activable>(health, {});
+
+    world.registry.addComponent<ecs::component::Position>(healthBar, {118, 922});
+    world.registry.addComponent<ecs::component::Size>(healthBar, {50, 282});
+    world.registry.addComponent<ecs::component::Drawable>(healthBar, {"menu", {3767, 719, 714, 97}});
+    world.registry.addComponent<ecs::component::Health>(healthBar, {utils::constant::maxPlayerHealth});
+    world.registry.addComponent<ecs::component::Activable>(healthBar, {});
 }
 
 static void setGameParallax(ecs::World &world)
@@ -161,6 +191,7 @@ ecs::World getGameWorld(const std::string &port = "8000", const std::string &hos
     utils::Window::getInstance().setFramerateLimit(FRAME_LIMIT);
     registerComponents(world);
     setGameParallax(world);
+    setGameHUD(world);
     addGameSystems(world);
     return world;
 }
@@ -214,10 +245,10 @@ static void setRoomTexts(ecs::World &world)
     world.registry.addComponent<ecs::component::Text>(textSecondRoom, {10});
     world.registry.addComponent<ecs::component::Text>(textThirdRoom, {10});
     world.registry.addComponent<ecs::component::Text>(textFourthRoom, {10});
-    world.registry.addComponent<ecs::component::Position>(textFirstRoom, {itRoom->second.posX + 60, itRoom->second.posY - 17 + itRoom->second.rectHeight / 2});
-    world.registry.addComponent<ecs::component::Position>(textSecondRoom, {itRoom->second.posX + 60, itRoom->second.posY + 103 + itRoom->second.rectHeight / 2});
-    world.registry.addComponent<ecs::component::Position>(textThirdRoom, {itRoom->second.posX + 60, itRoom->second.posY + 223 + itRoom->second.rectHeight / 2});
-    world.registry.addComponent<ecs::component::Position>(textFourthRoom, {itRoom->second.posX + 60, itRoom->second.posY + 343 + itRoom->second.rectHeight / 2});
+    world.registry.addComponent<ecs::component::Position>(textFirstRoom, {itRoom->second.posX + 100, itRoom->second.posY - 17 + itRoom->second.rectHeight / 2});
+    world.registry.addComponent<ecs::component::Position>(textSecondRoom, {itRoom->second.posX + 100, itRoom->second.posY + 103 + itRoom->second.rectHeight / 2});
+    world.registry.addComponent<ecs::component::Position>(textThirdRoom, {itRoom->second.posX + 100, itRoom->second.posY + 223 + itRoom->second.rectHeight / 2});
+    world.registry.addComponent<ecs::component::Position>(textFourthRoom, {itRoom->second.posX + 100, itRoom->second.posY + 343 + itRoom->second.rectHeight / 2});
     world.registry.addComponent<ecs::component::Size>(textFirstRoom, {30, 0});
     world.registry.addComponent<ecs::component::Size>(textSecondRoom, {30, 0});
     world.registry.addComponent<ecs::component::Size>(textThirdRoom, {30, 0});

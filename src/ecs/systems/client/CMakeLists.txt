@@ -11,6 +11,8 @@ set(SYSTEMS_SRC
     ${SRCROOT}/SendDirection.hpp
     ${SRCROOT}/HandleParallaxBounds.hpp
     ${SRCROOT}/Buttons.hpp
+    ${SRCROOT}/ScoreUpdate.hpp
+    ${SRCROOT}/HealthBar.hpp
     PARENT_SCOPE
 )
 
