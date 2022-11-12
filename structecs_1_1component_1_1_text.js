@@ -8,7 +8,7 @@ var structecs_1_1component_1_1_text =
     [ "getFont", "structecs_1_1component_1_1_text.html#a0ab5db751941993acf854eff058e1ba3", null ],
     [ "getMarginRight", "structecs_1_1component_1_1_text.html#aa32f62f163984a6cbb54d51484c638f2", null ],
     [ "getTextColor", "structecs_1_1component_1_1_text.html#addda4a007348046f8965887675555bef", null ],
-    [ "setContent", "structecs_1_1component_1_1_text.html#a55fb09343edb41cea6e7eae7017b6a74", null ],
+    [ "setContent", "structecs_1_1component_1_1_text.html#a27f85af282a7b58b0f828fa4822e6aa7", null ],
     [ "setFontKey", "structecs_1_1component_1_1_text.html#a83fba109c821a1fc3ae6a8b2bbcc704f", null ],
     [ "setMarginRight", "structecs_1_1component_1_1_text.html#ac0f60ea1dbe8f5dba6e311e51c97b90a", null ],
     [ "setTextColor", "structecs_1_1component_1_1_text.html#a438029518d2bb92785226f2d7ecb1f36", null ]

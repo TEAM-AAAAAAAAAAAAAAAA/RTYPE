@@ -35,6 +35,7 @@ var _constant_8hpp =
       [ "BOSS_STAGE", "_constant_8hpp.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a8ffa48b4a6012e684f17743bca2046d1", null ],
       [ "GAME_OVER", "_constant_8hpp.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ab0ada823658f01387806157db3e5ce4e", null ],
       [ "MULTIPLAYER_INFO", "_constant_8hpp.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a2db5d4ec86b1378334846f309d4708fc", null ],
+      [ "HEALTH_UPDATE", "_constant_8hpp.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ab6ca68978db29ccd0ebcf101a070d1f7", null ],
       [ "NONE", "_constant_8hpp.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a3e453aacf60bd5aa37a77fc907bcc131", null ]
     ] ]
 ];

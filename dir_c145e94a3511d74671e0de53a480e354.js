@@ -24,6 +24,9 @@ var dir_c145e94a3511d74671e0de53a480e354 =
     [ "Position.hpp", "_position_8hpp.html", [
       [ "Position", "structecs_1_1component_1_1_position.html", "structecs_1_1component_1_1_position" ]
     ] ],
+    [ "Score.hpp", "_score_8hpp.html", [
+      [ "Score", "structecs_1_1component_1_1_score.html", "structecs_1_1component_1_1_score" ]
+    ] ],
     [ "Size.hpp", "_size_8hpp.html", [
       [ "Size", "structecs_1_1component_1_1_size.html", "structecs_1_1component_1_1_size" ]
     ] ],

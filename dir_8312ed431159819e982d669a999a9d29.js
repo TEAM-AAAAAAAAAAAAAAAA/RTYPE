@@ -7,6 +7,8 @@ var dir_8312ed431159819e982d669a999a9d29 =
     [ "HandleParallaxBounds.hpp", "_handle_parallax_bounds_8hpp.html", "_handle_parallax_bounds_8hpp" ],
     [ "HandleSFMLEvents.hpp", "_handle_s_f_m_l_events_8hpp.html", "_handle_s_f_m_l_events_8hpp" ],
     [ "HandleSFMLKeys.hpp", "_handle_s_f_m_l_keys_8hpp.html", "_handle_s_f_m_l_keys_8hpp" ],
+    [ "HealthBar.hpp", "_health_bar_8hpp.html", "_health_bar_8hpp" ],
     [ "MenuSelect.hpp", "_menu_select_8hpp.html", "_menu_select_8hpp" ],
+    [ "ScoreUpdate.hpp", "_score_update_8hpp.html", "_score_update_8hpp" ],
     [ "SendDirection.hpp", "_send_direction_8hpp.html", "_send_direction_8hpp" ]
 ];

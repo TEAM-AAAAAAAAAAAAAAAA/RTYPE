@@ -145,17 +145,22 @@ $(document).ready(function(){initNavTree('_health_8hpp_source.html',''); initRes
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs_1_1component.html">ecs::component</a></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="structecs_1_1component_1_1_health.html">   12</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structecs_1_1component_1_1_health.html">Health</a> {</div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="structecs_1_1component_1_1_health.html#a690db6f5fd2224adbb8c6b61eba628f4">   13</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="structecs_1_1component_1_1_health.html#a690db6f5fd2224adbb8c6b61eba628f4">health</a>;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    };</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;} <span class="comment">// namespace ecs::component</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_constant_8hpp.html">Constant.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceecs_1_1component.html">ecs::component</a></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="structecs_1_1component_1_1_health.html">   14</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structecs_1_1component_1_1_health.html">Health</a> {</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="structecs_1_1component_1_1_health.html#a690db6f5fd2224adbb8c6b61eba628f4">   15</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="structecs_1_1component_1_1_health.html#a690db6f5fd2224adbb8c6b61eba628f4">health</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="structecs_1_1component_1_1_health.html#aac500f70f724d9dc4dbe4355326d0b9b">   16</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="structecs_1_1component_1_1_health.html#aac500f70f724d9dc4dbe4355326d0b9b">lastHealth</a> = utils::constant::maxPlayerHealth;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    };</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;} <span class="comment">// namespace ecs::component</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="anamespaceecs_1_1component_html"><div class="ttname"><a href="namespaceecs_1_1component.html">ecs::component</a></div><div class="ttdef"><b>Definition:</b> Activable.hpp:11</div></div>
-<div class="ttc" id="astructecs_1_1component_1_1_health_html_a690db6f5fd2224adbb8c6b61eba628f4"><div class="ttname"><a href="structecs_1_1component_1_1_health.html#a690db6f5fd2224adbb8c6b61eba628f4">ecs::component::Health::health</a></div><div class="ttdeci">int health</div><div class="ttdef"><b>Definition:</b> Health.hpp:13</div></div>
-<div class="ttc" id="astructecs_1_1component_1_1_health_html"><div class="ttname"><a href="structecs_1_1component_1_1_health.html">ecs::component::Health</a></div><div class="ttdef"><b>Definition:</b> Health.hpp:12</div></div>
+<div class="ttc" id="astructecs_1_1component_1_1_health_html_a690db6f5fd2224adbb8c6b61eba628f4"><div class="ttname"><a href="structecs_1_1component_1_1_health.html#a690db6f5fd2224adbb8c6b61eba628f4">ecs::component::Health::health</a></div><div class="ttdeci">int health</div><div class="ttdef"><b>Definition:</b> Health.hpp:15</div></div>
+<div class="ttc" id="astructecs_1_1component_1_1_health_html_aac500f70f724d9dc4dbe4355326d0b9b"><div class="ttname"><a href="structecs_1_1component_1_1_health.html#aac500f70f724d9dc4dbe4355326d0b9b">ecs::component::Health::lastHealth</a></div><div class="ttdeci">int lastHealth</div><div class="ttdef"><b>Definition:</b> Health.hpp:16</div></div>
+<div class="ttc" id="astructecs_1_1component_1_1_health_html"><div class="ttname"><a href="structecs_1_1component_1_1_health.html">ecs::component::Health</a></div><div class="ttdef"><b>Definition:</b> Health.hpp:14</div></div>
+<div class="ttc" id="a_constant_8hpp_html"><div class="ttname"><a href="_constant_8hpp.html">Constant.hpp</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

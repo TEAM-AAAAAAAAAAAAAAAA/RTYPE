@@ -16,6 +16,7 @@ var namespaceecs_1_1component =
     [ "Parallax", "structecs_1_1component_1_1_parallax.html", "structecs_1_1component_1_1_parallax" ],
     [ "Position", "structecs_1_1component_1_1_position.html", "structecs_1_1component_1_1_position" ],
     [ "Projectile", "structecs_1_1component_1_1_projectile.html", "structecs_1_1component_1_1_projectile" ],
+    [ "Score", "structecs_1_1component_1_1_score.html", "structecs_1_1component_1_1_score" ],
     [ "Shootable", "structecs_1_1component_1_1_shootable.html", "structecs_1_1component_1_1_shootable" ],
     [ "Size", "structecs_1_1component_1_1_size.html", "structecs_1_1component_1_1_size" ],
     [ "Text", "structecs_1_1component_1_1_text.html", "structecs_1_1component_1_1_text" ],

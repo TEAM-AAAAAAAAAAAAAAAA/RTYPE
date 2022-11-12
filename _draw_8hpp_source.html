@@ -213,44 +213,46 @@ $(document).ready(function(){initNavTree('_draw_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                      <span class="keywordflow">if</span> (activ-&gt;getIsActivate()) {</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                          sf::Text sfText;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                          sf::Color textColor;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                          textColor.r = text-&gt;getTextColor().r;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                          textColor.g = text-&gt;getTextColor().g;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                          textColor.b = text-&gt;getTextColor().b;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                          textColor.a = text-&gt;getTextColor().a;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                          sfText.setCharacterSize(size-&gt;height);</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                          sfText.setFont(text-&gt;getFont());</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                          sfText.setPosition(</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                              <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(pos-&gt;x + j * 40), <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(pos-&gt;y));</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                          sfText.setFillColor(textColor);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                          sfText.setString(text-&gt;getContent(j));</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                          <a class="code" href="namespaceutils.html#a79e536d2358e77e397c975738dc4a121">utils::Window::getInstance</a>().draw(sfText);</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                      }</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                  }</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;              }</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;          }</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;          <span class="keywordflow">if</span> (i &lt; hitBoxes.size() &amp;&amp; i &lt; positions.size() &amp;&amp; i &lt; sizes.size()) {</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;              <span class="keyword">auto</span> <span class="keyword">const</span> &amp;hitBox = hitBoxes[i];</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;              <span class="keyword">auto</span> <span class="keyword">const</span> &amp;pos = positions[i];</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;              <span class="keyword">auto</span> <span class="keyword">const</span> &amp;size = sizes[i];</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;              <span class="keywordflow">if</span> (hitBox &amp;&amp; size &amp;&amp; pos) {</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                  <span class="keywordflow">if</span> (hitBox-&gt;enableHitBox) {</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                      sf::RectangleShape hitBoxRec({0, 0});</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                      hitBoxRec.setFillColor(sf::Color::Transparent);</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                      hitBoxRec.setOutlineColor(sf::Color::Red);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                      hitBoxRec.setOutlineThickness(2);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                      hitBoxRec.setSize({(float)size-&gt;width, (<span class="keywordtype">float</span>)size-&gt;height});</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                      hitBoxRec.setPosition({(float)(pos-&gt;x), (float)(pos-&gt;y)});</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                      <a class="code" href="namespaceutils.html#a79e536d2358e77e397c975738dc4a121">utils::Window::getInstance</a>().draw(hitBoxRec);</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                  }</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;              }</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;          }</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;      };</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;      <a class="code" href="namespaceutils.html#a79e536d2358e77e397c975738dc4a121">utils::Window::getInstance</a>().display();</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    };</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                          <span class="keywordtype">size_t</span> textLength = 0;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                          textColor.r = text-&gt;getTextColor().r;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                          textColor.g = text-&gt;getTextColor().g;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                          textColor.b = text-&gt;getTextColor().b;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                          textColor.a = text-&gt;getTextColor().a;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                          sfText.setCharacterSize(size-&gt;height);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                          sfText.setFont(text-&gt;getFont());</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                          (j &gt; 0) ? textLength = text-&gt;getContent(j - 1).length() : 0;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                          sfText.setPosition(</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                              <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(pos-&gt;x + j * size-&gt;height + textLength * size-&gt;width), <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(pos-&gt;y));</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                          sfText.setFillColor(textColor);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                          sfText.setString(text-&gt;getContent(j));</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                          <a class="code" href="namespaceutils.html#a79e536d2358e77e397c975738dc4a121">utils::Window::getInstance</a>().draw(sfText);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                      }</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                  }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;              }</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;          }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;          <span class="keywordflow">if</span> (i &lt; hitBoxes.size() &amp;&amp; i &lt; positions.size() &amp;&amp; i &lt; sizes.size()) {</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;              <span class="keyword">auto</span> <span class="keyword">const</span> &amp;hitBox = hitBoxes[i];</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;              <span class="keyword">auto</span> <span class="keyword">const</span> &amp;pos = positions[i];</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;              <span class="keyword">auto</span> <span class="keyword">const</span> &amp;size = sizes[i];</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;              <span class="keywordflow">if</span> (hitBox &amp;&amp; size &amp;&amp; pos) {</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                  <span class="keywordflow">if</span> (hitBox-&gt;enableHitBox) {</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                      sf::RectangleShape hitBoxRec({0, 0});</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                      hitBoxRec.setFillColor(sf::Color::Transparent);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                      hitBoxRec.setOutlineColor(sf::Color::Red);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                      hitBoxRec.setOutlineThickness(2);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                      hitBoxRec.setSize({(float)size-&gt;width, (<span class="keywordtype">float</span>)size-&gt;height});</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                      hitBoxRec.setPosition({(float)(pos-&gt;x), (float)(pos-&gt;y)});</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                      <a class="code" href="namespaceutils.html#a79e536d2358e77e397c975738dc4a121">utils::Window::getInstance</a>().draw(hitBoxRec);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                  }</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;              }</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;          }</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;      };</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;      <a class="code" href="namespaceutils.html#a79e536d2358e77e397c975738dc4a121">utils::Window::getInstance</a>().display();</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    };</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="astructecs_1_1component_1_1_drawable_html"><div class="ttname"><a href="structecs_1_1component_1_1_drawable.html">ecs::component::Drawable</a></div><div class="ttdef"><b>Definition:</b> Drawable.hpp:19</div></div>
