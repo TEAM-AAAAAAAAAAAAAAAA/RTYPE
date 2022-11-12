@@ -74,7 +74,7 @@ namespace network
          * Get the amount of clients that are connected
          * @return Amount of connected clients
          */
-        static size_t getClientCount() { return getInstance()._clients.size(); }
+        static size_t getClientCount() { return getInstance()._clients.size() - (getInstance()._hubID != -1); }
 
         /**
          * Get the ID of client from the clients array
@@ -285,7 +285,7 @@ namespace network
         ClientList _clients;
         std::map<unsigned int, size_t> _clientToEntID;
         int _nextClientID;
-        int _hubID;
+        int _hubID = -1;
 
         /**
          * The timestamps of the last received messages from each client
