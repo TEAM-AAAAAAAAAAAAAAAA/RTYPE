@@ -104,6 +104,7 @@ jobs:
                 -B build
                 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
                 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_TOOLCHAIN_PATH}
+                -DSFML_DIR=${SFML_DIR}
                 -DBoost_NO_SYSTEM_PATHS=TRUE
                 -DBOOST_ROOT=${{ github.workspace }}/vcpkg/installed/${{ matrix.triplet }}
               RESULT_VARIABLE result
