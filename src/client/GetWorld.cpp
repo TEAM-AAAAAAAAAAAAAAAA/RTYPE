@@ -208,6 +208,7 @@ static void addMenuSystems(ecs::World &world)
     world.addSystem(ecs::systems::draw);
     world.addSystem(ecs::systems::movement);
     world.addSystem(ecs::systems::menuSelect);
+    world.addSystem(ecs::systems::animate);
 }
 
 static void setMainButtons(ecs::World &world)
@@ -243,14 +244,14 @@ static void setRoomTexts(ecs::World &world)
     ecs::Entity textFourthRoom = world.registry.spawn_entity();
     auto itRoom = utils::constant::buttonValueMap.find(utils::constant::ROOM);
 
-    world.registry.addComponent<ecs::component::Text>(textFirstRoom, {10});
-    world.registry.addComponent<ecs::component::Text>(textSecondRoom, {10});
-    world.registry.addComponent<ecs::component::Text>(textThirdRoom, {10});
-    world.registry.addComponent<ecs::component::Text>(textFourthRoom, {10});
+    world.registry.addComponent<ecs::component::Text>(textFirstRoom, {"0", "/", "4", "Player"});
+    world.registry.addComponent<ecs::component::Text>(textSecondRoom, {"0", "/", "4", "Player"});
+    world.registry.addComponent<ecs::component::Text>(textThirdRoom, {"0", "/", "4", "Player"});
+    world.registry.addComponent<ecs::component::Text>(textFourthRoom, {"0", "/", "4", "Player"});
     world.registry.addComponent<ecs::component::Position>(textFirstRoom, {itRoom->second.posX + 100, itRoom->second.posY - 17 + itRoom->second.rectHeight / 2});
-    world.registry.addComponent<ecs::component::Position>(textSecondRoom, {itRoom->second.posX + 100, itRoom->second.posY + 103 + itRoom->second.rectHeight / 2});
-    world.registry.addComponent<ecs::component::Position>(textThirdRoom, {itRoom->second.posX + 100, itRoom->second.posY + 223 + itRoom->second.rectHeight / 2});
-    world.registry.addComponent<ecs::component::Position>(textFourthRoom, {itRoom->second.posX + 100, itRoom->second.posY + 343 + itRoom->second.rectHeight / 2});
+    world.registry.addComponent<ecs::component::Position>(textSecondRoom, {itRoom->second.posX + 100, itRoom->second.posY + 133 + itRoom->second.rectHeight / 2});
+    world.registry.addComponent<ecs::component::Position>(textThirdRoom, {itRoom->second.posX + 100, itRoom->second.posY + 283 + itRoom->second.rectHeight / 2});
+    world.registry.addComponent<ecs::component::Position>(textFourthRoom, {itRoom->second.posX + 100, itRoom->second.posY + 433 + itRoom->second.rectHeight / 2});
     world.registry.addComponent<ecs::component::Size>(textFirstRoom, {30, 0});
     world.registry.addComponent<ecs::component::Size>(textSecondRoom, {30, 0});
     world.registry.addComponent<ecs::component::Size>(textThirdRoom, {30, 0});
@@ -259,7 +260,6 @@ static void setRoomTexts(ecs::World &world)
     world.registry.addComponent<ecs::component::Activable>(textSecondRoom, {false, false, utils::constant::ROOM_TEXT});
     world.registry.addComponent<ecs::component::Activable>(textThirdRoom, {false, false, utils::constant::ROOM_TEXT});
     world.registry.addComponent<ecs::component::Activable>(textFourthRoom, {false, false, utils::constant::ROOM_TEXT});
-
 }
 
 static void setRoomButtons(ecs::World &world)
@@ -766,10 +766,10 @@ static void setMenuBackground(ecs::World &world)
     setMainButtons(world);
     setRoomButtons(world);
     setRoomTexts(world);
+    setRoomPlanet(world);
     setOptionInterface(world);
     setVolumeButtons(world);
     setOptionInterfaceText(world);
-    setRoomPlanet(world);
 }
 
 ecs::World getMenuWorld()
