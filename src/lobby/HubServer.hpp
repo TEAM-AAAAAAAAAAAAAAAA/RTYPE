@@ -12,6 +12,7 @@
 #include <map>
 #include <string>
 #include <windows.h>
+#include <stdio.h>
 #include "../server/Server.hpp"
 #include "../utils/Constant.hpp"
 
@@ -26,8 +27,20 @@ class HubServer {
         _pids.fill(0);
         _port = port;
 #ifndef WIN32
+        for (size_t i = 0; i < _processes.size(); i++) {
+            STARTUPINFO si;
+
+            ZeroMemory(&si, sizeof(si));
+            si.cb = sizeof(si);
+            ZeroMemory(&_processes[i], sizeof(_processes[i]));
+
+            if (!CreateProcess(NULL, ("r-type_server " + std::to_string(_port + i)).c_str(), NULL, NULL, FALSE, 0, NULL, NULL, &si, &_processes[i])) {
+                std::cerr << "Failed to create process" << std::endl;
+                exit(84);
+            }
+        }
 #else
-        for (size_t i = 0; i < 4; i++) {
+        for (size_t i = 0; i < _pids.size(); i++) {
             _pids[i] = fork();
             if (_pids[i] == -1) {
                 std::cerr << "Error while forking" << std::endl;
