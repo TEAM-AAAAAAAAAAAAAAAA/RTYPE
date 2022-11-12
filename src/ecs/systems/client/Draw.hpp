@@ -43,7 +43,7 @@ namespace ecs::systems
               auto const &activ = activables[i];
               auto const &pos = positions[i];
               auto const &size = sizes[i];
-
+#pragma region texture
               if (pos && size && draw && activ) {
                   if (activ->getIsActivate()) {
                       sf::Sprite sprite;
@@ -67,6 +67,9 @@ namespace ecs::systems
                   }
               }
           }
+#pragma endregion
+
+#pragma region text
           if (i < texts.size() && i < positions.size() && i < sizes.size() && i < activables.size()) {
               auto const &text = texts[i];
               auto const &activ = activables[i];
@@ -96,6 +99,8 @@ namespace ecs::systems
                   }
               }
           }
+#pragma endregion
+#pragma region hitbox
           if (i < hitBoxes.size() && i < positions.size() && i < sizes.size()) {
               auto const &hitBox = hitBoxes[i];
               auto const &pos = positions[i];
@@ -115,6 +120,7 @@ namespace ecs::systems
               }
           }
       };
+#pragma endregion
       utils::Window::getInstance().display();
     };
 } // namespace ecs::systems
