@@ -21,8 +21,8 @@ int main()
     ecs::Engine engine;
     network::Message msg;
 
-    network::Client::setHost("8000");
-    network::Client::setPort("localhost");
+    network::Client::setHost("localhost");
+    network::Client::setPort("8000");
     msg.fill(0);
     network::Client::connect();
     network::Client::getOutgoingMessages().push(msg);
