@@ -36,6 +36,7 @@
 #include "systems/client/ScoreUpdate.hpp"
 #include "systems/client/SendDirection.hpp"
 
+
 static const int FRAME_LIMIT = 60;
 
 #pragma region GameWorld
@@ -186,6 +187,9 @@ ecs::World getGameWorld(const std::string &port = "8000", const std::string &hos
 {
     ecs::World world;
 
+    audio::AudioManager::stopBGM();
+    audio::AudioManager::loadBGM("bgm1");
+    audio::AudioManager::playBGM();
     network::Client::setHost(host);
     network::Client::setPort(port);
     utils::Window::getInstance().setFramerateLimit(FRAME_LIMIT);
@@ -300,8 +304,12 @@ ecs::World getMenuWorld()
 {
     ecs::World world;
 
+
     utils::Window::getInstance().setFramerateLimit(FRAME_LIMIT);
     utils::Window::Color = sf::Color(18, 32, 45, 255);
+    audio::AudioManager::stopBGM();
+    audio::AudioManager::loadBGM("lobby_bgm");
+    audio::AudioManager::playBGM("lobby_bgm");
     registerComponents(world);
     addMenuSystems(world);
     setMenuBackground(world);
