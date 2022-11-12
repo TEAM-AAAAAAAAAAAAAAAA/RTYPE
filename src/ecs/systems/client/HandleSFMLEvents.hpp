@@ -100,12 +100,12 @@ namespace ecs::systems
                                                 auto sound = audio::AudioManager::getSFXVolume();
                                                 if (activ->getButtonType() == utils::constant::SOUND_LEFT_HOVER) {
                                                     if (positions[j]->x > 903) {
-                                                        audio::AudioManager::setSFXVolume(sound - 10);
+                                                        audio::AudioManager::setSFXVolume(sound - 5);
                                                         positions[j]->x -= 17;
                                                     }
                                                 } else {
                                                     if (positions[j]->x < 1213) {
-                                                        audio::AudioManager::setSFXVolume(sound + 10);
+                                                        audio::AudioManager::setSFXVolume(sound + 5);
                                                         positions[j]->x += 17;
                                                     }
                                                 }
@@ -123,12 +123,12 @@ namespace ecs::systems
                                                 auto music = audio::AudioManager::getBGMVolume();
                                                 if (activ->getButtonType() == utils::constant::MUSIC_LEFT_HOVER) {
                                                     if (positions[j]->x > 903) {
-                                                        audio::AudioManager::setBGMVolume(music - 10);
+                                                        audio::AudioManager::setBGMVolume(music - 5);
                                                         positions[j]->x -= 17;
                                                     }
                                                 } else {
                                                     if (positions[j]->x < 1213) {
-                                                        audio::AudioManager::setBGMVolume(music + 10);
+                                                        audio::AudioManager::setBGMVolume(music + 5);
                                                         positions[j]->x += 17;
                                                     }
                                                 }
