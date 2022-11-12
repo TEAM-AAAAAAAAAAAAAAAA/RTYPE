@@ -59,10 +59,6 @@ namespace ecs::systems
                           static_cast<float>(size.value().height) / static_cast<float>(sprite.getTextureRect().height);
                       sprite.setScale(scaleX, scaleY);
                       sprite.setPosition({static_cast<float>(pos.value().x), static_cast<float>(pos.value().y)});
-                      // if (draw.value().rotation) {
-                      //     sprite.setOrigin(size.value().width / 2, size.value().height / 2);
-                      //     sprite.setRotation(draw.value().rotation);
-                      // }
                       utils::Window::getInstance().draw(sprite);
                   }
               }
@@ -78,7 +74,7 @@ namespace ecs::systems
 
               if (text && activ && size && pos) {
                   for (size_t j = 0; j < text->getContentSize(); j++) {
-                      if (activ->getIsActivate()) {
+                      if (activ->getIsActivate() && text->getContent(j) != "") {
                           sf::Text sfText;
                           sf::Color textColor;
                           size_t textLength = 0;
