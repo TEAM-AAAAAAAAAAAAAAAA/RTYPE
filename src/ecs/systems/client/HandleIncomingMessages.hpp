@@ -18,10 +18,10 @@
 #include "components/Position.hpp"
 #include "components/Size.hpp"
 #include "components/Velocity.hpp"
+#include "components/client/Activable.hpp"
 #include "components/client/Controllable.hpp"
 #include "components/client/Drawable.hpp"
 #include "components/client/Shootable.hpp"
-#include "components/client/Activable.hpp"
 
 namespace ecs::systems
 {
@@ -96,7 +96,8 @@ namespace ecs::systems
                         newEntity, ecs::component::Shootable(asset::AssetLoader::GetKeybind("shoot")));
                     world.registry.addComponent<ecs::component::Controllable>(newEntity,
                         {asset::AssetLoader::GetKeybind("up"), asset::AssetLoader::GetKeybind("left"),
-                            asset::AssetLoader::GetKeybind("down"), asset::AssetLoader::GetKeybind("right"), asset::AssetLoader::GetKeybind("hitbox")});
+                            asset::AssetLoader::GetKeybind("down"), asset::AssetLoader::GetKeybind("right"),
+                            asset::AssetLoader::GetKeybind("hitbox")});
                     world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
                     world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 1, 32, 16}});
                     world.registry.addComponent<ecs::component::Animated>(newEntity,
@@ -111,11 +112,11 @@ namespace ecs::systems
                     newEntity, {component::EntityType::Types::PlayerBot});
                 world.registry.addComponent<component::Drawable>(newEntity, {"players", {1, 35, 32, 16}});
                 world.registry.addComponent<ecs::component::Hitbox>(newEntity, {ecs::component::Hitbox()});
-                    world.registry.addComponent<ecs::component::Animated>(newEntity,
-                        {AnimFrame(1, 35, 32, 16, 100), AnimFrame(34, 35, 32, 16, 100), AnimFrame(67, 35, 32, 16, 100),
-                            AnimFrame(100, 35, 32, 16, 100), AnimFrame(133, 35, 32, 16, 100),
-                            AnimFrame(100, 35, 32, 16, 100), AnimFrame(67, 35, 32, 16, 100),
-                            AnimFrame(34, 35, 32, 16, 100)});
+                world.registry.addComponent<ecs::component::Animated>(newEntity,
+                    {AnimFrame(1, 35, 32, 16, 100), AnimFrame(34, 35, 32, 16, 100), AnimFrame(67, 35, 32, 16, 100),
+                        AnimFrame(100, 35, 32, 16, 100), AnimFrame(133, 35, 32, 16, 100),
+                        AnimFrame(100, 35, 32, 16, 100), AnimFrame(67, 35, 32, 16, 100),
+                        AnimFrame(34, 35, 32, 16, 100)});
                 break;
 #pragma region uranus ships
             case component::EntityType::Types::UranusBattlecruiser:
@@ -375,7 +376,6 @@ namespace ecs::systems
                     return;
                 }
         }
-        std::cerr << "Error: Client couldn't kill unknown entity with netId '" << msgId << "'." << std::endl;
     }
 
     static std::unordered_map<char, std::function<void(World &, network::Message &msg)>> packetTypeFunction = {
@@ -386,7 +386,8 @@ namespace ecs::systems
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Client::getReceivedMessages().empty()) {
             network::Message msg = network::Client::getReceivedMessages().pop();
-            packetTypeFunction[msg[0]](world, msg);
+            if (packetTypeFunction.find(msg[0]) != packetTypeFunction.end())
+                packetTypeFunction[msg[0]](world, msg);
         }
     };
 } // namespace ecs::systems
