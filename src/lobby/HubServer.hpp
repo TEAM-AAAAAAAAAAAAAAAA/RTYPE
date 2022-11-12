@@ -36,7 +36,7 @@ class HubServer {
             si.cb = sizeof(si);
             ZeroMemory(&_processes[i], sizeof(_processes[i]));
 
-            if (!CreateProcess(NULL, ("r-type_server " + std::to_string(_port + i)).c_str(), NULL, NULL, FALSE, 0, NULL,
+            if (!CreateProcess(NULL, ("r-type_server " + std::to_string(_port + i + 1)).c_str(), NULL, NULL, FALSE, 0, NULL,
                     NULL, &si, &_processes[i])) {
                 std::cerr << "Failed to create process" << std::endl;
                 exit(84);
@@ -50,7 +50,7 @@ class HubServer {
                 exit(84);
             }
             if (_pids[i] == 0) {
-                execl("./r-type_server", "./r-type_server", std::to_string(_port + i).c_str(), nullptr);
+                execl("./r-type_server", "./r-type_server", std::to_string(_port + i + 1).c_str(), nullptr);
                 exit(0);
             } else {
                 _serverPorts[i] = _port + i + 1;
