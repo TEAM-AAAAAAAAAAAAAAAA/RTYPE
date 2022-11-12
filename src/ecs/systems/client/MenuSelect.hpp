@@ -110,6 +110,9 @@ namespace ecs::systems
                       }
                       default: break;
                   }
+                  if (activ->getButtonType() == utils::constant::QUIT_HOVER)
+                      if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+                          utils::Window::getInstance().close();
                   activ->setIsHover(true);
               } else if (activ->getIsHover() && activ->getIsButton()){
                   activ->getButtonType() == utils::constant::ROOM ? draw->rect.top = itButtonRoom->second.rectTop : 0;
@@ -131,8 +134,6 @@ namespace ecs::systems
                           break;
                       }
                       case utils::constant::QUIT_HOVER: {
-                          if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-                              utils::Window::getInstance().close();
                           activ->setButtonType(utils::constant::QUIT);
                           draw->rect.left = 4760;
                           draw->rect.top = itButton->second.rectTop;
