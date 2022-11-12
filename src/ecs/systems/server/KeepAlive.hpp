@@ -25,9 +25,9 @@ namespace ecs::systems
             network::Server::getClientLastPings();
         if (utils::constant::chronoDuration(utils::constant::chrono::now() - clock).count() > 1000) {
             clock = utils::constant::chrono::now();
-
             for (auto &ping : _clientLastPing) {
-                if (utils::constant::chronoDuration(utils::constant::chrono::now() - ping.second).count() > 5000) {
+                auto lastPing = ping.second;
+                if (utils::constant::chronoDuration(utils::constant::chrono::now() - lastPing).count() > 5000) {
                     network::Message msg;
                     msg.fill(0);
                     msg[0] = 70;

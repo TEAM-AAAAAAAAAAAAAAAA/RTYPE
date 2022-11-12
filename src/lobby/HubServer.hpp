@@ -142,7 +142,7 @@ class HubServer {
     void sendOutgoingMessages()
     {
         static auto clock = chrono::now();
-        if (utils::constant::chronoDuration(utils::constant::chrono::now() - clock).count() > 200) {
+        if (utils::constant::chronoDuration(utils::constant::chrono::now() - clock).count() > 500) {
             clock = utils::constant::chrono::now();
             for (size_t i = 0; i < _serverPorts.size(); i++) {
                 if (_serverPorts[i] != 0 && _serverIds[i] != 0) {
