@@ -94,6 +94,7 @@ jobs:
                 -G "Visual Studio 17 2022"
                 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
                 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_TOOLCHAIN_PATH}
+                -DSFML_DIR=${SFML_DIR}
                 -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE
             RESULT_VARIABLE result
             )
