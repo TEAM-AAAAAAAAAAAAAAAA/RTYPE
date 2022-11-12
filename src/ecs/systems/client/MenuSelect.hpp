@@ -32,7 +32,7 @@ namespace ecs::systems
 
           if (draw && pos && size && activ) {
               if ((mousePosition.x >= pos->x && mousePosition.x <= pos->x + size->width) && (mousePosition.y >= pos->y && mousePosition.y <= pos->y + size->height) && activ->getIsButton()) {
-                  if (!activ->getIsHover())
+                  if (!activ->getIsHover() && activ->getIsActivate())
                       audio::AudioManager::playSFX("button_hover");
                   switch(activ->getButtonType()) {
                       case utils::constant::PLAY: {
