@@ -25,9 +25,9 @@ int main()
 //    network::Client::getOutgoingMessages().push(msg);
     asset::AssetLoader::LoadIniFile(asset::AssetLoader::smartPath("assets", "config.ini"));
     audio::AudioManager::playSFX("splash_screen");
-    audio::AudioManager::loadBGM("bgm1");
-    audio::AudioManager::playBGM(true);
     ecs::WorldManager::setWaitingWorld(getMenuWorld);
+    audio::AudioManager::setBGMVolume(50);
+    audio::AudioManager::setSFXVolume(50);
     engine.run();
     return 0;
 }
