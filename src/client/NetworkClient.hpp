@@ -10,8 +10,11 @@
 #include <boost/array.hpp>
 #include <boost/asio.hpp>
 #include <iostream>
+#include "Constant.hpp"
 #include "LockedQueue.hpp"
 
+using chrono = std::chrono::high_resolution_clock;
+using chronoDuration = std::chrono::duration<double, std::milli>;
 using boost::asio::ip::udp;
 
 namespace network
@@ -47,6 +50,7 @@ namespace network
 
         static inline LockedQueue<Message> &getReceivedMessages() { return getInstance()._receivedMessages; }
 
+        static inline std::chrono::_V2::system_clock::time_point getLastPing() { return getInstance()._lastPing; }
         static inline bool getIsConnected() { return getInstance()._isConnected;}
         static inline void setIsConnected() { getInstance()._isConnected = true;}
 
@@ -101,6 +105,11 @@ namespace network
         LockedQueue<Message> _receivedMessages;
 
         /**
+         * The timestamp of the last received message
+         */
+        std::chrono::_V2::system_clock::time_point _lastPing;
+
+        /**
          * Handles the incoming messages by placing them into the incoming
          * messages locked queue
          * @param error error of reception
@@ -111,6 +120,7 @@ namespace network
             if (!error) {
                 try {
                     auto message = Message(_recvBuffer);
+                    _lastPing = chrono::now();
                     if (!message.empty()) {
                         network::Client::setIsConnected();
                         _receivedMessages.push(message);
@@ -130,14 +140,6 @@ namespace network
             _socket.async_receive_from(boost::asio::buffer(_recvBuffer), senderEndpoint,
                 [this](std::error_code ec, std::size_t bytesRecvd) { this->handleReceive(ec, bytesRecvd); });
         }
-
-        /**
-         * Handles the sending of packets
-         * @param message the packet as an array
-         * @param error error code of sending
-         * @param bytesTransferred the size of the outgoing packet
-         */
-        void handleSend(Message message, const std::error_code &error, std::size_t bytesTransferred) {}
 
         /**
          * Run the client's service
@@ -185,8 +187,8 @@ namespace network
          */
         std::thread _incomingService;
         std::thread _outgoingService;
-        
+
         static Client &getInstance();
-//        static Client getInstance();
+        //        static Client getInstance();
     };
 } // namespace network

@@ -420,12 +420,20 @@ namespace ecs::systems
         }
     }
 
+    static void keepAliveResponse(World &world, network::Message &msg)
+    {
+        network::Message response;
+        response[0] = 71;
+        network::Client::getOutgoingMessages().push(response);
+    }
+
     static std::unordered_map<char, std::function<void(World &, network::Message &msg)>> packetTypeFunction = {
-            {utils::constant::getPacketTypeKey(utils::constant::PacketType::ENTITY_MOVE), movePacketHandle},
-            {0, firstMessageHandle},
-            {utils::constant::getPacketTypeKey(utils::constant::PacketType::ENTITY_DEATH), deathMessageHandle},
-            {utils::constant::getPacketTypeKey(utils::constant::PacketType::HEALTH_UPDATE), playerHealthHandle},
-            {utils::constant::getPacketTypeKey(utils::constant::PacketType::ROOM_UPDATE), roomUpdate}};
+        {utils::constant::getPacketTypeKey(utils::constant::PacketType::ENTITY_MOVE), movePacketHandle},
+        {0, firstMessageHandle},
+        {utils::constant::getPacketTypeKey(utils::constant::PacketType::ENTITY_DEATH), deathMessageHandle},
+        {utils::constant::getPacketTypeKey(utils::constant::PacketType::KEEP_ALIVE), keepAliveResponse},
+        {utils::constant::getPacketTypeKey(utils::constant::PacketType::ROOM_UPDATE), roomUpdate},
+        {utils::constant::getPacketTypeKey(utils::constant::PacketType::HEALTH_UPDATE), playerHealthHandle}};
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Client::getReceivedMessages().empty()) {
