@@ -113,6 +113,19 @@ jobs:
             message(FATAL_ERROR "Bad exit status. Failed to build RTYPE project.")
           endif()
 
+      - name: Package
+        shell: cmake -P {0}
+        if: matrix.platform == 'ubuntu-latest'
+        run: |
+          execute_process(
+            COMMAND cpack 
+            WORKING_DIRECTORY build
+            RESULT_VARIABLE result
+          )
+          if (NOT result EQUAL 0)
+            message(FATAL_ERROR "Bad exit status. Failed to build RTYPE project.")
+          endif()
+
       - name: Create msi installer
         if: matrix.platform == 'windows-latest'
         run: |
