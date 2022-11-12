@@ -289,11 +289,45 @@ static void setRoomButtons(ecs::World &world)
     world.registry.addComponent<ecs::component::Activable>(fourthRoom, {false, true, utils::constant::ROOM});
 }
 
+static void setVolumeButtons(ecs::World &world)
+{
+    auto itLeftButton = utils::constant::buttonValueMap.find(utils::constant::ROOM);
+    auto itRightButton = utils::constant::buttonValueMap.find(utils::constant::ROOM);
+    auto itLeftButtonHover = utils::constant::buttonValueMap.find(utils::constant::ROOM);
+    auto itRightButtonHover = utils::constant::buttonValueMap.find(utils::constant::ROOM);
+    auto itSlideButton = utils::constant::buttonValueMap.find(utils::constant::ROOM);
+    auto itVolumeBar = utils::constant::buttonValueMap.find(utils::constant::ROOM);
+    ecs::Entity leftButton = world.registry.spawn_entity();
+    ecs::Entity rightButton = world.registry.spawn_entity();
+    ecs::Entity leftButtonHover = world.registry.spawn_entity();
+    ecs::Entity rightButtonHover = world.registry.spawn_entity();
+    ecs::Entity slideButton = world.registry.spawn_entity();
+    ecs::Entity volumeBar = world.registry.spawn_entity();
+
+    world.registry.addComponent<ecs::component::Position>(leftButton, {itLeftButton->second.posX, itLeftButton->second.posY});
+    world.registry.addComponent<ecs::component::Size>(leftButton, {itLeftButton->second.rectHeight, itLeftButton->second.rectWidth});
+    world.registry.addComponent<ecs::component::Drawable>(leftButton, {"menu", {itLeftButton->second.rectLeft, itLeftButton->second.rectTop, itLeftButton->second.defaultRectWidth, itLeftButton->second.defaultRectHeight}});
+    world.registry.addComponent<ecs::component::Activable>(leftButton, {false, false, utils::constant::OPTION_INTERFACE});
+}
+
+static void setOptionInterface(ecs::World &world)
+{
+    auto itOptionInterface = utils::constant::buttonValueMap.find(utils::constant::ROOM);
+    ecs::Entity optionInterface = world.registry.spawn_entity();
+
+    world.registry.addComponent<ecs::component::Position>(optionInterface, {itOptionInterface->second.posX, itOptionInterface->second.posY});
+    world.registry.addComponent<ecs::component::Size>(optionInterface, {itOptionInterface->second.rectHeight, itOptionInterface->second.rectWidth});
+    world.registry.addComponent<ecs::component::Drawable>(optionInterface, {"menu", {itOptionInterface->second.rectLeft, itOptionInterface->second.rectTop, itOptionInterface->second.defaultRectWidth, itOptionInterface->second.defaultRectHeight}});
+    world.registry.addComponent<ecs::component::Activable>(optionInterface, {false, false, utils::constant::OPTION_INTERFACE});
+}
+
 static void setMenuBackground(ecs::World &world)
 {
     setMainButtons(world);
     setRoomButtons(world);
     setRoomTexts(world);
+    setOptionInterface(world);
+    setVolumeButtons(world);
 }
 
 ecs::World getMenuWorld()
