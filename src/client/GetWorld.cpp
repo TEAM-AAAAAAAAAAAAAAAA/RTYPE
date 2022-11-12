@@ -104,7 +104,7 @@ static void setGameHUD(ecs::World &world)
     world.registry.addComponent<ecs::component::Activable>(healthBar, {});
 }
 
-static void setGameParallax(ecs::World &world, bool moving = true)
+static void setGameParallax(ecs::World &world)
 {
     ecs::Entity background1 = world.registry.spawn_entity();
     ecs::Entity parallaxFirstView = world.registry.spawn_entity();
@@ -118,73 +118,72 @@ static void setGameParallax(ecs::World &world, bool moving = true)
         background1, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(background1, {"bg1", {0, 0, 5760, 360}});
     world.registry.addComponent<ecs::component::Activable>(background1, {});
-    if (moving) {
-        world.registry.addComponent<ecs::component::Velocity>(background1, {1, 0});
-        world.registry.addComponent<ecs::component::Direction>(background1, {-1, 0});
-        world.registry.addComponent<ecs::component::Parallax>(
-            background1, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
-        world.registry.addComponent<ecs::component::Animated>(background1, AnimFrame(0, 0, 640, 360, 15));
-    }
+
+    world.registry.addComponent<ecs::component::Velocity>(background1, {1, 0});
+    world.registry.addComponent<ecs::component::Direction>(background1, {-1, 0});
+    world.registry.addComponent<ecs::component::Parallax>(
+        background1, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
+    world.registry.addComponent<ecs::component::Animated>(background1, AnimFrame(0, 0, 640, 360, 15));
+
     world.registry.addComponent<ecs::component::Position>(parallaxFirstView, {utils::constant::mapWidth, 0});
     world.registry.addComponent<ecs::component::Size>(
         parallaxFirstView, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(parallaxFirstView, {"bg1", {0, 0, 5760, 360}});
     world.registry.addComponent<ecs::component::Activable>(parallaxFirstView, {});
-    if (moving) {
-        world.registry.addComponent<ecs::component::Velocity>(parallaxFirstView, {1, 0});
-        world.registry.addComponent<ecs::component::Direction>(parallaxFirstView, {-1, 0});
-        world.registry.addComponent<ecs::component::Parallax>(
-            parallaxFirstView, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
-        world.registry.addComponent<ecs::component::Animated>(parallaxFirstView, AnimFrame(0, 0, 640, 360, 15));
-    }
+
+    world.registry.addComponent<ecs::component::Velocity>(parallaxFirstView, {1, 0});
+    world.registry.addComponent<ecs::component::Direction>(parallaxFirstView, {-1, 0});
+    world.registry.addComponent<ecs::component::Parallax>(
+        parallaxFirstView, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
+    world.registry.addComponent<ecs::component::Animated>(parallaxFirstView, AnimFrame(0, 0, 640, 360, 15));
+
     world.registry.addComponent<ecs::component::Position>(background2, {0, 0});
     world.registry.addComponent<ecs::component::Size>(
         background2, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(background2, {"bg2", {0, 0, 5760, 360}});
     world.registry.addComponent<ecs::component::Activable>(background2, {});
-    if (moving) {
-        world.registry.addComponent<ecs::component::Velocity>(background2, {2, 0});
-        world.registry.addComponent<ecs::component::Direction>(background2, {-1, 0});
-        world.registry.addComponent<ecs::component::Parallax>(
-            background2, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
-        world.registry.addComponent<ecs::component::Animated>(background2, AnimFrame(0, 0, 640, 360, 5));
-    }
+
+    world.registry.addComponent<ecs::component::Velocity>(background2, {2, 0});
+    world.registry.addComponent<ecs::component::Direction>(background2, {-1, 0});
+    world.registry.addComponent<ecs::component::Parallax>(
+        background2, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
+    world.registry.addComponent<ecs::component::Animated>(background2, AnimFrame(0, 0, 640, 360, 5));
+
     world.registry.addComponent<ecs::component::Position>(parallaxSecondView, {utils::constant::mapWidth, 0});
     world.registry.addComponent<ecs::component::Size>(
         parallaxSecondView, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(parallaxSecondView, {"bg2", {0, 0, 5760, 360}});
     world.registry.addComponent<ecs::component::Activable>(parallaxSecondView, {});
-    if (moving) {
-        world.registry.addComponent<ecs::component::Velocity>(parallaxSecondView, {2, 0});
-        world.registry.addComponent<ecs::component::Parallax>(
-            parallaxSecondView, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
-        world.registry.addComponent<ecs::component::Direction>(parallaxSecondView, {-1, 0});
-        world.registry.addComponent<ecs::component::Animated>(parallaxSecondView, AnimFrame(0, 0, 640, 360, 5));
-    }
+
+    world.registry.addComponent<ecs::component::Velocity>(parallaxSecondView, {2, 0});
+    world.registry.addComponent<ecs::component::Parallax>(
+        parallaxSecondView, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
+    world.registry.addComponent<ecs::component::Direction>(parallaxSecondView, {-1, 0});
+    world.registry.addComponent<ecs::component::Animated>(parallaxSecondView, AnimFrame(0, 0, 640, 360, 5));
+
     world.registry.addComponent<ecs::component::Position>(background3, {0, 0});
     world.registry.addComponent<ecs::component::Size>(
         background3, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(background3, {"bg3", {0, 0, 5760, 360}});
     world.registry.addComponent<ecs::component::Activable>(background3, {});
-    if (moving) {
-        world.registry.addComponent<ecs::component::Velocity>(background3, {3, 0});
-        world.registry.addComponent<ecs::component::Parallax>(
-            background3, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
-        world.registry.addComponent<ecs::component::Direction>(background3, {-1, 0});
-        world.registry.addComponent<ecs::component::Animated>(background3, AnimFrame(0, 0, 640, 360, 10));
-    }
+
+    world.registry.addComponent<ecs::component::Velocity>(background3, {3, 0});
+    world.registry.addComponent<ecs::component::Parallax>(
+        background3, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
+    world.registry.addComponent<ecs::component::Direction>(background3, {-1, 0});
+    world.registry.addComponent<ecs::component::Animated>(background3, AnimFrame(0, 0, 640, 360, 10));
+
     world.registry.addComponent<ecs::component::Position>(parallaxThirdView, {utils::constant::mapWidth, 0});
     world.registry.addComponent<ecs::component::Size>(
         parallaxThirdView, {utils::constant::mapHeight, utils::constant::mapWidth});
     world.registry.addComponent<ecs::component::Drawable>(parallaxThirdView, {"bg3", {0, 0, 5760, 360}});
     world.registry.addComponent<ecs::component::Activable>(parallaxThirdView, {});
-    if (moving) {
-        world.registry.addComponent<ecs::component::Velocity>(parallaxThirdView, {3, 0});
-        world.registry.addComponent<ecs::component::Direction>(parallaxThirdView, {-1, 0});
-        world.registry.addComponent<ecs::component::Parallax>(
-            parallaxThirdView, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
-        world.registry.addComponent<ecs::component::Animated>(parallaxThirdView, AnimFrame(0, 0, 640, 360, 10));
-    }
+
+    world.registry.addComponent<ecs::component::Velocity>(parallaxThirdView, {3, 0});
+    world.registry.addComponent<ecs::component::Direction>(parallaxThirdView, {-1, 0});
+    world.registry.addComponent<ecs::component::Parallax>(
+        parallaxThirdView, {utils::constant::mapWidth * -1, utils::constant::mapWidth * 2});
+    world.registry.addComponent<ecs::component::Animated>(parallaxThirdView, AnimFrame(0, 0, 640, 360, 10));
 }
 
 /**
@@ -197,6 +196,9 @@ ecs::World getGameWorld(const std::string &port = "8000", const std::string &hos
 {
     ecs::World world;
 
+    audio::AudioManager::stopBGM();
+    audio::AudioManager::loadBGM("bgm1");
+    audio::AudioManager::playBGM();
     network::Client::setHost(host);
     network::Client::setPort(port);
     utils::Window::getInstance().setFramerateLimit(FRAME_LIMIT);
@@ -332,6 +334,50 @@ static void setRoomButtons(ecs::World &world)
     world.registry.addComponent<ecs::component::Activable>(fourthRoom, {false, true, utils::constant::ROOM});
 }
 
+static void setVolumeButtons(ecs::World &world)
+{
+    auto itLeftButton = utils::constant::buttonValueMap.find(utils::constant::ROOM);
+    auto itRightButton = utils::constant::buttonValueMap.find(utils::constant::ROOM);
+    auto itLeftButtonHover = utils::constant::buttonValueMap.find(utils::constant::ROOM);
+    auto itRightButtonHover = utils::constant::buttonValueMap.find(utils::constant::ROOM);
+    auto itSlideButton = utils::constant::buttonValueMap.find(utils::constant::ROOM);
+    auto itVolumeBar = utils::constant::buttonValueMap.find(utils::constant::ROOM);
+    ecs::Entity leftButton = world.registry.spawn_entity();
+    ecs::Entity rightButton = world.registry.spawn_entity();
+    ecs::Entity leftButtonHover = world.registry.spawn_entity();
+    ecs::Entity rightButtonHover = world.registry.spawn_entity();
+    ecs::Entity slideButton = world.registry.spawn_entity();
+    ecs::Entity volumeBar = world.registry.spawn_entity();
+
+    world.registry.addComponent<ecs::component::Position>(
+        leftButton, {itLeftButton->second.posX, itLeftButton->second.posY});
+    world.registry.addComponent<ecs::component::Size>(
+        leftButton, {itLeftButton->second.rectHeight, itLeftButton->second.rectWidth});
+    world.registry.addComponent<ecs::component::Drawable>(leftButton,
+        {"menu",
+            {itLeftButton->second.rectLeft, itLeftButton->second.rectTop, itLeftButton->second.defaultRectWidth,
+                itLeftButton->second.defaultRectHeight}});
+    world.registry.addComponent<ecs::component::Activable>(
+        leftButton, {false, false, utils::constant::OPTION_INTERFACE});
+}
+
+static void setOptionInterface(ecs::World &world)
+{
+    auto itOptionInterface = utils::constant::buttonValueMap.find(utils::constant::ROOM);
+    ecs::Entity optionInterface = world.registry.spawn_entity();
+
+    world.registry.addComponent<ecs::component::Position>(
+        optionInterface, {itOptionInterface->second.posX, itOptionInterface->second.posY});
+    world.registry.addComponent<ecs::component::Size>(
+        optionInterface, {itOptionInterface->second.rectHeight, itOptionInterface->second.rectWidth});
+    world.registry.addComponent<ecs::component::Drawable>(optionInterface,
+        {"menu",
+            {itOptionInterface->second.rectLeft, itOptionInterface->second.rectTop,
+                itOptionInterface->second.defaultRectWidth, itOptionInterface->second.defaultRectHeight}});
+    world.registry.addComponent<ecs::component::Activable>(
+        optionInterface, {false, false, utils::constant::OPTION_INTERFACE});
+}
+
 static void setMenuBackground(ecs::World &world)
 {
     ecs::Entity planet = world.registry.spawn_entity();
@@ -433,6 +479,8 @@ static void setMenu(ecs::World &world)
     setMainButtons(world);
     setRoomButtons(world);
     setRoomTexts(world);
+    setOptionInterface(world);
+    setVolumeButtons(world);
 }
 
 ecs::World getMenuWorld()
@@ -441,6 +489,9 @@ ecs::World getMenuWorld()
 
     utils::Window::getInstance().setFramerateLimit(FRAME_LIMIT);
     utils::Window::Color = sf::Color(18, 32, 45, 255);
+    audio::AudioManager::stopBGM();
+    audio::AudioManager::loadBGM("lobby_bgm");
+    audio::AudioManager::playBGM("lobby_bgm");
     registerComponents(world);
     addMenuSystems(world);
     setMenu(world);
