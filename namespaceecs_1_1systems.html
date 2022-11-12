@@ -314,7 +314,8 @@ Variables</h2></td></tr>
 <b>Initial value:</b><div class="fragment"><div class="line">= [](World &amp;world) {</div>
 <div class="line">        <span class="keywordflow">while</span> (!<a class="code" href="classnetwork_1_1_client.html#ac8d5bead7d861e42f7b7258eba61fd54">network::Client::getReceivedMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a6f83affbc6d8bc587e67a5b1003678b9">empty</a>()) {</div>
 <div class="line">            <a class="code" href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a> msg = <a class="code" href="classnetwork_1_1_client.html#ac8d5bead7d861e42f7b7258eba61fd54">network::Client::getReceivedMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a2be6f1a5bcdc3fd83a53558377f51d80">pop</a>();</div>
-<div class="line">            packetTypeFunction[msg[0]](world, msg);</div>
+<div class="line">            <span class="keywordflow">if</span> (packetTypeFunction.find(msg[0]) != packetTypeFunction.end())</div>
+<div class="line">                packetTypeFunction[msg[0]](world, msg);</div>
 <div class="line">        }</div>
 <div class="line">    }</div>
 </div><!-- fragment -->
