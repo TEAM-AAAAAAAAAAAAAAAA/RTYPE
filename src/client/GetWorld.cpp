@@ -295,34 +295,75 @@ static void setRoomButtons(ecs::World &world)
 
 static void setVolumeButtons(ecs::World &world)
 {
-    auto itLeftButton = utils::constant::buttonValueMap.find(utils::constant::ROOM);
-    auto itRightButton = utils::constant::buttonValueMap.find(utils::constant::ROOM);
-    auto itLeftButtonHover = utils::constant::buttonValueMap.find(utils::constant::ROOM);
-    auto itRightButtonHover = utils::constant::buttonValueMap.find(utils::constant::ROOM);
-    auto itSlideButton = utils::constant::buttonValueMap.find(utils::constant::ROOM);
-    auto itVolumeBar = utils::constant::buttonValueMap.find(utils::constant::ROOM);
-    ecs::Entity leftButton = world.registry.spawn_entity();
-    ecs::Entity rightButton = world.registry.spawn_entity();
-    ecs::Entity leftButtonHover = world.registry.spawn_entity();
-    ecs::Entity rightButtonHover = world.registry.spawn_entity();
-    ecs::Entity slideButton = world.registry.spawn_entity();
-    ecs::Entity volumeBar = world.registry.spawn_entity();
+    auto itLeftButton = utils::constant::buttonValueMap.find(utils::constant::SOUND_LEFT);
+    auto itRightButton = utils::constant::buttonValueMap.find(utils::constant::SOUND_RIGHT);
+    auto itMusicSlide = utils::constant::buttonValueMap.find(utils::constant::SLIDE_MUSIC);
+    auto itSoundSlide = utils::constant::buttonValueMap.find(utils::constant::SLIDE_SOUND);
+    auto itMusicBar = utils::constant::buttonValueMap.find(utils::constant::SOUND_BAR);
+    ecs::Entity leftSound = world.registry.spawn_entity();
+    ecs::Entity rightSound = world.registry.spawn_entity();
+    ecs::Entity leftMusic = world.registry.spawn_entity();
+    ecs::Entity rightMusic = world.registry.spawn_entity();
+    ecs::Entity soundBar = world.registry.spawn_entity();
+    ecs::Entity musicBar = world.registry.spawn_entity();
+    ecs::Entity slideMusicButton = world.registry.spawn_entity();
+    ecs::Entity slideSoundButton = world.registry.spawn_entity();
 
-    world.registry.addComponent<ecs::component::Position>(leftButton, {itLeftButton->second.posX, itLeftButton->second.posY});
-    world.registry.addComponent<ecs::component::Size>(leftButton, {itLeftButton->second.rectHeight, itLeftButton->second.rectWidth});
-    world.registry.addComponent<ecs::component::Drawable>(leftButton, {"menu", {itLeftButton->second.rectLeft, itLeftButton->second.rectTop, itLeftButton->second.defaultRectWidth, itLeftButton->second.defaultRectHeight}});
-    world.registry.addComponent<ecs::component::Activable>(leftButton, {false, false, utils::constant::OPTION_INTERFACE});
+    world.registry.addComponent<ecs::component::Position>(leftSound, {itLeftButton->second.posX, itLeftButton->second.posY});
+    world.registry.addComponent<ecs::component::Size>(leftSound, {itLeftButton->second.rectHeight, itLeftButton->second.rectWidth});
+    world.registry.addComponent<ecs::component::Drawable>(leftSound, {"menu", {itLeftButton->second.rectLeft, itLeftButton->second.rectTop, itLeftButton->second.defaultRectWidth, itLeftButton->second.defaultRectHeight}});
+    world.registry.addComponent<ecs::component::Activable>(leftSound, {true, false, utils::constant::SOUND_LEFT});
+
+    world.registry.addComponent<ecs::component::Position>(rightSound, {itRightButton->second.posX, itRightButton->second.posY});
+    world.registry.addComponent<ecs::component::Size>(rightSound, {itRightButton->second.rectHeight, itRightButton->second.rectWidth});
+    world.registry.addComponent<ecs::component::Drawable>(rightSound, {"menu", {itRightButton->second.rectLeft, itRightButton->second.rectTop, itRightButton->second.defaultRectWidth, itRightButton->second.defaultRectHeight}});
+    world.registry.addComponent<ecs::component::Activable>(rightSound, {true, true, utils::constant::SOUND_RIGHT});
+
+    world.registry.addComponent<ecs::component::Position>(leftMusic, {itLeftButton->second.posX, itLeftButton->second.posY + 130});
+    world.registry.addComponent<ecs::component::Size>(leftMusic, {itLeftButton->second.rectHeight, itLeftButton->second.rectWidth});
+    world.registry.addComponent<ecs::component::Drawable>(leftMusic, {"menu", {itLeftButton->second.rectLeft, itLeftButton->second.rectTop, itLeftButton->second.defaultRectWidth, itLeftButton->second.defaultRectHeight}});
+    world.registry.addComponent<ecs::component::Activable>(leftMusic, {true, false, utils::constant::SOUND_LEFT});
+
+    world.registry.addComponent<ecs::component::Position>(rightMusic, {itRightButton->second.posX, itRightButton->second.posY + 130});
+    world.registry.addComponent<ecs::component::Size>(rightMusic, {itRightButton->second.rectHeight, itRightButton->second.rectWidth});
+    world.registry.addComponent<ecs::component::Drawable>(rightMusic, {"menu", {itRightButton->second.rectLeft, itRightButton->second.rectTop, itRightButton->second.defaultRectWidth, itRightButton->second.defaultRectHeight}});
+    world.registry.addComponent<ecs::component::Activable>(rightMusic, {true, true, utils::constant::SOUND_RIGHT});
+
+    world.registry.addComponent<ecs::component::Position>(soundBar, {itMusicBar->second.posX, itMusicBar->second.posY});
+    world.registry.addComponent<ecs::component::Size>(soundBar, {itMusicBar->second.rectHeight, itMusicBar->second.rectWidth});
+    world.registry.addComponent<ecs::component::Drawable>(soundBar, {"menu", {itMusicBar->second.rectLeft, itMusicBar->second.rectTop, itMusicBar->second.defaultRectWidth,itMusicBar->second.defaultRectHeight}});
+    world.registry.addComponent<ecs::component::Activable>(soundBar, {true, false, utils::constant::SOUND_BAR});
+
+    world.registry.addComponent<ecs::component::Position>(musicBar, {itMusicBar->second.posX, itMusicBar->second.posY + 130});
+    world.registry.addComponent<ecs::component::Size>(musicBar, {itMusicBar->second.rectHeight, itMusicBar->second.rectWidth});
+    world.registry.addComponent<ecs::component::Drawable>(musicBar, {"menu", {itMusicBar->second.rectLeft, itMusicBar->second.rectTop, itMusicBar->second.defaultRectWidth,itMusicBar->second.defaultRectHeight}});
+    world.registry.addComponent<ecs::component::Activable>(musicBar, {true, false, utils::constant::SOUND_BAR});
+
+    world.registry.addComponent<ecs::component::Position>(slideSoundButton, {itSoundSlide->second.posX, itSoundSlide->second.posY});
+    world.registry.addComponent<ecs::component::Size>(slideSoundButton, {itSoundSlide->second.rectHeight, itSoundSlide->second.rectWidth});
+    world.registry.addComponent<ecs::component::Drawable>(slideSoundButton, {"menu", {itSoundSlide->second.rectLeft, itSoundSlide->second.rectTop, itSoundSlide->second.defaultRectWidth,itMusicSlide->second.defaultRectHeight}});
+    world.registry.addComponent<ecs::component::Activable>(slideSoundButton, {true, false, utils::constant::SLIDE_SOUND});
+
+    world.registry.addComponent<ecs::component::Position>(slideMusicButton, {itMusicSlide->second.posX, itMusicSlide->second.posY});
+    world.registry.addComponent<ecs::component::Size>(slideMusicButton, {itMusicSlide->second.rectHeight, itMusicSlide->second.rectWidth});
+    world.registry.addComponent<ecs::component::Drawable>(slideMusicButton, {"menu", {itMusicSlide->second.rectLeft, itMusicSlide->second.rectTop, itMusicSlide->second.defaultRectWidth,itMusicSlide->second.defaultRectHeight}});
+    world.registry.addComponent<ecs::component::Activable>(slideMusicButton, {true, false, utils::constant::SLIDE_MUSIC});
 }
 
 static void setOptionInterface(ecs::World &world)
 {
-    auto itOptionInterface = utils::constant::buttonValueMap.find(utils::constant::ROOM);
+    auto itOptionInterface = utils::constant::buttonValueMap.find(utils::constant::OPTION_INTERFACE);
     ecs::Entity optionInterface = world.registry.spawn_entity();
 
     world.registry.addComponent<ecs::component::Position>(optionInterface, {itOptionInterface->second.posX, itOptionInterface->second.posY});
     world.registry.addComponent<ecs::component::Size>(optionInterface, {itOptionInterface->second.rectHeight, itOptionInterface->second.rectWidth});
     world.registry.addComponent<ecs::component::Drawable>(optionInterface, {"menu", {itOptionInterface->second.rectLeft, itOptionInterface->second.rectTop, itOptionInterface->second.defaultRectWidth, itOptionInterface->second.defaultRectHeight}});
-    world.registry.addComponent<ecs::component::Activable>(optionInterface, {false, false, utils::constant::OPTION_INTERFACE});
+    world.registry.addComponent<ecs::component::Activable>(optionInterface, {true, false, utils::constant::OPTION_INTERFACE});
+}
+
+static void setHowToPlayButton(ecs::World &world)
+{
+
 }
 
 static void setMenuBackground(ecs::World &world)
@@ -332,6 +373,7 @@ static void setMenuBackground(ecs::World &world)
     setRoomTexts(world);
     setOptionInterface(world);
     setVolumeButtons(world);
+    setHowToPlayButton(world);
 }
 
 ecs::World getMenuWorld()
