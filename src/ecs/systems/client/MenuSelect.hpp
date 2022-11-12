@@ -66,11 +66,50 @@ namespace ecs::systems
                           draw->rect.height = itHoveredButton->second.defaultRectHeight;
                           break;
                       }
+                      case utils::constant::SOUND_LEFT: {
+                          auto itLeft = utils::constant::buttonValueMap.find(utils::constant::SOUND_LEFT_HOVER);
+                          activ->setButtonType(utils::constant::SOUND_LEFT_HOVER);
+                          draw->rect.top = itLeft->second.rectTop;
+                          draw->rect.left = itLeft->second.rectLeft;
+                          break;
+                      }
+                      case utils::constant::SOUND_RIGHT: {
+                          auto itRight = utils::constant::buttonValueMap.find(utils::constant::SOUND_RIGHT_HOVER);
+                          activ->setButtonType(utils::constant::SOUND_RIGHT_HOVER);
+                          draw->rect.top = itRight->second.rectTop;
+                          draw->rect.left = itRight->second.rectLeft;
+                          break;
+                      }
+                      case utils::constant::MUSIC_LEFT: {
+                          auto itLeft = utils::constant::buttonValueMap.find(utils::constant::MUSIC_LEFT_HOVER);
+                          activ->setButtonType(utils::constant::MUSIC_LEFT_HOVER);
+                          draw->rect.top = itLeft->second.rectTop;
+                          draw->rect.left = itLeft->second.rectLeft;
+                          break;
+                      }
+                      case utils::constant::MUSIC_RIGHT: {
+                          auto itRight = utils::constant::buttonValueMap.find(utils::constant::MUSIC_RIGHT_HOVER);
+                          activ->setButtonType(utils::constant::MUSIC_RIGHT_HOVER);
+                          draw->rect.top = itRight->second.rectTop;
+                          draw->rect.left = itRight->second.rectLeft;
+                          break;
+                      }
+                      case utils::constant::HOW_TO: {
+                          auto itHowTo = utils::constant::buttonValueMap.find(utils::constant::HOW_TO_HOVER);
+                          activ->setButtonType(utils::constant::HOW_TO_HOVER);
+                          draw->rect.top = itHowTo->second.rectTop;
+                          draw->rect.left = itHowTo->second.rectLeft;
+                          break;
+                      }
+                      case utils::constant::SETTINGS: {
+                          auto itSettings = utils::constant::buttonValueMap.find(utils::constant::SETTINGS_HOVER);
+                          activ->setButtonType(utils::constant::SETTINGS_HOVER);
+                          draw->rect.top = itSettings->second.rectTop;
+                          draw->rect.left = itSettings->second.rectLeft;
+                          break;
+                      }
                       default: break;
                   }
-                  if (activ->getButtonType() == utils::constant::QUIT_HOVER)
-                      if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-                          utils::Window::getInstance().close();
                   activ->setIsHover(true);
               } else if (activ->getIsHover() && activ->getIsButton()){
                   activ->getButtonType() == utils::constant::ROOM ? draw->rect.top = itButtonRoom->second.rectTop : 0;
@@ -92,6 +131,8 @@ namespace ecs::systems
                           break;
                       }
                       case utils::constant::QUIT_HOVER: {
+                          if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+                              utils::Window::getInstance().close();
                           activ->setButtonType(utils::constant::QUIT);
                           draw->rect.left = 4760;
                           draw->rect.top = itButton->second.rectTop;
@@ -105,9 +146,51 @@ namespace ecs::systems
                           draw->rect.width = itButtonRoom->second.defaultRectWidth;
                           draw->rect.height = itButtonRoom->second.defaultRectHeight;
                           break;
-                          default:
-                              break;
                       }
+                      case utils::constant::SOUND_LEFT_HOVER: {
+                          auto itLeft = utils::constant::buttonValueMap.find(utils::constant::SOUND_LEFT);
+                          activ->setButtonType(utils::constant::SOUND_LEFT);
+                          draw->rect.top = itLeft->second.rectTop;
+                          draw->rect.left = itLeft->second.rectLeft;
+                          break;
+                      }
+                      case utils::constant::SOUND_RIGHT_HOVER: {
+                          auto itRight = utils::constant::buttonValueMap.find(utils::constant::SOUND_RIGHT);
+                          activ->setButtonType(utils::constant::SOUND_RIGHT);
+                          draw->rect.top = itRight->second.rectTop;
+                          draw->rect.left = itRight->second.rectLeft;
+                          break;
+                      }
+                      case utils::constant::MUSIC_LEFT_HOVER: {
+                          auto itLeft = utils::constant::buttonValueMap.find(utils::constant::MUSIC_LEFT);
+                          activ->setButtonType(utils::constant::MUSIC_LEFT);
+                          draw->rect.top = itLeft->second.rectTop;
+                          draw->rect.left = itLeft->second.rectLeft;
+                          break;
+                      }
+                      case utils::constant::MUSIC_RIGHT_HOVER: {
+                          auto itRight = utils::constant::buttonValueMap.find(utils::constant::MUSIC_RIGHT);
+                          activ->setButtonType(utils::constant::MUSIC_RIGHT);
+                          draw->rect.top = itRight->second.rectTop;
+                          draw->rect.left = itRight->second.rectLeft;
+                          break;
+                      }
+                      case utils::constant::HOW_TO_HOVER: {
+                          auto itHowTo = utils::constant::buttonValueMap.find(utils::constant::HOW_TO);
+                          activ->setButtonType(utils::constant::HOW_TO);
+                          draw->rect.top = itHowTo->second.rectTop;
+                          draw->rect.left = itHowTo->second.rectLeft;
+                          break;
+                      }
+                      case utils::constant::SETTINGS_HOVER: {
+                          auto itSettings = utils::constant::buttonValueMap.find(utils::constant::SETTINGS);
+                          activ->setButtonType(utils::constant::SETTINGS);
+                          draw->rect.top = itSettings->second.rectTop;
+                          draw->rect.left = itSettings->second.rectLeft;
+                          break;
+                      }
+                      default:
+                          break;
                   }
                   activ->setIsHover(false);
               }
