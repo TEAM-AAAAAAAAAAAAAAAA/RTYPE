@@ -63,9 +63,9 @@ namespace ecs::systems
                             if ((mousePosition.x >= pos->x && mousePosition.x <= pos->x + size->width)
                                 && (mousePosition.y >= pos->y && mousePosition.y <= pos->y + size->height)
                                 && activ->getIsButton() && activ->getIsActivate()) {
-                                audio::AudioManager::playSFX("button_click");
                                 if (activ->getButtonType() == utils::constant::PLAY_HOVER) {
                                     if (event.mouseButton.button == sf::Mouse::Left) {
+                                        audio::AudioManager::playSFX("button_click");
                                         for (size_t j = 0; j < activables.size() && texts.size(); j++)
                                             if (activables[j]->getButtonType() == utils::constant::ROOM
                                                 || activables[j]->getButtonType() == utils::constant::ROOM_TEXT) {
@@ -73,22 +73,26 @@ namespace ecs::systems
                                             }
                                     }
                                 } else if (activ->getButtonType() == utils::constant::OPTION_HOVER) {
-                                    for (size_t j = 0; j < activables.size() && texts.size(); j++)
-                                        if (activables[j]->getButtonType() == utils::constant::OPTION_INTERFACE
-                                            || activables[j]->getButtonType() == utils::constant::SOUND_LEFT
-                                            || activables[j]->getButtonType() == utils::constant::SOUND_RIGHT
-                                            || activables[j]->getButtonType() == utils::constant::HOW_TO
-                                            || activables[j]->getButtonType() == utils::constant::SLIDE_MUSIC
-                                            || activables[j]->getButtonType() == utils::constant::SLIDE_SOUND
-                                            || activables[j]->getButtonType() == utils::constant::SOUND_BAR
-                                            || activables[j]->getButtonType() == utils::constant::SETTINGS
-                                            || activables[j]->getButtonType() == utils::constant::OPTIONS_TEXT
-                                            || activables[j]->getButtonType() == utils::constant::MUSIC_LEFT
-                                            || activables[j]->getButtonType() == utils::constant::MUSIC_RIGHT) {
-                                            activables[j]->switchSetIsActivate();
-                                        }
+                                    if (event.mouseButton.button == sf::Mouse::Left) {
+                                        audio::AudioManager::playSFX("button_click");
+                                        for (size_t j = 0; j < activables.size() && texts.size(); j++)
+                                            if (activables[j]->getButtonType() == utils::constant::OPTION_INTERFACE
+                                                || activables[j]->getButtonType() == utils::constant::SOUND_LEFT
+                                                || activables[j]->getButtonType() == utils::constant::SOUND_RIGHT
+                                                || activables[j]->getButtonType() == utils::constant::HOW_TO
+                                                || activables[j]->getButtonType() == utils::constant::SLIDE_MUSIC
+                                                || activables[j]->getButtonType() == utils::constant::SLIDE_SOUND
+                                                || activables[j]->getButtonType() == utils::constant::SOUND_BAR
+                                                || activables[j]->getButtonType() == utils::constant::SETTINGS
+                                                || activables[j]->getButtonType() == utils::constant::OPTIONS_TEXT
+                                                || activables[j]->getButtonType() == utils::constant::MUSIC_LEFT
+                                                || activables[j]->getButtonType() == utils::constant::MUSIC_RIGHT) {
+                                                activables[j]->switchSetIsActivate();
+                                            }
+                                    }
                                 } else if (activ->getButtonType() == utils::constant::SOUND_LEFT_HOVER || activ->getButtonType() == utils::constant::SOUND_RIGHT_HOVER) {
                                     if (event.mouseButton.button == sf::Mouse::Left) {
+                                        audio::AudioManager::playSFX("button_click");
                                         for (size_t j = 0; j < activables.size() || j < positions.size(); j++) {
                                             if (!positions[j] || !activables[j])
                                                 continue;
@@ -111,6 +115,7 @@ namespace ecs::systems
                                     }
                                 } else if (activ->getButtonType() == utils::constant::MUSIC_LEFT_HOVER || activ->getButtonType() == utils::constant::MUSIC_RIGHT_HOVER) {
                                     if (event.mouseButton.button == sf::Mouse::Left) {
+                                        audio::AudioManager::playSFX("button_click");
                                         for (size_t j = 0; j < activables.size() || j < positions.size(); j++) {
                                             if (!positions[j] || !activables[j])
                                                 continue;
