@@ -30,6 +30,7 @@ namespace ecs::systems
         auto &positions = world.registry.getComponents<component::Position>();
         auto &sizes = world.registry.getComponents<component::Size>();
         auto &texts = world.registry.getComponents<component::Text>();
+        auto &connections = world.registry.getComponents<component::Connection>();
 
         while (utils::Window::getInstance().pollEvent(event)) {
             switch (event.type) {
@@ -52,11 +53,10 @@ namespace ecs::systems
                     }
                 }
                 case sf::Event::MouseButtonReleased: {
-                    for (size_t i = 0; i < positions.size() && i < activables.size() && i < sizes.size(); i++) {
+                    for (size_t i = 0; i < positions.size() || i < activables.size() || i < sizes.size() || i < connections.size(); i++) {
                         auto &pos = positions[i];
                         auto &activ = activables[i];
                         auto &size = sizes[i];
-                        auto &text = texts[i];
                         auto mousePosition = sf::Mouse::getPosition(utils::Window::getInstance());
 
                         if (pos && size && activ) {
@@ -65,13 +65,29 @@ namespace ecs::systems
                                 && activ->getIsButton() && activ->getIsActivate()) {
                                 if (activ->getButtonType() == utils::constant::PLAY_HOVER) {
                                     if (event.mouseButton.button == sf::Mouse::Left) {
+                                        network::Message msg;
+
                                         audio::AudioManager::playSFX("button_click");
-                                        for (size_t j = 0; j < activables.size() && texts.size(); j++)
+                                        msg.fill(128);
+                                        network::Client::getOutgoingMessages().push(msg);
+                                        for (size_t j = 0; j < activables.size() && texts.size(); j++) {
+                                            if (connections[j])
+                                                connections[j]->setIsSet(false);
                                             if (activables[j]->getButtonType() == utils::constant::ROOM
                                                 || activables[j]->getButtonType() == utils::constant::ROOM_TEXT
                                                 || activables[j]->getButtonType() == utils::constant::PLANET) {
                                                 activables[j]->switchSetIsActivate();
                                             }
+                                        }
+                                    }
+                                } else if (activ->getButtonType() == utils::constant::ROOM_HOVER) {
+                                    if (i < connections.size()) {
+                                        auto &connec = connections[i];
+
+                                        if (event.mouseButton.button == sf::Mouse::Left) {
+                                            audio::AudioManager::playSFX("button_click");
+                                            connec->setClientConnection();
+                                        }
                                     }
                                 } else if (activ->getButtonType() == utils::constant::OPTION_HOVER) {
                                     if (event.mouseButton.button == sf::Mouse::Left) {
