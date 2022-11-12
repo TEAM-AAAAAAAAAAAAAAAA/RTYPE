@@ -11,6 +11,7 @@
 #include "Window.hpp"
 #include "World.hpp"
 #include "WorldManager.hpp"
+#include "../../../client/AudioManager.hpp"
 
 namespace ecs::systems
 {
@@ -62,6 +63,7 @@ namespace ecs::systems
                           if ((mousePosition.x >= pos->x && mousePosition.x <= pos->x + size->width)
                               && (mousePosition.y >= pos->y && mousePosition.y <= pos->y + size->height)
                               && activ->getIsButton()) {
+                              audio::AudioManager::playSFX("button_click");
                               if (activ->getButtonType() == utils::constant::PLAY_HOVER)
                                   if (event.mouseButton.button == sf::Mouse::Left)
                                       for (size_t j = 0; j < activables.size() && texts.size(); j++)
@@ -69,6 +71,7 @@ namespace ecs::systems
                                               || activables[j]->getButtonType() == utils::constant::ROOM_TEXT) {
                                               activables[j]->switchSetIsActivate();
                                           }
+                                  }
                           }
                       }
                   }
