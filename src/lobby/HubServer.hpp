@@ -28,7 +28,6 @@ class HubServer {
         network::ServerMessage response;
         _port = port;
 #ifdef WIN32
-        //LPSTR executable_name;
         for (size_t i = 0; i < _processes.size(); i++) {
             STARTUPINFO si;
             std::string exec_base_name = "r-type_server.exe" + std::to_string(_port + i + 1);

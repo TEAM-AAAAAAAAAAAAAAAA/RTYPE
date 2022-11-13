@@ -120,7 +120,7 @@ namespace network
             if (!error) {
                 try {
                     auto message = Message(_recvBuffer);
-                    _lastPing = chrono::now();
+                    _lastPing = std::chrono::steady_clock::now();
                     if (!message.empty()) {
                         network::Client::setIsConnected();
                         _receivedMessages.push(message);
