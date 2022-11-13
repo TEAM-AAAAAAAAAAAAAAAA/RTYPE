@@ -188,6 +188,7 @@ namespace network
                 try {
                     if (_recvBuffer[0] == 68) {
                         _hubID = getOrCreateClientID(_remoteEndpoint);
+                        std::cerr << "Hub connected" << std::endl;
                     }
                     auto message = ClientMessage(std::array(_recvBuffer), getOrCreateClientID(_remoteEndpoint));
                     _clientLastPing[getOrCreateClientID(_remoteEndpoint)] = std::chrono::system_clock::now();

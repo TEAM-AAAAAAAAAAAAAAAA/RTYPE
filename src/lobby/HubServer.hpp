@@ -63,6 +63,7 @@ class HubServer {
                 _serverSlots[i] = 0;
                 _serverIds[i] = network::Server::connect("localhost", std::to_string(_port + i + 1));
                 response.first[0] = 68;
+                response.second.clear();
                 response.second.push_back(_serverIds[i]);
                 network::Server::getOutgoingMessages().push(response);
             }
