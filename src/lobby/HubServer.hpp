@@ -26,17 +26,19 @@ class HubServer {
     HubServer(int port)
     {
         network::ServerMessage response;
-        _pids.fill(0);
         _port = port;
 #ifdef WIN32
+        //LPSTR executable_name;
         for (size_t i = 0; i < _processes.size(); i++) {
             STARTUPINFO si;
+            std::string exec_base_name = "r-type_server.exe" + std::to_string(_port + i + 1);
+            LPSTR exec_win_name = const_cast<char *>(exec_base_name.c_str());
 
             ZeroMemory(&si, sizeof(si));
             si.cb = sizeof(si);
             ZeroMemory(&_processes[i], sizeof(_processes[i]));
-
-            if (!CreateProcess(NULL, ("r-type_server " + std::to_string(_port + i + 1)).c_str(), NULL, NULL, FALSE, 0,
+            if (!CreateProcessA(NULL, exec_win_name,
+                    NULL, NULL, FALSE, 0,
                     NULL, NULL, &si, &_processes[i])) {
                 std::cerr << "Failed to create process" << std::endl;
                 exit(84);
@@ -49,6 +51,7 @@ class HubServer {
             network::Server::getOutgoingMessages().push(response);
         }
 #else
+        _pids.fill(0);
         for (size_t i = 0; i < _pids.size(); i++) {
             _pids[i] = fork();
             if (_pids[i] == -1) {
