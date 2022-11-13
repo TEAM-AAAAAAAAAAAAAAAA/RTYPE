@@ -70,11 +70,12 @@ namespace ecs::systems
                                             network::Message msg;
 
                                             audio::AudioManager::playSFX("button_click");
-                                            msg.fill(128);
+                                            msg[0] = 128;
                                             network::Client::getOutgoingMessages().push(msg);
-                                            for (size_t j = 0; j < activables.size() && j < connections.size(); j++) {
-                                                if (connections[j])
-                                                    connections[j]->setIsSet(false);
+                                            for (size_t j = 0; j < activables.size(); j++) {
+                                                if (j < connections.size())
+                                                    if (connections[j])
+                                                        connections[j]->setIsSet(false);
                                                 if (activables[j]->getButtonType() == utils::constant::ROOM
                                                     || activables[j]->getButtonType() == utils::constant::ROOM_TEXT
                                                     || activables[j]->getButtonType() == utils::constant::PLANET) {
