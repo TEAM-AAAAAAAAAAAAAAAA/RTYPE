@@ -12,6 +12,8 @@
 #include "EnemyFactory.hpp"
 #include "World.hpp"
 #include "WorldManager.hpp"
+#include "components/EntityType.hpp"
+#include "components/Health.hpp"
 
 namespace ecs::systems
 {
@@ -19,6 +21,8 @@ namespace ecs::systems
         static std::size_t lastWave = 0;
         static int waveCounter = 0;
         auto const &factions = ecs::WorldManager::getWorld().registry.getComponents<ecs::component::Faction>();
+        auto const &types = ecs::WorldManager::getWorld().registry.getComponents<ecs::component::EntityType>();
+        auto &healths = ecs::WorldManager::getWorld().registry.getComponents<ecs::component::Health>();
         bool enemiesAlive = false;
 
         /**
@@ -34,13 +38,14 @@ namespace ecs::systems
                 }
             }
         }
-        if (!enemiesAlive || (utils::constant::chrono::now().time_since_epoch().count() - 100000000000 > lastWave && waveCounter != 1)) {
+        if (!enemiesAlive
+            || (utils::constant::chrono::now().time_since_epoch().count() - 100000000000 > lastWave
+                && waveCounter != 1)) {
             waveCounter++;
             network::Message msg;
             msg[0] = utils::constant::getPacketTypeKey(utils::constant::PacketType::WAVE_UPDATE);
             msg[1] = waveCounter;
-            network::Server::getOutgoingMessages().push(
-                network::ServerMessage(msg, std::vector<unsigned int>()));
+            network::Server::getOutgoingMessages().push(network::ServerMessage(msg, std::vector<unsigned int>()));
 
             std::cout << "next wave (" << waveCounter << ")" << std::endl;
             if (waveCounter % 10 == 0) {
@@ -308,6 +313,16 @@ namespace ecs::systems
                 }
             }
             lastWave = utils::constant::chrono::now().time_since_epoch().count();
+            for (std::size_t i = 0; i < healths.size() && i < types.size(); i++) {
+                if (healths[i] && types[i]) {
+                    if (types[i].value().type == ecs::component::EntityType::Types::Player) {
+                        healths[i].value().health += (utils::constant::maxPlayerHealth / 10);
+                        if (healths[i].value().health > utils::constant::maxPlayerHealth) {
+                            healths[i].value().health = utils::constant::maxPlayerHealth;
+                        }
+                    }
+                }
+            }
         }
     };
 }
