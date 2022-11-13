@@ -43,10 +43,10 @@ ecs::World getGameWorld()
     world.addSystem(ecs::systems::movement);
     world.addSystem(ecs::systems::projectileCollision);
     world.addSystem(ecs::systems::HandleIncomingMessages);
-    world.addSystem(ecs::systems::PositionUpdate);
     world.addSystem(ecs::systems::runMovementAI);
     world.addSystem(ecs::systems::runAttackAI);
     world.addSystem(ecs::systems::deathUpdate);
+    world.addSystem(ecs::systems::PositionUpdate);
     world.addSystem(ecs::systems::playerHealthUpdate);
     world.addSystem(ecs::systems::waves);
     world.addSystem(ecs::systems::keepAlive);
