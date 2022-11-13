@@ -35,6 +35,8 @@ namespace ecs::systems
                         health.value().lastHealth = health.value().health;
                         std::array<char, 2> idBin = id.value().serialize();
                         network::Message msg;
+
+                        msg.fill(0);
                         msg[0] = utils::constant::getPacketTypeKey(utils::constant::PacketType::HEALTH_UPDATE);
                         msg[1] = idBin[0];
                         msg[2] = idBin[1];
