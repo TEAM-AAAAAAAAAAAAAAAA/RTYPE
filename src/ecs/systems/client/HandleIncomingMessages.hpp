@@ -421,11 +421,14 @@ namespace ecs::systems
                     if (!connec->getIsSet()) {
                         connec->setPort(port);
                         for (size_t j = 0; j < texts.size() && j < activables.size(); j++)
-                            if (activables[j]->getButtonType() == utils::constant::ROOM_TEXT && !texts[j]->getIsSet()) {
-                                texts[j]->setContent(0, std::to_string(nbPlayer));
-                                texts[j]->setContent(3, std::to_string(port));
-                                texts[j]->setIsSet(true);
-                                return;
+                            if (texts[j] && activables[j]) {
+                                if (activables[j]->getButtonType() == utils::constant::ROOM_TEXT &&
+                                    !texts[j]->getIsSet()) {
+                                    texts[j]->setContent(0, std::to_string(nbPlayer));
+                                    texts[j]->setContent(3, std::to_string(port));
+                                    texts[j]->setIsSet(true);
+                                    return;
+                                }
                             }
                     }
                 }

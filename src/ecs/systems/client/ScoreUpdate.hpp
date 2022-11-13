@@ -24,7 +24,7 @@ namespace ecs::systems
         auto &scores = world.registry.getComponents<component::Score>();
 
         static std::chrono::high_resolution_clock::time_point begin = utils::constant::chrono::now();
-        for (size_t i = 0; i < texts.size() || i < scores.size(); i++) {
+        for (size_t i = 0; i < texts.size() && i < scores.size(); i++) {
             auto &text = texts[i];
             auto &score = scores[i];
 
