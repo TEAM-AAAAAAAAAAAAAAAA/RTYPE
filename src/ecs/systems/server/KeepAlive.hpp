@@ -20,7 +20,7 @@ namespace ecs::systems
      * knows the client is still up
      */
     std::function<void(World &)> keepAlive = [](World &world) {
-        static auto clock = utils::constant::chrono::now();
+        static auto clock = utils::constant::chrono::steady_clock::now();
         std::map<uint32_t, std::chrono::steady_clock::time_point> _clientLastPing =
             network::Server::getClientLastPings();
         if (utils::constant::chronoDuration(utils::constant::chrono::now() - clock).count() > 1000) {
