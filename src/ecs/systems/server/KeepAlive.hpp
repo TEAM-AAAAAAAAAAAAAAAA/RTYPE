@@ -30,7 +30,7 @@ namespace ecs::systems
                 if (utils::constant::chronoDuration(utils::constant::chrono::now() - lastPing).count() > 5000) {
                     network::Message msg;
                     msg.fill(0);
-                    msg[0] = utils::constant::getPacketTypeKey(utils::constant::PLAYER_MOVE);
+                    msg[0] = utils::constant::getPacketTypeKey(utils::constant::KEEP_ALIVE);
                     network::Server::getOutgoingMessages().push(
                         network::ServerMessage(msg, std::vector<unsigned int>()));
                 }

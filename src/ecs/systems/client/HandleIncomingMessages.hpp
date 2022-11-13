@@ -403,7 +403,6 @@ namespace ecs::systems
         int port = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
         int nbPlayer = (unsigned char)msg[3];
 
-        std::cout << "Room port:" << port << " | nbplayer : " << nbPlayer << std::endl;
         for (size_t i = 0; i < activables.size() && i < positions.size() && i < connections.size(); i++) {
             auto &pos = positions[i];
             auto &activ = activables[i];

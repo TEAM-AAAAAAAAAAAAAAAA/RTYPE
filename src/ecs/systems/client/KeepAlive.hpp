@@ -23,7 +23,7 @@ namespace ecs::systems
         if (utils::constant::chronoDuration(utils::constant::chrono::now() - network::Client::getLastPing()).count() > 5000) {
             network::Message msg;
             msg.fill(0);
-            msg[0] = utils::constant::getPacketTypeKey(utils::constant::PLAYER_MOVE);
+            msg[0] = utils::constant::getPacketTypeKey(utils::constant::KEEP_ALIVE);
             network::Client::getOutgoingMessages().push(msg);
         }
     };
