@@ -160,7 +160,7 @@ namespace ecs::systems
     {
         network::Message response;
         response[0] = 71;
-        network::Server::getOutgoingMessages().push(std::pair(response, std::vector<unsigned int>()));
+        network::Server::getOutgoingMessages().push(std::pair(response, std::vector<unsigned int>(msg.second)));
     }
 
     static std::unordered_map<char, std::function<void(World &, network::ClientMessage &msg)>> packetTypeFunction = {

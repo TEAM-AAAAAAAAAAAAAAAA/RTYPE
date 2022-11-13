@@ -36,11 +36,17 @@ class HubServer {
             si.cb = sizeof(si);
             ZeroMemory(&_processes[i], sizeof(_processes[i]));
 
-            if (!CreateProcess(NULL, ("r-type_server " + std::to_string(_port + i + 1)).c_str(), NULL, NULL, FALSE, 0, NULL,
-                    NULL, &si, &_processes[i])) {
+            if (!CreateProcess(NULL, ("r-type_server " + std::to_string(_port + i + 1)).c_str(), NULL, NULL, FALSE, 0,
+                    NULL, NULL, &si, &_processes[i])) {
                 std::cerr << "Failed to create process" << std::endl;
                 exit(84);
             }
+            _serverPorts[i] = _port + i + 1;
+            _serverSlots[i] = 0;
+            _serverIds[i] = network::Server::connect("localhost", std::to_string(_port + i + 1));
+            response.first[0] = 68;
+            response.second.push_back(_serverIds[i]);
+            network::Server::getOutgoingMessages().push(response);
         }
 #else
         for (size_t i = 0; i < _pids.size(); i++) {
@@ -55,7 +61,7 @@ class HubServer {
             } else {
                 _serverPorts[i] = _port + i + 1;
                 _serverSlots[i] = 0;
-                _serverIds[i] = network::Server::connect("localhost", std::to_string(_port + i));
+                _serverIds[i] = network::Server::connect("localhost", std::to_string(_port + i + 1));
                 response.first[0] = 68;
                 response.second.push_back(_serverIds[i]);
                 network::Server::getOutgoingMessages().push(response);
@@ -88,8 +94,7 @@ class HubServer {
             network::ServerMessage response;
             response.second.clear();
             response.first.fill(0);
-            _serverSlots.fill(0);
-            _serverIds.fill(0);
+            std::cerr << "Msg from " << msg.second << std::endl;
             if (msg.first[0] == 0) {
                 response.first[0] = 64;
                 response.second.push_back(msg.second);
@@ -97,7 +102,7 @@ class HubServer {
             }
             if (msg.first[0] == 128) {
                 response.second.push_back(msg.second);
-                int clientPort = (unsigned char)msg.first[1] << 8U | (unsigned char)msg.first[2];
+                std::cerr << "Sending servers information" << std::endl;
                 for (size_t i = 0; i < _serverPorts.size(); i++) {
                     if (_serverPorts[i] != 0 && _serverPorts[i] != 0) {
                         int tmp = 0;

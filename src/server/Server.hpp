@@ -67,7 +67,8 @@ namespace network
         static void sendToAll(const Message &message)
         {
             for (auto client : getInstance()._clients)
-                getInstance().send(message, client.second);
+                if (client.first != getInstance()._hubID)
+                    getInstance().send(message, client.second);
         }
 
         /**

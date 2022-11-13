@@ -7,8 +7,8 @@
 
 #include <iostream>
 #include <string>
-#include "HubServer.hpp"
 #include "../server/Server.hpp"
+#include "HubServer.hpp"
 
 int main(int argc, char **argv)
 {
@@ -29,7 +29,9 @@ int main(int argc, char **argv)
     int base = std::stoi(argv[1]);
     network::Server::start(std::stoi(argv[1]));
     HubServer hubServer(base);
-    while (1)
+    while (1) {
         hubServer.handleIncomingMessages();
+        hubServer.sendOutgoingMessages();
+    }
     return 0;
 }
