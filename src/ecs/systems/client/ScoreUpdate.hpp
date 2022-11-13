@@ -14,8 +14,6 @@
 #include "components/Score.hpp"
 #include "components/client/Text.hpp"
 
-static std::chrono::high_resolution_clock::time_point begin = utils::constant::chrono::now();
-
 namespace ecs::systems
 {
     /**
@@ -25,7 +23,8 @@ namespace ecs::systems
         auto &texts = world.registry.getComponents<component::Text>();
         auto &scores = world.registry.getComponents<component::Score>();
 
-        for (size_t i = 0; i < texts.size() || i < scores.size(); i++) {
+        static std::chrono::high_resolution_clock::time_point begin = utils::constant::chrono::now();
+        for (size_t i = 0; i < texts.size() && i < scores.size(); i++) {
             auto &text = texts[i];
             auto &score = scores[i];
 

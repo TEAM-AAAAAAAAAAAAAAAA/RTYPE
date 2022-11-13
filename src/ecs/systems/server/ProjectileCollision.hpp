@@ -51,23 +51,27 @@ namespace ecs::systems
                 for (size_t j = 0; j < healths.size() && j < positions.size(); ++j) {
                     auto &victimHealth = healths[j];
                     auto const &victimPos = positions[j];
-                    auto const &victimSize = sizes[j];
 
-                    if (victimHealth && victimPos && victimSize) {
-                        if (victimHealth.value().health <= 0)
-                            continue;
-                        if (i < factions.size() && j < factions.size())
-                            if (factions[i] && factions[j])
-                                if (factions[i].value().faction == factions[j].value().faction)
+                    if (victimHealth && victimPos) {
+                        if (j < sizes.size()) {
+                            auto const &victimSize = sizes[j];
+                            if (victimSize) {
+                                if (victimHealth.value().health <= 0)
                                     continue;
-                        if (projPos.value().x > victimPos.value().x
-                            && projPos.value().x < victimPos.value().x + victimSize.value().width
-                            && projPos.value().y > victimPos.value().y
-                            && projPos.value().y < victimPos.value().y + victimSize.value().height) {
-                            victimHealth.value().health -= proj.value().damage;
-                            victimHealth.value().health <= 0 ? victimHealth.value().health = 0 : 0;
-                            projHealth.value().health = 0;
-                            break;
+                                if (i < factions.size() && j < factions.size())
+                                    if (factions[i] && factions[j])
+                                        if (factions[i].value().faction == factions[j].value().faction)
+                                            continue;
+                                if (projPos.value().x > victimPos.value().x
+                                    && projPos.value().x < victimPos.value().x + victimSize.value().width
+                                    && projPos.value().y > victimPos.value().y
+                                    && projPos.value().y < victimPos.value().y + victimSize.value().height) {
+                                    victimHealth.value().health -= proj.value().damage;
+                                    victimHealth.value().health <= 0 ? victimHealth.value().health = 0 : 0;
+                                    projHealth.value().health = 0;
+                                    break;
+                                }
+                            }
                         }
                     }
                 }

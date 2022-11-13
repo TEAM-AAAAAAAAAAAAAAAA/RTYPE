@@ -61,6 +61,7 @@ class HubServer {
                 execl("./r-type_server", "./r-type_server", std::to_string(_port + i + 1).c_str(), nullptr);
                 exit(0);
             } else {
+                sleep(1);
                 _serverPorts[i] = _port + i + 1;
                 _serverSlots[i] = 0;
                 _serverIds[i] = network::Server::connect("localhost", std::to_string(_port + i + 1));
