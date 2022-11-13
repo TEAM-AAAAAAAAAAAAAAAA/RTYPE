@@ -70,7 +70,8 @@ namespace ecs::systems
                                             network::Message msg;
 
                                             audio::AudioManager::playSFX("button_click");
-                                            msg[0] = 128;
+                                            msg.fill(0);
+                                            msg[0] = 60;
                                             network::Client::getOutgoingMessages().push(msg);
                                             for (size_t j = 0; j < activables.size(); j++) {
                                                 if (j < connections.size())

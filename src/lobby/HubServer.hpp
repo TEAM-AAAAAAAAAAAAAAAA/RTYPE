@@ -94,20 +94,22 @@ class HubServer {
             network::ServerMessage response;
             response.second.clear();
             response.first.fill(0);
-            std::cerr << "Msg from " << msg.second << std::endl;
-            if (msg.first[0] == 0) {
+            int msgCode = msg.first[0];
+            if (msgCode == 0) {
+                std::cout << "NEW CONNEC\n";
                 response.first[0] = 64;
                 response.second.push_back(msg.second);
                 network::Server::getOutgoingMessages().push(response);
             }
-            if (msg.first[0] == 128) {
+            if (msgCode == 60) {
+                std::cout << "REFRESH SERVER\n";
                 response.second.push_back(msg.second);
                 std::cerr << "Sending servers information" << std::endl;
                 for (size_t i = 0; i < _serverPorts.size(); i++) {
                     if (_serverPorts[i] != 0 && _serverPorts[i] != 0) {
                         int tmp = 0;
                         tmp = _serverPorts[i] >> 8;
-                        response.first[0] = 129;
+                        response.first[0] = 61;
                         response.first[1] = tmp;
                         response.first[2] = _serverPorts[i] & 0xff;
                         response.first[3] = _serverSlots[i];
@@ -115,7 +117,7 @@ class HubServer {
                     }
                 }
             }
-            if (msg.first[0] == 130) {
+            if (msgCode == 130) {
                 for (size_t i = 0; i < _serverIds.size(); i++) {
                     if (_serverIds[i] == msg.second) {
                         _serverSlots[i] = msg.first[2];
@@ -123,7 +125,7 @@ class HubServer {
                     }
                 }
             }
-            if (msg.first[0] == 255) {
+            if (msgCode == 255) {
                 int clientPort = (unsigned char)msg.first[1] << 8U | (unsigned char)msg.first[2];
                 size_t i = 0;
                 for (; i < _serverPorts.size(); i++) {
