@@ -83,6 +83,9 @@ namespace ecs::systems
                                                     activables[j]->switchSetIsActivate();
                                                 }
                                             }
+                                            for (size_t j = 0; j < activables.size() && j < texts.size(); j++)
+                                                if (activables[j]->getButtonType() == utils::constant::ROOM_TEXT)
+                                                    texts[j]->setIsSet(false);
                                         }
                                     } else if (activ->getButtonType() == utils::constant::ROOM_HOVER) {
                                         if (i < connections.size()) {
