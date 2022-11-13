@@ -151,7 +151,7 @@ namespace ecs::systems
 
         message.first.fill(0);
         message.first[0] = 130;
-        message.first[1] = network::Server::getClientCount() & 0xFF;
+        message.first[1] = network::Server::getClientCount();
         message.second.push_back(msg.second);
         network::Server::getOutgoingMessages().push(message);
     }

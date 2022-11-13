@@ -120,7 +120,7 @@ class HubServer {
             if (msgCode == 130) {
                 for (size_t i = 0; i < _serverIds.size(); i++) {
                     if (_serverIds[i] == msg.second) {
-                        _serverSlots[i] = msg.first[2];
+                        _serverSlots[i] = msg.first[1];
                         break;
                     }
                 }
