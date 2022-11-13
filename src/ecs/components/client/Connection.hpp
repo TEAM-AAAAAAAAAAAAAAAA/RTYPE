@@ -11,7 +11,7 @@
 namespace ecs::component {
     struct Connection {
 
-            Connection(int port = 8000, const std::string &host = "localhost") : _port(std::to_string(port)), _host(host), _isSet(false) {}
+            Connection() : _port("8001"), _host(asset::AssetLoader::GetServerInfo("host")), _isSet(false) {}
 
             void setPort(int port) {
                 _port = std::to_string(port);

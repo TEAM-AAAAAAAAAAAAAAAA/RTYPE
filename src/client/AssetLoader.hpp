@@ -169,6 +169,11 @@ namespace asset
             return smart;
         }
 
+        static void LoadServerInfo(const std::string &key, const std::string &info)
+        {
+            getInstance()._serverInfo[key] = info;
+        }
+
         /**
          * @brief Get an Asset object from the map
          * @param key of the asset to get
@@ -199,6 +204,8 @@ namespace asset
 
         static sf::Keyboard::Key &GetKeybind(const std::string &key) { return getInstance()._keyMap[key]; }
 
+        static std::string GetServerInfo(const std::string &key) {return getInstance()._serverInfo[key];}
+
         /**
          * @brief Load a .ini file with boost loading assets into the map
          */
@@ -224,6 +231,8 @@ namespace asset
                         loadKeybind(value.first, value.second.data());
                         continue;
                     }
+                    if (section.first == "server")
+                        LoadServerInfo(value.first, value.second.data());
                     paths.push_back(value.second.data());
 
                     if (section.first == "texture")
@@ -234,6 +243,7 @@ namespace asset
                         LoadSFX(value.first, paths);
                     if (section.first == "font")
                         LoadFont(value.first, paths);
+
                 }
             }
         }
@@ -289,5 +299,7 @@ namespace asset
          * Map of all the keybinds, loaded in the [keybinds] section of the .ini file
          */
         std::unordered_map<std::string, sf::Keyboard::Key> _keyMap;
+
+        std::unordered_map<std::string, std::string> _serverInfo;
     };
 } // namespace asset
