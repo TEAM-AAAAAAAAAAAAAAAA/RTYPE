@@ -14,7 +14,7 @@
 #include "components/Score.hpp"
 #include "components/client/Text.hpp"
 
-static std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+static std::chrono::high_resolution_clock::time_point begin = utils::constant::chrono::now();
 
 namespace ecs::systems
 {
@@ -31,7 +31,7 @@ namespace ecs::systems
 
             if (text && score) {
                 if (text.value().getContent(0) == "Score: ") {
-                    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+                    std::chrono::high_resolution_clock::time_point end = utils::constant::chrono::now();
                     auto time = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() / 10;
                     auto elapsed = std::to_string(time);
 
