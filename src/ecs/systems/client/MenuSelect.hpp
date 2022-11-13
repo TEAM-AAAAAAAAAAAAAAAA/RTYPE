@@ -111,8 +111,10 @@ namespace ecs::systems
                       default: break;
                   }
                   if (activ->getButtonType() == utils::constant::QUIT_HOVER)
-                      if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+                      if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                           utils::Window::getInstance().close();
+                          exit(0);
+                      }
                   activ->setIsHover(true);
               } else if (activ->getIsHover() && activ->getIsButton()){
                   activ->getButtonType() == utils::constant::ROOM ? draw->rect.top = itButtonRoom->second.rectTop : 0;

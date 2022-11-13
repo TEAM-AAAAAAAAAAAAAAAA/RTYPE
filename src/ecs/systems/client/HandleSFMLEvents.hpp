@@ -41,7 +41,7 @@ namespace ecs::systems
 
         while (utils::Window::getInstance().pollEvent(event)) {
             switch (event.type) {
-                case sf::Event::Closed: utils::Window::getInstance().close(); break;
+                case sf::Event::Closed: utils::Window::getInstance().close(); exit(0);
                 case sf::Event::KeyReleased: {
                     for (size_t i = 0; i < controllables.size(); i++) {
                         auto &contr = controllables[i];
