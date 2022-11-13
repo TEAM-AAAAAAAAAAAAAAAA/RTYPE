@@ -133,7 +133,7 @@ namespace network
 
         static std::map<unsigned int, std::chrono::time_point<std::chrono::high_resolution_clock>> &getClientLastPings() { return getInstance()._clientLastPing; }
 
-        static std::chrono::steady_clock::time_point getLastPing(uint32_t clientID)
+        static std::chrono::high_resolution_clock::time_point getLastPing(uint32_t clientID)
         {
             for (const auto &client : getInstance()._clientLastPing)
                 if (client.first == clientID)
@@ -292,7 +292,7 @@ namespace network
         /**
          * The timestamps of the last received messages from each client
          */
-        std::map<uint32_t, std::chrono::steady_clock::time_point> _clientLastPing;
+        std::map<uint32_t, std::chrono::high_resolution_clock::time_point> _clientLastPing;
 
         /**
          * Used to know if the server is running or not

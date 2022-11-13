@@ -50,7 +50,7 @@ namespace network
 
         static inline LockedQueue<Message> &getReceivedMessages() { return getInstance()._receivedMessages; }
 
-        static inline std::chrono::steady_clock::time_point getLastPing() { return getInstance()._lastPing; }
+        static inline std::chrono::high_resolution_clock::time_point getLastPing() { return getInstance()._lastPing; }
         static inline bool getIsConnected() { return getInstance()._isConnected;}
         static inline void setIsConnected() { getInstance()._isConnected = true;}
 
@@ -107,7 +107,7 @@ namespace network
         /**
          * The timestamp of the last received message
          */
-        std::chrono::steady_clock::time_point _lastPing;
+        std::chrono::high_resolution_clock::time_point _lastPing;
 
         /**
          * Handles the incoming messages by placing them into the incoming
