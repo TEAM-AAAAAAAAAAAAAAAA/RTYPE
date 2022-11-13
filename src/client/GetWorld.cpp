@@ -194,8 +194,6 @@ ecs::World getGameWorld(const std::string &port = "8000", const std::string &hos
     audio::AudioManager::stopBGM();
     audio::AudioManager::loadBGM("bgm1");
     audio::AudioManager::playBGM();
-    network::Client::setHost(host);
-    network::Client::setPort(port);
     utils::Window::getInstance().setFramerateLimit(FRAME_LIMIT);
     registerComponents(world);
     setGameParallax(world);
