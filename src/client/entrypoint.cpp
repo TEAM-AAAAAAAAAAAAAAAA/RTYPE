@@ -19,10 +19,13 @@
 int main()
 {
     ecs::Engine engine;
-//    network::Message msg;
-//    msg.fill(0);
-//    network::Client::connect();
-//    network::Client::getOutgoingMessages().push(msg);
+    network::Message msg;
+
+    network::Client::setHost("localhost");
+    network::Client::setPort("8000");
+    msg.fill(0);
+    network::Client::connect();
+    network::Client::getOutgoingMessages().push(msg);
     asset::AssetLoader::LoadIniFile(asset::AssetLoader::smartPath("assets", "config.ini"));
     audio::AudioManager::playSFX("splash_screen");
     ecs::WorldManager::setWaitingWorld(getMenuWorld);

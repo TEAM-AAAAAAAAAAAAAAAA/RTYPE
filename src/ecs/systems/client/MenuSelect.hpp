@@ -24,7 +24,7 @@ namespace ecs::systems
       auto itButtonRoom = utils::constant::buttonValueMap.find(utils::constant::ROOM);
       auto itHoveredButton = utils::constant::buttonValueMap.find(utils::constant::PLAY_HOVER);
 
-      for (size_t i = 0; i < positions.size() && i < drawables.size() && i < sizes.size(); i++) {
+      for (size_t i = 0; i < positions.size() && i < drawables.size() && i < sizes.size() && activables.size(); i++) {
           auto &pos = positions[i];
           auto &draw = drawables[i];
           auto &size = sizes[i];

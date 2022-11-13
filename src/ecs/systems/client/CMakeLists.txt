@@ -5,11 +5,13 @@ set(SYSTEMS_SRC
     ${SRCROOT}/Draw.hpp
     ${SRCROOT}/ExecuteOnce.hpp
     ${SRCROOT}/HandleIncomingMessages.hpp
+    ${SRCROOT}/PeriodicPing.hpp
     ${SRCROOT}/HandleSFMLEvents.hpp
     ${SRCROOT}/HandleSFMLKeys.hpp
     ${SRCROOT}/MenuSelect.hpp
     ${SRCROOT}/SendDirection.hpp
     ${SRCROOT}/HandleParallaxBounds.hpp
+    ${SRCROOT}/KeepAlive.hpp
     ${SRCROOT}/Buttons.hpp
     ${SRCROOT}/ScoreUpdate.hpp
     ${SRCROOT}/HealthBar.hpp

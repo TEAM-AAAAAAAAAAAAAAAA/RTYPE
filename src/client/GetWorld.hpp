@@ -9,5 +9,5 @@
 
 #include "World.hpp"
 
-ecs::World getGameWorld(const std::string& port, const std::string &host);
+ecs::World getGameWorld();
 ecs::World getMenuWorld();

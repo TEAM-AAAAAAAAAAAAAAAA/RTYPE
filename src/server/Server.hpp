@@ -9,10 +9,13 @@
 #include <map>
 #include <string>
 #include <thread>
+#include "../utils/Constant.hpp"
 #include "LockedQueue.hpp"
 #include <boost/asio/thread_pool.hpp>
 #include <boost/shared_ptr.hpp>
 
+using chrono = std::chrono::high_resolution_clock;
+using chronoDuration = std::chrono::duration<double, std::milli>;
 using boost::asio::ip::udp;
 
 typedef std::map<uint32_t, udp::endpoint> ClientList;
@@ -31,6 +34,7 @@ namespace network
         ~Server()
         {
             _ioService.stop();
+            _isStopping = true;
             _serviceThread.join();
             _outgoingService.join();
             _socket.close();
@@ -63,14 +67,15 @@ namespace network
         static void sendToAll(const Message &message)
         {
             for (auto client : getInstance()._clients)
-                getInstance().send(message, client.second);
+                if (client.first != getInstance()._hubID)
+                    getInstance().send(message, client.second);
         }
 
         /**
          * Get the amount of clients that are connected
          * @return Amount of connected clients
          */
-        static size_t getClientCount() { return getInstance()._clients.size(); }
+        static size_t getClientCount() { return getInstance()._clients.size() - (getInstance()._hubID != -1); }
 
         /**
          * Get the ID of client from the clients array
@@ -83,6 +88,28 @@ namespace network
             for (int i = 0; i < index; i++)
                 ++it;
             return it->first;
+        }
+
+        static uint32_t connect(std::string host, std::string port)
+        {
+            udp::resolver resolver(getInstance()._ioService);
+            udp::resolver::query query(udp::v4(), host, port);
+            udp::endpoint endpoint = *resolver.resolve(query);
+            return getInstance().getOrCreateClientID(endpoint);
+        }
+
+        /**
+         * Remove a client from the clients map
+         * @param clientId the clients ID
+         */
+        static void removeClient(uint32_t clientID)
+        {
+            if (getInstance()._clients.find(clientID) != getInstance()._clients.end())
+                getInstance()._clients.erase(clientID);
+            if (getInstance()._clientToEntID.find(clientID) != getInstance()._clientToEntID.end())
+                getInstance()._clientToEntID.erase(clientID);
+            if (getInstance()._clientLastPing.find(clientID) != getInstance()._clientLastPing.end())
+                getInstance()._clientLastPing.erase(clientID);
         }
 
         static inline void start(unsigned short localPort)
@@ -100,7 +127,19 @@ namespace network
 
         static LockedQueue<ServerMessage> &getOutgoingMessages() { return getInstance()._outgoingMessages; }
 
-        static LockedQueue<ClientMessage> &GetReceivedMessages() { return getInstance()._receivedMessages; }
+        static LockedQueue<ClientMessage> &getReceivedMessages() { return getInstance()._receivedMessages; }
+
+        static std::map<unsigned int, size_t> &getClientToEntID() { return getInstance()._clientToEntID; }
+
+        static std::map<unsigned int, std::chrono::time_point<std::chrono::high_resolution_clock>> &getClientLastPings() { return getInstance()._clientLastPing; }
+
+        static std::chrono::high_resolution_clock::time_point getLastPing(uint32_t clientID)
+        {
+            for (const auto &client : getInstance()._clientLastPing)
+                if (client.first == clientID)
+                    return client.second;
+            return chrono::now();
+        }
 
       private:
         /**
@@ -117,7 +156,6 @@ namespace network
          * All network related variables
          */
         boost::asio::io_service _ioService;
-        udp::endpoint _serverEndpoint;
         udp::endpoint _remoteEndpoint;
         Message _recvBuffer;
         udp::socket _socket;
@@ -148,7 +186,12 @@ namespace network
         {
             if (!error) {
                 try {
+                    if (_recvBuffer[0] == 68) {
+                        _hubID = getOrCreateClientID(_remoteEndpoint);
+                        std::cerr << "Hub connected" << std::endl;
+                    }
                     auto message = ClientMessage(std::array(_recvBuffer), getOrCreateClientID(_remoteEndpoint));
+                    _clientLastPing[getOrCreateClientID(_remoteEndpoint)] = utils::constant::chrono::now();
                     if (!message.first.empty()) {
                         _receivedMessages.push(message);
                         for (const auto &c : message.first) {}
@@ -172,6 +215,8 @@ namespace network
         void receiveIncoming()
         {
             while (!_isRunning) {
+                if (_isStopping)
+                    return;
                 std::this_thread::sleep_for(std::chrono::milliseconds(100));
             }
             startReceive();
@@ -197,11 +242,11 @@ namespace network
             for (const auto &client : _clients)
                 if (client.second == endpoint)
                     return client.first;
-
             auto id = ++_nextClientID;
             _clients.insert(Client(id, endpoint));
             return id;
         }
+
 
         /**
          * Send a specified message to a specified client
@@ -220,6 +265,8 @@ namespace network
         void sendOutgoing()
         {
             while (!_isRunning) {
+                if (_isStopping)
+                    return;
                 std::this_thread::sleep_for(std::chrono::milliseconds(100));
             }
             while (!_ioService.stopped()) {
@@ -238,12 +285,20 @@ namespace network
          *  Clients of the server
          */
         ClientList _clients;
+        std::map<unsigned int, size_t> _clientToEntID;
         int _nextClientID;
+        int _hubID = -1;
+
+        /**
+         * The timestamps of the last received messages from each client
+         */
+        std::map<uint32_t, std::chrono::high_resolution_clock::time_point> _clientLastPing;
 
         /**
          * Used to know if the server is running or not
          */
-        bool _isRunning;
+        bool _isRunning = false;
+        bool _isStopping = false;
 
         /**
          * Default Constructor of the Server Class, initializing every part of it, socket, endpointk,
@@ -251,10 +306,10 @@ namespace network
          * @param localPort The open localPort of the server
          */
         Server()
-            : _socket(_ioService), _isRunning(false), _serviceThread(&network::Server::receiveIncoming, this),
-              _nextClientID(0L), _outgoingService(&network::Server::sendOutgoing, this){};
+            : _socket(_ioService), _serviceThread(&network::Server::receiveIncoming, this), _nextClientID(0L),
+              _outgoingService(&network::Server::sendOutgoing, this){};
 
-//        static Server getInstance();
+        //        static Server getInstance();
         static Server &getInstance();
     };
 } // namespace network
