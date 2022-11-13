@@ -187,7 +187,7 @@ static void setGameParallax(ecs::World &world)
  * @param engine The engine in which you want to operate
  * @return The world ready to be used
  */
-ecs::World getGameWorld(const std::string &port = "8000", const std::string &host = "localhost")
+ecs::World getGameWorld()
 {
     ecs::World world;
 

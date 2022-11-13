@@ -30,6 +30,7 @@ namespace ecs::systems
     {
         using AnimFrame = ecs::component::Animated::AnimFrame;
 
+        std::cout << "UPDATE INFO SERVER\n";
         auto &positions = world.registry.getComponents<component::Position>();
         auto &networkId = world.registry.getComponents<component::NetworkId>();
         auto &velocities = world.registry.getComponents<component::Velocity>();

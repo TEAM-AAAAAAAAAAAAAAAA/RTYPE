@@ -103,6 +103,7 @@ class HubServer {
                 network::Server::getOutgoingMessages().push(response);
             }
             if (msgCode == 60) {
+                std::cout << "REFRESH SERVER\n";
                 response.second.push_back(msg.second);
                 for (size_t i = 0; i < _serverPorts.size(); i++) {
                     if (_serverPorts[i] != 0) {
@@ -118,7 +119,6 @@ class HubServer {
                 }
             }
             if (msgCode == 130) {
-                std::cout << "REFRESH SERVER\n";
                 for (size_t i = 0; i < _serverIds.size(); i++) {
                     if (_serverIds[i] == msg.second) {
                         _serverSlots[i] = msg.first[2];
