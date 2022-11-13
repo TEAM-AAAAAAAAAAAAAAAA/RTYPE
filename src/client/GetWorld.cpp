@@ -213,6 +213,7 @@ static void addMenuSystems(ecs::World &world)
     world.addSystem(ecs::systems::movement);
     world.addSystem(ecs::systems::menuSelect);
     world.addSystem(ecs::systems::animate);
+    world.addSystem(ecs::systems::HandleIncomingMessages);
 }
 
 static void setMainButtons(ecs::World &world)
