@@ -21,7 +21,7 @@ namespace ecs::component
 
     struct Text {
 
-            Text(size_t marginRight = 0, const std::string &key = "nasa") : _fontKey(key), _marginRight(marginRight), _textColor({255, 255, 255, 255})
+            Text(size_t marginRight = 0, const std::string &key = "nasa") : _fontKey(key), _marginRight(marginRight), _textColor({255, 255, 255, 255}), _isSet(false)
             {
                 _content.emplace_back("");
                 _content.emplace_back("");
@@ -29,7 +29,7 @@ namespace ecs::component
                 _content.emplace_back("");
             };
 
-            Text(const std::string& s1 = "", const std::string& s2 = "", const std::string& s3 = "", const std::string& s4 = "", const std::string &key = "nasa") : _fontKey(key), _marginRight(0), _textColor({255, 255, 255, 255})
+            Text(const std::string& s1 = "", const std::string& s2 = "", const std::string& s3 = "", const std::string& s4 = "", const std::string &key = "nasa") : _fontKey(key), _marginRight(0), _textColor({255, 255, 255, 255}), _isSet(false)
             {
                 _content.emplace_back(s1);
                 _content.emplace_back(s2);
@@ -63,11 +63,14 @@ namespace ecs::component
             inline const sf::Font &getFont() const { return asset::AssetLoader::GetFont(_fontKey);};
             inline void setMarginRight(size_t marginRight) {_marginRight = marginRight;};
             inline size_t getMarginRight() const {return _marginRight;};
+            inline void setIsSet(bool isSet) {_isSet = isSet;}
+            inline bool getIsSet() {return _isSet;}
 
         private:
             std::vector<std::string> _content;
             struct textColor _textColor;
             std::string _fontKey;
             size_t _marginRight;
+            bool _isSet;
     };
 } // namespace ecs::component
