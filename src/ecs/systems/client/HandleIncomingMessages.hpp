@@ -395,11 +395,26 @@ namespace ecs::systems
         }
     }
 
+    static void waveHandle(World &world, network::Message &msg)
+    {
+        auto &texts = world.registry.getComponents<component::Text>();
+
+        for (size_t i = 0; i < texts.size(); i++) {
+            if (texts[i]) {
+                if (texts[i].value().getContent(0) == "Wave: ") {
+                    texts[i].value().setContent(1, std::to_string(msg[1]));
+                    return;
+                }
+            }
+        }
+    }
+
     static std::unordered_map<char, std::function<void(World &, network::Message &msg)>> packetTypeFunction = {
         {utils::constant::getPacketTypeKey(utils::constant::PacketType::ENTITY_MOVE), movePacketHandle},
         {0, firstMessageHandle},
         {utils::constant::getPacketTypeKey(utils::constant::PacketType::ENTITY_DEATH), deathMessageHandle},
-        {utils::constant::getPacketTypeKey(utils::constant::PacketType::HEALTH_UPDATE), playerHealthHandle}};
+        {utils::constant::getPacketTypeKey(utils::constant::PacketType::HEALTH_UPDATE), playerHealthHandle},
+        {utils::constant::getPacketTypeKey(utils::constant::PacketType::WAVE_UPDATE), waveHandle}};
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Client::getReceivedMessages().empty()) {

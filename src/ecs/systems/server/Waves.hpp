@@ -36,6 +36,12 @@ namespace ecs::systems
         }
         if (!enemiesAlive || utils::constant::chrono::now().time_since_epoch().count() - 100000000000 > lastWave) {
             waveCounter++;
+            network::Message msg;
+            msg[0] = utils::constant::getPacketTypeKey(utils::constant::PacketType::WAVE_UPDATE);
+            msg[1] = waveCounter;
+            network::Server::getOutgoingMessages().push(
+                network::ServerMessage(msg, std::vector<unsigned int>()));
+
             std::cout << "next wave (" << waveCounter << ")" << std::endl;
             if (waveCounter % 10 == 0) {
                 ecs::EnemyFactory::spawnEnemy(ecs::WorldManager::getWorld(),

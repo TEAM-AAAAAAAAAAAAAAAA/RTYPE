@@ -66,12 +66,13 @@ namespace ecs::systems
                                 if (activ->getButtonType() == utils::constant::PLAY_HOVER) {
                                     if (event.mouseButton.button == sf::Mouse::Left) {
                                         audio::AudioManager::playSFX("button_click");
-                                        for (size_t j = 0; j < activables.size() && texts.size(); j++)
-                                            if (activables[j]->getButtonType() == utils::constant::ROOM
-                                                || activables[j]->getButtonType() == utils::constant::ROOM_TEXT
-                                                || activables[j]->getButtonType() == utils::constant::PLANET) {
-                                                activables[j]->switchSetIsActivate();
-                                            }
+                                        ecs::WorldManager::setWaitingWorld([] { return getGameWorld("8000", "localhost"); });
+                                        // for (size_t j = 0; j < activables.size() && texts.size(); j++)
+                                            // if (activables[j]->getButtonType() == utils::constant::ROOM
+                                                // || activables[j]->getButtonType() == utils::constant::ROOM_TEXT
+                                                // || activables[j]->getButtonType() == utils::constant::PLANET) {
+                                                // activables[j]->switchSetIsActivate();
+                                            // }
                                     }
                                 } else if (activ->getButtonType() == utils::constant::OPTION_HOVER) {
                                     if (event.mouseButton.button == sf::Mouse::Left) {

@@ -29,13 +29,11 @@ namespace ecs::systems
           auto &text = texts[i];
           auto &score = scores[i];
 
-          if (text && score) {
+          if (text && score && text.value().getContent(0) == "Score: ") {
               std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
               auto time = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() / 10;
               auto elapsed = std::to_string(time);
-              const std::string string = "Score: ";
 
-              text->setContent(0, string);
               text->setContent(1, elapsed);
               score->setScore(time);
           }
