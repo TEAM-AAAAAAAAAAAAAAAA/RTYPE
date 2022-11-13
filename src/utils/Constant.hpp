@@ -42,6 +42,7 @@ namespace utils
             ROOM_INFO,
             KEEP_ALIVE,
             HEALTH_UPDATE,
+            WAVE_UPDATE,
             ROOM_UPDATE,
             HUB_CONNECT,
             NONE
@@ -136,9 +137,10 @@ namespace utils
             {7, BOSS_STAGE},
             {15, GAME_OVER},
             {31, MULTIPLAYER_INFO},
+            {38, HEALTH_UPDATE},
+            {40, WAVE_UPDATE},
             {70, KEEP_ALIVE},
             {127, ROOM_INFO},
-            {38, HEALTH_UPDATE},
             {61, ROOM_UPDATE}
         };
 
