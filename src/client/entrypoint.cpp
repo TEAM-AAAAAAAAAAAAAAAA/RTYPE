@@ -22,14 +22,13 @@ int main()
     network::Message msg;
 
     network::Client::setHost("localhost");
-    network::Client::setPort("8001");
+    network::Client::setPort("8000");
     msg.fill(0);
     network::Client::connect();
     network::Client::getOutgoingMessages().push(msg);
     asset::AssetLoader::LoadIniFile(asset::AssetLoader::smartPath("assets", "config.ini"));
     audio::AudioManager::playSFX("splash_screen");
-//    ecs::WorldManager::setWaitingWorld(getMenuWorld);
-    ecs::WorldManager::setWaitingWorld([] { return getGameWorld(); });
+    ecs::WorldManager::setWaitingWorld(getMenuWorld);
     audio::AudioManager::setBGMVolume(0);
     audio::AudioManager::setSFXVolume(50);
     engine.run();
