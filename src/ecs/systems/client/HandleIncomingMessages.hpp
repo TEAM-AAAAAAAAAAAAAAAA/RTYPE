@@ -380,18 +380,12 @@ namespace ecs::systems
     static void playerHealthHandle(World &world, network::Message &msg)
     {
         size_t msgId = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
-        auto &netIds = world.registry.getComponents<component::NetworkId>();
         auto &healths = world.registry.getComponents<component::Health>();
-
-        for (size_t i = 0; i < netIds.size(); i++) {
-            if (netIds[i]) {
-                if (netIds[i].value().id == msgId) {
-                    for (size_t j = 0; j < healths.size(); j++)
-                        if (healths[j])
-                            healths[j].value().health = msg[3];
-                    return;
-                }
-            }
+        if (msgId == selfId) {
+            for (size_t j = 0; j < healths.size(); j++)
+                if (healths[j])
+                    healths[j].value().health = msg[3];
+            return;
         }
     }
 
