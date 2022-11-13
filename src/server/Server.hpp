@@ -191,7 +191,7 @@ namespace network
                         std::cerr << "Hub connected" << std::endl;
                     }
                     auto message = ClientMessage(std::array(_recvBuffer), getOrCreateClientID(_remoteEndpoint));
-                    _clientLastPing[getOrCreateClientID(_remoteEndpoint)] = std::chrono::steady_clock::now();
+                    _clientLastPing[getOrCreateClientID(_remoteEndpoint)] = utils::constant::chrono::now();
                     if (!message.first.empty()) {
                         _receivedMessages.push(message);
                         for (const auto &c : message.first) {}
