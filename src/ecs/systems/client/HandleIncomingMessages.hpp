@@ -409,12 +409,18 @@ namespace ecs::systems
             auto &connec = connections[i];
 
             if (pos && activ && connec) {
-                if (activ->getButtonType() == utils::constant::ROOM)
+                if (activ->getButtonType() == utils::constant::ROOM) {
                     if (!connec->getIsSet()) {
-                        std::cout << "ROOM UPDATE\nPort : " << port << " | nbPlayer: "<< nbPlayer << std::endl;
                         connec->setPort(port);
-//                        text->setContent(0, std::to_string(nbPlayer));
+                        for (size_t j = 0; j < texts.size() && j < activables.size(); j++)
+                            if (activables[j]->getButtonType() == utils::constant::ROOM_TEXT && !texts[j]->getIsSet()) {
+                                texts[j]->setContent(0, std::to_string(nbPlayer));
+                                texts[j]->setContent(3, std::to_string(port));
+                                texts[j]->setIsSet(true);
+                                return;
+                            }
                     }
+                }
             }
         }
     }
@@ -427,12 +433,12 @@ namespace ecs::systems
     }
 
     static std::unordered_map<char, std::function<void(World &, network::Message &msg)>> packetTypeFunction = {
-        {utils::constant::getPacketTypeKey(utils::constant::PacketType::ENTITY_MOVE), movePacketHandle},
-        {0, firstMessageHandle},
-        {utils::constant::getPacketTypeKey(utils::constant::PacketType::ENTITY_DEATH), deathMessageHandle},
-        {utils::constant::getPacketTypeKey(utils::constant::PacketType::KEEP_ALIVE), keepAliveResponse},
-        {utils::constant::getPacketTypeKey(utils::constant::PacketType::ROOM_UPDATE), roomUpdate},
-        {utils::constant::getPacketTypeKey(utils::constant::PacketType::HEALTH_UPDATE), playerHealthHandle}};
+            {utils::constant::getPacketTypeKey(utils::constant::PacketType::ENTITY_MOVE), movePacketHandle},
+            {0, firstMessageHandle},
+            {utils::constant::getPacketTypeKey(utils::constant::PacketType::ENTITY_DEATH), deathMessageHandle},
+            {utils::constant::getPacketTypeKey(utils::constant::PacketType::KEEP_ALIVE), keepAliveResponse},
+            {utils::constant::getPacketTypeKey(utils::constant::PacketType::ROOM_UPDATE), roomUpdate},
+            {utils::constant::getPacketTypeKey(utils::constant::PacketType::HEALTH_UPDATE), playerHealthHandle}};
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Client::getReceivedMessages().empty()) {
