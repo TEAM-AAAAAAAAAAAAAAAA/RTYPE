@@ -155,7 +155,7 @@ $(document).ready(function(){initNavTree('_execute_once_8hpp_source.html',''); i
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">bool</span> executed = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keywordflow">if</span> (!executed) {</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            <a class="code" href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a> msg;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            <a class="code" href="namespacenetwork.html#a525d8692011f553dcece227390c8f4a2">network::Message</a> msg;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            msg.fill(0);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <a class="code" href="classnetwork_1_1_client.html#ab803b1a4b60b0d5ca35b84e95729c2b4">network::Client::connect</a>();</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <a class="code" href="classnetwork_1_1_client.html#ab4ee2988395ad66a1c4e259eba436d23">network::Client::getOutgoingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">push</a>(msg);</div>
@@ -165,14 +165,14 @@ $(document).ready(function(){initNavTree('_execute_once_8hpp_source.html',''); i
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="anamespacenetwork_html_a6ec876aa185a7f04d2f7fba304553d21"><div class="ttname"><a href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a></div><div class="ttdeci">std::array&lt; char, 16 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
+<div class="ttc" id="anamespacenetwork_html_a525d8692011f553dcece227390c8f4a2"><div class="ttname"><a href="namespacenetwork.html#a525d8692011f553dcece227390c8f4a2">network::Message</a></div><div class="ttdeci">std::array&lt; unsigned char, 16 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
 <div class="ttc" id="aclassnetwork_1_1_locked_queue_html_a076e0981cce5c44eed95476e135011f2"><div class="ttname"><a href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">network::LockedQueue::push</a></div><div class="ttdeci">void push(T value)</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:43</div></div>
 <div class="ttc" id="anamespaceecs_1_1systems_html_af0f0d16128e4e5a8d8137f4927d8619c"><div class="ttname"><a href="namespaceecs_1_1systems.html#af0f0d16128e4e5a8d8137f4927d8619c">ecs::systems::executeOnce</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; executeOnce</div><div class="ttdef"><b>Definition:</b> ExecuteOnce.hpp:19</div></div>
 <div class="ttc" id="a_world_8hpp_html"><div class="ttname"><a href="_world_8hpp.html">World.hpp</a></div></div>
-<div class="ttc" id="aclassnetwork_1_1_client_html_ab4ee2988395ad66a1c4e259eba436d23"><div class="ttname"><a href="classnetwork_1_1_client.html#ab4ee2988395ad66a1c4e259eba436d23">network::Client::getOutgoingMessages</a></div><div class="ttdeci">static LockedQueue&lt; Message &gt; &amp; getOutgoingMessages()</div><div class="ttdef"><b>Definition:</b> NetworkClient.hpp:46</div></div>
+<div class="ttc" id="aclassnetwork_1_1_client_html_ab4ee2988395ad66a1c4e259eba436d23"><div class="ttname"><a href="classnetwork_1_1_client.html#ab4ee2988395ad66a1c4e259eba436d23">network::Client::getOutgoingMessages</a></div><div class="ttdeci">static LockedQueue&lt; Message &gt; &amp; getOutgoingMessages()</div><div class="ttdef"><b>Definition:</b> NetworkClient.hpp:49</div></div>
 <div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:19</div></div>
 <div class="ttc" id="anamespaceecs_1_1systems_html"><div class="ttname"><a href="namespaceecs_1_1systems.html">ecs::systems</a></div><div class="ttdef"><b>Definition:</b> Animate.hpp:19</div></div>
-<div class="ttc" id="aclassnetwork_1_1_client_html_ab803b1a4b60b0d5ca35b84e95729c2b4"><div class="ttname"><a href="classnetwork_1_1_client.html#ab803b1a4b60b0d5ca35b84e95729c2b4">network::Client::connect</a></div><div class="ttdeci">static void connect()</div><div class="ttdef"><b>Definition:</b> NetworkClient.hpp:56</div></div>
+<div class="ttc" id="aclassnetwork_1_1_client_html_ab803b1a4b60b0d5ca35b84e95729c2b4"><div class="ttname"><a href="classnetwork_1_1_client.html#ab803b1a4b60b0d5ca35b84e95729c2b4">network::Client::connect</a></div><div class="ttdeci">static void connect()</div><div class="ttdef"><b>Definition:</b> NetworkClient.hpp:60</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

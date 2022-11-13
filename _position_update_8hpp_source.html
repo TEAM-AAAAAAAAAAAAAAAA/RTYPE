@@ -200,7 +200,7 @@ $(document).ready(function(){initNavTree('_position_update_8hpp_source.html','')
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                    std::array&lt;char, 2&gt; idBin = <span class="keywordtype">id</span>.value().serialize();</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                    std::array&lt;char, 4&gt; posBin = pos.value().serialize();</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                    std::array&lt;char, 4&gt; sizeBin = size.value().serialize();</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                    <a class="code" href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a> msg;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                    <a class="code" href="namespacenetwork.html#a525d8692011f553dcece227390c8f4a2">network::Message</a> msg;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                    msg[firstByteId] = idBin[0];</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                    msg[secondByteId] = idBin[1];</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                    msg[valueType] = type.value().type;</div>
@@ -227,8 +227,8 @@ $(document).ready(function(){initNavTree('_position_update_8hpp_source.html','')
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="astructecs_1_1component_1_1_velocity_html_a9d81d0483e462287b986182b881eb7ff"><div class="ttname"><a href="structecs_1_1component_1_1_velocity.html#a9d81d0483e462287b986182b881eb7ff">ecs::component::Velocity::y</a></div><div class="ttdeci">int y</div><div class="ttdef"><b>Definition:</b> Velocity.hpp:15</div></div>
-<div class="ttc" id="anamespacenetwork_html_a6ec876aa185a7f04d2f7fba304553d21"><div class="ttname"><a href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a></div><div class="ttdeci">std::array&lt; char, 16 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
-<div class="ttc" id="aclassnetwork_1_1_server_html_a0c64a21c5e324114615c0073596cb403"><div class="ttname"><a href="classnetwork_1_1_server.html#a0c64a21c5e324114615c0073596cb403">network::Server::getOutgoingMessages</a></div><div class="ttdeci">static LockedQueue&lt; ServerMessage &gt; &amp; getOutgoingMessages()</div><div class="ttdef"><b>Definition:</b> Server.hpp:101</div></div>
+<div class="ttc" id="anamespacenetwork_html_a525d8692011f553dcece227390c8f4a2"><div class="ttname"><a href="namespacenetwork.html#a525d8692011f553dcece227390c8f4a2">network::Message</a></div><div class="ttdeci">std::array&lt; unsigned char, 16 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
+<div class="ttc" id="aclassnetwork_1_1_server_html_a0c64a21c5e324114615c0073596cb403"><div class="ttname"><a href="classnetwork_1_1_server.html#a0c64a21c5e324114615c0073596cb403">network::Server::getOutgoingMessages</a></div><div class="ttdeci">static LockedQueue&lt; ServerMessage &gt; &amp; getOutgoingMessages()</div><div class="ttdef"><b>Definition:</b> Server.hpp:128</div></div>
 <div class="ttc" id="astructecs_1_1component_1_1_velocity_html"><div class="ttname"><a href="structecs_1_1component_1_1_velocity.html">ecs::component::Velocity</a></div><div class="ttdoc">Velocity component.</div><div class="ttdef"><b>Definition:</b> Velocity.hpp:13</div></div>
 <div class="ttc" id="a_network_id_8hpp_html"><div class="ttname"><a href="_network_id_8hpp.html">NetworkId.hpp</a></div></div>
 <div class="ttc" id="a_velocity_8hpp_html"><div class="ttname"><a href="_velocity_8hpp.html">Velocity.hpp</a></div></div>

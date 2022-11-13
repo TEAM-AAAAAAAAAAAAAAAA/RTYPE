@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['x_869',['x',['../structecs_1_1component_1_1_animated_1_1_anim_frame.html#aa53d8684cc431a925f7726f6b6f2ce98',1,'ecs::component::Animated::AnimFrame::x()'],['../structecs_1_1component_1_1_direction.html#adace82c5390af95e69356052f4171213',1,'ecs::component::Direction::x()'],['../structecs_1_1component_1_1_position.html#a3d72213f7aed875ca0f04c64b5a4a2cf',1,'ecs::component::Position::x()'],['../structecs_1_1component_1_1_velocity.html#ae49476305ddc3758feaa8f6facdd03a6',1,'ecs::component::Velocity::x()']]]
+  ['waves_918',['waves',['../namespaceecs_1_1systems.html#ac65203b9493f3209712ac4f23a6aec61',1,'ecs::systems']]],
+  ['width_919',['width',['../structecs_1_1component_1_1_animated_1_1_anim_frame.html#a9ff95a11f62cf6abc6c39917204aa834',1,'ecs::component::Animated::AnimFrame::width()'],['../structecs_1_1component_1_1_size.html#a74a08ef18b4e55b48d8c02d5d6a70c79',1,'ecs::component::Size::width()']]]
 ];

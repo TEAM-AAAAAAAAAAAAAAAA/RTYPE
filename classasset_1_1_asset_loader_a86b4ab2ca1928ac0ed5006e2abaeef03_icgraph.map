@@ -1,11 +1,12 @@
 <map id="asset::AssetLoader::GetBGM" name="asset::AssetLoader::GetBGM">
-<area shape="rect" id="node1" title="Get a background music object from the map." alt="" coords="380,169,525,211"/>
-<area shape="rect" id="node2" href="$classaudio_1_1_audio_manager.html#a023feb4ca83fcc432506ec5f1234df11" title=" " alt="" coords="172,5,332,47"/>
-<area shape="rect" id="node3" href="$classaudio_1_1_audio_manager.html#ad9db14006b01e84f7442791256574a9e" title="load a background music to be played" alt="" coords="172,71,332,112"/>
-<area shape="rect" id="node5" href="$classaudio_1_1_audio_manager.html#a25a646bae0c42cf204ec516e9c1fc828" title=" " alt="" coords="172,136,332,177"/>
-<area shape="rect" id="node6" href="$classaudio_1_1_audio_manager.html#acc9e148ad7ca3b078aabfebeeee18fbc" title=" " alt="" coords="172,201,332,243"/>
-<area shape="rect" id="node7" href="$classaudio_1_1_audio_manager.html#a683ab7aa039fa232acceaa98fd88a7f9" title=" " alt="" coords="172,332,332,373"/>
-<area shape="rect" id="node9" href="$classaudio_1_1_audio_manager.html#ac504f4df750396558cf034c21874d1d2" title=" " alt="" coords="172,267,332,308"/>
-<area shape="rect" id="node4" href="$_get_world_8hpp.html#a6477985952456c92826513c2631d2337" title=" " alt="" coords="5,209,124,235"/>
-<area shape="rect" id="node8" href="$client_2entrypoint_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="37,339,92,366"/>
+<area shape="rect" id="node1" title="Get a background music object from the map." alt="" coords="483,169,628,211"/>
+<area shape="rect" id="node2" href="$classaudio_1_1_audio_manager.html#a023feb4ca83fcc432506ec5f1234df11" title=" " alt="" coords="275,5,435,47"/>
+<area shape="rect" id="node3" href="$classaudio_1_1_audio_manager.html#ad9db14006b01e84f7442791256574a9e" title="load a background music to be played" alt="" coords="275,71,435,112"/>
+<area shape="rect" id="node6" href="$classaudio_1_1_audio_manager.html#a25a646bae0c42cf204ec516e9c1fc828" title=" " alt="" coords="275,136,435,177"/>
+<area shape="rect" id="node7" href="$classaudio_1_1_audio_manager.html#acc9e148ad7ca3b078aabfebeeee18fbc" title=" " alt="" coords="275,201,435,243"/>
+<area shape="rect" id="node8" href="$classaudio_1_1_audio_manager.html#a683ab7aa039fa232acceaa98fd88a7f9" title=" " alt="" coords="275,332,435,373"/>
+<area shape="rect" id="node10" href="$classaudio_1_1_audio_manager.html#ac504f4df750396558cf034c21874d1d2" title=" " alt="" coords="275,267,435,308"/>
+<area shape="rect" id="node4" href="$_get_world_8hpp.html#a998c7eb0e92409953a713476a37a8250" title=" " alt="" coords="108,209,227,235"/>
+<area shape="rect" id="node5" href="$server_2entrypoint_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title=" " alt="" coords="5,209,60,235"/>
+<area shape="rect" id="node9" href="$client_2entrypoint_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="140,339,195,366"/>
 </map>

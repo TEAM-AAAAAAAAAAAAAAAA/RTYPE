@@ -142,6 +142,9 @@ $(document).ready(function(){initNavTree('functions_s.html',''); initResizable()
 : <a class="el" href="structecs_1_1component_1_1_attack_a_i.html#aac7c4d7eb279c3e085e52330edc31d9cac84a81f28492be21d844f31fec1c1eac">ecs::component::AttackAI</a>
 , <a class="el" href="classecs_1_1_enemy_factory.html#a61e138c0eaa79a98c9839a06fc9ce2a2a1d9cb4161d81568fffdbd31796b5508d">ecs::EnemyFactory</a>
 </li>
+<li>sendOutgoingMessages()
+: <a class="el" href="class_hub_server.html#ad974b933b529865a80b0a3bad66a90ce">HubServer</a>
+</li>
 <li>sendToAll()
 : <a class="el" href="classnetwork_1_1_server.html#a2b7c28fd5a3a978fd923e583e45bf539">network::Server</a>
 </li>
@@ -154,11 +157,17 @@ $(document).ready(function(){initNavTree('functions_s.html',''); initResizable()
 , <a class="el" href="structecs_1_1component_1_1_size.html#a37adab4df04ce650e6a44609ba33dfb9">ecs::component::Size</a>
 , <a class="el" href="classecs_1_1_event.html#aba458ae4c5aeb4fc7452b27130bfa31c">ecs::Event</a>
 </li>
+<li>ServerId()
+: <a class="el" href="structecs_1_1component_1_1_server_id.html#a72c3a0e6e7a7db6819a11d45b24aedce">ecs::component::ServerId</a>
+</li>
 <li>setBGMVolume()
 : <a class="el" href="classaudio_1_1_audio_manager.html#a683ab7aa039fa232acceaa98fd88a7f9">audio::AudioManager</a>
 </li>
 <li>setButtonType()
 : <a class="el" href="structecs_1_1component_1_1_activable.html#a35d72777fed96a26d3cd3ad30e3dffed">ecs::component::Activable</a>
+</li>
+<li>setClientConnection()
+: <a class="el" href="structecs_1_1component_1_1_connection.html#a6e4697b47d3305187eb42651fa853b44">ecs::component::Connection</a>
 </li>
 <li>setColor()
 : <a class="el" href="classanim_1_1_animation.html#ad54b2c67ebdc7396b8b8575c79e35e65">anim::Animation</a>
@@ -173,7 +182,8 @@ $(document).ready(function(){initNavTree('functions_s.html',''); initResizable()
 : <a class="el" href="structecs_1_1component_1_1_text.html#a83fba109c821a1fc3ae6a8b2bbcc704f">ecs::component::Text</a>
 </li>
 <li>setHost()
-: <a class="el" href="classnetwork_1_1_client.html#a07fc7307d327b56735af419262a5160d">network::Client</a>
+: <a class="el" href="structecs_1_1component_1_1_connection.html#ab04f05b9c82f8b3e13f72c1f9014c9a3">ecs::component::Connection</a>
+, <a class="el" href="classnetwork_1_1_client.html#a07fc7307d327b56735af419262a5160d">network::Client</a>
 </li>
 <li>setIsActivate()
 : <a class="el" href="structecs_1_1component_1_1_activable.html#a7a4c39672d3069622b155c3a37c1da36">ecs::component::Activable</a>
@@ -187,6 +197,10 @@ $(document).ready(function(){initNavTree('functions_s.html',''); initResizable()
 <li>setIsHover()
 : <a class="el" href="structecs_1_1component_1_1_activable.html#adddece4c4a5ccfc303852f3c7096481c">ecs::component::Activable</a>
 </li>
+<li>setIsSet()
+: <a class="el" href="structecs_1_1component_1_1_connection.html#a893deffbb34323436981970e696b9004">ecs::component::Connection</a>
+, <a class="el" href="structecs_1_1component_1_1_text.html#a263e4d9a4837ef56c036d3fe33640830">ecs::component::Text</a>
+</li>
 <li>setLastMovement()
 : <a class="el" href="structecs_1_1component_1_1_movement_a_i.html#a2cf64fd8a7497d560ede615ddd72480c">ecs::component::MovementAI</a>
 </li>
@@ -194,7 +208,8 @@ $(document).ready(function(){initNavTree('functions_s.html',''); initResizable()
 : <a class="el" href="structecs_1_1component_1_1_text.html#ac0f60ea1dbe8f5dba6e311e51c97b90a">ecs::component::Text</a>
 </li>
 <li>setPort()
-: <a class="el" href="classnetwork_1_1_client.html#a54f38a429fe6e96c68f10ddf3f226eb9">network::Client</a>
+: <a class="el" href="structecs_1_1component_1_1_connection.html#ae0ac4234b742b99275db752a79a10dc0">ecs::component::Connection</a>
+, <a class="el" href="classnetwork_1_1_client.html#a54f38a429fe6e96c68f10ddf3f226eb9">network::Client</a>
 </li>
 <li>setPosition()
 : <a class="el" href="classanim_1_1_animation.html#a91d297ee0bd8c4a3b10c9497082496e1">anim::Animation</a>
@@ -267,7 +282,7 @@ $(document).ready(function(){initNavTree('functions_s.html',''); initResizable()
 : <a class="el" href="classasset_1_1_asset_loader.html#af021904f960d6de31b1cb06d48296e46">asset::AssetLoader</a>
 </li>
 <li>SparseArray()
-: <a class="el" href="classecs_1_1_sparse_array.html#a61ccc34c05864d9b536dc3f7de33b9f5">ecs::SparseArray&lt; Component &gt;</a>
+: <a class="el" href="classecs_1_1_sparse_array.html#abd3c8f8be422ad1af9fe244ac59ffeb7">ecs::SparseArray&lt; Component &gt;</a>
 </li>
 <li>spawn_entity()
 : <a class="el" href="classecs_1_1_registry.html#a960bf8fcdaa237dc3a8594cf53290085">ecs::Registry</a>

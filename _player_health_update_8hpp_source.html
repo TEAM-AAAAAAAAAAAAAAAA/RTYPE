@@ -161,30 +161,34 @@ $(document).ready(function(){initNavTree('_player_health_update_8hpp_source.html
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">auto</span> &amp;entity = world.registry.getComponents&lt;<a class="code" href="structecs_1_1component_1_1_entity_type.html">component::EntityType</a>&gt;();</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; healths.size(); ++i) {</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <span class="keyword">auto</span> &amp;health = healths[i];</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="keywordflow">if</span> (health &amp;&amp; health.value().health != health.value().lastHealth) {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                <span class="keywordflow">if</span> (i &lt; entity.size() &amp;&amp; i &lt; networkId.size()) {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                    <span class="keyword">auto</span> &amp;type = entity[i];</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                    <span class="keyword">auto</span> &amp;<span class="keywordtype">id</span> = networkId[i];</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                    <span class="keywordflow">if</span> (type &amp;&amp; <span class="keywordtype">id</span> &amp;&amp; type.value().type == component::EntityType::Types::Player) {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                        health.value().<a class="code" href="structecs_1_1component_1_1_health.html#aac500f70f724d9dc4dbe4355326d0b9b">lastHealth</a> = health.value().health;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                        std::array&lt;char, 2&gt; idBin = <span class="keywordtype">id</span>.value().serialize();</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                        <a class="code" href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a> msg;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                        msg[0] = utils::constant::getPacketTypeKey(<a class="code" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ab6ca68978db29ccd0ebcf101a070d1f7">utils::constant::PacketType::HEALTH_UPDATE</a>);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                        msg[1] = idBin[0];</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                        msg[2] = idBin[1];</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                        msg[3] = health.value().health;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                        <a class="code" href="classnetwork_1_1_server.html#a0c64a21c5e324114615c0073596cb403">network::Server::getOutgoingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">push</a>(</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                            <a class="code" href="namespacenetwork.html#a1290ee51c4c8d07f57076ac8f7505129">network::ServerMessage</a>(msg, std::vector&lt;unsigned int&gt;()));</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                    }</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                }</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            }</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        }</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    };</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="keywordflow">if</span> (health) {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                <span class="keywordflow">if</span> (health.value().health != health.value().lastHealth) {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                    <span class="keywordflow">if</span> (i &lt; entity.size() &amp;&amp; i &lt; networkId.size()) {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                        <span class="keyword">auto</span> &amp;type = entity[i];</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                        <span class="keyword">auto</span> &amp;<span class="keywordtype">id</span> = networkId[i];</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                        <span class="keywordflow">if</span> (type &amp;&amp; <span class="keywordtype">id</span>) {</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                            <span class="keywordflow">if</span> (type.value().type == component::EntityType::Types::Player) {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                                health.value().<a class="code" href="structecs_1_1component_1_1_health.html#aac500f70f724d9dc4dbe4355326d0b9b">lastHealth</a> = health.value().health;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                                std::array&lt;char, 2&gt; idBin = <span class="keywordtype">id</span>.value().serialize();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                                <a class="code" href="namespacenetwork.html#a525d8692011f553dcece227390c8f4a2">network::Message</a> msg;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                                msg[0] = utils::constant::getPacketTypeKey(<a class="code" href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ab6ca68978db29ccd0ebcf101a070d1f7">utils::constant::PacketType::HEALTH_UPDATE</a>);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                                msg[1] = idBin[0];</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                                msg[2] = idBin[1];</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                                msg[3] = health.value().health;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                                <a class="code" href="classnetwork_1_1_server.html#a0c64a21c5e324114615c0073596cb403">network::Server::getOutgoingMessages</a>().<a class="code" href="classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2">push</a>(</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                                        <a class="code" href="namespacenetwork.html#a1290ee51c4c8d07f57076ac8f7505129">network::ServerMessage</a>(msg, std::vector&lt;unsigned int&gt;()));</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                            }</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                        }</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                    }</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                }</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            }</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        }</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    };</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="anamespacenetwork_html_a6ec876aa185a7f04d2f7fba304553d21"><div class="ttname"><a href="namespacenetwork.html#a6ec876aa185a7f04d2f7fba304553d21">network::Message</a></div><div class="ttdeci">std::array&lt; char, 16 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
-<div class="ttc" id="aclassnetwork_1_1_server_html_a0c64a21c5e324114615c0073596cb403"><div class="ttname"><a href="classnetwork_1_1_server.html#a0c64a21c5e324114615c0073596cb403">network::Server::getOutgoingMessages</a></div><div class="ttdeci">static LockedQueue&lt; ServerMessage &gt; &amp; getOutgoingMessages()</div><div class="ttdef"><b>Definition:</b> Server.hpp:101</div></div>
+<div class="ttc" id="anamespacenetwork_html_a525d8692011f553dcece227390c8f4a2"><div class="ttname"><a href="namespacenetwork.html#a525d8692011f553dcece227390c8f4a2">network::Message</a></div><div class="ttdeci">std::array&lt; unsigned char, 16 &gt; Message</div><div class="ttdef"><b>Definition:</b> LockedQueue.hpp:22</div></div>
+<div class="ttc" id="aclassnetwork_1_1_server_html_a0c64a21c5e324114615c0073596cb403"><div class="ttname"><a href="classnetwork_1_1_server.html#a0c64a21c5e324114615c0073596cb403">network::Server::getOutgoingMessages</a></div><div class="ttdeci">static LockedQueue&lt; ServerMessage &gt; &amp; getOutgoingMessages()</div><div class="ttdef"><b>Definition:</b> Server.hpp:128</div></div>
 <div class="ttc" id="a_network_id_8hpp_html"><div class="ttname"><a href="_network_id_8hpp.html">NetworkId.hpp</a></div></div>
 <div class="ttc" id="a_position_8hpp_html"><div class="ttname"><a href="_position_8hpp.html">Position.hpp</a></div></div>
 <div class="ttc" id="anamespaceecs_1_1systems_html_a226e5eab26f85fc3598eb012bf0fbc0f"><div class="ttname"><a href="namespaceecs_1_1systems.html#a226e5eab26f85fc3598eb012bf0fbc0f">ecs::systems::playerHealthUpdate</a></div><div class="ttdeci">std::function&lt; void(World &amp;)&gt; playerHealthUpdate</div><div class="ttdef"><b>Definition:</b> PlayerHealthUpdate.hpp:24</div></div>
@@ -199,7 +203,7 @@ $(document).ready(function(){initNavTree('_player_health_update_8hpp_source.html
 <div class="ttc" id="aclassecs_1_1_world_html"><div class="ttname"><a href="classecs_1_1_world.html">ecs::World</a></div><div class="ttdef"><b>Definition:</b> World.hpp:19</div></div>
 <div class="ttc" id="anamespaceecs_1_1systems_html"><div class="ttname"><a href="namespaceecs_1_1systems.html">ecs::systems</a></div><div class="ttdef"><b>Definition:</b> Animate.hpp:19</div></div>
 <div class="ttc" id="a_entity_8hpp_html"><div class="ttname"><a href="_entity_8hpp.html">Entity.hpp</a></div></div>
-<div class="ttc" id="anamespaceutils_1_1constant_html_a02f29b9fcdfc8d4a1f0b8923e5b4c477ab6ca68978db29ccd0ebcf101a070d1f7"><div class="ttname"><a href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ab6ca68978db29ccd0ebcf101a070d1f7">utils::constant::HEALTH_UPDATE</a></div><div class="ttdeci">@ HEALTH_UPDATE</div><div class="ttdef"><b>Definition:</b> Constant.hpp:42</div></div>
+<div class="ttc" id="anamespaceutils_1_1constant_html_a02f29b9fcdfc8d4a1f0b8923e5b4c477ab6ca68978db29ccd0ebcf101a070d1f7"><div class="ttname"><a href="namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ab6ca68978db29ccd0ebcf101a070d1f7">utils::constant::HEALTH_UPDATE</a></div><div class="ttdeci">@ HEALTH_UPDATE</div><div class="ttdef"><b>Definition:</b> Constant.hpp:44</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

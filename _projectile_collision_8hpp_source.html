@@ -189,31 +189,35 @@ $(document).ready(function(){initNavTree('_projectile_collision_8hpp_source.html
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt; healths.size() &amp;&amp; j &lt; positions.size(); ++j) {</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                    <span class="keyword">auto</span> &amp;victimHealth = healths[j];</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                    <span class="keyword">auto</span> <span class="keyword">const</span> &amp;victimPos = positions[j];</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                    <span class="keyword">auto</span> <span class="keyword">const</span> &amp;victimSize = sizes[j];</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                    <span class="keywordflow">if</span> (victimHealth &amp;&amp; victimPos &amp;&amp; victimSize) {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                        <span class="keywordflow">if</span> (victimHealth.value().health &lt;= 0)</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                            <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                        <span class="keywordflow">if</span> (i &lt; factions.size() &amp;&amp; j &lt; factions.size())</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                            <span class="keywordflow">if</span> (factions[i] &amp;&amp; factions[j])</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                                <span class="keywordflow">if</span> (factions[i].value().faction == factions[j].value().faction)</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                                    <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                        <span class="keywordflow">if</span> (projPos.value().x &gt; victimPos.value().x</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                            &amp;&amp; projPos.value().x &lt; victimPos.value().x + victimSize.value().width</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                            &amp;&amp; projPos.value().y &gt; victimPos.value().y</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                            &amp;&amp; projPos.value().y &lt; victimPos.value().y + victimSize.value().height) {</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                            victimHealth.value().health -= proj.value().damage;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                            victimHealth.value().health &lt;= 0 ? victimHealth.value().health = 0 : 0;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                            projHealth.value().health = 0;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                        }</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                    }</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            }</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        };</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#pragma endregion</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    };</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                    <span class="keywordflow">if</span> (victimHealth &amp;&amp; victimPos) {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                        <span class="keywordflow">if</span> (j &lt; sizes.size()) {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                            <span class="keyword">auto</span> <span class="keyword">const</span> &amp;victimSize = sizes[j];</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                            <span class="keywordflow">if</span> (victimSize) {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                                <span class="keywordflow">if</span> (victimHealth.value().health &lt;= 0)</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                                    <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                                <span class="keywordflow">if</span> (i &lt; factions.size() &amp;&amp; j &lt; factions.size())</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                                    <span class="keywordflow">if</span> (factions[i] &amp;&amp; factions[j])</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                                        <span class="keywordflow">if</span> (factions[i].value().faction == factions[j].value().faction)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                                            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                                <span class="keywordflow">if</span> (projPos.value().x &gt; victimPos.value().x</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                                    &amp;&amp; projPos.value().x &lt; victimPos.value().x + victimSize.value().width</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                                    &amp;&amp; projPos.value().y &gt; victimPos.value().y</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                                    &amp;&amp; projPos.value().y &lt; victimPos.value().y + victimSize.value().height) {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                                    victimHealth.value().health -= proj.value().damage;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                                    victimHealth.value().health &lt;= 0 ? victimHealth.value().health = 0 : 0;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                                    projHealth.value().health = 0;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                                }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                            }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                        }</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                    }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                }</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        };</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#pragma endregion</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    };</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;} <span class="comment">// namespace ecs::systems</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="a_velocity_8hpp_html"><div class="ttname"><a href="_velocity_8hpp.html">Velocity.hpp</a></div></div>

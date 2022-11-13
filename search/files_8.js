@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['lockedqueue_2ehpp_584',['LockedQueue.hpp',['../_locked_queue_8hpp.html',1,'']]]
+  ['keepalive_2ehpp_615',['KeepAlive.hpp',['../client_2_keep_alive_8hpp.html',1,'(Global Namespace)'],['../server_2_keep_alive_8hpp.html',1,'(Global Namespace)']]]
 ];

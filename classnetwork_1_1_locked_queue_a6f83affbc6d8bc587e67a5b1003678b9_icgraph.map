@@ -1,4 +1,6 @@
 <map id="network::LockedQueue::empty" name="network::LockedQueue::empty">
-<area shape="rect" id="node1" title=" " alt="" coords="275,5,445,47"/>
-<area shape="rect" id="node2" href="$classnetwork_1_1_server.html#a9d372185a335562311ea01b43c47f9d1" title=" " alt="" coords="5,13,227,39"/>
+<area shape="rect" id="node1" title=" " alt="" coords="628,5,799,47"/>
+<area shape="rect" id="node2" href="$classnetwork_1_1_server.html#a9d372185a335562311ea01b43c47f9d1" title=" " alt="" coords="359,13,580,39"/>
+<area shape="rect" id="node3" href="$class_hub_server.html#ad3ec49605ab85cc4ca9d046dc5375820" title=" " alt="" coords="108,5,311,47"/>
+<area shape="rect" id="node4" href="$lobby_2entrypoint_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title=" " alt="" coords="5,13,60,39"/>
 </map>

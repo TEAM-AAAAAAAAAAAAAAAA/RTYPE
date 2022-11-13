@@ -5,5 +5,6 @@ var annotated_dup =
     [ "audio", "namespaceaudio.html", "namespaceaudio" ],
     [ "ecs", "namespaceecs.html", "namespaceecs" ],
     [ "network", "namespacenetwork.html", "namespacenetwork" ],
-    [ "utils", "namespaceutils.html", "namespaceutils" ]
+    [ "utils", "namespaceutils.html", "namespaceutils" ],
+    [ "HubServer", "class_hub_server.html", "class_hub_server" ]
 ];

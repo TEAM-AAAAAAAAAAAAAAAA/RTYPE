@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['laser_937',['Laser',['../structecs_1_1component_1_1_entity_type.html#af64becff8cb6fbfeba4815b3d3824449ae7161ff49572036737d53cb504c61148',1,'ecs::component::EntityType']]],
-  ['longleftright_938',['LongLeftRight',['../structecs_1_1component_1_1_movement_a_i.html#a91579cb5d99e03b8a268d3afe1b0b95fa89736e2740aff2da57169ecd6307d398',1,'ecs::component::MovementAI']]],
-  ['longupdown_939',['LongUpDown',['../structecs_1_1component_1_1_movement_a_i.html#a91579cb5d99e03b8a268d3afe1b0b95faedffafd002b4d4df03ab342c04c0b13a',1,'ecs::component::MovementAI']]]
+  ['keep_5falive_989',['KEEP_ALIVE',['../namespaceutils_1_1constant.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ae2343793ec3db65511e6474b632b6aca',1,'utils::constant']]]
 ];

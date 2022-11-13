@@ -53,7 +53,12 @@ var _constant_8hpp =
       [ "BOSS_STAGE", "_constant_8hpp.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a8ffa48b4a6012e684f17743bca2046d1", null ],
       [ "GAME_OVER", "_constant_8hpp.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ab0ada823658f01387806157db3e5ce4e", null ],
       [ "MULTIPLAYER_INFO", "_constant_8hpp.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a2db5d4ec86b1378334846f309d4708fc", null ],
+      [ "ROOM_INFO", "_constant_8hpp.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a65252a2c34d0bf590b73e00167f2ab4b", null ],
+      [ "KEEP_ALIVE", "_constant_8hpp.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ae2343793ec3db65511e6474b632b6aca", null ],
       [ "HEALTH_UPDATE", "_constant_8hpp.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477ab6ca68978db29ccd0ebcf101a070d1f7", null ],
+      [ "WAVE_UPDATE", "_constant_8hpp.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a58a1d2990cabc8634ec467e42de9bc2e", null ],
+      [ "ROOM_UPDATE", "_constant_8hpp.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a7609cd4158e1dbff108f0da02471cf16", null ],
+      [ "HUB_CONNECT", "_constant_8hpp.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a3a2061dfbc0c23a7e1d0a8e266e9e677", null ],
       [ "NONE", "_constant_8hpp.html#a02f29b9fcdfc8d4a1f0b8923e5b4c477a3e453aacf60bd5aa37a77fc907bcc131", null ]
     ] ]
 ];

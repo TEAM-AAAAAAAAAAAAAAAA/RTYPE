@@ -16,7 +16,5 @@ var dir_6908ff505388a07996d238c763adbdab =
     [ "GetWorld.cpp", "_get_world_8cpp.html", "_get_world_8cpp" ],
     [ "GetWorld.hpp", "_get_world_8hpp.html", "_get_world_8hpp" ],
     [ "NetworkClient.cpp", "_network_client_8cpp.html", null ],
-    [ "NetworkClient.hpp", "_network_client_8hpp.html", [
-      [ "Client", "classnetwork_1_1_client.html", "classnetwork_1_1_client" ]
-    ] ]
+    [ "NetworkClient.hpp", "_network_client_8hpp.html", "_network_client_8hpp" ]
 ];
