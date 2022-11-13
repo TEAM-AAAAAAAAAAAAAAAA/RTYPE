@@ -113,7 +113,7 @@ namespace ecs::systems
 #ifdef WIN32
                                             ShellExecute(0, 0, L"https://www.google.com/", 0, 0 , SW_SHOW );
 #else
-                                            std::string url = "https://www.google.com";
+                                            std::string url = "https://cavonstavants-organization.gitbook.io/rtype/how-to-play";
                                             system(std::string("xdg-open " + url).c_str());
 #endif
                                         }
