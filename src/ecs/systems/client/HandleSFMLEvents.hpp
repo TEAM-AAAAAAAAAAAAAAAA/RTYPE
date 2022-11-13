@@ -111,7 +111,7 @@ namespace ecs::systems
                                     } else if (activ->getButtonType() == utils::constant::HOW_TO_HOVER) {
                                         if (event.mouseButton.button == sf::Mouse::Left) {
 #ifdef WIN32
-                                            ShellExecute(0, 0, L"https://cavonstavants-organization.gitbook.io/rtype/how-to-play", 0, 0 , SW_SHOW );
+                                            ShellExecute(0, 0, "https://cavonstavants-organization.gitbook.io/rtype/how-to-play", 0, 0 , SW_SHOW );
 #else
                                             std::string url = "https://cavonstavants-organization.gitbook.io/rtype/how-to-play";
                                             system(std::string("xdg-open " + url).c_str());
