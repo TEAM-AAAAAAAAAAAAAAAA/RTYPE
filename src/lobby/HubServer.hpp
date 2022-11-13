@@ -103,22 +103,22 @@ class HubServer {
                 network::Server::getOutgoingMessages().push(response);
             }
             if (msgCode == 60) {
-                std::cout << "REFRESH SERVER\n";
                 response.second.push_back(msg.second);
-                std::cerr << "Sending servers information" << std::endl;
                 for (size_t i = 0; i < _serverPorts.size(); i++) {
-                    if (_serverPorts[i] != 0 && _serverPorts[i] != 0) {
+                    if (_serverPorts[i] != 0) {
                         int tmp = 0;
                         tmp = _serverPorts[i] >> 8;
                         response.first[0] = 61;
                         response.first[1] = tmp;
                         response.first[2] = _serverPorts[i] & 0xff;
+                        std::cerr << (int)response.first[1] << " " << (int)response.first[2] << std::endl;
                         response.first[3] = _serverSlots[i];
                         network::Server::getOutgoingMessages().push(response);
                     }
                 }
             }
             if (msgCode == 130) {
+                std::cout << "REFRESH SERVER\n";
                 for (size_t i = 0; i < _serverIds.size(); i++) {
                     if (_serverIds[i] == msg.second) {
                         _serverSlots[i] = msg.first[2];
@@ -152,15 +152,15 @@ class HubServer {
         static auto clock = chrono::now();
         if (utils::constant::chronoDuration(utils::constant::chrono::now() - clock).count() > 500) {
             clock = utils::constant::chrono::now();
+            network::ServerMessage response;
+            response.second.clear();
+            response.first.fill(0);
+            response.first[0] = 127;
             for (size_t i = 0; i < _serverPorts.size(); i++) {
-                if (_serverPorts[i] != 0 && _serverIds[i] != 0) {
-                    network::ServerMessage response;
-                    response.second.clear();
-                    response.first.fill(0);
+                if (_serverPorts[i] != 0 && _serverIds[i] != 0)
                     response.second.push_back(_serverIds[i]);
-                    response.first[0] = 127;
-                }
             }
+            network::Server::getOutgoingMessages().push(response);
         }
     }
 

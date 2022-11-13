@@ -164,8 +164,8 @@ namespace ecs::systems
     }
 
     static std::unordered_map<char, std::function<void(World &, network::ClientMessage &msg)>> packetTypeFunction = {
-        {0, createPlayer}, {utils::constant::PLAYER_MOVE, movePlayer}, {utils::constant::PLAYER_SHOT, playerShoot},
-        {utils::constant::ROOM_INFO, sendRoomInfo}, {utils::constant::KEEP_ALIVE, keepAliveResponse}};
+        {0, createPlayer}, {utils::constant::getPacketTypeKey(utils::constant::PLAYER_MOVE), movePlayer}, {utils::constant::getPacketTypeKey(utils::constant::PLAYER_SHOT), playerShoot},
+        {utils::constant::getPacketTypeKey(utils::constant::ROOM_INFO), sendRoomInfo}, {utils::constant::getPacketTypeKey(utils::constant::KEEP_ALIVE), keepAliveResponse}};
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Server::getReceivedMessages().empty()) {

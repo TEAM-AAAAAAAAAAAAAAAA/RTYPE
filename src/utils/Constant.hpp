@@ -137,7 +137,7 @@ namespace utils
             {15, GAME_OVER},
             {31, MULTIPLAYER_INFO},
             {70, KEEP_ALIVE},
-            {128, ROOM_INFO},
+            {127, ROOM_INFO},
             {38, HEALTH_UPDATE},
             {61, ROOM_UPDATE}
         };
