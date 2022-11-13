@@ -139,7 +139,7 @@ namespace utils
             {70, KEEP_ALIVE},
             {128, ROOM_INFO},
             {38, HEALTH_UPDATE},
-            {129, ROOM_UPDATE}
+            {61, ROOM_UPDATE}
         };
 
         static int getPacketTypeKey(PacketType type)
