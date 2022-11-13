@@ -278,25 +278,25 @@ static void setRoomButtons(ecs::World &world)
     world.registry.addComponent<ecs::component::Size>(firstRoom, {itRoom->second.rectHeight, itRoom->second.rectWidth});
     world.registry.addComponent<ecs::component::Drawable>(firstRoom, {"menu", {itRoom->second.rectLeft, itRoom->second.rectTop, itRoom->second.defaultRectWidth, itRoom->second.defaultRectHeight}});
     world.registry.addComponent<ecs::component::Activable>(firstRoom, {false, true, utils::constant::ROOM});
-    world.registry.addComponent<ecs::component::Connection>(firstRoom, {0});
+    world.registry.addComponent<ecs::component::Connection>(firstRoom, {});
 
     world.registry.addComponent<ecs::component::Position>(secondRoom, {itRoom->second.posX, itRoom->second.posY + 150});
     world.registry.addComponent<ecs::component::Size>(secondRoom, {itRoom->second.rectHeight, itRoom->second.rectWidth});
     world.registry.addComponent<ecs::component::Drawable>(secondRoom, {"menu", {itRoom->second.rectLeft, itRoom->second.rectTop, itRoom->second.defaultRectWidth, itRoom->second.defaultRectHeight}});
     world.registry.addComponent<ecs::component::Activable>(secondRoom, {false, true, utils::constant::ROOM});
-    world.registry.addComponent<ecs::component::Connection>(firstRoom, {1});
+    world.registry.addComponent<ecs::component::Connection>(firstRoom, {});
 
     world.registry.addComponent<ecs::component::Position>(thirdRoom, {itRoom->second.posX, itRoom->second.posY + 300});
     world.registry.addComponent<ecs::component::Size>(thirdRoom, {itRoom->second.rectHeight, itRoom->second.rectWidth});
     world.registry.addComponent<ecs::component::Drawable>(thirdRoom, {"menu", {itRoom->second.rectLeft, itRoom->second.rectTop, itRoom->second.defaultRectWidth, itRoom->second.defaultRectHeight}});
     world.registry.addComponent<ecs::component::Activable>(thirdRoom, {false, true, utils::constant::ROOM});
-    world.registry.addComponent<ecs::component::Connection>(firstRoom, {2});
+    world.registry.addComponent<ecs::component::Connection>(firstRoom, {});
 
     world.registry.addComponent<ecs::component::Position>(fourthRoom, {itRoom->second.posX, itRoom->second.posY + 450});
     world.registry.addComponent<ecs::component::Size>(fourthRoom, {itRoom->second.rectHeight, itRoom->second.rectWidth});
     world.registry.addComponent<ecs::component::Drawable>(fourthRoom, {"menu", {itRoom->second.rectLeft, itRoom->second.rectTop, itRoom->second.defaultRectWidth, itRoom->second.defaultRectHeight}});
     world.registry.addComponent<ecs::component::Activable>(fourthRoom, {false, true, utils::constant::ROOM});
-    world.registry.addComponent<ecs::component::Connection>(firstRoom, {3});
+    world.registry.addComponent<ecs::component::Connection>(firstRoom, {});
 }
 
 static void setVolumeButtons(ecs::World &world)
