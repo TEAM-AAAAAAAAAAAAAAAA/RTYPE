@@ -97,8 +97,7 @@ namespace ecs::systems
                                                     auto host = connec->getHost();
                                                     audio::AudioManager::playSFX("button_click");
                                                     connec->setClientConnection();
-//                                                    ecs::WorldManager::setWaitingWorld(
-//                                                            [] { return getGameWorld(); });
+                                                    ecs::WorldManager::setWaitingWorld([] { return getGameWorld(); });
                                                 }
                                             }
                                         }
