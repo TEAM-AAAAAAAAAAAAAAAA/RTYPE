@@ -403,19 +403,17 @@ namespace ecs::systems
         int port = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
         int nbPlayer = (unsigned char)msg[3];
 
-        std::cout << "ROOM UPDATE : " << std::endl;
-        for (size_t i = 0; i < activables.size() && i < positions.size()
-                           && i < texts.size() && i < connections.size(); i++) {
+        for (size_t i = 0; i < activables.size() && i < positions.size() && i < connections.size(); i++) {
             auto &pos = positions[i];
             auto &activ = activables[i];
-            auto &text = texts[i];
             auto &connec = connections[i];
 
-            if (pos && activ && text && connec) {
+            if (pos && activ && connec) {
                 if (activ->getButtonType() == utils::constant::ROOM)
                     if (!connec->getIsSet()) {
+                        std::cout << "ROOM UPDATE\nPort : " << port << " | nbPlayer: "<< nbPlayer << std::endl;
                         connec->setPort(port);
-                        text->setContent(0, std::to_string(nbPlayer));
+//                        text->setContent(0, std::to_string(nbPlayer));
                     }
             }
         }
