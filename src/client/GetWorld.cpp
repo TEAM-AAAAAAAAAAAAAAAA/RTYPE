@@ -235,12 +235,12 @@ static void setMainButtons(ecs::World &world)
 
     world.registry.addComponent<ecs::component::Position>(optionButton, {itOptions->second.posX, itOptions->second.posY});
     world.registry.addComponent<ecs::component::Size>(optionButton, {itPlay->second.rectHeight, itPlay->second.rectWidth});
-    world.registry.addComponent<ecs::component::Drawable>(optionButton, {"menu", {itOptions->second.rectLeft, itOptions->second.rectTop, itPlay->second.defaultRectWidth, itPlay->second.defaultRectHeight}});
+    world.registry.addComponent<ecs::component::Drawable>(optionButton, {"menu", {itOptions->second.rectLeft, itOptions->second.rectTop, itOptions->second.defaultRectWidth, itOptions->second.defaultRectHeight}});
     world.registry.addComponent<ecs::component::Activable>(optionButton, {true, true, utils::constant::OPTION});
 
     world.registry.addComponent<ecs::component::Position>(quitButton, {itQuit->second.posX, itQuit->second.posY});
     world.registry.addComponent<ecs::component::Size>(quitButton, {itPlay->second.rectHeight, itPlay->second.rectWidth});
-    world.registry.addComponent<ecs::component::Drawable>(quitButton, {"menu", {itQuit->second.rectLeft, itQuit->second.rectTop, itPlay->second.defaultRectWidth, itPlay->second.defaultRectHeight}});
+    world.registry.addComponent<ecs::component::Drawable>(quitButton, {"menu", {itQuit->second.rectLeft, itQuit->second.rectTop, itQuit->second.defaultRectWidth, itQuit->second.defaultRectHeight}});
     world.registry.addComponent<ecs::component::Activable>(quitButton, {true, true, utils::constant::QUIT});
 }
 
