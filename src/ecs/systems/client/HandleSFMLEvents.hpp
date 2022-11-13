@@ -7,7 +7,14 @@
 
 #pragma once
 
+#ifdef WIN32
+#include <windows.h>
+    #include <shellapi.h>
+#endif
 #include <functional>
+#include <iostream>
+#include <string>
+#include <stdlib.h>
 #include "Window.hpp"
 #include "World.hpp"
 #include "WorldManager.hpp"
@@ -101,6 +108,16 @@ namespace ecs::systems
                                                 }
                                             }
                                         }
+                                    } else if (activ->getButtonType() == utils::constant::HOW_TO_HOVER) {
+                                        if (event.mouseButton.button == sf::Mouse::Left) {
+#ifdef WIN32
+                                            ShellExecute(0, 0, L"https://www.google.com/", 0, 0 , SW_SHOW );
+#else
+                                            std::string url = "https://cavonstavants-organization.gitbook.io/rtype/how-to-play";
+                                            system(std::string("xdg-open " + url).c_str());
+#endif
+                                        }
+
                                     } else if (activ->getButtonType() == utils::constant::OPTION_HOVER) {
                                         if (event.mouseButton.button == sf::Mouse::Left) {
                                             audio::AudioManager::playSFX("button_click");
