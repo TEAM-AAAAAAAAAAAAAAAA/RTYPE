@@ -34,7 +34,7 @@ namespace ecs::systems
                 }
             }
         }
-        if (!enemiesAlive || utils::constant::chrono::steady_clock::now().time_since_epoch().count() - 100000000000 > lastWave) {
+        if (!enemiesAlive || utils::constant::chrono::now().time_since_epoch().count() - 100000000000 > lastWave) {
             waveCounter++;
             network::Message msg;
             msg[0] = utils::constant::getPacketTypeKey(utils::constant::PacketType::WAVE_UPDATE);
@@ -307,7 +307,7 @@ namespace ecs::systems
                         ecs::component::MovementAI::AIType::Idle);
                 }
             }
-            lastWave = utils::constant::chrono::steady_clock::now().time_since_epoch().count();
+            lastWave = utils::constant::chrono::now().time_since_epoch().count();
         }
     };
 }

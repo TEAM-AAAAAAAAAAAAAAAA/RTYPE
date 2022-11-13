@@ -50,9 +50,9 @@ namespace ecs::systems
         static const int dirX = 14;
         static const int dirY = 15;
 
-        static auto clock = utils::constant::chrono::steady_clock::now();
-        if (utils::constant::chronoDuration(utils::constant::chrono::steady_clock::now() - clock).count() > 10) {
-            clock = utils::constant::chrono::steady_clock::now();
+        static auto clock = utils::constant::chrono::now();
+        if (utils::constant::chronoDuration(utils::constant::chrono::now() - clock).count() > 10) {
+            clock = utils::constant::chrono::now();
             for (size_t i = 0; i < position.size() && i < networkId.size() && i < sizes.size() && i < entityType.size()
                  && i < velocities.size() && i < directions.size();
                  i++) {

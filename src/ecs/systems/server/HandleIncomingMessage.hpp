@@ -114,11 +114,11 @@ namespace ecs::systems
                 auto &fac = factions[i];
 
                 if (pos && weapon && fac) {
-                    auto elapsed = utils::constant::chrono::steady_clock::now().time_since_epoch().count() - weapon.value().lastShoot;
+                    auto elapsed = utils::constant::chrono::now().time_since_epoch().count() - weapon.value().lastShoot;
                     if (weapon.value().hasSuper && elapsed > weapon.value().superLoadingTime) {
-                        weapon.value().lastShoot = utils::constant::chrono::steady_clock::now().time_since_epoch().count();
+                        weapon.value().lastShoot = utils::constant::chrono::now().time_since_epoch().count();
                     } else if (elapsed > weapon.value().shootDelay) {
-                        weapon.value().lastShoot = utils::constant::chrono::steady_clock::now().time_since_epoch().count();
+                        weapon.value().lastShoot = utils::constant::chrono::now().time_since_epoch().count();
                         ecs::Entity bullet = world.registry.spawn_entity();
                         world.registry.addComponent<ecs::component::EntityType>(
                             bullet, {component::EntityType::Bullet});

@@ -25,7 +25,7 @@ namespace ecs::systems
         auto &healths = world.registry.getComponents<component::Health>();
         auto &networkId = world.registry.getComponents<component::NetworkId>();
         std::map<unsigned int, size_t> _clientToEntID = network::Server::getClientToEntID();
-        static auto clock = utils::constant::chrono::steady_clock::now();
+        static auto clock = utils::constant::chrono::now();
         auto const &follow = world.registry.getComponents<component::FollowEntity>();
 
         for (size_t i = 0; i < healths.size(); i++) {
@@ -75,8 +75,8 @@ namespace ecs::systems
                 }
             }
         }
-        if (utils::constant::chronoDuration(utils::constant::chrono::steady_clock::now() - clock).count() > 100) {
-            clock = utils::constant::chrono::steady_clock::now();
+        if (utils::constant::chronoDuration(utils::constant::chrono::now() - clock).count() > 100) {
+            clock = utils::constant::chrono::now();
             for (size_t i = 0; i < networkId.size(); ++i) {
                 auto &id = networkId[i];
                 int clientId = 0;
@@ -87,7 +87,7 @@ namespace ecs::systems
                             clientId = key;
                         }
                     if (utils::constant::chronoDuration(
-                            utils::constant::chrono::steady_clock::now() - network::Server::getLastPing(clientId))
+                            utils::constant::chrono::now() - network::Server::getLastPing(clientId))
                             .count()
                         > 10000) {
                         std::array<char, 2> idBin = id.value().serialize();
