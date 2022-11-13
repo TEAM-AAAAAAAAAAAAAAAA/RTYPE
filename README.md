@@ -11,24 +11,12 @@ This project is an EPITECH Project. If you are an EPITECH student, move out the 
 
 ## Prerequisites
 
-To use this project, you'll need Cmake 3.17.0 Compiler, SFML-devel library, Boost and C11.
+To use this project, you'll need Cmake 3.17.0 Compiler, SFML-devel library, Boost and C++20.
 
-## Building program
+For more informations on how to install, compile or build the project.
+Please visit our online documentation at [https://cavonstavants-organization.gitbook.io/rtype/welcome/r-thaaaaaai](https://cavonstavants-organization.gitbook.io/rtype/welcome/r-thaaaaaai)
 
-```bash
-    cmake -B ./build -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
-    cmake --build ./build
-```
-
-## Testing program
-
-```bash
-    rm -rf ./build
-    cmake -B ./build -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DTESTING=ON
-    cmake --build ./build
-    cd ./build
-    ctest --ouput-on-failure
-```
+For technical documentations extracted from our code with Doxygen, go to [https://cavonstavants-organization.gitbook.io/rtype-technical-documentation/](https://cavonstavants-organization.gitbook.io/rtype-technical-documentation)
 
 ## Coding Style
 
