@@ -25,7 +25,7 @@ namespace ecs::systems
         auto &texts = world.registry.getComponents<component::Text>();
         auto &scores = world.registry.getComponents<component::Score>();
 
-        for (size_t i = 0; i < texts.size() || i < scores.size(); i++) {
+        for (size_t i = 0; i < texts.size() && i < scores.size(); i++) {
             auto &text = texts[i];
             auto &score = scores[i];
 
