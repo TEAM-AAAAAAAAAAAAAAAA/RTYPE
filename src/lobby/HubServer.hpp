@@ -97,13 +97,11 @@ class HubServer {
             response.first.fill(0);
             int msgCode = msg.first[0];
             if (msgCode == 0) {
-                std::cout << "NEW CONNEC\n";
                 response.first[0] = 64;
                 response.second.push_back(msg.second);
                 network::Server::getOutgoingMessages().push(response);
             }
             if (msgCode == 60) {
-                std::cout << "REFRESH SERVER\n";
                 response.second.push_back(msg.second);
                 for (size_t i = 0; i < _serverPorts.size(); i++) {
                     if (_serverPorts[i] != 0) {
