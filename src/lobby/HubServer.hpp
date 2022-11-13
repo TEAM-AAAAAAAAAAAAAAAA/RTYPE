@@ -111,37 +111,17 @@ class HubServer {
                         response.first[0] = 61;
                         response.first[1] = tmp;
                         response.first[2] = _serverPorts[i] & 0xff;
-                        std::cerr << (int)response.first[1] << " " << (int)response.first[2] << std::endl;
                         response.first[3] = _serverSlots[i];
                         network::Server::getOutgoingMessages().push(response);
                     }
                 }
             }
             if (msgCode == 130) {
-                std::cout << "REFRESH SERVER\n";
                 for (size_t i = 0; i < _serverIds.size(); i++) {
                     if (_serverIds[i] == msg.second) {
                         _serverSlots[i] = msg.first[2];
                         break;
                     }
-                }
-            }
-            if (msgCode == 255) {
-                int clientPort = (unsigned char)msg.first[1] << 8U | (unsigned char)msg.first[2];
-                size_t i = 0;
-                for (; i < _serverPorts.size(); i++) {
-                    if (_serverPorts[i] == clientPort) {
-                        break;
-                    }
-                }
-                response.second.push_back(msg.second);
-                if (_serverPorts[i] == clientPort && _serverSlots[i] < 4) {
-                    _serverSlots[i]++;
-                    response.first[0] = 65;
-                    network::Server::getOutgoingMessages().push(response);
-                } else {
-                    response.first[0] = 66;
-                    network::Server::getOutgoingMessages().push(response);
                 }
             }
         }
