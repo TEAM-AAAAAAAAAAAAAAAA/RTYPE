@@ -20,6 +20,7 @@
 #include "components/client/Controllable.hpp"
 #include "components/client/Drawable.hpp"
 #include "components/client/Hitbox.hpp"
+#include "components/client/Connection.hpp"
 #include "components/client/Parallax.hpp"
 #include "components/client/Text.hpp"
 #include "systems/ManageClientEvents.hpp"
@@ -35,6 +36,9 @@
 #include "systems/client/MenuSelect.hpp"
 #include "systems/client/ScoreUpdate.hpp"
 #include "systems/client/SendDirection.hpp"
+#include "systems/client/PeriodicPing.hpp"
+#include "systems/client/KeepAlive.hpp"
+#include "systems/client/ExecuteOnce.hpp"
 
 using AnimFrame = ecs::component::Animated::AnimFrame;
 static const int FRAME_LIMIT = 60;
@@ -62,6 +66,7 @@ static void registerComponents(ecs::World &world)
     world.registry.registerComponent<ecs::component::Text>();
     world.registry.registerComponent<ecs::component::Activable>();
     world.registry.registerComponent<ecs::component::Score>();
+    world.registry.registerComponent<ecs::component::Connection>();
 }
 
 static void addGameSystems(ecs::World &world)
@@ -76,6 +81,7 @@ static void addGameSystems(ecs::World &world)
     world.addSystem(ecs::systems::HandleParallaxBounds);
     world.addSystem(ecs::systems::scoreUpdate);
     world.addSystem(ecs::systems::executeOnce);
+    world.addSystem(ecs::systems::keepAlive);
     world.addSystem(ecs::systems::healthBar);
     world.addSystem(ecs::systems::animate);
 }
@@ -194,8 +200,6 @@ ecs::World getGameWorld(const std::string &port = "8000", const std::string &hos
     audio::AudioManager::stopBGM();
     audio::AudioManager::loadBGM("bgm1");
     audio::AudioManager::playBGM();
-    network::Client::setHost(host);
-    network::Client::setPort(port);
     utils::Window::getInstance().setFramerateLimit(FRAME_LIMIT);
     registerComponents(world);
     setGameParallax(world);
@@ -215,6 +219,7 @@ static void addMenuSystems(ecs::World &world)
     world.addSystem(ecs::systems::movement);
     world.addSystem(ecs::systems::menuSelect);
     world.addSystem(ecs::systems::animate);
+    world.addSystem(ecs::systems::HandleIncomingMessages);
 }
 
 static void setMainButtons(ecs::World &world)
@@ -250,18 +255,18 @@ static void setRoomTexts(ecs::World &world)
     ecs::Entity textFourthRoom = world.registry.spawn_entity();
     auto itRoom = utils::constant::buttonValueMap.find(utils::constant::ROOM);
 
-    world.registry.addComponent<ecs::component::Text>(textFirstRoom, {"0", "/", "4", "Player"});
-    world.registry.addComponent<ecs::component::Text>(textSecondRoom, {"0", "/", "4", "Player"});
-    world.registry.addComponent<ecs::component::Text>(textThirdRoom, {"0", "/", "4", "Player"});
-    world.registry.addComponent<ecs::component::Text>(textFourthRoom, {"0", "/", "4", "Player"});
-    world.registry.addComponent<ecs::component::Position>(textFirstRoom, {itRoom->second.posX + 100, itRoom->second.posY - 17 + itRoom->second.rectHeight / 2});
-    world.registry.addComponent<ecs::component::Position>(textSecondRoom, {itRoom->second.posX + 100, itRoom->second.posY + 133 + itRoom->second.rectHeight / 2});
-    world.registry.addComponent<ecs::component::Position>(textThirdRoom, {itRoom->second.posX + 100, itRoom->second.posY + 283 + itRoom->second.rectHeight / 2});
-    world.registry.addComponent<ecs::component::Position>(textFourthRoom, {itRoom->second.posX + 100, itRoom->second.posY + 433 + itRoom->second.rectHeight / 2});
-    world.registry.addComponent<ecs::component::Size>(textFirstRoom, {30, 0});
-    world.registry.addComponent<ecs::component::Size>(textSecondRoom, {30, 0});
-    world.registry.addComponent<ecs::component::Size>(textThirdRoom, {30, 0});
-    world.registry.addComponent<ecs::component::Size>(textFourthRoom, {30, 0});
+    world.registry.addComponent<ecs::component::Text>(textFirstRoom, {"0", "/", "4   ", ""});
+    world.registry.addComponent<ecs::component::Text>(textSecondRoom, {"0", "/", "4   ", ""});
+    world.registry.addComponent<ecs::component::Text>(textThirdRoom, {"0", "/", "4   ", ""});
+    world.registry.addComponent<ecs::component::Text>(textFourthRoom, {"0", "/", "4   ", ""});
+    world.registry.addComponent<ecs::component::Position>(textFirstRoom, {itRoom->second.posX + 80, itRoom->second.posY - 17 + itRoom->second.rectHeight / 2});
+    world.registry.addComponent<ecs::component::Position>(textSecondRoom, {itRoom->second.posX + 80, itRoom->second.posY + 133 + itRoom->second.rectHeight / 2});
+    world.registry.addComponent<ecs::component::Position>(textThirdRoom, {itRoom->second.posX + 80, itRoom->second.posY + 283 + itRoom->second.rectHeight / 2});
+    world.registry.addComponent<ecs::component::Position>(textFourthRoom, {itRoom->second.posX + 80, itRoom->second.posY + 433 + itRoom->second.rectHeight / 2});
+    world.registry.addComponent<ecs::component::Size>(textFirstRoom, {30, 20});
+    world.registry.addComponent<ecs::component::Size>(textSecondRoom, {30, 20});
+    world.registry.addComponent<ecs::component::Size>(textThirdRoom, {30, 20});
+    world.registry.addComponent<ecs::component::Size>(textFourthRoom, {30, 20});
     world.registry.addComponent<ecs::component::Activable>(textFirstRoom, {false, false, utils::constant::ROOM_TEXT});
     world.registry.addComponent<ecs::component::Activable>(textSecondRoom, {false, false, utils::constant::ROOM_TEXT});
     world.registry.addComponent<ecs::component::Activable>(textThirdRoom, {false, false, utils::constant::ROOM_TEXT});
@@ -280,21 +285,25 @@ static void setRoomButtons(ecs::World &world)
     world.registry.addComponent<ecs::component::Size>(firstRoom, {itRoom->second.rectHeight, itRoom->second.rectWidth});
     world.registry.addComponent<ecs::component::Drawable>(firstRoom, {"menu", {itRoom->second.rectLeft, itRoom->second.rectTop, itRoom->second.defaultRectWidth, itRoom->second.defaultRectHeight}});
     world.registry.addComponent<ecs::component::Activable>(firstRoom, {false, true, utils::constant::ROOM});
+    world.registry.addComponent<ecs::component::Connection>(firstRoom, {});
 
     world.registry.addComponent<ecs::component::Position>(secondRoom, {itRoom->second.posX, itRoom->second.posY + 150});
     world.registry.addComponent<ecs::component::Size>(secondRoom, {itRoom->second.rectHeight, itRoom->second.rectWidth});
     world.registry.addComponent<ecs::component::Drawable>(secondRoom, {"menu", {itRoom->second.rectLeft, itRoom->second.rectTop, itRoom->second.defaultRectWidth, itRoom->second.defaultRectHeight}});
     world.registry.addComponent<ecs::component::Activable>(secondRoom, {false, true, utils::constant::ROOM});
+    world.registry.addComponent<ecs::component::Connection>(secondRoom, {});
 
     world.registry.addComponent<ecs::component::Position>(thirdRoom, {itRoom->second.posX, itRoom->second.posY + 300});
     world.registry.addComponent<ecs::component::Size>(thirdRoom, {itRoom->second.rectHeight, itRoom->second.rectWidth});
     world.registry.addComponent<ecs::component::Drawable>(thirdRoom, {"menu", {itRoom->second.rectLeft, itRoom->second.rectTop, itRoom->second.defaultRectWidth, itRoom->second.defaultRectHeight}});
     world.registry.addComponent<ecs::component::Activable>(thirdRoom, {false, true, utils::constant::ROOM});
+    world.registry.addComponent<ecs::component::Connection>(thirdRoom, {});
 
     world.registry.addComponent<ecs::component::Position>(fourthRoom, {itRoom->second.posX, itRoom->second.posY + 450});
     world.registry.addComponent<ecs::component::Size>(fourthRoom, {itRoom->second.rectHeight, itRoom->second.rectWidth});
     world.registry.addComponent<ecs::component::Drawable>(fourthRoom, {"menu", {itRoom->second.rectLeft, itRoom->second.rectTop, itRoom->second.defaultRectWidth, itRoom->second.defaultRectHeight}});
     world.registry.addComponent<ecs::component::Activable>(fourthRoom, {false, true, utils::constant::ROOM});
+    world.registry.addComponent<ecs::component::Connection>(fourthRoom, {});
 }
 
 static void setVolumeButtons(ecs::World &world)

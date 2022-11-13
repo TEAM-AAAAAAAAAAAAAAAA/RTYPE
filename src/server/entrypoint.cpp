@@ -17,6 +17,7 @@
 #include "systems/server/ProjectileCollision.hpp"
 #include "systems/server/RunAttackAI.hpp"
 #include "systems/server/Waves.hpp"
+#include "systems/server/KeepAlive.hpp"
 #include "systems/server/FollowEntitySystem.hpp"
 
 ecs::World getGameWorld()
@@ -48,14 +49,29 @@ ecs::World getGameWorld()
     world.addSystem(ecs::systems::deathUpdate);
     world.addSystem(ecs::systems::playerHealthUpdate);
     world.addSystem(ecs::systems::waves);
+    world.addSystem(ecs::systems::keepAlive);
     world.addSystem(ecs::systems::followEntitySystem);
 
     return world;
 }
 
-int main()
+int main(int argc, char **argv)
 {
-    network::Server::start(8000);
+    if (argc != 2) {
+        std::cerr << argc << std::endl;
+        std::cerr << "Usage: ./r-type_server [port]" << std::endl;
+        return 1;
+    }
+    try {
+        if (std::stoi(argv[1]) < 0) {
+            std::cerr << "Port must be greater than 0" << std::endl;
+            return 84;
+        }
+    } catch (std::exception &e) {
+        std::cerr << "Port must be a number" << std::endl;
+        return 84;
+    }
+    network::Server::start(std::stoi(argv[1]));
     std::srand(std::time(NULL));
     ecs::Engine engine;
     ecs::WorldManager::setWaitingWorld(getGameWorld);

@@ -27,8 +27,6 @@
 
 namespace ecs::systems
 {
-    static std::map<unsigned int, size_t> clientNumToId = {};
-
     /**
      * In goal of create a player, first, we need to add every components of the player.
      * Specify to the server that there is a new connection and check if the request has been accepted
@@ -48,9 +46,7 @@ namespace ecs::systems
         world.registry.addComponent<ecs::component::Health>(newPlayer, {utils::constant::maxPlayerHealth});
         world.registry.addComponent<ecs::component::NetworkId>(newPlayer, {static_cast<size_t>(newPlayer)});
         world.registry.addComponent<ecs::component::Faction>(newPlayer, {ecs::component::Faction::Factions::Chefs});
-
         ecs::Entity playerBot = world.registry.spawn_entity();
-
         world.registry.addComponent<ecs::component::Position>(playerBot, {20, 5});
         world.registry.addComponent<ecs::component::Size>(playerBot, {16, 32});
         world.registry.addComponent<ecs::component::EntityType>(playerBot, {ecs::component::EntityType::Types::PlayerBot});
@@ -62,7 +58,7 @@ namespace ecs::systems
         world.registry.addComponent<ecs::component::FollowEntity>(playerBot, {static_cast<std::size_t>(newPlayer)});
         world.registry.addComponent<ecs::component::AttackAI>(playerBot, {component::AttackAI::AIType::PlayerBot});
 
-        clientNumToId[msg.second] = static_cast<size_t>(newPlayer);
+        network::Server::getClientToEntID()[msg.second] = (size_t)newPlayer;
         network::Message message;
         message.fill(0);
         message[1] = static_cast<size_t>(newPlayer) >> 8;
@@ -85,7 +81,7 @@ namespace ecs::systems
             auto &id = networkIds[i];
 
             if (dir && id) {
-                if (clientNumToId[msg.second] == id.value().id) {
+                if (network::Server::getClientToEntID()[msg.second] == id.value().id) {
                     dir.value().x = (int)msg.first[1];
                     dir.value().y = (int)msg.first[2];
                     return;
@@ -111,7 +107,8 @@ namespace ecs::systems
             auto &id = networkIds[i];
 
             if (id
-                && clientNumToId.find(msg.second) != clientNumToId.end() & clientNumToId[msg.second] == id.value().id) {
+                && network::Server::getClientToEntID().find(msg.second) != network::Server::getClientToEntID().end()
+                    & network::Server::getClientToEntID()[msg.second] == id.value().id) {
                 auto &pos = positions[i];
                 auto &weapon = weapons[i];
                 auto &fac = factions[i];
@@ -143,12 +140,36 @@ namespace ecs::systems
         };
     }
 
+    /**
+     * Used send information about the room to the hub server
+     * @param world Not used in this function
+     * @param msg Only used to check packet type
+     */
+    static void sendRoomInfo(World &world, network::ClientMessage &msg)
+    {
+        network::ServerMessage message;
+
+        message.first.fill(0);
+        message.first[0] = 130;
+        message.first[1] = network::Server::getClientCount() & 0xFF;
+        message.second.push_back(msg.second);
+        network::Server::getOutgoingMessages().push(message);
+    }
+
+    static void keepAliveResponse(World &world, network::ClientMessage &msg)
+    {
+        network::Message response;
+        response[0] = 71;
+        network::Server::getOutgoingMessages().push(std::pair(response, std::vector<unsigned int>(msg.second)));
+    }
+
     static std::unordered_map<char, std::function<void(World &, network::ClientMessage &msg)>> packetTypeFunction = {
-        {0, createPlayer}, {utils::constant::PLAYER_MOVE, movePlayer}, {utils::constant::PLAYER_SHOT, playerShoot}};
+        {0, createPlayer}, {utils::constant::getPacketTypeKey(utils::constant::PLAYER_MOVE), movePlayer}, {utils::constant::getPacketTypeKey(utils::constant::PLAYER_SHOT), playerShoot},
+        {utils::constant::getPacketTypeKey(utils::constant::ROOM_INFO), sendRoomInfo}, {utils::constant::getPacketTypeKey(utils::constant::KEEP_ALIVE), keepAliveResponse}};
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
-        while (!network::Server::GetReceivedMessages().empty()) {
-            network::ClientMessage msg = network::Server::GetReceivedMessages().pop();
+        while (!network::Server::getReceivedMessages().empty()) {
+            network::ClientMessage msg = network::Server::getReceivedMessages().pop();
             if (packetTypeFunction.find(msg.first[0]) != packetTypeFunction.end())
                 packetTypeFunction[msg.first[0]](world, msg);
         }

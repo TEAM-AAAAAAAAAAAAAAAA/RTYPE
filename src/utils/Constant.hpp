@@ -39,8 +39,12 @@ namespace utils
             BOSS_STAGE,
             GAME_OVER,
             MULTIPLAYER_INFO,
+            ROOM_INFO,
+            KEEP_ALIVE,
             HEALTH_UPDATE,
             WAVE_UPDATE,
+            ROOM_UPDATE,
+            HUB_CONNECT,
             NONE
         };
 
@@ -129,13 +133,15 @@ namespace utils
             {17, ENTITY_DEATH},
             {32, ENTITY_DAMAGE},
             {34, ENTITY_HEAL},
-            {64, PLAYER_POWERUP},
             {3, NEW_WAVE},
             {7, BOSS_STAGE},
             {15, GAME_OVER},
             {31, MULTIPLAYER_INFO},
             {38, HEALTH_UPDATE},
             {40, WAVE_UPDATE}
+            {70, KEEP_ALIVE},
+            {127, ROOM_INFO},
+            {61, ROOM_UPDATE}
         };
 
         static int getPacketTypeKey(PacketType type)
