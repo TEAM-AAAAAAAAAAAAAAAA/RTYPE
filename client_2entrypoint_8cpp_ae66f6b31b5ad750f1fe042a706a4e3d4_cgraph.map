@@ -1,23 +1,24 @@
 <map id="main" name="main">
-<area shape="rect" id="node1" title=" " alt="" coords="5,369,60,396"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,392,60,419"/>
 <area shape="rect" id="node2" href="$classnetwork_1_1_client.html#ab803b1a4b60b0d5ca35b84e95729c2b4" title=" " alt="" coords="123,5,303,32"/>
 <area shape="rect" id="node3" href="$_get_world_8cpp.html#a6ad7959edcdf6eccefe497fbfa3a0fdc" title=" " alt="" coords="155,56,271,83"/>
 <area shape="rect" id="node5" href="$classnetwork_1_1_client.html#ab4ee2988395ad66a1c4e259eba436d23" title=" " alt="" coords="108,107,317,149"/>
-<area shape="rect" id="node6" href="$classasset_1_1_asset_loader.html#a259aabaae49480269917291cba241043" title="Load a .ini file with boost loading assets into the map." alt="" coords="140,173,285,214"/>
-<area shape="rect" id="node7" href="$classaudio_1_1_audio_manager.html#ac01493a92b3a76bf9212e12b28167223" title=" " alt="" coords="133,238,293,279"/>
-<area shape="rect" id="node10" href="$classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2" title=" " alt="" coords="127,303,298,345"/>
-<area shape="rect" id="node11" href="$classecs_1_1_engine.html#aa7ecda3685c27b8f859fdf0e764f0a94" title=" " alt="" coords="150,369,275,396"/>
-<area shape="rect" id="node15" href="$classaudio_1_1_audio_manager.html#a683ab7aa039fa232acceaa98fd88a7f9" title=" " alt="" coords="133,421,293,462"/>
-<area shape="rect" id="node17" href="$classnetwork_1_1_client.html#a07fc7307d327b56735af419262a5160d" title=" " alt="" coords="123,487,302,513"/>
-<area shape="rect" id="node18" href="$classnetwork_1_1_client.html#a54f38a429fe6e96c68f10ddf3f226eb9" title=" " alt="" coords="125,537,300,564"/>
-<area shape="rect" id="node19" href="$classaudio_1_1_audio_manager.html#a7f9980bd200869418d147eec57178d58" title=" " alt="" coords="133,589,293,630"/>
-<area shape="rect" id="node20" href="$classecs_1_1_world_manager.html#ab8a3b57448589e5301d8ae65f7dbf88e" title=" " alt="" coords="135,654,290,695"/>
-<area shape="rect" id="node21" href="$classasset_1_1_asset_loader.html#a5d2e326963a2a9bf49587a28de5fc006" title="create a smartpath from a vector of string" alt="" coords="140,719,285,761"/>
+<area shape="rect" id="node6" href="$classasset_1_1_asset_loader.html#a3c8bef9af852fd33fffa16369d4ce74f" title=" " alt="" coords="380,170,525,211"/>
+<area shape="rect" id="node8" href="$classasset_1_1_asset_loader.html#a259aabaae49480269917291cba241043" title="Load a .ini file with boost loading assets into the map." alt="" coords="140,225,285,266"/>
+<area shape="rect" id="node9" href="$classaudio_1_1_audio_manager.html#ac01493a92b3a76bf9212e12b28167223" title=" " alt="" coords="133,290,293,331"/>
+<area shape="rect" id="node11" href="$classnetwork_1_1_locked_queue.html#a076e0981cce5c44eed95476e135011f2" title=" " alt="" coords="127,355,298,397"/>
+<area shape="rect" id="node12" href="$classecs_1_1_engine.html#aa7ecda3685c27b8f859fdf0e764f0a94" title=" " alt="" coords="150,421,275,448"/>
+<area shape="rect" id="node16" href="$classaudio_1_1_audio_manager.html#a683ab7aa039fa232acceaa98fd88a7f9" title=" " alt="" coords="133,473,293,514"/>
+<area shape="rect" id="node18" href="$classnetwork_1_1_client.html#a07fc7307d327b56735af419262a5160d" title=" " alt="" coords="123,539,302,565"/>
+<area shape="rect" id="node19" href="$classnetwork_1_1_client.html#a54f38a429fe6e96c68f10ddf3f226eb9" title=" " alt="" coords="125,589,300,616"/>
+<area shape="rect" id="node20" href="$classaudio_1_1_audio_manager.html#a7f9980bd200869418d147eec57178d58" title=" " alt="" coords="133,641,293,682"/>
+<area shape="rect" id="node21" href="$classecs_1_1_world_manager.html#ab8a3b57448589e5301d8ae65f7dbf88e" title=" " alt="" coords="135,706,290,747"/>
+<area shape="rect" id="node22" href="$classasset_1_1_asset_loader.html#a5d2e326963a2a9bf49587a28de5fc006" title="create a smartpath from a vector of string" alt="" coords="140,771,285,813"/>
 <area shape="rect" id="node4" href="$namespaceutils.html#a79e536d2358e77e397c975738dc4a121" title=" " alt="" coords="385,56,520,83"/>
-<area shape="rect" id="node8" href="$classasset_1_1_asset_loader.html#aae5364a01b69a76bab4d489a0cc1c83e" title="Get a sound effect object from the map." alt="" coords="380,238,525,279"/>
-<area shape="rect" id="node9" href="$classasset_1_1_asset_loader.html#a50f7f49aa27c1f7648cf645915be8481" title=" " alt="" coords="588,355,733,397"/>
-<area shape="rect" id="node12" href="$classecs_1_1_world_manager.html#a1e9cb1cc467c773762bfa0c3299068aa" title=" " alt="" coords="375,303,530,345"/>
-<area shape="rect" id="node13" href="$classutils_1_1_window.html#adf07a85381bcbdf6cb2c71db03302e38" title=" " alt="" coords="371,369,534,396"/>
-<area shape="rect" id="node14" href="$classecs_1_1_world.html#a0015fa0624f4eeaa5178d189bf5e233b" title=" " alt="" coords="365,420,540,447"/>
-<area shape="rect" id="node16" href="$classasset_1_1_asset_loader.html#a86b4ab2ca1928ac0ed5006e2abaeef03" title="Get a background music object from the map." alt="" coords="380,471,525,513"/>
+<area shape="rect" id="node7" href="$classasset_1_1_asset_loader.html#a50f7f49aa27c1f7648cf645915be8481" title=" " alt="" coords="588,265,733,306"/>
+<area shape="rect" id="node10" href="$classasset_1_1_asset_loader.html#aae5364a01b69a76bab4d489a0cc1c83e" title="Get a sound effect object from the map." alt="" coords="380,265,525,306"/>
+<area shape="rect" id="node13" href="$classecs_1_1_world_manager.html#a1e9cb1cc467c773762bfa0c3299068aa" title=" " alt="" coords="375,330,530,371"/>
+<area shape="rect" id="node14" href="$classutils_1_1_window.html#adf07a85381bcbdf6cb2c71db03302e38" title=" " alt="" coords="371,396,534,423"/>
+<area shape="rect" id="node15" href="$classecs_1_1_world.html#a0015fa0624f4eeaa5178d189bf5e233b" title=" " alt="" coords="365,447,540,473"/>
+<area shape="rect" id="node17" href="$classasset_1_1_asset_loader.html#a86b4ab2ca1928ac0ed5006e2abaeef03" title="Get a background music object from the map." alt="" coords="380,498,525,539"/>
 </map>

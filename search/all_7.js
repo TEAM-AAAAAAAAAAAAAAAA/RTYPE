@@ -43,13 +43,14 @@ var searchData=
   ['getrandomattack_170',['getRandomAttack',['../structecs_1_1component_1_1_attack_a_i.html#ae8d69cf21c1de4e033b8cad57af714b4',1,'ecs::component::AttackAI']]],
   ['getreceivedmessages_171',['getReceivedMessages',['../classnetwork_1_1_client.html#ac8d5bead7d861e42f7b7258eba61fd54',1,'network::Client::getReceivedMessages()'],['../classnetwork_1_1_server.html#a0d3fd563ba145ae94e198f15daf49eb6',1,'network::Server::getReceivedMessages()']]],
   ['getscore_172',['getScore',['../structecs_1_1component_1_1_score.html#ae2451fe30667bb0372b3cfb362214bc8',1,'ecs::component::Score']]],
-  ['getsfx_173',['GetSFX',['../classasset_1_1_asset_loader.html#aae5364a01b69a76bab4d489a0cc1c83e',1,'asset::AssetLoader']]],
-  ['getsfxvolume_174',['getSFXVolume',['../classaudio_1_1_audio_manager.html#a8212210769c8168e1d55db524ed8ac78',1,'audio::AudioManager']]],
-  ['getshape_175',['getShape',['../classanim_1_1_animation.html#a96a7186a3512121023a5b5ce9f5fd0ae',1,'anim::Animation']]],
-  ['getsize_176',['getSize',['../classanim_1_1_animation.html#a5868122aa6a9b3988596543aee5abe17',1,'anim::Animation']]],
-  ['gettextcolor_177',['getTextColor',['../structecs_1_1component_1_1_text.html#addda4a007348046f8965887675555bef',1,'ecs::component::Text']]],
-  ['gettexture_178',['getTexture',['../structecs_1_1component_1_1_drawable.html#ad7beaaf10a9fa577ce0cff4010b11ccb',1,'ecs::component::Drawable::getTexture()'],['../structecs_1_1component_1_1_drawable.html#af806011a057d0d9968c03526f6dde709',1,'ecs::component::Drawable::getTexture() const'],['../classasset_1_1_asset_loader.html#ab9214a64413a1c36d34381a9bbc9f15d',1,'asset::AssetLoader::GetTexture()']]],
-  ['getworld_179',['getWorld',['../classecs_1_1_world_manager.html#a1e9cb1cc467c773762bfa0c3299068aa',1,'ecs::WorldManager']]],
-  ['getworld_2ecpp_180',['GetWorld.cpp',['../_get_world_8cpp.html',1,'']]],
-  ['getworld_2ehpp_181',['GetWorld.hpp',['../_get_world_8hpp.html',1,'']]]
+  ['getserverinfo_173',['GetServerInfo',['../classasset_1_1_asset_loader.html#a3c8bef9af852fd33fffa16369d4ce74f',1,'asset::AssetLoader']]],
+  ['getsfx_174',['GetSFX',['../classasset_1_1_asset_loader.html#aae5364a01b69a76bab4d489a0cc1c83e',1,'asset::AssetLoader']]],
+  ['getsfxvolume_175',['getSFXVolume',['../classaudio_1_1_audio_manager.html#a8212210769c8168e1d55db524ed8ac78',1,'audio::AudioManager']]],
+  ['getshape_176',['getShape',['../classanim_1_1_animation.html#a96a7186a3512121023a5b5ce9f5fd0ae',1,'anim::Animation']]],
+  ['getsize_177',['getSize',['../classanim_1_1_animation.html#a5868122aa6a9b3988596543aee5abe17',1,'anim::Animation']]],
+  ['gettextcolor_178',['getTextColor',['../structecs_1_1component_1_1_text.html#addda4a007348046f8965887675555bef',1,'ecs::component::Text']]],
+  ['gettexture_179',['getTexture',['../structecs_1_1component_1_1_drawable.html#ad7beaaf10a9fa577ce0cff4010b11ccb',1,'ecs::component::Drawable::getTexture()'],['../structecs_1_1component_1_1_drawable.html#af806011a057d0d9968c03526f6dde709',1,'ecs::component::Drawable::getTexture() const'],['../classasset_1_1_asset_loader.html#ab9214a64413a1c36d34381a9bbc9f15d',1,'asset::AssetLoader::GetTexture()']]],
+  ['getworld_180',['getWorld',['../classecs_1_1_world_manager.html#a1e9cb1cc467c773762bfa0c3299068aa',1,'ecs::WorldManager']]],
+  ['getworld_2ecpp_181',['GetWorld.cpp',['../_get_world_8cpp.html',1,'']]],
+  ['getworld_2ehpp_182',['GetWorld.hpp',['../_get_world_8hpp.html',1,'']]]
 ];

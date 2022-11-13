@@ -179,6 +179,8 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a5d2e326963a2a9bf49587a28de5fc006"><td class="memItemLeft" align="right" valign="top">static std::filesystem::path&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classasset_1_1_asset_loader.html#a5d2e326963a2a9bf49587a28de5fc006">smartPath</a> (std::vector&lt; std::string &gt; paths)</td></tr>
 <tr class="memdesc:a5d2e326963a2a9bf49587a28de5fc006"><td class="mdescLeft">&#160;</td><td class="mdescRight">create a smartpath from a vector of string  <a href="classasset_1_1_asset_loader.html#a5d2e326963a2a9bf49587a28de5fc006">More...</a><br /></td></tr>
 <tr class="separator:a5d2e326963a2a9bf49587a28de5fc006"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82bf3b6c3cfe903d83923b06b24ae83d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classasset_1_1_asset_loader.html#a82bf3b6c3cfe903d83923b06b24ae83d">LoadServerInfo</a> (const std::string &amp;key, const std::string &amp;info)</td></tr>
+<tr class="separator:a82bf3b6c3cfe903d83923b06b24ae83d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9214a64413a1c36d34381a9bbc9f15d"><td class="memItemLeft" align="right" valign="top">static sf::Texture &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classasset_1_1_asset_loader.html#ab9214a64413a1c36d34381a9bbc9f15d">GetTexture</a> (const std::string &amp;key)</td></tr>
 <tr class="memdesc:ab9214a64413a1c36d34381a9bbc9f15d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an Asset object from the map.  <a href="classasset_1_1_asset_loader.html#ab9214a64413a1c36d34381a9bbc9f15d">More...</a><br /></td></tr>
 <tr class="separator:ab9214a64413a1c36d34381a9bbc9f15d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -193,6 +195,8 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:aaa118a3aeb44cc3b257b9e198d6b6a79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e1c0476d23069623484d336ba539a6a"><td class="memItemLeft" align="right" valign="top">static sf::Keyboard::Key &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classasset_1_1_asset_loader.html#a7e1c0476d23069623484d336ba539a6a">GetKeybind</a> (const std::string &amp;key)</td></tr>
 <tr class="separator:a7e1c0476d23069623484d336ba539a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c8bef9af852fd33fffa16369d4ce74f"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classasset_1_1_asset_loader.html#a3c8bef9af852fd33fffa16369d4ce74f">GetServerInfo</a> (const std::string &amp;key)</td></tr>
+<tr class="separator:a3c8bef9af852fd33fffa16369d4ce74f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a259aabaae49480269917291cba241043"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classasset_1_1_asset_loader.html#a259aabaae49480269917291cba241043">LoadIniFile</a> (const std::filesystem::path &amp;path)</td></tr>
 <tr class="memdesc:a259aabaae49480269917291cba241043"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a .ini file with boost loading assets into the map.  <a href="classasset_1_1_asset_loader.html#a259aabaae49480269917291cba241043">More...</a><br /></td></tr>
 <tr class="separator:a259aabaae49480269917291cba241043"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -412,18 +416,20 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classasset_1_1_asset_loader_a50f7f49aa27c1f7648cf645915be8481_icgraph.png" border="0" usemap="#classasset_1_1_asset_loader_a50f7f49aa27c1f7648cf645915be8481_icgraph" alt=""/></div>
 <map name="classasset_1_1_asset_loader_a50f7f49aa27c1f7648cf645915be8481_icgraph" id="classasset_1_1_asset_loader_a50f7f49aa27c1f7648cf645915be8481_icgraph">
-<area shape="rect" title=" " alt="" coords="747,593,892,635"/>
+<area shape="rect" title=" " alt="" coords="747,620,892,661"/>
 <area shape="rect" href="classasset_1_1_asset_loader.html#a72591f665720f906fd307c829b25b024" title=" " alt="" coords="517,169,699,211"/>
 <area shape="rect" href="classasset_1_1_asset_loader.html#a86b4ab2ca1928ac0ed5006e2abaeef03" title="Get a background music object from the map." alt="" coords="535,235,681,276"/>
-<area shape="rect" href="classasset_1_1_asset_loader.html#aaa118a3aeb44cc3b257b9e198d6b6a79" title="Get a font object from the mapb." alt="" coords="535,397,681,439"/>
-<area shape="rect" href="classasset_1_1_asset_loader.html#a7e1c0476d23069623484d336ba539a6a" title=" " alt="" coords="535,463,681,504"/>
-<area shape="rect" href="classasset_1_1_asset_loader.html#aae5364a01b69a76bab4d489a0cc1c83e" title="Get a sound effect object from the map." alt="" coords="535,528,681,569"/>
-<area shape="rect" href="classasset_1_1_asset_loader.html#ab9214a64413a1c36d34381a9bbc9f15d" title="Get an Asset object from the map." alt="" coords="535,593,681,635"/>
-<area shape="rect" href="classasset_1_1_asset_loader.html#a34eea8210eb11f8dd6e6610bcab0c9c1" title="Load a background music and add it to the map." alt="" coords="535,659,681,700"/>
-<area shape="rect" href="classasset_1_1_asset_loader.html#a9a64fb7ccaf06f392b96762491d67c06" title="load a font and add it to the map" alt="" coords="535,724,681,765"/>
-<area shape="rect" href="classasset_1_1_asset_loader.html#acdb14909a1e86dd034e84e1aac84d3a5" title=" " alt="" coords="535,789,681,831"/>
-<area shape="rect" href="classasset_1_1_asset_loader.html#a5750d8f80f23059cad9de41be8a94a56" title="Load a sound effect and add it to the map." alt="" coords="535,855,681,896"/>
-<area shape="rect" href="classasset_1_1_asset_loader.html#a22d3b68a45b4d58ffd509fe9ac27cffa" title="load an SFML asset and add it to the map" alt="" coords="535,920,681,961"/>
+<area shape="rect" href="classasset_1_1_asset_loader.html#aaa118a3aeb44cc3b257b9e198d6b6a79" title="Get a font object from the mapb." alt="" coords="535,372,681,413"/>
+<area shape="rect" href="classasset_1_1_asset_loader.html#a7e1c0476d23069623484d336ba539a6a" title=" " alt="" coords="535,437,681,479"/>
+<area shape="rect" href="classasset_1_1_asset_loader.html#a3c8bef9af852fd33fffa16369d4ce74f" title=" " alt="" coords="299,463,445,504"/>
+<area shape="rect" href="classasset_1_1_asset_loader.html#aae5364a01b69a76bab4d489a0cc1c83e" title="Get a sound effect object from the map." alt="" coords="535,555,681,596"/>
+<area shape="rect" href="classasset_1_1_asset_loader.html#ab9214a64413a1c36d34381a9bbc9f15d" title="Get an Asset object from the map." alt="" coords="535,620,681,661"/>
+<area shape="rect" href="classasset_1_1_asset_loader.html#a34eea8210eb11f8dd6e6610bcab0c9c1" title="Load a background music and add it to the map." alt="" coords="535,685,681,727"/>
+<area shape="rect" href="classasset_1_1_asset_loader.html#a9a64fb7ccaf06f392b96762491d67c06" title="load a font and add it to the map" alt="" coords="535,751,681,792"/>
+<area shape="rect" href="classasset_1_1_asset_loader.html#acdb14909a1e86dd034e84e1aac84d3a5" title=" " alt="" coords="535,816,681,857"/>
+<area shape="rect" href="classasset_1_1_asset_loader.html#a82bf3b6c3cfe903d83923b06b24ae83d" title=" " alt="" coords="535,881,681,923"/>
+<area shape="rect" href="classasset_1_1_asset_loader.html#a5750d8f80f23059cad9de41be8a94a56" title="Load a sound effect and add it to the map." alt="" coords="535,947,681,988"/>
+<area shape="rect" href="classasset_1_1_asset_loader.html#a22d3b68a45b4d58ffd509fe9ac27cffa" title="load an SFML asset and add it to the map" alt="" coords="535,1012,681,1053"/>
 <area shape="rect" href="classaudio_1_1_audio_manager.html#a023feb4ca83fcc432506ec5f1234df11" title=" " alt="" coords="292,5,452,47"/>
 <area shape="rect" href="classaudio_1_1_audio_manager.html#ad9db14006b01e84f7442791256574a9e" title="load a background music to be played" alt="" coords="292,71,452,112"/>
 <area shape="rect" href="classaudio_1_1_audio_manager.html#a25a646bae0c42cf204ec516e9c1fc828" title=" " alt="" coords="292,136,452,177"/>
@@ -432,12 +438,12 @@ Here is the caller graph for this function:</div>
 <area shape="rect" href="classaudio_1_1_audio_manager.html#ac504f4df750396558cf034c21874d1d2" title=" " alt="" coords="292,267,452,308"/>
 <area shape="rect" href="_get_world_8hpp.html#a998c7eb0e92409953a713476a37a8250" title=" " alt="" coords="108,209,227,235"/>
 <area shape="rect" href="server_2entrypoint_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title=" " alt="" coords="5,209,60,235"/>
-<area shape="rect" href="client_2entrypoint_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="140,437,195,463"/>
+<area shape="rect" href="client_2entrypoint_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="140,470,195,497"/>
 <area shape="rect" href="structecs_1_1component_1_1_text.html#a0ab5db751941993acf854eff058e1ba3" title=" " alt="" coords="292,397,452,439"/>
-<area shape="rect" href="classaudio_1_1_audio_manager.html#ac3974320e61eb1e2ada3ade2bac07306" title="load a sound effect to be played" alt="" coords="292,463,452,504"/>
-<area shape="rect" href="classaudio_1_1_audio_manager.html#ac01493a92b3a76bf9212e12b28167223" title=" " alt="" coords="292,528,452,569"/>
-<area shape="rect" href="structecs_1_1component_1_1_drawable.html#a5d55f9868b9335fc7690b2c41cc7a518" title="Construct a new Drawable object with the full texture." alt="" coords="275,593,469,635"/>
-<area shape="rect" href="structecs_1_1component_1_1_drawable.html#ad7beaaf10a9fa577ce0cff4010b11ccb" title=" " alt="" coords="275,659,469,700"/>
+<area shape="rect" href="classaudio_1_1_audio_manager.html#ac3974320e61eb1e2ada3ade2bac07306" title="load a sound effect to be played" alt="" coords="292,528,452,569"/>
+<area shape="rect" href="classaudio_1_1_audio_manager.html#ac01493a92b3a76bf9212e12b28167223" title=" " alt="" coords="292,593,452,635"/>
+<area shape="rect" href="structecs_1_1component_1_1_drawable.html#a5d55f9868b9335fc7690b2c41cc7a518" title="Construct a new Drawable object with the full texture." alt="" coords="275,659,469,700"/>
+<area shape="rect" href="structecs_1_1component_1_1_drawable.html#ad7beaaf10a9fa577ce0cff4010b11ccb" title=" " alt="" coords="275,724,469,765"/>
 </map>
 </div>
 
@@ -473,6 +479,50 @@ Here is the call graph for this function:</div>
 <map name="classasset_1_1_asset_loader_a7e1c0476d23069623484d336ba539a6a_cgraph" id="classasset_1_1_asset_loader_a7e1c0476d23069623484d336ba539a6a_cgraph">
 <area shape="rect" title=" " alt="" coords="5,5,151,47"/>
 <area shape="rect" href="classasset_1_1_asset_loader.html#a50f7f49aa27c1f7648cf645915be8481" title=" " alt="" coords="199,5,344,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a3c8bef9af852fd33fffa16369d4ce74f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c8bef9af852fd33fffa16369d4ce74f">&#9670;&nbsp;</a></span>GetServerInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::string asset::AssetLoader::GetServerInfo </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>key</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classasset_1_1_asset_loader_a3c8bef9af852fd33fffa16369d4ce74f_cgraph.png" border="0" usemap="#classasset_1_1_asset_loader_a3c8bef9af852fd33fffa16369d4ce74f_cgraph" alt=""/></div>
+<map name="classasset_1_1_asset_loader_a3c8bef9af852fd33fffa16369d4ce74f_cgraph" id="classasset_1_1_asset_loader_a3c8bef9af852fd33fffa16369d4ce74f_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,151,47"/>
+<area shape="rect" href="classasset_1_1_asset_loader.html#a50f7f49aa27c1f7648cf645915be8481" title=" " alt="" coords="199,5,344,47"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classasset_1_1_asset_loader_a3c8bef9af852fd33fffa16369d4ce74f_icgraph.png" border="0" usemap="#classasset_1_1_asset_loader_a3c8bef9af852fd33fffa16369d4ce74f_icgraph" alt=""/></div>
+<map name="classasset_1_1_asset_loader_a3c8bef9af852fd33fffa16369d4ce74f_icgraph" id="classasset_1_1_asset_loader_a3c8bef9af852fd33fffa16369d4ce74f_icgraph">
+<area shape="rect" title=" " alt="" coords="108,5,253,47"/>
+<area shape="rect" href="client_2entrypoint_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,13,60,39"/>
 </map>
 </div>
 
@@ -905,6 +955,51 @@ Here is the call graph for this function:</div>
 <area shape="rect" title=" " alt="" coords="5,35,151,76"/>
 <area shape="rect" href="classasset_1_1_asset_loader.html#a50f7f49aa27c1f7648cf645915be8481" title=" " alt="" coords="199,5,344,47"/>
 <area shape="rect" href="group___input.html#ga946e5447e375434a936a69287229d14d" title=" " alt="" coords="224,71,319,98"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a82bf3b6c3cfe903d83923b06b24ae83d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82bf3b6c3cfe903d83923b06b24ae83d">&#9670;&nbsp;</a></span>LoadServerInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void asset::AssetLoader::LoadServerInfo </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>info</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classasset_1_1_asset_loader_a82bf3b6c3cfe903d83923b06b24ae83d_cgraph.png" border="0" usemap="#classasset_1_1_asset_loader_a82bf3b6c3cfe903d83923b06b24ae83d_cgraph" alt=""/></div>
+<map name="classasset_1_1_asset_loader_a82bf3b6c3cfe903d83923b06b24ae83d_cgraph" id="classasset_1_1_asset_loader_a82bf3b6c3cfe903d83923b06b24ae83d_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,151,47"/>
+<area shape="rect" href="classasset_1_1_asset_loader.html#a50f7f49aa27c1f7648cf645915be8481" title=" " alt="" coords="199,5,344,47"/>
 </map>
 </div>
 

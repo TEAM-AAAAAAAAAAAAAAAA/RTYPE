@@ -1,6 +1,6 @@
 var structecs_1_1component_1_1_connection =
 [
-    [ "Connection", "structecs_1_1component_1_1_connection.html#a8b874cac2d750c1ec28d3b7c2bfb52f7", null ],
+    [ "Connection", "structecs_1_1component_1_1_connection.html#acd0f1d354e50555cf5f28030bb6fee23", null ],
     [ "getHost", "structecs_1_1component_1_1_connection.html#a649e14af3f7394813e65e2a9e203b2ab", null ],
     [ "getIsSet", "structecs_1_1component_1_1_connection.html#a9cc2469b0f9365f82f2a06bd63e79d2a", null ],
     [ "getPort", "structecs_1_1component_1_1_connection.html#a48ddd9a9d5bf133a683f75b8f5291cb6", null ],
