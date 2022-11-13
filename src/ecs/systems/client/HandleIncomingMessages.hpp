@@ -379,15 +379,23 @@ namespace ecs::systems
     static void playerHealthHandle(World &world, network::Message &msg)
     {
         size_t msgId = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
-        auto &netIds = world.registry.getComponents<component::NetworkId>();
         auto &healths = world.registry.getComponents<component::Health>();
+        if (msgId == selfId) {
+            for (size_t j = 0; j < healths.size(); j++)
+                if (healths[j])
+                    healths[j].value().health = msg[3];
+            return;
+        }
+    }
 
-        for (size_t i = 0; i < netIds.size(); i++) {
-            if (netIds[i]) {
-                if (netIds[i].value().id == msgId) {
-                    for (size_t j = 0; j < healths.size(); j++)
-                        if (healths[j])
-                            healths[j].value().health = msg[3];
+    static void waveHandle(World &world, network::Message &msg)
+    {
+        auto &texts = world.registry.getComponents<component::Text>();
+
+        for (size_t i = 0; i < texts.size(); i++) {
+            if (texts[i]) {
+                if (texts[i].value().getContent(0) == "Wave: ") {
+                    texts[i].value().setContent(1, std::to_string(msg[1]));
                     return;
                 }
             }
@@ -439,7 +447,8 @@ namespace ecs::systems
             {utils::constant::getPacketTypeKey(utils::constant::PacketType::ENTITY_DEATH), deathMessageHandle},
             {utils::constant::getPacketTypeKey(utils::constant::PacketType::KEEP_ALIVE), keepAliveResponse},
             {utils::constant::getPacketTypeKey(utils::constant::PacketType::ROOM_UPDATE), roomUpdate},
-            {utils::constant::getPacketTypeKey(utils::constant::PacketType::HEALTH_UPDATE), playerHealthHandle}};
+            {utils::constant::getPacketTypeKey(utils::constant::PacketType::HEALTH_UPDATE), playerHealthHandle},
+            {utils::constant::getPacketTypeKey(utils::constant::PacketType::WAVE_UPDATE), waveHandle}};
 
     std::function<void(World &)> HandleIncomingMessages = [](World &world) {
         while (!network::Client::getReceivedMessages().empty()) {

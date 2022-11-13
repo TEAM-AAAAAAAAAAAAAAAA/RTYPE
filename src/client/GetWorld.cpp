@@ -86,6 +86,7 @@ static void addGameSystems(ecs::World &world)
 static void setGameHUD(ecs::World &world)
 {
     ecs::Entity textScore = world.registry.spawn_entity();
+    ecs::Entity textWave = world.registry.spawn_entity();
     ecs::Entity health = world.registry.spawn_entity();
     ecs::Entity healthBar = world.registry.spawn_entity();
 
@@ -94,6 +95,11 @@ static void setGameHUD(ecs::World &world)
     world.registry.addComponent<ecs::component::Text>(textScore, {"Score: "});
     world.registry.addComponent<ecs::component::Score>(textScore, {});
     world.registry.addComponent<ecs::component::Activable>(textScore, {});
+
+    world.registry.addComponent<ecs::component::Position>(textWave, {utils::constant::mapWidth - 250, 10});
+    world.registry.addComponent<ecs::component::Size>(textWave, {40, 17});
+    world.registry.addComponent<ecs::component::Text>(textWave, {"Wave: ", "1"});
+    world.registry.addComponent<ecs::component::Activable>(textWave, {});
 
     world.registry.addComponent<ecs::component::Position>(health, {6, 900});
     world.registry.addComponent<ecs::component::Size>(health, {100, 400});
