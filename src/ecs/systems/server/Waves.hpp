@@ -34,7 +34,7 @@ namespace ecs::systems
                 }
             }
         }
-        if (!enemiesAlive || utils::constant::chrono::now().time_since_epoch().count() - 100000000000 > lastWave) {
+        if (!enemiesAlive || (utils::constant::chrono::now().time_since_epoch().count() - 100000000000 > lastWave && waveCounter != 1)) {
             waveCounter++;
             network::Message msg;
             msg[0] = utils::constant::getPacketTypeKey(utils::constant::PacketType::WAVE_UPDATE);
