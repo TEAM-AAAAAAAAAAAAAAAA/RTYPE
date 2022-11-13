@@ -1,7 +1,7 @@
 # R-Type
 [![Build](https://github.com/TEAM-AAAAAAAAAAAAAAAA/RTYPE/actions/workflows/ci.yml/badge.svg)](https://github.com/TEAM-AAAAAAAAAAAAAAAA/RTYPE/actions/workflows/ci.yml)
 
-This project aims to recreate the R-Type game and add a multiplayer mode to it. we had to implement a multi-threaded server and a graphical client in SFML.
+This project aims to recreate the R-Type game and add a multiplayer mode to it. We had to implement a multi-threaded server and a graphical client in SFML.
 
 ## Before continuing...
 
@@ -9,7 +9,7 @@ This project is an EPITECH Project. If you are an EPITECH student, move out the 
 
 ## Prerequisites
 
-To use this project, you'll need Cmake 3.17.0 Compiler, SFML-devel library and C11.
+To use this project, you'll need Cmake 3.17.0 Compiler, SFML-devel library, Boost and C11.
 
 ## Building program
 
