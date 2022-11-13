@@ -403,8 +403,9 @@ namespace ecs::systems
         int port = (unsigned char)msg[1] << 8U | (unsigned char)msg[2];
         int nbPlayer = (unsigned char)msg[3];
 
-        for (size_t i = 0; i < activables.size() || i < positions.size()
-                           || i < texts.size() || i < connections.size(); i++) {
+        std::cout << "ROOM UPDATE : " << std::endl;
+        for (size_t i = 0; i < activables.size() && i < positions.size()
+                           && i < texts.size() && i < connections.size(); i++) {
             auto &pos = positions[i];
             auto &activ = activables[i];
             auto &text = texts[i];
