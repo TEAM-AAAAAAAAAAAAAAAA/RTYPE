@@ -20,8 +20,8 @@ namespace ecs::systems
      * knows the server is still up
      */
     std::function<void(World &)> periodicPing = [](World &world) {
-        static auto clock = utils::constant::chrono::now();
-        if (utils::constant::chronoDuration(utils::constant::chrono::now() - clock).count() > 1000) {
+        static auto clock = utils::constant::chrono::steady_clock::now();
+        if (utils::constant::chronoDuration(utils::constant::chrono::steady_clock::now() - clock).count() > 1000) {
             network::Message msg;
             msg.fill(0);
             msg[0] = 70;

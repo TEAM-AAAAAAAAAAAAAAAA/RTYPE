@@ -131,8 +131,8 @@ class HubServer {
     void sendOutgoingMessages()
     {
         static auto clock = chrono::now();
-        if (utils::constant::chronoDuration(utils::constant::chrono::now() - clock).count() > 500) {
-            clock = utils::constant::chrono::now();
+        if (utils::constant::chronoDuration(utils::constant::chrono::steady_clock::now() - clock).count() > 500) {
+            clock = utils::constant::chrono::steady_clock::now();
             network::ServerMessage response;
             response.second.clear();
             response.first.fill(0);
